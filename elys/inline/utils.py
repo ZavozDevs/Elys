@@ -56,6 +56,22 @@ class Utils(InlineUnit):
             getattr(getattr(self._client, "elys_me", None), "premium", False)
         )
 
+    def _get_placeholder_emoji(self) -> str:
+        try:
+            if hasattr(self, "_client") and hasattr(self._client, "loader"):
+                if mod := self._client.loader.lookup("ElysConfig"):
+                    if emoji := mod.config.get("cfg_emoji"):
+                        if emoji != "🌟" or not getattr(getattr(self._client, "elys_me", None), "premium", False):
+                            return str(emoji)
+        except Exception:
+            pass
+
+        return (
+            utils.get_platform_emoji()
+            if getattr(getattr(self._client, "elys_me", None), "premium", False)
+            else "🌟"
+        )
+
     def _get_button_style(self, button: dict) -> str | None:
         """Extract and validate button style from button dict"""
         style = button.get("style")

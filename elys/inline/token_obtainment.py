@@ -69,7 +69,7 @@ class TokenObtainment(InlineUnit):
                 username = f"@{genran}_{uid}_bot"
 
             for msg in [
-                "🪐 Elys userbot"[:64],
+                "🌟 Elys userbot"[:64],
                 username,
                 "/setuserpic",
                 username,

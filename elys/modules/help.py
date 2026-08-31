@@ -50,7 +50,7 @@ class Help(loader.Module):
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji>",
+                "<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji>",
                 lambda: "Desc emoji",
             ),
             loader.ConfigValue(
@@ -179,7 +179,7 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji>",
+            "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji>",
             _name,
         )
         inline_cmd = ""

@@ -46,7 +46,7 @@ VERIFICATION_EMOJIES = list(
         "🦀🐡🐠🐟🐅🐊🦭🦈🐋🐳🐬🐆🦓🦍🦧🦣🐘🦛🐃🦬🦘🦒🐫🐪🦏"
         "🐂🐄🐎🐖🐏🐑🦙🐈🐕‍🦺🦮🐩🐕🦌🐐🐈‍⬛🪶🐓🦃🦤🦚🦜🦡🦨🦝🐇"
         "🕊🦩🦢🦫🦦🦥🐁🐀🐿🦔🌳🌲🌵🐲🐉🐾🎋🍂🍁🍄🐚🌾🪨💐🌷"
-        "🥀🌺🌸🌻🌞🌜🌘🌗🌎🪐💫⭐️✨⚡️☄️💥☀️🌪🔥🌈🌤⛅️❄️⛄️🌊"
+        "🥀🌺🌸🌻🌞🌜🌘🌗🌎🌟💫⭐️✨⚡️☄️💥☀️🌪🔥🌈🌤⛅️❄️⛄️🌊"
         "☂️🍏🍎🍐🍊🍋🍌🍉🥭🍑🍒🍈🫐🍓🍇🍍🥥🥝🍅🥑🥦🧔‍♂️"
     )
 )
@@ -270,11 +270,7 @@ class Form(InlineUnit):
                 status_message = await (
                     message.edit if message.out else message.respond
                 )(
-                    (
-                        utils.get_platform_emoji()
-                        if self._client.elys_me.premium
-                        else "🪐"
-                    )
+                    self._get_placeholder_emoji()
                     + self.translator.getkey("inline.opening_form"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
                 )
@@ -459,8 +455,11 @@ class Form(InlineUnit):
         ):
             return
 
-        form = self._units[inline_query.query]
-        form_text = "🪐" if form.get("premium_emoji_pre_edit") else form.get("text")
+        form_text = (
+            self._get_placeholder_emoji()
+            if form.get("premium_emoji_pre_edit")
+            else form.get("text")
+        )
         try:
             match True:
                 case _ if "photo" in form:

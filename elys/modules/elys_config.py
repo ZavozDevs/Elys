@@ -70,8 +70,8 @@ class ElysConfigMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "cfg_emoji",
-                "🪐",
-                "Change emoji when opening config",
+                "🌟",
+                "Change emoji when opening inline",
                 validator=loader.validators.String(),
             ),
         )

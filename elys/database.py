@@ -154,7 +154,7 @@ class Database(dict):
             content_channel, _ = await utils.asset_channel(
                 client=self._client,
                 title="elys-userbot",
-                description="🪐 Content related to Elys will be here",
+                description="🌟 Content related to Elys will be here",
                 silent=True,
                 invite_bot=True,
                 avatar="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys.png",

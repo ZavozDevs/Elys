@@ -266,7 +266,7 @@ presets:
   back: "🔙 Zurück"
   install: "📦 Installieren"
   installing: "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Installation des Sets </b><code>{}</code><b>...</b>"
-  installing_module: "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Installation des Sets</b> <code>{}</code> <b>({}/{} Module)...</b>\n\n<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <i>Installation des Moduls {}...</i>"
+  installing_module: "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Installation des Sets</b> <code>{}</code> <b>({}/{} Module)...</b>\n\n<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>Installation des Moduls {}...</i>"
   installed: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Set</b> <code>{}</code> <b>wurde installiert!</b>"
   already_installed: "✅ [Installiert]"
   add_to_folder_usage: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Geben Sie einen Ordner an, um ein Modul hinzuzufügen. </b> <code>{prefix}addtofolder <ordner> <modul></code>"
@@ -276,7 +276,7 @@ presets:
   folder_load_usage: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Geben Sie einen Ordner an, um Module zu laden. </b> <code>{prefix}fl <ordner></code>"
   folder_not_found: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ordner {} nicht gefunden</b>"
   no_modules_in_folder: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Keine Module im Ordner {}</b>"
-  folder: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Ordner</b> {}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lp zur Antwort auf diese Nachricht zum Installieren</b>"
+  folder: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Ordner</b> {}\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lp zur Antwort auf diese Nachricht zum Installieren</b>"
   remove_from_folder_usage: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Geben Sie Ordner und Modul zum Entfernen an. </b> <code>{prefix}removefromfolder <ordner> <modul></code>"
   removed_from_folder: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Modul {} aus Ordner entfernt</b> <code>{}</code>"
   module_not_in_folder: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Modul {} ist nicht im Ordner {}</b>"
@@ -291,11 +291,11 @@ presets:
 
   name: Presets
 settings:
-  choose_installation: "<tg-emoji emoji-id=5363805650327450240>🪐</tg-emoji> <b>Wählen Sie Ihre Elys-Installationsoption:</b>"
+  choose_installation: "<tg-emoji emoji-id=5363805650327450240>🌟</tg-emoji> <b>Wählen Sie Ihre Elys-Installationsoption:</b>"
   vds_install: "<tg-emoji emoji-id=5471952986970267163>💎</tg-emoji> Der Installationsprozess auf einem VDS wird mit einem einzigen Befehl durchgeführt:\n<pre><code class=\"language-shell\">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n<i>Hinweis: Wenn Sie keine sudo-Rechte haben, lassen Sie den entsprechenden Teil des Befehls aus.</i>"
   wsl_install: "<b>Lade WSL herunter.</b> Öffne dazu PowerShell als Administrator und gib ein <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>Für die Installation von WSL wird Windows 10 Build 2004 oder Windows 11 einer beliebigen Version und ein PC mit Virtualisierungsunterstützung benötigt. Für die Installation auf älteren Betriebssystemversionen, siehe</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">diese Seite</a>\n\n⬜️ <b>Starte deinen PC neu und starte die Ubuntu 22.04.x Anwendung</b> \n\n⬜️ <b>Füge den Befehl ein (Rechtsklick):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>Wenn gelbe Warnungen erscheinen, gib</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>ein und ersetze /home/username/.local/bin durch den in der Meldung genannten Pfad</i>\n\n⬜️ <b>Füge den Befehl ein (Rechtsklick):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n🔗 <b>Wo bekommt man API_ID und API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Video</a>"
   userland_install: "<b>Installiere UserLAnd über diesen</b> <a href=\"https://play.google.com/store/apps/details?id=tech.ula\">Link</a>\n\n<b>Öffne es, wähle Ubuntu —&gt; Minimal —&gt; Terminal</b>\n\n<b>Warte auf die Installation der Distribution, du kannst dir einen Tee einschenken</b>\n\n<b>Nach erfolgreicher Installation öffnet sich ein Terminal, gib dort ein:</b>\n<pre><code class=\"language-bash\">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n<b>Am Ende der Installation erscheint ein Link, folge ihm und gib deine Account-Daten zum Einloggen ein.\n\nVoilà! Du hast Elys auf UserLAnd installiert.</b>"
-  hikkahost_install: "<b>🌘 Wie installiert man Elys auf HikkaHost?</b>\n\n1. Gehe zu @hikkahost_bot\n2. Wähle \"Install\"\n3. Wähle \"🪐 Elys\"\n\nUnd fahre mit der Installation fort.\n\n<b>Danach erhältst du einen Link, öffne ihn und logge dich in dein Konto ein.</b>"
+  hikkahost_install: "<b>🌘 Wie installiert man Elys auf HikkaHost?</b>\n\n1. Gehe zu @hikkahost_bot\n2. Wähle \"Install\"\n3. Wähle \"🌟 Elys\"\n\nUnd fahre mit der Installation fort.\n\n<b>Danach erhältst du einen Link, öffne ihn und logge dich in dein Konto ein.</b>"
   too_many_args: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Zu viele Argumente</b>"
   blacklisted: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Chat {} wurde zur Blacklist des Userbots hinzugefügt</b>"
   unblacklisted: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Chat {} wurde aus der Blacklist des Userbots entfernt</b>"
@@ -311,7 +311,7 @@ settings:
   aliases_created: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>{count} Aliase hinzugefügt:</b>\n<blockquote expandable>{aliases}</blockquote>"
   aliases_created_line: "{aliases} für {command}"
   aliases_list: "<b>🔗 Aliase importiert:</b>\n\n<blockquote expandable>{}</blockquote>"
-  aliases_file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Deine Aliase</b>\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}la als Antwort auf diese Nachricht zum Importieren der Aliase</b>"
+  aliases_file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Deine Aliase</b>\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}la als Antwort auf diese Nachricht zum Importieren der Aliase</b>"
   aliases: "<b>🔗 Aliase:</b>\n"
   happy_beta: "\n\n<tg-emoji emoji-id=5465188915990255885>🌟</tg-emoji> <b>Sie sind glücklicher Besitzer der <code>{}</code> Version!</b>"
   no_command: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Der Befehl</b> <code>{}</code> <b>existiert nicht</b>"
@@ -426,7 +426,7 @@ test:
   ping_emoji: "Emoji, das bei einer leichten Ping-Erhöhung angezeigt wird."
   back: "↩️ Zurück"
   banner_url: "Bild für Ihren Ping, zum Beispiel: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/ping_cmd.png"
-  logs_caption: "<tg-emoji emoji-id=5350594756126721186>🪐</tg-emoji> <b>Elys-Logs des Levels</b> <code>{}</code>\n\n<tg-emoji emoji-id=5228879218363872764>⚪️</tg-emoji> <b>Version: {}.{}.{}</b>{}"
+  logs_caption: "<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>Elys-Logs des Levels</b> <code>{}</code>\n\n<tg-emoji emoji-id=5228879218363872764>⚪️</tg-emoji> <b>Version: {}.{}.{}</b>{}"
   debugging_enabled: "<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>Der Entwicklermodus wurde für das Modul</b> <code>{0}</code> <b>aktiviert</b>\n<i>Gehe zum Ordner `debug_modules`, ändere die Datei `{0}.py` und beobachte die Änderungen in Echtzeit</i>"
   debugging_disabled: "<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>Der Entwicklermodus wurde deaktiviert</b>"
   suspend_invalid_time: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ungültige Zeitdauer für das Einfrieren</b>"
@@ -559,8 +559,8 @@ elys_info:
   name: ElysInfo
   _cls_doc: Userbot-Informationen anzeigen
 loader:
-  link: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Datei von</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lm als Antwort auf diese Nachricht installieren</b>\n\n<tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
-  file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Datei von</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lm als Antwort auf diese Nachricht zum Installieren</b>\n\n{not_exact}"
+  link: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Datei von</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lm als Antwort auf diese Nachricht installieren</b>\n\n<tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
+  file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Datei von</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lm als Antwort auf diese Nachricht zum Installieren</b>\n\n{not_exact}"
   loading_module_via_file: "<tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Das Modul wird geladen."
   ml_load_module: "<tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Ich lade das Modul als Datei herunter."
   no_ml: "<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>Modul</b> <code>{}</code> <b>kann nicht als Datei exportiert werden</b>"
@@ -574,7 +574,7 @@ loader:
   provide_module: "<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Geben Sie ein Modul zum Download an</b>"
   bad_unicode: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ungültige Modulkodierung</b>"
   load_failed: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Der Download war nicht erfolgreich. Siehe Logs.</b>"
-  loaded: "<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>Modul</b> <code>{}</code>{} <b>wurde geladen {}</b>{}{}{}{}{}{}{}{}"
+  loaded: "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>Modul</b> <code>{}</code>{} <b>wurde geladen {}</b>{}{}{}{}{}{}{}{}"
   no_class: "<b>Was soll entladen werden?</b>"
   unloaded: "{} <b>Modul {} wurde entladen.</b>"
   unload_suggestions: "<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>Modul</b> <code>{}</code> <b>wurde nicht gefunden.</b>\n\n<b>Meintest du vielleicht:</b>"
@@ -632,7 +632,7 @@ loader:
   basic_auth_doc: "Authentifizierung für den Zugriff auf das Repository"
   choose_repo: "<tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Wähle ein Repository aus, um alle Module daraus zu installieren:</b>"
   installing_all_from_repo: "<tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>Installiere alle Module aus dem Repository...</b>"
-  installed_all_from_repo: "<tg-emoji emoji-id=5429092129638980960>🪐</tg-emoji> <b>Alle Module aus dem Repository erfolgreich installiert!</b>"
+  installed_all_from_repo: "<tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>Alle Module aus dem Repository erfolgreich installiert!</b>"
   dlm_all_from_repo_error_nomods: "<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Keine Module in diesem Repository gefunden!</b>"
   dlm_all_from_repo_error_somemods: "<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Einige Module konnten nicht installiert werden:</b>\n"
   show_banner_doc: "Meta-Banner wie Vorschau anzeigen?"
@@ -641,8 +641,8 @@ loader:
   '404': <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Modul nicht gefunden</b>
   _cmd_doc_dlmall: Alle Module aus dem ausgewählten Repository installieren
   _cmd_doc_ml: <module> - Modul als Datei senden
-  result: "<tg-emoji emoji-id=5337183664630709422>🔎</tg-emoji> <b>Suchergebnis für</b> <code>{query}</code>\n\n<tg-emoji emoji-id=5258270535710317499>📦</tg-emoji> <b>{name}</b> von <b>{dev}</b>\n<tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> <i>{cls_doc}</i>\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <b>Befehle:</b>\n{commands}\n\n<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <code>{prefix}dlmod {mhash}</code>"
-  finding_module_in_repos: <tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <b>Suche Modul in Repositories...</b>
+  result: "<tg-emoji emoji-id=5337183664630709422>🔎</tg-emoji> <b>Suchergebnis für</b> <code>{query}</code>\n\n<tg-emoji emoji-id=5258270535710317499>📦</tg-emoji> <b>{name}</b> von <b>{dev}</b>\n<tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> <i>{cls_doc}</i>\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <b>Befehle:</b>\n{commands}\n\n<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>"
+  finding_module_in_repos: <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Suche Modul in Repositories...</b>
   modules_unloaded: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>Entladene Module:</b> {}
   modules_not_unloaded: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Nicht entladen:</b> {}
   not_subscribed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Du musst zuerst den Kanal des Moduls abonnieren</b>
@@ -708,7 +708,7 @@ translate:
 
   name: Translator
 quickstart:
-  base: "<tg-emoji emoji-id=5463379725441341739>🪐</tg-emoji> <b>Hallo.</b> Dein <b>{}</b> Userbot ist jetzt installiert.\n\n<tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Brauchst du Hilfe?</b> Tritt <a href=\"https://t.me/elys_talks\">unserem Support-Chat</a> bei. Wir helfen <b>jedem</b>.\n\n<tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>Kurzanleitung:</b>\n\n<tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> <b>Schreibe</b> <code>.help</code><b>, um die Liste der Module zu sehen</b>\n<tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> <b>Schreibe</b> <code>.help &lt;Modulname/Befehl&gt;</code><b>, um die Beschreibung des Moduls zu sehen</b>\n<tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> <b>Schreibe</b> <code>.dlmod &lt;Link&gt;</code><b>, um ein Modul von einem Link zu laden</b>\n<tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> <b>Schreibe</b> <code>.loadmod</code> <b>als Antwort auf eine Datei, um ein Modul daraus zu laden</b>\n<tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> <b>Schreibe</b> <code>.unloadmod &lt;Modulname&gt;</code><b>, um ein Modul zu entladen</b>\n\n<tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>Elys unterstützt Module von Hikka, Friendly-Telegram und GeekTG, sowie seine eigenen.</b>\n"
+  base: "<tg-emoji emoji-id=5463379725441341739>🌟</tg-emoji> <b>Hallo.</b> Dein <b>{}</b> Userbot ist jetzt installiert.\n\n<tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Brauchst du Hilfe?</b> Tritt <a href=\"https://t.me/elys_talks\">unserem Support-Chat</a> bei. Wir helfen <b>jedem</b>.\n\n<tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>Kurzanleitung:</b>\n\n<tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> <b>Schreibe</b> <code>.help</code><b>, um die Liste der Module zu sehen</b>\n<tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> <b>Schreibe</b> <code>.help &lt;Modulname/Befehl&gt;</code><b>, um die Beschreibung des Moduls zu sehen</b>\n<tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> <b>Schreibe</b> <code>.dlmod &lt;Link&gt;</code><b>, um ein Modul von einem Link zu laden</b>\n<tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> <b>Schreibe</b> <code>.loadmod</code> <b>als Antwort auf eine Datei, um ein Modul daraus zu laden</b>\n<tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> <b>Schreibe</b> <code>.unloadmod &lt;Modulname&gt;</code><b>, um ein Modul zu entladen</b>\n\n<tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>Elys unterstützt Module von Hikka, Friendly-Telegram und GeekTG, sowie seine eigenen.</b>\n"
   language_saved: "🇩🇪 Sprache gespeichert!"
   language: "🇩🇪 Deutsch"
   btn_support: "🥷 Support-Chat"
@@ -764,8 +764,8 @@ $inline:
   inline_cmds: "ℹ️ Sie haben {} verfügbaren Befehl(-e)"
   inline_cmds_msg: "<b>ℹ️ Verfügbare Inline-Befehle:</b>\n\n{}"
   run_command: "🏌️ Befehl ausführen"
-  command_msg: "<b>🪐 Befehl „{}“</b>\n\n<i>{}</i>"
-  command: "🪐 Befehl „{}“"
+  command_msg: "<b>🌟 Befehl „{}“</b>\n\n<i>{}</i>"
+  command: "🌟 Befehl „{}“"
   button403: "Sie können diesen Button nicht drücken!"
   keep_id: "⚠️ Löschen Sie die ID nicht! {}"
   no_query_results: "<tg-emoji emoji-id=5440660757194744323>‼️</tg-emoji> <b>Formular konnte nicht erstellt werden</b>\n\nMögliche Lösungen für den Fehler:\n\n1. Starten Sie Elys neu: <code>{prefix}restart</code>\n\n2. Aktivieren Sie den Inline-Modus für den Bot: gehen Sie zu @BotFather, senden Sie /mybots, klicken Sie auf Bot Settings -> Inline Mode -> On\n\n3. Erstellen Sie einen neuen Bot: senden Sie den Befehl <code>{prefix}ch_elys_bot</code> <@botname>"

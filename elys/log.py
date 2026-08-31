@@ -293,7 +293,7 @@ class TelegramLogsHandler(logging.Handler):
     ):
         chunks = (
             item.message
-            + "\n\n<b>🪐 Full traceback:</b>\n"
+            + "\n\n<b>🌟 Full traceback:</b>\n"
             + f'<pre><code class="language-python">{item.full_stack}</code></pre>'
         )
 
@@ -376,7 +376,7 @@ class TelegramLogsHandler(logging.Handler):
                             reply_markup=self._mods[client_id].inline.generate_markup(
                                 [
                                     {
-                                        "text": "🪐 Full traceback",
+                                        "text": "🌟 Full traceback",
                                         "callback": self._show_full_trace,
                                         "args": (
                                             self._mods[client_id].inline.bot,
