@@ -176,3 +176,6 @@ Pipfile.lock
 elys.log.*
 unknown_errors.txt
 tmp/
+AGENTS.md
+agents.md
+
