@@ -30,9 +30,9 @@ from dataclasses import dataclass, field
 from importlib.abc import SourceLoader
 
 import requests
-from herokutl.hints import EntityLike
-from herokutl.tl.functions.account import UpdateNotifySettingsRequest
-from herokutl.tl.types import (
+from elystl.hints import EntityLike
+from elystl.tl.functions.account import UpdateNotifySettingsRequest
+from elystl.tl.types import (
     Channel,
     ChannelForbidden,
     ChannelFull,

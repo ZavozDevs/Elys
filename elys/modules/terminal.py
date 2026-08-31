@@ -21,7 +21,7 @@ import typing
 from collections.abc import Callable
 import signal
 
-import herokutl
+import elystl
 
 from .. import loader, utils
 
@@ -66,7 +66,7 @@ async def sleep_for_task(func: Callable, data: bytes, delay: float):
 class MessageEditor:
     def __init__(
         self,
-        message: herokutl.tl.types.Message,
+        message: elystl.tl.types.Message,
         command: str,
         config,
         strings,
@@ -107,10 +107,10 @@ class MessageEditor:
             exec_time = time.time() - self.start_time
             text += self.strings["time_exec"].format(round(exec_time, 2))
 
-        with contextlib.suppress(herokutl.errors.rpcerrorlist.MessageNotModifiedError):
+        with contextlib.suppress(elystl.errors.rpcerrorlist.MessageNotModifiedError):
             try:
                 self.message = await utils.answer(self.message, text)
-            except herokutl.errors.rpcerrorlist.MessageTooLongError as e:
+            except elystl.errors.rpcerrorlist.MessageTooLongError as e:
                 logger.error(e)
                 logger.error(text)
         # The message is never empty due to the template header
@@ -171,7 +171,7 @@ class SudoMessageEditor(MessageEditor):
 
             try:
                 await utils.answer(self.message, text)
-            except herokutl.errors.rpcerrorlist.MessageNotModifiedError as e:
+            except elystl.errors.rpcerrorlist.MessageNotModifiedError as e:
                 logger.debug(e)
 
             logger.debug("edited message with link to self")
@@ -187,7 +187,7 @@ class SudoMessageEditor(MessageEditor):
             self.message.client.remove_event_handler(self.on_message_edited)
             self.message.client.add_event_handler(
                 self.on_message_edited,
-                herokutl.events.messageedited.MessageEdited(chats=["me"]),
+                elystl.events.messageedited.MessageEdited(chats=["me"]),
             )
 
             logger.debug("registered handler")
@@ -236,7 +236,7 @@ class SudoMessageEditor(MessageEditor):
             # The user has provided interactive authentication. Send password to stdin for sudo.
             try:
                 self.authmsg = await utils.answer(message, self.strings["auth_ongoing"])
-            except herokutl.errors.rpcerrorlist.MessageNotModifiedError:
+            except elystl.errors.rpcerrorlist.MessageNotModifiedError:
                 # Try to clear personal info if the edit fails
                 await message.delete()
 
@@ -288,13 +288,13 @@ class RawMessageEditor(SudoMessageEditor):
         logger.debug(text)
 
         with contextlib.suppress(
-            herokutl.errors.rpcerrorlist.MessageNotModifiedError,
-            herokutl.errors.rpcerrorlist.MessageEmptyError,
+            elystl.errors.rpcerrorlist.MessageNotModifiedError,
+            elystl.errors.rpcerrorlist.MessageEmptyError,
             ValueError,
         ):
             try:
                 await utils.answer(self.message, text)
-            except herokutl.errors.rpcerrorlist.MessageTooLongError as e:
+            except elystl.errors.rpcerrorlist.MessageTooLongError as e:
                 logger.error(e)
                 logger.error(text)
 
@@ -761,7 +761,7 @@ class TerminalMod(loader.Module):
 
     async def run_command(
         self,
-        message: herokutl.tl.types.Message,
+        message: elystl.tl.types.Message,
         cmd: str,
         editor: MessageEditor | None = None,
     ):
@@ -821,7 +821,7 @@ class TerminalMod(loader.Module):
 
     def _find_inline_editor_by_message(
         self,
-        message: herokutl.tl.types.Message,
+        message: elystl.tl.types.Message,
     ) -> InlineMessageEditor | None:
         text = getattr(message, "raw_text", None) or getattr(message, "text", "")
         running_editors = [

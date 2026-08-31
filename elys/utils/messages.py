@@ -12,8 +12,8 @@ import re
 import typing
 
 import grapheme
-import herokutl
-from herokutl.tl.types import (
+import elystl
+from elystl.tl.types import (
     Channel,
     Chat,
     InputDocument,
@@ -39,7 +39,7 @@ emoji_pattern = re.compile(
     flags=re.UNICODE,
 )
 
-parser = herokutl.utils.sanitize_parse_mode("html")
+parser = elystl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 
@@ -128,7 +128,7 @@ def smart_split(
 
     :example:
         >>> utils.smart_split(
-            *herokutl.extensions.html.parse(
+            *elystl.extensions.html.parse(
                 "<b>Hello, world!</b>"
             )
         )
@@ -336,7 +336,7 @@ async def answer(
         case _ if "reply_to" in kwargs:
             kwargs.pop("reply_to")
 
-    parse_mode = herokutl.utils.sanitize_parse_mode(
+    parse_mode = elystl.utils.sanitize_parse_mode(
         kwargs.pop(
             "parse_mode",
             message.client.parse_mode,

@@ -17,8 +17,8 @@ import functools
 import typing
 from math import ceil
 
-from herokutl.tl.types import Message
-from herokutl.extensions import html
+from elystl.tl.types import Message
+from elystl.extensions import html
 
 from .. import loader, translations, utils
 from ..inline.types import InlineCall

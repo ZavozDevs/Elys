@@ -12,8 +12,8 @@
 
 import logging
 
-from herokutl.tl.types import Message
-from herokutl.utils import get_display_name
+from elystl.tl.types import Message
+from elystl.utils import get_display_name
 
 from .. import loader, main, utils
 from ..inline.types import InlineCall

@@ -15,20 +15,20 @@ import sys
 import typing
 import warnings
 
-import herokutl
-from herokutl import hints
-from herokutl.tl.functions.channels import (
+import elystl
+from elystl import hints
+from elystl.tl.functions.channels import (
     EditAdminRequest,
     InviteToChannelRequest,
 )
-from herokutl.tl.types import (
+from elystl.tl.types import (
     ChatAdminRights,
 )
 
 from ..tl_cache import CustomTelegramClient
 from ..types import ListLike
 
-parser = herokutl.utils.sanitize_parse_mode("html")
+parser = elystl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 

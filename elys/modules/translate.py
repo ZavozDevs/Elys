@@ -14,7 +14,7 @@ import asyncio
 import logging
 
 from deep_translator import GoogleTranslator
-from herokutl.tl.custom import Message
+from elystl.tl.custom import Message
 
 from .. import loader, utils
 

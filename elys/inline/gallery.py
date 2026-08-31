@@ -22,9 +22,9 @@ import typing
 from collections.abc import Callable
 from urllib.parse import urlparse
 
-from herokutl.errors.rpcerrorlist import FloodWaitError, MediaPrevInvalidError
-from herokutl.errors.rpcerrorlist import ChatSendInlineForbiddenError
-from herokutl.tl.types import Message
+from elystl.errors.rpcerrorlist import FloodWaitError, MediaPrevInvalidError
+from elystl.errors.rpcerrorlist import ChatSendInlineForbiddenError
+from elystl.tl.types import Message
 
 from .. import main, utils
 from ..types import ElysReplyMarkup

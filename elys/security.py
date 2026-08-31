@@ -17,10 +17,10 @@ import time
 import typing
 from collections.abc import Callable
 
-from herokutl.hints import EntityLike
-from herokutl.tl.functions.messages import GetFullChatRequest
-from herokutl.tl.types import ChatParticipantAdmin, ChatParticipantCreator, Message
-from herokutl.utils import get_display_name
+from elystl.hints import EntityLike
+from elystl.tl.functions.messages import GetFullChatRequest
+from elystl.tl.types import ChatParticipantAdmin, ChatParticipantCreator, Message
+from elystl.utils import get_display_name
 
 from . import main, utils
 from .database import Database
