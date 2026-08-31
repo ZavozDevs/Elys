@@ -389,7 +389,12 @@ async def asset_forum_topic(
 
         return result.topics[0]
 
-    forums_cache = db.pointer("elys.forums", "forums_cache", {})
+    def _save_cache(topic_title: str, topic_id: int):
+        cached = db.pointer("elys.forums", "forums_cache", {})
+        channel_title = getattr(entity, "title", "elys-userbot")
+        cached.setdefault(channel_title, {})[topic_title] = topic_id
+        cached.setdefault("elys-userbot", {})[topic_title] = topic_id
+        db.save()
 
     async def _search_topic(topic_title: str) -> int | None:
         result = await client(
@@ -404,13 +409,23 @@ async def asset_forum_topic(
         await fw_protect()
         for found_topic in result.topics:
             if found_topic.title == topic_title:
-                forums_cache.setdefault(entity.title, {})[topic_title] = found_topic.id
+                _save_cache(topic_title, found_topic.id)
                 return found_topic.id
         return None
 
-    if topic_id := forums_cache.get(entity.title, {}).get(title) or await _search_topic(
-        title
-    ):
+    channel_title = getattr(entity, "title", "elys-userbot")
+    cached = db.get("elys.forums", "forums_cache", {})
+    topic_id = (
+        cached.get(channel_title, {}).get(title)
+        if isinstance(cached, dict)
+        else None
+    ) or (
+        cached.get("elys-userbot", {}).get(title)
+        if isinstance(cached, dict)
+        else None
+    )
+
+    if topic_id or (topic_id := await _search_topic(title)):
         await fw_protect()
         new_topic = await client(
             GetForumTopicsByIDRequest(peer=entity, topics=[topic_id])
@@ -423,12 +438,12 @@ async def asset_forum_topic(
             )
             await fw_protect()
             new_topic = await create_topic()
-            forums_cache[entity.title][title] = new_topic.id
+            _save_cache(title, new_topic.id)
 
     else:
         await fw_protect()
         new_topic = await create_topic()
-        forums_cache.setdefault(entity.title, {})[title] = new_topic.id
+        _save_cache(title, new_topic.id)
 
     if invite_bot:
         await fw_protect()
