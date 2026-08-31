@@ -1,0 +1,6 @@
+requests
+moviepy
+python-ffmpeg
+ffmpeg
+bs4
+uvloop

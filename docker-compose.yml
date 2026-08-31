@@ -1,0 +1,15 @@
+services:
+  worker:
+    container_name: elys_ub
+    build:
+      context: .
+    volumes:
+      - worker:/data
+    stop_signal: SIGINT
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    init: true
+
+volumes:
+  worker:
