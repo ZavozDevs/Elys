@@ -325,7 +325,7 @@ settings:
   aliases_cleared: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Усі аліаси видалено</b>."
   no_alias: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Аліаса</b> <code>{}</code> <b>не існує</b>"
   db_cleared: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Базу очищена</b>"
-  elys: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>ElysTL:</b> <i>{}</i>\n\n<tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Developers: <a href=\"t.me/codrago\">@codrago</a>, <a href=\"t.me/zetgo\">@zetgo</a></b>"
+  elys: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>ElysTL:</b> <i>{}</i>\n\n<tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Developers: <a href=\"t.me/RooniRN\">@RooniRN</a>, <a href=\"t.me/top1skiper\">@top1skiper</a>, <a href=\"t.me/gemeguardian\">@gemeguardian</a></b>"
   _cls_doc: "Керування базовими налаштуваннями юзербота"
   confirm_cleardb: "⚠️ <b>Ви впевнені, що хочете зкинути базу даних?</b>"
   cleardb_confirm: "🗑 Очистити базу"
