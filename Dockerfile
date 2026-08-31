@@ -1,4 +1,4 @@
-FROM python:3.14
+FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -8,6 +8,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
+    ca-certificates \
     curl \
     ffmpeg \
     gcc \
@@ -20,22 +21,16 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libmagic1 \
     libswscale-dev \
     openssh-server \
-    xfonts-75dpi \
-    xfonts-base \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install --no-install-recommends -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /data
-RUN mkdir /data/private
-
-RUN git clone https://github.com/ZavozDevs/Elys /data/Elys
+RUN mkdir -p /data/private
 
 WORKDIR /data/Elys
-
-ARG ELYS_REF=master
-RUN git fetch origin "${ELYS_REF}" && git checkout "${ELYS_REF}" && git pull origin "${ELYS_REF}"
+COPY . /data/Elys
 
 RUN pip install --no-cache-dir --no-warn-script-location --disable-pip-version-check --upgrade -r requirements.txt
 
