@@ -130,6 +130,26 @@ class CommandDispatcher:
         self._cached_usernames.add(str(self._client.elys_me.id))
 
         self.raw_handlers = []
+        self._message_text_cache = collections.OrderedDict()
+
+    def _is_text_changed(self, message: Message) -> bool:
+        chat_id = utils.get_chat_id(message)
+        msg_id = getattr(message, "id", None)
+        if not msg_id or not chat_id:
+            return True
+
+        key = (chat_id, msg_id)
+        current_text = getattr(message, "message", None) or ""
+
+        if key in self._message_text_cache:
+            prev_text = self._message_text_cache[key]
+            if prev_text == current_text:
+                return False
+
+        self._message_text_cache[key] = current_text
+        if len(self._message_text_cache) > 2000:
+            self._message_text_cache.popitem(last=False)
+        return True
 
     async def _handle_ratelimit(self, message: Message, func: Callable) -> bool:
         if await self.security.check(message, security.OWNER):
@@ -282,6 +302,23 @@ class CommandDispatcher:
         if not event.message.message:
             return False
 
+        is_edit = (
+            isinstance(event, events.MessageEdited.Event)
+            or type(event).__name__ == "MessageEdited"
+            or getattr(event, "is_edit", False)
+        )
+        if is_edit:
+            if not self._is_text_changed(message):
+                return False
+        else:
+            chat_id = utils.get_chat_id(message)
+            if getattr(message, "id", None) and chat_id:
+                self._message_text_cache[(chat_id, message.id)] = (
+                    getattr(message, "message", None) or ""
+                )
+                if len(self._message_text_cache) > 2000:
+                    self._message_text_cache.popitem(last=False)
+
         if (
             message.out
             and len(message.message) > len(prefix) * 2
@@ -297,8 +334,15 @@ class CommandDispatcher:
 
             if func:
                 if not watcher:
+                    new_text = message.message[len(prefix) :]
+                    chat_id = utils.get_chat_id(message)
+                    if getattr(message, "id", None) and chat_id:
+                        self._message_text_cache[(chat_id, message.id)] = new_text
+                        if len(self._message_text_cache) > 2000:
+                            self._message_text_cache.popitem(last=False)
+
                     await message.edit(
-                        message.message[len(prefix) :],
+                        new_text,
                         parse_mode=lambda s: (
                             s,
                             utils.relocate_entities(
