@@ -21,8 +21,6 @@ if not NO_GIT:
     import git
 else:
     git = None
-from ._internal import (check_commit_ancestor, get_branch_name,
-                        reset_to_master, restart, restore_worktree)
 
 if NO_GIT:
     branch = "master"

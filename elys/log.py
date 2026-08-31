@@ -14,7 +14,6 @@
 
 import asyncio
 import contextlib
-import git
 import inspect
 import io
 import linecache
@@ -34,13 +33,6 @@ from elystl.errors.rpcbaseerrors import ServerError, RPCError
 from elystl.errors.rpcerrorlist import FloodWaitError
 
 from . import utils
-from ._internal import (
-    get_branch_name,
-    check_commit_ancestor,
-    reset_to_master,
-    restore_worktree,
-    restart,
-)
 from .tl_cache import CustomTelegramClient
 from .types import BotInlineCall, Module, CoreOverwriteError
 
@@ -551,33 +543,6 @@ class TelegramLogsHandler(logging.Handler):
                 self.buffer = []
             finally:
                 self.release()
-
-
-async def check_branch(me_id: int, allowed_ids: list, self):
-    if os.environ.get("ELYS_NO_GIT") == "1":
-        return
-    repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-    try:
-        with git.Repo(path=repo_path) as repo:
-            if me_id in allowed_ids:
-                return
-
-            branch_name = get_branch_name(repo_path)
-            is_ancestor = check_commit_ancestor(repo, branch_name)
-            if is_ancestor:
-                return
-    except Exception:
-        return
-
-    try:
-        reset_to_master(repo_path)
-        restore_worktree(repo_path)
-        self.client.log_out()
-    except Exception:
-        pass
-
-    restart()
 
 
 _main_formatter = logging.Formatter(
