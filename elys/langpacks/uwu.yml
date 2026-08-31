@@ -338,7 +338,7 @@ settings:
   aliases_cleared: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Aww awiases wemoved</b>."
   no_alias: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Awias</b> <code>{}</code> <b>does nyot exist</b>"
   db_cleared: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Database cweawed</b>"
-  elys: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>ElysTL:</b> <i>{}</i>\n\n<tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Devewopews: <a href=\"t.me/RooniRN\">@RooniRN</a>, <a href=\"t.me/top1skiper\">@top1skiper</a>, <a href=\"t.me/gemeguardian\">@gemeguardian</a></b> :3"
+  elys: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>ElysTL:</b> <i>{}</i>\n\n<tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Devewopews: {}</b> :3"
   confirm_cleardb: "⚠️ <b>Awe you suwe, dat you want to cweaw database?</b>"
   cleardb_confirm: "🗑 Cweaw database"
   cancel: "🚫 Cancew"

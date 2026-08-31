@@ -325,7 +325,7 @@ settings:
   aliases_cleared: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Alle Aliase wurden entfernt</b>."
   no_alias: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Alias</b> <code>{}</code> <b>existiert nicht</b>"
   db_cleared: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Datenbank wurde gelöscht</b>"
-  elys: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>ElysTL:</b> <i>{}</i>\n\n<tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Developers: <a href=\"t.me/gemeguardian\">@gemeguardian</a>, <a href=\"t.me/top1skiper\">@top1skiper</a>, <a href=\"t.me/RooniRN\">@RooniRN</a></b>"
+  elys: "{} <b>{}.{}.{}</b> <i>{}</i>\n\n<b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>ElysTL:</b> <i>{}</i>\n\n<tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Developers: {}</b>"
   _cls_doc: "Verwaltung der grundlegenden Einstellungen des Userbots"
   confirm_cleardb: "⚠️ <b>Bist du sicher, dass du die Datenbank zurücksetzen möchtest?</b>"
   cleardb_confirm: "🗑 Datenbank löschen"
