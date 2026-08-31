@@ -51,7 +51,7 @@ class ElysInfoMod(loader.Module):
             ),
             loader.ConfigValue(
                 "banner_url",
-                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/heroku_info.png",
+                "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_info.png",
                 lambda: self.strings["_cfg_banner"],
                 validator=loader.validators.RandomLink(),
             ),

@@ -116,10 +116,10 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<tg-emoji emoji-id={}>🪐</tg-emoji>",
-            "<tg-emoji emoji-id=5352934134618549768>🪐</tg-emoji>",
-            "<tg-emoji emoji-id=5352663371290271790>🪐</tg-emoji>",
-            "<tg-emoji emoji-id=5350822883314655367>🪐</tg-emoji>",
+            "<tg-emoji emoji-id={}>⭐</tg-emoji>",
+            "<tg-emoji emoji-id=5238027013373078585>❤️</tg-emoji>",
+            "<tg-emoji emoji-id=5238002536354458511>❤️</tg-emoji>",
+            "<tg-emoji emoji-id=5238153160857529945>❤️</tg-emoji>",
         )
     )
 
@@ -135,7 +135,7 @@ def get_platform_emoji() -> str:
             return BASE.format(5352678227582152630)
 
         case _:
-            return BASE.format(5393588431026674882)
+            return BASE.format(5238183758204544049)
 
 
 def uptime() -> int:
