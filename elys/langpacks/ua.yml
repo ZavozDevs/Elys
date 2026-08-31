@@ -409,8 +409,8 @@ inline_stuff:
   bot_updated: "<tg-emoji emoji-id=6318792204118656433>🎉</tg-emoji> <b>Налаштування збережені. Для їх застосування треба перезавантажити юзербота</b>"
   this_is_elys: "{} <b>Привіт! Це {} — потужний модульний Telegram юзербот. Ви можете встановити його на свій акаунт!</b>"
   support_chat_caption: "Чат підтримки"
-  profile_cmd: "ℹ️ Основна інформація про юзерботу\n\n<blockquote>• Префікс: {prefix}\n• Використання RAM: {ram_usage} МБ\n• Використання CPU: {cpu_usage}%\n• Хостинг: {host}</blockquote>"
-  restart: "🔄 Ваша Elys перезапускається..."
+  profile_cmd: "ℹ️ Основна інформація про юзербота\n\n<blockquote>• Префікс: {prefix}\n• Використання RAM: {ram_usage} МБ\n• Використання CPU: {cpu_usage}%\n• Хостинг: {host}</blockquote>"
+  restart: "🔄 Ваш Elys перезапускається..."
   prefix_reset: "🔀 Префікс скинутий!"
   _cmd_doc_ch_elys_bot: "<юзернейм> - Змінити юзернейм інлайн бота"
 
@@ -447,12 +447,12 @@ test:
   name: Test
 updater:
   source: "<tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>"
-  restarting_caption: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Твоя {} перезавантажується...</b>"
+  restarting_caption: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Твій {} перезавантажується...</b>"
   downloading: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Завантаження оновлень...</b>"
   installing: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Встановлення оновлень...</b>"
   success: "<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>Перезавантаження успішне! {}</b>\n<i>Але модулі ще завантажуються...</i>\n<i>Перезавантаження зайняло {} сек</i>"
   full_success: "<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Юзербот повністю завантажений! {}</b>\n<i>Повне перезавантаження зайняло {} сек</i>"
-  ub_stop: "Твоя {} остановлена!"
+  ub_stop: "Твій {emoji} зупинений!"
   full_fail: "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Юзербот повністю завантажений, але сталася помилка! {}\n<i>Повне перезавантаження зайняло {} сек\nНе вдалося завантажити {} модулів</i>"
   secure_boot_complete: "<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Безпечне завантаження завершено! {}</b>\n<i>Перезавантаження зайняло {} сек</i>"
   secure_boot_fail: "<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Безпечне завантаження завершено, але сталася помилка! {}</b>\n<i>Перезавантаження зайняло {} сек\nНе вдалося завантажити {} модулів</i>"
@@ -552,7 +552,7 @@ elys_info:
   font_installed: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Шрифт успішно встановлено!</b>\n<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <i>Тепер ви можете ним користуватися.</i>"
   incorrect_format_font: "<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> <b>Невірний формат шрифту!</b>\n<blockquote>Підтримувані формати → otf, ttf</blockquote>"
   incorrect_img_format: "<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> <b>Невірний формат зображення</b>\n<blockquote>Підтримувані формати → jpg, jpeg, png, bmp, webp</blockquote>"
-  _cmd_doc_ubinfo: "Надіслати інформацію на кшталт 'Що таке Элис?'"
+  _cmd_doc_ubinfo: "Надіслати інформацію на кшталт 'Що таке Elys?'"
   _cmd_doc_info: "Надсилає інформацію про бота"
   _cmd_doc_setinfo: "<текст> - Змінити текст у .info"
 
