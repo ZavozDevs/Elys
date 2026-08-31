@@ -405,7 +405,6 @@ class CustomTelegramClient(TelegramClient):
             logger.debug("Saved hashable_entity %s perms to cache", hashable_entity)
 
             def save_user(key: str | int):
-                nonlocal self, cache_record, user, hashable_user
                 if getattr(user, "id", None):
                     self._elys_perms_cache.setdefault(key, {})[user.id] = cache_record
 

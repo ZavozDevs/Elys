@@ -347,7 +347,6 @@ def translatable_docstring(cls):
     @wraps(cls.config_complete)
     def config_complete(self, *args, **kwargs):
         def proccess_decorators(mark: str, obj: str):
-            nonlocal self
             for attr in dir(func_):
                 if (
                     attr.endswith("_doc")

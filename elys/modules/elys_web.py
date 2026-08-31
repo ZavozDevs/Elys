@@ -45,7 +45,6 @@ logger = logging.getLogger(__name__)
 class ElysWebMod(loader.Module):
     """Elys Accounts and Web Interface Manager"""
 
-
     strings = {"name": "ElysAccounts"}
 
     @loader.command()

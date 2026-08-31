@@ -571,7 +571,7 @@ class Utils(InlineUnit):
         """Params `self`, `unit_id` are for internal use only, do not try to pass them"""
         if getattr(
             getattr(getattr(call, "message", None), "chat", None), "id", None
-        ) and getattr(getattr(call, "message", None), "message_id", None): #67676767
+        ) and getattr(getattr(call, "message", None), "message_id", None):
             try:
                 await self.bot.delete_message(
                     call.message.chat.id,

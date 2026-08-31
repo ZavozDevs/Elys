@@ -726,18 +726,17 @@ class LoaderMod(loader.Module):
                 await self.inline.form(
                     self.strings["version_incompatible"].format(incompatible_ver),
                     m,
-
-                        reply_markup=[
-                            {
-                                "text": self.lookup("updater").strings("btn_update"),
-                                "callback": self.lookup("updater").inline_update,
-                            },
-                            {
-                                "text": self.lookup("updater").strings("cancel"),
-                                "action": "close",
-                            },
-                        ],
-                    )
+                    reply_markup=[
+                        {
+                            "text": self.lookup("updater").strings("btn_update"),
+                            "callback": self.lookup("updater").inline_update,
+                        },
+                        {
+                            "text": self.lookup("updater").strings("cancel"),
+                            "action": "close",
+                        },
+                    ],
+                )
                 return False
 
         developer = re.search(r"# ?meta developer: ?(.+)", doc)
@@ -849,8 +848,6 @@ class LoaderMod(loader.Module):
             await self.invoke("restart", "-f", message=message)
 
         async def core_overwrite(e: CoreOverwriteError):
-            nonlocal message
-
             with contextlib.suppress(Exception):
                 self.allmodules.modules.remove(instance)
 
@@ -997,7 +994,7 @@ class LoaderMod(loader.Module):
                 self.allmodules.send_config_one(instance)
 
                 async def inner_proxy():
-                    nonlocal instance, message
+                    nonlocal message
                     while True:
                         if hasattr(instance, "elys_wait_channel_approve"):
                             if message:
@@ -1210,7 +1207,6 @@ class LoaderMod(loader.Module):
         )
 
         def loaded_msg(use_subscribe: bool = True):
-            nonlocal modname, version, mod_doc, modhelp, placeholders, developer, origin, subscribe, blob_link, depends_from
             return self.strings["loaded"].format(
                 modname.strip(),
                 version,

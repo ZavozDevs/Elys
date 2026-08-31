@@ -29,7 +29,6 @@ import typing
 from getpass import getpass
 from pathlib import Path
 
-import aiohttp
 from elystl import events
 from elystl.errors import (
     ApiIdInvalidError,
@@ -58,14 +57,14 @@ sys.modules.setdefault("herokutl", elystl)
 sys.modules.setdefault("hikkatl", elystl)
 sys.modules.setdefault("telethon", elystl)
 
-from . import database, loader, utils, version
-from ._internal import print_banner, restart
-from .dispatcher import CommandDispatcher
-from .qr import QRCode
-from .secure import patcher
-from .tl_cache import CustomTelegramClient
-from .translations import Translator
-from .version import __version__
+from . import database, loader, utils, version  # noqa: E402
+from ._internal import print_banner, restart  # noqa: E402
+from .dispatcher import CommandDispatcher  # noqa: E402
+from .qr import QRCode  # noqa: E402
+from .secure import patcher  # noqa: E402
+from .tl_cache import CustomTelegramClient  # noqa: E402
+from .translations import Translator  # noqa: E402
+from .version import __version__  # noqa: E402
 
 BASE_DIR = (
     "/data"
@@ -1012,7 +1011,6 @@ class Elys:
                 f"• Version: {'.'.join(list(map(str, list(__version__))))}\n"
                 f"• {upd}\n"
             )
-
 
             if not self.omit_log:
                 print(logo)
