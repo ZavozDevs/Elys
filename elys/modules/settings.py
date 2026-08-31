@@ -115,6 +115,13 @@ class CoreMod(loader.Module):
         random.shuffle(devs)
         devs_str = ", ".join(devs)
 
+        designers = [
+            '<a href="https://t.me/RooniRN">@RooniRN</a>',
+            '<a href="https://t.me/Rom4ik_212">@Rom4ik_212</a>',
+        ]
+        random.shuffle(designers)
+        designers_str = ", ".join(designers)
+
         await utils.answer(
             message,
             self.strings["elys"].format(
@@ -127,6 +134,7 @@ class CoreMod(loader.Module):
                 utils.get_commit_url(),
                 f"{elystl.__version__} #{elystl.tl.alltlobjects.LAYER}",
                 devs_str,
+                designers_str,
             )
             + (branch_text),
             file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png",
