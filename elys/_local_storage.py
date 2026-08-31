@@ -22,7 +22,6 @@ import requests
 
 from . import utils
 from .tl_cache import CustomTelegramClient
-from .version import __version__
 
 logger = logging.getLogger(__name__)
 

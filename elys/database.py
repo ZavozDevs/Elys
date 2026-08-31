@@ -277,11 +277,9 @@ class Database(dict):
         except FileNotFoundError:
             logger.debug("Database file not found, creating new one...")
 
-
     def _update_from_read(self, items: dict) -> None:
         """Update DB from persisted storage without write-protection checks."""
         super().update(self.migrate_data(items))
-
 
     def process_db_autofix(self, db: dict) -> bool:
         if not utils.is_serializable(db):
@@ -482,7 +480,6 @@ class Database(dict):
                         return self[old_owner][key]
             return default
 
-
     def set(self, owner: str, key: str, value: JSONSerializable) -> bool:
         """Set database key"""
         if not utils.is_serializable(owner):
@@ -529,7 +526,6 @@ class Database(dict):
     def update(self, *args, **kwargs) -> None:
         items = dict(*args, **kwargs)
         return super().update(self.migrate_data(items))
-
 
     def pointer(
         self,

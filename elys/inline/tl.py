@@ -232,7 +232,6 @@ class TelethonBot:
                 )
             )
 
-
     async def send_audio(
         self,
         chat_id,

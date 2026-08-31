@@ -664,7 +664,6 @@ class UpdaterMod(loader.Module):
 
             logger.critical("Got update loop. Update manually via .terminal")
 
-
     @loader.command()
     async def source(self, message: Message):
         await utils.answer(

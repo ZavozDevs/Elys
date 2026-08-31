@@ -144,7 +144,6 @@ class Quickstart(loader.Module):
         except Exception:
             logger.debug("Support chat @elys_talks is not available yet")
 
-
         self.mark = lambda: [
             [
                 {

@@ -41,7 +41,7 @@ from elystl.tl.types import (
     UserFull,
 )
 
-from . import version
+from . import utils, version
 from ._reference_finder import replace_all_refs
 from .inline.types import (
     BotInlineCall,
@@ -513,7 +513,6 @@ class Module:
                         f"Library requires Heroku version {'{}.{}.{}'.format(*ver)}+"
                     )
                 )
-
 
         module = f"elys.libraries.{url.replace('%', '%%').replace('.', '%d')}"
         origin = f"<library {url}>"

@@ -170,7 +170,6 @@ class InlineManager(
         if self._token and not db.get("elys.inline", "bot_token", False):
             db.set("elys.inline", "bot_token", self._token)
 
-
         self._me: int = None
         self._name: str = None
         self._bot_client: TelegramClient = None
@@ -479,7 +478,7 @@ class InlineManager(
         exception: Exception = None
 
         async def result_getter():
-            nonlocal unit_id, q
+            nonlocal q
             with contextlib.suppress(Exception):
                 q = await self._client.inline_query(self.bot_username, unit_id)
 

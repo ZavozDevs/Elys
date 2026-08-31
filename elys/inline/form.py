@@ -334,7 +334,6 @@ class Form(InlineUnit):
         }
 
         async def answer(msg: str):
-            nonlocal message
             if isinstance(message, Message):
                 await (message.edit if message.out else message.respond)(
                     msg,

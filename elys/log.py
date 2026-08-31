@@ -22,7 +22,6 @@ import re
 import sys
 import traceback
 import typing
-import os
 import functools
 from logging.handlers import RotatingFileHandler
 from collections.abc import Coroutine

@@ -205,4 +205,3 @@ class LoaderRestrictor(loader.Module):
         await message.delete()
 
         await self._start_quiz()
-
