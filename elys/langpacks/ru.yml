@@ -126,7 +126,7 @@ elys_settings:
   deauth_cancel: "🚫 Отмена"
   deauth_confirm_btn: "😢 Удалить"
   uninstall: "😢 <b>Удаляю Elys...</b>"
-  uninstalled: "😢 <b>Elys удалена.</b>"
+  uninstalled: "😢 <b>Elys удален.</b>"
   cmd_nn_list: "<tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>NoNick включен для этих команд:</b>\n\n<blockquote expandable>{}</blockquote>"
   user_nn_list: "<tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>NoNick включен для этих пользователей:</b>\n\n<blockquote expandable>{}</blockquote>"
   chat_nn_list: "<tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>NoNick включен для этих чатов:</b>\n\n<blockquote expandable>{}</blockquote>"
@@ -411,7 +411,7 @@ inline_stuff:
   this_is_elys: "{} <b>Привет! Это {} — мощный модульный Telegram юзербот. Вы можете установить его на свой аккаунт!</b>"
   support_chat_caption: "Чат поддержки"
   profile_cmd: "ℹ️ Основная информация об юзерботе\n\n<blockquote>• Префикс: {prefix}\n• Использование RAM: {ram_usage} МБ\n• Использование CPU: {cpu_usage}%\n• Хостинг: {host}</blockquote>"
-  restart: "🔄 Ваша Elys перезапускается..."
+  restart: "🔄 Ваш Elys перезапускается..."
   prefix_reset: "🔀 Префикс сброшен!"
   _cmd_doc_ch_elys_bot: "<юзернейм> - Изменить юзернейм инлайн бота"
 
@@ -448,12 +448,12 @@ test:
   name: Test
 updater:
   source: "<tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>Исходный код можно прочитать</b> <a href='{}'>здесь</a>"
-  restarting_caption: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Твоя {} перезагружается...</b>"
+  restarting_caption: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Твой {} перезагружается...</b>"
   downloading: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Скачивание обновлений...</b>"
   installing: "<tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Установка обновлений...</b>"
   success: "<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>Перезагрузка успешна! {}</b>\n<i>Но модули еще загружаются...</i>\n<i>Перезагрузка заняла {} сек</i>"
   full_success: "<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Юзербот полностью загружен! {}</b>\n<i>Полная перезагрузка заняла {} сек.</i>"
-  ub_stop: "Твоя {emoji} остановлена!"
+  ub_stop: "Твой {emoji} остановлен!"
   full_fail: "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Юзербот полностью загружен, но произошла ошибка! {}\n<i>Полная перезагрузка заняла {} сек\nНе удалось загрузить {} модулей</i>"
   secure_boot_complete: "<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Безопасная загрузка завершена! {}</b>\n<i>Перезагрузка заняла {} сек</i>"
   secure_boot_fail: "<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Безопасная загрузка завершена, но произошла ошибка! {}</b>\n<i>Перезагрузка заняла {} сек\nНе удалось загрузить {} модулей</i>"
@@ -571,7 +571,7 @@ elys_info:
   font_installed: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Шрифт установлен!</b>\n<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <i>Теперь вы с удовольствием можете пользоваться им.</i>"
   incorrect_format_font: "<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> <b>Неверный формат шрифта!</b>\n<blockquote>Поддерживаемые форматы -> otf, ttf</blockquote>"
   incorrect_img_format: "<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> <b>Неверный формат изображения</b>\n<blockquote>Поддерживаемые форматы -> jpg, jpeg, png, bmp, webp</blockquote>"
-  _cmd_doc_ubinfo: "Отправить информацию по типу 'Что такое Элис?'"
+  _cmd_doc_ubinfo: "Отправить информацию по типу 'Что такое Elys?'"
   _cmd_doc_info: "Отправляет информацию о боте"
   _cmd_doc_setinfo: "<текст> - Изменить текст в .info"
 

@@ -84,9 +84,9 @@ class CoreMod(loader.Module):
         return f"{str(chatid)}.{module}" if module else chatid
 
     @loader.command(
-        ru_doc="Информация о Элис",
+        ru_doc="Информация об Elys",
         en_doc="Information of Elys",
-        ua_doc="Інформація про Элис",
+        ua_doc="Інформація про Elys",
         de_doc="Informationen über Elys",
     )
     async def elyscmd(self, message: Message):

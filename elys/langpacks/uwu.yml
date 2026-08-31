@@ -434,7 +434,7 @@ test:
   name: "Testew"
   set_loglevel: "<tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>Pwease specify vewbosity as an integew ow stwing</b>"
   no_logs: "<tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>You don't have any wogs at vewbosity</b> <code>{}</code><b>.</b>"
-  configping: "Youw custom text. You can use pwacehowdews: {ping} - Dat's youw ping. {uptime} - It's youw uptime. {ping_hint} - Dis is da same hint as in da heroku moduwe, it is chosen with wandom chance, awso you can specify dis hint in da config. You can use da {hostname} pwacehowdew if you nyeed da hostnyame of youw sewvew"
+  configping: "Youw custom text. You can use pwacehowdews: {ping} - Dat's youw ping. {uptime} - It's youw uptime. {ping_hint} - Dis is da same hint as in da elys moduwe, it is chosen with wandom chance, awso you can specify dis hint in da config. You can use da {hostname} pwacehowdew if you nyeed da hostnyame of youw sewvew"
   configpingph: "🤖 Custom pwaceholders: {}"
   hint: "Set a hint"
   ping_emoji: "Emoji dat appeaws when ping does nyot incwease signyificantwy"
