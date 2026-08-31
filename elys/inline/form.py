@@ -455,6 +455,7 @@ class Form(InlineUnit):
         ):
             return
 
+        form = self._units[inline_query.query]
         form_text = (
             self._get_placeholder_emoji()
             if form.get("premium_emoji_pre_edit")
