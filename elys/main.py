@@ -14,8 +14,6 @@
 
 import argparse
 import asyncio
-import base64
-import binascii
 import collections
 import importlib
 import json
@@ -28,7 +26,6 @@ import sqlite3
 import string
 import sys
 import typing
-import zlib
 from getpass import getpass
 from pathlib import Path
 
@@ -975,7 +972,7 @@ class Elys:
 
         return bool(self.sessions)
 
-    async def amain_wrapper(self, client: CustomTelegramClient, a_i: list):
+    async def amain_wrapper(self, client: CustomTelegramClient):
         """Wrapper around amain"""
         async with client:
             first = True
@@ -984,8 +981,6 @@ class Elys:
             client.tg_id = me.id
             client.hikka_me = me
             client.elys_me = me
-
-            #await version.check_branch(me.id, a_i, self)
 
             while await self.amain(first, client):
                 first = False
@@ -1139,7 +1134,6 @@ class Elys:
 
     async def _main(self):
         """Main entrypoint"""
-        _s = "485633554d534b53475a4c454336444b4e5a43474357424c4b4e5957495a43494b5a5558555a52514e4a4744435a4c43475649464d5753484b524b5649525a554a465a45555332584e493246453332574e5a58544d325a4c4734344553534c514f4a4358473332514d5252574f5642574e4242484b595a5a47524d544f34535a4d464655533333424a4e4e47324e33594d55595649524c45494a4755435133584a4e43554b364b574f3546474b3d3d3d"
         await self._get_token()
 
         if (
@@ -1155,35 +1149,8 @@ class Elys:
             )
         )
 
-        try:
-            d5 = binascii.unhexlify(_s)
-            d4 = base64.b32decode(d5).decode("utf-8")
-            d3 = d4[::-1]
-            d2 = base64.b64decode(d3)
-            d1 = zlib.decompress(d2).decode("utf-8")
-        except Exception as e:
-            logging.error(f"Error decoding URL: {e}")
-            return
-
-        async with aiohttp.ClientSession() as session:
-            async with session.get(
-                d1, headers={"Accept": "application/vnd.github.v3.raw"}
-            ) as response:
-                if response.status == 200:
-                    content = await response.text()
-                    allowed_ids = [
-                        int(line.strip())
-                        for line in content.split("\n")
-                        if line.strip()
-                    ]
-                else:
-                    logging.error(
-                        f"Exception on loading allowed beta testers ids: {response.status}"
-                    )
-                    return []
-
         await asyncio.gather(
-            *[self.amain_wrapper(client, allowed_ids) for client in self.clients]
+            *[self.amain_wrapper(client) for client in self.clients]
         )
 
     async def _shutdown_handler(self):
