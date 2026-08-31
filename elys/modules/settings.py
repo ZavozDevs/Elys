@@ -110,13 +110,13 @@ class CoreMod(loader.Module):
         devs = [
             '<a href="https://t.me/gemeguardian">@gemeguardian</a>',
             '<a href="https://t.me/top1skiper">@top1skiper</a>',
-            '<a href="https://t.me/RooniRN">@RooniRN</a>',
+            '<a href="https://t.me/YouRooni">@YouRooni</a>',
         ]
         random.shuffle(devs)
         devs_str = ", ".join(devs)
 
         designers = [
-            '<a href="https://t.me/RooniRN">@RooniRN</a>',
+            '<a href="https://t.me/YouRooni">@YouRooni</a>',
             '<a href="https://t.me/Rom4ik_212">@Rom4ik_212</a>',
         ]
         random.shuffle(designers)
