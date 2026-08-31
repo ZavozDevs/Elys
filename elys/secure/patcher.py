@@ -14,9 +14,7 @@ def patch(client: CustomTelegramClient, session: SQLiteSession):
     client._sender._state = MTProtoState(session.auth_key, client._sender._loggers)
     client._connection = ConnectionTcpFull
 
-    socket_path = (
-        Path(__file__).parent.parent.parent / f"elys-{session_id}-proxy.sock"
-    )
+    socket_path = Path(__file__).parent.parent.parent / f"elys-{session_id}-proxy.sock"
     client.connect = functools.partial(client.connect, unix_socket_path=socket_path)
 
     logging.warning("Patched mtprotostate")

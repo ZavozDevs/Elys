@@ -196,10 +196,7 @@ class LoaderRestrictor(loader.Module):
         )
 
     async def bot_watcher(self, message: BotInlineMessage):
-        if (
-            message.text != "/start lm_verify"
-            or message.sender_id != self.client.tg_id
-        ):
+        if message.text != "/start lm_verify" or message.sender_id != self.client.tg_id:
             return
 
         await message.delete()

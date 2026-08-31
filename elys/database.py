@@ -220,7 +220,7 @@ class Database(dict):
             if isinstance(k, str):
                 for old_pfx in ("heroku.", "hikka.", "legacy.", "ftg."):
                     if k.startswith(old_pfx):
-                        new_key = "elys." + k[len(old_pfx):]
+                        new_key = "elys." + k[len(old_pfx) :]
                         break
 
                 if new_key in mod_renames:
@@ -265,8 +265,12 @@ class Database(dict):
                 )
             )
             if migrated_needed:
-                logger.info("Migrating database from legacy Heroku/Hikka format to Elys and cleaning old keys...")
-                db_raw = re.sub(r'"(?:heroku|hikka|legacy|ftg)\.(\S+":)', r'"elys.\1', db_raw)
+                logger.info(
+                    "Migrating database from legacy Heroku/Hikka format to Elys and cleaning old keys..."
+                )
+                db_raw = re.sub(
+                    r'"(?:heroku|hikka|legacy|ftg)\.(\S+":)', r'"elys.\1', db_raw
+                )
             data = json.loads(db_raw)
             data = self.migrate_data(data)
             self._update_from_read(data)
@@ -363,7 +367,9 @@ class Database(dict):
     async def _get_assets_topic_id(self) -> int | None:
         forums_cache = self.get("elys.forums", "forums_cache", {})
         if isinstance(forums_cache, dict):
-            if "elys-userbot" in forums_cache and isinstance(forums_cache["elys-userbot"], dict):
+            if "elys-userbot" in forums_cache and isinstance(
+                forums_cache["elys-userbot"], dict
+            ):
                 if tid := forums_cache["elys-userbot"].get("Assets"):
                     return tid
             for _, topics in forums_cache.items():
@@ -469,7 +475,12 @@ class Database(dict):
         except KeyError:
             if owner.startswith("elys."):
                 suffix = owner[5:]
-                for old in (f"heroku.{suffix}", f"hikka.{suffix}", f"legacy.{suffix}", f"ftg.{suffix}"):
+                for old in (
+                    f"heroku.{suffix}",
+                    f"hikka.{suffix}",
+                    f"legacy.{suffix}",
+                    f"ftg.{suffix}",
+                ):
                     if old in self and key in self[old]:
                         return self[old][key]
             elif owner.startswith("Elys"):

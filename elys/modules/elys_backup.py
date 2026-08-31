@@ -144,8 +144,12 @@ class ElysBackupMod(loader.Module):
                 if getattr(found_topic, "title", None) == "Backups":
                     forums_cache = self._db.pointer("elys.forums", "forums_cache", {})
                     channel_title = getattr(entity, "title", "elys-userbot")
-                    forums_cache.setdefault(channel_title, {})["Backups"] = found_topic.id
-                    forums_cache.setdefault("elys-userbot", {})["Backups"] = found_topic.id
+                    forums_cache.setdefault(channel_title, {})[
+                        "Backups"
+                    ] = found_topic.id
+                    forums_cache.setdefault("elys-userbot", {})[
+                        "Backups"
+                    ] = found_topic.id
                     self._db.save()
                     return found_topic.id
         except Exception as e:
@@ -193,9 +197,7 @@ class ElysBackupMod(loader.Module):
                         "elys.forums", "channel_id", current_forums["channel_id"]
                     )
                 if current_forums.get("forum_id"):
-                    self._db.set(
-                        "elys.forums", "forum_id", current_forums["forum_id"]
-                    )
+                    self._db.set("elys.forums", "forum_id", current_forums["forum_id"])
 
         if current_bot_token:
             inline_cfg = self._db.get("elys.inline", {})
@@ -306,7 +308,9 @@ class ElysBackupMod(loader.Module):
 
         try:
             if not getattr(self, "_content_channel_id", None):
-                self._content_channel_id = await utils.wait_for_content_channel(self._db)
+                self._content_channel_id = await utils.wait_for_content_channel(
+                    self._db
+                )
 
             # Try to get message from content channel or from caller chat
             msg = None
@@ -343,7 +347,9 @@ class ElysBackupMod(loader.Module):
                             with modzip.open("db_mods.json", "r") as modules:
                                 db_mods = orjson.loads(modules.read().decode())
                                 if isinstance(db_mods, dict):
-                                    self.lookup("LoaderMod").set("loaded_modules", db_mods)
+                                    self.lookup("LoaderMod").set(
+                                        "loaded_modules", db_mods
+                                    )
 
                         for name in modzip.namelist():
                             if name == "db_mods.json" or not Path(name).name.endswith(
@@ -672,7 +678,9 @@ class ElysBackupMod(loader.Module):
                             with modzip.open("db_mods.json", "r") as modules:
                                 db_mods = orjson.loads(modules.read().decode())
                                 if isinstance(db_mods, dict):
-                                    self.lookup("LoaderMod").set("loaded_modules", db_mods)
+                                    self.lookup("LoaderMod").set(
+                                        "loaded_modules", db_mods
+                                    )
 
                         for name in modzip.namelist():
                             if name == "db_mods.json" or not Path(name).name.endswith(

@@ -416,13 +416,9 @@ async def asset_forum_topic(
     channel_title = getattr(entity, "title", "elys-userbot")
     cached = db.get("elys.forums", "forums_cache", {})
     topic_id = (
-        cached.get(channel_title, {}).get(title)
-        if isinstance(cached, dict)
-        else None
+        cached.get(channel_title, {}).get(title) if isinstance(cached, dict) else None
     ) or (
-        cached.get("elys-userbot", {}).get(title)
-        if isinstance(cached, dict)
-        else None
+        cached.get("elys-userbot", {}).get(title) if isinstance(cached, dict) else None
     )
 
     if topic_id or (topic_id := await _search_topic(title)):
@@ -483,7 +479,9 @@ async def get_topic_id(db: "Database", topic_name: str) -> int | None:
             return None
 
         # Check default key first
-        if "elys-userbot" in forums_cache and isinstance(forums_cache["elys-userbot"], dict):
+        if "elys-userbot" in forums_cache and isinstance(
+            forums_cache["elys-userbot"], dict
+        ):
             if topic_id := forums_cache["elys-userbot"].get(topic_name):
                 return topic_id
 

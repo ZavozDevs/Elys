@@ -99,7 +99,10 @@ class UpdaterMod(loader.Module):
     def _is_emfile_error(error: BaseException) -> bool:
         current: BaseException | None = error
         while current is not None:
-            if isinstance(current, OSError) and current.errno in (errno.EMFILE, errno.EAGAIN):
+            if isinstance(current, OSError) and current.errno in (
+                errno.EMFILE,
+                errno.EAGAIN,
+            ):
                 return True
 
             current = current.__cause__ or current.__context__
@@ -303,7 +306,6 @@ class UpdaterMod(loader.Module):
                             "🔎 diff",
                         ),
                     ),
-
                 )
                 await self.invoke("update", "-f", peer=self.inline.bot_username)
 
@@ -474,9 +476,7 @@ class UpdaterMod(loader.Module):
         msg_obj = await utils.answer(
             msg_obj,
             self.strings["restarting_caption"].format(
-                utils.get_platform_emoji()
-                if self._client.elys_me.premium
-                else "Elys"
+                utils.get_platform_emoji() if self._client.elys_me.premium else "Elys"
             ),
         )
 
@@ -508,7 +508,10 @@ class UpdaterMod(loader.Module):
                     try:
                         r = origin.pull()
                     except GitCommandError:
-                        logger.info("Fast-forward pull failed, resetting hard to origin/%s...", version.branch)
+                        logger.info(
+                            "Fast-forward pull failed, resetting hard to origin/%s...",
+                            version.branch,
+                        )
                         origin.fetch()
                         repo.git.reset("--hard", f"origin/{version.branch}")
                         return True
@@ -793,7 +796,8 @@ class UpdaterMod(loader.Module):
                                     None,
                                     ignore_migrated=True,
                                 )
-                                if "elys" in dialog.name or "heroku" in dialog.name
+                                if "elys" in dialog.name
+                                or "heroku" in dialog.name
                                 or "Elys" in dialog.name
                                 and dialog.is_channel
                                 or (
@@ -953,9 +957,7 @@ class UpdaterMod(loader.Module):
         await self.inline.form(
             message=message,
             text=self.strings["stop_ub_confirm"].format(
-                utils.get_platform_emoji()
-                if self.client.elys_me.premium
-                else "Elys"
+                utils.get_platform_emoji() if self.client.elys_me.premium else "Elys"
             ),
             reply_markup=[
                 [

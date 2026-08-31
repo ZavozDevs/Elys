@@ -326,7 +326,10 @@ class CommandDispatcher:
             or event.dice
             or event.audio
             or event.via_bot_id
-            or (getattr(event, "reactions", False) and getattr(event, "edit_hide", False))
+            or (
+                getattr(event, "reactions", False)
+                and getattr(event, "edit_hide", False)
+            )
         ):
             return False
 
