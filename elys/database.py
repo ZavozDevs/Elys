@@ -134,10 +134,9 @@ class Database(dict):
                 )
             except Exception as e:
                 logger.warning(
-                    f"Saved channel ID {existing_channel_id} not found or inaccessible: {e}"
+                    f"Saved channel ID {existing_channel_id} not found via get_entity ({e}), checking dialogs..."
                 )
                 content_channel = None
-                self.set("elys.forums", "forums_cache", {"elys-userbot": {}})
 
         if not content_channel:
             async for dialog in self._client.iter_dialogs():
@@ -164,6 +163,7 @@ class Database(dict):
                 _folder="elys",
             )
             self.set("elys.forums", "channel_id", int(content_channel.id))
+            self.set("elys.forums", "forums_cache", {"elys-userbot": {}})
 
         return content_channel
 
@@ -362,17 +362,52 @@ class Database(dict):
 
         return True
 
+    async def _get_assets_topic_id(self) -> int | None:
+        forums_cache = self.get("elys.forums", "forums_cache", {})
+        if isinstance(forums_cache, dict):
+            if "elys-userbot" in forums_cache and isinstance(forums_cache["elys-userbot"], dict):
+                if tid := forums_cache["elys-userbot"].get("Assets"):
+                    return tid
+            for _, topics in forums_cache.items():
+                if isinstance(topics, dict) and (tid := topics.get("Assets")):
+                    return tid
+
+        # Search existing topic on Telegram without creating a new one
+        if _content_channel_id := self.get("elys.forums", "channel_id", None):
+            try:
+                from elystl.tl.functions.channels import GetForumTopicsRequest
+
+                entity = await self._client.get_entity(_content_channel_id)
+                result = await self._client(
+                    GetForumTopicsRequest(
+                        peer=entity,
+                        offset_date=None,
+                        offset_id=0,
+                        offset_topic=0,
+                        limit=100,
+                    )
+                )
+                for found_topic in result.topics:
+                    if getattr(found_topic, "title", None) == "Assets":
+                        cached = self.pointer("elys.forums", "forums_cache", {})
+                        channel_title = getattr(entity, "title", "elys-userbot")
+                        cached.setdefault(channel_title, {})["Assets"] = found_topic.id
+                        cached.setdefault("elys-userbot", {})["Assets"] = found_topic.id
+                        self.save()
+                        return found_topic.id
+            except Exception:
+                pass
+
+        return None
+
     async def store_asset(self, message: Message) -> int:
         """
         Save assets
         returns asset_id as integer
         """
 
-        try:
-            _assets_topic_id = self.get("elys.forums", "forums_cache", {})[
-                "elys-userbot"
-            ]["Assets"]
-        except (TypeError, KeyError):
+        _assets_topic_id = await self._get_assets_topic_id()
+        if not _assets_topic_id:
             raise NoAssetsChannel("Tried to save asset to non-existing asset topic.")
 
         if not (_content_channel_id := self.get("elys.forums", "channel_id", None)):
@@ -405,11 +440,8 @@ class Database(dict):
                 "Tried to save asset with non-existing content channel."
             )
 
-        try:
-            _assets_topic_id = self.get("elys.forums", "forums_cache", {})[
-                "elys-userbot"
-            ]["Assets"]
-        except (TypeError, KeyError):
+        _assets_topic_id = await self._get_assets_topic_id()
+        if not _assets_topic_id:
             raise NoAssetsChannel("Tried to save asset to non-existing asset topic.")
 
         asset = await self._client.get_messages(

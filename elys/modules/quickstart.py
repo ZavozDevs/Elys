@@ -43,10 +43,9 @@ class Quickstart(loader.Module):
                     )
                 except Exception as e:
                     logger.warning(
-                        f"Saved channel ID {existing_channel_id} not found or inaccessible: {e}"
+                        f"Saved channel ID {existing_channel_id} not found via get_entity ({e}), checking dialogs..."
                     )
                     content_channel = None
-                    self.db.set("elys.forums", "forums_cache", {"elys-userbot": {}})
 
             if not content_channel:
                 async for dialog in self.client.iter_dialogs():

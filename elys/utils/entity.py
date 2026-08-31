@@ -464,7 +464,20 @@ async def get_topic_id(db: "Database", topic_name: str) -> int | None:
     """
     try:
         forums_cache = db.get("elys.forums", "forums_cache", {})
-        return forums_cache.get("elys-userbot", {}).get(topic_name)
+        if not isinstance(forums_cache, dict):
+            return None
+
+        # Check default key first
+        if "elys-userbot" in forums_cache and isinstance(forums_cache["elys-userbot"], dict):
+            if topic_id := forums_cache["elys-userbot"].get(topic_name):
+                return topic_id
+
+        # Search across all cached channel entities
+        for _, topics in forums_cache.items():
+            if isinstance(topics, dict) and (topic_id := topics.get(topic_name)):
+                return topic_id
+
+        return None
     except Exception:
         return None
 
