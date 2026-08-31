@@ -232,8 +232,8 @@ python3 -m elys
 ## 🙏 Acknowledgements & Credits
 
 - [**Codrago**](https://github.com/coddrago) for [Heroku Userbot](https://github.com/coddrago/Heroku)
-- [**Hikari**](https://gitlab.com/hikariatama) for Hikka (project foundation)
-- [**Lonami**](https://t.me/lonami) for Telethon
+- [**Hikari**](https://gitlab.com/hikariatama) for [Hikka Userbot](https://github.com/hikariatama/hikka) (project foundation)
+- [**Lonami**](https://t.me/lonami) for [Telethon](https://codeberg.org/Lonami/Telethon)
 
 
 
