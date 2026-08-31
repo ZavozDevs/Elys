@@ -180,6 +180,8 @@ def patched_import(name: str, *args, **kwargs):
                 return native_import(name, *args, **kwargs)
             case s if s.startswith("hikka"):
                 return native_import("elys" + name[5:], *args, **kwargs)
+            case s if s.startswith("heroku") and not s.startswith("herokutl"):
+                return native_import("elys" + name[6:], *args, **kwargs)
 
         return native_import(name, *args, **kwargs)
     finally:

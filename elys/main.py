@@ -1036,7 +1036,7 @@ class Elys:
 
                 await client.elys_inline.bot.send_photo(
                     log_chat_id,
-                    "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/started.png",
+                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_started.png",
                     caption=(
 
                         "{} <b>{} started!</b>\n\n<tg-emoji emoji-id=5231065262228250587>⚙</tg-emoji> <b>GitHub commit SHA: <a"

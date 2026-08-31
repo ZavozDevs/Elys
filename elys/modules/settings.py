@@ -92,10 +92,6 @@ class CoreMod(loader.Module):
         """Information about Elys"""
         return await self._elyscmd(message)
 
-    async def herokucmd(self, message: Message):
-        """[Legacy alias] Information about Elys"""
-        return await self._elyscmd(message)
-
     async def _elyscmd(self, message: Message):
 
         branch_text = ""
@@ -112,7 +108,7 @@ class CoreMod(loader.Module):
 
         await utils.answer(
             message,
-            self.strings.get("elys", self.strings.get("heroku")).format(
+            self.strings["elys"].format(
                 (
                     utils.get_platform_emoji()
                     if self._client.elys_me.premium
@@ -123,7 +119,7 @@ class CoreMod(loader.Module):
                 f"{herokutl.__version__} #{herokutl.tl.alltlobjects.LAYER}",
             )
             + (branch_text),
-            file="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/cmd.png",
+            file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png",
 
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
@@ -658,13 +654,13 @@ class CoreMod(loader.Module):
                 self.strings["choose_installation"],
                 message,
                 reply_markup=self._markup(),
-                photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/installation.png",
+                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_installation.png",
             )
         ):
 
             await self.client.send_file(
                 message.peer_id,
-                "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/installation.png",
+                "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_installation.png",
                 caption=self.strings["vds_install"],
 
                 reply_to=getattr(message, "reply_to_msg_id", None),

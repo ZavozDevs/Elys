@@ -344,7 +344,7 @@ class Module:
                 "✖️ <b>Declined joining <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/declined_jr.png",
+            photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/declined_jr.png",
         )
 
     async def request_join(
@@ -411,7 +411,7 @@ class Module:
 
         await self.inline.bot.send_photo(
             self.tg_id,
-            "https://raw.githubusercontent.com/coddrago/assets/refs/heads/main/heroku/join_request.png",
+            "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/join_request.png",
             caption=(
                 self._client.loader.lookup("translations")
                 .strings("requested_join")
