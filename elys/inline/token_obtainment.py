@@ -94,9 +94,7 @@ class TokenObtainment(InlineUnit):
                         "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys.png"
                     )
                 else:
-                    m = await conv.send_file(
-                        main.BASE_PATH / "assets" / "elys.png"
-                    )
+                    m = await conv.send_file(main.BASE_PATH / "assets" / "elys.png")
                 r = await conv.get_response()
 
                 logger.debug(">> <Photo>")
@@ -245,9 +243,7 @@ class TokenObtainment(InlineUnit):
                         await fw_protect()
                         from .. import main
 
-                        m = await conv.send_file(
-                            main.BASE_PATH / "assets" / "elys.png"
-                        )
+                        m = await conv.send_file(main.BASE_PATH / "assets" / "elys.png")
                         r = await conv.get_response()
 
                         logger.debug(">> <Photo>")

@@ -53,6 +53,7 @@ from elystl.tl.functions.auth import CheckPasswordRequest
 from elystl.tl.functions.contacts import UnblockRequest
 
 import elystl
+
 sys.modules.setdefault("herokutl", elystl)
 sys.modules.setdefault("hikkatl", elystl)
 sys.modules.setdefault("telethon", elystl)
@@ -1036,7 +1037,6 @@ class Elys:
                     log_chat_id,
                     "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_started.png",
                     caption=(
-
                         "{} <b>{} started!</b>\n\n<tg-emoji emoji-id=5231065262228250587>⚙</tg-emoji> <b>GitHub commit SHA: <a"
                         ' href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>\n<tg-emoji emoji-id=5873225338984599714>🔎</tg-emoji>'
                         " <b>Update status: {}</b>\n<tg-emoji emoji-id=5870903672937911120>🕶</tg-emoji> <b>Prefix:</b> <code>{}</code>"
@@ -1147,9 +1147,7 @@ class Elys:
             )
         )
 
-        await asyncio.gather(
-            *[self.amain_wrapper(client) for client in self.clients]
-        )
+        await asyncio.gather(*[self.amain_wrapper(client) for client in self.clients])
 
     async def _shutdown_handler(self):
         for client in self.clients:

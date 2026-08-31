@@ -494,7 +494,9 @@ class Module:
         code = code.text
 
         elys_lib_min = re.search(r"# ?scope: ?(?:elys|talvo)_min ((\d+\.){2}\d+)", code)
-        legacy_lib_min = re.search(r"# ?scope: ?(?:heroku|hikka)_min ((\d+\.){2}\d+)", code)
+        legacy_lib_min = re.search(
+            r"# ?scope: ?(?:heroku|hikka)_min ((\d+\.){2}\d+)", code
+        )
 
         if elys_lib_min:
             ver = tuple(map(int, elys_lib_min[1].split(".")))

@@ -138,7 +138,6 @@ class CoreMod(loader.Module):
             )
             + (branch_text),
             file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png",
-
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
 
@@ -680,7 +679,6 @@ class CoreMod(loader.Module):
                 message.peer_id,
                 "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_installation.png",
                 caption=self.strings["vds_install"],
-
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
         match True:

@@ -694,7 +694,9 @@ class LoaderMod(loader.Module):
 
         incompatible_ver = None
         elys_min = re.search(r"# ?scope: ?(?:elys|talvo)_min ((?:\d+\.){2}\d+)", doc)
-        legacy_min = re.search(r"# ?scope: ?(?:heroku|hikka)_min ((?:\d+\.){2}\d+)", doc)
+        legacy_min = re.search(
+            r"# ?scope: ?(?:heroku|hikka)_min ((?:\d+\.){2}\d+)", doc
+        )
 
         if elys_min:
             ver = elys_min.group(1)

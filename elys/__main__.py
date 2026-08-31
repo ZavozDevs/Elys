@@ -144,9 +144,7 @@ if (
 if sys.version_info < (3, 10, 0):
     print("\U0001f6ab Error: you must use at least Python version 3.10.0")
 elif __package__ != "elys":
-    print(
-        "🚫 Error: you cannot run this as a script; you must execute as a package"
-    )
+    print("🚫 Error: you cannot run this as a script; you must execute as a package")
 
 else:
     try:

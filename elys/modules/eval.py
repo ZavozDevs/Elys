@@ -511,8 +511,7 @@ class Evaluator(loader.Module):
                             lambda x: x[0][0] != "_"
                             and isinstance(x[1], ModuleType)
                             and x[1] != obj
-                            and x[1].__package__.rsplit(".", _depth)[0]
-                            == "elystl.tl",
+                            and x[1].__package__.rsplit(".", _depth)[0] == "elystl.tl",
                             obj.__dict__.items(),
                         )
                     ]

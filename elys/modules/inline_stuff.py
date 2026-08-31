@@ -126,7 +126,11 @@ class InlineStuff(loader.Module):
                             if self._client.elys_me.premium is True
                             else "🪐"
                         ),
-                        utils.get_platform_emoji() if self._client.elys_me.premium is True else "Elys",
+                        (
+                            utils.get_platform_emoji()
+                            if self._client.elys_me.premium is True
+                            else "Elys"
+                        ),
                     ),
                     reply_markup=self.inline.generate_markup(
                         markup_obj=[

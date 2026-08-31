@@ -54,9 +54,7 @@ class Quickstart(loader.Module):
                         logger.debug(
                             f"Found existing channel '{dialog.title}' with ID {dialog.entity.id}"
                         )
-                        self.db.set(
-                            "elys.forums", "channel_id", int(dialog.entity.id)
-                        )
+                        self.db.set("elys.forums", "channel_id", int(dialog.entity.id))
                         break
 
             if not content_channel:
