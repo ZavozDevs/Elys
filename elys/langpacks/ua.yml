@@ -266,7 +266,7 @@ presets:
   back: "🔙 Назад"
   install: "📦 Встановити"
   installing: "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Встановлення набору </b><code>{}</code><b>...</b>"
-  installing_module: "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Встановлення набору</b> <code>{}</code> <b>({}/{} модулів)...</b>\n\n<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <i>Встановлення модуля {}...</i>"
+  installing_module: "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Встановлення набору</b> <code>{}</code> <b>({}/{} модулів)...</b>\n\n<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>Встановлення модуля {}...</i>"
   installed: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Набір</b> <code>{}</code> <b>встановлено!</b>"
   already_installed: "✅ [Встановлено]"
   add_to_folder_usage: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Вкажи папку для додавання модуля. </b> <code>{prefix}addtofolder <папка> <модуль></code>"
@@ -276,7 +276,7 @@ presets:
   folder_load_usage: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Вкажи папку для завантаження модулів. </b> <code>{prefix}fl <папка></code>"
   folder_not_found: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Папка {} не знайдена</b>"
   no_modules_in_folder: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>У папці {} немає модулів</b>"
-  folder: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Папка</b> {}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>Відповідь на це повідомлення {prefix}lp для встановлення</b>"
+  folder: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Папка</b> {}\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>Відповідь на це повідомлення {prefix}lp для встановлення</b>"
   remove_from_folder_usage: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Вкажи папку та модуль для видалення. </b> <code>{prefix}removefromfolder <папка> <модуль></code>"
   removed_from_folder: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Модуль {} видалено з папки</b> <code>{}</code>"
   module_not_in_folder: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Модуль {} не знаходиться в папці {}</b>"
@@ -291,11 +291,11 @@ presets:
 
   name: Presets
 settings:
-  choose_installation: "<tg-emoji emoji-id=5363805650327450240>🪐</tg-emoji> <b>Виберіть варіант установки Elys:</b>"
+  choose_installation: "<tg-emoji emoji-id=5363805650327450240>🌟</tg-emoji> <b>Виберіть варіант установки Elys:</b>"
   vds_install: "<tg-emoji emoji-id=5471952986970267163>💎</tg-emoji> Процес установки на VDS виконується однією командою:\n<pre><code class=\"language-shell\">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n<i>Примітка: Якщо у вас відсутні права sudo, виключіть відповідну частину команди.</i>"
   wsl_install: "<b>Завантаж WSL.</b> Для цього відкрий PowerShell з правами адміністратора і напиши <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>Для встановлення WSL потрібна Windows 10 збірки 2004 або Windows 11 будь-якої версії та ПК з підтримкою віртуалізації. Для встановлення на більш ранні версії ОС звернись до</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">цієї сторінки</a>\n\n⬜️ <b>Перезавантаж ПК та запусти додаток Ubuntu 22.04.x</b> \n\n⬜️ <b>Встав у нього команду (ПКМ):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>При появі жовтих попереджень введи</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>замінивши /home/username/.local/bin на той шлях, про який йдеться в повідомленні</i>\n\n⬜️ <b>Встав команду (ПКМ):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n🔗 <b>Де отримати API_ID та API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Відео</a>"
   userland_install: "<b>Встанови UserLAnd за</b> <a href=\"https://play.google.com/store/apps/details?id=tech.ula\">посиланням</a>\n\n<b>Відкрий його, вибери Ubuntu —&gt; Minimal —&gt; Terminal</b>\n\n<b>Чекай встановлення дистрибутиву, можеш налити чаю</b>\n\n<b>Після успішного встановлення перед тобою відкриється термінал, пиши туди:</b>\n<pre><code class=\"language-bash\">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n<b>В кінці встановлення з'явиться посилання, переходи за ним і вводи дані свого акаунта для входу.\n\nВуаля! Ви встановили Elys на UserLAnd.</b>"
-  hikkahost_install: "<b>🌘 Як встановити Elys на HikkaHost?</b>\n\n1. Перейдіть до @hikkahost_bot\n2. Виберіть \"Установить\"\n3. Виберіть \"🪐 Elys\"\n\nІ продовжуйте встановлення.\n\n<b>Після цього ви отримаєте посилання, відкрийте його та увійдіть у свій акаунт.</b>"
+  hikkahost_install: "<b>🌘 Як встановити Elys на HikkaHost?</b>\n\n1. Перейдіть до @hikkahost_bot\n2. Виберіть \"Установить\"\n3. Виберіть \"🌟 Elys\"\n\nІ продовжуйте встановлення.\n\n<b>Після цього ви отримаєте посилання, відкрийте його та увійдіть у свій акаунт.</b>"
   too_many_args: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <bЗанадто багато аргументів</b>"
   blacklisted: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Чат {} додано до чорного списку юзербота</b>"
   unblacklisted: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Чат {} видалено з чорного списку юзербота</b>"
@@ -311,7 +311,7 @@ settings:
   aliases_created: "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Додано {count} аліаси:</b>\n<blockquote expandable>{aliases}</blockquote>"
   aliases_created_line: "{aliases} для {command}"
   aliases_list: "<b>🔗 Імпортовано аліаси:</b>\n\n<blockquote expandable>{}</blockquote>"
-  aliases_file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Ваші аліаси</b>\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}la у відповідь на це повідомлення для імпорту аліасів</b>"
+  aliases_file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Ваші аліаси</b>\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}la у відповідь на це повідомлення для імпорту аліасів</b>"
   unstable: "\n\n<tg-emoji emoji-id=5355133243773435190>❕</tg-emoji> <b>Ви використовуєте нестабільну гілку</b> <code>{}</code><b>!</b>"
   aliases: "<b>🔗 Аліаси:</b>\n"
   happy_beta: "\n\n<tg-emoji emoji-id=5465188915990255885>🌟</tg-emoji> <b>Ви щасливий володар версії <code>{}</code>!</b>"
@@ -426,7 +426,7 @@ test:
   ping_emoji: "Емоджі, який з'являється, коли пінг не збільшується суттєво"
   back: "↩️ Назад"
   banner_url: "Картинка для вашого пінгу, наприклад: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/ping_cmd.png"
-  logs_caption: "<tg-emoji emoji-id=5350594756126721186>🪐</tg-emoji> <b>Логи Elys рівня</b> <code>{}</code>\n\n<tg-emoji emoji-id=5228879218363872764>⚪️</tg-emoji> <b>Версія: {}.{}.{}</b>{}"
+  logs_caption: "<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>Логи Elys рівня</b> <code>{}</code>\n\n<tg-emoji emoji-id=5228879218363872764>⚪️</tg-emoji> <b>Версія: {}.{}.{}</b>{}"
   debugging_enabled: "<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>Режим розробника увімкнено для модуля</b> <code>{0}</code>\n<i>Прямуй до директорії `debug_modules`, змінюй файл `{0}.py`, и смотри изменения в режиме реального времени</i>"
   debugging_disabled: "<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>Режим розробника вімкнено</b>"
   suspend_invalid_time: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Неверное время заморозки</b>"
@@ -546,7 +546,7 @@ elys_info:
   _cfg_banner: "Посилання на банер-картинку"
   switchinfo_on: "<tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Інформація про зображення успішно увімкнена"
   switchinfo_off: "<tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Інформація про зображення успішно вимкнена"
-  desc: "<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <b>Що таке Userbot?</b>\n\n<tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.\n\n<tg-emoji emoji-id=5474667187258006816>😎</tg-emoji> Юзерботи відрізняються від звичайних ботів у Telegram тим, що <b>вони працюють на акаунті користувача</b>, а не на бот-акаунті. Це означає, що вони можуть мати доступ до більшої кількості функцій і мають більшу гнучкість у плані виконання дій.\n\n<tg-emoji emoji-id=5472267631979405211>🚫</tg-emoji> Однак важливо зазначити, що <b>юзерботи офіційно не підтримуються Telegram</b> і їх використання може порушувати умови використання платформи. Тому <b>користувачі мають бути обережними під час їх використання</b> і переконатися, що на їхньому акаунті не виконується шкідливий код.\n\n"
+  desc: "<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Що таке Userbot?</b>\n\n<tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.\n\n<tg-emoji emoji-id=5474667187258006816>😎</tg-emoji> Юзерботи відрізняються від звичайних ботів у Telegram тим, що <b>вони працюють на акаунті користувача</b>, а не на бот-акаунті. Це означає, що вони можуть мати доступ до більшої кількості функцій і мають більшу гнучкість у плані виконання дій.\n\n<tg-emoji emoji-id=5472267631979405211>🚫</tg-emoji> Однак важливо зазначити, що <b>юзерботи офіційно не підтримуються Telegram</b> і їх використання може порушувати умови використання платформи. Тому <b>користувачі мають бути обережними під час їх використання</b> і переконатися, що на їхньому акаунті не виконується шкідливий код.\n\n"
   no_font: "<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> Де посилання чи відповідь з шрифтом?"
   no_banner: "<tg-emoji emoji-id=6010394680179562842>😶</tg-emoji> <b>За вказаним посиланням </b><code>{link}</code><b> нічого не знайдено.\n\nПеревірте цілісність вашого файлу за посиланням, а також переконайтеся, що посилання вказує безпосередньо на файл.</b>"
   font_installed: "<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Шрифт успішно встановлено!</b>\n<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <i>Тепер ви можете ним користуватися.</i>"
@@ -559,8 +559,8 @@ elys_info:
   name: ElysInfo
   _cls_doc: Показати інформацію про юзербота
 loader:
-  link: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Файл</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lm у відповідь на це повідомлення до установити</b>\n\n<tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
-  file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Файл</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>{prefix}lm у відповідь до цього повідомлення встановити</b>\n\n{not_exact}"
+  link: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Файл</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lm у відповідь на це повідомлення до установити</b>\n\n<tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>\n\n{not_exact}"
+  file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Файл</b> {class_name}\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lm у відповідь до цього повідомлення встановити</b>\n\n{not_exact}"
   finding_module_in_repos: "<tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Пошук модулів у сховищах."
   loading_module_via_file: "<tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Завантаження модуля."
   ml_load_module: "<tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Я завантажую модуль як файл."
@@ -574,7 +574,7 @@ loader:
   provide_module: "<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Вкажи модуль для завантаження</b>"
   bad_unicode: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Неправильне кодування модуля</b>"
   load_failed: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Завантаження не увінчалося успіхом. Дивись логи.</b>"
-  loaded: "<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji> <b>Модуль</b> <code>{}</code>{} <b>завантажено {}</b>{}{}{}{}{}{}{}{}"
+  loaded: "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>Модуль</b> <code>{}</code>{} <b>завантажено {}</b>{}{}{}{}{}{}{}{}"
   no_class: "<b>Мені самому придумати що вивантажити?</b>"
   unloaded: "{} <b>Модуль {} вивантажено.</b>"
   unload_suggestions: "<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>Модуль</b> <code>{}</code> <b>не знайдено.</b>\n\n<b>Можливо, ти мав на увазі:</b>"
@@ -634,7 +634,7 @@ loader:
   basic_auth_doc: "Авторизація для доступу до репозиторію"
   choose_repo: "<tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Обери репозиторій, з якого встановити всі модулі:</b>"
   installing_all_from_repo: "<tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>Встановлюю всі модулі з репозиторію...</b>"
-  installed_all_from_repo: "<tg-emoji emoji-id=5429092129638980960>🪐</tg-emoji> <b>Всі модулі з репозиторію успішно встановлено!</b>"
+  installed_all_from_repo: "<tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>Всі модулі з репозиторію успішно встановлено!</b>"
   dlm_all_from_repo_error_nomods: "<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>У цьому репозиторії не знайдено жодного модуля!</b>"
   dlm_all_from_repo_error_somemods: "<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Деякі модулі не вдалося встановити:</b>\n"
   show_banner_doc: "Показати прев'ю мета-банера?"
@@ -643,7 +643,7 @@ loader:
   '404': <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Модуль не знайдено</b>
   _cmd_doc_dlmall: Встановити всі модулі з вибраного репозиторію
   _cmd_doc_ml: <module> - Надіслати модуль файлом
-  result: "<tg-emoji emoji-id=5337183664630709422>🔎</tg-emoji> <b>Результат пошуку за</b> <code>{query}</code>\n\n<tg-emoji emoji-id=5258270535710317499>📦</tg-emoji> <b>{name}</b> від <b>{dev}</b>\n<tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> <i>{cls_doc}</i>\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <b>Команди:</b>\n{commands}\n\n<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji> <code>{prefix}dlmod {mhash}</code>"
+  result: "<tg-emoji emoji-id=5337183664630709422>🔎</tg-emoji> <b>Результат пошуку за</b> <code>{query}</code>\n\n<tg-emoji emoji-id=5258270535710317499>📦</tg-emoji> <b>{name}</b> від <b>{dev}</b>\n<tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> <i>{cls_doc}</i>\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <b>Команди:</b>\n{commands}\n\n<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>"
   args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Недостатньо аргументів</b>
   not_subscribed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Спочатку потрібно підписатися на канал модуля</b>
   verify_required: "<tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>Щоб розблокувати можливість встановлення сторонніх модулів, пройдіть тест у <a href=\"https://t.me/{}?start=lm_verify\">своєму боті</a></b>"
@@ -708,7 +708,7 @@ translate:
 
   name: Translator
 quickstart:
-  base: "<tg-emoji emoji-id=5463379725441341739>🪐</tg-emoji> <b>Привіт.</b> Твій юзербот <b>{}</b> тепер встановлено.\n\n<tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Потрібна допомога?</b> Заходь у <a href=\"https://t.me/elys_talks\">наш чат підтримки</a>. Ми допомагаємо <b>всім</b>.\n\n<tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>Короткий посібник:</b>\n\n<tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> <b>Напиши</b> <code>.help</code><b>, щоб побачити список модулів</b>\n<tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> <b>Напиши</b> <code>.help &lt;Назва модуля/команда&gt;</code><b>, щоб побачити опис модуля</b>\n<tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> <b>Напиши</b> <code>.dlmod &lt;посилання&gt;</code><b>, щоб завантажити модуль за посиланням</b>\n<tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> <b>Напиши</b> <code>.loadmod</code> <b>у відповідь на файл, щоб завантажити з нього модуль</b>\n<tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> <b>Напиши</b> <code>.unloadmod &lt;Назва модуля&gt;</code><b>, щоб вивантажити модуль</b>\n\n<tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>Elys підтримує модулі від Hikka, Friendly-Telegram та GeekTG, а також свої власні.</b>\n"
+  base: "<tg-emoji emoji-id=5463379725441341739>🌟</tg-emoji> <b>Привіт.</b> Твій юзербот <b>{}</b> тепер встановлено.\n\n<tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Потрібна допомога?</b> Заходь у <a href=\"https://t.me/elys_talks\">наш чат підтримки</a>. Ми допомагаємо <b>всім</b>.\n\n<tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>Короткий посібник:</b>\n\n<tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> <b>Напиши</b> <code>.help</code><b>, щоб побачити список модулів</b>\n<tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> <b>Напиши</b> <code>.help &lt;Назва модуля/команда&gt;</code><b>, щоб побачити опис модуля</b>\n<tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> <b>Напиши</b> <code>.dlmod &lt;посилання&gt;</code><b>, щоб завантажити модуль за посиланням</b>\n<tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> <b>Напиши</b> <code>.loadmod</code> <b>у відповідь на файл, щоб завантажити з нього модуль</b>\n<tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> <b>Напиши</b> <code>.unloadmod &lt;Назва модуля&gt;</code><b>, щоб вивантажити модуль</b>\n\n<tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>Elys підтримує модулі від Hikka, Friendly-Telegram та GeekTG, а також свої власні.</b>\n"
   language_saved: "🇺🇦 Мова збережена!"
   language: "🇺🇦 Українська"
   btn_support: "🥷 Чат підтримки"
@@ -764,8 +764,8 @@ $inline:
   inline_cmds: "ℹ️ В тебе {} доступна(-их) команда(-и)"
   inline_cmds_msg: "<b>ℹ️ Доступні inline команди:</b>\n\n{}"
   run_command: "🏌️ Виконати команду"
-  command_msg: "<b>🪐 Команда «{}»</b>\n\n<i>{}</i>"
-  command: "🪐 Команда «{}»"
+  command_msg: "<b>🌟 Команда «{}»</b>\n\n<i>{}</i>"
+  command: "🌟 Команда «{}»"
   button403: "Ви не можете натиснути на цю кнопку!"
   keep_id: "⚠️ Не видаляйте ID! {}"
   no_query_results: "<tg-emoji emoji-id=5440660757194744323>‼️</tg-emoji> <b>Не вдалося створити форму</b>\n\nМожливі способи виправлення помилки:\n\n1. Перезавантажте Elys: <code>{prefix}restart</code>\n\n2. Увімкніть inline-режим для бота: перейдіть до @BotFather, відправте /mybots, натисніть Bot Settings -> Inline Mode -> On\n\n3. Створіть нового бота: відправте команду <code>{prefix}ch_elys_bot</code> <@ім'я_бота>"

@@ -1016,7 +1016,7 @@ class Elys:
             if not self.omit_log:
                 print(logo)
                 logging.debug(
-                    "\n🪐 Elys %s #%s (%s) started",
+                    "\n🌟 Elys %s #%s (%s) started",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
                     upd,
@@ -1044,7 +1044,7 @@ class Elys:
                         (
                             utils.get_platform_emoji()
                             if client.elys_me.premium is True
-                            else "🪐 Elys"
+                            else "🌟 Elys"
                         ),
                         ".".join(list(map(str, list(__version__)))),
                         build,

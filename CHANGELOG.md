@@ -1,5 +1,5 @@
 # Elys Changelog
-## 🪐 Elys 0.1.0 (Beta / Initial Import)
+## 🌟 Elys 0.1.0 (Beta / Initial Import)
 
 
  - Initial release of Elys Userbot
@@ -138,7 +138,7 @@
  - store bot's ID and user information in client instance
  - enhance reaction handling and improve message text update logic
 
-## 🪐 Elys 2.0.0
+## 🌟 Elys 2.0.0
 
 - rework utils
 - add prefix to start message
@@ -255,7 +255,7 @@
 - fix restore button invoke
 - improve logging logic
 
-## 🪐 Elys 1.7.2
+## 🌟 Elys 1.7.2
 
 - added autoupdate
 - updated heroku-tl to 1.7.2
@@ -292,7 +292,7 @@
 - added quote for list commands in help
 - fix banner in .presets command
 
-## 🪐 Elys 1.7.1
+## 🌟 Elys 1.7.1
 
 - fixed bug with web 
 - fixed bug with executor
@@ -309,7 +309,7 @@
 - fixed error with "method not mounted"
 - added bot polling sleep log to ignore filter
 
-## 🪐 Elys 1.7.0
+## 🌟 Elys 1.7.0
 
 - added banner to ping
 - added config for emoji in config (.cfg herokuconfig)
@@ -333,7 +333,7 @@
 - updated inline bot stack
 - fix some bugs with buttons in inline
 
-## 🪐 Elys 1.6.8
+## 🌟 Elys 1.6.8
 
 - Finally renamed to Elys and new Emoji
 - many changes and improvements

@@ -190,11 +190,7 @@ class List(InlineUnit):
                 status_message = await (
                     message.edit if message.out else message.respond
                 )(
-                    (
-                        utils.get_platform_emoji()
-                        if self._client.elys_me.premium
-                        else "🪐"
-                    )
+                    self._get_placeholder_emoji()
                     + self.translator.getkey("inline.opening_list"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
                 )
@@ -328,7 +324,7 @@ class List(InlineUnit):
                             await inline_query.builder.article(
                                 title="Elys",
                                 text=(
-                                    "🪐"
+                                    self._get_placeholder_emoji()
                                     if unit.get("premium_emoji_pre_edit")
                                     else self.sanitise_text(unit["strings"][0])
                                 ),

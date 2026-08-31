@@ -322,14 +322,16 @@ class CommandDispatcher:
                 return False
 
         if (
-            event.sticker
-            or event.dice
-            or event.audio
-            or event.via_bot_id
-            or (
-                getattr(event, "reactions", False)
-                and getattr(event, "edit_hide", False)
-            )
+            getattr(event, "sticker", False)
+            or getattr(message, "sticker", False)
+            or getattr(event, "dice", False)
+            or getattr(message, "dice", False)
+            or getattr(event, "audio", False)
+            or getattr(message, "audio", False)
+            or getattr(event, "via_bot_id", False)
+            or getattr(message, "via_bot_id", False)
+            or getattr(event, "edit_hide", False)
+            or getattr(message, "edit_hide", False)
         ):
             return False
 

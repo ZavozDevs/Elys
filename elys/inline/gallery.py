@@ -256,11 +256,7 @@ class Gallery(InlineUnit):
                 status_message = await (
                     message.edit if message.out else message.respond
                 )(
-                    (
-                        utils.get_platform_emoji()
-                        if self._client.elys_me.premium
-                        else "🪐"
-                    )
+                    self._get_placeholder_emoji()
                     + self.translator.getkey("inline.opening_gallery"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
                 )
