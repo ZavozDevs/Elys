@@ -11,6 +11,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import contextlib
+import random
 import elystl
 from elystl.tl.types import Message, User
 
@@ -106,6 +107,14 @@ class CoreMod(loader.Module):
         else:
             branch_text = self.strings["unstable"].format(version.branch)
 
+        devs = [
+            '<a href="https://t.me/gemeguardian">@gemeguardian</a>',
+            '<a href="https://t.me/top1skiper">@top1skiper</a>',
+            '<a href="https://t.me/RooniRN">@RooniRN</a>',
+        ]
+        random.shuffle(devs)
+        devs_str = ", ".join(devs)
+
         await utils.answer(
             message,
             self.strings["elys"].format(
@@ -117,6 +126,7 @@ class CoreMod(loader.Module):
                 *version.__version__,
                 utils.get_commit_url(),
                 f"{elystl.__version__} #{elystl.tl.alltlobjects.LAYER}",
+                devs_str,
             )
             + (branch_text),
             file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png",
