@@ -150,14 +150,14 @@ elif __package__ != "elys":
 
 else:
     try:
-        import herokutl
+        import elystl
     except Exception:
         pass
     else:
         try:
-            import herokutl  # noqa: F811
+            import elystl  # noqa: F811
 
-            if tuple(map(int, herokutl.__version__.split("."))) < (1, 7, 2):
+            if tuple(map(int, elystl.__version__.split("."))) < (1, 0, 0):
                 raise ImportError
         except ImportError:
             print("\U0001f504 Installing dependencies...")

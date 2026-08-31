@@ -1,7 +1,7 @@
 import logging
 import typing
 
-from herokutl.tl import types
+from elystl.tl import types
 
 ElysReplyMarkup = typing.Union[list[list[dict]], list[dict], dict]
 

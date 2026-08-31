@@ -10,9 +10,9 @@ import os
 import time
 from datetime import timedelta
 
-import herokutl
+import elystl
 
-parser = herokutl.utils.sanitize_parse_mode("html")
+parser = elystl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 IS_DOCKER = "DOCKER" in os.environ

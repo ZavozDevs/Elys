@@ -24,8 +24,8 @@ from asyncio import Event
 from urllib.parse import urlparse
 
 import grapheme
-from herokutl.errors.rpcerrorlist import ChatSendInlineForbiddenError
-from herokutl.tl.types import InputGeoPoint, Message
+from elystl.errors.rpcerrorlist import ChatSendInlineForbiddenError
+from elystl.tl.types import InputGeoPoint, Message
 
 from .. import main, utils
 from ..types import ElysReplyMarkup

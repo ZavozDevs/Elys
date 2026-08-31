@@ -16,8 +16,8 @@ import inspect
 import logging
 import re
 
-from herokutl.tl.types import Message
-from herokutl.types import InputMediaWebPage
+from elystl.tl.types import Message
+from elystl.types import InputMediaWebPage
 
 
 from .. import loader, utils

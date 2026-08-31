@@ -10,11 +10,11 @@ import subprocess
 from typing import Literal
 
 import git
-import herokutl
+import elystl
 
 from .. import version
 
-parser = herokutl.utils.sanitize_parse_mode("html")
+parser = elystl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 

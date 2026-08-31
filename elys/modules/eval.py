@@ -21,10 +21,10 @@ import typing
 from io import StringIO
 from types import ModuleType
 
-import herokutl
-from herokutl.errors.rpcerrorlist import MessageIdInvalidError
-from herokutl.sessions import StringSession
-from herokutl.tl.types import Message
+import elystl
+from elystl.errors.rpcerrorlist import MessageIdInvalidError
+from elystl.sessions import StringSession
+from elystl.tl.types import Message
 from meval import meval
 
 from .. import loader, main, utils
@@ -476,9 +476,10 @@ class Evaluator(loader.Module):
             "r": reply,
             "event": message,
             "chat": message.to_id,
-            "herokutl": herokutl,
-            "telethon": herokutl,
-            "hikkatl": herokutl,
+            "elystl": elystl,
+            "herokutl": elystl,
+            "telethon": elystl,
+            "hikkatl": elystl,
             "utils": utils,
             "main": main,
             "loader": loader,
@@ -487,8 +488,8 @@ class Evaluator(loader.Module):
             "lookup": self.lookup,
             "self": self,
             "db": self.db,
-            **self.get_sub(herokutl.tl.functions),
-            **self.get_sub(herokutl.tl.types),
+            **self.get_sub(elystl.tl.functions),
+            **self.get_sub(elystl.tl.types),
         }
 
     def get_sub(self, obj: typing.Any, _depth: int = 1) -> dict:
@@ -511,7 +512,7 @@ class Evaluator(loader.Module):
                             and isinstance(x[1], ModuleType)
                             and x[1] != obj
                             and x[1].__package__.rsplit(".", _depth)[0]
-                            == "herokutl.tl",
+                            == "elystl.tl",
                             obj.__dict__.items(),
                         )
                     ]

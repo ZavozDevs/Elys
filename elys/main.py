@@ -33,8 +33,8 @@ from getpass import getpass
 from pathlib import Path
 
 import aiohttp
-from herokutl import events
-from herokutl.errors import (
+from elystl import events
+from elystl.errors import (
     ApiIdInvalidError,
     AuthKeyDuplicatedError,
     FloodWaitError,
@@ -42,19 +42,24 @@ from herokutl.errors import (
     PhoneNumberInvalidError,
     SessionPasswordNeededError,
 )
-from herokutl.errors.rpcerrorlist import (
+from elystl.errors.rpcerrorlist import (
     AuthKeyUnregisteredError,
     YouBlockedUserError,
 )
-from herokutl.network.connection import (
+from elystl.network.connection import (
     ConnectionTcpFull,
     ConnectionTcpMTProxyRandomizedIntermediate,
 )
-from herokutl.password import compute_check
-from herokutl.sessions import MemorySession, SQLiteSession
-from herokutl.tl.functions.account import GetPasswordRequest
-from herokutl.tl.functions.auth import CheckPasswordRequest
-from herokutl.tl.functions.contacts import UnblockRequest
+from elystl.password import compute_check
+from elystl.sessions import MemorySession, SQLiteSession
+from elystl.tl.functions.account import GetPasswordRequest
+from elystl.tl.functions.auth import CheckPasswordRequest
+from elystl.tl.functions.contacts import UnblockRequest
+
+import elystl
+sys.modules.setdefault("herokutl", elystl)
+sys.modules.setdefault("hikkatl", elystl)
+sys.modules.setdefault("telethon", elystl)
 
 from . import database, loader, utils, version
 from ._internal import print_banner, restart

@@ -19,8 +19,8 @@ import random
 import time
 from io import BytesIO
 
-from herokutl.tl.types import Message
-from herokutl.types import InputMediaWebPage
+from elystl.tl.types import Message
+from elystl.types import InputMediaWebPage
 
 from .. import loader, main, utils
 from ..inline.types import InlineCall

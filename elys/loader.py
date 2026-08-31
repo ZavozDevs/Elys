@@ -31,7 +31,7 @@ from pathlib import Path
 from types import FunctionType
 from uuid import uuid4
 
-from herokutl.tl.tlobject import TLObject
+from elystl.tl.tlobject import TLObject
 
 from . import main, security, utils, validators
 from .database import Database
@@ -154,7 +154,7 @@ VALID_APT_PACKAGES = re.compile(
 IMPORT_PIP_ALIASES = {
     "sklearn": "scikit-learn",
     "pil": "Pillow",
-    "herokutl": "Heroku-TL-New",
+    "elystl": "Heroku-TL-New",
     "markdown_it": "markdown-it-py",
 }
 
@@ -173,14 +173,16 @@ def patched_import(name: str, *args, **kwargs):
     try:
         match name:
             case s if s.startswith("telethon"):
-                return native_import("herokutl" + name[8:], *args, **kwargs)
+                return native_import("elystl" + name[8:], *args, **kwargs)
             case s if s.startswith("hikkatl"):
-                return native_import("herokutl" + name[7:], *args, **kwargs)
+                return native_import("elystl" + name[7:], *args, **kwargs)
+            case s if s.startswith("herokutl"):
+                return native_import("elystl" + name[8:], *args, **kwargs)
             case s if s.startswith("hikkalls"):
                 return native_import(name, *args, **kwargs)
             case s if s.startswith("hikka"):
                 return native_import("elys" + name[5:], *args, **kwargs)
-            case s if s.startswith("heroku") and not s.startswith("herokutl"):
+            case s if s.startswith("heroku"):
                 return native_import("elys" + name[6:], *args, **kwargs)
 
         return native_import(name, *args, **kwargs)

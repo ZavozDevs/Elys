@@ -13,12 +13,12 @@
 import time
 import psutil
 import logging
-import herokutl
+import elystl
 
-from herokutl.errors import WebpageMediaEmptyError
-from herokutl.types import InputMediaWebPage
-from herokutl.tl.types import Message
-from herokutl.utils import get_display_name
+from elystl.errors import WebpageMediaEmptyError
+from elystl.types import InputMediaWebPage
+from elystl.tl.types import Message
+from elystl.utils import get_display_name
 from .. import loader, utils, version
 import platform as lib_platform
 import getpass
@@ -151,7 +151,7 @@ class ElysInfoMod(loader.Module):
             "kernel": lib_platform.release(),
             "cpu": f"{psutil.cpu_count(logical=False)} ({psutil.cpu_count()}) core(-s); {psutil.cpu_percent()}% total",
             "ping": round((time.perf_counter_ns() - start) / 10**6, 3),
-            "htl_ver": herokutl.__version__,
+            "htl_ver": elystl.__version__,
             "git_status": utils.get_git_status(),
         }
         data = await utils.get_placeholders(data, self.config["custom_message"])

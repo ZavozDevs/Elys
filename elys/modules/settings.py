@@ -11,8 +11,8 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import contextlib
-import herokutl
-from herokutl.tl.types import Message, User
+import elystl
+from elystl.tl.types import Message, User
 
 from .. import loader, main, utils, version
 from ..inline.types import InlineCall
@@ -116,7 +116,7 @@ class CoreMod(loader.Module):
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
-                f"{herokutl.__version__} #{herokutl.tl.alltlobjects.LAYER}",
+                f"{elystl.__version__} #{elystl.tl.alltlobjects.LAYER}",
             )
             + (branch_text),
             file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png",

@@ -17,18 +17,18 @@ import time
 import typing
 from collections.abc import Callable
 
-from herokutl import TelegramClient
-from herokutl import helpers
-from herokutl._updates import ChannelState, Entity, EntityType, SessionState
-from herokutl.errors.rpcerrorlist import TopicDeletedError
-from herokutl.hints import EntityLike
-from herokutl.network import MTProtoSender
-from herokutl.tl import functions
-from herokutl.tl.alltlobjects import LAYER
-from herokutl.tl.functions.channels import GetFullChannelRequest
-from herokutl.tl.functions.users import GetFullUserRequest
-from herokutl.tl.tlobject import TLRequest
-from herokutl.tl.types import (
+from elystl import TelegramClient
+from elystl import helpers
+from elystl._updates import ChannelState, Entity, EntityType, SessionState
+from elystl.errors.rpcerrorlist import TopicDeletedError
+from elystl.hints import EntityLike
+from elystl.network import MTProtoSender
+from elystl.tl import functions
+from elystl.tl.alltlobjects import LAYER
+from elystl.tl.functions.channels import GetFullChannelRequest
+from elystl.tl.functions.users import GetFullUserRequest
+from elystl.tl.tlobject import TLRequest
+from elystl.tl.types import (
     ChannelFull,
     Message,
     Updates,
@@ -37,7 +37,7 @@ from herokutl.tl.types import (
     User,
     UserFull,
 )
-from herokutl.utils import is_list_like
+from elystl.utils import is_list_like
 
 from .types import (
     CacheRecordEntity,

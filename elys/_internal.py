@@ -52,7 +52,7 @@ def restart():
 
     if "ELYS_DO_NOT_RESTART2" in os.environ:
         print(
-            "HerokuTL version 1.0.2 or higher is required, use `pip install heroku-tl-new -U` for update."
+            "ElysTL version 1.0.2 or higher is required, use `pip install heroku-tl-new -U` for update."
         )
         sys.exit(0)
 

@@ -23,8 +23,8 @@ from collections.abc import Callable
 from copy import deepcopy
 from urllib.parse import urlparse
 
-from herokutl.errors.rpcbaseerrors import RPCError
-from herokutl.errors.rpcerrorlist import (
+from elystl.errors.rpcbaseerrors import RPCError
+from elystl.errors.rpcerrorlist import (
     FloodWaitError,
     MediaPrevInvalidError,
     MessageNotModifiedError,

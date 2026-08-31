@@ -28,7 +28,7 @@ except ImportError as e:
 
 import typing
 
-from herokutl.tl.types import Message, User
+from elystl.tl.types import Message, User
 
 from . import main, utils
 from .pointers import (
