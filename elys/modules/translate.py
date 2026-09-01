@@ -13,6 +13,7 @@
 import asyncio
 import contextlib
 import copy
+import html as stdlib_html
 import logging
 import re
 import time
@@ -277,6 +278,10 @@ class Translator(loader.Module):
             token_pattern = rf"(?i)\[\s*\[\s*{re.escape(key)}\s*\]\s*\]"
             res = re.sub(token_pattern, lambda _, repl=full: repl, res)
 
+        # 4. Ensure separation between emojis and adjacent words
+        res = re.sub(r"(</tg-emoji>)([\w])", r"\1 \2", res)
+        res = re.sub(r"([\w])(<tg-emoji[\s>])", r"\1 \2", res)
+
         return res
 
     @staticmethod
@@ -332,7 +337,7 @@ class Translator(loader.Module):
                 if not element:
                     time.sleep(0.3 * (attempt + 1))
                     continue
-                result = element.get_text()
+                result = stdlib_html.unescape(element.decode_contents())
                 if (
                     "Error 500 (Server Error)" in result
                     or "That’s all we know" in result
