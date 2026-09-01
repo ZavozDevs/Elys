@@ -91,10 +91,6 @@ class CoreMod(loader.Module):
     )
     async def elyscmd(self, message: Message):
         """Information about Elys"""
-        return await self._elyscmd(message)
-
-    async def _elyscmd(self, message: Message):
-
         branch_text = ""
         if version.branch == "master":
             branch_text = ""

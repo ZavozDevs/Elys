@@ -144,7 +144,7 @@ class InlineStuff(loader.Module):
                             [
                                 {
                                     "text": self.strings["support_chat_caption"],
-                                    "url": "https://t.me/elys_talks",
+                                    "url": "https://t.me/ElysTalk",
                                     "emoji_id": "5363805650327450240",
                                 }
                             ],
