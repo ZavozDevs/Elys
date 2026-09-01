@@ -286,48 +286,23 @@ def install_rich_message_support():
     if getattr(Message, "_elys_rich_message_support", False):
         return
 
-    original_text = Message.text
-    original_raw_text = Message.raw_text
-
-    def get_message(self):
-        native = getattr(self, "_elys_rich_message_native", None)
+    def get_rich_message(self):
+        native = getattr(self, "_elys_rich_message_native", None) or getattr(
+            self, "rich_message_raw", None
+        )
         if native is not None:
             return rich_message_to_html(native)
-        return getattr(self, "_elys_message_text", None)
-
-    def set_message(self, value):
-        self._elys_message_text = value
-
-    def get_rich_message(self):
-        native = getattr(self, "_elys_rich_message_native", None)
-        return rich_message_to_html(native) if native is not None else None
+        return None
 
     def set_rich_message(self, value):
         self._elys_rich_message_native = value
 
-    def get_text(self):
-        if getattr(self, "_elys_rich_message_native", None) is not None:
-            return get_rich_message(self)
-        return original_text.fget(self)
-
-    def set_text(self, value):
-        original_text.fset(self, value)
-
-    def get_raw_text(self):
-        if getattr(self, "_elys_rich_message_native", None) is not None:
-            return get_rich_message(self)
-        return original_raw_text.fget(self)
-
-    def set_raw_text(self, value):
-        original_raw_text.fset(self, value)
-
     def get_rich_message_entity(self):
-        return getattr(self, "_elys_rich_message_native", None)
+        return getattr(self, "_elys_rich_message_native", None) or getattr(
+            self, "rich_message_raw", None
+        )
 
-    Message.message = property(get_message, set_message)
     Message.rich_message = property(get_rich_message, set_rich_message)
-    Message.text = property(get_text, set_text)
-    Message.raw_text = property(get_raw_text, set_raw_text)
     Message.rich_message_entity = property(get_rich_message_entity)
     Message._elys_rich_message_support = True
 
