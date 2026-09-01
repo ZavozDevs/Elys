@@ -52,7 +52,7 @@ class CoreMod(loader.Module):
                     "vds",
                     "wsl",
                     "userland",
-                    "hikkahost",
+                    "rnhost",
                 ]
             ],
             2,
@@ -117,11 +117,7 @@ class CoreMod(loader.Module):
         await utils.answer(
             message,
             self.strings["elys"].format(
-                (
-                    utils.get_platform_emoji()
-                    if self._client.elys_me.premium
-                    else "🌟 <b>Elys userbot</b>"
-                ),
+                "🌟 <b>Elys userbot</b>",
                 *version.__version__,
                 utils.get_commit_url(),
                 f"{elystl.__version__} #{elystl.tl.alltlobjects.LAYER}",
@@ -680,8 +676,8 @@ class CoreMod(loader.Module):
                 await utils.answer(message, self.strings["wsl_install"])
             case _ if "-ul" in args:
                 await utils.answer(message, self.strings["userland_install"])
-            case _ if "-hh" in args:
-                await utils.answer(message, self.strings["hikkahost_install"])
+            case _ if "-rn" in args:
+                await utils.answer(message, self.strings["rnhost_install"])
 
     async def _inline__choose__installation(self, call: InlineCall, platform: str):
         with contextlib.suppress(Exception):
