@@ -11,6 +11,8 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import contextlib
+import getpass
+import logging
 import random
 import elystl
 from elystl.tl.types import Message, User
@@ -18,12 +20,14 @@ from elystl.tl.types import Message, User
 from .. import loader, main, utils, version
 from ..inline.types import InlineCall
 
+logger = logging.getLogger(__name__)
+
 
 @loader.tds
-class CoreMod(loader.Module):
-    """Control core userbot settings"""
+class Settings(loader.Module):
+    """Elys settings & info module"""
 
-    strings = {"name": "Settings"}
+    strings = {"name": "Settings", "_cfg_rich_mode": "Use rich text in outputs"}
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -37,6 +41,12 @@ class CoreMod(loader.Module):
                 "alias_emoji",
                 "<tg-emoji emoji-id=4974259868996207180>▪️</tg-emoji>",
                 "just emoji in .aliases",
+            ),
+            loader.ConfigValue(
+                "rich_mode",
+                False,
+                lambda: self.strings["_cfg_rich_mode"],
+                validator=loader.validators.Boolean(),
             ),
         )
 
@@ -113,6 +123,25 @@ class CoreMod(loader.Module):
         ]
         random.shuffle(designers)
         designers_str = ", ".join(designers)
+
+        if self.config["rich_mode"]:
+            rich_message = self.strings.get("rich_elys_message", self.strings.get("rich_heroku_message", "")).format(
+                platform=utils.get_platform_emoji(),
+                version=".".join(map(str, version.__version__)),
+                build=utils.get_commit_url(),
+                htl_version=elystl.__version__,
+                layer=elystl.tl.alltlobjects.LAYER,
+                current_user=getpass.getuser(),
+                devs_str=devs_str,
+                designers_str=designers_str,
+                banner_url="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png?v=1",
+            )
+            await utils.answer(
+                message,
+                rich_message=rich_message,
+                reply_to=getattr(message, "reply_to_msg_id", None),
+            )
+            return
 
         await utils.answer(
             message,

@@ -11,22 +11,33 @@ import logging
 import re
 import typing
 
-import grapheme
+try:
+    import grapheme
+except ImportError:
+    class _GraphemeFallback:
+        @staticmethod
+        def safe_split_index(text: str, index: int) -> int:
+            return min(max(index, 0), len(text))
+
+    grapheme = _GraphemeFallback()
+
 import elystl
+from elystl.tl.custom import Message
 from elystl.tl.types import (
     Channel,
     Chat,
     InputDocument,
-    Message,
+    InputReplyToMessage,
     MessageMediaPhoto,
     MessageMediaDocument,
     MessageMediaWebPage,
+    MessageReplyHeader,
 )
 
 from .other import _copy_tl
 from .entity import get_chat_id, FormattingEntity
 
-from ..inline.types import BotInlineCall, InlineCall, InlineMessage
+from ..inline.types import BotInlineCall, BotInlineMessage, InlineCall, InlineMessage
 from ..types import ElysReplyMarkup, ListLike
 
 emoji_pattern = re.compile(
@@ -49,19 +60,20 @@ def get_topic(message: Message) -> int | None:
     :param message: Message to get topic of
     :return: int or None if not present
     """
-    return (
-        (message.reply_to.reply_to_top_id or message.reply_to.reply_to_msg_id)
-        if (
-            isinstance(message, Message)
-            and message.reply_to
-            and message.reply_to.forum_topic
-        )
-        else (
-            message.form["top_msg_id"]
-            if isinstance(message, (InlineCall, InlineMessage))
-            else None
-        )
-    )
+    if isinstance(message, (InlineCall, InlineMessage)):
+        return message.form["top_msg_id"]
+
+    if not isinstance(message, Message):
+        return None
+
+    reply_to = message.reply_to
+    if isinstance(reply_to, MessageReplyHeader):
+        if reply_to.forum_topic:
+            return reply_to.reply_to_top_id or reply_to.reply_to_msg_id
+        return None
+    if isinstance(reply_to, InputReplyToMessage):
+        return reply_to.top_msg_id
+    return None
 
 
 def mime_type(message: Message) -> str:
@@ -266,11 +278,85 @@ def array_sum(array: list[list[typing.Any]], /) -> list[typing.Any]:
     return result
 
 
+async def _send_rich_message(
+    message: Message,
+    html: typing.Any,
+    *,
+    reply_to: int | None = None,
+    reply_markup=None,
+    silent: bool | None = None,
+):
+    return await message.client.send_rich_message(
+        message.peer_id,
+        html,
+        reply_to=reply_to,
+        buttons=reply_markup,
+        silent=silent,
+    )
+
+
+async def _edit_rich_message(
+    message: Message,
+    html: typing.Any,
+    *,
+    reply_markup=None,
+):
+    return await message.client.edit_rich_message(
+        message.peer_id,
+        message,
+        html,
+        buttons=reply_markup,
+    )
+
+
+async def _edit_inline_rich_message(
+    message,
+    rich_message: str,
+    reply_markup=None,
+):
+    unit = getattr(message, "form", None) or {}
+    caller = unit.get("caller")
+    if caller is None:
+        caller = unit.get("chat")
+    if caller is None:
+        caller = getattr(message, "chat_id", None)
+    if caller is not None and hasattr(message, "inline_manager"):
+        with contextlib.suppress(Exception):
+            await message.delete()
+        return await message.inline_manager.form(
+            "",
+            caller,
+            reply_markup=reply_markup or [],
+            rich_message=rich_message,
+            silent=True,
+        )
+    rich_markup = (
+        message.inline_manager.generate_markup(reply_markup)
+        if reply_markup is not None
+        else None
+    )
+    if isinstance(message, (InlineMessage, InlineCall)):
+        await message.inline_manager.bot.edit_rich_message(
+            rich_message,
+            inline_message_id=message.inline_message_id,
+            reply_markup=rich_markup,
+        )
+    else:
+        await message.inline_manager.bot.edit_rich_message(
+            rich_message,
+            chat_id=message.chat_id,
+            message_id=message.message_id,
+            reply_markup=rich_markup,
+        )
+    return message
+
+
 async def answer(
     message: Message | InlineCall | InlineMessage,
-    response: str,
+    response: str = "",
     *,
     reply_markup: ElysReplyMarkup | None = None,
+    rich_message: str | None = None,
     **kwargs,
 ) -> InlineCall | InlineMessage | Message:
     """
@@ -278,6 +364,7 @@ async def answer(
     :param message: Message to answer to. Can be a tl message or heroku inline object
     :param response: Response to send
     :param reply_markup: Reply markup to send. If specified, inline form will be used
+    :param rich_message: Rich message to send or edit
     :return: Message or inline object
 
     :example:
@@ -300,6 +387,35 @@ async def answer(
 
     if isinstance(message, list) and message:
         message = message[0]
+
+    if rich_message is not None:
+        if isinstance(
+            message,
+            (InlineMessage, InlineCall, BotInlineMessage, BotInlineCall),
+        ):
+            return await _edit_inline_rich_message(
+                message,
+                rich_message,
+                reply_markup=reply_markup,
+            )
+
+        edit = message.out and not message.via_bot_id and not message.fwd_from
+        if edit:
+            return await _edit_rich_message(
+                message,
+                rich_message,
+                reply_markup=reply_markup,
+            )
+
+        return await _send_rich_message(
+            message,
+            rich_message,
+            reply_to=kwargs.pop("reply_to", None)
+            or getattr(message, "reply_to_msg_id", None)
+            or get_topic(message),
+            reply_markup=reply_markup,
+            silent=kwargs.pop("silent", None),
+        )
 
     if reply_markup is not None:
         if not isinstance(reply_markup, (list, dict)):
