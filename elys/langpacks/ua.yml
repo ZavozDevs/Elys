@@ -766,14 +766,22 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>У тебе остання версія. Оновитися примусово?</b>
   cancel: 🚫 Скасувати
-  branch_menu: '🌿 <b>Вибір гілки оновлення Elys</b>\n\n    Поточна гілка: <code>{current}</code>\n\n    <b>Доступні гілки:</b>\n    • <b>master</b> — Стабільна версія, перевірена часом\n    • <b>beta</b> — Публічна бета-версія нових можливостей\n    • <b>dev</b> — Максимально нестабільна гілка для розробників з прямими змінами\n\n    <i>Натисни на кнопку нижче, щоб перемкнути гілку:</i>'
-  branch_switching: '🤔 <b>Перемикання на гілку <code>{branch}</code>...</b>'
-  branch_switched: '✅ <b>Гілку успішно перемкнено на <code>{branch}</code>!</b>\n\n    <i>Для застосування змін потрібне перезавантаження юзербота.</i>'
-  branch_switch_fail: '❌ <b>Не вдалося перемкнути гілку на <code>{branch}</code>!</b>\n\n    Помилка: <code>{error}</code>'
-  branch_already_on: 'Ти вже на гілці {branch}!'
+  branch_menu: '<blockquote><tg-emoji emoji-id=5447644880824180424>🌿</tg-emoji> <b>Вибір гілки оновлення Elys</b>
+    Поточна гілка: <code>{current}</code></blockquote>
+
+    <blockquote><tg-emoji emoji-id=5206607081351684259>🛡</tg-emoji> <b>master</b> — стабільна
+    <tg-emoji emoji-id=5447410659035716599>🧪</tg-emoji> <b>beta</b> — бета-версія
+    <tg-emoji emoji-id=5465496001856950230>⚡️</tg-emoji> <b>dev</b> — розробка (нестабільна)</blockquote>'
+  branch_switching: '<blockquote><tg-emoji emoji-id=5879813604068298387>🤔</tg-emoji> <b>Перемикання на гілку <code>{branch}</code>...</b></blockquote>'
+  branch_switched: '<blockquote><tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Гілку перемкнено на <code>{branch}</code>!</b>
+    <i>Для застосування потрібне перезавантаження.</i></blockquote>'
+  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не вдалося перемкнути гілку на <code>{branch}</code>!</b>
+    Помилка: <code>{error}</code></blockquote>'
+  branch_already_on: 'Ти вже на гілці {branch}'
   branch_invalid: '❌ Невідома гілка <code>{target}</code>! Доступні: {available}'
-  branch_btn_restart: '🔄 Перезавантажити'
-  branch_btn_later: '⏳ Пізніше'
+  branch_btn_restart: 'Перезавантажити'
+  branch_btn_later: 'Пізніше'
+  branch_btn_close: 'Закрити'
   stop_ub_confirm: Ваш {} будет зупинено, ви впевнені?
   _cls_doc: Оновлює юзербот
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ви повинні вказати кількість комітів для відкату!</b>
