@@ -770,6 +770,14 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>最新バージョンですが、とにかくアップデートを取得しますか？</b>
   cancel: 🚫 キャンセル
+  branch_menu: '🌿 <b>Выбор ветки обновления Elys</b>\n\n    Текущая ветка: <code>{current}</code>\n\n    <b>Доступные ветки:</b>\n    • <b>master</b> — Стабильная версия, проверенная временем\n    • <b>beta</b> — Публичная бета-версия новых возможностей\n    • <b>dev</b> — Максимально нестабильная ветка для разработчиков с прямыми изменениями\n\n    <i>Нажми на кнопку ниже, чтобы переключить ветку:</i>'
+  branch_switching: '🤔 <b>Переключение на ветку <code>{branch}</code>...</b>'
+  branch_switched: '✅ <b>Ветка успешно переключена на <code>{branch}</code>!</b>\n\n    <i>Для применения изменений требуется перезагрузка юзербота.</i>'
+  branch_switch_fail: '❌ <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\n\n    Ошибка: <code>{error}</code>'
+  branch_already_on: 'Ты уже находишься на ветке {branch}!'
+  branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
+  branch_btn_restart: '🔄 Перезагрузить'
+  branch_btn_later: '⏳ Позже'
   stop_ub_confirm: あなたの {} は停止されました。本当によろしいですか？
   full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>ユーザーボットが完全に読み込まれました！ {}</b>
 
