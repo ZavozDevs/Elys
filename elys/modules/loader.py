@@ -1754,7 +1754,10 @@ class LoaderMod(loader.Module):
         cleaned = False
         for class_name in list(todo.keys()):
             if class_name in core_mod_names or f"{class_name}Mod" in core_mod_names:
-                logger.info("Cleaning up duplicate core module from external storage: %s", class_name)
+                logger.info(
+                    "Cleaning up duplicate core module from external storage: %s",
+                    class_name,
+                )
                 fs_path = self._module_fs_path(class_name)
                 if os.path.isfile(fs_path):
                     with contextlib.suppress(Exception):

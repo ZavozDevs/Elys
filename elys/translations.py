@@ -282,6 +282,7 @@ class Strings:
 
         if mod_name:
             import re
+
             cleaned = re.sub(r"(?i)mod$", "", str(mod_name)).lower()
             candidates = [
                 cleaned,
