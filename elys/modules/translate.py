@@ -15,11 +15,14 @@ import contextlib
 import copy
 import logging
 import re
+import time
 
+import bs4
 from deep_translator import GoogleTranslator
 from elystl.extensions import html
 from elystl.tl import functions, types
 from elystl.tl.custom import Message
+import requests
 
 from .. import loader, utils
 
@@ -296,6 +299,61 @@ class Translator(loader.Module):
             chunks.append("\n".join(current))
         return chunks
 
+    @staticmethod
+    def _translate_google_chunk(
+        chunk: str, target_lang: str, source_lang: str = "auto"
+    ) -> str:
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36"
+                " (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36"
+            ),
+            "Accept-Language": "en-US,en;q=0.9",
+        }
+        for attempt in range(3):
+            try:
+                resp = requests.get(
+                    "https://translate.google.com/m",
+                    params={"tl": target_lang, "sl": source_lang, "q": chunk},
+                    headers=headers,
+                    timeout=10,
+                )
+                if resp.status_code == 429:
+                    time.sleep(0.4 * (attempt + 1))
+                    continue
+                if resp.status_code != 200:
+                    time.sleep(0.3 * (attempt + 1))
+                    continue
+
+                soup = bs4.BeautifulSoup(resp.text, "html.parser")
+                element = soup.find("div", {"class": "result-container"}) or soup.find(
+                    "div", {"class": "t0"}
+                )
+                if not element:
+                    time.sleep(0.3 * (attempt + 1))
+                    continue
+                result = element.get_text()
+                if (
+                    "Error 500 (Server Error)" in result
+                    or "That’s all we know" in result
+                ):
+                    time.sleep(0.4 * (attempt + 1))
+                    continue
+                return result
+            except Exception:
+                if attempt == 2:
+                    break
+                time.sleep(0.3 * (attempt + 1))
+
+        # Fallback to deep_translator if direct fetch fails
+        gt = GoogleTranslator(source=source_lang, target=target_lang)
+        res = gt.translate(chunk)
+        if not res or "Error 500 (Server Error)" in res or "That’s all we know" in res:
+            raise ValueError(
+                f"Google translate error response: {res[:100] if res else 'empty'}"
+            )
+        return res
+
     async def _translate_external(self, text: str, target_lang: str) -> str:
         provider = self.config["provider"]
         (
@@ -309,22 +367,13 @@ class Translator(loader.Module):
 
         def do_translate(content: str):
             if provider == "google":
-                gt = GoogleTranslator(source="auto", target=target_lang)
                 chunks = self._split_masked_chunks(content, max_chunk_len=1800)
                 translated_chunks = []
                 for chunk in chunks:
                     if not chunk.strip():
                         translated_chunks.append(chunk)
                         continue
-                    res = gt.translate(chunk)
-                    if (
-                        not res
-                        or "Error 500 (Server Error)" in res
-                        or "That’s all we know" in res
-                    ):
-                        raise ValueError(
-                            f"Google translate error response: {res[:100]}"
-                        )
+                    res = self._translate_google_chunk(chunk, target_lang)
                     translated_chunks.append(res)
                 return "\n".join(translated_chunks)
 

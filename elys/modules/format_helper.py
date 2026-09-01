@@ -7,9 +7,7 @@
 import io
 import json
 import logging
-import typing
 
-import elystl
 from elystl.extensions import html, markdown
 from elystl.tl.types import Message
 
@@ -306,8 +304,7 @@ class FormatHelperMod(loader.Module):
 
         try:
             entities_dump = [
-                e.to_dict() if hasattr(e, "to_dict") else str(e)
-                for e in entities_list
+                e.to_dict() if hasattr(e, "to_dict") else str(e) for e in entities_list
             ]
             rendered = json.dumps(
                 entities_dump, indent=2, ensure_ascii=False, default=str
