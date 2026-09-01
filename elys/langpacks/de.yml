@@ -656,6 +656,14 @@ elys_config:
   builtin: 🛰 Eingebaut
   external: 🛸 Extern
   libraries: 📦 Bibliotheken
+  _cfg_chat_input: Konfigurationswerte per normaler Chatnachricht statt Inline-Abfrage eingeben (experimentell)
+  chat_input_prompt_set: "✍️ <b>Sende den neuen Wert für <code>{}</code> des Moduls <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Sende den neuen Wert für <code>{}</code> der Bibliothek <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
+  chat_input_prompt_add: "➕ <b>Sende das Element zum Hinzufügen zu <code>{}</code> des Moduls <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Sende das Element zum Hinzufügen zu <code>{}</code> der Bibliothek <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
+  chat_input_prompt_remove: "➖ <b>Sende das Element zum Entfernen aus <code>{}</code> des Moduls <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Sende das Element zum Entfernen aus <code>{}</code> der Bibliothek <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
+  cancel_btn: 🚫 Abbrechen
   _cmd_doc_config: Module konfigurieren
   _cmd_doc_fconfig: <Modul> <Einstellung> <Wert> - Setzt den Konfigurationswert für ein Modul
   name: ElysConfig
@@ -1169,9 +1177,9 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Keine Argumente angegeben</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Text konnte nicht übersetzt werden</b>
   language: de
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> Übersetzter Text:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Übersetzter Text:</blockquote>
 
-    <blockquote>{tr_text} </blockquote>'
+    <blockquote>{tr_text}</blockquote>'
   _cls_doc: Übersetzt Text (offensichtlich)
   _cmd_doc_tr: '[Sprache] [Text] - Übersetzt den Text'
   name: Translator

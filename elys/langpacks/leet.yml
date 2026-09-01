@@ -671,6 +671,14 @@ elys_config:
   builtin: 🛰 Bu1l7-1n
   external: 🛸 3x73rn4l
   libraries: 📦 L1b5
+  _cfg_chat_input: 3n73r c0nf1g v4lu35 v14 ch47 m5g (3xp3r1m3n74l)
+  chat_input_prompt_set: "✍️ <b>53nd n3w v4lu3 4 <code>{}</code> 0f m0dul3 <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>53nd n3w v4lu3 4 <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  chat_input_prompt_add: "➕ <b>53nd 173m 2 4dd 2 <code>{}</code> 0f m0dul3 <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  chat_input_prompt_add_lib: "➕ <b>53nd 173m 2 4dd 2 <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  chat_input_prompt_remove: "➖ <b>53nd 173m 2 r3m0v3 fr0m <code>{}</code> 0f m0dul3 <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>53nd 173m 2 r3m0v3 fr0m <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  cancel_btn: 🚫 C4nc3l
   _cmd_doc_config: C0nf1g m0dul35
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - s37 7h3 c0nf1g v4lu3 4 7h3 m0dul3
   _cls_doc: 1n73r4c71v3 c0nf1gur470r 4 H3r0ku Us3rb07
@@ -1190,7 +1198,7 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>N0 4rg5 pr0v1d3d</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Un4bl3 2 7r4n5l473 73x7</b>
   language: en
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> 7r4n5l473d 73x7:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> 7r4n5l473d 73x7:</blockquote>
 
     <blockquote>{tr_text}</blockquote>'
   _cmd_doc_tr: '[language] [text] - 7r4n5l473 73x7'

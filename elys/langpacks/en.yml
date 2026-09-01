@@ -718,6 +718,14 @@ elys_config:
   builtin: 🛰 Built-in
   external: 🛸 External
   libraries: 📦 Libraries
+  _cfg_chat_input: Enter config values via regular chat message instead of inline query (experimental)
+  chat_input_prompt_set: "✍️ <b>Send new value for <code>{}</code> of module <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Send new value for <code>{}</code> of library <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  chat_input_prompt_add: "➕ <b>Send element to add to <code>{}</code> of module <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Send element to add to <code>{}</code> of library <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  chat_input_prompt_remove: "➖ <b>Send element to remove from <code>{}</code> of module <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Send element to remove from <code>{}</code> of library <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  cancel_btn: 🚫 Cancel
   _cmd_doc_config: Configure modules
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - set the config value for the module
   _cls_doc: Interactive configurator for Elys Userbot
@@ -1269,7 +1277,7 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>No arguments provided</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Unable to translate text</b>
   language: en
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> Translated text:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Translated text:</blockquote>
 
     <blockquote>{tr_text}</blockquote>'
   _cmd_doc_tr: '[language] [text] - Translate text'

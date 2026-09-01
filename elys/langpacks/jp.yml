@@ -674,6 +674,14 @@ elys_config:
   builtin: 🛰 組み込み
   external: 🛸 外部
   libraries: 📦 ライブラリ
+  _cfg_chat_input: インラインクエリの代わりに通常のチャットメッセージで設定値を入力する（実験的）
+  chat_input_prompt_set: "✍️ <b>モジュール <code>{}</code> の設定 <code>{}</code> の新しい値をこのチャットに送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>ライブラリ <code>{}</code> の設定 <code>{}</code> の新しい値をこのチャットに送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
+  chat_input_prompt_add: "➕ <b>モジュール <code>{}</code> の設定 <code>{}</code> に追加する要素を送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
+  chat_input_prompt_add_lib: "➕ <b>ライブラリ <code>{}</code> の設定 <code>{}</code> に追加する要素を送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
+  chat_input_prompt_remove: "➖ <b>モジュール <code>{}</code> の設定 <code>{}</code> から削除する要素を送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>ライブラリ <code>{}</code> の設定 <code>{}</code> から削除する要素を送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
+  cancel_btn: 🚫 キャンセル
   _cmd_doc_config: モジュールを設定します
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - モジュールの設定値を設定します
   _cls_doc: Elys Userbot 用のインタラクティブな設定ツール
@@ -1202,7 +1210,7 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>引数が指定されていません</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>テキストを翻訳できません</b>
   language: ja
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> 翻訳されたテキスト:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> 翻訳されたテキスト:</blockquote>
 
     <blockquote>{tr_text}</blockquote>'
   _cmd_doc_tr: '[language] [text] - テキストを翻訳します'
