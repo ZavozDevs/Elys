@@ -461,6 +461,8 @@ class CommandDispatcher:
 
                 message._text = None
                 message.message = new_text
+                message.text = new_text
+                message.raw_text = new_text
 
         if (
             f"{str(chat_id)}.{func.__self__.__module__}" in blacklist_chats

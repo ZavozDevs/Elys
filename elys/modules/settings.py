@@ -374,8 +374,8 @@ class Settings(loader.Module):
                 command = args[1]
 
             command_parts = command.split(maxsplit=1)
-            cmd = command_parts[0]
-            rest = command_parts[1] if len(command_parts) > 1 else None
+            cmd = command_parts[0].lower().strip()
+            rest = command_parts[1].strip() if len(command_parts) > 1 else None
 
             if cmd not in self.allmodules.commands:
                 await utils.answer(
@@ -463,7 +463,8 @@ class Settings(loader.Module):
 
         response.extend(skipped_lines)
 
-        await utils.answer(message, "\n\n".join(response))
+        if response:
+            await utils.answer(message, "\n".join(response))
 
     @loader.command()
     async def delalias(self, message: Message):
@@ -497,12 +498,14 @@ class Settings(loader.Module):
         missed_aliases = []
 
         for alias in aliases:
-            if not self.allmodules.remove_alias(alias):
+            removed = self.allmodules.remove_alias(alias)
+            if alias in current:
+                current.pop(alias, None)
+                removed_aliases.append(alias)
+            elif removed:
+                removed_aliases.append(alias)
+            else:
                 missed_aliases.append(alias)
-                continue
-
-            current.pop(alias, None)
-            removed_aliases.append(alias)
 
         if removed_aliases:
             self.set("aliases", current)

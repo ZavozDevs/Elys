@@ -816,7 +816,6 @@ class Modules:
 
     def add_aliases(self, aliases: dict):
         """Saves aliases and applies them to <core>/<file> modules"""
-        self.aliases.update(aliases)
         for alias, cmd in aliases.items():
             self.add_alias(alias, *cmd.split(maxsplit=1))
 
@@ -899,8 +898,16 @@ class Modules:
 
         for alias, cmd in self.aliases.copy().items():
             _cmd = cmd.split(maxsplit=1)
-            if _cmd[0] in instance.elys_commands:
+            if _cmd[0].lower() in [c.lower() for c in instance.elys_commands]:
                 self.add_alias(alias, *_cmd)
+
+        settings = self.lookup("settings")
+        if settings:
+            for alias, cmd in settings.get("aliases", {}).items():
+                if alias.lower().strip() not in self.aliases:
+                    _cmd = cmd.split(maxsplit=1)
+                    if _cmd[0].lower() in [c.lower() for c in instance.elys_commands]:
+                        self.add_alias(alias, *_cmd)
 
         self.register_inline_stuff(instance)
 
@@ -1371,7 +1378,7 @@ class Modules:
                 )
                 del self.commands[name]
                 for alias, _command in self.aliases.copy().items():
-                    if _command == name:
+                    if _command.split(maxsplit=1)[0].lower() == name.lower():
                         del self.aliases[alias]
 
     def unregister_watchers(self, instance: Module, purpose: str):
@@ -1399,10 +1406,14 @@ class Modules:
 
     def add_alias(self, alias: str, cmd: str, args: str = None) -> bool:
         """Make an alias"""
-        if cmd not in self.commands:
+        cmd_clean = cmd.lower().strip()
+        if cmd_clean not in self.commands:
             return False
 
-        self.aliases[alias.lower().strip()] = f"{cmd} {args}" if args else cmd
+        args_clean = args.strip() if args else None
+        self.aliases[alias.lower().strip()] = (
+            f"{cmd_clean} {args_clean}" if args_clean else cmd_clean
+        )
         return True
 
     def remove_alias(self, alias: str) -> bool:
