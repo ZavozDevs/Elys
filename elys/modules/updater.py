@@ -884,6 +884,10 @@ class UpdaterMod(loader.Module):
                 )
 
     async def update_complete(self):
+        ms = self.get("selfupdatemsg")
+        if ms is None:
+            return
+
         logger.debug("Self update successful! Edit message")
         start = self.get("restart_ts")
         try:
@@ -892,17 +896,19 @@ class UpdaterMod(loader.Module):
             took = "n/a"
 
         msg = self.strings["success"].format(utils.ascii_face(), took)
-        ms = self.get("selfupdatemsg")
 
-        if legacy_message_ref := self._parse_legacy_update_message_ref(ms):
-            chat_id, message_id = legacy_message_ref
-            await self._client.edit_message(chat_id, message_id, msg)
-            return
+        try:
+            if legacy_message_ref := self._parse_legacy_update_message_ref(ms):
+                chat_id, message_id = legacy_message_ref
+                await self._client.edit_message(chat_id, message_id, msg)
+                return
 
-        await self.inline.bot.edit_message_text(
-            inline_message_id=self._deserialize_inline_message_id(str(ms)),
-            text=self.inline.sanitise_text(msg),
-        )
+            await self.inline.bot.edit_message_text(
+                inline_message_id=self._deserialize_inline_message_id(str(ms)),
+                text=self.inline.sanitise_text(msg),
+            )
+        except Exception:
+            logger.debug("Failed to edit update_complete message", exc_info=True)
 
     async def full_restart_complete(self, secure_boot: bool = False):
         start = self.get("restart_ts")
