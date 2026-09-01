@@ -1781,6 +1781,9 @@ class LoaderMod(loader.Module):
                 for alias, cmd in settings.get("aliases", {}).items():
                     self.allmodules.add_alias(alias, *cmd.split(maxsplit=1))
 
+        while not getattr(self.allmodules, "fully_ready", False):
+            await asyncio.sleep(0.5)
+
         self.fully_loaded = True
 
         try:
