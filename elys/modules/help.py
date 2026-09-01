@@ -277,7 +277,7 @@ class Help(loader.Module):
             rich_inline_commands = inline_cmd.replace("\r\n", "<br>").replace(
                 "\n", "<br>"
             )
-            rich_message = f"{rich_reply}<details><summary>{self.strings.get('rich_commands', 'Commands')}</summary>" f"{rich_commands}{rich_inline_commands}</details>" + (
+            base_rich_message = f"{rich_reply}<details><summary>{self.strings.get('rich_commands', 'Commands')}</summary>" f"{rich_commands}{rich_inline_commands}</details>" + (
                 f"<details><summary>{self.strings.get('rich_placeholders', 'Placeholders')}</summary>"
                 f"{placeholders}</details>"
                 if placeholders
@@ -295,13 +295,19 @@ class Help(loader.Module):
             )
             if banner_url:
                 rich_message = (
-                    f'<figure><img src="{banner_url}"/></figure>' + rich_message
+                    f'<figure><img src="{banner_url}"/></figure>' + base_rich_message
                 )
-            await utils.answer(message, rich_message=rich_message)
+                try:
+                    await utils.answer(message, rich_message=rich_message)
+                    return
+                except Exception:
+                    await utils.answer(message, rich_message=base_rich_message)
+                    return
+
+            await utils.answer(message, rich_message=base_rich_message)
             return
 
-        await utils.answer(
-            message,
+        plain_text = (
             f"{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote>"
             + (
                 f"<blockquote expandable>\n{placeholders}</blockquote>"
@@ -314,9 +320,20 @@ class Help(loader.Module):
                 f"\n{self.strings['core_notice']}"
                 if module.__origin__.startswith("<core")
                 else ""
-            ),
-            **banner_kwargs,
+            )
         )
+
+        try:
+            await utils.answer(
+                message,
+                plain_text,
+                **banner_kwargs,
+            )
+        except Exception:
+            await utils.answer(
+                message,
+                plain_text,
+            )
 
     @loader.command(
         ru_doc="[args] | Помощь с вашими модулями!",

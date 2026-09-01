@@ -401,25 +401,66 @@ async def answer(
             )
 
         edit = message.out and not message.via_bot_id and not message.fwd_from
-        if edit:
-            try:
-                return await _edit_rich_message(
-                    message,
-                    rich_message,
-                    reply_markup=reply_markup,
-                )
-            except Exception:
-                pass
-
-        return await _send_rich_message(
-            message,
-            rich_message,
-            reply_to=kwargs.pop("reply_to", None)
+        reply_to_target = (
+            kwargs.pop("reply_to", None)
             or getattr(message, "reply_to_msg_id", None)
-            or get_topic(message),
-            reply_markup=reply_markup,
-            silent=kwargs.pop("silent", None),
+            or get_topic(message)
         )
+        silent_target = kwargs.pop("silent", None)
+
+        try:
+            if edit:
+                try:
+                    return await _edit_rich_message(
+                        message,
+                        rich_message,
+                        reply_markup=reply_markup,
+                    )
+                except Exception:
+                    pass
+
+            return await _send_rich_message(
+                message,
+                rich_message,
+                reply_to=reply_to_target,
+                reply_markup=reply_markup,
+                silent=silent_target,
+            )
+        except Exception as e:
+            err_str = str(e)
+            if (
+                "RICH_MESSAGE_PHOTO_NO_MEDIA_FOUND" in err_str
+                or "PHOTO" in err_str
+                or "MEDIA" in err_str
+            ):
+                clean_rich = re.sub(
+                    r"<figure>.*?<img.*?>.*?</figure>",
+                    "",
+                    rich_message,
+                    flags=re.DOTALL,
+                )
+                clean_rich = re.sub(r"<img.*?>", "", clean_rich)
+                try:
+                    if edit:
+                        try:
+                            return await _edit_rich_message(
+                                message,
+                                clean_rich,
+                                reply_markup=reply_markup,
+                            )
+                        except Exception:
+                            pass
+
+                    return await _send_rich_message(
+                        message,
+                        clean_rich,
+                        reply_to=reply_to_target,
+                        reply_markup=reply_markup,
+                        silent=silent_target,
+                    )
+                except Exception:
+                    pass
+            raise
 
     if reply_markup is not None:
         if not isinstance(reply_markup, (list, dict)):
