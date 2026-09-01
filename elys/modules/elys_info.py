@@ -86,12 +86,6 @@ class ElysInfoMod(loader.Module):
                 "Show platform custom emoji if user has Telegram Premium",
                 validator=loader.validators.Boolean(),
             ),
-            loader.ConfigValue(
-                "async_placeholders",
-                False,
-                lambda: "Enable lazy placeholders evaluation (shows loading emoji while resolving)",
-                validator=loader.validators.Boolean(),
-            ),
         )
 
     def _get_cpu_info(self) -> str | None:
@@ -116,15 +110,19 @@ class ElysInfoMod(loader.Module):
         self,
         start: float,
         template_key: str = "info_message",
+        on_ready_callback: typing.Callable | None = None,
     ) -> str:
-        try:
-            up_to_date = utils.is_up_to_date()
-            if up_to_date:
-                upd = self.strings["up-to-date"]
-            else:
-                upd = self.strings["update_required"].format(prefix=self.get_prefix())
-        except Exception:
-            upd = ""
+        async_enabled = utils.is_async_enabled(self._client)
+        loading_ph = utils.get_loading_placeholder(self._client)
+
+        if async_enabled:
+            upd = loading_ph
+        else:
+            try:
+                is_avail = await self.lookup("Updater").check_for_updates()
+                upd = self.strings["upd_avail"] if is_avail else self.strings["up_to_date"]
+            except Exception:
+                upd = ""
 
         me = (
             '<b><a href="tg://user?id={}">{}</a></b>'.format(
@@ -191,13 +189,30 @@ class ElysInfoMod(loader.Module):
         if cpu_info:
             data["cpu"] = cpu_info
 
+        template = self.config["custom_message"] or self.strings[template_key]
+
         data = await utils.get_placeholders(
             data,
-            self.config["custom_message"],
+            template,
             client=self._client,
             on_ready_callback=on_ready_callback,
-            lazy=self.config.get("async_placeholders", False),
+            lazy=async_enabled,
         )
+
+        if async_enabled and on_ready_callback and upd == loading_ph:
+            async def _bg_resolve_upd():
+                try:
+                    is_avail = await self.lookup("Updater").check_for_updates()
+                    data["upd"] = self.strings["upd_avail"] if is_avail else self.strings["up_to_date"]
+                except Exception:
+                    data["upd"] = ""
+                if inspect.iscoroutinefunction(on_ready_callback):
+                    await on_ready_callback(data)
+                else:
+                    on_ready_callback(data)
+
+            asyncio.create_task(_bg_resolve_upd())
+
         if self.config["custom_message"]:
             try:
                 placeholders_msg = re.sub(
@@ -208,30 +223,16 @@ class ElysInfoMod(loader.Module):
             except KeyError:
                 logger.exception("Missing placeholder in custom_message")
                 placeholders_msg = self.config["custom_message"]
-        return (
-            placeholders_msg
-            if self.config["custom_message"]
-            else self.strings[template_key].format(
-                (
-                    utils.get_platform_emoji()
-                    if self._client.elys_me.premium
-                    and self.config.get("show_elys", True)
-                    else ""
-                ),
-                banner_url=self.config["banner_url"],
-                me=me,
-                version=_version,
-                prefix=prefix,
-                uptime=utils.formatted_uptime(),
-                branch=version.branch,
-                cpu_usage=utils.get_cpu_usage(),
-                ram_usage=f"{utils.get_ram_usage()} MB",
-                ping=round((time.perf_counter_ns() - start) / 10**6, 3),
-                upd=upd,
-                platform=platform,
-                os=self._get_os_name() or self.strings["non_detectable"],
-                python_ver=lib_platform.python_version(),
-            )
+            return placeholders_msg
+
+        return self.strings[template_key].format(
+            (
+                utils.get_platform_emoji()
+                if self._client.elys_me.premium
+                and self.config.get("show_elys", True)
+                else ""
+            ),
+            **data,
         )
 
     @loader.command()
@@ -245,18 +246,31 @@ class ElysInfoMod(loader.Module):
 
         async def _on_placeholders_ready(updated_data):
             nonlocal target_message
-            for _ in range(50):
+            for _ in range(60):
                 if target_message is not None:
                     break
                 await asyncio.sleep(0.05)
 
-            if target_message and self.config["custom_message"]:
+            if target_message:
                 try:
-                    updated_text = re.sub(
-                        r"{(\w+)}",
-                        lambda match: str(updated_data.get(match.group(1), match.group(0))),
-                        self.config["custom_message"],
-                    )
+                    if self.config["custom_message"]:
+                        updated_text = re.sub(
+                            r"{(\w+)}",
+                            lambda match: str(updated_data.get(match.group(1), match.group(0))),
+                            self.config["custom_message"],
+                        )
+                    else:
+                        template_key = "rich_info_message" if self.config["rich_mode"] else "info_message"
+                        updated_text = self.strings[template_key].format(
+                            (
+                                utils.get_platform_emoji()
+                                if self._client.elys_me.premium
+                                and self.config.get("show_elys", True)
+                                else ""
+                            ),
+                            **updated_data,
+                        )
+
                     with contextlib.suppress(Exception):
                         if self.config["rich_mode"]:
                             await utils.answer(target_message, rich_message=updated_text)
@@ -287,7 +301,10 @@ class ElysInfoMod(loader.Module):
                 case _ if self.config["custom_message"] is None:
                     target_message = await utils.answer(
                         message,
-                        await self._render_info(start),
+                        await self._render_info(
+                            start,
+                            on_ready_callback=_on_placeholders_ready,
+                        ),
                         file=media,
                         reply_to=getattr(message, "reply_to_msg_id", None),
                         invert_media=self.config["invert_media"],

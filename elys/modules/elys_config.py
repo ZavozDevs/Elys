@@ -119,6 +119,12 @@ class ElysConfigMod(loader.Module):
                 lambda: self.strings["_cfg_chat_input"],
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "async_placeholders",
+                True,
+                "Enable lazy placeholders evaluation (shows loading emoji while resolving)",
+                validator=loader.validators.Boolean(),
+            ),
         )
         self._active_chat_inputs: dict[str, dict] = {}
 

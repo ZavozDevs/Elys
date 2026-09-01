@@ -45,6 +45,31 @@ def get_loading_placeholder(client=None) -> str:
     return LOADING_EMOJI_PLAIN
 
 
+def is_async_enabled(client=None) -> bool:
+    """
+    Checks if async placeholders are enabled in ElysConfig.
+    """
+    try:
+        if client and hasattr(client, "loader"):
+            cfg = client.loader.lookup("ElysConfig")
+            if cfg and "async_placeholders" in cfg.config:
+                return bool(cfg.config["async_placeholders"])
+    except Exception:
+        pass
+
+    for ph_data in custom_placeholders.values():
+        instance = ph_data.get("module_instance")
+        if instance and hasattr(instance, "lookup"):
+            try:
+                cfg = instance.lookup("ElysConfig")
+                if cfg and "async_placeholders" in cfg.config:
+                    return bool(cfg.config["async_placeholders"])
+            except Exception:
+                pass
+
+    return True
+
+
 def register_placeholder(
     placeholder: str,
     callback: typing.Callable,
