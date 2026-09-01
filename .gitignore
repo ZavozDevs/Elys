@@ -178,4 +178,9 @@ unknown_errors.txt
 tmp/
 AGENTS.md
 agents.md
-
+agent_diary.md
+agent/
+.agents/
+TODO.md
+todo.md
+*.patch
