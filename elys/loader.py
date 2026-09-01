@@ -795,16 +795,22 @@ class Modules:
 
         cls_name = ret.__class__.__name__
 
-        if save_fs:
+        if save_fs and (origin == "<string>" or utils.check_url(origin)):
             path = os.path.join(
                 LOADED_MODULES_DIR,
                 f"{cls_name}_{self.client.tg_id}.py",
             )
 
-            if origin == "<string>":
-                Path(path).write_text(spec.loader.data.decode(), encoding="utf-8")
+            if source_data is not None:
+                Path(path).write_text(source_data, encoding="utf-8")
 
                 logger.debug("Saved class %s to path %s", cls_name, path)
+            else:
+                logger.warning(
+                    "Can't save class %s to path %s: no source data",
+                    cls_name,
+                    path,
+                )
 
         return ret
 
