@@ -273,7 +273,7 @@ class UpdaterMod(loader.Module):
             if manual_update:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/updated.png",
+                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/updated.png?v=1",
                     caption=self.strings["update_required"].format(
                         current[:6],
                         '<a href="https://github.com/ZavozDevs/Elys/compare/{}...{}">{}</a>'.format(
