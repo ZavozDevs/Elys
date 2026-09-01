@@ -35,17 +35,17 @@ class Help(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<tg-emoji emoji-id=4974681956907221809>▪️</tg-emoji>",
+                "<tg-emoji emoji-id=5238035813761069618>◼️</tg-emoji>",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<tg-emoji emoji-id=4974508259839836856>▪️</tg-emoji>",
+                "<tg-emoji emoji-id=5238160913273502720>⚫</tg-emoji>",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
                 "empty_emoji",
-                "<tg-emoji emoji-id=5100652175172830068>🟠</tg-emoji>",
+                "<tg-emoji emoji-id=5238094680582823847>▪️</tg-emoji>",
                 lambda: "Empty modules bullet",
             ),
             loader.ConfigValue(
