@@ -5,7 +5,6 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import io
-import json
 import logging
 
 from elystl.extensions import html, markdown
@@ -18,13 +17,12 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class FormatHelperMod(loader.Module):
-    """Помощник для работы с форматированием сообщений (Rich HTML, Telegram HTML, Markdown, Raw text, JSON)"""
+    """Помощник для работы с форматированием сообщений (Rich HTML, Telegram HTML, Markdown)"""
 
     strings = {
         "name": "FormatHelper",
         "no_args_or_reply": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Укажи текст для форматирования или ответь на сообщение</b>",
         "no_content": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет текста</b>",
-        "no_entities": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет форматирования</b>",
     }
 
     async def _send_or_code(
@@ -184,81 +182,3 @@ class FormatHelperMod(loader.Module):
             return
 
         await utils.answer(message, self.strings["no_args_or_reply"])
-
-    # ==================== FTEXT ====================
-
-    @loader.command(
-        ru_doc="<текст> или [reply] - Отправить чистый текст или получить сырой текст ответа",
-        ua_doc="<текст> або [reply] - Надіслати чистий текст або отримати сирий текст відповіді",
-        en_doc="<text> or [reply] - Send raw text or get raw text of replied message",
-    )
-    async def ftext(self, message: Message):
-        """<text> or [reply] - Send raw text or get raw text of replied message"""
-        args = utils.get_args_raw(message)
-        if args:
-            # Текст передан напрямую — отправляем без форматирования
-            await utils.answer(message, args, parse_mode=None)
-            return
-
-        reply = await message.get_reply_message()
-        if reply:
-            # Текст не передан, но есть реплай — извлекаем сырой текст
-            text = (
-                getattr(reply, "raw_text", None)
-                or getattr(reply, "message", None)
-                or getattr(reply, "text", "")
-            )
-            if not text:
-                await utils.answer(message, self.strings["no_content"])
-                return
-
-            await self._send_or_code(message, text, "message.txt")
-            return
-
-        await utils.answer(message, self.strings["no_args_or_reply"])
-
-    # ==================== FJSON & FENTITIES ====================
-
-    @loader.command(
-        ru_doc="[reply] - Получить JSON дамп структуры сообщения",
-        ua_doc="[reply] - Отримати JSON дамп структури повідомлення",
-        en_doc="[reply] - Get JSON dump of message structure",
-    )
-    async def fjson(self, message: Message):
-        """[reply] - Get JSON dump of message structure"""
-        reply = await message.get_reply_message()
-        target = reply or message
-        try:
-            dump_data = target.to_dict()
-            rendered = json.dumps(dump_data, indent=2, ensure_ascii=False, default=str)
-        except Exception as e:
-            rendered = f"Error dumping message: {e}"
-
-        await self._send_or_code(message, rendered, "message.json", lang="json")
-
-    @loader.command(
-        ru_doc="[reply] - Получить список сущностей форматирования (entities) сообщения",
-        ua_doc="[reply] - Отримати список сутностей форматування (entities) повідомлення",
-        en_doc="[reply] - Get message formatting entities dump",
-    )
-    async def fentities(self, message: Message):
-        """[reply] - Get message formatting entities dump"""
-        reply = await message.get_reply_message()
-        target = reply or message
-        entities_list = getattr(target, "entities", None)
-
-        if not entities_list:
-            await utils.answer(message, self.strings["no_entities"])
-            return
-
-        try:
-            entities_dump = [
-                e.to_dict() if hasattr(e, "to_dict") else str(e) for e in entities_list
-            ]
-            rendered = json.dumps(
-                entities_dump, indent=2, ensure_ascii=False, default=str
-            )
-        except Exception as e:
-            rendered = f"Error dumping entities: {e}"
-
-        await self._send_or_code(message, rendered, "entities.json", lang="json")
