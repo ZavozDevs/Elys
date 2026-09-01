@@ -377,6 +377,16 @@ class Settings(loader.Module):
             cmd = command_parts[0].lower().strip()
             rest = command_parts[1].strip() if len(command_parts) > 1 else None
 
+            # Resolve alias-to-alias chain
+            visited = set()
+            while cmd in self.allmodules.aliases and cmd not in visited:
+                visited.add(cmd)
+                alias_target = self.allmodules.aliases[cmd]
+                target_parts = alias_target.split(maxsplit=1)
+                cmd = target_parts[0].lower().strip()
+                if len(target_parts) > 1:
+                    rest = f"{target_parts[1]} {rest}" if rest else target_parts[1]
+
             if cmd not in self.allmodules.commands:
                 await utils.answer(
                     message,
