@@ -1210,9 +1210,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>引数が指定されていません</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>テキストを翻訳できません</b>
   language: ja
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> 翻訳されたテキスト:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> 翻訳されたテキスト:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cmd_doc_tr: '[language] [text] - テキストを翻訳します'
   _cls_doc: テキストを翻訳します（当たり前ですが）
 quickstart:

@@ -1198,9 +1198,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Nyo awguments pwovided</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Unyabwe to twanswate text >_<</b>
   language: en
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Twanswated text:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> Twanswated text:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cmd_doc_tr: '[wanguage] [text] - Twanswate text'
   _cls_doc: Twanswates text (obviouswy)
 quickstart:

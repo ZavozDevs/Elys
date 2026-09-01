@@ -39,13 +39,13 @@ class Translator(loader.Module):
             " arguments provided</b>"
         ),
         "error": (
-            "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Unable to"
+            '<tg-emoji emoji-id="5210952531676504517">❌</tg-emoji> <b>Unable to'
             " translate text</b>"
         ),
         "language": "en",
         "translated_text": (
-            "<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji>"
-            " Translated text:</blockquote>\n\n<blockquote>{tr_text}</blockquote>"
+            '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji>'
+            " Translated text:</blockquote>\n\n{tr_text}"
         ),
     }
 
@@ -203,17 +203,22 @@ class Translator(loader.Module):
 
         # 1. Unmask indexed tags with whitespace-tolerant and case-insensitive regexes
         for idx, attrs in emoji_map.items():
-            tag_pattern = (
-                rf"(?i)<e\s*{re.escape(idx)}\s*>(.*?)</e\s*(?:{re.escape(idx)})?\s*>"
+            tag_pattern = rf"(?i)<\s*e\s*{re.escape(idx)}\s*>(.*?)<\s*/\s*e\s*(?:{re.escape(idx)})?\s*>"
+            doc_id_match = re.search(
+                r'(?:emoji-id|id|document_id)\s*=\s*["\']?(\d+)["\']?', attrs
             )
             attrs_str = (
-                attrs
-                if (
-                    attrs.startswith("emoji-id=")
-                    or attrs.startswith("id=")
-                    or attrs.startswith("document_id=")
+                f'emoji-id="{doc_id_match.group(1)}"'
+                if doc_id_match
+                else (
+                    attrs
+                    if (
+                        attrs.startswith("emoji-id=")
+                        or attrs.startswith("id=")
+                        or attrs.startswith("document_id=")
+                    )
+                    else f'emoji-id="{attrs}"'
                 )
-                else f"emoji-id={attrs}"
             )
             res = re.sub(
                 tag_pattern,
@@ -223,9 +228,7 @@ class Translator(loader.Module):
             )
 
         for idx, attrs in link_map.items():
-            tag_pattern = (
-                rf"(?i)<a\s*{re.escape(idx)}\s*>(.*?)</a\s*(?:{re.escape(idx)})?\s*>"
-            )
+            tag_pattern = rf"(?i)<\s*a\s*{re.escape(idx)}\s*>(.*?)<\s*/\s*a\s*(?:{re.escape(idx)})?\s*>"
             attrs_str = (
                 attrs
                 if (attrs.startswith("href=") or attrs.startswith("url="))
@@ -239,7 +242,7 @@ class Translator(loader.Module):
             )
 
         for idx, attrs in btn_map.items():
-            tag_pattern = rf"(?i)<btn\s*{re.escape(idx)}\s*>(.*?)</btn\s*(?:{re.escape(idx)})?\s*>"
+            tag_pattern = rf"(?i)<\s*btn\s*{re.escape(idx)}\s*>(.*?)<\s*/\s*btn\s*(?:{re.escape(idx)})?\s*>"
             res = re.sub(
                 tag_pattern,
                 rf"<tg-button {attrs}>\1</tg-button>",
@@ -248,9 +251,7 @@ class Translator(loader.Module):
             )
 
         for idx, attrs in date_map.items():
-            tag_pattern = (
-                rf"(?i)<d\s*{re.escape(idx)}\s*>(.*?)</d\s*(?:{re.escape(idx)})?\s*>"
-            )
+            tag_pattern = rf"(?i)<\s*d\s*{re.escape(idx)}\s*>(.*?)<\s*/\s*d\s*(?:{re.escape(idx)})?\s*>"
             res = re.sub(
                 tag_pattern,
                 rf"<date {attrs}>\1</date>",
@@ -259,18 +260,18 @@ class Translator(loader.Module):
             )
 
         # 2. Restore shorthands
-        res = re.sub(r"(?i)<bq>", "<blockquote>", res)
-        res = re.sub(r"(?i)</bq>", "</blockquote>", res)
-        res = re.sub(r"(?i)<ebq>", "<blockquote expandable>", res)
-        res = re.sub(r"(?i)</ebq>", "</blockquote>", res)
-        res = re.sub(r"(?i)<sp>", "<tg-spoiler>", res)
-        res = re.sub(r"(?i)</sp>", "</tg-spoiler>", res)
-        res = re.sub(r"(?i)<c>", "<code>", res)
-        res = re.sub(r"(?i)</c>", "</code>", res)
+        res = re.sub(r"(?i)<\s*bq\s*>", "<blockquote>", res)
+        res = re.sub(r"(?i)<\s*/\s*bq\s*>", "</blockquote>", res)
+        res = re.sub(r"(?i)<\s*ebq\s*>", "<blockquote expandable>", res)
+        res = re.sub(r"(?i)<\s*/\s*ebq\s*>", "</blockquote>", res)
+        res = re.sub(r"(?i)<\s*sp\s*>", "<tg-spoiler>", res)
+        res = re.sub(r"(?i)<\s*/\s*sp\s*>", "</tg-spoiler>", res)
+        res = re.sub(r"(?i)<\s*c\s*>", "<code>", res)
+        res = re.sub(r"(?i)<\s*/\s*c\s*>", "</code>", res)
 
         # 3. Restore opaque tokens
         for key, full in opaque_map.items():
-            token_pattern = rf"(?i)\[\[\s*{re.escape(key)}\s*\]\]"
+            token_pattern = rf"(?i)\[\s*\[\s*{re.escape(key)}\s*\]\s*\]"
             res = re.sub(token_pattern, lambda _, repl=full: repl, res)
 
         return res
@@ -310,7 +311,22 @@ class Translator(loader.Module):
             if provider == "google":
                 gt = GoogleTranslator(source="auto", target=target_lang)
                 chunks = self._split_masked_chunks(content, max_chunk_len=1800)
-                return "\n".join(gt.translate(chunk) for chunk in chunks)
+                translated_chunks = []
+                for chunk in chunks:
+                    if not chunk.strip():
+                        translated_chunks.append(chunk)
+                        continue
+                    res = gt.translate(chunk)
+                    if (
+                        not res
+                        or "Error 500 (Server Error)" in res
+                        or "That’s all we know" in res
+                    ):
+                        raise ValueError(
+                            f"Google translate error response: {res[:100]}"
+                        )
+                    translated_chunks.append(res)
+                return "\n".join(translated_chunks)
 
             return content
 
@@ -513,45 +529,28 @@ class Translator(loader.Module):
             if not tr_text or not tr_text.strip():
                 raise ValueError("Translation returned empty result")
 
-            if rich_message is not None:
-                if only_text:
-                    logger.info(
-                        "Translator: answering only_text rich_message=%r",
-                        tr_text,
-                    )
+            if only_text:
+                logger.info(
+                    "Translator: answering only_text (rich=%s) tr_text=%r",
+                    rich_message is not None,
+                    tr_text,
+                )
+                if rich_message is not None:
                     await utils.answer(message, rich_message=tr_text)
                 else:
-                    header_template = self.strings.get("translated_text", "")
-                    if "{tr_text}" in header_template:
-                        rich_header = header_template.split("{tr_text}")[0].rstrip()
-                        if rich_header.endswith("<blockquote>"):
-                            rich_header = rich_header.removesuffix(
-                                "<blockquote>"
-                            ).rstrip()
-                        rich_header = rich_header.strip() + "\n"
-                    else:
-                        rich_header = (
-                            header_template.split("\n")[0].strip() + "\n"
-                            if header_template
-                            else "<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Translated text:</blockquote>\n"
-                        )
-                    logger.info(
-                        "Translator: answering full rich_message=%r",
-                        rich_header + tr_text,
-                    )
-                    await utils.answer(message, rich_message=rich_header + tr_text)
-            else:
-                if only_text:
-                    logger.info("Translator: answering only_text tr_text=%r", tr_text)
                     await utils.answer(message, tr_text)
+            else:
+                formatted_response = self.strings["translated_text"].format(
+                    tr_text=tr_text
+                )
+                logger.info(
+                    "Translator: answering full (rich=%s) formatted_response=%r",
+                    rich_message is not None,
+                    formatted_response,
+                )
+                if rich_message is not None:
+                    await utils.answer(message, rich_message=formatted_response)
                 else:
-                    formatted_response = self.strings["translated_text"].format(
-                        tr_text=tr_text
-                    )
-                    logger.info(
-                        "Translator: answering full formatted_response=%r",
-                        formatted_response,
-                    )
                     await utils.answer(message, formatted_response)
 
         except Exception:
