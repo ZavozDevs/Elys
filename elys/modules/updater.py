@@ -699,12 +699,6 @@ class UpdaterMod(loader.Module):
             ]
         )
 
-        if self.get("selfupdatemsg") is not None:
-            try:
-                await self.update_complete()
-            except Exception:
-                logger.exception("Failed to complete update!")
-
         if self.get("do_not_create", False):
             pass
         else:
@@ -888,11 +882,17 @@ class UpdaterMod(loader.Module):
         self.set("selfupdatemsg", None)
 
         try:
+            logger.debug("Editing restart complete message: %s", msg)
             if legacy_message_ref := self._parse_legacy_update_message_ref(ms):
                 chat_id, message_id = legacy_message_ref
                 await self._client.edit_message(chat_id, message_id, msg)
-                await asyncio.sleep(60)
-                await self._client.delete_messages(chat_id, message_id)
+
+                async def _delete_legacy():
+                    await asyncio.sleep(60)
+                    with contextlib.suppress(Exception):
+                        await self._client.delete_messages(chat_id, message_id)
+
+                asyncio.ensure_future(_delete_legacy())
                 return
 
             await self.inline.bot.edit_message_text(
