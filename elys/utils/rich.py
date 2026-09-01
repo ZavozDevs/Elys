@@ -30,7 +30,12 @@ def _text(value) -> str:
     if name == "TextConcat":
         return "".join(_text(item) for item in getattr(value, "texts", []))
     if name == "TextWithEntities":
-        return _escape(getattr(value, "text", ""))
+        from elystl.extensions import html as html_parser
+
+        return html_parser.unparse(
+            getattr(value, "text", ""),
+            getattr(value, "entities", None) or [],
+        )
 
     tags = {
         "TextBold": ("<b>", "</b>"),
@@ -63,7 +68,14 @@ def _text(value) -> str:
     if name in {"TextHashtag", "TextCashtag", "TextBotCommand", "TextBankCard"}:
         return _text(getattr(value, "text", None))
     if name == "TextCustomEmoji":
-        return f'<tg-emoji emoji-id={_attribute(getattr(value, "document_id", ""))}>{_escape(getattr(value, "alt", ""))}</tg-emoji>'
+        doc_id = _attribute(getattr(value, "document_id", ""))
+        alt = (
+            getattr(value, "alt", None)
+            or getattr(getattr(value, "text", None), "text", None)
+            or getattr(value, "text", None)
+            or "⭐️"
+        )
+        return f'<tg-emoji emoji-id="{doc_id}">{_escape(alt)}</tg-emoji>'
     if name == "TextImage":
         return f'<i>[image:{_attribute(getattr(value, "document_id", ""))}]</i>'
     if name == "TextMath":
@@ -220,8 +232,10 @@ def _block(value) -> str:
         tag = simple[name]
         return text if tag is None else f"<{tag}>{text}</{tag}>"
     if name == "PageBlockPreformatted":
-        language = _attribute(getattr(value, "language", ""))
-        return f'<pre><code class="language-{language}">{text}</code></pre>'
+        language = getattr(value, "language", "")
+        if language:
+            return f'<pre><code class="language-{_attribute(language)}">{text}</code></pre>'
+        return f"<pre>{text}</pre>"
     if name == "PageBlockDivider":
         return "<hr>"
     if name == "PageBlockAnchor":
@@ -275,8 +289,9 @@ def _block(value) -> str:
         return f"<{tag}{attributes}>{items}</{tag}>"
     if name == "PageBlockDetails":
         title = _text(getattr(value, "title", None))
+        summary_html = f"<summary>{title}</summary>" if title else ""
         blocks = "".join(_block(item) for item in getattr(value, "blocks", []))
-        return f"<details><summary>{title}</summary>{blocks}</details>"
+        return f"<details>{summary_html}{blocks}</details>"
     if name == "PageBlockMath":
         return f"<tg-math-block>{_escape(getattr(value, 'source', ''))}</tg-math-block>"
     if name == "PageBlockThinking":
@@ -307,11 +322,29 @@ def _block(value) -> str:
 def rich_message_to_html(rich_message) -> str:
     if rich_message is None:
         return ""
-    return "\n".join(
-        rendered
-        for rendered in (_block(item) for item in getattr(rich_message, "blocks", []))
-        if rendered
-    )
+    if isinstance(rich_message, str):
+        return rich_message
+    if isinstance(rich_message, (list, tuple)):
+        return "\n".join(
+            rendered
+            for rendered in (rich_message_to_html(item) for item in rich_message)
+            if rendered
+        )
+    name = type(rich_message).__name__
+    if name.startswith("Text"):
+        return _text(rich_message)
+    if name.startswith("PageBlock"):
+        return _block(rich_message)
+    if hasattr(rich_message, "blocks"):
+        blocks = getattr(rich_message, "blocks", None)
+        if isinstance(blocks, (list, tuple)):
+            return "\n".join(
+                rendered for rendered in (_block(item) for item in blocks) if rendered
+            )
+    rendered = _block(rich_message)
+    if rendered:
+        return rendered
+    return _text(rich_message)
 
 
 def install_rich_message_support():
