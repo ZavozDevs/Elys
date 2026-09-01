@@ -133,7 +133,7 @@ class CoreMod(loader.Module):
                 designers_str,
             )
             + (branch_text),
-            file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png",
+            file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png?v=1",
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
 
