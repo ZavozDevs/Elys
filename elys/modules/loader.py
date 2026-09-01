@@ -1739,7 +1739,31 @@ class LoaderMod(loader.Module):
         await self.lookup("Updater").restart_common(call)
 
     async def _update_modules(self):
+        with contextlib.suppress(Exception):
+            if updater := self.lookup("Updater"):
+                await updater.update_complete()
+
         todo = await self._get_modules_to_load()
+
+        # Clean up any leftover external copies of core modules (e.g. FormatHelper)
+        core_mod_names = {
+            m.__class__.__name__
+            for m in self.allmodules.modules
+            if getattr(m, "_is_core", False) or m.__origin__.startswith("<core")
+        }
+        cleaned = False
+        for class_name in list(todo.keys()):
+            if class_name in core_mod_names or f"{class_name}Mod" in core_mod_names:
+                logger.info("Cleaning up duplicate core module from external storage: %s", class_name)
+                fs_path = self._module_fs_path(class_name)
+                if os.path.isfile(fs_path):
+                    with contextlib.suppress(Exception):
+                        os.remove(fs_path)
+                todo.pop(class_name, None)
+                cleaned = True
+
+        if cleaned:
+            self.set("loaded_modules", todo)
 
         self._secure_boot = False
 
