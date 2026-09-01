@@ -80,6 +80,12 @@ class ElysInfoMod(loader.Module):
                 lambda: self.strings["_cfg_rich_mode"],
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "show_elys",
+                True,
+                "Show platform custom emoji if user has Telegram Premium",
+                validator=loader.validators.Boolean(),
+            ),
         )
 
     def _get_cpu_info(self) -> str | None:
