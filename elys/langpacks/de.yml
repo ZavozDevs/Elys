@@ -727,9 +727,9 @@ test:
   _cfg_rich_mode: Ping als Rich-Nachricht anzeigen.
 updater:
   source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>Den Quellcode kannst du <a href='{}'>hier</a> einsehen</b>
-  restarting_caption: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Dein {} wird neu gestartet...</b>
-  downloading: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Updates werden heruntergeladen...</b>
-  installing: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Updates werden installiert...</b>
+  restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Dein {} wird neu gestartet...</b>
+  downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Updates werden heruntergeladen...</b>
+  installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Updates werden installiert...</b>
   success: '<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>Neustart erfolgreich! {}</b>
 
     <i>Die Module werden jedoch noch geladen...</i>

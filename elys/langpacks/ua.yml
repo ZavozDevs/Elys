@@ -729,9 +729,9 @@ test:
   _cfg_rich_mode: Показувати ping як Rich-повідомлення.
 updater:
   source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>
-  restarting_caption: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Твій {} перезавантажується...</b>
-  downloading: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Завантаження оновлень...</b>
-  installing: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Встановлення оновлень...</b>
+  restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Твій {} перезавантажується...</b>
+  downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Завантаження оновлень...</b>
+  installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Встановлення оновлень...</b>
   success: '<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>Перезавантаження успішне! {}</b>
 
     <i>Але модулі ще завантажуються...</i>

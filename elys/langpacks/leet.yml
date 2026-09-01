@@ -747,9 +747,9 @@ test:
 updater:
   name: Upd473r
   source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>R34d 7h3 s0urc3 c0d3 fr0m</b> <a href='{}'>h3r3</a>
-  restarting_caption: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Ur {} 15 r3574r71ng...</b>
-  downloading: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>D0wnl04d1ng upd4735...</b>
-  installing: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>1n574ll1ng upd4735...</b>
+  restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Ur {} 15 r3574r71ng...</b>
+  downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>D0wnl04d1ng upd4735...</b>
+  installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>1n574ll1ng upd4735...</b>
   success: '<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>R3574r7 5ucc355ful! {}</b>
 
     <i>Bu7 571ll l04d1ng m0d5...</i>
