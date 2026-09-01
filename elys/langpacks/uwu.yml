@@ -767,16 +767,16 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>You awe on da watest vewsion, puww updates anyway?</b>
   cancel: 🚫 Cancew
-  branch_menu: '<blockquote><tg-emoji emoji-id=5447644880824180424>🌿</tg-emoji> <b>Выбор ветки обновления Elys</b>
+  branch_menu: '<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>
     Текущая ветка: <code>{current}</code></blockquote>
 
-    <blockquote><tg-emoji emoji-id=5206607081351684259>🛡</tg-emoji> <b>master</b> — стабильная
-    <tg-emoji emoji-id=5447410659035716599>🧪</tg-emoji> <b>beta</b> — бета-версия
-    <tg-emoji emoji-id=5465496001856950230>⚡️</tg-emoji> <b>dev</b> — разработка (нестабильная)</blockquote>'
-  branch_switching: '<blockquote><tg-emoji emoji-id=5879813604068298387>🤔</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>'
-  branch_switched: '<blockquote><tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>
+    <blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> — стабильная
+    <tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> — бета-версия
+    <tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> — разработка (нестабильная)</blockquote>'
+  branch_switching: '<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>'
+  branch_switched: '<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>
     <i>Для применения изменений требуется перезагрузка.</i></blockquote>'
-  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>
+  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>
     Ошибка: <code>{error}</code></blockquote>'
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
