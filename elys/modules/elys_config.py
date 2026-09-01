@@ -72,6 +72,9 @@ class ElysConfigMod(loader.Module):
             "Enter config values via regular chat message instead of inline"
             " query (experimental)"
         ),
+        "_cfg_switch_layout": (
+            "Automatically invert keyboard layout for commands (e.g. .рудз -> .help)"
+        ),
         "chat_input_prompt_set": (
             "✍️ <b>Send new value for <code>{}</code> of module <code>{}</code>"
             " as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
@@ -123,6 +126,12 @@ class ElysConfigMod(loader.Module):
                 "async_placeholders",
                 True,
                 "Enable lazy placeholders evaluation (shows loading emoji while resolving)",
+                validator=loader.validators.Boolean(),
+            ),
+            loader.ConfigValue(
+                "switch_layout",
+                True,
+                lambda: self.strings["_cfg_switch_layout"],
                 validator=loader.validators.Boolean(),
             ),
         )

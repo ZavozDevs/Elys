@@ -666,6 +666,7 @@ elys_config:
   external: 🛸 External
   libraries: 📦 Libs
   _cfg_chat_input: Input config values via message (experimental)
+  _cfg_switch_layout: Invert layout for commands (e.g. .рудз -> .help)
   chat_input_prompt_set: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
   chat_input_prompt_set_lib: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
   chat_input_prompt_add: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"

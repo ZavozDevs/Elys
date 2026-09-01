@@ -675,6 +675,7 @@ elys_config:
   external: 🛸 外部
   libraries: 📦 ライブラリ
   _cfg_chat_input: インラインクエリの代わりに通常のチャットメッセージで設定値を入力する（実験的）
+  _cfg_switch_layout: コマンドのキーボードレイアウトを自動的に反転します（例：.рудз -> .help）
   chat_input_prompt_set: "✍️ <b>モジュール <code>{}</code> の設定 <code>{}</code> の新しい値をこのチャットに送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
   chat_input_prompt_set_lib: "✍️ <b>ライブラリ <code>{}</code> の設定 <code>{}</code> の新しい値をこのチャットに送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"
   chat_input_prompt_add: "➕ <b>モジュール <code>{}</code> の設定 <code>{}</code> に追加する要素を送信してください。</b>\n\n<b>現在値: {}</b>\n\n<i>⏳ メッセージ待機中... (自動的に削除されます)</i>"

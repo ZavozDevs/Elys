@@ -672,6 +672,7 @@ elys_config:
   external: 🛸 3x73rn4l
   libraries: 📦 L1b5
   _cfg_chat_input: 3n73r c0nf1g v4lu35 v14 ch47 m5g (3xp3r1m3n74l)
+  _cfg_switch_layout: 4u70m471c4lly 1nv3r7 k3yb04rd l4y0u7 f0r c0mm4nd5 (3.g. .рудз -> .help)
   chat_input_prompt_set: "✍️ <b>53nd n3w v4lu3 4 <code>{}</code> 0f m0dul3 <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
   chat_input_prompt_set_lib: "✍️ <b>53nd n3w v4lu3 4 <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
   chat_input_prompt_add: "➕ <b>53nd 173m 2 4dd 2 <code>{}</code> 0f m0dul3 <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
