@@ -116,7 +116,7 @@ class Module:
 
     """There is no help for this module"""
 
-    def config_complete(self):
+    def config_complete(self, *args, **kwargs):
         """Called when module.config is populated"""
 
     async def client_ready(self):
