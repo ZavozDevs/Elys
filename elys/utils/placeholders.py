@@ -97,12 +97,14 @@ async def get_placeholders(
     client=None,
     message=None,
     on_ready_callback: typing.Callable | None = None,
-    timeout: float = 0.08,
+    timeout: float = 0.1,
+    lazy: bool = False,
 ) -> dict:
     """
-    Evaluates placeholders mentioned in custom_message. Fast placeholders are evaluated
-    immediately. Slower placeholders receive a loading indicator ('😭' or '>_<') and
-    are resolved asynchronously in the background.
+    Evaluates placeholders mentioned in custom_message.
+    If lazy=False (default): evaluates all placeholders concurrently and waits for completion.
+    If lazy=True: fast placeholders are evaluated immediately, while slower ones receive a loading indicator
+    and resolve asynchronously in the background.
     """
     if custom_message is None or not custom_placeholders:
         return data
@@ -120,6 +122,15 @@ async def get_placeholders(
         name: asyncio.create_task(get_placeholder(name, data))
         for name in matched
     }
+
+    if not lazy:
+        results = await asyncio.gather(*tasks.values(), return_exceptions=True)
+        for name, res in zip(tasks.keys(), results):
+            if isinstance(res, Exception):
+                data[name] = ""
+            else:
+                data[name] = str(res)
+        return data
 
     done, pending = await asyncio.wait(tasks.values(), timeout=timeout)
 

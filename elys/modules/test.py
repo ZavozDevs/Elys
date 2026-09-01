@@ -139,6 +139,12 @@ class TestMod(loader.Module):
                 "Switch preview invert media in ping",
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "async_placeholders",
+                False,
+                lambda: "Enable lazy placeholders evaluation (shows loading emoji while resolving)",
+                validator=loader.validators.Boolean(),
+            ),
         )
 
     def _pass_config_to_logger(self):
@@ -364,6 +370,11 @@ class TestMod(loader.Module):
 
         async def _on_placeholders_ready(updated_data):
             nonlocal target_message
+            for _ in range(50):
+                if target_message is not None:
+                    break
+                await asyncio.sleep(0.05)
+
             if target_message and self.config["custom_message"]:
                 try:
                     updated_text = self.config["custom_message"].format(**updated_data)
@@ -388,6 +399,7 @@ class TestMod(loader.Module):
             self.config["custom_message"],
             client=self._client,
             on_ready_callback=_on_placeholders_ready,
+            lazy=self.config.get("async_placeholders", False),
         )
         try:
             placeholders_msg = self.config["custom_message"].format(**data)
