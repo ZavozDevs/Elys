@@ -151,13 +151,12 @@ python3 -m elys
 
 ### Official hostings
 <details>
-<summary><b>🌘 HikkaHost</b></summary>
+<summary><b>❤️‍🔥 RnHost</b></summary>
   
-  1. Go to [@hikkahost_bot](https://t.me/hikkahost_bot)
-  2. Press "Install"
-  3. Choose "🌟 Elys"
-  And continue installation.
-  > **After that, you will receive a link, open it and login in your account.**
+  1. Open [host.rooni.dev](https://host.rooni.dev)
+  2. Deploy **🌟 Elys Userbot**
+  3. Enter your account details to log in.
+  > **Easy, fast and 24/7 cloud hosting for Elys!**
 
 </details>
 

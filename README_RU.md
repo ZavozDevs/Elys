@@ -143,16 +143,14 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3 git python3-p
 > Вуаля! Вы установили Elys на UserLAnd.
 </details>
 
-### Официальные хосты
+### Официальные хостинги
 <details>
-<summary><b>🌘 HikkaHost</b></summary>
+<summary><b>❤️‍🔥 RnHost</b></summary>
   
- 1. Перейдите в [@hikkahost_bot](https://.me/hikkahost_bot)
-2. Нажмите "Установить"
-3. Выберите "🌟 Elys"
-И продолжайте установку.
-
-> **После этого вы получите ссылку, откройте ее и войдите в свою учетную запись.**
+  1. Перейдите на [host.rooni.dev](https://host.rooni.dev)
+  2. Закажите размещение **🌟 Elys Userbot**
+  3. Введите данные своей учетной записи для входа.
+  > **Простой, быстрый и круглосуточный облачный хостинг для Elys!**
 
 </details>
 
