@@ -1207,9 +1207,9 @@ class ElysConfigMod(loader.Module):
         )
         target_chat_id = (
             getattr(call, "chat_id", None)
+            or getattr(getattr(call, "message", None), "chat_id", None)
             or (unit.get("chat") if unit else None)
             or (getattr(unit.get("caller"), "chat_id", None) if unit else None)
-            or getattr(self._client, "tg_id", None)
         )
         top_msg_id = (unit.get("top_msg_id") if unit else None) or getattr(
             getattr(unit, "caller", None), "message_thread_id", None
@@ -1276,7 +1276,7 @@ class ElysConfigMod(loader.Module):
             if not event.out and sender_id not in allowed_senders:
                 return
 
-            if utils.get_chat_id(event.message) != target_chat_id:
+            if target_chat_id is not None and utils.get_chat_id(event.message) != target_chat_id:
                 return
 
             if top_msg_id and utils.get_topic(event.message) != top_msg_id:

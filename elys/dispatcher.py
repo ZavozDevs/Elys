@@ -699,6 +699,9 @@ class CommandDispatcher:
         ):
             logger.debug("Message is blocklisted")
 
+        if not getattr(self._modules, "fully_ready", False):
+            return
+
         for func in self._modules.watchers:
             bl = self._db.get(main.__name__, "disabled_watchers", {})
             modname = str(func.__self__.__class__.strings["name"])
