@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/hikariatama/assets/raw/master/1326-command-window-line-flat.webp" height="80">
+  <img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/logo.png" height="90" alt="Elys Logo">
   <h1>Elys Userbot</h1>
   <p>Advanced Telegram userbot with enhanced security and modern features</p>
   
@@ -210,7 +210,7 @@ python3 -m elys
 
 ## 💬 Support
 
-[![Telegram Support](https://img.shields.io/badge/Telegram-Support_Group-2594cb?logo=telegram)](https://t.me/elys_talks)
+[![Telegram Support](https://img.shields.io/badge/Telegram-Support_Group-2594cb?logo=telegram)](https://t.me/ElysTalk)
 
 ---
 

@@ -136,17 +136,17 @@ class Quickstart(loader.Module):
 
         try:
             await self.request_join(
-                "elys_talks",
+                "ElysTalk",
                 "Elys help is only available in this chat. By agreeing to join the chat, you agree to the Elys federation rules and if you violate them, you will be permanently banned.",
             )
         except Exception:
-            logger.debug("Support chat @elys_talks is not available yet")
+            logger.debug("Support chat @ElysTalk is not available yet")
 
         self.mark = lambda: [
             [
                 {
                     "text": self.strings["btn_support"],
-                    "url": "https://t.me/elys_talks",
+                    "url": "https://t.me/ElysTalk",
                 }
             ],
         ] + utils.chunks(
