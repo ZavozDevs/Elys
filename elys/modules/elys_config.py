@@ -11,12 +11,14 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import ast
+import asyncio
 import contextlib
 import difflib
 import functools
 import typing
 from math import ceil
 
+from elystl import events
 from elystl.tl.types import Message
 from elystl.extensions import html
 
@@ -64,7 +66,44 @@ class _InlineFormDraft:
 class ElysConfigMod(loader.Module):
     """Interactive configurator for Elys Userbot"""
 
-    strings = {"name": "ElysConfig"}
+    strings = {
+        "name": "ElysConfig",
+        "_cfg_chat_input": (
+            "Enter config values via regular chat message instead of inline"
+            " query (experimental)"
+        ),
+        "chat_input_prompt_set": (
+            "✍️ <b>Send new value for <code>{}</code> of module <code>{}</code>"
+            " as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
+            "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+        ),
+        "chat_input_prompt_set_lib": (
+            "✍️ <b>Send new value for <code>{}</code> of library <code>{}</code>"
+            " as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
+            "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+        ),
+        "chat_input_prompt_add": (
+            "➕ <b>Send element to add to <code>{}</code> of module"
+            " <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
+            "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+        ),
+        "chat_input_prompt_add_lib": (
+            "➕ <b>Send element to add to <code>{}</code> of library"
+            " <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
+            "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+        ),
+        "chat_input_prompt_remove": (
+            "➖ <b>Send element to remove from <code>{}</code> of module"
+            " <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
+            "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+        ),
+        "chat_input_prompt_remove_lib": (
+            "➖ <b>Send element to remove from <code>{}</code> of library"
+            " <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
+            "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+        ),
+        "cancel_btn": "🚫 Cancel",
+    }
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -74,7 +113,25 @@ class ElysConfigMod(loader.Module):
                 "Change emoji when opening inline",
                 validator=loader.validators.String(),
             ),
+            loader.ConfigValue(
+                "chat_input",
+                False,
+                lambda: self.strings["_cfg_chat_input"],
+                validator=loader.validators.Boolean(),
+            ),
         )
+        self._active_chat_inputs: dict[str, dict] = {}
+
+    def on_unload(self):
+        for session in list(self._active_chat_inputs.values()):
+            if "future" in session and not session["future"].done():
+                session["future"].cancel()
+            if "handler" in session:
+                with contextlib.suppress(Exception):
+                    self._client.remove_event_handler(
+                        session["handler"], events.NewMessage
+                    )
+        self._active_chat_inputs.clear()
 
     @staticmethod
     def prep_value(value: typing.Any) -> typing.Any:
@@ -121,6 +178,15 @@ class ElysConfigMod(loader.Module):
         suffix = "\n... <i>значение обрезано для inline-сообщения</i>"
         plain_limit = max(0, limit - len(suffix) - len("<b><code></code></b>"))
         return f"<b><code>{utils.escape_html(plain[:plain_limit])}</code></b>{suffix}"
+
+    def _is_hidden(self, mod: str, option: str) -> bool:
+        try:
+            validator = self.lookup(mod).config._config[option].validator
+            return bool(
+                validator and getattr(validator, "internal_id", None) == "Hidden"
+            )
+        except Exception:
+            return False
 
     @staticmethod
     def _paginate_text_markup(
@@ -532,33 +598,62 @@ class ElysConfigMod(loader.Module):
         option: str,
         obj_type: bool | str = False,
     ) -> list:
+        use_chat_input = self.config["chat_input"] and not self._is_hidden(mod, option)
+        inline_msg_id = getattr(call, "inline_message_id", None)
         return [
             [
-                {
-                    "text": self.strings["enter_value_btn"],
-                    "input": self.strings["enter_value_desc"],
-                    "handler": self.inline__set_config,
-                    "args": (mod, option, call.inline_message_id),
-                    "kwargs": {"obj_type": obj_type},
-                }
+                (
+                    {
+                        "text": self.strings["enter_value_btn"],
+                        "callback": self.inline__prompt_chat_input,
+                        "args": ("set", mod, option),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                    if use_chat_input
+                    else {
+                        "text": self.strings["enter_value_btn"],
+                        "input": self.strings["enter_value_desc"],
+                        "handler": self.inline__set_config,
+                        "args": (mod, option, inline_msg_id),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                )
             ],
             [
                 *(
                     [
-                        {
-                            "text": self.strings["remove_item_btn"],
-                            "input": self.strings["remove_item_desc"],
-                            "handler": self.inline__remove_item,
-                            "args": (mod, option, call.inline_message_id),
-                            "kwargs": {"obj_type": obj_type},
-                        },
-                        {
-                            "text": self.strings["add_item_btn"],
-                            "input": self.strings["add_item_desc"],
-                            "handler": self.inline__add_item,
-                            "args": (mod, option, call.inline_message_id),
-                            "kwargs": {"obj_type": obj_type},
-                        },
+                        (
+                            {
+                                "text": self.strings["remove_item_btn"],
+                                "callback": self.inline__prompt_chat_input,
+                                "args": ("remove", mod, option),
+                                "kwargs": {"obj_type": obj_type},
+                            }
+                            if use_chat_input
+                            else {
+                                "text": self.strings["remove_item_btn"],
+                                "input": self.strings["remove_item_desc"],
+                                "handler": self.inline__remove_item,
+                                "args": (mod, option, inline_msg_id),
+                                "kwargs": {"obj_type": obj_type},
+                            }
+                        ),
+                        (
+                            {
+                                "text": self.strings["add_item_btn"],
+                                "callback": self.inline__prompt_chat_input,
+                                "args": ("add", mod, option),
+                                "kwargs": {"obj_type": obj_type},
+                            }
+                            if use_chat_input
+                            else {
+                                "text": self.strings["add_item_btn"],
+                                "input": self.strings["add_item_desc"],
+                                "handler": self.inline__add_item,
+                                "args": (mod, option, inline_msg_id),
+                                "kwargs": {"obj_type": obj_type},
+                            }
+                        ),
                     ]
                     if self.lookup(mod).config[option]
                     else []
@@ -687,15 +782,26 @@ class ElysConfigMod(loader.Module):
             .config._config[option]
             .validator.validate.keywords["possible_values"]
         )
+        use_chat_input = self.config["chat_input"] and not self._is_hidden(mod, option)
+        inline_msg_id = getattr(call, "inline_message_id", None)
         return [
             [
-                {
-                    "text": self.strings["enter_value_btn"],
-                    "input": self.strings["enter_value_desc"],
-                    "handler": self.inline__set_config,
-                    "args": (mod, option, call.inline_message_id),
-                    "kwargs": {"obj_type": obj_type},
-                }
+                (
+                    {
+                        "text": self.strings["enter_value_btn"],
+                        "callback": self.inline__prompt_chat_input,
+                        "args": ("set", mod, option),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                    if use_chat_input
+                    else {
+                        "text": self.strings["enter_value_btn"],
+                        "input": self.strings["enter_value_desc"],
+                        "handler": self.inline__set_config,
+                        "args": (mod, option, inline_msg_id),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                )
             ],
             *utils.chunks(
                 [
@@ -761,15 +867,26 @@ class ElysConfigMod(loader.Module):
             .config._config[option]
             .validator.validate.keywords["possible_values"]
         )
+        use_chat_input = self.config["chat_input"] and not self._is_hidden(mod, option)
+        inline_msg_id = getattr(call, "inline_message_id", None)
         return [
             [
-                {
-                    "text": self.strings["enter_value_btn"],
-                    "input": self.strings["enter_value_desc"],
-                    "handler": self.inline__set_config,
-                    "args": (mod, option, call.inline_message_id),
-                    "kwargs": {"obj_type": obj_type},
-                }
+                (
+                    {
+                        "text": self.strings["enter_value_btn"],
+                        "callback": self.inline__prompt_chat_input,
+                        "args": ("set", mod, option),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                    if use_chat_input
+                    else {
+                        "text": self.strings["enter_value_btn"],
+                        "input": self.strings["enter_value_desc"],
+                        "handler": self.inline__set_config,
+                        "args": (mod, option, inline_msg_id),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                )
             ],
             *utils.chunks(
                 [
@@ -997,19 +1114,32 @@ class ElysConfigMod(loader.Module):
             ),
         )
 
+        use_chat_input = self.config["chat_input"] and not self._is_hidden(
+            mod, config_opt
+        )
+        inline_msg_id = getattr(call, "inline_message_id", None)
+        enter_btn = (
+            {
+                "text": self.strings["enter_value_btn"],
+                "callback": self.inline__prompt_chat_input,
+                "args": ("set", mod, config_opt),
+                "kwargs": {"obj_type": obj_type},
+            }
+            if use_chat_input
+            else {
+                "text": self.strings["enter_value_btn"],
+                "input": self.strings["enter_value_desc"],
+                "handler": self.inline__set_config,
+                "args": (mod, config_opt, inline_msg_id),
+                "kwargs": {"obj_type": obj_type},
+            }
+        )
+
         await call.edit(
             text,
             reply_markup=additonal_button_row
             + [
-                [
-                    {
-                        "text": self.strings["enter_value_btn"],
-                        "input": self.strings["enter_value_desc"],
-                        "handler": self.inline__set_config,
-                        "args": (mod, config_opt, call.inline_message_id),
-                        "kwargs": {"obj_type": obj_type},
-                    }
-                ],
+                [enter_btn],
                 [
                     {
                         "text": self.strings["set_default_btn"],
@@ -1034,6 +1164,200 @@ class ElysConfigMod(loader.Module):
                     },
                 ],
             ],
+        )
+
+    async def inline__prompt_chat_input(
+        self,
+        call: InlineCall,
+        action: str,
+        mod: str,
+        option: str,
+        obj_type: bool | str = False,
+    ):
+        unit_id = getattr(call, "unit_id", None) or utils.rand(16)
+        if unit_id in self._active_chat_inputs:
+            old_session = self._active_chat_inputs.pop(unit_id)
+            if "future" in old_session and not old_session["future"].done():
+                old_session["future"].cancel()
+            if "handler" in old_session:
+                with contextlib.suppress(Exception):
+                    self._client.remove_event_handler(
+                        old_session["handler"], events.NewMessage
+                    )
+
+        unit = (
+            self.inline._units.get(unit_id)
+            if hasattr(self, "inline") and hasattr(self.inline, "_units")
+            else None
+        )
+        target_chat_id = (
+            getattr(call, "chat_id", None)
+            or (unit.get("chat") if unit else None)
+            or (getattr(unit.get("caller"), "chat_id", None) if unit else None)
+            or getattr(self._client, "tg_id", None)
+        )
+        top_msg_id = (unit.get("top_msg_id") if unit else None) or getattr(
+            getattr(unit, "caller", None), "message_thread_id", None
+        )
+
+        match action:
+            case "add":
+                prompt_key = (
+                    "chat_input_prompt_add"
+                    if isinstance(obj_type, bool)
+                    else "chat_input_prompt_add_lib"
+                )
+            case "remove":
+                prompt_key = (
+                    "chat_input_prompt_remove"
+                    if isinstance(obj_type, bool)
+                    else "chat_input_prompt_remove_lib"
+                )
+            case _:
+                prompt_key = (
+                    "chat_input_prompt_set"
+                    if isinstance(obj_type, bool)
+                    else "chat_input_prompt_set_lib"
+                )
+
+        text = self.strings[prompt_key].format(
+            utils.escape_html(option),
+            utils.escape_html(mod),
+            self._get_inline_value(mod, option),
+        )
+
+        reply_markup = [
+            [
+                {
+                    "text": self.strings["cancel_btn"],
+                    "callback": self.inline__cancel_chat_input,
+                    "args": (mod, option),
+                    "kwargs": {"obj_type": obj_type},
+                    "style": "danger",
+                }
+            ]
+        ]
+
+        await call.edit(text, reply_markup=reply_markup)
+        with contextlib.suppress(Exception):
+            await call.answer()
+
+        loop = asyncio.get_event_loop()
+        future: asyncio.Future = loop.create_future()
+
+        async def _message_handler(event):
+            if future.done():
+                return
+
+            sender_id = event.sender_id or getattr(event.message, "sender_id", None)
+            allowed_senders = [getattr(self._client, "tg_id", None)]
+            if hasattr(self._client, "dispatcher") and hasattr(
+                self._client.dispatcher, "security"
+            ):
+                allowed_senders += self._client.dispatcher.security._owner or []
+            if hasattr(self, "inline") and hasattr(self.inline, "_me"):
+                allowed_senders.append(self.inline._me)
+
+            if not event.out and sender_id not in allowed_senders:
+                return
+
+            if utils.get_chat_id(event.message) != target_chat_id:
+                return
+
+            if top_msg_id and utils.get_topic(event.message) != top_msg_id:
+                return
+
+            future.set_result(event.message)
+
+        self._client.add_event_handler(_message_handler, events.NewMessage)
+        self._active_chat_inputs[unit_id] = {
+            "future": future,
+            "handler": _message_handler,
+            "call": call,
+            "mod": mod,
+            "option": option,
+            "obj_type": obj_type,
+        }
+
+        asyncio.create_task(
+            self._wait_chat_input(
+                unit_id,
+                future,
+                _message_handler,
+                call,
+                action,
+                mod,
+                option,
+                obj_type,
+            )
+        )
+
+    async def _wait_chat_input(
+        self,
+        unit_id: str,
+        future: asyncio.Future,
+        handler: typing.Callable,
+        call: InlineCall,
+        action: str,
+        mod: str,
+        option: str,
+        obj_type: bool | str = False,
+    ):
+        try:
+            msg = await asyncio.wait_for(future, timeout=120)
+        except (asyncio.TimeoutError, asyncio.CancelledError):
+            with contextlib.suppress(Exception):
+                await self.inline__configure_option(
+                    call, mod=mod, config_opt=option, obj_type=obj_type
+                )
+            return
+        finally:
+            with contextlib.suppress(Exception):
+                self._client.remove_event_handler(handler, events.NewMessage)
+            self._active_chat_inputs.pop(unit_id, None)
+
+        with contextlib.suppress(Exception):
+            await msg.delete()
+
+        query = msg.raw_text or getattr(msg, "message", "") or ""
+        if query.strip().lower() in (".cancel", "/cancel"):
+            await self.inline__configure_option(
+                call, mod=mod, config_opt=option, obj_type=obj_type
+            )
+            return
+
+        match action:
+            case "add":
+                await self.inline__add_item(call, query, mod, option, obj_type=obj_type)
+            case "remove":
+                await self.inline__remove_item(
+                    call, query, mod, option, obj_type=obj_type
+                )
+            case _:
+                await self.inline__set_config(
+                    call, query, mod, option, obj_type=obj_type
+                )
+
+    async def inline__cancel_chat_input(
+        self,
+        call: InlineCall,
+        mod: str,
+        option: str,
+        obj_type: bool | str = False,
+    ):
+        unit_id = getattr(call, "unit_id", None)
+        if unit_id and unit_id in self._active_chat_inputs:
+            session = self._active_chat_inputs.pop(unit_id)
+            if "future" in session and not session["future"].done():
+                session["future"].cancel()
+            if "handler" in session:
+                with contextlib.suppress(Exception):
+                    self._client.remove_event_handler(
+                        session["handler"], events.NewMessage
+                    )
+
+        await self.inline__configure_option(
+            call, mod=mod, config_opt=option, obj_type=obj_type
         )
 
     async def inline__configure_page(

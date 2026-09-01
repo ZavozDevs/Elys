@@ -665,6 +665,14 @@ elys_config:
   builtin: 🛰 Built-in
   external: 🛸 External
   libraries: 📦 Libs
+  _cfg_chat_input: Input config values via message (experimental)
+  chat_input_prompt_set: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_add: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_remove: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  cancel_btn: 🚫 Cancel
   _cmd_doc_config: Open Configurator
   _cmd_doc_fconfig: <mod> <key> <val> - Set config key
   _cls_doc: Interactive Configurator
@@ -1158,7 +1166,7 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Arg 'text' required</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>TranslationError</b>
   language: en
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> Output:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Output:</blockquote>
 
     <blockquote>{tr_text}</blockquote>'
   _cmd_doc_tr: '[lang] [text] - Translate'

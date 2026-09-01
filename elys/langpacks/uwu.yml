@@ -671,6 +671,14 @@ elys_config:
   builtin: 🛰 Buiwt-in
   external: 🛸 Extewnaw
   libraries: 📦 Wibwawies
+  _cfg_chat_input: Type config vawues in chat instead of inwine (expewimentaw)
+  chat_input_prompt_set: "✍️ <b>Send new vawue fow <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Send new vawue fow <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  chat_input_prompt_add: "➕ <b>Send ewement to add to <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Send ewement to add to <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  chat_input_prompt_remove: "➖ <b>Send ewement to wemove fwom <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Send ewement to wemove fwom <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  cancel_btn: 🚫 Cancew
   _cmd_doc_config: Configuwe moduwes
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - set da config vawue fow da moduwe
   _cls_doc: Intewactive configuwatow fow Elys Usewbot
@@ -1190,7 +1198,7 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Nyo awguments pwovided</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Unyabwe to twanswate text >_<</b>
   language: en
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> Twanswated text:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Twanswated text:</blockquote>
 
     <blockquote>{tr_text}</blockquote>'
   _cmd_doc_tr: '[wanguage] [text] - Twanswate text'

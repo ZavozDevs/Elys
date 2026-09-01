@@ -653,6 +653,14 @@ elys_config:
   builtin: 🛰 Встроенные
   external: 🛸 Внешние
   libraries: 📦 Либы
+  _cfg_chat_input: Писать значения конфига в чат вместо инлайна (хайп/эксперимент)
+  chat_input_prompt_set: "✍️ <b>Кидай новое значение для <code>{}</code> модуля <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Кидай новое значение для <code>{}</code> либки <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_add: "➕ <b>Кидай новый пункт для <code>{}</code> модуля <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Кидай новый пункт для <code>{}</code> либки <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_remove: "➖ <b>Кидай пункт на вылет из <code>{}</code> модуля <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Кидай пункт на вылет из <code>{}</code> либки <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  cancel_btn: 🚫 Отмена
   _cmd_doc_config: Настроить модули
   _cmd_doc_fconfig: <модуль> <опция> <значение> - быстро поменять конфиг
   name: ElysConfig
@@ -1171,9 +1179,9 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Аргументы где?</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не перевелось (скилл ишью)</b>
   language: ru
-  translated_text: '<tg-emoji emoji-id=5787344001862471785>🔁</tg-emoji> Перевод:
+  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Перевод:</blockquote>
 
-    <blockquote>{tr_text} </blockquote>'
+    <blockquote>{tr_text}</blockquote>'
   _cls_doc: Переводчик
   _cmd_doc_tr: '[язык] [текст] - Перевести'
   name: Translator

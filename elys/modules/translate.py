@@ -12,6 +12,7 @@
 
 import asyncio
 import contextlib
+import copy
 import logging
 
 from deep_translator import GoogleTranslator
@@ -86,9 +87,26 @@ class Translator(loader.Module):
                 return
 
             text = reply.raw_text
-            entities = reply.entities
+            entities = reply.entities or []
+            target_msg = reply
         else:
-            entities = []
+            target_msg = message
+            if message.entities and text:
+                prefix_len = len(message.raw_text) - len(text)
+                adjusted_entities = []
+                for ent in message.entities:
+                    if ent.offset >= prefix_len:
+                        new_ent = copy.copy(ent)
+                        new_ent.offset -= prefix_len
+                        adjusted_entities.append(new_ent)
+                    elif ent.offset + ent.length > prefix_len:
+                        new_ent = copy.copy(ent)
+                        new_ent.length = (ent.offset + ent.length) - prefix_len
+                        new_ent.offset = 0
+                        adjusted_entities.append(new_ent)
+                entities = adjusted_entities
+            else:
+                entities = []
 
         provider = self.config["provider"]
 
@@ -126,7 +144,11 @@ class Translator(loader.Module):
                         return
                 else:
                     tr_text = await self._client.translate(
-                        message.peer_id, message, lang, raw_text=text, entities=entities
+                        message.peer_id,
+                        target_msg,
+                        lang,
+                        raw_text=text,
+                        entities=entities,
                     )
             else:
                 tr_text = await self._translate_external(text, lang)
