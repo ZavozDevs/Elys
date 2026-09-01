@@ -7,7 +7,9 @@
 import io
 import json
 import logging
+import typing
 
+import elystl
 from elystl.extensions import html, markdown
 from elystl.tl.types import Message
 
@@ -18,17 +20,58 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class FormatHelperMod(loader.Module):
-    """Helper module for Rich Messages and message formatting"""
+    """Помощник для работы с форматированием сообщений (HTML, Markdown, Rich Messages, Raw, JSON)"""
 
     strings = {
         "name": "FormatHelper",
         "no_reply": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Ответь на сообщение или укажи текст</b>",
-        "no_content": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет текста или форматирования</b>",
-        "rich_header": "<b>Rich Message HTML:</b>",
-        "html_header": "<b>Telegram HTML:</b>",
-        "md_header": "<b>Markdown:</b>",
-        "json_header": "<b>Message JSON:</b>",
+        "no_content": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет текста</b>",
+        "no_entities": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет форматирования</b>",
     }
+
+    async def _send_or_code(
+        self,
+        message: Message,
+        content: str,
+        filename: str,
+        lang: str | None = None,
+    ):
+        """Отправляет результат моноширинным кодом или файлом, если он слишком большой"""
+        if len(content) > 3000:
+            file = io.BytesIO(content.encode("utf-8"))
+            file.name = filename
+            file.seek(0)
+            await utils.answer(message, file=file)
+            return
+
+        escaped = utils.escape_html(content)
+        if lang:
+            result = f'<pre><code class="language-{lang}">{escaped}</code></pre>'
+        else:
+            result = f"<code>{escaped}</code>"
+
+        await utils.answer(message, result)
+
+    def _extract_source_text(
+        self,
+        message: Message,
+        reply: Message | None,
+    ) -> str | None:
+        """Извлекает текст из аргументов команды или из реплая"""
+        args = utils.get_args_raw(message)
+        if args:
+            return args
+
+        if reply:
+            return (
+                getattr(reply, "raw_text", None)
+                or getattr(reply, "message", None)
+                or getattr(reply, "text", None)
+            )
+
+        return None
+
+    # ==================== RICH MESSAGE ====================
 
     @loader.command(
         ru_doc="<html/текст> [reply] - Отправить или отредактировать сообщение как Rich Message",
@@ -42,8 +85,9 @@ class FormatHelperMod(loader.Module):
         if not args and reply:
             args = (
                 getattr(reply, "rich_message", None)
-                or getattr(reply, "text", None)
-                or getattr(reply, "message", "")
+                or getattr(reply, "raw_text", None)
+                or getattr(reply, "message", None)
+                or getattr(reply, "text", "")
             )
 
         if not args:
@@ -53,12 +97,12 @@ class FormatHelperMod(loader.Module):
         await utils.answer(message, rich_message=args)
 
     @loader.command(
-        ru_doc="[reply] - Получить Rich HTML код сообщения для копирования и вставки",
-        ua_doc="[reply] - Отримати Rich HTML код повідомлення для копіювання",
-        en_doc="[reply] - Get Rich HTML code of message to copy and paste",
+        ru_doc="[reply] - Получить Rich HTML код сообщения",
+        ua_doc="[reply] - Отримати Rich HTML код повідомлення",
+        en_doc="[reply] - Get Rich HTML code of message",
     )
     async def getrich(self, message: Message):
-        """[reply] - Get Rich HTML code of message to copy and paste"""
+        """[reply] - Get Rich HTML code of message"""
         reply = await message.get_reply_message()
         target = reply or message
         rich_html = None
@@ -97,7 +141,7 @@ class FormatHelperMod(loader.Module):
             try:
                 rich_html = html.unparse(target.message, target.entities or [])
             except Exception:
-                rich_html = getattr(target, "text", None) or getattr(
+                rich_html = getattr(target, "raw_text", None) or getattr(
                     target, "message", ""
                 )
 
@@ -105,19 +149,25 @@ class FormatHelperMod(loader.Module):
             await utils.answer(message, self.strings["no_content"])
             return
 
-        if len(rich_html) > 3000:
-            file = io.BytesIO(rich_html.encode("utf-8"))
-            file.name = "rich_message.html"
-            file.seek(0)
-            await utils.answer(message, self.strings["rich_header"], file=file)
-        else:
-            await utils.answer(
-                message,
-                self.strings["rich_header"]
-                + "\n\n<code>"
-                + utils.escape_html(rich_html)
-                + "</code>",
-            )
+        await self._send_or_code(message, rich_html, "rich_message.html", lang="html")
+
+    # ==================== TELEGRAM HTML ====================
+
+    @loader.command(
+        ru_doc="<html/текст> [reply] - Отправить или отредактировать сообщение с парсингом Telegram HTML",
+        ua_doc="<html/текст> [reply] - Надіслати або відредагувати повідомлення як Telegram HTML",
+        en_doc="<html/text> [reply] - Send or edit message parsed as Telegram HTML",
+    )
+    async def html(self, message: Message):
+        """<html/text> [reply] - Send or edit message parsed as Telegram HTML"""
+        reply = await message.get_reply_message()
+        text = self._extract_source_text(message, reply)
+
+        if not text:
+            await utils.answer(message, self.strings["no_reply"])
+            return
+
+        await utils.answer(message, text, parse_mode="html")
 
     @loader.command(
         ru_doc="[reply] - Получить Telegram HTML код сообщения",
@@ -135,21 +185,29 @@ class FormatHelperMod(loader.Module):
         try:
             rendered = html.unparse(target.message, target.entities or [])
         except Exception:
-            rendered = getattr(target, "text", None) or getattr(target, "message", "")
-
-        if len(rendered) > 3000:
-            file = io.BytesIO(rendered.encode("utf-8"))
-            file.name = "message.html"
-            file.seek(0)
-            await utils.answer(message, self.strings["html_header"], file=file)
-        else:
-            await utils.answer(
-                message,
-                self.strings["html_header"]
-                + "\n\n<code>"
-                + utils.escape_html(rendered)
-                + "</code>",
+            rendered = getattr(target, "raw_text", None) or getattr(
+                target, "message", ""
             )
+
+        await self._send_or_code(message, rendered, "message.html", lang="html")
+
+    # ==================== TELEGRAM MARKDOWN ====================
+
+    @loader.command(
+        ru_doc="<md/текст> [reply] - Отправить или отредактировать сообщение с парсингом Telegram Markdown",
+        ua_doc="<md/текст> [reply] - Надіслати або відредагувати повідомлення як Telegram Markdown",
+        en_doc="<md/text> [reply] - Send or edit message parsed as Telegram Markdown",
+    )
+    async def md(self, message: Message):
+        """<md/text> [reply] - Send or edit message parsed as Telegram Markdown"""
+        reply = await message.get_reply_message()
+        text = self._extract_source_text(message, reply)
+
+        if not text:
+            await utils.answer(message, self.strings["no_reply"])
+            return
+
+        await utils.answer(message, text, parse_mode="md")
 
     @loader.command(
         ru_doc="[reply] - Получить Markdown код сообщения",
@@ -171,19 +229,48 @@ class FormatHelperMod(loader.Module):
                 target, "message", ""
             )
 
-        if len(rendered) > 3000:
-            file = io.BytesIO(rendered.encode("utf-8"))
-            file.name = "message.md"
-            file.seek(0)
-            await utils.answer(message, self.strings["md_header"], file=file)
-        else:
-            await utils.answer(
-                message,
-                self.strings["md_header"]
-                + "\n\n<code>"
-                + utils.escape_html(rendered)
-                + "</code>",
-            )
+        await self._send_or_code(message, rendered, "message.md", lang="markdown")
+
+    # ==================== RAW / ПЛАЙН ТЕКСТ ====================
+
+    @loader.command(
+        ru_doc="<текст> [reply] - Отправить или отредактировать сообщение как чистый текст (без форматирования)",
+        ua_doc="<текст> [reply] - Надіслати або відредагувати повідомлення как чистий текст (без форматування)",
+        en_doc="<text> [reply] - Send or edit message as raw text (without formatting)",
+    )
+    async def raw(self, message: Message):
+        """<text> [reply] - Send or edit message as raw text (without formatting)"""
+        reply = await message.get_reply_message()
+        text = self._extract_source_text(message, reply)
+
+        if not text:
+            await utils.answer(message, self.strings["no_reply"])
+            return
+
+        await utils.answer(message, text, parse_mode=None)
+
+    @loader.command(
+        ru_doc="[reply] - Получить чистый сырой текст сообщения (без форматирования)",
+        ua_doc="[reply] - Отримати чистий сирий текст повідомлення (без форматування)",
+        en_doc="[reply] - Get raw text of message (without formatting)",
+    )
+    async def getraw(self, message: Message):
+        """[reply] - Get raw text of message (without formatting)"""
+        reply = await message.get_reply_message()
+        target = reply or message
+        text = (
+            getattr(target, "raw_text", None)
+            or getattr(target, "message", None)
+            or getattr(target, "text", "")
+        )
+
+        if not text:
+            await utils.answer(message, self.strings["no_content"])
+            return
+
+        await self._send_or_code(message, text, "message.txt")
+
+    # ==================== JSON & ENTITIES ДАМП ====================
 
     @loader.command(
         ru_doc="[reply] - Получить JSON дамп структуры сообщения",
@@ -200,16 +287,32 @@ class FormatHelperMod(loader.Module):
         except Exception as e:
             rendered = f"Error dumping message: {e}"
 
-        if len(rendered) > 3000:
-            file = io.BytesIO(rendered.encode("utf-8"))
-            file.name = "message.json"
-            file.seek(0)
-            await utils.answer(message, self.strings["json_header"], file=file)
-        else:
-            await utils.answer(
-                message,
-                self.strings["json_header"]
-                + '\n\n<pre><code class="language-json">'
-                + utils.escape_html(rendered)
-                + "</code></pre>",
+        await self._send_or_code(message, rendered, "message.json", lang="json")
+
+    @loader.command(
+        ru_doc="[reply] - Получить список сущностей форматирования (entities) сообщения",
+        ua_doc="[reply] - Отримати список сутностей форматування (entities) повідомлення",
+        en_doc="[reply] - Get message formatting entities dump",
+    )
+    async def entities(self, message: Message):
+        """[reply] - Get message formatting entities dump"""
+        reply = await message.get_reply_message()
+        target = reply or message
+        entities_list = getattr(target, "entities", None)
+
+        if not entities_list:
+            await utils.answer(message, self.strings["no_entities"])
+            return
+
+        try:
+            entities_dump = [
+                e.to_dict() if hasattr(e, "to_dict") else str(e)
+                for e in entities_list
+            ]
+            rendered = json.dumps(
+                entities_dump, indent=2, ensure_ascii=False, default=str
             )
+        except Exception as e:
+            rendered = f"Error dumping entities: {e}"
+
+        await self._send_or_code(message, rendered, "entities.json", lang="json")
