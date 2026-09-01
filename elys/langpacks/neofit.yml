@@ -759,7 +759,7 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>Up to date. git pull --force?</b>
   cancel: 🚫 ^C
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Boot complete! {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Boot complete! {}</b>
 
     <i>Total Runtime: {}s</i>'
   ub_stop: '{emoji} Process SIGSTOP'

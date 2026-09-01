@@ -735,7 +735,7 @@ updater:
     <i>Die Module werden jedoch noch geladen...</i>
 
     <i>Der Neustart dauerte {} Sekunden</i>'
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Der Userbot ist vollständig geladen! {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Der Userbot ist vollständig geladen! {}</b>
 
     <i>Der vollständige Neustart dauerte {} Sekunden.</i>'
   ub_stop: Dein {} wurde gestoppt!

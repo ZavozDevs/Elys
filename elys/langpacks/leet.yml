@@ -767,7 +767,7 @@ updater:
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>U r 0n 7h3 l47357 v3r510n, pull upd4735 4nyw4y?</b>
   cancel: 🚫 C4nc3l
   stop_ub_confirm: Y0ur {} w1ll b3 570pp3d, 4r3 y0u 5ur3?
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Us3rb07 15 fully l04d3d! {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Us3rb07 15 fully l04d3d! {}</b>
 
     <i>Full r3574r7 700k {}s</i>'
   ub_stop: Ur {emoji} h45 b33n 570pp3d

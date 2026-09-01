@@ -814,7 +814,7 @@ updater:
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>You are on the latest version, pull updates anyway?</b>
   cancel: 🚫 Cancel
   stop_ub_confirm: Your {} will be stopped, are you sure?
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Userbot is fully loaded! {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Userbot is fully loaded! {}</b>
 
     <i>Full restart took {}s</i>'
   ub_stop: Your {emoji} has been stopped
