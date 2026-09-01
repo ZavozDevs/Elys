@@ -148,7 +148,7 @@ elys_settings:
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Command not found in PATH</b>
   inline_settings: ⚙️ <b>/etc/environment config</b>
   confirm_update: 🧭 <b>git pull &amp;&amp; systemctl restart?</b>
-  confirm_restart: 🔄 <b>sudo reboot now?</b>
+  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>sudo reboot now?</b>
   btn_restart: 🔄 sudo reboot
   btn_update: 🧭 git pull
   close_menu: 😌 exit
@@ -695,7 +695,7 @@ inline_stuff:
     • CPU: {cpu_usage}%
 
     • Host: {host}</blockquote>'
-  restart: 🔄 Restarting daemon..
+  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Restarting daemon..
   prefix_reset: 🔀 Prefix reset.
   _cmd_doc_ch_elys_bot: <username> - Change inline bot username
   _cls_doc: Inline Mode Handler

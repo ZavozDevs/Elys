@@ -154,7 +154,7 @@ elys_settings:
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>コマンドが見つかりません</b>
   inline_settings: ⚙️ <b>ここでは Elys の設定を行えます</b>
   confirm_update: 🧭 <b>アップデートすることを確認してください。ユーザーボットは再起動されます</b>
-  confirm_restart: 🔄 <b>再起動することを確認してください</b>
+  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>再起動することを確認してください</b>
   btn_restart: 🔄 再起動
   btn_update: 🧭 アップデート
   close_menu: 😌 メニューを閉じる
@@ -704,7 +704,7 @@ inline_stuff:
     • CPU 使用率: {cpu_usage}%
 
     • ホスティング: {host}</blockquote>'
-  restart: 🔄 Elys を再起動しています...
+  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Elys を再起動しています...
   prefix_reset: 🔀 プレフィックスをリセットしました！
   _cmd_doc_ch_elys_bot: <username> - Elys インラインボットのユーザー名を変更します
   _cls_doc: インライン機能のサポートを提供します

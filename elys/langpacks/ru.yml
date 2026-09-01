@@ -142,7 +142,7 @@ elys_settings:
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Команда не найдена</b>
   inline_settings: ⚙️ <b>Здесь можно управлять настройками Elys</b>
   confirm_update: 🧭 <b>Подтвердите обновление. Юзербот будет перезагружен</b>
-  confirm_restart: 🔄 <b>Подтвердите перезагрузку</b>
+  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Подтвердите перезагрузку</b>
   btn_restart: 🔄 Перезагрузка
   btn_update: 🧭 Обновление
   close_menu: 😌 Закрыть меню
@@ -687,7 +687,7 @@ inline_stuff:
     • Использование CPU: {cpu_usage}%
 
     • Хостинг: {host}</blockquote>'
-  restart: 🔄 Ваш Elys перезапускается...
+  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Ваш Elys перезапускается...
   prefix_reset: 🔀 Префикс сброшен!
   _cmd_doc_ch_elys_bot: <юзернейм> - Изменить юзернейм инлайн бота
   name: InlineStuff

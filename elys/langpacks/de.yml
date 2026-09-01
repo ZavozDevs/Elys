@@ -142,7 +142,7 @@ elys_settings:
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Befehl nicht gefunden</b>
   inline_settings: ⚙️ <b>Hier kannst du die Elys-Einstellungen verwalten</b>
   confirm_update: 🧭 <b>Bestätige das Update. Der Userbot wird neu gestartet</b>
-  confirm_restart: 🔄 <b>Bestätige den Neustart</b>
+  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Bestätige den Neustart</b>
   btn_restart: 🔄 Neustart
   btn_update: 🧭 Update
   close_menu: 😌 Menü schließen
@@ -685,7 +685,7 @@ inline_stuff:
     • CPU-Auslastung: {cpu_usage} %
 
     • Hosting: {host}</blockquote>'
-  restart: 🔄 Dein Elys wird neu gestartet...
+  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Dein Elys wird neu gestartet...
   prefix_reset: 🔀 Präfix zurückgesetzt!
   _cmd_doc_ch_elys_bot: <Benutzername> - Ändert den Benutzernamen des Inline-Bots
   name: InlineStuff

@@ -150,7 +150,7 @@ elys_settings:
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Cmd n07 f0und</b>
   inline_settings: ⚙️ <b>H3r3 u c4n c0nf1g ur H3r0ku s3771ng5</b>
   confirm_update: 🧭 <b>Plz, c0nf1rm 7h47 u w4n7 2 upd473. Ur u53rb07 w1ll b3 r3574r73d</b>
-  confirm_restart: 🔄 <b>Plz, c0nf1rm 7h47 u w4n7 2 r3574r7</b>
+  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Plz, c0nf1rm 7h47 u w4n7 2 r3574r7</b>
   btn_restart: 🔄 R3574r7
   btn_update: 🧭 Upd473
   close_menu: 😌 Cl053 m3nu
@@ -701,7 +701,7 @@ inline_stuff:
     • CPU U54g3: {cpu_usage}%
 
     • H0571ng: {host}</blockquote>'
-  restart: 🔄 Ur Elys 15 b31ng r3574r73d..
+  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Ur Elys 15 b31ng r3574r73d..
   prefix_reset: 🔀 Pr3f1x r3537!
   _cmd_doc_ch_elys_bot: <username> - Ch4ng3 ur H3r0ku 1nl1n3 b07 u53rn4m3
   _cls_doc: Pr0v1d35 supp0r7 4 1nl1n3 57uff
