@@ -747,9 +747,9 @@ test:
 updater:
   name: Upwdatew
   source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>Wead da souwce code fwom</b> <a href='{}'>hewe</a>
-  restarting_caption: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Youw {} is westawting...</b>
-  downloading: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Downwoading updates...</b>
-  installing: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>Instawwing updates...</b>
+  restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Youw {} is westawting...</b>
+  downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Downwoading updates...</b>
+  installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Instawwing updates...</b>
   success: '<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>Westawt successfuw! {}</b>
 
     <i>But stiww woading moduwes...</i>

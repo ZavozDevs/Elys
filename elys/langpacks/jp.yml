@@ -750,9 +750,9 @@ test:
 updater:
   name: Updater
   source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>ソースコードは</b> <a href='{}'>こちら</a> <b>からお読みください</b>
-  restarting_caption: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>{} を再起動しています...</b>
-  downloading: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>更新をダウンロードしています...</b>
-  installing: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>更新をインストールしています...</b>
+  restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>{} を再起動しています...</b>
+  downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>更新をダウンロードしています...</b>
+  installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>更新をインストールしています...</b>
   success: '<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>再起動に成功しました！ {}</b>
 
     <i>まだモジュールを読み込んでいます...</i>
