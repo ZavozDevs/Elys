@@ -10,6 +10,8 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+import asyncio
+import contextlib
 import getpass
 import inspect
 import logging
@@ -363,7 +365,6 @@ class TestMod(loader.Module):
         target_message = None
 
         async def _on_placeholders_ready(updated_data):
-            nonlocal target_message
             for _ in range(50):
                 if target_message is not None:
                     break
@@ -376,7 +377,9 @@ class TestMod(loader.Module):
                         if self.config["rich_mode"]:
                             await utils.answer(
                                 target_message,
-                                rich_message=updated_text.replace("\r\n", "<br>").replace("\n", "<br>"),
+                                rich_message=updated_text.replace(
+                                    "\r\n", "<br>"
+                                ).replace("\n", "<br>"),
                             )
                         else:
                             await utils.answer(

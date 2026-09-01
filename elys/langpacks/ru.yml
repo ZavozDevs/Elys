@@ -815,6 +815,7 @@ updater:
     <i><b>🎥 И еще {}...</b></i>'
   latest_disabled: Уведомление о последнем обновлении было выключено
   _cfg_doc_disable_notifications: Выключить уведомления об обновлениях
+  _cfg_doc_check_interval: Интервал проверки обновлений (в секундах)
   changelog: <tg-emoji emoji-id=5434144690511290129>📰</tg-emoji> <b>Список изменений последнего масштабного обновления:</b><blockquote expandable>{}</blockquote>
   _cfg_doc_autoupdate: <tg-emoji emoji-id=5469741319330996757>💫</tg-emoji> Автоматические обновления для вашей Elys
   _cmd_doc_restart: Перезагружает юзербот

@@ -815,6 +815,7 @@ updater:
 
     <i><b>🎥 Und noch {}...</b></i>'
   _cfg_doc_disable_notifications: Update-Benachrichtigungen deaktivieren
+  _cfg_doc_check_interval: Aktualisierungsprüfintervall (in Sekunden)
   latest_disabled: Benachrichtigungen über das neueste Update wurden deaktiviert
   update: 🔄 Aktualisieren
   ignore: 🚫 Ignorieren

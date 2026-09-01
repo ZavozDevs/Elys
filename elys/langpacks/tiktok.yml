@@ -810,6 +810,7 @@ updater:
     <i><b>🎥 И еще {} штук...</b></i>'
   latest_disabled: Уведомление о ласт обнове оффнуто
   _cfg_doc_disable_notifications: Оффнуть уведомления об обновах
+  _cfg_doc_check_interval: Интервал чека обнов (в секундах)
   changelog: <tg-emoji emoji-id=5434144690511290129>📰</tg-emoji> <b>Че было в жирной обнове:</b><blockquote expandable>{}</blockquote>
   _cfg_doc_autoupdate: 💫 Авто-апдейт Elys
   _cmd_doc_restart: Ребутает юб
