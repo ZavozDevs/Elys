@@ -1179,9 +1179,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Аргументы где?</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не перевелось (скилл ишью)</b>
   language: ru
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Перевод:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> Перевод:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cls_doc: Переводчик
   _cmd_doc_tr: '[язык] [текст] - Перевести'
   name: Translator

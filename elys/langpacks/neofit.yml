@@ -1166,9 +1166,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Arg 'text' required</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>TranslationError</b>
   language: en
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Output:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> Output:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cmd_doc_tr: '[lang] [text] - Translate'
   _cls_doc: Translation Utils
 quickstart:

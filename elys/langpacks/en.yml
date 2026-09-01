@@ -1277,9 +1277,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>No arguments provided</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Unable to translate text</b>
   language: en
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Translated text:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> Translated text:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cmd_doc_tr: '[language] [text] - Translate text'
   _cls_doc: Translates text (obviously)
 quickstart:

@@ -1198,9 +1198,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>N0 4rg5 pr0v1d3d</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Un4bl3 2 7r4n5l473 73x7</b>
   language: en
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> 7r4n5l473d 73x7:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> 7r4n5l473d 73x7:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cmd_doc_tr: '[language] [text] - 7r4n5l473 73x7'
   _cls_doc: 7r4n5l4735 73x7 (0bv10u5ly)
 quickstart:

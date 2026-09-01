@@ -1238,9 +1238,10 @@ translate:
   no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не указаны аргументы</b>
   error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не удалось перевести текст</b>
   language: ru
-  translated_text: '<blockquote><tg-emoji emoji-id=5933541411558264121>🎤</tg-emoji> Переведённый текст:</blockquote>
+  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> Переведённый текст:</blockquote>
 
-    <blockquote>{tr_text}</blockquote>'
+
+    {tr_text}'
   _cls_doc: Переводит текст (очевидно)
   _cmd_doc_tr: '[язык] [текст] - Перевести текст'
   name: Translator
