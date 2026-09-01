@@ -36,11 +36,8 @@ from .pointers import (
     BaseSerializingMiddlewareList,
     NamedTupleMiddlewareDict,
     NamedTupleMiddlewareList,
-    NestedPointerDict,
-    NestedPointerList,
     PointerDict,
     PointerList,
-    PointerTuple,
 )
 from .tl_cache import CustomTelegramClient
 from .types import JSONSerializable

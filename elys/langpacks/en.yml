@@ -1206,6 +1206,10 @@ translations:
   btn_cancel: Cancel
   btn_delete: Delete
   btn_back: Back
+  btn_approve: 💫 Approve
+  btn_decline: ✖️ Decline
+  declined_join: ✖️ <b>Declined joining <a href="https://t.me/{}">{}</a></b>
+  joined_channel: 💫 <b>Joined <a href="https://t.me/{}">{}</a></b>
   no_downloaded: <b>List is empty</b>
   choose_downloaded: <b>Downloaded languages</b>
   confirm_lang: <b>Install this language?</b>
@@ -1298,6 +1302,7 @@ quickstart:
   language_saved: 🇬🇧 Language saved!
   language: 🇬🇧 English
   btn_support: 🥷 Support chat
+  support_chat_reason: Elys help is only available in this chat. By agreeing to join the chat, you agree to the Elys federation rules and if you violate them, you will be permanently banned.
   _cls_doc: Notifies user about userbot installation
 $validators:
   boolean: boolean

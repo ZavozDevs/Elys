@@ -80,7 +80,9 @@ def _text(value) -> str:
         ):
             if getattr(value, field, False):
                 attributes.append(tag)
-        return f'<date {" ".join(attributes)}>{_text(getattr(value, "text", None))}</date>'
+        return (
+            f'<date {" ".join(attributes)}>{_text(getattr(value, "text", None))}</date>'
+        )
     if name == "TextAnchor":
         return f'<a name="{_attribute(getattr(value, "name", ""))}">{_text(getattr(value, "text", None))}</a>'
     if name == "TextDiff":
@@ -146,26 +148,45 @@ def _button(value) -> str:
     type_name = type(button_type).__name__
     attributes = []
     if type_name == "InlineButtonTypeUrl":
-        attributes = ["type=\"url\"", f"url=\"{_attribute(getattr(button_type, 'url', ''))}\""]
+        attributes = [
+            'type="url"',
+            f"url=\"{_attribute(getattr(button_type, 'url', ''))}\"",
+        ]
     elif type_name == "InlineButtonTypeCallback":
         data = getattr(button_type, "data", b"")
         if isinstance(data, (bytes, bytearray, memoryview)):
             data = base64.urlsafe_b64encode(bytes(data)).decode()
-        attributes = ["type=\"callback_data\"", f"data=\"{_attribute(data)}\""]
+        attributes = ['type="callback_data"', f'data="{_attribute(data)}"']
     elif type_name == "InlineButtonTypeSwitchInline":
         query = _attribute(getattr(button_type, "query", ""))
-        tag = "switch_inline_query_current_chat" if getattr(button_type, "same_peer", False) else "switch_inline_query"
-        attributes = [f"type=\"{tag}\"", f"query=\"{query}\""]
+        tag = (
+            "switch_inline_query_current_chat"
+            if getattr(button_type, "same_peer", False)
+            else "switch_inline_query"
+        )
+        attributes = [f'type="{tag}"', f'query="{query}"']
     elif type_name == "InlineButtonTypeWebView":
-        attributes = ["type=\"web_app\"", f"url=\"{_attribute(getattr(button_type, 'url', ''))}\""]
+        attributes = [
+            'type="web_app"',
+            f"url=\"{_attribute(getattr(button_type, 'url', ''))}\"",
+        ]
     elif type_name == "InlineButtonTypeCopy":
-        attributes = ["type=\"copy_text\"", f"text=\"{_attribute(getattr(button_type, 'copy_text', ''))}\""]
+        attributes = [
+            'type="copy_text"',
+            f"text=\"{_attribute(getattr(button_type, 'copy_text', ''))}\"",
+        ]
     elif type_name == "InlineButtonTypeUrlAuth":
-        attributes = ["type=\"login_url\"", f"url=\"{_attribute(getattr(button_type, 'url', ''))}\""]
+        attributes = [
+            'type="login_url"',
+            f"url=\"{_attribute(getattr(button_type, 'url', ''))}\"",
+        ]
     elif type_name == "InlineButtonTypeUserProfile":
-        attributes = ["type=\"url\"", f"url=\"tg://user?id={_attribute(getattr(button_type, 'user_id', ''))}\""]
+        attributes = [
+            'type="url"',
+            f"url=\"tg://user?id={_attribute(getattr(button_type, 'user_id', ''))}\"",
+        ]
     else:
-        attributes = ["type=\"disabled\""]
+        attributes = ['type="disabled"']
     style = getattr(getattr(value, "style", None), "__dict__", {})
     for key in ("bg_primary", "bg_danger", "bg_success", "link"):
         if style.get(key):
@@ -211,7 +232,12 @@ def _block(value) -> str:
     if name == "PageBlockBlockquoteBlocks":
         blocks = "".join(_block(item) for item in getattr(value, "blocks", []))
         return f"<blockquote>{blocks}{_caption(getattr(value, 'caption', None))}</blockquote>"
-    if name in {"PageBlockPhoto", "PageBlockVideo", "PageBlockAudio", "PageBlockDocument"}:
+    if name in {
+        "PageBlockPhoto",
+        "PageBlockVideo",
+        "PageBlockAudio",
+        "PageBlockDocument",
+    }:
         return _media(name.removeprefix("PageBlock").lower(), value)
     if name == "PageBlockMap":
         return _caption(getattr(value, "caption", None))
@@ -219,11 +245,19 @@ def _block(value) -> str:
         buttons = "".join(_button(item) for item in getattr(value, "buttons", []))
         return f"<tg-button-row>{buttons}</tg-button-row>"
     if name in {"PageBlockCollage", "PageBlockSlideshow"}:
-        return "".join(_block(item) for item in getattr(value, "items", [])) + _caption(getattr(value, "caption", None))
+        return "".join(_block(item) for item in getattr(value, "items", [])) + _caption(
+            getattr(value, "caption", None)
+        )
     if name == "PageBlockTable":
-        title = _text(getattr(value, "title", None)) if getattr(value, "title", None) else ""
+        title = (
+            _text(getattr(value, "title", None))
+            if getattr(value, "title", None)
+            else ""
+        )
         rows = "".join(
-            "<tr>" + "".join(_table_cell(cell) for cell in getattr(row, "cells", [])) + "</tr>"
+            "<tr>"
+            + "".join(_table_cell(cell) for cell in getattr(row, "cells", []))
+            + "</tr>"
             for row in getattr(value, "rows", [])
         )
         return title + ("\n" if title else "") + f"<table>{rows}</table>"
@@ -249,9 +283,15 @@ def _block(value) -> str:
         return f"<tg-thinking>{text}</tg-thinking>"
     if name == "PageBlockEmbed":
         url = getattr(value, "url", None)
-        return f'<a href="{_attribute(url)}">{_escape(getattr(value, "html", "") or url or "[embed]")}</a>' if url else _escape(getattr(value, "html", "[embed]"))
+        return (
+            f'<a href="{_attribute(url)}">{_escape(getattr(value, "html", "") or url or "[embed]")}</a>'
+            if url
+            else _escape(getattr(value, "html", "[embed]"))
+        )
     if name == "PageBlockEmbedPost":
-        return "".join(_block(item) for item in getattr(value, "blocks", [])) + _caption(getattr(value, "caption", None))
+        return "".join(
+            _block(item) for item in getattr(value, "blocks", [])
+        ) + _caption(getattr(value, "caption", None))
     if name == "PageBlockRelatedArticles":
         return _text(getattr(value, "title", None))
     if name == "PageBlockAuthorDate":

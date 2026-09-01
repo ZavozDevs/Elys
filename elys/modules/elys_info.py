@@ -202,7 +202,8 @@ class ElysInfoMod(loader.Module):
             else self.strings[template_key].format(
                 (
                     utils.get_platform_emoji()
-                    if self._client.elys_me.premium and self.config.get("show_elys", True)
+                    if self._client.elys_me.premium
+                    and self.config.get("show_elys", True)
                     else ""
                 ),
                 banner_url=self.config["banner_url"],
