@@ -770,7 +770,7 @@ updater:
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>最新バージョンですが、とにかくアップデートを取得しますか？</b>
   cancel: 🚫 キャンセル
   stop_ub_confirm: あなたの {} は停止されました。本当によろしいですか？
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>ユーザーボットが完全に読み込まれました！ {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>ユーザーボットが完全に読み込まれました！ {}</b>
 
     <i>完全な再起動に {}秒かかりました</i>'
   ub_stop: '{emoji} は停止されました'

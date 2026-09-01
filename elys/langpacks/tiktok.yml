@@ -732,7 +732,7 @@ updater:
     <i>Модули еще грузятся...</i>
 
     <i>Заняло {} сек</i>'
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Фулл загрузка! {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Фулл загрузка! {}</b>
 
     <i>Всего заняло {} сек.</i>'
   ub_stop: Твой {emoji} стопнулся!

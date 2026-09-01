@@ -767,7 +767,7 @@ updater:
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>You awe on da watest vewsion, puww updates anyway?</b>
   cancel: 🚫 Cancew
   stop_ub_confirm: Youw {} wiww be stopped, awe you suwe? :3
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>Usewbot is fuwwy woaded! {}</b>
+  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Usewbot is fuwwy woaded! {}</b>
 
     <i>Fuww westawt took {}s</i>'
   ub_stop: Youw {emoji} has been stopped
