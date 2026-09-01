@@ -18,9 +18,10 @@ import functools
 import typing
 from math import ceil
 
+import elystl.utils
 from elystl import events
-from elystl.tl.types import Message
 from elystl.extensions import html
+from elystl.tl.types import Message
 
 from .. import loader, translations, utils
 from ..inline.types import InlineCall
@@ -60,6 +61,9 @@ class _InlineFormDraft:
         self.text = text
         self.reply_markup = reply_markup
         self.kwargs = kwargs
+
+    async def answer(self, *args: typing.Any, **kwargs: typing.Any) -> None:
+        pass
 
 
 @loader.tds
@@ -147,6 +151,67 @@ class ElysConfigMod(loader.Module):
                         session["handler"], events.NewMessage
                     )
         self._active_chat_inputs.clear()
+
+    @staticmethod
+    def _normalize_chat_id(chat: typing.Any) -> int | None:
+        if chat is None:
+            return None
+        if isinstance(chat, int):
+            try:
+                return elystl.utils.resolve_id(chat)[0]
+            except Exception:
+                return chat
+        if hasattr(chat, "chat_id") or hasattr(chat, "chat"):
+            try:
+                chat_id = getattr(chat, "chat_id", None) or getattr(
+                    getattr(chat, "chat", None), "id", None
+                )
+                if chat_id is not None:
+                    return elystl.utils.resolve_id(chat_id)[0]
+            except Exception:
+                pass
+        try:
+            peer_id = elystl.utils.get_peer_id(chat)
+            return elystl.utils.resolve_id(peer_id)[0]
+        except Exception:
+            pass
+        return None
+
+    @staticmethod
+    def _get_series_min_len(validator: typing.Any) -> int:
+        if validator is None:
+            return 0
+        if isinstance(validator, loader.validators.Validator):
+            keywords = (
+                getattr(getattr(validator, "validate", None), "keywords", {}) or {}
+            )
+            if keywords.get("fixed_len") is not None:
+                return keywords["fixed_len"]
+            if keywords.get("min_len") is not None:
+                return keywords["min_len"]
+        cls_name = getattr(validator, "__class__", type(validator)).__name__
+        if cls_name == "RandomLink":
+            return 1
+        return 0
+
+    @staticmethod
+    def _format_series_item_label(
+        idx: int, item: typing.Any, is_hidden: bool = False, max_len: int = 28
+    ) -> str:
+        if is_hidden:
+            return f"🗑 {idx}. **********"
+        s = str(item).strip()
+        if s.startswith(("http://", "https://")):
+            path_part = s.split("?")[0].rstrip("/").split("/")[-1]
+            if path_part and len(path_part) <= max_len:
+                display = path_part
+            else:
+                display = s
+        else:
+            display = s
+        if len(display) > max_len:
+            display = display[: max_len - 3] + "..."
+        return f"🗑 {idx}. {display}"
 
     @staticmethod
     def prep_value(value: typing.Any) -> typing.Any:
@@ -497,7 +562,16 @@ class ElysConfigMod(loader.Module):
             if not isinstance(query, list):
                 query = [query]
 
-            self.lookup(mod).config[option] = self.lookup(mod).config[option] + query
+            mod_instance = self.lookup(mod)
+            current_val = mod_instance.config[option]
+            if current_val is None:
+                current_list = []
+            elif isinstance(current_val, (list, tuple, set)):
+                current_list = list(current_val)
+            else:
+                current_list = [current_val]
+
+            mod_instance.config[option] = current_list + query
         except loader.validators.ValidationError as e:
             await call.edit(
                 self.strings["validation_error"].format(e.args[0]),
@@ -546,31 +620,112 @@ class ElysConfigMod(loader.Module):
         obj_type: bool | str = False,
     ):
         try:
-            with contextlib.suppress(Exception):
-                query = ast.literal_eval(query)
+            mod_instance = self.lookup(mod)
+            current_val = mod_instance.config[option]
+            if current_val is None:
+                current_list = []
+            elif isinstance(current_val, (list, tuple, set)):
+                current_list = list(current_val)
+            else:
+                current_list = [current_val]
 
-            if isinstance(query, (set, tuple)):
-                query = list(query)
-
-            if not isinstance(query, list):
-                query = [query]
-
-            query = list(map(str, query))
-
-            old_config_len = len(self.lookup(mod).config[option])
-
-            self.lookup(mod).config[option] = [
-                i for i in self.lookup(mod).config[option] if str(i) not in query
-            ]
-
-            if old_config_len == len(self.lookup(mod).config[option]):
+            if not current_list:
                 raise loader.validators.ValidationError(
-                    f"Nothing from passed value ({self.prep_value(query)}) is not in"
-                    " target list"
+                    self.strings["series_empty_error"].format(utils.escape_html(option))
                 )
+
+            validator = mod_instance.config._config[option].validator
+            min_len = self._get_series_min_len(validator)
+
+            if len(current_list) <= min_len:
+                raise loader.validators.ValidationError(
+                    self.strings["series_min_len_error"].format(
+                        utils.escape_html(option),
+                        min_len,
+                    )
+                )
+
+            new_list = None
+            query_str = str(query).strip()
+
+            # 1. Check if query is 1-based index (e.g. "1", "#1", "2", "1, 2", "#1, #2")
+            tokens = [
+                tok.strip().lstrip("#").strip()
+                for tok in query_str.replace(",", " ").split()
+                if tok.strip()
+            ]
+            if tokens and all(
+                tok.isdigit() or (tok.startswith("-") and tok[1:].isdigit())
+                for tok in tokens
+            ):
+                indices_to_remove = set()
+                for tok in tokens:
+                    val = int(tok)
+                    if 1 <= val <= len(current_list):
+                        indices_to_remove.add(val - 1)
+                    elif -len(current_list) <= val < 0:
+                        indices_to_remove.add(len(current_list) + val)
+                if indices_to_remove:
+                    new_list = [
+                        item
+                        for i, item in enumerate(current_list)
+                        if i not in indices_to_remove
+                    ]
+
+            # 2. If index didn't match, try exact matching
+            if new_list is None:
+                eval_query = query_str
+                with contextlib.suppress(Exception):
+                    eval_query = ast.literal_eval(query_str)
+
+                if isinstance(eval_query, (set, tuple)):
+                    eval_query = list(eval_query)
+
+                if isinstance(eval_query, list):
+                    query_items = [str(x) for x in eval_query]
+                else:
+                    query_items = [str(eval_query), query_str]
+
+                tentative_list = [
+                    item
+                    for item in current_list
+                    if str(item) not in query_items and item not in query_items
+                ]
+                if len(tentative_list) < len(current_list):
+                    new_list = tentative_list
+
+            # 3. If exact match didn't remove anything, try case-insensitive substring match
+            if new_list is None:
+                q_lower = query_str.lower()
+                tentative_list = [
+                    item for item in current_list if q_lower not in str(item).lower()
+                ]
+                if len(tentative_list) < len(current_list):
+                    new_list = tentative_list
+
+            if new_list is None or len(new_list) == len(current_list):
+                raise loader.validators.ValidationError(
+                    self.strings["series_not_found_error"].format(
+                        utils.escape_html(query_str),
+                        utils.escape_html(option),
+                    )
+                )
+
+            if len(new_list) < min_len:
+                raise loader.validators.ValidationError(
+                    self.strings["series_min_len_error"].format(
+                        utils.escape_html(option),
+                        min_len,
+                    )
+                )
+
+            mod_instance.config[option] = new_list
         except loader.validators.ValidationError as e:
+            err_msg = str(e.args[0])
+            if not err_msg.startswith(("<tg-emoji", "🚫", "⚠️", "❌")):
+                err_msg = self.strings["validation_error"].format(err_msg)
             await call.edit(
-                self.strings["validation_error"].format(e.args[0]),
+                err_msg,
                 reply_markup={
                     "text": self.strings["try_again"],
                     "callback": self.inline__configure_option,
@@ -606,89 +761,295 @@ class ElysConfigMod(loader.Module):
             inline_message_id=inline_message_id or call.inline_message_id,
         )
 
+    async def inline__remove_series_index(
+        self,
+        call: InlineCall,
+        mod: str,
+        option: str,
+        index: int,
+        obj_type: bool | str = False,
+        series_page: int = 0,
+        force_hidden: bool = False,
+    ):
+        mod_instance = self.lookup(mod)
+        raw_items = mod_instance.config[option]
+        if raw_items is None:
+            items = []
+        elif isinstance(raw_items, (list, tuple, set)):
+            items = list(raw_items)
+        else:
+            items = [raw_items]
+
+        if not items:
+            await call.edit(
+                self.strings["series_empty_error"].format(utils.escape_html(option)),
+                reply_markup=[
+                    [
+                        {
+                            "text": self.strings["back_btn"],
+                            "callback": self.inline__configure_option,
+                            "kwargs": {
+                                "mod": mod,
+                                "config_opt": option,
+                                "obj_type": obj_type,
+                                "series_page": series_page,
+                                "force_hidden": force_hidden,
+                            },
+                        }
+                    ]
+                ],
+            )
+            return
+
+        validator = mod_instance.config._config[option].validator
+        min_len = self._get_series_min_len(validator)
+
+        if len(items) <= min_len:
+            await call.edit(
+                self.strings["series_min_len_error"].format(
+                    utils.escape_html(option),
+                    min_len,
+                ),
+                reply_markup=[
+                    [
+                        {
+                            "text": self.strings["enter_value_btn"],
+                            "callback": self.inline__prompt_chat_input,
+                            "args": ("set", mod, option),
+                            "kwargs": {"obj_type": obj_type},
+                        },
+                        {
+                            "text": self.strings["set_default_btn"],
+                            "callback": self.inline__reset_default,
+                            "args": (mod, option),
+                            "kwargs": {"obj_type": obj_type},
+                        },
+                    ],
+                    [
+                        {
+                            "text": self.strings["back_btn"],
+                            "callback": self.inline__configure_option,
+                            "kwargs": {
+                                "mod": mod,
+                                "config_opt": option,
+                                "obj_type": obj_type,
+                                "series_page": series_page,
+                                "force_hidden": force_hidden,
+                            },
+                        }
+                    ],
+                ],
+            )
+            return
+
+        if index < 0 or index >= len(items):
+            await self.inline__configure_option(
+                call,
+                mod=mod,
+                config_opt=option,
+                force_hidden=force_hidden,
+                obj_type=obj_type,
+                series_page=series_page,
+            )
+            return
+
+        new_items = [item for i, item in enumerate(items) if i != index]
+
+        try:
+            mod_instance.config[option] = new_items
+        except loader.validators.ValidationError as e:
+            err_msg = str(e.args[0])
+            if not err_msg.startswith(("<tg-emoji", "🚫", "⚠️", "❌")):
+                err_msg = self.strings["validation_error"].format(err_msg)
+            await call.edit(
+                err_msg,
+                reply_markup={
+                    "text": self.strings["try_again"],
+                    "callback": self.inline__configure_option,
+                    "kwargs": {
+                        "obj_type": obj_type,
+                        "mod": mod,
+                        "config_opt": option,
+                        "series_page": series_page,
+                        "force_hidden": force_hidden,
+                    },
+                },
+            )
+            return
+
+        items_per_page = 5
+        total_pages = max(1, ceil(len(new_items) / items_per_page))
+        new_series_page = min(series_page, total_pages - 1)
+
+        await self.inline__configure_option(
+            call,
+            mod=mod,
+            config_opt=option,
+            force_hidden=force_hidden,
+            obj_type=obj_type,
+            series_page=new_series_page,
+        )
+
     def _generate_series_markup(
         self,
         call: InlineCall,
         mod: str,
         option: str,
         obj_type: bool | str = False,
+        series_page: int = 0,
+        force_hidden: bool = False,
     ) -> list:
         use_chat_input = self.config["chat_input"] and not self._is_hidden(mod, option)
         inline_msg_id = getattr(call, "inline_message_id", None)
-        return [
-            [
-                (
+        is_hidden = self._is_hidden(mod, option) and not force_hidden
+
+        mod_instance = self.lookup(mod)
+        raw_items = mod_instance.config[option]
+        if raw_items is None:
+            items = []
+        elif isinstance(raw_items, (list, tuple, set)):
+            items = list(raw_items)
+        else:
+            items = [raw_items]
+
+        enter_btn = (
+            {
+                "text": self.strings["enter_value_btn"],
+                "callback": self.inline__prompt_chat_input,
+                "args": ("set", mod, option),
+                "kwargs": {"obj_type": obj_type},
+            }
+            if use_chat_input
+            else {
+                "text": self.strings["enter_value_btn"],
+                "input": self.strings["enter_value_desc"],
+                "handler": self.inline__set_config,
+                "args": (mod, option, inline_msg_id),
+                "kwargs": {"obj_type": obj_type},
+            }
+        )
+
+        add_btn = (
+            {
+                "text": self.strings["add_item_btn"],
+                "callback": self.inline__prompt_chat_input,
+                "args": ("add", mod, option),
+                "kwargs": {"obj_type": obj_type},
+            }
+            if use_chat_input
+            else {
+                "text": self.strings["add_item_btn"],
+                "input": self.strings["add_item_desc"],
+                "handler": self.inline__add_item,
+                "args": (mod, option, inline_msg_id),
+                "kwargs": {"obj_type": obj_type},
+            }
+        )
+
+        remove_btn = (
+            {
+                "text": self.strings["remove_item_btn"],
+                "callback": self.inline__prompt_chat_input,
+                "args": ("remove", mod, option),
+                "kwargs": {"obj_type": obj_type},
+            }
+            if use_chat_input
+            else {
+                "text": self.strings["remove_item_btn"],
+                "input": self.strings["remove_item_desc"],
+                "handler": self.inline__remove_item,
+                "args": (mod, option, inline_msg_id),
+                "kwargs": {"obj_type": obj_type},
+            }
+        )
+
+        kb = [[enter_btn, add_btn]]
+        if items and use_chat_input:
+            kb.append([remove_btn])
+
+        items_per_page = 5
+        total_pages = max(1, ceil(len(items) / items_per_page))
+        series_page = min(max(0, series_page), total_pages - 1)
+
+        page_items = items[
+            series_page * items_per_page : (series_page + 1) * items_per_page
+        ]
+        for offset, item in enumerate(page_items):
+            actual_idx = series_page * items_per_page + offset
+            label = self._format_series_item_label(actual_idx + 1, item, is_hidden)
+            kb.append(
+                [
                     {
-                        "text": self.strings["enter_value_btn"],
-                        "callback": self.inline__prompt_chat_input,
-                        "args": ("set", mod, option),
-                        "kwargs": {"obj_type": obj_type},
+                        "text": label,
+                        "callback": self.inline__remove_series_index,
+                        "args": (mod, option, actual_idx),
+                        "kwargs": {
+                            "obj_type": obj_type,
+                            "series_page": series_page,
+                            "force_hidden": force_hidden,
+                        },
                     }
-                    if use_chat_input
-                    else {
-                        "text": self.strings["enter_value_btn"],
-                        "input": self.strings["enter_value_desc"],
-                        "handler": self.inline__set_config,
-                        "args": (mod, option, inline_msg_id),
-                        "kwargs": {"obj_type": obj_type},
+                ]
+            )
+
+        if total_pages > 1:
+            pagination_row = []
+            if series_page > 0:
+                pagination_row.append(
+                    {
+                        "text": "◀️",
+                        "callback": self.inline__configure_option,
+                        "kwargs": {
+                            "mod": mod,
+                            "config_opt": option,
+                            "obj_type": obj_type,
+                            "series_page": series_page - 1,
+                            "force_hidden": force_hidden,
+                        },
                     }
                 )
-            ],
-            [
-                *(
-                    [
-                        (
-                            {
-                                "text": self.strings["remove_item_btn"],
-                                "callback": self.inline__prompt_chat_input,
-                                "args": ("remove", mod, option),
-                                "kwargs": {"obj_type": obj_type},
-                            }
-                            if use_chat_input
-                            else {
-                                "text": self.strings["remove_item_btn"],
-                                "input": self.strings["remove_item_desc"],
-                                "handler": self.inline__remove_item,
-                                "args": (mod, option, inline_msg_id),
-                                "kwargs": {"obj_type": obj_type},
-                            }
-                        ),
-                        (
-                            {
-                                "text": self.strings["add_item_btn"],
-                                "callback": self.inline__prompt_chat_input,
-                                "args": ("add", mod, option),
-                                "kwargs": {"obj_type": obj_type},
-                            }
-                            if use_chat_input
-                            else {
-                                "text": self.strings["add_item_btn"],
-                                "input": self.strings["add_item_desc"],
-                                "handler": self.inline__add_item,
-                                "args": (mod, option, inline_msg_id),
-                                "kwargs": {"obj_type": obj_type},
-                            }
-                        ),
-                    ]
-                    if self.lookup(mod).config[option]
-                    else []
-                ),
-            ],
-            [
-                *(
-                    [
-                        {
-                            "text": self.strings["set_default_btn"],
-                            "callback": self.inline__reset_default,
-                            "args": (mod, option),
-                            "kwargs": {"obj_type": obj_type},
-                        }
-                    ]
-                    if self.lookup(mod).config[option]
-                    != self.lookup(mod).config.getdef(option)
-                    else []
+            pagination_row.append(
+                {
+                    "text": f"{series_page + 1}/{total_pages}",
+                    "callback": self.inline__configure_option,
+                    "kwargs": {
+                        "mod": mod,
+                        "config_opt": option,
+                        "obj_type": obj_type,
+                        "series_page": series_page,
+                        "force_hidden": force_hidden,
+                    },
+                }
+            )
+            if series_page < total_pages - 1:
+                pagination_row.append(
+                    {
+                        "text": "▶️",
+                        "callback": self.inline__configure_option,
+                        "kwargs": {
+                            "mod": mod,
+                            "config_opt": option,
+                            "obj_type": obj_type,
+                            "series_page": series_page + 1,
+                            "force_hidden": force_hidden,
+                        },
+                    }
                 )
-            ],
+            kb.append(pagination_row)
+
+        if mod_instance.config[option] != mod_instance.config.getdef(option):
+            kb.append(
+                [
+                    {
+                        "text": self.strings["set_default_btn"],
+                        "callback": self.inline__reset_default,
+                        "args": (mod, option),
+                        "kwargs": {"obj_type": obj_type},
+                    }
+                ]
+            )
+
+        kb.append(
             [
                 {
                     "text": self.strings["back_btn"],
@@ -702,8 +1063,9 @@ class ElysConfigMod(loader.Module):
                     "action": "close",
                     "style": "danger",
                 },
-            ],
-        ]
+            ]
+        )
+        return kb
 
     async def _choice_set_value(
         self,
@@ -963,6 +1325,7 @@ class ElysConfigMod(loader.Module):
         config_opt: str = "",
         force_hidden: bool = False,
         obj_type: bool | str = False,
+        series_page: int = 0,
     ):
         module = self.lookup(mod)
         args = [
@@ -994,6 +1357,7 @@ class ElysConfigMod(loader.Module):
                                 "mod": mod,
                                 "config_opt": config_opt,
                                 "force_hidden": False,
+                                "series_page": series_page,
                             },
                         }
                     ]
@@ -1009,6 +1373,7 @@ class ElysConfigMod(loader.Module):
                                 "mod": mod,
                                 "config_opt": config_opt,
                                 "force_hidden": True,
+                                "series_page": series_page,
                             },
                         }
                     ]
@@ -1059,6 +1424,7 @@ class ElysConfigMod(loader.Module):
                     config_opt=config_opt,
                     force_hidden=force_hidden,
                     obj_type=obj_type,
+                    series_page=series_page,
                 ),
             )
             match validator.internal_id:
@@ -1078,7 +1444,12 @@ class ElysConfigMod(loader.Module):
                         reply_markup=additonal_button_row
                         + self._put_pagination_before_nav(
                             self._generate_series_markup(
-                                call, mod, config_opt, obj_type
+                                call,
+                                mod,
+                                config_opt,
+                                obj_type,
+                                series_page=series_page,
+                                force_hidden=force_hidden,
                             ),
                             pagination,
                         ),
@@ -1126,6 +1497,7 @@ class ElysConfigMod(loader.Module):
                 config_opt=config_opt,
                 force_hidden=force_hidden,
                 obj_type=obj_type,
+                series_page=series_page,
             ),
         )
 
@@ -1189,7 +1561,11 @@ class ElysConfigMod(loader.Module):
         option: str,
         obj_type: bool | str = False,
     ):
-        unit_id = getattr(call, "unit_id", None) or utils.rand(16)
+        unit_id = (
+            getattr(call, "unit_id", None)
+            or getattr(getattr(call, "form", {}), "get", lambda k: None)("id")
+            or utils.rand(16)
+        )
         if unit_id in self._active_chat_inputs:
             old_session = self._active_chat_inputs.pop(unit_id)
             if "future" in old_session and not old_session["future"].done():
@@ -1205,14 +1581,34 @@ class ElysConfigMod(loader.Module):
             if hasattr(self, "inline") and hasattr(self.inline, "_units")
             else None
         )
-        target_chat_id = (
-            getattr(call, "chat_id", None)
-            or getattr(getattr(call, "message", None), "chat_id", None)
-            or (unit.get("chat") if unit else None)
-            or (getattr(unit.get("caller"), "chat_id", None) if unit else None)
+
+        target_chat_id = None
+        if unit and unit.get("chat") is not None:
+            target_chat_id = self._normalize_chat_id(unit.get("chat"))
+        if target_chat_id is None and unit and unit.get("caller") is not None:
+            target_chat_id = self._normalize_chat_id(unit.get("caller"))
+        if target_chat_id is None:
+            call_chat = getattr(call, "chat_id", None) or getattr(
+                getattr(call, "message", None), "chat_id", None
+            )
+            target_chat_id = self._normalize_chat_id(call_chat)
+
+        top_msg_id = (
+            (unit.get("top_msg_id") if unit else None)
+            or (
+                utils.get_topic(unit.get("caller"))
+                if unit and unit.get("caller")
+                else None
+            )
+            or (
+                utils.get_topic(getattr(call, "message", None))
+                if hasattr(call, "message")
+                else None
+            )
         )
-        top_msg_id = (unit.get("top_msg_id") if unit else None) or getattr(
-            getattr(unit, "caller", None), "message_thread_id", None
+
+        button_sender_id = getattr(call, "sender_id", None) or getattr(
+            getattr(call, "from_user", None), "id", None
         )
 
         match action:
@@ -1264,22 +1660,74 @@ class ElysConfigMod(loader.Module):
             if future.done():
                 return
 
-            sender_id = event.sender_id or getattr(event.message, "sender_id", None)
-            allowed_senders = [getattr(self._client, "tg_id", None)]
-            if hasattr(self._client, "dispatcher") and hasattr(
-                self._client.dispatcher, "security"
-            ):
-                allowed_senders += self._client.dispatcher.security._owner or []
-            if hasattr(self, "inline") and hasattr(self.inline, "_me"):
-                allowed_senders.append(self.inline._me)
+            if target_chat_id is not None:
+                msg_chat_id = self._normalize_chat_id(event.message)
+                if msg_chat_id != target_chat_id:
+                    return
 
-            if not event.out and sender_id not in allowed_senders:
+            if top_msg_id is not None and utils.get_topic(event.message) != top_msg_id:
                 return
 
-            if target_chat_id is not None and utils.get_chat_id(event.message) != target_chat_id:
+            msg_sender_id = event.sender_id or getattr(event.message, "sender_id", None)
+            my_id = getattr(self._client, "tg_id", None)
+
+            if button_sender_id is not None:
+                if button_sender_id == my_id:
+                    if not event.out and msg_sender_id != my_id:
+                        return
+                else:
+                    if msg_sender_id != button_sender_id:
+                        return
+            else:
+                allowed_senders = [my_id]
+                if hasattr(self._client, "dispatcher") and hasattr(
+                    self._client.dispatcher, "security"
+                ):
+                    allowed_senders += self._client.dispatcher.security._owner or []
+                if hasattr(self, "inline") and hasattr(self.inline, "_me"):
+                    allowed_senders.append(self.inline._me)
+                if not event.out and msg_sender_id not in allowed_senders:
+                    return
+
+            raw_text = (
+                event.message.raw_text or getattr(event.message, "message", "") or ""
+            ).strip()
+            if not raw_text:
                 return
 
-            if top_msg_id and utils.get_topic(event.message) != top_msg_id:
+            prefixes = {".", "/"}
+            try:
+                if hasattr(self, "get_prefixes"):
+                    prefixes.update(self.get_prefixes())
+                elif hasattr(self._client, "loader"):
+                    prefixes.update(self._client.loader.get_prefixes())
+            except Exception:
+                pass
+            try:
+                if hasattr(self, "get_prefix"):
+                    prefixes.add(self.get_prefix())
+            except Exception:
+                pass
+
+            cancel_cmds = {"/cancel", ".cancel"} | {f"{p}cancel" for p in prefixes if p}
+
+            if raw_text.lower() in cancel_cmds:
+                future.set_result(event.message)
+                return
+
+            is_other_cmd = False
+            for p in prefixes:
+                if p and raw_text.startswith(p):
+                    cmd_body = raw_text[len(p) :].strip()
+                    if (
+                        cmd_body
+                        and not cmd_body.startswith(" ")
+                        and not cmd_body.startswith(p)
+                    ):
+                        is_other_cmd = True
+                        break
+
+            if is_other_cmd:
                 return
 
             future.set_result(event.message)
@@ -1334,8 +1782,25 @@ class ElysConfigMod(loader.Module):
         with contextlib.suppress(Exception):
             await msg.delete()
 
-        query = msg.raw_text or getattr(msg, "message", "") or ""
-        if query.strip().lower() in (".cancel", "/cancel"):
+        raw_text = (msg.raw_text or getattr(msg, "message", "") or "").strip()
+
+        prefixes = {".", "/"}
+        try:
+            if hasattr(self, "get_prefixes"):
+                prefixes.update(self.get_prefixes())
+            elif hasattr(self._client, "loader"):
+                prefixes.update(self._client.loader.get_prefixes())
+        except Exception:
+            pass
+        try:
+            if hasattr(self, "get_prefix"):
+                prefixes.add(self.get_prefix())
+        except Exception:
+            pass
+
+        cancel_cmds = {"/cancel", ".cancel"} | {f"{p}cancel" for p in prefixes if p}
+
+        if raw_text.lower() in cancel_cmds:
             await self.inline__configure_option(
                 call, mod=mod, config_opt=option, obj_type=obj_type
             )
@@ -1343,14 +1808,16 @@ class ElysConfigMod(loader.Module):
 
         match action:
             case "add":
-                await self.inline__add_item(call, query, mod, option, obj_type=obj_type)
+                await self.inline__add_item(
+                    call, raw_text, mod, option, obj_type=obj_type
+                )
             case "remove":
                 await self.inline__remove_item(
-                    call, query, mod, option, obj_type=obj_type
+                    call, raw_text, mod, option, obj_type=obj_type
                 )
             case _:
                 await self.inline__set_config(
-                    call, query, mod, option, obj_type=obj_type
+                    call, raw_text, mod, option, obj_type=obj_type
                 )
 
     async def inline__cancel_chat_input(
