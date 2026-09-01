@@ -54,7 +54,7 @@ class UpdaterMod(loader.Module):
     """Updates itself, tracks latest Elys releases, and notifies you, if update is required"""
 
     strings = {"name": "Updater"}
-    _GIT_FETCH_INTERVAL = 300
+    _GIT_FETCH_INTERVAL = 1800
     _EMFILE_FETCH_BACKOFF = 900
 
     def __init__(self):
@@ -79,6 +79,12 @@ class UpdaterMod(loader.Module):
                 False,
                 doc=lambda: self.strings["_cfg_doc_autoupdate"],
                 validator=loader.validators.Boolean(),
+            ),
+            loader.ConfigValue(
+                "check_interval",
+                1800,
+                doc=lambda: self.strings["_cfg_doc_check_interval"],
+                validator=loader.validators.Integer(minimum=60),
             ),
         )
 
@@ -144,44 +150,72 @@ class UpdaterMod(loader.Module):
 
         return res
 
-    def _get_update_state(self) -> tuple[str, str, str | typing.Literal[False]]:
-        with git.Repo() as repo:
-            origin = repo.remote("origin")
-            now = time.monotonic()
-            if now >= self._git_fetch_backoff_until:
-                if now - self._last_git_fetch >= self._GIT_FETCH_INTERVAL:
-                    logger.debug("Fetching changelog from %s", origin.url)
-                    subprocess.run(
-                        ["git", "fetch", "--quiet", "origin"],
-                        cwd=repo.working_dir,
-                        timeout=60,
-                        capture_output=True,
-                        check=False,
-                    )
-                    self._last_git_fetch = now
-            else:
-                logger.debug(
-                    "Skipping changelog fetch for %.0f more seconds after EMFILE",
-                    self._git_fetch_backoff_until - now,
-                )
-
-            current = repo.head.commit.hexsha
-            latest = next(
-                repo.iter_commits(f"origin/{version.branch}", max_count=1)
-            ).hexsha
-            commits = [*repo.iter_commits(f"HEAD..origin/{version.branch}")]
-
-            return (
-                current,
-                latest,
-                self._format_changelog(commits) if commits else False,
+    @staticmethod
+    def _get_remote_head_commit(repo_dir: str, branch: str) -> str | None:
+        try:
+            res = subprocess.run(
+                ["git", "ls-remote", "--heads", "origin", branch],
+                cwd=repo_dir,
+                capture_output=True,
+                text=True,
+                timeout=15,
             )
+            if res.returncode == 0 and res.stdout.strip():
+                return res.stdout.strip().split()[0]
+        except Exception:
+            pass
+        return None
+
+    def _get_update_state(
+        self,
+        force_fetch: bool = False,
+    ) -> tuple[str, str, str | typing.Literal[False]]:
+        with git.Repo() as repo:
+            target_branch = str(version.branch)
+            current = repo.head.commit.hexsha
+            now = time.monotonic()
+            needs_fetch = force_fetch
+
+            if not force_fetch and now >= self._git_fetch_backoff_until:
+                check_interval = max(60, self.config["check_interval"])
+                if now - self._last_git_fetch >= check_interval:
+                    remote_sha = self._get_remote_head_commit(
+                        repo.working_dir,
+                        target_branch,
+                    )
+                    if remote_sha and remote_sha != current:
+                        needs_fetch = True
+                    self._last_git_fetch = now
+
+            if needs_fetch:
+                logger.debug("Fetching changelog from %s", repo.remote("origin").url)
+                subprocess.run(
+                    ["git", "fetch", "--quiet", "origin", target_branch],
+                    cwd=repo.working_dir,
+                    timeout=60,
+                    capture_output=True,
+                    check=False,
+                )
+                self._last_git_fetch = now
+
+            try:
+                latest = next(
+                    repo.iter_commits(f"origin/{target_branch}", max_count=1)
+                ).hexsha
+                commits = [*repo.iter_commits(f"HEAD..origin/{target_branch}")]
+                return (
+                    current,
+                    latest,
+                    self._format_changelog(commits) if commits else False,
+                )
+            except Exception:
+                return current, current, False
 
     def get_changelog(self) -> str | typing.Literal[False]:
         if NO_GIT:
             return False
         try:
-            return self._get_update_state()[2]
+            return self._get_update_state(force_fetch=True)[2]
         except Exception as e:
             self._log_git_poll_error(e)
             return False
@@ -197,29 +231,25 @@ class UpdaterMod(loader.Module):
         except Exception:
             return ""
 
-    @loader.loop(interval=60, autostart=True)
+    @loader.loop(interval=1800, autostart=True)
     async def poller_announcement(self):
         async with aiohttp.ClientSession() as session:
             try:
-                url = "https://api.github.com/repos/ZavozDevs/assets/contents/elys/announcment.txt"
+                url = "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/announcment.txt"
                 r = await session.get(
                     url,
                     timeout=aiohttp.ClientTimeout(total=10),
-                    headers={"Accept": "application/vnd.github.v3.raw"},
                 )
 
-                match r.status:
-                    case 200:
-                        announcement = (await r.text()).strip()
-                        previous = self.get("announcement", "")
-                        if announcement and announcement != previous:
-                            await self.inline.bot.send_message(
-                                self.tg_id,
-                                self.strings["announcement"].format(announcement),
-                            )
-                            self.set("announcement", announcement)
-                    case _:
-                        pass
+                if r.status == 200:
+                    announcement = (await r.text()).strip()
+                    previous = self.get("announcement", "")
+                    if announcement and announcement != previous:
+                        await self.inline.bot.send_message(
+                            self.tg_id,
+                            self.strings["announcement"].format(announcement),
+                        )
+                        self.set("announcement", announcement)
             except Exception:
                 pass
 
@@ -227,8 +257,17 @@ class UpdaterMod(loader.Module):
     async def poller(self):
         if NO_GIT:
             return
+
+        now = time.monotonic()
+        if now < self._git_fetch_backoff_until:
+            return
+        if now - self._last_git_fetch < max(60, self.config["check_interval"]):
+            return
+
         try:
-            current, self._pending, changelog = self._get_update_state()
+            current, self._pending, changelog = await asyncio.to_thread(
+                self._get_update_state
+            )
         except Exception as e:
             self._log_git_poll_error(e)
             return
@@ -252,8 +291,9 @@ class UpdaterMod(loader.Module):
                 try:
                     async with aiohttp.ClientSession() as session:
                         r = await session.get(
-                            url=f"https://api.github.com/repos/ZavozDevs/Elys/contents/elys/version.py?ref={version.branch}",
-                            headers={"Accept": "application/vnd.github.v3.raw"},
+                            url=f"https://raw.githubusercontent.com/ZavozDevs/Elys/{version.branch}/elys/version.py",
+                            headers={"Accept": "text/plain"},
+                            timeout=aiohttp.ClientTimeout(total=10),
                         )
                         text = await r.text()
 
@@ -575,10 +615,21 @@ class UpdaterMod(loader.Module):
         try:
             args = utils.get_args_raw(message)
             current = utils.get_git_hash() or ""
-            with git.Repo() as repo:
-                upcoming = next(
-                    repo.iter_commits(f"origin/{version.branch}", max_count=1)
-                ).hexsha
+
+            def _fetch_upcoming():
+                with git.Repo() as repo:
+                    subprocess.run(
+                        ["git", "fetch", "--quiet", "origin", str(version.branch)],
+                        cwd=repo.working_dir,
+                        timeout=60,
+                        capture_output=True,
+                        check=False,
+                    )
+                    return next(
+                        repo.iter_commits(f"origin/{version.branch}", max_count=1)
+                    ).hexsha
+
+            upcoming = await asyncio.to_thread(_fetch_upcoming)
             if (
                 "-f" in args
                 or not self.inline.init_complete
@@ -627,19 +678,23 @@ class UpdaterMod(loader.Module):
     ):
         if hard:
             try:
-                root_repo = os.path.dirname(utils.get_base_dir())
-                subprocess.run(
-                    ["git", "fetch", "origin", version.branch],
-                    cwd=root_repo,
-                    check=False,
-                    capture_output=True,
-                )
-                subprocess.run(
-                    ["git", "reset", "--hard", f"origin/{version.branch}"],
-                    cwd=root_repo,
-                    check=False,
-                    capture_output=True,
-                )
+
+                def _hard_reset():
+                    root_repo = os.path.dirname(utils.get_base_dir())
+                    subprocess.run(
+                        ["git", "fetch", "origin", str(version.branch)],
+                        cwd=root_repo,
+                        check=False,
+                        capture_output=True,
+                    )
+                    subprocess.run(
+                        ["git", "reset", "--hard", f"origin/{version.branch}"],
+                        cwd=root_repo,
+                        check=False,
+                        capture_output=True,
+                    )
+
+                await asyncio.to_thread(_hard_reset)
             except Exception:
                 pass
 

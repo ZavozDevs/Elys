@@ -817,6 +817,7 @@ updater:
 
     <i><b>🎥 І ще {}...</b></i>'
   _cfg_doc_disable_notifications: Вимкнути сповіщення про оновлення
+  _cfg_doc_check_interval: Інтервал перевірки оновлень (у секундах)
   latest_disabled: Повідомлення про останнє оновлення було вимкнено
   update: 🔄 Оновити
   ignore: 🚫 Ігнорувати

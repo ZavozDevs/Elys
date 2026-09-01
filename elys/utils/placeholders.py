@@ -134,19 +134,12 @@ async def get_placeholders(
     if custom_message is None or not custom_placeholders:
         return data
 
-    matched = [
-        name
-        for name in custom_placeholders
-        if f"{{{name}}}" in custom_message
-    ]
+    matched = [name for name in custom_placeholders if f"{{{name}}}" in custom_message]
 
     if not matched:
         return data
 
-    tasks = {
-        name: asyncio.create_task(get_placeholder(name, data))
-        for name in matched
-    }
+    tasks = {name: asyncio.create_task(get_placeholder(name, data)) for name in matched}
 
     if not lazy:
         results = await asyncio.gather(*tasks.values(), return_exceptions=True)
@@ -169,6 +162,7 @@ async def get_placeholders(
             data[name] = get_loading_placeholder(client)
 
     if pending:
+
         async def _background_resolver():
             try:
                 results = await asyncio.gather(*tasks.values(), return_exceptions=True)

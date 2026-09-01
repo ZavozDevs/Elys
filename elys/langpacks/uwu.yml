@@ -835,6 +835,7 @@ updater:
 
     <i><b>🎥 And {} mowe...</b></i>'
   _cfg_doc_disable_notifications: Disabwe update nyotifications
+  _cfg_doc_check_interval: Update check intewvaw (in seconds)
   latest_disabled: Nyotifications about da watest update have been suppwessed
   update: 🔄 Update
   ignore: 🚫 Ignyowe

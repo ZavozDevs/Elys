@@ -838,6 +838,7 @@ updater:
 
     <i><b>🎥 その他 {} 件...</b></i>'
   _cfg_doc_disable_notifications: アップデート通知を無効にする
+  _cfg_doc_check_interval: 更新確認の間隔（秒）
   latest_disabled: 最新のアップデートに関する通知は抑制されました
   update: 🔄 アップデート
   ignore: 🚫 無視

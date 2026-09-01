@@ -10,19 +10,24 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
-import time
-import psutil
-import logging
-import re
-import elystl
-
-from elystl.errors import WebpageMediaEmptyError
-from elystl.types import InputMediaWebPage
-from elystl.tl.types import Message
-from elystl.utils import get_display_name
-from .. import loader, utils, version
-import platform as lib_platform
+import asyncio
+import contextlib
 import getpass
+import inspect
+import logging
+import platform as lib_platform
+import re
+import time
+import typing
+
+import elystl
+import psutil
+from elystl.errors import WebpageMediaEmptyError
+from elystl.tl.types import Message
+from elystl.types import InputMediaWebPage
+from elystl.utils import get_display_name
+
+from .. import loader, utils, version
 
 logger = logging.getLogger(__name__)
 
@@ -120,7 +125,11 @@ class ElysInfoMod(loader.Module):
         else:
             try:
                 is_avail = await self.lookup("Updater").check_for_updates()
-                upd = self.strings["upd_avail"] if is_avail else self.strings["up_to_date"]
+                upd = (
+                    self.strings["upd_avail"]
+                    if is_avail
+                    else self.strings["up_to_date"]
+                )
             except Exception:
                 upd = ""
 
@@ -200,10 +209,15 @@ class ElysInfoMod(loader.Module):
         )
 
         if async_enabled and on_ready_callback and upd == loading_ph:
+
             async def _bg_resolve_upd():
                 try:
                     is_avail = await self.lookup("Updater").check_for_updates()
-                    data["upd"] = self.strings["upd_avail"] if is_avail else self.strings["up_to_date"]
+                    data["upd"] = (
+                        self.strings["upd_avail"]
+                        if is_avail
+                        else self.strings["up_to_date"]
+                    )
                 except Exception:
                     data["upd"] = ""
                 if inspect.iscoroutinefunction(on_ready_callback):
@@ -228,8 +242,7 @@ class ElysInfoMod(loader.Module):
         return self.strings[template_key].format(
             (
                 utils.get_platform_emoji()
-                if self._client.elys_me.premium
-                and self.config.get("show_elys", True)
+                if self._client.elys_me.premium and self.config.get("show_elys", True)
                 else ""
             ),
             **data,
@@ -245,7 +258,6 @@ class ElysInfoMod(loader.Module):
             media = InputMediaWebPage(str(self.config["banner_url"]), optional=True)
 
         async def _on_placeholders_ready(updated_data):
-            nonlocal target_message
             for _ in range(60):
                 if target_message is not None:
                     break
@@ -256,11 +268,17 @@ class ElysInfoMod(loader.Module):
                     if self.config["custom_message"]:
                         updated_text = re.sub(
                             r"{(\w+)}",
-                            lambda match: str(updated_data.get(match.group(1), match.group(0))),
+                            lambda match: str(
+                                updated_data.get(match.group(1), match.group(0))
+                            ),
                             self.config["custom_message"],
                         )
                     else:
-                        template_key = "rich_info_message" if self.config["rich_mode"] else "info_message"
+                        template_key = (
+                            "rich_info_message"
+                            if self.config["rich_mode"]
+                            else "info_message"
+                        )
                         updated_text = self.strings[template_key].format(
                             (
                                 utils.get_platform_emoji()
@@ -273,7 +291,9 @@ class ElysInfoMod(loader.Module):
 
                     with contextlib.suppress(Exception):
                         if self.config["rich_mode"]:
-                            await utils.answer(target_message, rich_message=updated_text)
+                            await utils.answer(
+                                target_message, rich_message=updated_text
+                            )
                         else:
                             await utils.answer(
                                 target_message,
