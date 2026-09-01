@@ -50,7 +50,17 @@ def _text(value) -> str:
     }
     if name in tags:
         start, end = tags[name]
-        return start + _text(getattr(value, "text", None)) + end
+        inner = _text(getattr(value, "text", None))
+        leading_ws = inner[: len(inner) - len(inner.lstrip("\n\r"))]
+        trailing_ws = inner[len(inner.rstrip("\n\r")) :]
+        stripped_inner = (
+            inner[len(leading_ws) : len(inner) - len(trailing_ws)]
+            if len(inner) > len(leading_ws)
+            else ""
+        )
+        if not stripped_inner:
+            return inner
+        return f"{leading_ws}{start}{stripped_inner}{end}{trailing_ws}"
 
     if name in {"TextUrl", "TextAutoUrl"}:
         url = getattr(value, "url", None) or getattr(value, "text", "")
@@ -151,7 +161,14 @@ def _table_cell(value) -> str:
         attributes.append(' align="center"')
     elif getattr(value, "align_right", False):
         attributes.append(' align="right"')
-    return f"<{tag}{''.join(attributes)}>{_text(getattr(value, 'text', None))}</{tag}>"
+    cell_content = (
+        _text(getattr(value, "text", None))
+        .strip("\r\n")
+        .replace("\r\n", "\n")
+        .replace("\r", "\n")
+        .replace("\n", "<br>")
+    )
+    return f"<{tag}{''.join(attributes)}>{cell_content}</{tag}>"
 
 
 def _button(value) -> str:
