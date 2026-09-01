@@ -86,6 +86,12 @@ class ElysInfoMod(loader.Module):
                 "Show platform custom emoji if user has Telegram Premium",
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "async_placeholders",
+                False,
+                lambda: "Enable lazy placeholders evaluation (shows loading emoji while resolving)",
+                validator=loader.validators.Boolean(),
+            ),
         )
 
     def _get_cpu_info(self) -> str | None:
@@ -190,6 +196,7 @@ class ElysInfoMod(loader.Module):
             self.config["custom_message"],
             client=self._client,
             on_ready_callback=on_ready_callback,
+            lazy=self.config.get("async_placeholders", False),
         )
         if self.config["custom_message"]:
             try:
@@ -238,6 +245,11 @@ class ElysInfoMod(loader.Module):
 
         async def _on_placeholders_ready(updated_data):
             nonlocal target_message
+            for _ in range(50):
+                if target_message is not None:
+                    break
+                await asyncio.sleep(0.05)
+
             if target_message and self.config["custom_message"]:
                 try:
                     updated_text = re.sub(
