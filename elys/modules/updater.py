@@ -826,7 +826,7 @@ class UpdaterMod(loader.Module):
             if b == current:
                 buttons.append(
                     {
-                        "text": f"✅ {b}",
+                        "text": b,
                         "callback": self._branch_same,
                         "args": (b,),
                         "style": "success",
@@ -846,7 +846,7 @@ class UpdaterMod(loader.Module):
             buttons,
             [
                 {
-                    "text": self.strings["cancel"],
+                    "text": self.strings["branch_btn_close"],
                     "action": "close",
                     "style": "danger",
                 }

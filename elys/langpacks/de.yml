@@ -764,14 +764,22 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>Du hast bereits die neueste Version. Möchtest du trotzdem ein Update erzwingen?</b>
   cancel: 🚫 Abbrechen
-  branch_menu: '🌿 <b>Выбор ветки обновления Elys</b>\n\n    Текущая ветка: <code>{current}</code>\n\n    <b>Доступные ветки:</b>\n    • <b>master</b> — Стабильная версия, проверенная временем\n    • <b>beta</b> — Публичная бета-версия новых возможностей\n    • <b>dev</b> — Максимально нестабильная ветка для разработчиков с прямыми изменениями\n\n    <i>Нажми на кнопку ниже, чтобы переключить ветку:</i>'
-  branch_switching: '🤔 <b>Переключение на ветку <code>{branch}</code>...</b>'
-  branch_switched: '✅ <b>Ветка успешно переключена на <code>{branch}</code>!</b>\n\n    <i>Для применения изменений требуется перезагрузка юзербота.</i>'
-  branch_switch_fail: '❌ <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\n\n    Ошибка: <code>{error}</code>'
-  branch_already_on: 'Ты уже находишься на ветке {branch}!'
+  branch_menu: '<blockquote><tg-emoji emoji-id=5447644880824180424>🌿</tg-emoji> <b>Выбор ветки обновления Elys</b>
+    Текущая ветка: <code>{current}</code></blockquote>
+
+    <blockquote><tg-emoji emoji-id=5206607081351684259>🛡</tg-emoji> <b>master</b> — стабильная
+    <tg-emoji emoji-id=5447410659035716599>🧪</tg-emoji> <b>beta</b> — бета-версия
+    <tg-emoji emoji-id=5465496001856950230>⚡️</tg-emoji> <b>dev</b> — разработка (нестабильная)</blockquote>'
+  branch_switching: '<blockquote><tg-emoji emoji-id=5879813604068298387>🤔</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>'
+  branch_switched: '<blockquote><tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>
+    <i>Для применения изменений требуется перезагрузка.</i></blockquote>'
+  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>
+    Ошибка: <code>{error}</code></blockquote>'
+  branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
-  branch_btn_restart: '🔄 Перезагрузить'
-  branch_btn_later: '⏳ Позже'
+  branch_btn_restart: 'Перезагрузить'
+  branch_btn_later: 'Позже'
+  branch_btn_close: 'Закрыть'
   stop_ub_confirm: Dein {} wird gestoppt, bist du sicher?
   _cls_doc: Aktualisiert den Userbot
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Sie müssen die Anzahl der Commits angeben, die zurückgesetzt werden sollen!</b>
