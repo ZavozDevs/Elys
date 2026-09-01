@@ -91,13 +91,13 @@ class CoreMod(loader.Module):
     )
     async def elyscmd(self, message: Message):
         """Information about Elys"""
-        branch_text = ""
-        if version.branch == "master":
-            branch_text = ""
-        elif version.branch == "beta":
-            branch_text = self.strings["happy_beta"].format(version.branch)
+        branch_name = str(version.branch)
+        if branch_name == "master":
+            branch_text = self.strings["stable_branch"].format(branch_name)
+        elif branch_name == "beta":
+            branch_text = self.strings["happy_beta"].format(branch_name)
         else:
-            branch_text = self.strings["unstable"].format(version.branch)
+            branch_text = self.strings["unstable"].format(branch_name)
 
         devs = [
             '<a href="https://t.me/gemeguardian">@gemeguardian</a>',

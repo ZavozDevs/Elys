@@ -314,6 +314,7 @@ settings:
   aliases_file: "<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Твои алиасы</b>\n\n<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}la в ответ на это сообщение для импорта</b>"
   aliases: "<b>🔗 Твои алиасы:</b>\n"
   happy_beta: "\n\n<tg-emoji emoji-id=5465188915990255885>🌟</tg-emoji> <b>Ты теперь счастливый юзер <code>{}</code> версии, это имба</b> ✨"
+  stable_branch: "\n\n<tg-emoji emoji-id=5427009714745541184>🟢</tg-emoji> <b>Ты на стабильной ветке</b> <code>{}</code><b>, база</b>"
   no_command: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Нет такой команды</b> <code>{}</code>"
   no_command_loaded: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Нет такой команды</b> <code>{}</code>\n\n<b>Загруженные алиасы:</b> <blockquote expandable>{}</blockquote>"
   alias_exists: "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Алиас</b> <code>{alias}</code> <b>уже занят командой</b> <code>{command}</code>"
