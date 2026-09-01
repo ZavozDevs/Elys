@@ -588,44 +588,96 @@ class Modules:
         self.db = db
         self.translator = translator
         self.secure_boot = False
-        asyncio.ensure_future(self._junk_collector())
         self.inline = InlineManager(self.client, self._db, self)
         self.client.elys_inline = self.inline
 
-    async def _junk_collector(self):
+    def _rebuild_handlers(self):
         """
-        Periodically reloads commands, inline handlers, callback handlers and watchers from loaded
-        modules to prevent zombie handlers
+        Rebuilds commands, inline handlers, callback handlers and watchers from loaded
+        modules to prevent zombie handlers and keep internal state in sync.
         """
-        while True:
-            await asyncio.sleep(30)
-            commands = {}
-            inline_handlers = {}
-            callback_handlers = {}
-            watchers = []
-            for module in self.modules:
-                commands.update(module.elys_commands)
-                inline_handlers.update(module.elys_inline_handlers)
-                callback_handlers.update(module.elys_callback_handlers)
-                watchers.extend(module.elys_watchers.values())
+        from . import main
 
-            self.commands = commands
-            self.inline_handlers = inline_handlers
-            self.callback_handlers = callback_handlers
-            self.watchers = watchers
+        commands = {}
+        inline_handlers = {}
+        callback_handlers = {}
+        watchers = []
+        core_commands = []
 
-            logger.debug(
-                (
-                    "Reloaded %s commands,"
-                    " %s inline handlers,"
-                    " %s callback handlers and"
-                    " %s watchers"
-                ),
-                len(self.commands),
-                len(self.inline_handlers),
-                len(self.callback_handlers),
-                len(self.watchers),
+        try:
+            disabled_modules = set(self._db.get(main.__name__, "disabled_modules", []))
+            disabled_commands = self._db.get(main.__name__, "disabled_commands", {})
+        except Exception:
+            disabled_modules = set()
+            disabled_commands = {}
+
+        for module in self.modules:
+            if not module:
+                continue
+
+            origin = getattr(module, "__origin__", "")
+            if origin.startswith("<core"):
+                core_commands.extend([cmd.lower() for cmd in module.elys_commands])
+
+            cls_name = module.__class__.__name__
+            if cls_name in disabled_modules:
+                continue
+
+            disabled_for_mod = set(
+                x.lower() for x in disabled_commands.get(cls_name, [])
             )
+
+            for cmd_name, cmd_func in module.elys_commands.items():
+                if cmd_name.lower() not in disabled_for_mod:
+                    commands[cmd_name.lower()] = cmd_func
+
+            for in_name, in_func in module.elys_inline_handlers.items():
+                inline_handlers[in_name.lower()] = in_func
+
+            for cb_name, cb_func in module.elys_callback_handlers.items():
+                callback_handlers[cb_name.lower()] = cb_func
+
+            watchers.extend(module.elys_watchers.values())
+
+        self._core_commands = list(dict.fromkeys(core_commands))
+        self.commands = commands
+        self.inline_handlers = inline_handlers
+        self.callback_handlers = callback_handlers
+        self.watchers = watchers
+
+        # Clean up aliases for commands that no longer exist
+        for alias, cmd in list(self.aliases.items()):
+            target_cmd = cmd.split(maxsplit=1)[0].lower()
+            if target_cmd not in self.commands:
+                self.aliases.pop(alias, None)
+
+        settings = self.lookup("settings")
+        if settings:
+            try:
+                for alias, cmd in settings.get("aliases", {}).items():
+                    if alias.lower().strip() not in self.aliases:
+                        _cmd = cmd.split(maxsplit=1)
+                        if _cmd[0].lower() in self.commands:
+                            self.add_alias(alias, *_cmd)
+            except Exception:
+                pass
+
+        logger.debug(
+            (
+                "Synchronized %s commands,"
+                " %s inline handlers,"
+                " %s callback handlers and"
+                " %s watchers"
+            ),
+            len(self.commands),
+            len(self.inline_handlers),
+            len(self.callback_handlers),
+            len(self.watchers),
+        )
+
+    async def _junk_collector(self):
+        """Deprecated: kept for backward compatibility; invokes event-driven _rebuild_handlers"""
+        self._rebuild_handlers()
 
     async def register_all(
         self,
@@ -658,6 +710,7 @@ class Modules:
         if not no_external:
             loaded += await self._register_modules(external_mods, "<file>")
 
+        self._rebuild_handlers()
         return loaded
 
     async def _register_modules(
@@ -891,6 +944,7 @@ class Modules:
             ):
                 with contextlib.suppress(Exception):
                     self.modules.remove(instance)
+                    self._rebuild_handlers()
 
                 raise CoreOverwriteError(command=_command)
 
@@ -1070,10 +1124,14 @@ class Modules:
                 self.unregister_raw_handlers(module, "update")
                 self.unregister_bot_update_handlers(module, "update")
                 self.unregister_loops(module, "update")
+                self.unregister_commands(module, "update")
+                self.unregister_watchers(module, "update")
+                self.unregister_inline_stuff(module, "update")
 
                 self.modules.remove(module)
 
         self.modules += [instance]
+        self._rebuild_handlers()
 
     def find_alias(
         self,
@@ -1245,6 +1303,7 @@ class Modules:
 
             logger.debug("Unloading %s, because it raised SelfUnload", mod)
             self.modules.remove(mod)
+            self._rebuild_handlers()
             return
         except SelfSuspend as e:
             if no_self_unload:
@@ -1262,6 +1321,7 @@ class Modules:
                 e,
             )
             self.modules.remove(mod)
+            self._rebuild_handlers()
             raise
 
         # Check for pack_url and load translations
@@ -1301,6 +1361,7 @@ class Modules:
         self.register_watchers(mod)
         self.register_raw_handlers(mod)
         self.register_bot_update_handlers(mod)
+        self._rebuild_handlers()
 
     def get_classname(self, name: str) -> str:
         return next(
@@ -1352,6 +1413,9 @@ class Modules:
                 self.unregister_commands(module, "unload")
                 self.unregister_watchers(module, "unload")
                 self.unregister_inline_stuff(module, "unload")
+
+        if worked:
+            self._rebuild_handlers()
 
         logger.debug("Worked: %s", worked)
         return worked

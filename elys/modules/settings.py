@@ -602,6 +602,7 @@ class Settings(loader.Module):
             self._db.set(main.__name__, "disabled_commands", disabled_commands)
             try:
                 self.allmodules.register_commands(mod_inst)
+                self.allmodules._rebuild_handlers()
             except Exception:
                 pass
 
@@ -615,6 +616,7 @@ class Settings(loader.Module):
 
             try:
                 self.allmodules.commands.pop(cmd.lower(), None)
+                self.allmodules._rebuild_handlers()
             except Exception:
                 pass
 
@@ -649,6 +651,7 @@ class Settings(loader.Module):
                 self.allmodules.register_watchers(mod_inst)
                 self.allmodules.register_raw_handlers(mod_inst)
                 self.allmodules.register_inline_stuff(mod_inst)
+                self.allmodules._rebuild_handlers()
             except Exception:
                 pass
             await utils.answer(message, self.strings["mod_enabled"].format(module_key))
@@ -660,6 +663,7 @@ class Settings(loader.Module):
                 self.allmodules.unregister_watchers(mod_inst, "disable")
                 self.allmodules.unregister_raw_handlers(mod_inst, "disable")
                 self.allmodules.unregister_inline_stuff(mod_inst, "disable")
+                self.allmodules._rebuild_handlers()
             except Exception:
                 pass
             await utils.answer(message, self.strings["mod_disabled"].format(module_key))
