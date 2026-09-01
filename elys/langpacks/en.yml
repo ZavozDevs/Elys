@@ -797,7 +797,7 @@ updater:
   restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Your {} is restarting...</b>
   downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Downloading updates...</b>
   installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Installing updates...</b>
-  success: '<tg-emoji emoji-id=5208661316947955396>⏱</tg-emoji> <b>Restart successful! {}</b>
+  success: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>Restart successful! {}</b>
 
     <i>But still loading modules...</i>
 

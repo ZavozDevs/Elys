@@ -436,11 +436,14 @@ class Settings(loader.Module):
             self.set("aliases", stored_aliases)
 
         if len(added_lines) == 1 and len(added_lines[0][0]) == 1 and not skipped_lines:
+            alias = added_lines[0][0][0]
+            target = added_lines[0][1]
             await utils.answer(
                 message,
                 self.strings["alias_created"].format(
-                    utils.escape_html(added_lines[0][0][0])
-                ),
+                    utils.escape_html(alias)
+                )
+                + f"\n<blockquote>{utils.escape_html(target)}</blockquote>",
             )
             return
 
