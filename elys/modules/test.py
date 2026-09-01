@@ -360,7 +360,35 @@ class TestMod(loader.Module):
             "user": getpass.getuser(),
             "platform": utils.get_platform_name(),
         }
-        data = await utils.get_placeholders(data, self.config["custom_message"])
+        target_message = None
+
+        async def _on_placeholders_ready(updated_data):
+            nonlocal target_message
+            if target_message and self.config["custom_message"]:
+                try:
+                    updated_text = self.config["custom_message"].format(**updated_data)
+                    with contextlib.suppress(Exception):
+                        if self.config["rich_mode"]:
+                            await utils.answer(
+                                target_message,
+                                rich_message=updated_text.replace("\r\n", "<br>").replace("\n", "<br>"),
+                            )
+                        else:
+                            await utils.answer(
+                                target_message,
+                                updated_text,
+                                file=banner,
+                                invert_media=self.config["invert_media"],
+                            )
+                except Exception as e:
+                    logger.debug("Failed to update ping placeholders: %s", e)
+
+        data = await utils.get_placeholders(
+            data,
+            self.config["custom_message"],
+            client=self._client,
+            on_ready_callback=_on_placeholders_ready,
+        )
         try:
             placeholders_msg = self.config["custom_message"].format(**data)
         except KeyError:
@@ -371,13 +399,13 @@ class TestMod(loader.Module):
             rich_message = placeholders_msg.replace("\r\n", "<br>").replace(
                 "\n", "<br>"
             )
-            await utils.answer(
+            target_message = await utils.answer(
                 message,
                 rich_message=rich_message,
             )
             return
 
-        await utils.answer(
+        target_message = await utils.answer(
             message,
             placeholders_msg,
             file=banner,
