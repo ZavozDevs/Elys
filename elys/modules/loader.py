@@ -184,9 +184,25 @@ class LoaderMod(loader.Module):
         if self.allmodules.secure_boot:
             return
 
+        # Links of modules that aren't currently loaded must survive this
+        # rewrite: they are either still waiting for the filesystem migration
+        # or failed to load this boot, and dropping them would lose the origin
+        # for good. Explicit unloading removes them from the db on its own.
+        loaded_classes = {
+            module.__class__.__name__ for module in self.allmodules.modules
+        }
+        pending = {
+            class_name: link
+            for class_name, link in self.get("loaded_modules", {}).items()
+            if isinstance(link, str)
+            and link.startswith("http")
+            and class_name not in loaded_classes
+        }
+
         self.set(
             "loaded_modules",
             {
+                **pending,
                 **{
                     module.__class__.__name__: module.__origin__
                     for module in self.allmodules.modules
@@ -347,8 +363,64 @@ class LoaderMod(loader.Module):
 
     async def _get_modules_to_load(self):
         todo = self.get("loaded_modules", {})
-        logger.debug("Loading modules: %s", todo)
+        logger.debug("Known external modules: %s", todo)
         return todo
+
+    def _module_fs_path(self, class_name: str) -> str:
+        return os.path.join(
+            loader.LOADED_MODULES_DIR,
+            f"{class_name}_{self._client.tg_id}.py",
+        )
+
+    def _is_saved_to_fs(self, class_name: str) -> bool:
+        return os.path.isfile(self._module_fs_path(class_name))
+
+    async def _migrate_link_only_modules(self, todo: dict) -> None:
+        """
+        Legacy databases stored only a download link for every external module,
+        which forced a re-download on every single restart. Modules are stored
+        on the filesystem now, so download the leftovers exactly once.
+        """
+        missing = {
+            class_name: link
+            for class_name, link in todo.items()
+            if isinstance(link, str)
+            and link.startswith("http")
+            and not self._is_saved_to_fs(class_name)
+        }
+
+        if not missing:
+            return
+
+        logger.info(
+            "Migrating %s link-only module(s) to the filesystem: %s",
+            len(missing),
+            ", ".join(missing),
+        )
+
+        for class_name, link in missing.items():
+            if await self.download_and_install(link) != MODULE_LOADING_SUCCESS:
+                logger.warning(
+                    "Failed to migrate module %s from %s, it will be retried on the"
+                    " next restart",
+                    class_name,
+                    link,
+                )
+
+    def _restore_origins(self, todo: dict) -> None:
+        """
+        Modules installed from a link are loaded from the filesystem after a
+        restart, so their `__origin__` is a local file. Put the original link
+        back, otherwise `.ml` and presets lose track of where they came from.
+        """
+        for module in self.allmodules.modules:
+            link = todo.get(module.__class__.__name__)
+            if (
+                isinstance(link, str)
+                and link.startswith("http")
+                and module.__origin__.startswith("<file")
+            ):
+                module.__origin__ = link
 
     async def _get_repo(self, repo: str) -> str:
         repo = repo.strip("/")
@@ -1033,6 +1105,15 @@ class LoaderMod(loader.Module):
                     e.type,
                     e.target,
                 )
+                # The module is already registered and saved to the filesystem
+                # at this point, so drop both to keep it from coming back on
+                # the next restart.
+                with contextlib.suppress(Exception):
+                    await self.allmodules.unload_module(instance.__class__.__name__)
+
+                with contextlib.suppress(Exception):
+                    self.allmodules.modules.remove(instance)
+
                 await core_overwrite(e)
                 return False
             except (loader.LoadError, ScamDetectionError) as e:
@@ -1652,8 +1733,8 @@ class LoaderMod(loader.Module):
             self._db.set(loader.__name__, "secure_boot", False)
             self._secure_boot = True
         else:
-            for mod in todo.values():
-                await self.download_and_install(mod)
+            await self._migrate_link_only_modules(todo)
+            self._restore_origins(await self._get_modules_to_load())
 
             self.update_modules_in_db()
 
