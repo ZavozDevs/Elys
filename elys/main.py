@@ -58,6 +58,40 @@ sys.modules.setdefault("herokutl", elystl)
 sys.modules.setdefault("hikkatl", elystl)
 sys.modules.setdefault("telethon", elystl)
 
+try:
+    import elystl.extensions.html as _elystl_html
+    import elystl.extensions.markdown as _elystl_md
+
+    _orig_html_unparse = _elystl_html.unparse
+
+    def _safe_html_unparse(text, entities):
+        if text is None:
+            return ""
+        return _orig_html_unparse(text, entities)
+
+    _elystl_html.unparse = _safe_html_unparse
+
+    _orig_html_add_surrogates = getattr(_elystl_html, "_add_surrogates", None)
+    if _orig_html_add_surrogates:
+
+        def _safe_html_add_surrogates(text):
+            if text is None:
+                return b""
+            return _orig_html_add_surrogates(text)
+
+        _elystl_html._add_surrogates = _safe_html_add_surrogates
+
+    _orig_md_unparse = _elystl_md.unparse
+
+    def _safe_md_unparse(text, entities):
+        if text is None:
+            return ""
+        return _orig_md_unparse(text, entities)
+
+    _elystl_md.unparse = _safe_md_unparse
+except Exception:
+    pass
+
 from . import database, loader, utils, version  # noqa: E402
 from ._internal import print_banner, restart  # noqa: E402
 from .dispatcher import CommandDispatcher  # noqa: E402
