@@ -766,6 +766,27 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>У тебя последняя версия. Обновиться принудительно?</b>
   cancel: 🚫 Отмена
+  branch_menu: '🌿 <b>Выбор ветки обновления Elys</b>
+
+    Текущая ветка: <code>{current}</code>
+
+    <b>Доступные ветки:</b>
+    • <b>master</b> — Стабильная версия, проверенная временем
+    • <b>beta</b> — Публичная бета-версия новых возможностей
+    • <b>dev</b> — Максимально нестабильная ветка для разработчиков с прямыми изменениями
+
+    <i>Нажми на кнопку ниже, чтобы переключить ветку:</i>'
+  branch_switching: '🤔 <b>Переключение на ветку <code>{branch}</code>...</b>'
+  branch_switched: '✅ <b>Ветка успешно переключена на <code>{branch}</code>!</b>
+
+    <i>Для применения изменений требуется перезагрузка юзербота.</i>'
+  branch_switch_fail: '❌ <b>Не удалось переключить ветку на <code>{branch}</code>!</b>
+
+    Ошибка: <code>{error}</code>'
+  branch_already_on: 'Ты уже находишься на ветке {branch}!'
+  branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
+  branch_btn_restart: '🔄 Перезагрузить'
+  branch_btn_later: '⏳ Позже'
   stop_ub_confirm: Ваш {} будет остановлен, вы уверены?
   _cls_doc: Обновляет юзербот
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Вы должны указать количество коммитов для отката!</b>

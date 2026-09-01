@@ -660,6 +660,212 @@ class UpdaterMod(loader.Module):
         except Exception:
             await self.inline_update(message)
 
+    async def _git_switch_branch(self, target_branch: str) -> bool:
+        def _sync():
+            root_repo = os.path.dirname(utils.get_base_dir())
+            with git.Repo(root_repo) as repo:
+                origin = repo.remote("origin")
+                logger.info("Fetching origin for branch %s...", target_branch)
+                origin.fetch(prune=True)
+
+                target_ref = f"origin/{target_branch}"
+                if target_ref not in [ref.name for ref in origin.refs]:
+                    raise ValueError(f"Branch '{target_branch}' not found on remote origin")
+
+                old_commit = repo.head.commit
+                repo.git.checkout("-B", target_branch, target_ref)
+                repo.git.reset("--hard", target_ref)
+                new_commit = repo.head.commit
+
+                for d in new_commit.diff(old_commit):
+                    if d.b_path == "requirements.txt":
+                        return True
+            return False
+
+        return await asyncio.wait_for(
+            asyncio.to_thread(_sync),
+            timeout=120,
+        )
+
+    async def _branch_same(self, call: InlineCall, b: str):
+        await call.answer(self.strings["branch_already_on"].format(branch=b), show_alert=True)
+
+    async def _branch_restart(self, call: InlineCall):
+        await self.restart_common(call)
+
+    async def _switch_branch_cb(self, call: InlineCall, target_branch: str):
+        await call.edit(
+            self.strings["branch_switching"].format(branch=target_branch),
+            reply_markup=[],
+        )
+        try:
+            req_update = await self._git_switch_branch(target_branch)
+            if req_update:
+                self.req_common()
+        except Exception as e:
+            logger.exception("Failed to switch branch to %s", target_branch)
+            await call.edit(
+                self.strings["branch_switch_fail"].format(
+                    branch=target_branch,
+                    error=utils.escape_html(str(e)),
+                ),
+                reply_markup=[
+                    [
+                        {
+                            "text": self.strings["cancel"],
+                            "action": "close",
+                            "style": "danger",
+                        }
+                    ]
+                ],
+            )
+            return
+
+        await call.edit(
+            self.strings["branch_switched"].format(branch=target_branch),
+            reply_markup=[
+                [
+                    {
+                        "text": self.strings["branch_btn_restart"],
+                        "callback": self._branch_restart,
+                        "style": "success",
+                    },
+                    {
+                        "text": self.strings["branch_btn_later"],
+                        "action": "close",
+                        "style": "danger",
+                    },
+                ]
+            ],
+        )
+
+    @loader.command(
+        ru_doc="[ветка] - Выбрать или сменить ветку обновлений юзербота (master, beta, dev)",
+        ua_doc="[гілка] - Обрати або змінити гілку оновлень юзербота (master, beta, dev)",
+        en_doc="[branch] - Choose or switch userbot update branch (master, beta, dev)",
+    )
+    async def branch(self, message: Message):
+        """[branch] - Choose or switch userbot update branch (master, beta, dev)"""
+        if NO_GIT:
+            await utils.answer(
+                message,
+                "<b>Git disabled via --no-git.</b>",
+            )
+            return
+
+        target = utils.get_args_raw(message).strip().lower()
+        branches = ["master", "beta", "dev"]
+        current = str(version.branch).strip()
+
+        if target:
+            if target not in branches:
+                await utils.answer(
+                    message,
+                    self.strings["branch_invalid"].format(
+                        target=utils.escape_html(target),
+                        available=", ".join(branches),
+                    ),
+                )
+                return
+
+            if target == current:
+                await utils.answer(
+                    message,
+                    self.strings["branch_already_on"].format(branch=target),
+                )
+                return
+
+            msg_obj = await utils.answer(
+                message,
+                self.strings["branch_switching"].format(branch=target),
+            )
+            try:
+                req_update = await self._git_switch_branch(target)
+                if req_update:
+                    self.req_common()
+            except Exception as e:
+                logger.exception("Failed to switch branch to %s", target)
+                await utils.answer(
+                    msg_obj,
+                    self.strings["branch_switch_fail"].format(
+                        branch=target,
+                        error=utils.escape_html(str(e)),
+                    ),
+                )
+                return
+
+            if self.inline.init_complete:
+                await self.inline.form(
+                    message=msg_obj,
+                    text=self.strings["branch_switched"].format(branch=target),
+                    reply_markup=[
+                        [
+                            {
+                                "text": self.strings["branch_btn_restart"],
+                                "callback": self._branch_restart,
+                                "style": "success",
+                            },
+                            {
+                                "text": self.strings["branch_btn_later"],
+                                "action": "close",
+                                "style": "danger",
+                            },
+                        ]
+                    ],
+                )
+            else:
+                await utils.answer(
+                    msg_obj,
+                    self.strings["branch_switched"].format(branch=target),
+                )
+            return
+
+        # Инлайн меню
+        buttons = []
+        for b in branches:
+            if b == current:
+                buttons.append(
+                    {
+                        "text": f"✅ {b}",
+                        "callback": self._branch_same,
+                        "args": (b,),
+                        "style": "success",
+                    }
+                )
+            else:
+                buttons.append(
+                    {
+                        "text": b,
+                        "callback": self._switch_branch_cb,
+                        "args": (b,),
+                        "style": "secondary",
+                    }
+                )
+
+        markup = [
+            buttons,
+            [
+                {
+                    "text": self.strings["cancel"],
+                    "action": "close",
+                    "style": "danger",
+                }
+            ],
+        ]
+
+        text = self.strings["branch_menu"].format(current=current)
+
+        if not self.inline.init_complete or not await self.inline.form(
+            message=message,
+            text=text,
+            reply_markup=markup,
+        ):
+            await utils.answer(
+                message,
+                text
+                + f"\n\n<i>Для смены ветки укажи её имя, например: <code>{self.get_prefix()}branch beta</code></i>",
+            )
+
     @loader.command()
     async def autoupdate(self, message: Message):
         """| switch autoupdate state"""
