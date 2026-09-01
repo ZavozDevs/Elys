@@ -728,17 +728,10 @@ test:
   debugging_disabled: <tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>Debug mode disabled</b>
   send_anyway: 📤 sudo force send
   cancel: 🚫 ^C
-  branch_menu: '<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>
-    Текущая ветка: <code>{current}</code></blockquote>
-
-    <blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> — стабильная
-    <tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> — бета-версия
-    <tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> — разработка (нестабильная)</blockquote>'
-  branch_switching: '<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>'
-  branch_switched: '<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>
-    <i>Для применения изменений требуется перезагрузка.</i></blockquote>'
-  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>
-    Ошибка: <code>{error}</code></blockquote>'
+  branch_menu: "<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n\n<blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> - стабильная\n<tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> - бета-версия\n<tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_switching: "<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
+  branch_switched: "<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
@@ -848,17 +841,10 @@ updater:
   _cmd_doc_autoupdate: Toggle automatic update daemon
   _cmd_doc_changelog: Print last major update changelog
   _cmd_doc_ubstop: Stop userbot process
-  branch_menu: '<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>
-    Текущая ветка: <code>{current}</code></blockquote>
-
-    <blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> — стабильная
-    <tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> — бета-версия
-    <tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> — разработка (нестабильная)</blockquote>'
-  branch_switching: '<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>'
-  branch_switched: '<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>
-    <i>Для применения изменений требуется перезагрузка.</i></blockquote>'
-  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>
-    Ошибка: <code>{error}</code></blockquote>'
+  branch_menu: "<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n\n<blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> - стабильная\n<tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> - бета-версия\n<tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_switching: "<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
+  branch_switched: "<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
