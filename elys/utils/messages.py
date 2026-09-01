@@ -401,11 +401,14 @@ async def answer(
 
         edit = message.out and not message.via_bot_id and not message.fwd_from
         if edit:
-            return await _edit_rich_message(
-                message,
-                rich_message,
-                reply_markup=reply_markup,
-            )
+            try:
+                return await _edit_rich_message(
+                    message,
+                    rich_message,
+                    reply_markup=reply_markup,
+                )
+            except Exception:
+                pass
 
         return await _send_rich_message(
             message,

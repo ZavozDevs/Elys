@@ -17,17 +17,13 @@ elys_security:
   group_member: 👥 グループ内
   pm: 🤙 PM (個人チャット)
   everyone: 🌍 全員 (インライン)
-  owner_list: '<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>グループ</b> <code>owner</code>
-    <b>のユーザー:</b>
+  owner_list: '<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>グループ</b> <code>owner</code> <b>のユーザー:</b>
 
 
     <blockquote expandable>{}</blockquote>'
-  no_owner: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>グループ</b> <code>owner</code>
-    <b>にユーザーはいません</b>
-  owner_added: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a>
-    をグループ</b> <code>owner</code> <b>に追加しました</b>
-  owner_removed: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a>
-    をグループ</b> <code>owner</code> <b>から削除しました</b>
+  no_owner: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>グループ</b> <code>owner</code> <b>にユーザーはいません</b>
+  owner_added: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a> をグループ</b> <code>owner</code> <b>に追加しました</b>
+  owner_removed: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a> をグループ</b> <code>owner</code> <b>から削除しました</b>
   no_user: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>許可するユーザーを指定してください</b>
   not_a_user: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>指定されたエンティティはユーザーではありません</b>
   li: <tg-emoji emoji-id=4974307891025543730>▫️</tg-emoji> <b><a href="tg://user?id={}">{}</a></b>
@@ -40,12 +36,10 @@ elys_security:
   self: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>自分自身を昇格/降格させることはできません！</b>
   suggest_nonick: 🔰 <i>このユーザーに対して NoNick を有効にしますか？</i>
   user_nn: 🔰 <b><a href="tg://user?id={}">{}</a> の NoNick を有効にしました</b>
-  what: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>最初の引数としてターゲットのタイプを指定する必要があります（</b><code>user</code>
-    <b>または</b> <code>chat</code><b>）</b>
+  what: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>最初の引数としてターゲットのタイプを指定する必要があります（</b><code>user</code> <b>または</b> <code>chat</code><b>）</b>
   no_target: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>セキュリティルールのターゲットを指定していません</b>
   no_rule: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ルール（モジュールまたはコマンド）を指定していません</b>
-  confirm_rule: 🔐 <b>{} <a href='{}'>{}</a> に {}</b> <code>{}</code> <b>の使用許可を {}
-    与えてもよろしいですか？</b>
+  confirm_rule: 🔐 <b>{} <a href='{}'>{}</a> に {}</b> <code>{}</code> <b>の使用許可を {} 与えてもよろしいですか？</b>
   rule_added: 🔐 <b>{} <a href='{}'>{}</a> に {}</b> <code>{}</code> <b>の使用許可を {} 与えました</b>
   confirm_btn: 👑 確認
   cancel_btn: 🚫 キャンセル
@@ -59,10 +53,8 @@ elys_security:
     <blockquote expandable>{}</blockquote>'
   no_rules: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ターゲットセキュリティルールはありません</b>
   owner_target: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>このユーザーは所有者であるため、ターゲットセキュリティによる昇格はできません</b>
-  rules_removed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b><a href="{}">{}</a>
-    のターゲットセキュリティルールを削除しました</b>
-  rule_removed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b><a href="{}">{}</a>
-    のターゲットセキュリティルール（</b><code>{}</code><b>）を削除しました</b>
+  rules_removed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b><a href="{}">{}</a> のターゲットセキュリティルールを削除しました</b>
+  rule_removed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b><a href="{}">{}</a> のターゲットセキュリティルール（</b><code>{}</code><b>）を削除しました</b>
   chat_inline: ⚠️ <b>チャット用のインラインコマンドルールは作成できません！</b>
   for: '期間:'
   forever: 無期限
@@ -85,8 +77,7 @@ elys_security:
   _cmd_doc_ownerlist: '`owner` グループのユーザーを一覧表示します'
   _cmd_doc_ownerrm: <user> - ユーザーを `owner` から削除します
   _cmd_doc_security: '[command] - コマンドのセキュリティ設定を構成します'
-  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [target user or chat] [rule (command/module)]
-    [time] - 新しいターゲットセキュリティルールを追加します
+  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [target user or chat] [rule (command/module)] [time] - 新しいターゲットセキュリティルールを追加します
 
     例: .tsec user ban 1d, .tsec chat weather 1h, .tsec user HikariChat'
   _cmd_doc_tsecclr: '<"user"/"chat"/"sgroup"> - ターゲットセキュリティルールをクリアします
@@ -99,20 +90,16 @@ elys_security:
   querysec_info: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> ここでは、すべての外部ユーザーのインラインクエリの使用許可を切り替えることができます
   until: '期限:'
   sgroup: セキュリティグループ
-  sgroup_info: '<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b>
-    <code>{}</code> <b>情報:</b>
+  sgroup_info: '<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b> <code>{}</code> <b>情報:</b>
 
 
     {}
 
     {}'
-  created_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b>
-    <code>{}</code> <b>を作成しました</b>
-  sgroup_already_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>セキュリティグループ</b>
-    <code>{}</code> <b>は既に存在します</b>
+  created_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b> <code>{}</code> <b>を作成しました</b>
+  sgroup_already_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>セキュリティグループ</b> <code>{}</code> <b>は既に存在します</b>
   no_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>引数が指定されていません</b>
-  sgroup_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>セキュリティグループ</b>
-    <code>{}</code> <b>が見つかりません</b>
+  sgroup_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>セキュリティグループ</b> <code>{}</code> <b>が見つかりません</b>
   no_users: <tg-emoji emoji-id=5870772616305839506>👥</tg-emoji> <b>ユーザーがいません</b>
   users_list: '<tg-emoji emoji-id=5870772616305839506>👥</tg-emoji> <b>ユーザー:</b>
 
@@ -125,22 +112,16 @@ elys_security:
     {}
 
     '
-  sgroup_li: <tg-emoji emoji-id=4974264756668990388>▫️</tg-emoji> <code>{}</code>
-    · <b>{} ユーザー</b> · <b>{} ルール</b>
+  sgroup_li: <tg-emoji emoji-id=4974264756668990388>▫️</tg-emoji> <code>{}</code> · <b>{} ユーザー</b> · <b>{} ルール</b>
   sgroups_list: '<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ:</b>
 
 
     {}'
-  deleted_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b>
-    <code>{}</code> <b>を削除しました</b>
-  user_already_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ユーザー</b>
-    <code>{}</code> <b>は既にセキュリティグループ</b> <code>{}</code> <b>に存在します</b>
-  user_added_to_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>ユーザー</b>
-    <code>{}</code> <b>をセキュリティグループ</b> <code>{}</code> <b>に追加しました</b>
-  user_not_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ユーザー</b>
-    <code>{}</code> <b>はセキュリティグループ</b> <code>{}</code> <b>に存在しません</b>
-  user_removed_from_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>ユーザー</b>
-    <code>{}</code> <b>をセキュリティグループ</b> <code>{}</code> <b>から削除しました</b>
+  deleted_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b> <code>{}</code> <b>を削除しました</b>
+  user_already_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ユーザー</b> <code>{}</code> <b>は既にセキュリティグループ</b> <code>{}</code> <b>に存在します</b>
+  user_added_to_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>ユーザー</b> <code>{}</code> <b>をセキュリティグループ</b> <code>{}</code> <b>に追加しました</b>
+  user_not_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ユーザー</b> <code>{}</code> <b>はセキュリティグループ</b> <code>{}</code> <b>に存在しません</b>
+  user_removed_from_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>ユーザー</b> <code>{}</code> <b>をセキュリティグループ</b> <code>{}</code> <b>から削除しました</b>
   _cmd_doc_delsgroup: <name> - セキュリティグループを削除します
   _cmd_doc_sgroup: <name> - セキュリティグループの情報を表示します
   _cmd_doc_sgroups: セキュリティグループを一覧表示します
@@ -154,28 +135,22 @@ elys_settings:
 
     <blockquote expandable><b>{}</b></blockquote>'
   no_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>引数が指定されていません</b>
-  invoke404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>内部デバッグメソッド</b>
-    <code>{}</code> <b>が見つからないため、呼び出せません</b>
-  module404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール</b> <code>{}</code>
-    <b>は見つかりません</b>
-  invoke: '<tg-emoji emoji-id=5215519585150706301>👍</tg-emoji> <b>内部デバッグメソッド</b> <code>{}</code>
-    <b>を呼び出しました</b>
+  invoke404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>内部デバッグメソッド</b> <code>{}</code> <b>が見つからないため、呼び出せません</b>
+  module404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール</b> <code>{}</code> <b>は見つかりません</b>
+  invoke: '<tg-emoji emoji-id=5215519585150706301>👍</tg-emoji> <b>内部デバッグメソッド</b> <code>{}</code> <b>を呼び出しました</b>
 
 
     <tg-emoji emoji-id=5784891605601225888>🔵</tg-emoji> <b>結果:
 
     {}</b>'
-  invoking: <tg-emoji emoji-id=5213452215527677338>⏳</tg-emoji> <b>内部デバッグメソッド</b>
-    <code>{}</code> <b>(対象:</b> <code>{}</code><b>) を呼び出しています...</b>
+  invoking: <tg-emoji emoji-id=5213452215527677338>⏳</tg-emoji> <b>内部デバッグメソッド</b> <code>{}</code> <b>(対象:</b> <code>{}</code><b>) を呼び出しています...</b>
   mod404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ウォッチャー {} が見つかりません</b>
   disabled: <tg-emoji emoji-id=5424885441100782420>👀</tg-emoji> <b>ウォッチャー {} は<u>無効化</u>されました</b>
   enabled: <tg-emoji emoji-id=5424885441100782420>👀</tg-emoji> <b>ウォッチャー {} は<u>有効化</u>されました</b>
   args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ウォッチャー名を指定する必要があります</b>
-  user_nn: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>このユーザーの NoNick は
-    {} になりました</b>
+  user_nn: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>このユーザーの NoNick は {} になりました</b>
   no_cmd: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>NoNick を切り替えるコマンドを指定してください</b>
-  cmd_nn: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b></b> <code>{}</code>
-    <b>の NoNick は {} になりました</b>
+  cmd_nn: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b></b> <code>{}</code> <b>の NoNick は {} になりました</b>
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>コマンドが見つかりません</b>
   inline_settings: ⚙️ <b>ここでは Elys の設定を行えます</b>
   confirm_update: 🧭 <b>アップデートすることを確認してください。ユーザーボットは再起動されます</b>
@@ -186,8 +161,7 @@ elys_settings:
   suggest_subscribe: ✅ チャンネル登録を提案する
   do_not_suggest_subscribe: 🚫 チャンネル登録を提案する
   private_not_allowed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>このコマンドはチャットで実行する必要があります</b>
-  nonick_warning: 警告！デフォルトのプレフィックスで NoNick を有効にしました！Elys チャットでミュートされる可能性があります。プレフィックスを変更するか、NoNick
-    を無効にしてください！
+  nonick_warning: 警告！デフォルトのプレフィックスで NoNick を有効にしました！Elys チャットでミュートされる可能性があります。プレフィックスを変更するか、NoNick を無効にしてください！
   reply_required: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>NoNick に追加するユーザーのメッセージに返信してください</b>
   deauth_confirm: '⚠️ <b>この操作を行うと、Elys はこのアカウントから完全に削除され、元に戻すことはできません！</b>
 
@@ -244,10 +218,8 @@ elys_settings:
     [-i - 受信のみ]'
   _cmd_doc_watchers: 現在のウォッチャーを一覧表示します
   _cls_doc: Elys Userbot の詳細設定
-  core_protection_already_removed: <tg-emoji emoji-id=6003424016977628379>🔒</tg-emoji>
-    <b>コア保護は既に解除されています</b>
-  core_protection_already_enabled: <tg-emoji emoji-id=6003424016977628379>🔒</tg-emoji>
-    <b>コア保護は既に設定されています</b>
+  core_protection_already_removed: <tg-emoji emoji-id=6003424016977628379>🔒</tg-emoji> <b>コア保護は既に解除されています</b>
+  core_protection_already_enabled: <tg-emoji emoji-id=6003424016977628379>🔒</tg-emoji> <b>コア保護は既に設定されています</b>
   core_protection_confirm: '⚠️ <b>よくお読みください！</b>
 
 
@@ -294,12 +266,9 @@ terminal:
 
     <tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>実行時間: {}秒</b>'
   auth_fail: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>認証に失敗しました。もう一度お試しください</b>
-  auth_needed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji><a href="tg://user?id={}">
-    インタラクティブ認証が必要です</a>
-  auth_msg: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>このメッセージを編集して、</b><code>{}</code>
-    <b>を実行するための</b> <code>{}</code> <b>のパスワードを入力してください</b>
-  dangerous_command: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このコマンド
-    (<code>{}</code>) の実行は安全のためにキャンセルされました。</b>
+  auth_needed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji><a href="tg://user?id={}"> インタラクティブ認証が必要です</a>
+  auth_msg: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>このメッセージを編集して、</b><code>{}</code> <b>を実行するための</b> <code>{}</code> <b>のパスワードを入力してください</b>
+  dangerous_command: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このコマンド (<code>{}</code>) の実行は安全のためにキャンセルされました。</b>
 
 
     <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i>これはエラーではなく、安全対策です。サポートチャットで報告しないでください。</i>'
@@ -326,8 +295,7 @@ elys_web:
   invalid_target: 追加したい人のメッセージに返信するか、正しい @username/id を指定してください。
   cant_add_self: 自分自身を追加することはできません。
   add_user_confirm: 本当にアカウント {} ({}) を追加しますか？
-  add_user_insecure: 本当にアカウント {} ({}) を追加しますか？確認するには <code>{}addacc {} force_insecure</code>
-    コマンドを使用してください。
+  add_user_insecure: 本当にアカウント {} ({}) を追加しますか？確認するには <code>{}addacc {} force_insecure</code> コマンドを使用してください。
   enter_number: 番号を入力してください
   your_phone_number: あなたの電話番号
   enter_code: コードを入力してください
@@ -351,8 +319,7 @@ elys_web:
   switch_confirm: '⚠️ <b>このUserbotを別のTelegramアカウントへ移行しますか？</b>
 
     現在のセッションはアーカイブされ、設定は移行され、inline botデータは新しいアカウント用に再作成されます。'
-  switch_insecure: 🚫 <b>アカウント移行に失敗しました:</b> インラインメニューが利用できません。強制するには <code>{}switchacc
-    force_insecure</code> と入力してください。
+  switch_insecure: 🚫 <b>アカウント移行に失敗しました:</b> インラインメニューが利用できません。強制するには <code>{}switchacc force_insecure</code> と入力してください。
   switch_failed: 🚫 <b>アカウント移行に失敗しました:</b> <code>{}</code>
   _cmd_doc_switchacc: Userbotを別のTelegramアカウントへ移行する
   name: ElysAccounts
@@ -365,25 +332,20 @@ elys_backup:
     バックアップの頻度を選択してください
 
 
-    <b>🚫 これにより、.lm コマンドでファイルからダウンロードされたモジュールを復元することは不可能になります！注意してください。復元する前に .backupmods
-    を行ってください。</b>'
+    <b>🚫 これにより、.lm コマンドでファイルからダウンロードされたモジュールを復元することは不可能になります！注意してください。復元する前に .backupmods を行ってください。</b>'
   saved: ✅ 周期が保存されました！ <code>{prefix}set_backup_period</code> で変更できます
   saved_bot: ✅ 周期が保存されました！ {prefix}set_backup_period で変更できます
   never: ✅ 自動バックアップは行いません。<code>{prefix}set_backup_period</code> を使用してキャンセルできます
   never_bot: ✅ 自動バックアップは行いません。{prefix}set_backup_period を使用してキャンセルできます
   invalid_args: 🚫 <b>正しい頻度を時間単位で指定するか、無効にする場合は `0` を指定してください</b>
-  backup_caption: <tg-emoji emoji-id=5469718869536940860>👆</tg-emoji> <b>これはデータベースのバックアップです。個人情報が含まれているため、誰とも共有しないでください。復元する必要がある場合は、このファイルへの返信として</b>
-    <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>を使用してください。</b>
-  backupall_info: 👆 <b>これはデータベースとモジュールのバックアップです。個人情報が含まれているため、誰にも渡さないでください。復元する必要がある場合は、このファイルへの返信として</b>
-    <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>を使用してください。</b>
+  backup_caption: <tg-emoji emoji-id=5469718869536940860>👆</tg-emoji> <b>これはデータベースのバックアップです。個人情報が含まれているため、誰とも共有しないでください。復元する必要がある場合は、このファイルへの返信として</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>を使用してください。</b>
+  backupall_info: 👆 <b>これはデータベースとモジュールのバックアップです。個人情報が含まれているため、誰にも渡さないでください。復元する必要がある場合は、このファイルへの返信として</b> <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>を使用してください。</b>
   restoring_backup: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>バックアップを復元し、依存関係とモジュールをインストールしています...</b>
   all_restored: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>完全バックアップが復元されました。再起動しています...</b>
   all_restored_bot: 🔄 完全バックアップが復元されました。再起動しています...
-  reply_to_file: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>.json または
-    .zip ファイルに返信してください</b>
+  reply_to_file: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>.json または .zip ファイルに返信してください</b>
   db_restored: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>データベースが更新されました。再起動しています...</b>
-  modules_backup: '<tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>モジュールバックアップ
-    ({})</b>
+  modules_backup: '<tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>モジュールバックアップ ({})</b>
 
 
     <b>以下を使用して復元できます:</b>
@@ -391,16 +353,13 @@ elys_backup:
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>モジュールが復元されました。再起動します</b>
   backup_sent: <tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>バックアップは<a href={}>データベースチャット</a>に送信されました</b>
-  backupall_sent: <tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>データベースとモジュールのバックアップが<a
-    href={}>「データベースチャット」</a>に送信されました</b>
+  backupall_sent: <tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>データベースとモジュールのバックアップが<a href={}>「データベースチャット」</a>に送信されました</b>
   db_warning: '❗️ Hikka バックアップが検出されました。続行すると、ユーザーボットは Elys に適した形式への変換を<b>試行</b>します。
 
     変換中にエラーが発生する可能性があります。続行しますか？'
   advice_converting: バックアップコンテンツ内の <a>'hikka.'</a> を <a>'elys.'</a> に手動で置換できます。これは読み込みに必要です。
   converting_db: 🔄 変換中...
-  probably_zip: <tg-emoji emoji-id=5210952531676504517>❗️</tg-emoji> <b>ファイルからのバックアップを復元できませんでした。おそらく完全バックアップ
-    (.zip または .backup) を復元しようとしています。その場合は、ファイルへの返信として</b> <code>{}restoreall</code>
-    <b>を使用してください。</b>
+  probably_zip: <tg-emoji emoji-id=5210952531676504517>❗️</tg-emoji> <b>ファイルからのバックアップを復元できませんでした。おそらく完全バックアップ (.zip または .backup) を復元しようとしています。その場合は、ファイルへの返信として</b> <code>{}restoreall</code> <b>を使用してください。</b>
   _cls_doc: データベースとモジュールのバックアップを処理します
   _cmd_doc_backupdb: データベースのバックアップを作成します [PMに送信されます]
   _cmd_doc_backupmods: モジュールのバックアップを作成します [PMに送信されます]
@@ -420,8 +379,7 @@ presets:
   _service_desc: 本当に便利なモジュール — アカウント管理、リンク短縮、検索エンジンなど
   _downloaders_title: 📥 ダウンローダー
   _downloaders_desc: さまざまなソース（YouTube、TikTok、Instagram、Spotify、VK Musicなど）からファイルをダウンロード/アップロードするのに役立つツールのコレクション
-  welcome: 👋 <b>こんにちは！チャンネルで無限のモジュールをスクロールするのに疲れましたか？いくつかの既製コレクションを提案させてください。このメニューを再度呼び出す必要がある場合は、このボットに
-    /presets を送信するだけです！</b>
+  welcome: 👋 <b>こんにちは！チャンネルで無限のモジュールをスクロールするのに疲れましたか？いくつかの既製コレクションを提案させてください。このメニューを再度呼び出す必要がある場合は、このボットに /presets を送信するだけです！</b>
   preset: '<b>{}:</b>
 
     ℹ️ <i>{}</i>
@@ -433,38 +391,27 @@ presets:
     {}'
   back: 🔙 戻る
   install: 📦 インストール
-  installing: <tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>プリセット</b> <code>{}</code>
-    <b>をインストールしています...</b>
-  installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>プリセット</b>
-    <code>{}</code> <b>({}/{}) をインストールしています...</b>
+  installing: <tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>プリセット</b> <code>{}</code> <b>をインストールしています...</b>
+  installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>プリセット</b> <code>{}</code> <b>({}/{}) をインストールしています...</b>
 
 
     <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>モジュール {} をインストール中...</i>'
-  installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>プリセット</b> <code>{}</code>
-    <b>がインストールされました！</b>
+  installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>プリセット</b> <code>{}</code> <b>がインストールされました！</b>
   already_installed: ✅ [インストール済み]
-  add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールを追加するフォルダを指定してください。
-    </b> <code>{prefix}addtofolder <フォルダ> <モジュール></code>
-  already_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールは既にフォルダ内にあります</b>
-    <code>{}</code>
-  added_to_folder: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>モジュール {}がフォルダに追加されました</b>
-    <code>{}</code>
+  add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールを追加するフォルダを指定してください。 </b> <code>{prefix}addtofolder <フォルダ> <モジュール></code>
+  already_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールは既にフォルダ内にあります</b> <code>{}</code>
+  added_to_folder: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>モジュール {}がフォルダに追加されました</b> <code>{}</code>
   module_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール {}が見つかりません</b>
-  folder_load_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールをロードするフォルダを指定してください。
-    </b> <code>{prefix}fl <フォルダ></code>
+  folder_load_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールをロードするフォルダを指定してください。 </b> <code>{prefix}fl <フォルダ></code>
   folder_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>フォルダ {}が見つかりません</b>
-  no_modules_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>フォルダ
-    {}にモジュールはありません</b>
+  no_modules_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>フォルダ {}にモジュールはありません</b>
   folder: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>フォルダ</b> {}
 
 
     <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lpをインストールするためにこのメッセージに返信してください</b>'
-  remove_from_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>削除するフォルダとモジュールを指定してください。
-    </b> <code>{prefix}removefromfolder <フォルダ> <モジュール></code>
-  removed_from_folder: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>フォルダからモジュール
-    {} を削除しました</b> <code>{}</code>
-  module_not_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール
-    {} はフォルダ {}</b> にありません
+  remove_from_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>削除するフォルダとモジュールを指定してください。 </b> <code>{prefix}removefromfolder <フォルダ> <モジュール></code>
+  removed_from_folder: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>フォルダからモジュール {} を削除しました</b> <code>{}</code>
+  module_not_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール {} はフォルダ {}</b> にありません
   _cmd_doc_presets: '| 読み込むモジュールパック'
   _cmd_doc_loadpreset: カスタムプリセットを読み込みます。コマンドと一緒にファイルを送るか、ファイルに返信してください。
   _cmd_doc_addtofolder: <フォルダ> <モジュール> - カスタムフォルダにモジュールを追加します
@@ -479,28 +426,13 @@ settings:
   wsl: 💻 WSL
   userland: 🐧 UserLand
   jamhost: 🧃 JamHost
-  choose_installation: <tg-emoji emoji-id=5363805650327450240>🌟</tg-emoji> <b>Elys
-    インストールオプションを選択してください:</b>
+  choose_installation: <tg-emoji emoji-id=5363805650327450240>🌟</tg-emoji> <b>Elys インストールオプションを選択してください:</b>
   vds_install: '<tg-emoji emoji-id=5471952986970267163>💎</tg-emoji> VDS でのインストールプロセスは単一のコマンドで完了します:
 
-    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade
-    -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys
-    &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3
-    -m elys</code></pre>
+    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
 
     <i>注: sudo 権限がない場合は、コマンドの該当部分を省略してください。</i>'
-  wsl_install: "<b>WSL をダウンロードします。</b> これを行うには、PowerShell を管理者として開き、<code>wsl --install\
-    \ -d Ubuntu-22.04</code> と入力します \n⚠️ <i>WSL をインストールするには、Windows 10 ビルド 2004 または\
-    \ Windows 11 の任意のバージョンと、仮想化サポートを備えた PC が必要です。以前のバージョンの OS へのインストールについては、</i> <a\
-    \ href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">このページ</a><i>を参照してください</i>\n\
-    \n⬜️ <b>PC を再起動し、Ubuntu 22.04.x アプリケーションを起動します</b> \n\n⬜️ <b>その中にコマンドを貼り付けます (右クリック):</b>\
-    \ <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>黄色い警告が表示された場合は、</i>\
-    \ <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>と入力し、/home/username/.local/bin\
-    \ をメッセージに記載されているパスに置き換えてください</i>\n\n⬜️ <b>コマンドを貼り付けます (右クリック):</b> \n<pre><code\
-    \ class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys\
-    \ &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3\
-    \ -m elys</code></pre>\n\U0001F517 <b>API_ID と API_HASH はどこで入手できますか？</b>: <a href=\"\
-    https://youtu.be/DcqDA249Lhg?t=24\">ビデオ</a>"
+  wsl_install: "<b>WSL をダウンロードします。</b> これを行うには、PowerShell を管理者として開き、<code>wsl --install -d Ubuntu-22.04</code> と入力します \n⚠️ <i>WSL をインストールするには、Windows 10 ビルド 2004 または Windows 11 の任意のバージョンと、仮想化サポートを備えた PC が必要です。以前のバージョンの OS へのインストールについては、</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">このページ</a><i>を参照してください</i>\n\n⬜️ <b>PC を再起動し、Ubuntu 22.04.x アプリケーションを起動します</b> \n\n⬜️ <b>その中にコマンドを貼り付けます (右クリック):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>黄色い警告が表示された場合は、</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>と入力し、/home/username/.local/bin をメッセージに記載されているパスに置き換えてください</i>\n\n⬜️ <b>コマンドを貼り付けます (右クリック):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>API_ID と API_HASH はどこで入手できますか？</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">ビデオ</a>"
   userland_install: '<b>UserLAnd をこの</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">リンク</a><b>からインストールします</b>
 
 
@@ -512,10 +444,7 @@ settings:
 
     <b>インストールが成功するとターミナルが開くので、そこに入力します:</b>
 
-    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
-    &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys
-    &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp;
-    python3 -m elys</code></pre>
+    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
 
 
     <b>インストールの最後にリンクが表示されるので、それに従ってアカウント情報を入力し、ログインします。
@@ -525,10 +454,8 @@ settings:
   too_many_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>引数が多すぎます</b>
   blacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>チャット {} をユーザーボットのブラックリストに追加しました</b>
   unblacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>チャット {} をユーザーボットのブラックリストから削除しました</b>
-  user_blacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>ユーザー {}
-    をユーザーボットのブラックリストに追加しました</b>
-  user_unblacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>ユーザー
-    {} をユーザーボットのブラックリストから削除しました</b>
+  user_blacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>ユーザー {} をユーザーボットのブラックリストに追加しました</b>
+  user_unblacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>ユーザー {} をユーザーボットのブラックリストから削除しました</b>
   what_prefix: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>プレフィックスを何に設定しますか？</b>
   prefix_incorrect: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>プレフィックスの長さは1文字である必要があります</b>
   prefix_set: '{} <b>コマンドプレフィックスが更新されました。元に戻すには以下のコマンドを使用してください:</b>
@@ -538,12 +465,9 @@ settings:
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix} {entity_id}</code></pre>'
   id_not_found_scgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> このエンティティはいずれのセキュリティグループにも存在しません。したがって、プレフィックスを追加しても意味がありません
-  invalid_id_or_username: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> 無効な
-    id/username が指定されました
-  alias_created: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>エイリアスが作成されました。</b>
-    <code>{}</code> <b>でアクセスできます</b>
-  aliases_created: '<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>{count}
-    個のエイリアスを追加しました:</b>
+  invalid_id_or_username: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> 無効な id/username が指定されました
+  alias_created: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>エイリアスが作成されました。</b> <code>{}</code> <b>でアクセスできます</b>
+  aliases_created: '<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>{count} 個のエイリアスを追加しました:</b>
 
     <blockquote expandable>{aliases}</blockquote>'
   aliases_created_line: '{aliases} -> {command}'
@@ -554,8 +478,7 @@ settings:
   aliases_file: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>あなたのエイリアス</b>
 
 
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>このメッセージに返信して {prefix}la
-    でエイリアスをインポート</b>'
+    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>このメッセージに返信して {prefix}la でエイリアスをインポート</b>'
   aliases: '<b>🔗 エイリアス:</b>
 
     '
@@ -566,33 +489,25 @@ settings:
   stable_branch: '
 
 
-    <tg-emoji emoji-id=5427009714745541184>🟢</tg-emoji> <b>安定版ブランチ</b> <code>{}</code>
-    <b>を使用しています！</b>'
-  no_command: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>コマンド</b> <code>{}</code>
-    <b>は存在しません</b>
-  no_command_loaded: '<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>コマンド</b>
-    <code>{}</code> <b>は存在しません</b>
+    <tg-emoji emoji-id=5427009714745541184>🟢</tg-emoji> <b>安定版ブランチ</b> <code>{}</code> <b>を使用しています！</b>'
+  no_command: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>コマンド</b> <code>{}</code> <b>は存在しません</b>
+  no_command_loaded: '<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>コマンド</b> <code>{}</code> <b>は存在しません</b>
 
 
     <b>読み込まれたエイリアス：</b><blockquote expandable>{}</blockquote>'
-  alias_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>エイリアス</b> <code>{alias}</code>
-    <b>はコマンド</b> <code>{command}</code> <b>に既に存在します</b>
+  alias_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>エイリアス</b> <code>{alias}</code> <b>はコマンド</b> <code>{command}</code> <b>に既に存在します</b>
   alias_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>コマンドとそのエイリアスを指定する必要があります</b>
   unstable: '
 
 
-    <tg-emoji emoji-id=5355133243773435190>❕</tg-emoji> <b>不安定なブランチ</b> <code>{}</code>
-    <b>を使用しています！</b>'
+    <tg-emoji emoji-id=5355133243773435190>❕</tg-emoji> <b>不安定なブランチ</b> <code>{}</code> <b>を使用しています！</b>'
   delalias_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>エイリアス名を指定する必要があります</b>
-  alias_removed: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>エイリアス</b>
-    <code>{}</code> <b>を削除しました</b>
-  aliases_removed: '<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>{count}
-    個のエイリアスを削除しました:</b>
+  alias_removed: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>エイリアス</b> <code>{}</code> <b>を削除しました</b>
+  aliases_removed: '<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>{count} 個のエイリアスを削除しました:</b>
 
     <blockquote expandable>{aliases}</blockquote>'
   aliases_cleared: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>すべてのエイリアスを削除しました</b>
-  no_alias: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>エイリアス</b> <code>{}</code>
-    <b>は存在しません</b>
+  no_alias: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>エイリアス</b> <code>{}</code> <b>は存在しません</b>
   db_cleared: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>データベースをクリアしました</b>
   elys: '{} <b>{}.{}.{}</b> <i>{}</i>
 
@@ -644,45 +559,36 @@ settings:
 
     3. 提供されたリンクからアカウントにログインします。'
   _cfg_rich_mode: ElysをRichメッセージで表示
-  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
-    bordered><tr><th>コンポーネント</th><th>現在のリリース</th></tr><tr><td><b>バージョン</b></td><td><code>{version}</code></td></tr><tr><td><b>ビルド</b></td><td>{build}</td></tr><tr><td><b>Elys
-    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>APIレイヤー</b></td><td><code>{layer}</code></td></tr><tr><td><b>現在のユーザー</b></td><td><code>{current_user}</code></td></tr><tr><td><b>開発者</b></td><td><a
-    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
-  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
-    bordered><tr><th>コンポーネント</th><th>現在のリリース</th></tr><tr><td><b>バージョン</b></td><td><code>{version}</code></td></tr><tr><td><b>ビルド</b></td><td>{build}</td></tr><tr><td><b>Elys
-    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>APIレイヤー</b></td><td><code>{layer}</code></td></tr><tr><td><b>現在のユーザー</b></td><td><code>{current_user}</code></td></tr><tr><td><b>開発者</b></td><td><a
-    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>コンポーネント</th><th>現在のリリース</th></tr><tr><td><b>バージョン</b></td><td><code>{version}</code></td></tr><tr><td><b>ビルド</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>APIレイヤー</b></td><td><code>{layer}</code></td></tr><tr><td><b>現在のユーザー</b></td><td><code>{current_user}</code></td></tr><tr><td><b>開発者</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>コンポーネント</th><th>現在のリリース</th></tr><tr><td><b>バージョン</b></td><td><code>{version}</code></td></tr><tr><td><b>ビルド</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>APIレイヤー</b></td><td><code>{layer}</code></td></tr><tr><td><b>現在のユーザー</b></td><td><code>{current_user}</code></td></tr><tr><td><b>開発者</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  no_aliases: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>保存されたエイリアスはまだありません</b>
 elys_config:
   name: ElysConfig
   choose_core: <tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>カテゴリを選択してください</b>
   configure: <tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>設定するモジュールを選択してください</b>
   configure_lib: 📦 <b>設定するライブラリを選択してください</b>
-  configuring_mod: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>モジュール</b>
-    <code>{}</code> <b>の設定オプションを選択してください</b>
+  configuring_mod: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>モジュール</b> <code>{}</code> <b>の設定オプションを選択してください</b>
 
 
     <b>現在のオプション:</b>
 
 
     {}'
-  configuring_folder: '<tg-emoji emoji-id=5433653135799228968>📁</tg-emoji> <b>フォルダー</b>
-    <code>{}</code> <b>の設定オプションを選択してください</b>
+  configuring_folder: '<tg-emoji emoji-id=5433653135799228968>📁</tg-emoji> <b>フォルダー</b> <code>{}</code> <b>の設定オプションを選択してください</b>
 
 
     <b>現在のオプション:</b>
 
 
     {}'
-  configuring_lib: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>ライブラリ</b>
-    <code>{}</code> <b>の設定オプションを選択してください</b>
+  configuring_lib: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>ライブラリ</b> <code>{}</code> <b>の設定オプションを選択してください</b>
 
 
     <b>現在のオプション:</b>
 
 
     {}'
-  configuring_category: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>モジュール</b>
-    <code>{}</code> <b>のカテゴリ</b> <code>{}</code> <b>の設定オプションを選択してください</b>
+  configuring_category: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>モジュール</b> <code>{}</code> <b>のカテゴリ</b> <code>{}</code> <b>の設定オプションを選択してください</b>
 
     <i>ℹ️ {}</i>
 
@@ -690,8 +596,7 @@ elys_config:
     <b>現在のオプション:</b>
 
     {}'
-  configuring_category_lib: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji>
-    <b>ライブラリ</b> <code>{}</code> <b>のカテゴリ</b> <code>{}</code> <b>の設定オプションを選択してください</b>
+  configuring_category_lib: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>ライブラリ</b> <code>{}</code> <b>のカテゴリ</b> <code>{}</code> <b>の設定オプションを選択してください</b>
 
     <i>ℹ️ {}</i>
 
@@ -710,8 +615,7 @@ elys_config:
   category_uncategorized: '
 
     <b><tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> その他</b>'
-  configuring_option: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>モジュール</b>
-    <code>{}</code> <b>のオプション</b> <code>{}</code> <b>を設定中</b>
+  configuring_option: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>モジュール</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>を設定中</b>
 
     <i>ℹ️ {}</i>
 
@@ -723,8 +627,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>ライブラリ</b>
-    <code>{}</code> <b>のオプション</b> <code>{}</code> <b>を設定中</b>
+  configuring_option_lib: '<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>を設定中</b>
 
     <i>ℹ️ {}</i>
 
@@ -736,19 +639,16 @@ elys_config:
 
 
     {}'
-  option_saved: '<tg-emoji emoji-id=5318933532825888187>⚙️</tg-emoji> <b>モジュール</b>
-    <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
+  option_saved: '<tg-emoji emoji-id=5318933532825888187>⚙️</tg-emoji> <b>モジュール</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
 
     <b>現在: {}</b>'
-  option_saved_lib: '<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>ライブラリ</b>
-    <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
+  option_saved_lib: '<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
 
     <b>現在: {}</b>'
   option_reset: '♻️ <b>モジュール</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>がデフォルトにリセットされました</b>
 
     <b>現在: {}</b>'
-  option_reset_lib: '♻️ <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code>
-    <b>がデフォルトにリセットされました</b>
+  option_reset_lib: '♻️ <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>がデフォルトにリセットされました</b>
 
     <b>現在: {}</b>'
   args: 🚫 <b>不正な引数が指定されました</b>
@@ -779,8 +679,7 @@ elys_config:
   _cls_doc: Elys Userbot 用のインタラクティブな設定ツール
 inline_stuff:
   name: InlineStuff
-  bot_username_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>指定されたボットのユーザー名が無効です。</b>
-    <code>bot</code> <b>で終わり、少なくとも4文字以上である必要があります</b>
+  bot_username_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>指定されたボットのユーザー名が無効です。</b> <code>bot</code> <b>で終わり、少なくとも4文字以上である必要があります</b>
   token_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>指定されたボットトークンが無効です。8〜10桁の数字、</b><code>:</code><b>、および34〜36文字の記号を含める必要があります</b>
   bot_username_occupied: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>このユーザー名は既に使用されています</b>
   bot_updated: <tg-emoji emoji-id=6318792204118656433>🎉</tg-emoji> <b>設定が正常に保存されました。変更を適用するにはユーザーボットを再起動してください</b>
@@ -804,17 +703,14 @@ inline_stuff:
 test:
   name: Tester
   set_loglevel: <tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>詳細レベルを整数または文字列で指定してください</b>
-  no_logs: <tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>詳細レベル</b> <code>{}</code>
-    <b>のログはありません。</b>
-  configping: 'カスタムテキスト。プレースホルダーを使用できます: {ping} - あなたの Ping。 {uptime} - 稼働時間。 {ping_hint}
-    - elys モジュールと同じヒント（ランダムな確率で選択）、設定で指定することも可能。 {hostname} - サーバーのホスト名が必要な場合'
+  no_logs: <tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>詳細レベル</b> <code>{}</code> <b>のログはありません。</b>
+  configping: 'カスタムテキスト。プレースホルダーを使用できます: {ping} - あなたの Ping。 {uptime} - 稼働時間。 {ping_hint} - elys モジュールと同じヒント（ランダムな確率で選択）、設定で指定することも可能。 {hostname} - サーバーのホスト名が必要な場合'
   configpingph: '🤖カスタムプレースホルダー: {}'
   hint: ヒントを設定
   ping_emoji: Ping が大幅に増加しない場合に表示される絵文字
   back: ↩️ 戻る
   banner_url: 'Ping 用の画像。例: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/ping_cmd.png'
-  logs_caption: '<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>詳細レベル</b>
-    <code>{}</code> <b>の Elys ログ</b>
+  logs_caption: '<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>詳細レベル</b> <code>{}</code> <b>の Elys ログ</b>
 
 
     <tg-emoji emoji-id=5228879218363872764>⚪️</tg-emoji> <b>バージョン: {}.{}.{}</b>{}'
@@ -826,8 +722,7 @@ test:
     <b>警告を無視するには</b> <code>.logs {0} -f</code> <b>と入力してください</b>'
   choose_loglevel: 💁‍♂️ <b>ログレベルを選択してください</b>
   bad_module: <tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>モジュールが見つかりません</b>
-  debugging_enabled: '<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>モジュール</b>
-    <code>{0}</code> <b>のデバッグモードが有効になりました</b>
+  debugging_enabled: '<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>モジュール</b> <code>{0}</code> <b>のデバッグモードが有効になりました</b>
 
     <i>`debug_modules` ディレクトリに移動し、`{0}.py` という名前のファイルを編集して、変更をリアルタイムで確認してください</i>'
   debugging_disabled: <tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>デバッグが無効になりました</b>
@@ -846,8 +741,7 @@ test:
   _cfg_rich_mode: pingをRichメッセージで表示
 updater:
   name: Updater
-  source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>ソースコードは</b> <a href='{}'>こちら</a>
-    <b>からお読みください</b>
+  source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>ソースコードは</b> <a href='{}'>こちら</a> <b>からお読みください</b>
   restarting_caption: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>{} を再起動しています...</b>
   downloading: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>更新をダウンロードしています...</b>
   installing: <tg-emoji emoji-id=5208622108191506906>🕗</tg-emoji> <b>更新をインストールしています...</b>
@@ -868,34 +762,28 @@ updater:
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>最新バージョンですが、とにかくアップデートを取得しますか？</b>
   cancel: 🚫 キャンセル
   stop_ub_confirm: あなたの {} は停止されました。本当によろしいですか？
-  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>ユーザーボットが完全に読み込まれました！
-    {}</b>
+  full_success: '<tg-emoji emoji-id=6028215594707324419>👍</tg-emoji> <b>ユーザーボットが完全に読み込まれました！ {}</b>
 
     <i>完全な再起動に {}秒かかりました</i>'
   ub_stop: '{emoji} は停止されました'
-  full_fail: '<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>ユーザーボットは完全に読み込まれましたが、エラーが発生しました！
-    {}
+  full_fail: '<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>ユーザーボットは完全に読み込まれましたが、エラーが発生しました！ {}
 
     <i>完全な再起動に {}秒かかりました
 
     {} 個のモジュールを読み込めませんでした</i>'
-  secure_boot_complete: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>セキュアブートが完了しました！
-    {}</b>
+  secure_boot_complete: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>セキュアブートが完了しました！ {}</b>
 
     <i>再起動に {}秒かかりました</i>'
-  secure_boot_fail: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>セキュアブートが完了しましたが、エラーが発生しました！
-    {}</b>
+  secure_boot_fail: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>セキュアブートが完了しましたが、エラーが発生しました！ {}</b>
 
     <i>再起動に {}秒かかりました
 
     {} 個のモジュールを読み込めませんでした</i>'
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ロールバックするコミット数を指定する必要があります！</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ロールバックしすぎています！</b>
-  rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>本当に {num}
-    コミット分ロールバックしますか？</b>
+  rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>本当に {num} コミット分ロールバックしますか？</b>
   rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>{num} コミット分ロールバックしています...</b>
-  autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> 新しい Elys
-    アップデート！
+  autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> 新しい Elys アップデート！
 
 
     🔮 新しい Elys バージョン #{} が利用可能です
@@ -945,8 +833,7 @@ updater:
   latest_disabled: 最新のアップデートに関する通知は抑制されました
   update: 🔄 アップデート
   ignore: 🚫 無視
-  changelog: <tg-emoji emoji-id=5434144690511290129>📰</tg-emoji> <b>最後のメジャーアップデートの変更履歴:</b><blockquote
-    expandable>{}</blockquote>
+  changelog: <tg-emoji emoji-id=5434144690511290129>📰</tg-emoji> <b>最後のメジャーアップデートの変更履歴:</b><blockquote expandable>{}</blockquote>
   _cmd_doc_autoupdate: 自動更新を切り替え
   _cmd_doc_changelog: 最後のメジャーアップデートの changelog を表示
   _cmd_doc_ubstop: ユーザーボットを停止
@@ -961,13 +848,11 @@ api_protection:
     <code>{prefix}support</code> グループで助けを求めることをお勧めします！
 
 
-    これが意図された動作であると思う場合は、ユーザーボットのロックが解除されるまで待ち、次回同様の操作を行う際は <code>{prefix}suspend_api_protect</code>
-    &lt;秒数&gt; を使用してください'
+    これが意図された動作であると思う場合は、ユーザーボットのロックが解除されるまで待ち、次回同様の操作を行う際は <code>{prefix}suspend_api_protect</code> &lt;秒数&gt; を使用してください'
   args_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>引数が無効です</b>
-  suspended_for: <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>API フラッド保護は
-    {} 秒間無効になります</b>
-  true: <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>保護が有効になりました</b>
-  false: <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>保護が無効になりました</b>
+  suspended_for: <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>API フラッド保護は {} 秒間無効になります</b>
+  'true': <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>保護が有効になりました</b>
+  'false': <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>保護が無効になりました</b>
   u_sure: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>よろしいですか？</b>
   _cfg_time_sample: ボットがリクエストをカウントする時間サンプル
   _cfg_threshold: 保護をトリガーするリクエストのしきい値
@@ -985,8 +870,7 @@ help:
   undoc: 🦥 ドキュメントなし
   all_header: <b>{} 個のモジュールが利用可能、{} 個が非表示:</b>
   no_mod: 🚫 <b>非表示にするモジュールを指定してください</b>
-  help_lib: '<tg-emoji emoji-id=5404553572727660202>❌</tg-emoji> <b>パッケージ</b> <code>{}</code>
-    <b>はライブラリです。</b>
+  help_lib: '<tg-emoji emoji-id=5404553572727660202>❌</tg-emoji> <b>パッケージ</b> <code>{}</code> <b>はライブラリです。</b>
 
     <tg-emoji emoji-id=5404553572727660202>❌</tg-emoji> <b>ライブラリには説明がありません...</b>'
   developer: '<tg-emoji emoji-id=5287454910059654880>🫶</tg-emoji> 開発者: {}'
@@ -1017,21 +901,8 @@ help:
   rich_placeholders: プレースホルダー
   rich_commands: コマンド
 elys_info:
-  info_message: "{}\n<blockquote>┌\n├  【<tg-emoji emoji-id=5883964170268840032>\U0001F464\
-    </tg-emoji>】 <b>所有者</b>: {me}\n├  【<tg-emoji emoji-id=5931415565955503486>\U0001F916\
-    </tg-emoji>】 <b>バージョン</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji\
-    \ emoji-id=5778335621491723621>\U0001F4F7</tg-emoji>】 <b>プレフィックス</b>: {prefix}⠀\
-    \ ⠀ \n├  【<tg-emoji emoji-id=5843799474362652262>\U0001F504</tg-emoji>】 <b>稼働時間</b>:\
-    \ {uptime}\n├  【<tg-emoji emoji-id=5879770735999717115>\U0001F464</tg-emoji>】\
-    \ <b>ブランチ</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5775887550262546277>❗️</tg-emoji>】\
-    \ <b>ＣＰＵ</b>: {cpu_usage}\n├  【<tg-emoji emoji-id=5931409969613116639>\U0001F6E1\
-    </tg-emoji>】 <b>ＲＡＭ</b>: {ram_usage}\n├  【<tg-emoji emoji-id=5931472654660800739>\U0001F4CA\
-    </tg-emoji>】 <b>Ｐｉｎｇ</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji\
-    \ emoji-id=5926783847453692661>\U0001F6E1</tg-emoji>】 <b>更新</b>: {upd}\n├  【<tg-emoji\
-    \ emoji-id=5931415565955503486>\U0001F916</tg-emoji>】 <b>ホスト</b>: {platform}\n\
-    ├  【<tg-emoji emoji-id=5819078828017849357>\U0001F916</tg-emoji>】 <b>ＯＳ</b>: {os}\n\
-    ├  【<tg-emoji emoji-id=5819078828017849357>\U0001F916</tg-emoji>】 <b>Python Ver</b>:\
-    \ {python_ver}\n└</blockquote>"
+  info_message: "{}\n<blockquote>┌\n├  【<tg-emoji emoji-id=5883964170268840032>\U0001F464</tg-emoji>】 <b>所有者</b>: {me}\n├  【<tg-emoji emoji-id=5931415565955503486>\U0001F916</tg-emoji>】 <b>バージョン</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5778335621491723621>\U0001F4F7</tg-emoji>】 <b>プレフィックス</b>: {prefix}⠀ ⠀ \n├  【<tg-emoji emoji-id=5843799474362652262>\U0001F504</tg-emoji>】 <b>稼働時間</b>: {uptime}\n├  【<tg-emoji emoji-id=5879770735999717115>\U0001F464</tg-emoji>】 <b>ブランチ</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5775887550262546277>❗️</tg-emoji>】 <b>ＣＰＵ</b>: {cpu_usage}\n├  【<tg-emoji emoji-id=5931409969613116639>\U0001F6E1</tg-emoji>】 <b>ＲＡＭ</b>: {ram_usage}\n├  【<tg-emoji emoji-id=5931472654660800739>\U0001F4CA</tg-emoji>】 <b>Ｐｉｎｇ</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5926783847453692661>\U0001F6E1</tg-emoji>】 <b>更新</b>: {upd}\n├  【<tg-emoji emoji-id=5931415565955503486>\U0001F916</tg-emoji>】 <b>ホスト</b>: {platform}\n\
+    ├  【<tg-emoji emoji-id=5819078828017849357>\U0001F916</tg-emoji>】 <b>ＯＳ</b>: {os}\n├  【<tg-emoji emoji-id=5819078828017849357>\U0001F916</tg-emoji>】 <b>Python Ver</b>: {python_ver}\n└</blockquote>"
   non_detectable: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>このコンポーネントはお使いのサーバーでは検出できません！</b>
   ping_emoji: 情報内の Ping 用絵文字
   send_info: ユーザーボット情報を送信
@@ -1040,9 +911,7 @@ elys_info:
   update_required: <b>更新が必要です</b> <code>{prefix}update</code>
   switchinfo_on: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> 画像情報をオンにしました
   switchinfo_off: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> 画像情報をオフにしました
-  _cfg_cst_msg: 情報のカスタムメッセージ。{me}, {version}, {build}, {prefix}, {platform}, {upd},
-    {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel},
-    {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} キーワードを含めることができます
+  _cfg_cst_msg: 情報のカスタムメッセージ。{me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} キーワードを含めることができます
   _cfg_cst_ph: '🤖カスタムプレースホルダー: {}'
   _cfg_cst_btn: 情報のカスタムボタン。ボタンを削除するには空のままにしてください
   _cfg_banner: 画像バナーのURL
@@ -1052,8 +921,7 @@ elys_info:
     <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> ユーザーボットとは、Telegram API と対話して<b>ユーザーに代わって自動化されたタスクを実行するサードパーティのプログラム</b>のことです。これらのユーザーボットは、<b>メッセージの送信、チャンネルへの参加、メディアのダウンロードなど</b>、さまざまなタスクを自動化するために使用できます。
 
 
-    <tg-emoji emoji-id=5474667187258006816>😎</tg-emoji> ユーザーボットは、ボットアカウントではなく<b>ユーザーのアカウントで実行される</b>ため、通常の
-    Telegram ボットとは異なります。つまり、ユーザーボットはより多くの機能にアクセスでき、実行できるアクションの柔軟性が高くなります。
+    <tg-emoji emoji-id=5474667187258006816>😎</tg-emoji> ユーザーボットは、ボットアカウントではなく<b>ユーザーのアカウントで実行される</b>ため、通常の Telegram ボットとは異なります。つまり、ユーザーボットはより多くの機能にアクセスでき、実行できるアクションの柔軟性が高くなります。
 
 
     <tg-emoji emoji-id=5472267631979405211>🚫</tg-emoji> ただし、<b>ユーザーボットは Telegram によって公式にサポートされていない</b>ことに注意してください。使用するとプラットフォームの利用規約に違反する可能性があります。そのため、<b>ユーザーはユーザーボットを使用する際に注意が必要であり</b>、悪意のある目的で使用されていないことを確認する必要があります。
@@ -1061,8 +929,7 @@ elys_info:
 
     '
   no_font: <tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> フォントへのリンクまたは返信はどこですか？
-  no_banner: '<tg-emoji emoji-id=6010394680179562842>😶</tg-emoji> <b>指定されたリンク </b><code>{link></code><b>
-    には何も見つかりませんでした。
+  no_banner: '<tg-emoji emoji-id=6010394680179562842>😶</tg-emoji> <b>指定されたリンク </b><code>{link></code><b> には何も見つかりませんでした。
 
 
     リンク先のファイルの整合性を確認し、リンクがファイルを直接指していることも確認してください。</b>'
@@ -1080,29 +947,17 @@ elys_info:
   _cmd_doc_setinfo: <text> - .info のテキストを変更します
   _ihandle_doc_info: ユーザーボット情報を送信します
   _cls_doc: ユーザーボット情報を表示します
-  show_preview_in_help: 'helpコマンドのプレビューに # meta banner を表示 [module]'
+  show_preview_in_help: help [module] でモジュールバナーのプレビューを表示しますか？
   name: ElysInfo
   _cfg_rich_mode: infoをRichメッセージで表示
-  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>概要</summary><table><tr><th>概要</th><th>所有者</th></tr><tr><td>【<tg-emoji
-    emoji-id=5883964170268840032>👤</tg-emoji>】 <b>所有者</b></td><td>{me}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>バージョン</b></td><td>{version}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5778335621491723621>📷</tg-emoji>】 <b>プレフィックス</b></td><td>{prefix}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5843799474362652262>🔄</tg-emoji>】 <b>稼働時間</b></td><td>{uptime}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5879770735999717115>👤</tg-emoji>】 <b>ブランチ</b></td><td>{branch}</td></tr></table></details><details><summary>状態</summary><table><tr><th>状態</th><th>更新</th></tr><tr><td>【<tg-emoji
-    emoji-id=5926783847453692661>🛡</tg-emoji>】 <b>更新</b></td><td>{upd}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5775887550262546277>❗️</tg-emoji>】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5931409969613116639>🛡</tg-emoji>】 <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5931472654660800739>📊</tg-emoji>】 <b>Ping</b></td><td>{ping}</td></tr></table></details><details><summary>環境</summary><table><tr><th>環境</th><th>OS</th></tr><tr><td>【<tg-emoji
-    emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>ホスト</b></td><td>{platform}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>OS</b></td><td>{os}</td></tr><tr><td>【<tg-emoji
-    emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>Python</b></td><td>{python_ver}</td></tr></table></details>
+  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>概要</summary><table><tr><th>概要</th><th>所有者</th></tr><tr><td>【<tg-emoji emoji-id=5883964170268840032>👤</tg-emoji>】 <b>所有者</b></td><td>{me}</td></tr><tr><td>【<tg-emoji emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>バージョン</b></td><td>{version}</td></tr><tr><td>【<tg-emoji emoji-id=5778335621491723621>📷</tg-emoji>】 <b>プレフィックス</b></td><td>{prefix}</td></tr><tr><td>【<tg-emoji emoji-id=5843799474362652262>🔄</tg-emoji>】 <b>稼働時間</b></td><td>{uptime}</td></tr><tr><td>【<tg-emoji emoji-id=5879770735999717115>👤</tg-emoji>】 <b>ブランチ</b></td><td>{branch}</td></tr></table></details><details><summary>状態</summary><table><tr><th>状態</th><th>更新</th></tr><tr><td>【<tg-emoji emoji-id=5926783847453692661>🛡</tg-emoji>】 <b>更新</b></td><td>{upd}</td></tr><tr><td>【<tg-emoji emoji-id=5775887550262546277>❗️</tg-emoji>】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【<tg-emoji emoji-id=5931409969613116639>🛡</tg-emoji>】 <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【<tg-emoji
+    emoji-id=5931472654660800739>📊</tg-emoji>】 <b>Ping</b></td><td>{ping}</td></tr></table></details><details><summary>環境</summary><table><tr><th>環境</th><th>OS</th></tr><tr><td>【<tg-emoji emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>ホスト</b></td><td>{platform}</td></tr><tr><td>【<tg-emoji emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>OS</b></td><td>{os}</td></tr><tr><td>【<tg-emoji emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>Python</b></td><td>{python_ver}</td></tr></table></details>
 loader:
   name: Loader
   link: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>{class_name} のファイル</b>
 
 
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>インストールするには、このメッセージに返信して
-    {prefix}lm</b>
+    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>インストールするには、このメッセージに返信して {prefix}lm</b>
 
 
     <tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>
@@ -1112,16 +967,14 @@ loader:
   file: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>{class_name} のファイル</b>
 
 
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>インストールするには、このメッセージに返信して
-    {prefix}lm</b>
+    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>インストールするには、このメッセージに返信して {prefix}lm</b>
 
 
     {not_exact}'
   finding_module_in_repos: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> リポジトリ内のモジュールを探しています。
   loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> モジュールを読み込んでいます。
   ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> モジュールをファイルとしてダウンロードしています。
-  no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>モジュール</b> <code>{}</code>
-    <b>はファイルとしてエクスポートできません</b>
+  no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>モジュール</b> <code>{}</code> <b>はファイルとしてエクスポートできません</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>完全一致が見つからなかったため、最も近い結果が表示されています</i>
   args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>引数を指定する必要があります</b>
   repo_config_doc: モジュールリポジトリへのURL
@@ -1131,22 +984,18 @@ loader:
   provide_module: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>読み込むモジュールを提供してください</b>
   bad_unicode: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール内のUnicode形式が無効です</b>
   load_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>読み込みに失敗しました。詳細はログを確認してください</b>
-  loaded: <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>モジュール</b> <code>{}</code>{}
-    <b>が読み込まれました {}</b>{}{}{}{}{}{}{}{}
+  loaded: <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>モジュール</b> <code>{}</code>{} <b>が読み込まれました {}</b>{}{}{}{}{}{}{}{}
   no_class: <b>どのクラスをアンロードする必要がありますか？</b>
   unloaded: '{} <b>モジュール {} がアンロードされました。</b>'
-  unload_suggestions: '<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>モジュール</b>
-    <code>{}</code> <b>が見つかりません。</b>
+  unload_suggestions: '<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>モジュール</b> <code>{}</code> <b>が見つかりません。</b>
 
 
     <b>もしかして:</b>'
-  modules_unloaded: '<tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>{unloaded_num}
-    個のモジュールをアンロードしました:</b>
+  modules_unloaded: '<tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>{unloaded_num} 個のモジュールをアンロードしました:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
   not_unloaded: <tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>モジュールはアンロードされませんでした。</b>
-  modules_not_unloaded: '<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>{not_unloaded}
-    個のモジュールのアンロードに失敗しました。</b>
+  modules_not_unloaded: '<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>{not_unloaded} 個のモジュールのアンロードに失敗しました。</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>要件のインストールに失敗しました</b>
@@ -1155,29 +1004,24 @@ loader:
 
 
     {}</b>'
-  requirements_restart: <tg-emoji emoji-id=5875145601682771643>🚀</tg-emoji> <b>要件はインストールされましたが、</b>
-    <code>{}</code> <b>を適用するには再起動が必要です</b>
+  requirements_restart: <tg-emoji emoji-id=5875145601682771643>🚀</tg-emoji> <b>要件はインストールされましたが、</b> <code>{}</code> <b>を適用するには再起動が必要です</b>
   all_modules_deleted: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>すべてのモジュールが削除されました</b>
   undoc: <tg-emoji emoji-id=5427052514094619126>🤷‍♀️</tg-emoji> ドキュメントなし
   ihandler: '
 
     <tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <code>{}</code> {}'
-  inline_init_failed: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールには
-    Elys インライン機能が必要ですが、InlineManager の初期化に失敗しました</b>
+  inline_init_failed: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールには Elys インライン機能が必要ですが、InlineManager の初期化に失敗しました</b>
 
     <i>@BotFather から古いボットの1つを削除し、ユーザーボットを再起動してこのモジュールをロードしてください</i>'
-  version_incompatible: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールには
-    Elys {}+ が必要です
+  version_incompatible: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールには Elys {}+ が必要です
 
     </b> <code>.update</code> <b>で更新してください</b>'
-  ffmpeg_required: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールには
-    FFMPEG が必要ですが、インストールされていません</b>
+  ffmpeg_required: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールには FFMPEG が必要ですが、インストールされていません</b>
   developer: '
 
 
     <tg-emoji emoji-id=5287454910059654880>🫶</tg-emoji> <b>開発者:</b> {}'
-  depends_from: "\n\n<tg-emoji emoji-id=5341492148468465410>\U0001F4E6</tg-emoji>\
-    \ <b>依存関係:</b> \n{}"
+  depends_from: "\n\n<tg-emoji emoji-id=5341492148468465410>\U0001F4E6</tg-emoji> <b>依存関係:</b> \n{}"
   by: by
   module_fs: 💿 <b>再起動後にアンロードされないように、このモジュールをファイルシステムに保存しますか？</b>
   save: 💿 保存
@@ -1194,8 +1038,7 @@ loader:
   blob_link: '
 
 
-    <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>モジュールのダウンロードに `blob` リンクを使用しないでください。代わりに
-    `raw` に切り替えることを検討してください</b>'
+    <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>モジュールのダウンロードに `blob` リンクを使用しないでください。代わりに `raw` に切り替えることを検討してください</b>'
   suggest_subscribe: '
 
 
@@ -1207,46 +1050,36 @@ loader:
   confirm_clearmodules: ⚠️ <b>本当にすべてのモジュールをクリアしますか？</b>
   clearmodules: 🗑 モジュールをクリア
   cancel: 🚫 キャンセル
-  overwrite_module: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールはコアモジュール
-    (</b><code>{}</code><b>) を上書きしようとしました</b>
+  overwrite_module: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールはコアモジュール (</b><code>{}</code><b>) を上書きしようとしました</b>
 
 
     <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i> バグとして報告しないでください。これはコアモジュールがジャンクなものに置き換えられるのを防ぐセキュリティ対策です</i>'
-  scam_module: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>モジュール</b> <code>{name}</code>
-    <b>は詐欺です。サポートグループ (</b><code>{prefix}support</code><b>) に報告してください</b>
+  scam_module: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>モジュール</b> <code>{name}</code> <b>は詐欺です。サポートグループ (</b><code>{prefix}support</code><b>) に報告してください</b>
 
 
     <tg-spoiler><i>保護により読み込みが停止されました。</i></tg-spoiler>'
-  overwrite_command: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールはコアコマンド
-    (</b><code>{}{}</code><b>) を上書きしようとしました</b>
+  overwrite_command: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>このモジュールはコアコマンド (</b><code>{}{}</code><b>) を上書きしようとしました</b>
 
 
     <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i> バグとして報告しないでください。これはコアモジュールのコマンドがジャンクなものに置き換えられるのを防ぐセキュリティ対策です</i>'
-  unload_core: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>コアモジュール</b>
-    <code>{}</code> <b>はアンロードできません</b>
+  unload_core: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>コアモジュール</b> <code>{}</code> <b>はアンロードできません</b>
 
 
     <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i> バグとして報告しないでください。これはコアモジュールがジャンクなものに置き換えられるのを防ぐセキュリティ対策です</i>'
   cannot_unload_lib: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>ライブラリはアンロードできません</b>
-  wait_channel_approve: '<tg-emoji emoji-id=5469741319330996757>💫</tg-emoji> <b>モジュール</b>
-    <code>{}</code> <b>がチャンネル <a href="https://t.me/{}">{}</a> への参加許可を求めています。
+  wait_channel_approve: '<tg-emoji emoji-id=5469741319330996757>💫</tg-emoji> <b>モジュール</b> <code>{}</code> <b>がチャンネル <a href="https://t.me/{}">{}</a> への参加許可を求めています。
 
 
     <b><tg-emoji emoji-id=5467666648263564704>❓</tg-emoji> 理由: {}</b>
 
 
     <i><a href="https://t.me/{}">承認</a>を待っています...</i>'
-  installing: <tg-emoji emoji-id=5325792861885570739>🕔</tg-emoji> <b>モジュール</b> <code>{}</code>
-    <b>をインストールしています...</b>
-  repo_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>リポジトリ</b> <code>{}</code>
-    <b>は既に追加されています</b>
-  repo_added: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>リポジトリ</b> <code>{}</code>
-    <b>が追加されました</b>
+  installing: <tg-emoji emoji-id=5325792861885570739>🕔</tg-emoji> <b>モジュール</b> <code>{}</code> <b>をインストールしています...</b>
+  repo_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>リポジトリ</b> <code>{}</code> <b>は既に追加されています</b>
+  repo_added: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>リポジトリ</b> <code>{}</code> <b>が追加されました</b>
   no_repo: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>追加するリポジトリを指定する必要があります</b>
-  repo_not_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>リポジトリ</b>
-    <code>{}</code> <b>は追加されていません</b>
-  repo_deleted: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>リポジトリ</b> <code>{}</code>
-    <b>が削除されました</b>
+  repo_not_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>リポジトリ</b> <code>{}</code> <b>は追加されていません</b>
+  repo_deleted: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>リポジトリ</b> <code>{}</code> <b>が削除されました</b>
   _cmd_doc_addrepo: リポジトリをリポジトリリストに追加します
   _cmd_doc_clearmodules: インストールされているすべてのモジュールを削除します
   _cmd_doc_delrepo: リポジトリをリポジトリリストから削除します
@@ -1258,10 +1091,8 @@ loader:
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>すべてのモジュールをインストールするリポジトリを選択してください:</b>
   installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>リポジトリからすべてのモジュールをインストール中...</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>リポジトリからすべてのモジュールが正常にインストールされました！</b>
-  dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji>
-    <b>このリポジトリにモジュールが見つかりません！</b>
-  dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji>
-    <b>一部のモジュールのインストールに失敗しました:</b>
+  dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>このリポジトリにモジュールが見つかりません！</b>
+  dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>一部のモジュールのインストールに失敗しました:</b>
 
     '
   show_banner_doc: メタバナーのプレビューを表示しますか？
@@ -1281,9 +1112,7 @@ loader:
 
 
     <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
-  verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>サードパーティ
-    モジュールをインストールする機能のロックを解除するには、<a href="https://t.me/{}?start=lm_verify">ボット</a></b>
-    でテストを完了してください。
+  verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>サードパーティ モジュールをインストールする機能のロックを解除するには、<a href="https://t.me/{}?start=lm_verify">ボット</a></b> でテストを完了してください。
 translations:
   name: Translations
   lang_saved: '{} <b>言語が保存されました！</b>'
@@ -1297,15 +1126,12 @@ translations:
   off_langs: 🏴‍☠️ 公式
   meme_langs: 🏴‍☠️ ミーム
   not_official: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>この言語は公式にサポートされていません</b>
-  requested_join: '💫 <b>モジュール</b> <code>{}</code> <b>がチャンネル <a href=''https://t.me/{}''>{}</a>
-    への参加をリクエストしました</b>
+  requested_join: '💫 <b>モジュール</b> <code>{}</code> <b>がチャンネル <a href=''https://t.me/{}''>{}</a> への参加をリクエストしました</b>
 
 
     <b>❓ 理由:</b> <i>{}</i>'
-  fw_error: <tg-emoji emoji-id=5877458226823302157>🕒</tg-emoji> <b>呼び出し</b> <code>{}</code>
-    <b>により、メソッド</b> <code>{}</code> <b>で {} の FloodWait が発生しました</b>
-  rpc_error: <tg-emoji emoji-id=5877477244938489129>🚫</tg-emoji> <b>呼び出し</b> <code>{}</code>
-    <b>はRPCエラーにより失敗しました:</b> <code>{}</code>
+  fw_error: <tg-emoji emoji-id=5877458226823302157>🕒</tg-emoji> <b>呼び出し</b> <code>{}</code> <b>により、メソッド</b> <code>{}</code> <b>で {} の FloodWait が発生しました</b>
+  rpc_error: <tg-emoji emoji-id=5877477244938489129>🚫</tg-emoji> <b>呼び出し</b> <code>{}</code> <b>はRPCエラーにより失敗しました:</b> <code>{}</code>
   _cmd_doc_dllangpack: '[リンク] - 外部の翻訳パックを追加'
   _cmd_doc_setlang: '[言語] - デフォルトの言語を変更する'
   downloaded_langs: ダウンロード済み
@@ -1379,8 +1205,7 @@ translate:
   _cls_doc: テキストを翻訳します（当たり前ですが）
 quickstart:
   name: Quickstart
-  base: '<tg-emoji emoji-id=5463379725441341739>🌟</tg-emoji> <b>こんにちは。</b> あなたの <b>{}</b>
-    ユーザーボットがインストールされました。
+  base: '<tg-emoji emoji-id=5463379725441341739>🌟</tg-emoji> <b>こんにちは。</b> あなたの <b>{}</b> ユーザーボットがインストールされました。
 
 
     <tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>お困りですか？</b> <a href="https://t.me/ElysTalk">サポートチャット</a>にご参加ください。私たちは<b>誰でも</b>サポートします。
@@ -1389,20 +1214,15 @@ quickstart:
     <tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>クイックガイド:</b>
 
 
-    <tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> モジュールのリストを見るには <code>.help</code>
-    と<b>書いてください</b>
+    <tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> モジュールのリストを見るには <code>.help</code> と<b>書いてください</b>
 
-    <tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> モジュールの説明を見るには <code>.help
-    &lt;モジュール名/コマンド&gt;</code> と<b>書いてください</b>
+    <tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> モジュールの説明を見るには <code>.help &lt;モジュール名/コマンド&gt;</code> と<b>書いてください</b>
 
-    <tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> リンクからモジュールを読み込むには <code>.dlmod
-    &lt;リンク&gt;</code> と<b>書いてください</b>
+    <tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> リンクからモジュールを読み込むには <code>.dlmod &lt;リンク&gt;</code> と<b>書いてください</b>
 
-    <tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> ファイルからモジュールを読み込むには、そのファイルに返信して
-    <code>.loadmod</code> と<b>書いてください</b>
+    <tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> ファイルからモジュールを読み込むには、そのファイルに返信して <code>.loadmod</code> と<b>書いてください</b>
 
-    <tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> モジュールをアンロードするには <code>.unloadmod
-    &lt;モジュール名&gt;</code> と<b>書いてください</b>
+    <tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> モジュールをアンロードするには <code>.unloadmod &lt;モジュール名&gt;</code> と<b>書いてください</b>
 
 
     <tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>Elysは、独自のモジュールに加えて、Hikka、Friendly-Telegram、GeekTGのモジュールをサポートしています。</b>
@@ -1498,51 +1318,36 @@ elys_plugin_security:
   _cmd_doc_unexternal: <module> - モジュールのユーザーボット完全アクセスを許可
   no_hash: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール名を指定してください</b>
   hash_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>この名前のモジュールは見つかりません</b>
-  hash_not_found_suggest: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>一致なし。最も近い候補:</b>
-    <code>{}</code>
+  hash_not_found_suggest: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>一致なし。最も近い候補:</b> <code>{}</code>
   hash_list: '<tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>モジュールハッシュ:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_hashes: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュール ハッシュが見つかりません</b>
-  external_removed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>is_external
-    は </b> <code>{}</code> のために削除されました
-  external_restored: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>is_external
-    が </b> <code>{}</code> 用に復元されました
-  already_internal: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Module</b>
-    <code>{}</code> <b> はすでに内部です</b>
-  already_external: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Module</b>
-    <code>{}</code> <b> はすでに外部です </b>
-  session_allowed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>.session
-    へのアクセスが </b> <code>{}</code> に許可されました
-  session_denied: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>.session
-    のアクセスが拒否されました。</b> <code>{}</code>
-  already_allowed: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>.session
-    へのアクセスはすでに </b> <code>{}</code> に許可されています
-  already_denied: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>.session
-    へのアクセスはすでに拒否されました </b> <code>{}</code>
+  external_removed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>is_external は </b> <code>{}</code> のために削除されました
+  external_restored: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>is_external が </b> <code>{}</code> 用に復元されました
+  already_internal: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Module</b> <code>{}</code> <b> はすでに内部です</b>
+  already_external: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Module</b> <code>{}</code> <b> はすでに外部です </b>
+  session_allowed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>.session へのアクセスが </b> <code>{}</code> に許可されました
+  session_denied: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>.session のアクセスが拒否されました。</b> <code>{}</code>
+  already_allowed: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>.session へのアクセスはすでに </b> <code>{}</code> に許可されています
+  already_denied: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>.session へのアクセスはすでに拒否されました </b> <code>{}</code>
   no_permissions: <tg-emoji emoji-id=5870450390679425417>🗒</tg-emoji> <b>権限がありません</b>
   permissions_list: '<tg-emoji emoji-id=5870450390679425417>🗒</tg-emoji> <b>権限:</b>
 
     {}
 
     '
-  sgroup_li: <tg-emoji emoji-id=4974264756668990388>▫️</tg-emoji> <code>{}</code>
-    · <b>{} ユーザー(-s)</b> · <b>{} ルール(-s)</b>
+  sgroup_li: <tg-emoji emoji-id=4974264756668990388>▫️</tg-emoji> <code>{}</code> · <b>{} ユーザー(-s)</b> · <b>{} ルール(-s)</b>
   sgroups_list: '<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティ グループ:</b>
 
 
     {}'
-  deleted_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b>
-    <code>{}</code> <b>削除</b>
-  user_already_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>User</b>
-    <code>{}</code> <b>すでにセキュリティ グループに属しています</b> <code>{}</code>
-  user_added_to_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>User</b>
-    <code>{}</code> <b>セキュリティグループに追加されました</b> <code>{}</code>
-  user_not_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>User</b>
-    <code>{}</code> <b>はセキュリティ グループに属していません</b> <code>{}</code>
-  user_removed_from_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>User</b>
-    <code>{}</code> <b>セキュリティ グループから削除されました</b> <code>{}</code>
+  deleted_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>セキュリティグループ</b> <code>{}</code> <b>削除</b>
+  user_already_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>User</b> <code>{}</code> <b>すでにセキュリティ グループに属しています</b> <code>{}</code>
+  user_added_to_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>User</b> <code>{}</code> <b>セキュリティグループに追加されました</b> <code>{}</code>
+  user_not_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>User</b> <code>{}</code> <b>はセキュリティ グループに属していません</b> <code>{}</code>
+  user_removed_from_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>User</b> <code>{}</code> <b>セキュリティ グループから削除されました</b> <code>{}</code>
   _cmd_doc_delsgroup: <name> - セキュリティグループの削除
   _cmd_doc_sgroup: <name> - セキュリティグループ情報を表示
   _cmd_doc_sgroups: セキュリティグループの一覧表示
@@ -1574,13 +1379,10 @@ loader_restrictor:
   q4_ans3: いいえ、しかしユーザーボットの基本的な保護はそのようなアクティビティを捕捉する必要があります
   q4_ans4: 必ずしもそうとは限りません - モジュールは手遅れになるまで、通知なしで目に見えずに動作する可能性があります
   q4_hint: 悪意のあるモジュールの主な危険性はステルスです。コードを事前にチェックしないと、手遅れになるまで問題に気付かない可能性があります。
-  timeout: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>すべての質問に時間内に回答できませんでした。
-    </b> <code>/start lm_verify</code> を送信してもう一度お試しください。
-  failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>間違った答えです。サードパーティ
-    モジュールのインストールのロックを解除するには、</b> <code>/start lm_verify</code> を送信して再試行してください。
-  already_passed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>すでにチェックに合格しています
-    - サードパーティ モジュールのインストールはロック解除されています</b>
-  unlocked: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>チェックに合格し、サードパーティ
-    モジュールのインストールのロックが解除されました</b>
+  timeout: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>すべての質問に時間内に回答できませんでした。 </b> <code>/start lm_verify</code> を送信してもう一度お試しください。
+  failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>間違った答えです。サードパーティ モジュールのインストールのロックを解除するには、</b> <code>/start lm_verify</code> を送信して再試行してください。
+  already_passed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>すでにチェックに合格しています - サードパーティ モジュールのインストールはロック解除されています</b>
+  unlocked: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>チェックに合格し、サードパーティ モジュールのインストールのロックが解除されました</b>
   unlock_prompt: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>サードパーティ モジュールのインストールのロックを解除するには、簡単なチェックを完了してください</b>
   unlock_prompt_btn: 小切手を受け取ります
+  name: LoaderRestrictor
