@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 IS_DOCKER = "DOCKER" in os.environ
 IS_HIKKAHOST = "HIKKAHOST" in os.environ
+IS_RNHOST = "RNHOST" in os.environ or "RN_HOST" in os.environ
 IS_MACOS = "com.apple" in os.environ.get("PATH", "")
 IS_USERLAND = "userland" in os.environ.get("USER", "")
 IS_WSL = False
@@ -60,6 +61,9 @@ def get_named_platform() -> str:
         case _ if IS_HIKKAHOST:
             return "HikkaHost"
 
+        case _ if IS_RNHOST:
+            return "RnHost"
+
         case _ if IS_DOCKER:
             return "Docker"
 
@@ -101,6 +105,9 @@ def get_named_platform_emoji() -> str:
         case _ if IS_HIKKAHOST:
             return "🌼 "
 
+        case _ if IS_RNHOST:
+            return "❤️‍🔥 "
+
         case _ if IS_DOCKER:
             return "🐳 "
 
@@ -130,6 +137,9 @@ def get_platform_emoji() -> str:
 
         case _ if IS_USERLAND:
             return BASE.format(5458877818031077824)
+
+        case _ if IS_RNHOST:
+            return BASE.format(5276415504079164229)
 
         case _ if IS_DOCKER:
             return BASE.format(5352678227582152630)
