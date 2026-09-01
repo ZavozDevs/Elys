@@ -117,35 +117,29 @@ def get_named_platform_emoji() -> str:
 
 def get_platform_emoji() -> str:
     """
-    Returns custom emoji for current platform
+    Returns custom emoji for current platform + Elys logo
     :return: Emoji entity in string
     """
 
-    BASE = "".join(
-        (
-            "<tg-emoji emoji-id={}>⭐</tg-emoji>",
-            "<tg-emoji emoji-id=5238125033116705019>❤️</tg-emoji>",
-            "<tg-emoji emoji-id=5237713227357397987>❤️</tg-emoji>",
-            "<tg-emoji emoji-id=5238101041429386602>❤️</tg-emoji>",
-        )
+    ELYS_LOGO = (
+        "<tg-emoji emoji-id=5237836252400626980>⭐</tg-emoji>"
+        "<tg-emoji emoji-id=5238125033116705019>❤️</tg-emoji>"
+        "<tg-emoji emoji-id=5237713227357397987>❤️</tg-emoji>"
+        "<tg-emoji emoji-id=5238101041429386602>❤️</tg-emoji>"
     )
 
+    platform_prefix = ""
     match True:
-
         case _ if IS_HIKKAHOST:
-            return BASE.format(5395745114494624362)
-
+            platform_prefix = "<tg-emoji emoji-id=5395745114494624362>🌼</tg-emoji>"
         case _ if IS_USERLAND:
-            return BASE.format(5458877818031077824)
-
+            platform_prefix = "<tg-emoji emoji-id=5458877818031077824>🐧</tg-emoji>"
         case _ if IS_RNHOST:
-            return BASE.format(5276415504079164229)
-
+            platform_prefix = "<tg-emoji emoji-id=5276415504079164229>❤️‍🔥</tg-emoji>"
         case _ if IS_DOCKER:
-            return BASE.format(5352678227582152630)
+            platform_prefix = "<tg-emoji emoji-id=5352678227582152630>🐳</tg-emoji>"
 
-        case _:
-            return BASE.format(5237836252400626980)
+    return f"{platform_prefix}{ELYS_LOGO}"
 
 
 def uptime() -> int:
