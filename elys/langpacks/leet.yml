@@ -767,7 +767,7 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>U r 0n 7h3 l47357 v3r510n, pull upd4735 4nyw4y?</b>
   cancel: 🚫 C4nc3l
-  branch_menu: "<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n\n<blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> - стабильная\n<tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> - бета-версия\n<tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_menu: "<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote><blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> - стабильная\n<tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> - бета-версия\n<tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> - разработка (нестабильная)</blockquote>"
   branch_switching: "<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
   branch_switched: "<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
   branch_switch_fail: "<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
