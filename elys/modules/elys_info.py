@@ -185,7 +185,12 @@ class ElysInfoMod(loader.Module):
         if cpu_info:
             data["cpu"] = cpu_info
 
-        data = await utils.get_placeholders(data, self.config["custom_message"])
+        data = await utils.get_placeholders(
+            data,
+            self.config["custom_message"],
+            client=self._client,
+            on_ready_callback=on_ready_callback,
+        )
         if self.config["custom_message"]:
             try:
                 placeholders_msg = re.sub(
@@ -225,30 +230,50 @@ class ElysInfoMod(loader.Module):
     @loader.command()
     async def infocmd(self, message: Message):
         start = time.perf_counter_ns()
+        target_message = None
+        media = str(self.config["banner_url"]) if self.config["banner_url"] else None
+
+        if self.config["banner_url"] and self.config["quote_media"] is True:
+            media = InputMediaWebPage(str(self.config["banner_url"]), optional=True)
+
+        async def _on_placeholders_ready(updated_data):
+            nonlocal target_message
+            if target_message and self.config["custom_message"]:
+                try:
+                    updated_text = re.sub(
+                        r"{(\w+)}",
+                        lambda match: str(updated_data.get(match.group(1), match.group(0))),
+                        self.config["custom_message"],
+                    )
+                    with contextlib.suppress(Exception):
+                        if self.config["rich_mode"]:
+                            await utils.answer(target_message, rich_message=updated_text)
+                        else:
+                            await utils.answer(
+                                target_message,
+                                updated_text,
+                                file=media,
+                                invert_media=self.config["invert_media"],
+                            )
+                except Exception as e:
+                    logger.debug("Failed to update placeholders: %s", e)
 
         if self.config["rich_mode"]:
-            await utils.answer(
+            target_message = await utils.answer(
                 message,
                 rich_message=await self._render_info(
                     start,
                     template_key="rich_info_message",
+                    on_ready_callback=_on_placeholders_ready,
                 ),
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )
             return
 
-        media = str(self.config["banner_url"])
-
-        if self.config["banner_url"] and self.config["quote_media"] is True:
-            media = InputMediaWebPage(str(self.config["banner_url"]), optional=True)
-
-        elif not self.config["banner_url"]:
-            media = None
-
         try:
             match True:
                 case _ if self.config["custom_message"] is None:
-                    await utils.answer(
+                    target_message = await utils.answer(
                         message,
                         await self._render_info(start),
                         file=media,
@@ -258,9 +283,12 @@ class ElysInfoMod(loader.Module):
                 case _:
                     if "{ping}" in self.config["custom_message"]:
                         message = await utils.answer(message, self.config["ping_emoji"])
-                    await utils.answer(
+                    target_message = await utils.answer(
                         message,
-                        await self._render_info(start),
+                        await self._render_info(
+                            start,
+                            on_ready_callback=_on_placeholders_ready,
+                        ),
                         file=media,
                         reply_to=getattr(message, "reply_to_msg_id", None),
                         invert_media=self.config["invert_media"],
