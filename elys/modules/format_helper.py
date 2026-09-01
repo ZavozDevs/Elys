@@ -18,11 +18,11 @@ logger = logging.getLogger(__name__)
 
 @loader.tds
 class FormatHelperMod(loader.Module):
-    """Помощник для работы с форматированием сообщений (HTML, Markdown, Rich Messages, Raw, JSON)"""
+    """Помощник для работы с форматированием сообщений (Rich HTML, Telegram HTML, Markdown, Raw text, JSON)"""
 
     strings = {
         "name": "FormatHelper",
-        "no_reply": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Ответь на сообщение или укажи текст</b>",
+        "no_args_or_reply": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Укажи текст для форматирования или ответь на сообщение</b>",
         "no_content": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет текста</b>",
         "no_entities": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет форматирования</b>",
     }
@@ -50,59 +50,8 @@ class FormatHelperMod(loader.Module):
 
         await utils.answer(message, result)
 
-    def _extract_source_text(
-        self,
-        message: Message,
-        reply: Message | None,
-    ) -> str | None:
-        """Извлекает текст из аргументов команды или из реплая"""
-        args = utils.get_args_raw(message)
-        if args:
-            return args
-
-        if reply:
-            return (
-                getattr(reply, "raw_text", None)
-                or getattr(reply, "message", None)
-                or getattr(reply, "text", None)
-            )
-
-        return None
-
-    # ==================== RICH MESSAGE ====================
-
-    @loader.command(
-        ru_doc="<html/текст> [reply] - Отправить или отредактировать сообщение как Rich Message",
-        ua_doc="<html/текст> [reply] - Надіслати або відредагувати повідомлення як Rich Message",
-        en_doc="<html/text> [reply] - Send or edit message as Rich Message",
-    )
-    async def rich(self, message: Message):
-        """<html/text> [reply] - Send or edit message as Rich Message"""
-        args = utils.get_args_raw(message)
-        reply = await message.get_reply_message()
-        if not args and reply:
-            args = (
-                getattr(reply, "rich_message", None)
-                or getattr(reply, "raw_text", None)
-                or getattr(reply, "message", None)
-                or getattr(reply, "text", "")
-            )
-
-        if not args:
-            await utils.answer(message, self.strings["no_reply"])
-            return
-
-        await utils.answer(message, rich_message=args)
-
-    @loader.command(
-        ru_doc="[reply] - Получить Rich HTML код сообщения",
-        ua_doc="[reply] - Отримати Rich HTML код повідомлення",
-        en_doc="[reply] - Get Rich HTML code of message",
-    )
-    async def getrich(self, message: Message):
-        """[reply] - Get Rich HTML code of message"""
-        reply = await message.get_reply_message()
-        target = reply or message
+    async def _extract_rich_html(self, target: Message) -> str | None:
+        """Извлекает Rich HTML разметку из сообщения"""
         rich_html = None
 
         if getattr(target, "_elys_rich_message_native", None) is not None:
@@ -128,7 +77,7 @@ class FormatHelperMod(loader.Module):
         if not rich_html:
             try:
                 rich_html = await self._client.get_rich_message(
-                    message.peer_id,
+                    target.peer_id,
                     target.id,
                     raw=False,
                 )
@@ -143,139 +92,139 @@ class FormatHelperMod(loader.Module):
                     target, "message", ""
                 )
 
-        if not rich_html:
-            await utils.answer(message, self.strings["no_content"])
-            return
+        return rich_html or getattr(target, "raw_text", None) or getattr(target, "message", None)
 
-        await self._send_or_code(message, rich_html, "rich_message.html", lang="html")
-
-    # ==================== TELEGRAM HTML ====================
+    # ==================== FRICH ====================
 
     @loader.command(
-        ru_doc="<html/текст> [reply] - Отправить или отредактировать сообщение с парсингом Telegram HTML",
-        ua_doc="<html/текст> [reply] - Надіслати або відредагувати повідомлення як Telegram HTML",
-        en_doc="<html/text> [reply] - Send or edit message parsed as Telegram HTML",
+        ru_doc="<html/текст> или [reply] - Отправить Rich HTML или получить Rich разметку ответа",
+        ua_doc="<html/текст> або [reply] - Надіслати Rich HTML або отримати Rich розмітку відповіді",
+        en_doc="<html/text> or [reply] - Send Rich HTML or get Rich markup of replied message",
     )
-    async def html(self, message: Message):
-        """<html/text> [reply] - Send or edit message parsed as Telegram HTML"""
-        reply = await message.get_reply_message()
-        text = self._extract_source_text(message, reply)
-
-        if not text:
-            await utils.answer(message, self.strings["no_reply"])
+    async def frich(self, message: Message):
+        """<html/text> or [reply] - Send Rich HTML or get Rich markup of replied message"""
+        args = utils.get_args_raw(message)
+        if args:
+            # Текст передан напрямую — форматируем и отправляем в Rich
+            await utils.answer(message, rich_message=args)
             return
 
-        await utils.answer(message, text, parse_mode="html")
+        reply = await message.get_reply_message()
+        if reply:
+            # Текст не передан, но есть реплай — извлекаем Rich HTML исходник
+            rich_html = await self._extract_rich_html(reply)
+            if not rich_html:
+                await utils.answer(message, self.strings["no_content"])
+                return
+            await self._send_or_code(message, rich_html, "rich_message.html", lang="html")
+            return
+
+        await utils.answer(message, self.strings["no_args_or_reply"])
+
+    # ==================== FHTML ====================
 
     @loader.command(
-        ru_doc="[reply] - Получить Telegram HTML код сообщения",
-        ua_doc="[reply] - Отримати Telegram HTML код повідомлення",
-        en_doc="[reply] - Get Telegram HTML code of message",
+        ru_doc="<html/текст> или [reply] - Отправить Telegram HTML или получить HTML код ответа",
+        ua_doc="<html/текст> або [reply] - Надіслати Telegram HTML або отримати HTML код відповіді",
+        en_doc="<html/text> or [reply] - Send Telegram HTML or get HTML code of replied message",
     )
-    async def gethtml(self, message: Message):
-        """[reply] - Get Telegram HTML code of message"""
-        reply = await message.get_reply_message()
-        target = reply or message
-        if not getattr(target, "message", None):
-            await utils.answer(message, self.strings["no_content"])
+    async def fhtml(self, message: Message):
+        """<html/text> or [reply] - Send Telegram HTML or get HTML code of replied message"""
+        args = utils.get_args_raw(message)
+        if args:
+            # Текст передан напрямую — отправляем с HTML форматированием
+            await utils.answer(message, args, parse_mode="html")
             return
 
-        try:
-            rendered = html.unparse(target.message, target.entities or [])
-        except Exception:
-            rendered = getattr(target, "raw_text", None) or getattr(
-                target, "message", ""
+        reply = await message.get_reply_message()
+        if reply:
+            # Текст не передан, но есть реплай — извлекаем чистый HTML исходник
+            if not getattr(reply, "message", None):
+                await utils.answer(message, self.strings["no_content"])
+                return
+
+            try:
+                rendered = html.unparse(reply.message, reply.entities or [])
+            except Exception:
+                rendered = getattr(reply, "raw_text", None) or getattr(reply, "message", "")
+
+            await self._send_or_code(message, rendered, "message.html", lang="html")
+            return
+
+        await utils.answer(message, self.strings["no_args_or_reply"])
+
+    # ==================== FMD ====================
+
+    @loader.command(
+        ru_doc="<md/текст> или [reply] - Отправить Telegram Markdown или получить Markdown код ответа",
+        ua_doc="<md/текст> або [reply] - Надіслати Telegram Markdown або отримати Markdown код відповіді",
+        en_doc="<md/text> or [reply] - Send Telegram Markdown or get Markdown code of replied message",
+    )
+    async def fmd(self, message: Message):
+        """<md/text> or [reply] - Send Telegram Markdown or get Markdown code of replied message"""
+        args = utils.get_args_raw(message)
+        if args:
+            # Текст передан напрямую — отправляем с Markdown форматированием
+            await utils.answer(message, args, parse_mode="md")
+            return
+
+        reply = await message.get_reply_message()
+        if reply:
+            # Текст не передан, но есть реплай — извлекаем Markdown исходник
+            if not getattr(reply, "message", None):
+                await utils.answer(message, self.strings["no_content"])
+                return
+
+            try:
+                rendered = markdown.unparse(reply.message, reply.entities or [])
+            except Exception:
+                rendered = getattr(reply, "raw_text", None) or getattr(reply, "message", "")
+
+            await self._send_or_code(message, rendered, "message.md", lang="markdown")
+            return
+
+        await utils.answer(message, self.strings["no_args_or_reply"])
+
+    # ==================== FTEXT ====================
+
+    @loader.command(
+        ru_doc="<текст> или [reply] - Отправить чистый текст или получить сырой текст ответа",
+        ua_doc="<текст> або [reply] - Надіслати чистий текст або отримати сирий текст відповіді",
+        en_doc="<text> or [reply] - Send raw text or get raw text of replied message",
+    )
+    async def ftext(self, message: Message):
+        """<text> or [reply] - Send raw text or get raw text of replied message"""
+        args = utils.get_args_raw(message)
+        if args:
+            # Текст передан напрямую — отправляем без форматирования
+            await utils.answer(message, args, parse_mode=None)
+            return
+
+        reply = await message.get_reply_message()
+        if reply:
+            # Текст не передан, но есть реплай — извлекаем сырой текст
+            text = (
+                getattr(reply, "raw_text", None)
+                or getattr(reply, "message", None)
+                or getattr(reply, "text", "")
             )
+            if not text:
+                await utils.answer(message, self.strings["no_content"])
+                return
 
-        await self._send_or_code(message, rendered, "message.html", lang="html")
-
-    # ==================== TELEGRAM MARKDOWN ====================
-
-    @loader.command(
-        ru_doc="<md/текст> [reply] - Отправить или отредактировать сообщение с парсингом Telegram Markdown",
-        ua_doc="<md/текст> [reply] - Надіслати або відредагувати повідомлення як Telegram Markdown",
-        en_doc="<md/text> [reply] - Send or edit message parsed as Telegram Markdown",
-    )
-    async def md(self, message: Message):
-        """<md/text> [reply] - Send or edit message parsed as Telegram Markdown"""
-        reply = await message.get_reply_message()
-        text = self._extract_source_text(message, reply)
-
-        if not text:
-            await utils.answer(message, self.strings["no_reply"])
+            await self._send_or_code(message, text, "message.txt")
             return
 
-        await utils.answer(message, text, parse_mode="md")
+        await utils.answer(message, self.strings["no_args_or_reply"])
 
-    @loader.command(
-        ru_doc="[reply] - Получить Markdown код сообщения",
-        ua_doc="[reply] - Отримати Markdown код повідомлення",
-        en_doc="[reply] - Get Markdown code of message",
-    )
-    async def getmd(self, message: Message):
-        """[reply] - Get Markdown code of message"""
-        reply = await message.get_reply_message()
-        target = reply or message
-        if not getattr(target, "message", None):
-            await utils.answer(message, self.strings["no_content"])
-            return
-
-        try:
-            rendered = markdown.unparse(target.message, target.entities or [])
-        except Exception:
-            rendered = getattr(target, "raw_text", None) or getattr(
-                target, "message", ""
-            )
-
-        await self._send_or_code(message, rendered, "message.md", lang="markdown")
-
-    # ==================== RAW / ПЛАЙН ТЕКСТ ====================
-
-    @loader.command(
-        ru_doc="<текст> [reply] - Отправить или отредактировать сообщение как чистый текст (без форматирования)",
-        ua_doc="<текст> [reply] - Надіслати або відредагувати повідомлення как чистий текст (без форматування)",
-        en_doc="<text> [reply] - Send or edit message as raw text (without formatting)",
-    )
-    async def raw(self, message: Message):
-        """<text> [reply] - Send or edit message as raw text (without formatting)"""
-        reply = await message.get_reply_message()
-        text = self._extract_source_text(message, reply)
-
-        if not text:
-            await utils.answer(message, self.strings["no_reply"])
-            return
-
-        await utils.answer(message, text, parse_mode=None)
-
-    @loader.command(
-        ru_doc="[reply] - Получить чистый сырой текст сообщения (без форматирования)",
-        ua_doc="[reply] - Отримати чистий сирий текст повідомлення (без форматування)",
-        en_doc="[reply] - Get raw text of message (without formatting)",
-    )
-    async def getraw(self, message: Message):
-        """[reply] - Get raw text of message (without formatting)"""
-        reply = await message.get_reply_message()
-        target = reply or message
-        text = (
-            getattr(target, "raw_text", None)
-            or getattr(target, "message", None)
-            or getattr(target, "text", "")
-        )
-
-        if not text:
-            await utils.answer(message, self.strings["no_content"])
-            return
-
-        await self._send_or_code(message, text, "message.txt")
-
-    # ==================== JSON & ENTITIES ДАМП ====================
+    # ==================== FJSON & FENTITIES ====================
 
     @loader.command(
         ru_doc="[reply] - Получить JSON дамп структуры сообщения",
         ua_doc="[reply] - Отримати JSON дамп структури повідомлення",
         en_doc="[reply] - Get JSON dump of message structure",
     )
-    async def msgjson(self, message: Message):
+    async def fjson(self, message: Message):
         """[reply] - Get JSON dump of message structure"""
         reply = await message.get_reply_message()
         target = reply or message
@@ -292,7 +241,7 @@ class FormatHelperMod(loader.Module):
         ua_doc="[reply] - Отримати список сутностей форматування (entities) повідомлення",
         en_doc="[reply] - Get message formatting entities dump",
     )
-    async def entities(self, message: Message):
+    async def fentities(self, message: Message):
         """[reply] - Get message formatting entities dump"""
         reply = await message.get_reply_message()
         target = reply or message
