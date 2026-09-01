@@ -1493,7 +1493,10 @@ class Modules:
 
         for module in self.modules:
             try:
-                module.config_complete(reload_dynamic_translate=True)
+                try:
+                    module.config_complete(reload_dynamic_translate=True)
+                except TypeError:
+                    module.config_complete()
             except Exception as e:
                 logger.debug(
                     "Can't complete dynamic translations reload of %s due to %s",
