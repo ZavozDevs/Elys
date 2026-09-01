@@ -125,7 +125,9 @@ class Settings(loader.Module):
         designers_str = ", ".join(designers)
 
         if self.config["rich_mode"]:
-            rich_message = self.strings.get("rich_elys_message", self.strings.get("rich_heroku_message", "")).format(
+            rich_message = self.strings.get(
+                "rich_elys_message", self.strings.get("rich_heroku_message", "")
+            ).format(
                 platform=utils.get_platform_emoji(),
                 version=".".join(map(str, version.__version__)),
                 build=utils.get_commit_url(),

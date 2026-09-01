@@ -152,7 +152,10 @@ class CustomTelegramClient(TelegramClient):
                 setattr(
                     block,
                     field,
-                    [CustomTelegramClient._rich_output_block_to_input(item) for item in value],
+                    [
+                        CustomTelegramClient._rich_output_block_to_input(item)
+                        for item in value
+                    ],
                 )
         return block
 
@@ -451,7 +454,6 @@ class CustomTelegramClient(TelegramClient):
     rich_answer_ai = compose_rich_message
     rich_save_draft = save_rich_draft
     rich_send_typing = send_rich_typing
-
 
     async def connect(self, unix_socket_path: str | None = None):
         if self.session is None:

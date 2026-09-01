@@ -1106,6 +1106,10 @@ translations:
   btn_cancel: Abbrechen
   btn_delete: Löschen
   btn_back: Zurück
+  btn_approve: 💫 Beitreten
+  btn_decline: ✖️ Ablehnen
+  declined_join: ✖️ <b>Beitritt abgelehnt zu <a href="https://t.me/{}">{}</a></b>
+  joined_channel: 💫 <b>Beigetreten zu <a href="https://t.me/{}">{}</a></b>
   no_downloaded: <b>Liste ist leer</b>
   choose_downloaded: <b>Heruntergeladene Sprachen</b>
   confirm_lang: <b>Diese Sprache installieren?</b>
@@ -1198,6 +1202,7 @@ quickstart:
   language_saved: 🇩🇪 Sprache gespeichert!
   language: 🇩🇪 Deutsch
   btn_support: 🥷 Support-Chat
+  support_chat_reason: Elys-Hilfe ist nur in diesem Chat verfügbar. Indem du dem Chat beitrittst, stimmst du den Elys-Föderationsregeln zu. Bei Verstößen wirst du dauerhaft gesperrt.
   name: Quickstart
   _cls_doc: Benachrichtigt den Benutzer über die Userbot-Installation
 $validators:

@@ -277,25 +277,26 @@ class Help(loader.Module):
             rich_inline_commands = inline_cmd.replace("\r\n", "<br>").replace(
                 "\n", "<br>"
             )
-            rich_message = (
-                f"{rich_reply}<details><summary>{self.strings.get('rich_commands', 'Commands')}</summary>"
-                f"{rich_commands}{rich_inline_commands}</details>"
-                + (
-                    f"<details><summary>{self.strings.get('rich_placeholders', 'Placeholders')}</summary>"
-                    f"{placeholders}</details>"
-                    if placeholders
-                    else ""
-                )
-                + (f"<p>{self.strings['developer'].format(dev_text)}</p>" if dev_text else "")
-                + (f"<p>{self.strings['not_exact']}</p>" if not exact else "")
-                + (
-                    f"<p>{self.strings['core_notice']}</p>"
-                    if module.__origin__.startswith("<core")
-                    else ""
-                )
+            rich_message = f"{rich_reply}<details><summary>{self.strings.get('rich_commands', 'Commands')}</summary>" f"{rich_commands}{rich_inline_commands}</details>" + (
+                f"<details><summary>{self.strings.get('rich_placeholders', 'Placeholders')}</summary>"
+                f"{placeholders}</details>"
+                if placeholders
+                else ""
+            ) + (
+                f"<p>{self.strings['developer'].format(dev_text)}</p>"
+                if dev_text
+                else ""
+            ) + (
+                f"<p>{self.strings['not_exact']}</p>" if not exact else ""
+            ) + (
+                f"<p>{self.strings['core_notice']}</p>"
+                if module.__origin__.startswith("<core")
+                else ""
             )
             if banner_url:
-                rich_message = f'<figure><img src="{banner_url}"/></figure>' + rich_message
+                rich_message = (
+                    f'<figure><img src="{banner_url}"/></figure>' + rich_message
+                )
             await utils.answer(message, rich_message=rich_message)
             return
 
@@ -486,13 +487,10 @@ class Help(loader.Module):
 
         if self.config["rich_mode"]:
             rich_message = (
-                (
-                    f"<figure><img src=\"{self.config['banner_url']}\"/></figure>"
-                    if self.config["banner_url"]
-                    else ""
-                )
-                + f"{self.config['desc_icon']} {reply}"
-            )
+                f"<figure><img src=\"{self.config['banner_url']}\"/></figure>"
+                if self.config["banner_url"]
+                else ""
+            ) + f"{self.config['desc_icon']} {reply}"
             rich_core = "".join(f"<p>{item.strip()}</p>" for item in core_)
             rich_modules = "".join(
                 f"<p>{item.strip()}</p>"

@@ -22,7 +22,14 @@ logger = logging.getLogger(__name__)
 class Quickstart(loader.Module):
     """Notifies user about userbot installation"""
 
-    strings = {"name": "Quickstart"}
+    strings = {
+        "name": "Quickstart",
+        "support_chat_reason": (
+            "Elys help is only available in this chat. By agreeing to join the chat,"
+            " you agree to the Elys federation rules and if you violate them, you"
+            " will be permanently banned."
+        ),
+    }
 
     async def client_ready(self):
         self.text = lambda: self.strings["base"].format(
@@ -137,7 +144,7 @@ class Quickstart(loader.Module):
         try:
             await self.request_join(
                 "ElysTalk",
-                "Elys help is only available in this chat. By agreeing to join the chat, you agree to the Elys federation rules and if you violate them, you will be permanently banned.",
+                self.strings["support_chat_reason"],
             )
         except Exception:
             logger.debug("Support chat @ElysTalk is not available yet")

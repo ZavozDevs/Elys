@@ -1127,6 +1127,10 @@ translations:
   btn_cancel: C4nc3l
   btn_delete: D3l373
   btn_back: B4ck
+  btn_approve: 💫 4ppr0v3
+  btn_decline: ✖️ D3cl1n3
+  declined_join: ✖️ <b>D3cl1n3d j01n1ng <a href="https://t.me/{}">{}</a></b>
+  joined_channel: 💫 <b>J01n3d <a href="https://t.me/{}">{}</a></b>
   no_downloaded: <b>L157 15 3mp7y</b>
   choose_downloaded: <b>D0wnl04d3d l4ngu4g35</b>
   confirm_lang: <b>1n574ll 7h15 l4ngu4g3?</b>
@@ -1219,6 +1223,7 @@ quickstart:
   language_saved: 🇬🇧 L4ngu4g3 54v3d!
   language: 🇬🇧 3ngl15h
   btn_support: 🥷 Supp0r7 ch47
+  support_chat_reason: Elys h3lp 15 0nly 4v41l4bl3 1n 7h15 ch47. By 4gr331ng 70 j01n, u 4gr33 70 Elys f3d3r4710n rul35, v10l4710n = p3rm b4n.
   _cls_doc: N071f135 u53r 4b0u7 u53rb07 1n574ll4710n
 $validators:
   boolean: b00l34n

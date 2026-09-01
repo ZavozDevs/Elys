@@ -1108,6 +1108,10 @@ translations:
   btn_cancel: Отмена
   btn_delete: Удалить
   btn_back: Назад
+  btn_approve: 💫 Вступить
+  btn_decline: ✖️ Скип
+  declined_join: ✖️ <b>Не захотели вступать в <a href="https://t.me/{}">{}</a></b>
+  joined_channel: 💫 <b>Залетели в <a href="https://t.me/{}">{}</a></b>
   no_downloaded: <b>Список пуст, нормис</b>
   choose_downloaded: <b>Скачанные языки</b>
   confirm_lang: <b>Установить этот язык, бро?</b>
@@ -1200,6 +1204,7 @@ quickstart:
   language_saved: 🇷🇺 Язык сохранил!
   language: 🇷🇺 Русский (Рофл)
   btn_support: 🥷 Саппорт
+  support_chat_reason: Помощь по Elys только тут. Заходишь — соглашаешься с правилами федерации Elys, нарушишь — пермач.
   name: Quickstart
   _cls_doc: Сообщает, что юзербот установлен
 $validators:

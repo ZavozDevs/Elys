@@ -1095,6 +1095,10 @@ translations:
   btn_cancel: Cancel
   btn_delete: rm -rf
   btn_back: Back
+  btn_approve: 💫 Join
+  btn_decline: ✖️ Skip
+  declined_join: ✖️ <b>Join declined for <a href="https://t.me/{}">{}</a></b>
+  joined_channel: 💫 <b>Joined <a href="https://t.me/{}">{}</a></b>
   no_downloaded: <b>List is empty</b>
   choose_downloaded: <b>Downloaded languages</b>
   confirm_lang: <b>Install this language?</b>
@@ -1187,6 +1191,7 @@ quickstart:
   language_saved: 🇬🇧 Locale saved!
   language: 🇬🇧 English
   btn_support: 🥷 Support
+  support_chat_reason: Help is only available here. Joining = agreeing to federation rules. Violations lead to permanent ban.
   _cls_doc: Installation Notification
 $validators:
   boolean: bool

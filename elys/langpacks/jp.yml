@@ -1139,6 +1139,10 @@ translations:
   btn_cancel: キャンセル
   btn_delete: 削除
   btn_back: 戻る
+  btn_approve: 💫 参加する
+  btn_decline: ✖️ 辞退する
+  declined_join: ✖️ <b><a href="https://t.me/{}">{}</a> への参加を辞退しました</b>
+  joined_channel: 💫 <b><a href="https://t.me/{}">{}</a> に参加しました</b>
   no_downloaded: <b>リストは空です</b>
   choose_downloaded: <b>ダウンロード済みの言語</b>
   confirm_lang: <b>この言語をインストールしますか？</b>
@@ -1231,6 +1235,7 @@ quickstart:
   language_saved: 🇯🇵 言語が保存されました！
   language: 🇯🇵 日本語
   btn_support: 🥷 サポートチャット
+  support_chat_reason: Elysのヘルプはこのチャットでのみ利用可能です。参加に同意することにより、Elys連邦のルールに同意したことになり、違反した場合は永久BANされます。
   _cls_doc: ユーザーボットのインストールについてユーザーに通知します
 $validators:
   boolean: 真偽値

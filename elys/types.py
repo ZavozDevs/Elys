@@ -339,11 +339,19 @@ class Module:
         )
         event.status = False
         event.set()
-        await call.edit(
-            (
+        tr = self._client.loader.lookup("translations")
+        text = (
+            tr.strings("declined_join").format(
+                channel.username, utils.escape_html(channel.title)
+            )
+            if tr
+            else (
                 "✖️ <b>Declined joining <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
-            ),
+            )
+        )
+        await call.edit(
+            text,
             photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/declined_jr.png",
         )
 
@@ -409,28 +417,37 @@ class Module:
             )
         )
 
+        tr = self._client.loader.lookup("translations")
+        caption = (
+            tr.strings("requested_join").format(
+                self.__class__.__name__,
+                channel.username,
+                utils.escape_html(channel.title),
+                utils.escape_html(reason),
+            )
+            if tr
+            else (
+                f"💫 <b>Module</b> <code>{self.__class__.__name__}</code>"
+                f" <b>requested to join channel <a href='https://t.me/{channel.username}'>{utils.escape_html(channel.title)}</a></b>\n\n"
+                f"<b>❓ Reason:</b> <i>{utils.escape_html(reason)}</i>"
+            )
+        )
+        btn_approve = tr.strings("btn_approve") if tr else "💫 Approve"
+        btn_decline = tr.strings("btn_decline") if tr else "✖️ Decline"
+
         await self.inline.bot.send_photo(
             self.tg_id,
             "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/join_request.png",
-            caption=(
-                self._client.loader.lookup("translations")
-                .strings("requested_join")
-                .format(
-                    self.__class__.__name__,
-                    channel.username,
-                    utils.escape_html(channel.title),
-                    utils.escape_html(reason),
-                )
-            ),
+            caption=caption,
             reply_markup=self.inline.generate_markup(
                 [
                     {
-                        "text": "💫 Approve",
+                        "text": btn_approve,
                         "callback": self.lookup("LoaderMod").approve_internal,
                         "args": (channel, event),
                     },
                     {
-                        "text": "✖️ Decline",
+                        "text": btn_decline,
                         "callback": self._decline,
                         "args": (channel, event),
                     },

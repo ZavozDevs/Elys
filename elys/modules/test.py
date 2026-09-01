@@ -368,7 +368,9 @@ class TestMod(loader.Module):
             placeholders_msg = "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji>"
 
         if self.config["rich_mode"]:
-            rich_message = placeholders_msg.replace("\r\n", "<br>").replace("\n", "<br>")
+            rich_message = placeholders_msg.replace("\r\n", "<br>").replace(
+                "\n", "<br>"
+            )
             await utils.answer(
                 message,
                 rich_message=rich_message,

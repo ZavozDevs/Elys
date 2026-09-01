@@ -7,9 +7,7 @@
 import io
 import json
 import logging
-import typing
 
-import elystl
 from elystl.extensions import html, markdown
 from elystl.tl.types import Message
 
@@ -42,7 +40,11 @@ class FormatHelperMod(loader.Module):
         args = utils.get_args_raw(message)
         reply = await message.get_reply_message()
         if not args and reply:
-            args = getattr(reply, "rich_message", None) or getattr(reply, "text", None) or getattr(reply, "message", "")
+            args = (
+                getattr(reply, "rich_message", None)
+                or getattr(reply, "text", None)
+                or getattr(reply, "message", "")
+            )
 
         if not args:
             await utils.answer(message, self.strings["no_reply"])
@@ -64,6 +66,7 @@ class FormatHelperMod(loader.Module):
         if getattr(target, "_elys_rich_message_native", None) is not None:
             try:
                 from ..utils.rich import rich_message_to_html
+
                 rich_html = rich_message_to_html(target._elys_rich_message_native)
             except Exception:
                 pass
@@ -75,6 +78,7 @@ class FormatHelperMod(loader.Module):
             else:
                 try:
                     from ..utils.rich import rich_message_to_html
+
                     rich_html = rich_message_to_html(val)
                 except Exception:
                     pass
@@ -93,7 +97,9 @@ class FormatHelperMod(loader.Module):
             try:
                 rich_html = html.unparse(target.message, target.entities or [])
             except Exception:
-                rich_html = getattr(target, "text", None) or getattr(target, "message", "")
+                rich_html = getattr(target, "text", None) or getattr(
+                    target, "message", ""
+                )
 
         if not rich_html:
             await utils.answer(message, self.strings["no_content"])
@@ -107,7 +113,10 @@ class FormatHelperMod(loader.Module):
         else:
             await utils.answer(
                 message,
-                self.strings["rich_header"] + "\n\n<code>" + utils.escape_html(rich_html) + "</code>",
+                self.strings["rich_header"]
+                + "\n\n<code>"
+                + utils.escape_html(rich_html)
+                + "</code>",
             )
 
     @loader.command(
@@ -136,7 +145,10 @@ class FormatHelperMod(loader.Module):
         else:
             await utils.answer(
                 message,
-                self.strings["html_header"] + "\n\n<code>" + utils.escape_html(rendered) + "</code>",
+                self.strings["html_header"]
+                + "\n\n<code>"
+                + utils.escape_html(rendered)
+                + "</code>",
             )
 
     @loader.command(
@@ -155,7 +167,9 @@ class FormatHelperMod(loader.Module):
         try:
             rendered = markdown.unparse(target.message, target.entities or [])
         except Exception:
-            rendered = getattr(target, "raw_text", None) or getattr(target, "message", "")
+            rendered = getattr(target, "raw_text", None) or getattr(
+                target, "message", ""
+            )
 
         if len(rendered) > 3000:
             file = io.BytesIO(rendered.encode("utf-8"))
@@ -165,7 +179,10 @@ class FormatHelperMod(loader.Module):
         else:
             await utils.answer(
                 message,
-                self.strings["md_header"] + "\n\n<code>" + utils.escape_html(rendered) + "</code>",
+                self.strings["md_header"]
+                + "\n\n<code>"
+                + utils.escape_html(rendered)
+                + "</code>",
             )
 
     @loader.command(
@@ -191,5 +208,8 @@ class FormatHelperMod(loader.Module):
         else:
             await utils.answer(
                 message,
-                self.strings["json_header"] + "\n\n<pre><code class=\"language-json\">" + utils.escape_html(rendered) + "</code></pre>",
+                self.strings["json_header"]
+                + '\n\n<pre><code class="language-json">'
+                + utils.escape_html(rendered)
+                + "</code></pre>",
             )

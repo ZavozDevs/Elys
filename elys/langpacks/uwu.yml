@@ -1127,6 +1127,10 @@ translations:
   btn_cancel: Cancew :c
   btn_delete: Dewete
   btn_back: Baaack
+  btn_approve: 💫 Appwove >w<
+  btn_decline: ✖️ Decwine :c
+  declined_join: ✖️ <b>Decwined joining <a href="https://t.me/{}">{}</a> :c</b>
+  joined_channel: 💫 <b>Joined <a href="https://t.me/{}">{}</a> OwO</b>
   no_downloaded: <b>Wist is empty...</b>
   choose_downloaded: <b>Downwoaded wanguages~</b>
   confirm_lang: <b>Instaww dis wanguage, senpai? :3</b>
@@ -1219,6 +1223,7 @@ quickstart:
   language_saved: 🇬🇧 Wangwuage saved! ~
   language: 🇬🇧 Engwish
   btn_support: 🥷 Suppowt chat
+  support_chat_reason: Elys hewp is onwy avaiwabwe in dis chat. By agweeing to join, you agwee to Elys fedewation wuwes and viowations = pewm ban >w<
   _cls_doc: Nyotifies usew about usewbot instawwation
 $validators:
   boolean: boowean

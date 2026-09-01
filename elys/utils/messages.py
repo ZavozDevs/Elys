@@ -14,6 +14,7 @@ import typing
 try:
     import grapheme
 except ImportError:
+
     class _GraphemeFallback:
         @staticmethod
         def safe_split_index(text: str, index: int) -> int:

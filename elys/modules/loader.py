@@ -602,11 +602,19 @@ class LoaderMod(loader.Module):
         event.status = True
         event.set()
 
-        await call.edit(
-            (
+        tr = self._client.loader.lookup("translations")
+        text = (
+            tr.strings("joined_channel").format(
+                channel.username, utils.escape_html(channel.title)
+            )
+            if tr
+            else (
                 "💫 <b>Joined <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
-            ),
+            )
+        )
+        await call.edit(
+            text,
             photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/joined_jr.png",
         )
 

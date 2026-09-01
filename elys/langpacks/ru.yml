@@ -1167,6 +1167,10 @@ translations:
   btn_cancel: Отмена
   btn_delete: Удалить
   btn_back: Назад
+  btn_approve: 💫 Принять
+  btn_decline: ✖️ Отклонить
+  declined_join: ✖️ <b>Отклонено присоединение к <a href="https://t.me/{}">{}</a></b>
+  joined_channel: 💫 <b>Вы присоединились к <a href="https://t.me/{}">{}</a></b>
   no_downloaded: "<b>Список пуст<\b>"
   choose_downloaded: "<b>Скачанные языки<\b>"
   confirm_lang: "<b>Установить этот язык?<\b>"
@@ -1259,6 +1263,7 @@ quickstart:
   language_saved: 🇷🇺 Язык сохранен!
   language: 🇷🇺 Русский
   btn_support: 🥷 Чат поддержки
+  support_chat_reason: Помощь по Elys доступна только в этом чате. Соглашаясь на вступление, вы принимаете правила федерации Elys. В случае их нарушения вы будете заблокированы навсегда.
   name: Quickstart
   _cls_doc: Уведомляет пользователя об установке юзербота
 $validators:
