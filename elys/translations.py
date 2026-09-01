@@ -268,14 +268,39 @@ class Strings:
         except KeyError:
             return self[key]
 
+    def _lookup_translator(self, key: str) -> str | bool:
+        if self._translator is None:
+            return False
+
+        res = self._translator.getkey(f"{self._mod.__module__}.{key}")
+        if res:
+            return res
+
+        mod_name = getattr(self._mod, "name", None) or self._base_strings.get("name")
+        if not mod_name and hasattr(self._mod, "__class__"):
+            mod_name = self._mod.__class__.__name__
+
+        if mod_name:
+            import re
+            cleaned = re.sub(r"(?i)mod$", "", str(mod_name)).lower()
+            candidates = [
+                cleaned,
+                f"elys_{cleaned}",
+                cleaned.replace("elys_", ""),
+                str(mod_name).lower(),
+            ]
+            for c in candidates:
+                for prefix in ("elys.modules.", ""):
+                    res = self._translator.getkey(f"{prefix}{c}.{key}")
+                    if res:
+                        return res
+
+        return False
+
     def __getitem__(self, key: str) -> str:
         return (
             self.external_strings.get(key, None)
-            or (
-                self._translator.getkey(f"{self._mod.__module__}.{key}")
-                if self._translator is not None
-                else False
-            )
+            or self._lookup_translator(key)
             or (
                 getattr(
                     self._mod,
