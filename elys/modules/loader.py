@@ -392,6 +392,10 @@ class LoaderMod(loader.Module):
         if not missing:
             return
 
+        with contextlib.suppress(Exception):
+            if updater := self.lookup("Updater"):
+                await updater.update_complete()
+
         logger.info(
             "Migrating %s link-only module(s) to the filesystem: %s",
             len(missing),
