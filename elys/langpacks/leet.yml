@@ -679,6 +679,9 @@ elys_config:
   chat_input_prompt_add_lib: "➕ <b>53nd 173m 2 4dd 2 <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
   chat_input_prompt_remove: "➖ <b>53nd 173m 2 r3m0v3 fr0m <code>{}</code> 0f m0dul3 <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
   chat_input_prompt_remove_lib: "➖ <b>53nd 173m 2 r3m0v3 fr0m <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
+  series_min_len_error: "⚠️ <b>C4n'7 r3m0v3 fr0m <code>{}</code>: l157 r3qu1r35 47 l3457 {} 173m(5).</b>\n\n3n73r n3w v4lu3 0r r3537 2 d3f4ul7."
+  series_empty_error: "⚠️ <b>L157 <code>{}</code> 15 4lr34dy 3mp7y.</b>"
+  series_not_found_error: "🚫 <b>173m <code>{}</code> n07 f0und 1n <code>{}</code>.</b>"
   cancel_btn: 🚫 C4nc3l
   _cmd_doc_config: C0nf1g m0dul35
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - s37 7h3 c0nf1g v4lu3 4 7h3 m0dul3

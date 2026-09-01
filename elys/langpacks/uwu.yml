@@ -679,6 +679,9 @@ elys_config:
   chat_input_prompt_add_lib: "➕ <b>Send ewement to add to <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
   chat_input_prompt_remove: "➖ <b>Send ewement to wemove fwom <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
   chat_input_prompt_remove_lib: "➖ <b>Send ewement to wemove fwom <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
+  series_min_len_error: "⚠️ <b>Cannot wemove item fwom <code>{}</code> uwu: wist wequiwes at weast {} item(s).</b>\n\nPwease entew new vawue ow weset to defauwt~"
+  series_empty_error: "⚠️ <b>Wist <code>{}</code> is awweady empty uwu.</b>"
+  series_not_found_error: "🚫 <b>Item <code>{}</code> not found in <code>{}</code> uwu.</b>"
   cancel_btn: 🚫 Cancew
   _cmd_doc_config: Configuwe moduwes
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - set da config vawue fow da moduwe

@@ -673,6 +673,9 @@ elys_config:
   chat_input_prompt_add_lib: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
   chat_input_prompt_remove: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
   chat_input_prompt_remove_lib: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  series_min_len_error: "⚠️ <b>len(<code>{}</code>) &lt;= {}: min_len constraint violation.</b>\n\nset() new value or reset_default()."
+  series_empty_error: "⚠️ <b><code>{}</code> is empty.</b>"
+  series_not_found_error: "🚫 <b>'{}' not found in <code>{}</code>.</b>"
   cancel_btn: 🚫 Cancel
   _cmd_doc_config: Open Configurator
   _cmd_doc_fconfig: <mod> <key> <val> - Set config key

@@ -726,6 +726,9 @@ elys_config:
   chat_input_prompt_add_lib: "➕ <b>Send element to add to <code>{}</code> of library <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
   chat_input_prompt_remove: "➖ <b>Send element to remove from <code>{}</code> of module <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
   chat_input_prompt_remove_lib: "➖ <b>Send element to remove from <code>{}</code> of library <code>{}</code> as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
+  series_min_len_error: "⚠️ <b>Cannot remove item from <code>{}</code>: list requires at least {} item(s).</b>\n\nEnter a new value or reset the parameter to default."
+  series_empty_error: "⚠️ <b>List <code>{}</code> is already empty.</b>"
+  series_not_found_error: "🚫 <b>Item <code>{}</code> not found in <code>{}</code>.</b>"
   cancel_btn: 🚫 Cancel
   _cmd_doc_config: Configure modules
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - set the config value for the module
