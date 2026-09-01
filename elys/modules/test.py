@@ -139,12 +139,6 @@ class TestMod(loader.Module):
                 "Switch preview invert media in ping",
                 validator=loader.validators.Boolean(),
             ),
-            loader.ConfigValue(
-                "async_placeholders",
-                False,
-                lambda: "Enable lazy placeholders evaluation (shows loading emoji while resolving)",
-                validator=loader.validators.Boolean(),
-            ),
         )
 
     def _pass_config_to_logger(self):
@@ -399,7 +393,7 @@ class TestMod(loader.Module):
             self.config["custom_message"],
             client=self._client,
             on_ready_callback=_on_placeholders_ready,
-            lazy=self.config.get("async_placeholders", False),
+            lazy=utils.is_async_enabled(self._client),
         )
         try:
             placeholders_msg = self.config["custom_message"].format(**data)
