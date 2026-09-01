@@ -90,7 +90,11 @@ class FormatHelperMod(loader.Module):
                     target, "message", ""
                 )
 
-        return rich_html or getattr(target, "raw_text", None) or getattr(target, "message", None)
+        return (
+            rich_html
+            or getattr(target, "raw_text", None)
+            or getattr(target, "message", None)
+        )
 
     # ==================== FRICH ====================
 
@@ -114,7 +118,9 @@ class FormatHelperMod(loader.Module):
             if not rich_html:
                 await utils.answer(message, self.strings["no_content"])
                 return
-            await self._send_or_code(message, rich_html, "rich_message.html", lang="html")
+            await self._send_or_code(
+                message, rich_html, "rich_message.html", lang="html"
+            )
             return
 
         await utils.answer(message, self.strings["no_args_or_reply"])
@@ -144,7 +150,9 @@ class FormatHelperMod(loader.Module):
             try:
                 rendered = html.unparse(reply.message, reply.entities or [])
             except Exception:
-                rendered = getattr(reply, "raw_text", None) or getattr(reply, "message", "")
+                rendered = getattr(reply, "raw_text", None) or getattr(
+                    reply, "message", ""
+                )
 
             await self._send_or_code(message, rendered, "message.html", lang="html")
             return
@@ -176,7 +184,9 @@ class FormatHelperMod(loader.Module):
             try:
                 rendered = markdown.unparse(reply.message, reply.entities or [])
             except Exception:
-                rendered = getattr(reply, "raw_text", None) or getattr(reply, "message", "")
+                rendered = getattr(reply, "raw_text", None) or getattr(
+                    reply, "message", ""
+                )
 
             await self._send_or_code(message, rendered, "message.md", lang="markdown")
             return

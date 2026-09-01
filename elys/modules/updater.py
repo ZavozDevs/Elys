@@ -231,6 +231,17 @@ class UpdaterMod(loader.Module):
         except Exception:
             return ""
 
+    async def check_for_updates(self) -> bool:
+        if NO_GIT:
+            return False
+        try:
+            current, pending, changelog = await asyncio.to_thread(
+                self._get_update_state
+            )
+            return bool(changelog and pending != current)
+        except Exception:
+            return False
+
     @loader.loop(interval=1800, autostart=True)
     async def poller_announcement(self):
         async with aiohttp.ClientSession() as session:
@@ -670,7 +681,9 @@ class UpdaterMod(loader.Module):
 
                 target_ref = f"origin/{target_branch}"
                 if target_ref not in [ref.name for ref in origin.refs]:
-                    raise ValueError(f"Branch '{target_branch}' not found on remote origin")
+                    raise ValueError(
+                        f"Branch '{target_branch}' not found on remote origin"
+                    )
 
                 old_commit = repo.head.commit
                 repo.git.checkout("-B", target_branch, target_ref)
@@ -688,7 +701,9 @@ class UpdaterMod(loader.Module):
         )
 
     async def _branch_same(self, call: InlineCall, b: str):
-        await call.answer(self.strings["branch_already_on"].format(branch=b), show_alert=True)
+        await call.answer(
+            self.strings["branch_already_on"].format(branch=b), show_alert=True
+        )
 
     async def _branch_restart(self, call: InlineCall):
         await self.restart_common(call)
