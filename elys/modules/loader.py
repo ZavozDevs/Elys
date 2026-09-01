@@ -1756,8 +1756,10 @@ class LoaderMod(loader.Module):
 
         self.fully_loaded = True
 
-        with contextlib.suppress(AttributeError):
+        try:
             await self.lookup("Updater").full_restart_complete(self._secure_boot)
+        except Exception:
+            logger.exception("Failed to complete full restart message update")
 
     def flush_cache(self) -> int:
         """Flush the cache of links to modules"""
