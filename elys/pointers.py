@@ -268,6 +268,36 @@ class PointerList(list):
         return self._db._get_raw(self._module, self._key, self._default)
 
 
+class PointerTuple(tuple):
+    """Pointer to tuple saved in database"""
+
+    def __init__(
+        self,
+        db: "Database",  # type: ignore  # noqa: F821
+        module: str,
+        key: str,
+        default: typing.Any | None = None,
+    ):
+        self._db = db
+        self._module = module
+        self._key = key
+        self._default = default
+        super().__init__()
+
+    @property
+    def data(self) -> tuple:
+        return tuple(self)
+
+    def __repr__(self):
+        return f"PointerTuple({tuple(self)})"
+
+    def __str__(self):
+        return f"PointerTuple({tuple(self)})"
+
+    def totuple(self):
+        return self._db._get_raw(self._module, self._key, self._default)
+
+
 class PointerDict(dict):
     """Pointer to dict saved in database"""
 
