@@ -11,6 +11,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import copy
+import getpass
 import inspect
 import logging
 import time
@@ -118,6 +119,48 @@ class CustomTelegramClient(TelegramClient):
         self.elys_db: "Database"
         self.loader: "Modules"
         self.elys_inline: "InlineManager"
+
+    async def start(
+        self,
+        phone=None,
+        password=None,
+        *,
+        bot_token=None,
+        force_sms=False,
+        code_callback=None,
+        first_name="New User",
+        last_name="",
+        max_attempts=3,
+    ):
+        if phone is None and not bot_token:
+            def _phone():
+                print("Enter phone:", flush=True)
+                return input("> ")
+            phone = _phone
+
+        if code_callback is None:
+            def code_callback():
+                print("Enter the code you received:", flush=True)
+                return input("> ")
+
+        if password is None:
+            def password():
+                print("Enter your 2FA password:", flush=True)
+                try:
+                    return getpass.getpass("> ")
+                except Exception:
+                    return input("> ")
+
+        return await super().start(
+            phone=phone,
+            password=password,
+            bot_token=bot_token,
+            force_sms=force_sms,
+            code_callback=code_callback,
+            first_name=first_name,
+            last_name=last_name,
+            max_attempts=max_attempts,
+        )
 
     @staticmethod
     def _rich_output_block_to_input(block):
