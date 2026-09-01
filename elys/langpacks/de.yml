@@ -657,6 +657,7 @@ elys_config:
   external: 🛸 Extern
   libraries: 📦 Bibliotheken
   _cfg_chat_input: Konfigurationswerte per normaler Chatnachricht statt Inline-Abfrage eingeben (experimentell)
+  _cfg_switch_layout: Tastaturlayout für Befehle automatisch umkehren (z. B. .рудз -> .help)
   chat_input_prompt_set: "✍️ <b>Sende den neuen Wert für <code>{}</code> des Moduls <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
   chat_input_prompt_set_lib: "✍️ <b>Sende den neuen Wert für <code>{}</code> der Bibliothek <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"
   chat_input_prompt_add: "➕ <b>Sende das Element zum Hinzufügen zu <code>{}</code> des Moduls <code>{}</code> als Chatnachricht.</b>\n\n<b>Aktuell: {}</b>\n\n<i>⏳ Warte auf Nachricht... (wird automatisch gelöscht)</i>"

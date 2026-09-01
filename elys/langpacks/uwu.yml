@@ -672,6 +672,7 @@ elys_config:
   external: 🛸 Extewnaw
   libraries: 📦 Wibwawies
   _cfg_chat_input: Type config vawues in chat instead of inwine (expewimentaw)
+  _cfg_switch_layout: Automaticawwy invewt keyboawd wayout fow commands (e.g. .рудз -> .help)
   chat_input_prompt_set: "✍️ <b>Send new vawue fow <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
   chat_input_prompt_set_lib: "✍️ <b>Send new vawue fow <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
   chat_input_prompt_add: "➕ <b>Send ewement to add to <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"

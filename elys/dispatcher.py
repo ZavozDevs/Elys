@@ -353,9 +353,17 @@ class CommandDispatcher:
                     )
                 return False
 
+        switch_layout = True
+        with contextlib.suppress(Exception):
+            if hasattr(self, "_modules") and self._modules:
+                cfg = self._modules.lookup("ElysConfig")
+                if cfg and "switch_layout" in cfg.config:
+                    switch_layout = bool(cfg.config["switch_layout"])
+
         match True:
             case _ if (
-                event.message.message.startswith(
+                switch_layout
+                and event.message.message.startswith(
                     str.translate(prefix, _LAYOUT_TRANSLATION)
                 )
                 and str.translate(prefix, _LAYOUT_TRANSLATION) != prefix
