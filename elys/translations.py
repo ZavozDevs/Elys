@@ -47,6 +47,7 @@ MEME_LANGUAGES = {
     "uwu": "🏴‍☠️ UwU",
     "tiktok": "🏴‍☠️ TikTokKid",
     "neofit": "🏴‍☠️ Neofit",
+    "lust": "🫦 Похоть",
 }
 
 
@@ -322,7 +323,7 @@ class Strings:
                                 + (
                                     ["en"]
                                     if original_lang in ["leet", "uwu", "neofit"]
-                                    else ["ru"] if original_lang == "tiktok" else []
+                                    else ["ru"] if original_lang in ["tiktok", "lust"] else []
                                 )
                             )
                             if hasattr(self._mod, f"strings_{lang}")
