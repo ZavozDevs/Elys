@@ -814,16 +814,16 @@ updater:
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
   no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>You are on the latest version, pull updates anyway?</b>
   cancel: 🚫 Cancel
-  branch_menu: '<blockquote><tg-emoji emoji-id=5447644880824180424>🌿</tg-emoji> <b>Elys Update Branch Selection</b>
+  branch_menu: '<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Elys Update Branch Selection</b>
     Current branch: <code>{current}</code></blockquote>
 
-    <blockquote><tg-emoji emoji-id=5206607081351684259>🛡</tg-emoji> <b>master</b> — stable release
-    <tg-emoji emoji-id=5447410659035716599>🧪</tg-emoji> <b>beta</b> — beta testing
-    <tg-emoji emoji-id=5465496001856950230>⚡️</tg-emoji> <b>dev</b> — active development (unstable)</blockquote>'
-  branch_switching: '<blockquote><tg-emoji emoji-id=5879813604068298387>🤔</tg-emoji> <b>Switching to branch <code>{branch}</code>...</b></blockquote>'
-  branch_switched: '<blockquote><tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Switched to branch <code>{branch}</code>!</b>
+    <blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> — stable release
+    <tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> — beta testing
+    <tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> — active development (unstable)</blockquote>'
+  branch_switching: '<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Switching to branch <code>{branch}</code>...</b></blockquote>'
+  branch_switched: '<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Switched to branch <code>{branch}</code>!</b>
     <i>A restart is required to apply changes.</i></blockquote>'
-  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Failed to switch to branch <code>{branch}</code>!</b>
+  branch_switch_fail: '<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Failed to switch to branch <code>{branch}</code>!</b>
     Error: <code>{error}</code></blockquote>'
   branch_already_on: 'You are already on branch {branch}'
   branch_invalid: '❌ Unknown branch <code>{target}</code>! Available: {available}'
