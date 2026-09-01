@@ -117,7 +117,11 @@ class CoreMod(loader.Module):
         await utils.answer(
             message,
             self.strings["elys"].format(
-                "🌟 <b>Elys userbot</b>",
+                (
+                    utils.get_platform_emoji()
+                    if self._client.elys_me.premium
+                    else "🌟 <b>Elys userbot</b>"
+                ),
                 *version.__version__,
                 utils.get_commit_url(),
                 f"{elystl.__version__} #{elystl.tl.alltlobjects.LAYER}",
