@@ -20,15 +20,16 @@ def tty_print(text: str, tty: bool):
     Print text to terminal if tty is True,
     otherwise removes all ANSI escape sequences
     """
-    print(text if tty else re.sub(r"\033\[[0-9;]*m", "", text))
+    print(text if tty else re.sub(r"\033\[[0-9;]*m", "", text), flush=True)
 
 
-def tty_input(text: str, tty: bool) -> str:
+def tty_input(text: str, tty: bool, prefix: str = "> ") -> str:
     """
     Print text to terminal if tty is True,
     otherwise removes all ANSI escape sequences
     """
-    return input(text if tty else re.sub(r"\033\[[0-9;]*m", "", text))
+    tty_print(text, tty)
+    return input(prefix)
 
 
 def api_config(tty: bool | None = None):
@@ -37,8 +38,9 @@ def api_config(tty: bool | None = None):
     from ._internal import print_banner
 
     if tty is None:
-        print("\033[0;91mThe quick brown fox jumps over the lazy dog\033[0m")
-        tty = input("Is the text above colored? [y/N]").lower() == "y"
+        tty_print("\033[0;91mThe quick brown fox jumps over the lazy dog\033[0m", True)
+        tty_print("Is the text above colored? [y/N]", True)
+        tty = input("> ").lower() == "y"
 
     if tty:
         print_banner("banner.txt")
@@ -61,7 +63,7 @@ def api_config(tty: bool | None = None):
         tty,
     )
 
-    while api_id := tty_input("\033[0;95mEnter API ID: \033[0m", tty):
+    while api_id := tty_input("\033[0;95mEnter API ID:\033[0m", tty):
         if api_id.isdigit():
             break
 
@@ -71,7 +73,7 @@ def api_config(tty: bool | None = None):
         tty_print("\033[0;91mCancelled\033[0m", tty)
         sys.exit(0)
 
-    while api_hash := tty_input("\033[0;95mEnter API hash: \033[0m", tty):
+    while api_hash := tty_input("\033[0;95mEnter API hash:\033[0m", tty):
         if len(api_hash) == 32 and all(
             symbol in string.hexdigits for symbol in api_hash
         ):

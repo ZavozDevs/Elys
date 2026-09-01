@@ -727,9 +727,11 @@ class Elys:
             and getattr(self.arguments, "tty", False)
             and not existing
         ):
-            while bot := input(
-                "You can enter a custom bot username or leave it empty and Elys will generate a random one: "
-            ):
+            print(
+                "You can enter a custom bot username or leave it empty and Elys will generate a random one:",
+                flush=True,
+            )
+            while bot := input("> "):
                 bot = bot.strip()
                 bot = bot.lstrip("@")
                 if any(
@@ -758,11 +760,38 @@ class Elys:
             await asyncio.sleep(3600)
 
     async def _phone_login(self, client: CustomTelegramClient) -> bool:
-        phone = input(
-            "\033[0;96mEnter phone: \033[0m" if self.arguments.tty else "Enter phone: "
+        print(
+            "\033[0;96mEnter phone:\033[0m" if self.arguments.tty else "Enter phone:",
+            flush=True,
         )
+        phone = input("> ")
 
-        await client.start(phone)
+        def _code_callback():
+            print(
+                "\033[0;96mEnter the code you received:\033[0m"
+                if self.arguments.tty
+                else "Enter the code you received:",
+                flush=True,
+            )
+            return input("> ")
+
+        def _password_callback():
+            print(
+                "\033[0;96mEnter your 2FA password:\033[0m"
+                if self.arguments.tty
+                else "Enter your 2FA password:",
+                flush=True,
+            )
+            try:
+                return getpass("> ")
+            except Exception:
+                return input("> ")
+
+        await client.start(
+            phone=phone,
+            code_callback=_code_callback,
+            password=_password_callback,
+        )
 
         me = await client.get_me()
         telegram_id = me.id
@@ -774,9 +803,11 @@ class Elys:
         db = database.Database(client)
         await db.init()
 
-        while bot := input(
-            "You can enter a custom bot username or leave it empty and Elys will generate a random one: "
-        ):
+        print(
+            "You can enter a custom bot username or leave it empty and Elys will generate a random one:",
+            flush=True,
+        )
+        while bot := input("> "):
             try:
                 if await self._check_bot(client, bot):
                     db.set("elys.inline", "custom_bot", bot)
@@ -852,14 +883,17 @@ class Elys:
             ("\033[0;96m{}\033[0m" if self.arguments.tty else "{}").format(
                 "You can use QR-code to login from another device (your friend's"
                 " phone, for example)."
-            )
+            ),
+            flush=True,
         )
 
-        user_choice = input(
-            "\033[0;96mUse QR code? [y/N]: \033[0m"
+        print(
+            "\033[0;96mUse QR code? [y/N]:\033[0m"
             if self.arguments.tty
-            else "Use QR code? [y/N]: "
-        ).lower()
+            else "Use QR code? [y/N]:",
+            flush=True,
+        )
+        user_choice = input("> ").lower()
 
         match user_choice:
             case "y":
