@@ -938,12 +938,19 @@ class Elys:
             case True:
                 print_banner("2fa.txt")
                 password = await client(GetPasswordRequest())
+                hint_str = f" ({password.hint})" if getattr(password, "hint", None) else ""
                 while True:
-                    _2fa = getpass(
-                        f"\033[0;96mEnter 2FA password ({password.hint}): \033[0m"
+                    print(
+                        f"\033[0;96mEnter 2FA password{hint_str}:\033[0m"
                         if self.arguments.tty
-                        else f"Enter 2FA password ({password.hint}): "
+                        else f"Enter 2FA password{hint_str}:",
+                        flush=True,
                     )
+                    try:
+                        _2fa = getpass("> ")
+                    except Exception:
+                        _2fa = input("> ")
+
                     try:
                         await client._on_login(
                             (
@@ -955,7 +962,7 @@ class Elys:
                             ).user
                         )
                     except PasswordHashInvalidError:
-                        print("\033[0;91mInvalid 2FA password!\033[0m")
+                        print("\033[0;91mInvalid 2FA password!\033[0m", flush=True)
                     except FloodWaitError as e:
                         seconds, minutes, hours = (
                             e.seconds % 3600 % 60,
