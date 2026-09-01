@@ -1227,10 +1227,12 @@ class LoaderMod(loader.Module):
         ):
             instance.strings.external_strings = transations
 
-        for alias, cmd in self.lookup("settings").get("aliases", {}).items():
-            _cmd = cmd.split(maxsplit=1)
-            if _cmd[0] in instance.commands:
-                self.allmodules.add_alias(alias, *_cmd)
+        settings = self.lookup("settings")
+        if settings:
+            for alias, cmd in settings.get("aliases", {}).items():
+                _cmd = cmd.split(maxsplit=1)
+                if _cmd[0].lower() in [c.lower() for c in instance.commands]:
+                    self.allmodules.add_alias(alias, *_cmd)
 
         try:
             modname = instance.strings("name")
@@ -1746,13 +1748,10 @@ class LoaderMod(loader.Module):
 
             self.update_modules_in_db()
 
-            aliases = {
-                alias: cmd
-                for alias, cmd in self.lookup("settings").get("aliases", {}).items()
-                if self.allmodules.add_alias(alias, *cmd.split(maxsplit=1))
-            }
-
-            self.lookup("settings").set("aliases", aliases)
+            settings = self.lookup("settings")
+            if settings:
+                for alias, cmd in settings.get("aliases", {}).items():
+                    self.allmodules.add_alias(alias, *cmd.split(maxsplit=1))
 
         self.fully_loaded = True
 
