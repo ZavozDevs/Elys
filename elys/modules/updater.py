@@ -730,6 +730,9 @@ class UpdaterMod(loader.Module):
         )
 
     async def client_ready(self):
+        with contextlib.suppress(Exception):
+            await self.update_complete()
+
         try:
             with git.Repo():
                 pass

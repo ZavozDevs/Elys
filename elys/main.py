@@ -1124,6 +1124,7 @@ class Elys:
         await modules.inline.register_manager()
         await db.ensure_content_channel()
         await modules.send_ready()
+        modules.fully_ready = True
 
         if first:
             await self._badge(client)
