@@ -138,7 +138,7 @@ elys_settings:
   cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Нет такой команды, лол</b>
   inline_settings: ⚙️ <b>Тут настройки Elys, не сломай</b>
   confirm_update: 🧭 <b>Обновляемся? Юб ребутнется</b>
-  confirm_restart: 🔄 <b>Ребутаем шарманку?</b>
+  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Ребутаем шарманку?</b>
   btn_restart: 🔄 Ребут
   btn_update: 🧭 Обнова
   close_menu: 😌 Закрыть (ну нафиг)
@@ -682,7 +682,7 @@ inline_stuff:
     • Проц грузит: {cpu_usage}%
 
     • Хост: {host}</blockquote>'
-  restart: 🔄 Ребутаюсь...
+  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Ребутаюсь...
   prefix_reset: 🔀 Префикс сбросил!
   _cmd_doc_ch_elys_bot: <юзернейм> - Сменить ник инлайн бота
   name: InlineStuff
