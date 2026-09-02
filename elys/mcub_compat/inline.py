@@ -35,7 +35,7 @@ import logging
 import typing
 import uuid
 
-from .events import MCUBCallbackEvent
+from .events import MCUBCallbackEvent, to_html
 
 logger = logging.getLogger(__name__)
 
@@ -136,7 +136,7 @@ class MCUBInlineManager:
         if not self._require_inline():
             return (False, None) if auto_send else None
 
-        text = _stringify_fields(title, fields)
+        text = to_html(_stringify_fields(title, fields), parse_mode)
         markup = to_elys_markup(buttons) if buttons else None
 
         form_kwargs: dict[str, typing.Any] = {
@@ -404,13 +404,24 @@ class MCUBInlineManager:
 
     # -- handler registration --------------------------------------------
 
-    def register_inline_handler(self, pattern: str, handler) -> None:
-        self._host.register_inline_handler(pattern, handler)
+    def register_inline_handler(self, pattern: str, handler, *, module_name=None) -> None:
+        self._host.register_inline_handler(
+            pattern, handler, module_name=module_name
+        )
 
-    def register_callback_handler(self, pattern, handler) -> None:
+    def register_callback_handler(self, pattern, handler, *, module_name=None) -> None:
         if isinstance(pattern, str):
             pattern = pattern.encode()
-        self._host.register_callback_prefix("<inline>", pattern, handler)
+        from .host import _module_name_of
+
+        name = module_name or _module_name_of(handler)
+        if not name:
+            logger.warning(
+                "MCUB callback prefix registered without a module name; "
+                "it will not be cleaned up on unload"
+            )
+            name = "<inline>"
+        self._host.register_callback_prefix(name, pattern, handler)
 
     # -- ACL surface (MCUB's other InlineManager) -------------------------
 

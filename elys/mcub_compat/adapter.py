@@ -114,6 +114,8 @@ class MCUBAdapterMixin:
             self._publish(f"{name}cmd", self._make_command(name, meta))
 
         for index, watcher in enumerate(registrations.watchers):
+            if watcher.get("bot_client"):
+                continue
             self._publish(
                 f"mcub{index}{watcher['name']}watcher",
                 self._make_watcher(watcher),
@@ -313,20 +315,21 @@ class MCUBAdapterMixin:
         instance = self.mcub_instance
 
         self._attach_events()
+        self._attach_bot_watchers()
 
         if instance is not None:
-            await self._safe(instance.on_load(), "on_load")
             if await self._first_install():
                 await self._safe(instance.on_install(), "on_install")
+            await self._safe(instance.on_load(), "on_load")
             instance._loaded = True
         elif registrations is not None:
-            if registrations.on_load is not None:
-                await self._safe(
-                    self._call_kernel_hook(registrations.on_load), "on_load"
-                )
             if registrations.on_install is not None and await self._first_install():
                 await self._safe(
                     self._call_kernel_hook(registrations.on_install), "on_install"
+                )
+            if registrations.on_load is not None:
+                await self._safe(
+                    self._call_kernel_hook(registrations.on_load), "on_load"
                 )
             for func in registrations.methods:
                 await self._safe(self._call_kernel_hook(func), "@method")
@@ -386,6 +389,30 @@ class MCUBAdapterMixin:
             handler = self._wrap_event_handler(spec["handler"])
             client.add_event_handler(handler, builder)
             self._mcub_event_handlers.append((client, handler, builder))
+
+    def _attach_bot_watchers(self) -> None:
+        """``@watcher(bot_client=True)`` listens on the helper bot, not the user."""
+        registrations = self.registrations
+        if registrations is None:
+            return
+
+        from elystl import events as tl_events
+
+        for watcher in registrations.watchers:
+            if not watcher.get("bot_client"):
+                continue
+            client = self._event_client(True)
+            if client is None:
+                logger.warning(
+                    "MCUB module %s wants a bot_client watcher but no bot is set up",
+                    self.mcub_name,
+                )
+                continue
+            handler = types.MethodType(self._make_watcher(watcher), self)
+            wrapped = self._wrap_event_handler(handler)
+            builder = tl_events.NewMessage()
+            client.add_event_handler(wrapped, builder)
+            self._mcub_event_handlers.append((client, wrapped, builder))
 
     def _event_client(self, bot_client: bool):
         if not bot_client:
@@ -454,6 +481,15 @@ class MCUBAdapterMixin:
                 instance._cleanup_callback_tokens()
             except Exception:
                 logger.debug("Failed cleaning MCUB callback tokens", exc_info=True)
+            try:
+                from .helpers import unregister_scope
+
+                unregister_scope(self.mcub_name)
+                instance_name = getattr(instance, "name", None)
+                if instance_name and instance_name != self.mcub_name:
+                    unregister_scope(instance_name)
+            except Exception:
+                logger.debug("Failed dropping MCUB placeholders", exc_info=True)
         elif registrations is not None and registrations.uninstall is not None:
             await self._safe(
                 self._call_kernel_hook(registrations.uninstall), "uninstall"

@@ -82,7 +82,16 @@ class CallbackRegistry:
 
     def pop(self, token: str) -> dict | None:
         with self._lock:
-            return self._entries.pop(token, None)
+            entry = self._entries.pop(token, None)
+            if entry is not None:
+                module_name = entry.get("module_name")
+                tokens = self._by_module.get(module_name) if module_name else None
+                if tokens is not None:
+                    try:
+                        tokens.remove(token)
+                    except ValueError:
+                        pass
+            return entry
 
     def forget_module(self, module_name: str) -> int:
         with self._lock:
@@ -90,6 +99,19 @@ class CallbackRegistry:
             for token in tokens:
                 self._entries.pop(token, None)
             return len(tokens)
+
+    def put(self, token: str, entry: dict, *, module_name: str | None = None) -> None:
+        """Store a pre-built entry under *token*, tracking it for unload."""
+        module_name = module_name or entry.get("module_name") or ""
+        stored = dict(entry)
+        stored.setdefault("module_name", module_name)
+        with self._lock:
+            self._purge_locked()
+            self._entries[token] = stored
+            if module_name:
+                tokens = self._by_module.setdefault(module_name, [])
+                if token not in tokens:
+                    tokens.append(token)
 
     def _purge_locked(self) -> None:
         now = time.time()
@@ -100,6 +122,11 @@ class CallbackRegistry:
         ]
         for token in expired:
             self._entries.pop(token, None)
+            for tokens in self._by_module.values():
+                try:
+                    tokens.remove(token)
+                except ValueError:
+                    pass
 
     def __len__(self) -> int:
         with self._lock:
@@ -199,7 +226,12 @@ def _build_callback_button(text, token, *, style=None, icon=None, **extra):
 
 
 def _rows(buttons) -> list[list]:
-    """Coerce any accepted markup shape into a list of rows."""
+    """Coerce any accepted markup shape into a list of rows.
+
+    A flat ``[b1, b2, b3]`` is one row. Already-nested markup
+    (``[[b1], [b2]]``) is left as vertical rows -- flattening those would
+    smash a column keyboard into a single line.
+    """
     if buttons is None:
         return []
     if isinstance(buttons, dict):
@@ -207,20 +239,12 @@ def _rows(buttons) -> list[list]:
     if not isinstance(buttons, (list, tuple)):
         return [[buttons]]
 
-    rows: list[list] = []
-    for item in buttons:
-        if isinstance(item, (list, tuple)):
-            rows.append(list(item))
-        else:
-            rows.append([item])
-
-    # A flat list of buttons is a single row, which is how MCUB modules
-    # frequently write short keyboards.
-    if all(len(row) == 1 for row in rows) and len(rows) > 1:
-        flat = [row[0] for row in rows]
-        if all(not isinstance(b, (list, tuple)) for b in flat):
-            return [flat]
-    return rows
+    if any(isinstance(item, (list, tuple)) for item in buttons):
+        return [
+            list(item) if isinstance(item, (list, tuple)) else [item]
+            for item in buttons
+        ]
+    return [list(buttons)]
 
 
 def _style_of(button) -> str | None:

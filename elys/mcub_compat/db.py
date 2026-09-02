@@ -58,17 +58,37 @@ class MCUBDatabase:
     async def db_delete(self, module: str, key: str) -> None:
         self._db.set(_owner(module), _check_key(key), None)
 
+    def _owner_map(self) -> dict:
+        """Top-level ``owner -> {key: value}`` mapping.
+
+        Elys's ``Database`` *is* that mapping (it subclasses ``dict``). Test
+        doubles and some Redis wrappers keep the same shape on ``._db``.
+        """
+        db = self._db
+        if isinstance(db, dict):
+            return db
+        raw = getattr(db, "_db", None)
+        return raw if isinstance(raw, dict) else {}
+
+    def _module_bucket(self, module: str) -> dict:
+        bucket = self._owner_map().get(_owner(module))
+        return bucket if isinstance(bucket, dict) else {}
+
     async def db_get_module_keys(self, module: str) -> list[str]:
-        bucket = self._db.get(_owner(module), "__keys__", None)
-        if bucket:
-            return list(bucket)
-        raw = getattr(self._db, "_db", None) or {}
-        return [k for k in (raw.get(_owner(module)) or {}) if not k.startswith("__")]
+        bucket = self._module_bucket(module)
+        return [
+            key
+            for key, value in bucket.items()
+            if not str(key).startswith("__") and value is not None
+        ]
 
     async def db_get_config_modules(self) -> list[str]:
-        raw = getattr(self._db, "_db", None) or {}
         prefix = f"{OWNER_PREFIX}."
-        return [k[len(prefix) :] for k in raw if k.startswith(prefix)]
+        return [
+            key[len(prefix) :]
+            for key in self._owner_map()
+            if str(key).startswith(prefix)
+        ]
 
     async def db_query(self, query: str, parameters=()) -> list:
         # Elys's database is JSON/Redis-backed, so raw SQL has no meaning here.
