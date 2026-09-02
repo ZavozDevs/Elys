@@ -24,6 +24,12 @@ form engine (``core/lib/loader/inline.py``) and an inline-query ACL store
 (``core_inline/lib/manager.py``). Both surfaces live here, kept apart.
 """
 
+# Required, not cosmetic: this class exposes MCUB's `list()` and `text()` API
+# names, which shadow the builtins inside the class body. Without deferred
+# annotations, `-> list[list[dict]]` is evaluated eagerly against the class
+# namespace on Python < 3.14 and raises TypeError at import time.
+from __future__ import annotations
+
 import html as html_lib
 import logging
 import typing

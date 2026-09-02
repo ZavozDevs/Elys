@@ -12,6 +12,8 @@ modules or the vendored MIT ports; the rest are small shims defined here,
 because they are only needed to satisfy an import in module code.
 """
 
+from __future__ import annotations
+
 import logging
 import types
 import typing

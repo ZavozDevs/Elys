@@ -21,6 +21,8 @@ registration to its caller via ``inspect.stack()[1]``. That is unreliable under
 our exec wrapping, so the proxy is bound to its owning module at construction.
 """
 
+from __future__ import annotations
+
 import asyncio
 import logging
 import re

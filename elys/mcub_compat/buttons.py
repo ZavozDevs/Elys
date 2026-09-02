@@ -18,6 +18,8 @@ Elys markup dicts, preserving the token as a raw ``data`` payload so Elys
 renders the button and our own dispatcher resolves the handler.
 """
 
+from __future__ import annotations
+
 import inspect
 import logging
 import threading

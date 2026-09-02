@@ -14,6 +14,8 @@ It also owns the two pieces of shared dispatch that cannot live on a single
 module: the callback-token router and the ``inline_temp`` map.
 """
 
+from __future__ import annotations
+
 import logging
 import os
 import time

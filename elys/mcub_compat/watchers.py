@@ -14,6 +14,8 @@ messages whose chat has not been fetched -- and in that case every ``only_pm``
 watcher would silently never fire.
 """
 
+from __future__ import annotations
+
 import re
 import typing
 

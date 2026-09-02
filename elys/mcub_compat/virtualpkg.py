@@ -28,6 +28,8 @@ The strategy, mirroring MCUB's own ``hikka_compat.fake_package`` in reverse:
    module that Elys will hand ``elystl`` objects to.
 """
 
+from __future__ import annotations
+
 import builtins
 import importlib
 import importlib.util

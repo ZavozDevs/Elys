@@ -23,6 +23,8 @@ Nothing here runs unless a module is actually detected as MCUB, so the layer
 is inert for ordinary Elys modules.
 """
 
+from __future__ import annotations
+
 import inspect
 import logging
 

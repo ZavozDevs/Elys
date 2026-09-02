@@ -18,6 +18,8 @@ wrapping happens there. The handlers land in a
 republishes to Elys.
 """
 
+from __future__ import annotations
+
 import asyncio
 import copy
 import logging
@@ -97,9 +99,24 @@ class ModuleBase(ABC):
     strings: dict = {}
     config: typing.Any = None
 
-    for _registry in _REGISTRY_NAMES:
-        vars()[_registry] = []
-    del _registry
+    # Declared explicitly rather than generated through `vars()` in the class
+    # body: mutating the class namespace that way is a CPython implementation
+    # detail, and these are only defaults anyway -- `__init_subclass__` rebuilds
+    # all of them for every concrete module.
+    _cmd_registry: list = []
+    _inline_registry: list = []
+    _callback_registry: list = []
+    _watcher_registry: list = []
+    _loop_registry: list = []
+    _event_registry: list = []
+    _method_registry: list = []
+    _on_install_registry: list = []
+    _uninstall_registry: list = []
+    _bot_cmd_registry: list = []
+    _owner_registry: list = []
+    _permission_registry: list = []
+    _error_handler_registry: list = []
+    _inline_temp_registry: list = []
 
     def __getattribute__(self, name: str):
         # `strings`/`config` start life as plain class dicts; route reads through

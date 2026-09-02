@@ -15,6 +15,8 @@ All keys live under a ``mcub.<namespace>`` owner so MCUB modules can never
 collide with Elys's own database namespaces.
 """
 
+from __future__ import annotations
+
 import logging
 import re
 

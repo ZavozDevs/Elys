@@ -24,6 +24,8 @@ Two shapes are needed:
     alert=...)``, and ``edit_rich(...)``.
 """
 
+from __future__ import annotations
+
 import logging
 import typing
 
