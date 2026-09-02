@@ -965,7 +965,9 @@ elys_info:
   send_info: Send userbot info
   description: ℹ This will not compromise any sensitive info
   up-to-date: <b>Up-to-date</b>
+  up_to_date: <b>Up-to-date</b>
   update_required: <b>Update required</b> <code>{prefix}update</code>
+  upd_avail: <b>Update required</b> <code>{prefix}update</code>
   switchinfo_on: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Image Info turned on successfully
   switchinfo_off: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Image Info turned off successfully
   _cfg_cst_msg: Custom message for info. May contain {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} keywords

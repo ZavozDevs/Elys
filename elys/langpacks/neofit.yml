@@ -916,7 +916,9 @@ elys_info:
   send_info: Cat info
   description: ℹ Confidential info safe.
   up-to-date: <b>Latest</b>
+  up_to_date: <b>Latest</b>
   update_required: <b>Update Req</b> <code>{prefix}update</code>
+  upd_avail: <b>Update Req</b> <code>{prefix}update</code>
   switchinfo_on: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Img Info = True
   switchinfo_off: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Img Info = False
   _cfg_cst_msg: Info template

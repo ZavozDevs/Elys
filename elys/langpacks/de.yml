@@ -902,7 +902,9 @@ elys_info:
   description: ℹ Dies wird keine persönlichen Informationen preisgeben
   _ihandle_doc_info: Sende Informationen zum Userbot
   up-to-date: <b>Aktuelle Version</b>
+  up_to_date: <b>Aktuelle Version</b>
   update_required: <b>Update erforderlich</b> <code>{prefix}update</code>
+  upd_avail: <b>Update erforderlich</b> <code>{prefix}update</code>
   _cfg_cst_msg: Benutzerdefinierter Nachrichtentext in info. Kann Schlüsselwörter {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} enthalten
   _cfg_cst_ph: '🤖Benutzerdefinierte Platzhalter: {}'
   _cfg_cst_btn: Benutzerdefinierte Schaltfläche in der Nachricht in info. Lasse es leer, um die Schaltfläche zu entfernen
