@@ -23,6 +23,8 @@ collected handlers onto the adapter under the names ``_get_members()`` looks
 for (``*cmd``, ``is_watcher``, ``*_inline_handler``, ...).
 """
 
+from __future__ import annotations
+
 import asyncio
 import logging
 import typing

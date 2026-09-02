@@ -13,6 +13,8 @@ module author writing ``# scop: kernel min v1.4.0`` is declaring a required
 MCUB API level.
 """
 
+from __future__ import annotations
+
 import logging
 import shutil
 

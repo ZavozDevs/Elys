@@ -12,6 +12,8 @@ Anything Elys lacks is implemented here rather than vendored, because these
 functions are thin and need Elys objects to work.
 """
 
+from __future__ import annotations
+
 import datetime
 import logging
 

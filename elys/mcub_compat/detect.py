@@ -14,6 +14,8 @@ surfaces as a baffling ``AttributeError``. So classification happens on the
 source text, before ``exec_module``.
 """
 
+from __future__ import annotations
+
 import ast
 import logging
 import re
