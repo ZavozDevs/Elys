@@ -20,6 +20,7 @@ renders the button and our own dispatcher resolves the handler.
 
 from __future__ import annotations
 
+import functools
 import inspect
 import logging
 import threading
@@ -292,7 +293,20 @@ def _from_dict(button: dict) -> dict | None:
 
     if button.get("input") is not None and callable(button.get("handler")):
         spec["input"] = button["input"]
-        spec["handler"] = button["handler"]
+        orig_handler = button["handler"]
+
+        @functools.wraps(orig_handler)
+        async def input_wrapper(call, *args, **kwargs):
+            from .events import MCUBCallbackEvent
+
+            wrapped_call = (
+                MCUBCallbackEvent(call)
+                if not isinstance(call, MCUBCallbackEvent)
+                else call
+            )
+            return await orig_handler(wrapped_call, *args, **kwargs)
+
+        spec["handler"] = input_wrapper
         if button.get("args"):
             spec["args"] = tuple(button["args"])
         if button.get("kwargs"):
