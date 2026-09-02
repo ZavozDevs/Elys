@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Шмэлькa | @hairpin01
+#
+# Global string groups extracted from MCUB core/langpacks/uk.yaml.
+lang: ru
+
+type_module:
+  __global__: 1
+  module_style_class: Class
+  module_style_kernel: Kernel
+  module_style_client_old: Client (застарілий)
+  module_type_native: Цей модуль MCUB нативний, використовує стиль {style}
+  module_type_hikka: Цей модуль використовує Heroku/Hikka compat (можливі помилки)
+  module_type_hikka_library: Цей модуль-бібліотека використовує Heroku/Hikka compat (можливі помилки)
+  module_config_info: У цього модуля є Module config, всього ключів {count}
+
+'null':
+  __global__: 1
+  'null': 'null'
+
+error:
+  __global__: on
+  full_error: '🚫 <b>Error:</b> <code>{error}</code>
+
+    🥁 Full logs:
+
+    <pre>{full_error}</pre>'
+  error: ❌ <b>Помилка:</b> <code>{error}</code>
+  timeout: <b>Час очікування запиту вичерпано</b>
+  unknown: ❌ <b>Невідома помилка</b>
+  api_error: ❌ <b>Помилка API:</b> <code>{error}</code>
+  permission_denied: ❌ <b>Доступ заборонено</b>
+
+buttons:
+  __global__: 1
+  close: 🙈 Close
+  'yes': 💠 Yes
+  'no': 🚫 No
+  back: < Back
+  next: 'Next >'
+  update: 🔄 Update
+  page: 'Page: {}'
+  back_menu: 🔙 Menu
+
+langbutton:
+  __global__: 1
+  btn_ru: 🇷🇺 Російська
+  btn_en: 🇬🇧 English
+  btn_uk: 🇺🇦 Українська

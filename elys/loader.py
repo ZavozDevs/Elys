@@ -33,7 +33,7 @@ from uuid import uuid4
 
 from elystl.tl.tlobject import TLObject
 
-from . import main, security, utils, validators
+from . import main, mcub_compat, security, utils, validators
 from .database import Database
 from .inline.core import BotUpdateType, InlineManager
 from .translations import Strings, Translator
@@ -769,6 +769,11 @@ class Modules:
             else None
         )
 
+        # MCUB modules must be detected before their body runs: kernel-style
+        # ones declare `def register(kernel)`, which would otherwise be taken
+        # for the legacy `module.register(module_name)` fallback below.
+        mcub_context = mcub_compat.prepare(module, source_data, self)
+
         async def _exec_module():
             attempted = False
             while True:
@@ -815,6 +820,9 @@ class Modules:
                     attempted = True
 
         await _exec_module()
+
+        if mcub_context is not None:
+            await mcub_compat.finalize(mcub_context, module)
 
         ret = None
 

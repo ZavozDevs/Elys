@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Шмэлькa | @hairpin01
+#
+# Global string groups extracted from MCUB core/langpacks/ru.yaml.
+lang: ru
+
+type_module:
+  __global__: 1
+  module_style_class: Class
+  module_style_kernel: Kernel
+  module_style_client_old: Client (ycтapeвший)
+  module_type_native: Дaнный мoдyль MCUB нaтивный, иcпoльзyeт {style} cтиль
+  module_type_hikka: Дaнный мoдyль иcпoльзyeт Heroku/Hikka compat (вoзмoжны oшибки)
+  module_type_hikka_library: Дaнный мoдyль-библиoтeкa иcпoльзyeт Heroku/Hikka compat (вoзмoжны oшибки)
+  module_config_info: У этoгo мoдyля ecть Module config, вceгo ключeй {count}
+
+'null':
+  __global__: 1
+  'null': 'null'
+
+error:
+  __global__: on
+  full_error: '🚫 <b>Error:</b> <code>{error}</code>
+
+    🥁 Full logs:
+
+    <pre>{full_error}</pre>'
+  error: ❌ <b>Oшибкa:</b> <code>{error}</code>
+  timeout: <b>Вpeмя oжидaния зaпpoca иcтeклo</b>
+  unknown: ❌ <b>Heизвecтнaя oшибкa</b>
+  api_error: ❌ <b>Oшибкa API:</b> <code>{error}</code>
+  permission_denied: ❌ <b>Дocтyп зaпpeщён</b>
+
+buttons:
+  __global__: 1
+  close: 🙈 Close
+  'yes': 💠 Yes
+  'no': 🚫 No
+  back: < Back
+  next: 'Next >'
+  update: 🔄 Update
+  page: 'Page: {}'
+  back_menu: 🔙 Menu
+
+langbutton:
+  __global__: 1
+  btn_ru: 🇷🇺 Pyccкий
+  btn_en: 🇬🇧 English
+  btn_uk: 🇺🇦 Українська

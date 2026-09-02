@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Шмэлькa | @hairpin01
+#
+# Global string groups extracted from MCUB core/langpacks/en.yaml.
+# Only groups marked `__global__` are vendored: MCUB's own core-module strings
+# are intentionally omitted because Elys never loads those modules.
+lang: en
+
+type_module:
+  __global__: 1
+  module_style_class: Class
+  module_style_kernel: Kernel
+  module_style_client_old: Client (legacy)
+  module_type_native: This is a native MCUB module using {style} style
+  module_type_hikka: This module uses Heroku/Hikka compat (errors are possible)
+  module_type_hikka_library: This library module uses Heroku/Hikka compat (errors are possible)
+  module_config_info: This module has Module config, total keys {count}
+
+'null':
+  __global__: 1
+  'null': 'null'
+
+error:
+  __global__: on
+  full_error: '🚫 <b>Error:</b> <code>{error}</code>
+
+  🥁 Full logs:
+
+  <pre>{full_error}</pre>'
+  error: ❌ <b>Error:</b> <code>{error}</code>
+  timeout: ⏱ <b>Request timed out</b>
+  unknown: ❌ <b>Unknown error</b>
+  api_error: ❌ <b>API error:</b> <code>{error}</code>
+  permission_denied: 🚫 <b>Permission denied</b>
+
+buttons:
+  __global__: on
+  close: 🙈 Close
+  'yes': 💠 Yes
+  'no': 🚫 No
+  back: < Back
+  next: 'Next >'
+  update: 🔄 Update
+  page: 'Page: {}'
+  back_menu: 🔙 Menu
+
+langbutton:
+  __global__: 1
+  btn_ru: 🇷🇺 Russian
+  btn_en: 🇬🇧 English
+  btn_uk: 🇺🇦 Ukrainian
