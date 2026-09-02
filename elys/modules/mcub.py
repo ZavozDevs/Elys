@@ -17,68 +17,52 @@ logger = logging.getLogger(__name__)
 class MCUBMod(loader.Module):
     """Диагностика слоя совместимости с модулями MCUB"""
 
+    # Plain Unicode emoji only. Custom emoji need a verified document id that
+    # the account can actually resolve; an unresolvable one makes Telegram
+    # reject the whole edit with DocumentInvalidError ("The document file was
+    # invalid and can't be used in inline mode"), which took this command down
+    # entirely rather than just degrading the icon.
     strings = {
         "name": "MCUB",
         "header": (
-            "<tg-emoji emoji-id=5451732530048792945>🧩</tg-emoji> <b>MCUB"
-            " compatibility</b>\n\n"
+            "🧩 <b>MCUB compatibility</b>\n\n"
             "<b>API level:</b> <code>{version}</code>\n"
             "<b>Upstream:</b> {upstream}\n"
             "<b>Virtual imports:</b> <code>{virtual}</code>\n"
             "<b>Callback tokens:</b> <code>{tokens}</code>\n"
             "<b>Inline prompts:</b> <code>{prompts}</code>"
         ),
-        "no_modules": (
-            "\n\n<tg-emoji emoji-id=5445284980978621387>💭</tg-emoji> <b>No MCUB"
-            " modules loaded</b>"
-        ),
-        "modules_header": (
-            "\n\n<tg-emoji emoji-id=5472308992514464048>📦</tg-emoji> <b>Loaded"
-            " modules ({count}):</b>"
-        ),
+        "no_modules": "\n\n💭 <b>No MCUB modules loaded</b>",
+        "modules_header": "\n\n📦 <b>Loaded modules ({count}):</b>",
         "module_row": (
             "\n• <b>{name}</b> <code>{version}</code> — <i>{style}</i>\n"
             "  <code>{handlers}</code>"
         ),
         "contested": (
-            "\n\n<tg-emoji emoji-id=5210952531676504517>⚠️</tg-emoji> <b>Import names"
-            " owned by other packages:</b> <code>{names}</code>"
+            "\n\n⚠️ <b>Import names owned by other packages:</b>"
+            " <code>{names}</code>"
         ),
         "not_mcub": (
-            "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>This is not an"
-            " MCUB module</b> (detected: <code>{style}</code>)"
+            "❌ <b>This is not an MCUB module</b> (detected:"
+            " <code>{style}</code>)"
         ),
         "detected": (
-            "<tg-emoji emoji-id=5451732530048792945>🧩</tg-emoji> <b>Detected"
-            " style:</b> <code>{style}</code>\n"
+            "🧩 <b>Detected style:</b> <code>{style}</code>\n"
             "<b>Name:</b> <code>{name}</code>\n"
             "<b>Author:</b> <code>{author}</code>\n"
             "<b>Version:</b> <code>{version}</code>\n"
             "<b>Requires:</b> <code>{requires}</code>"
         ),
-        "no_file": (
-            "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Reply to a"
-            " module file to inspect it</b>"
-        ),
+        "no_file": "❌ <b>Reply to a module file to inspect it</b>",
     }
 
     strings_ru = {
-        "no_modules": (
-            "\n\n<tg-emoji emoji-id=5445284980978621387>💭</tg-emoji> <b>Модули MCUB"
-            " не загружены</b>"
-        ),
-        "modules_header": (
-            "\n\n<tg-emoji emoji-id=5472308992514464048>📦</tg-emoji> <b>Загруженные"
-            " модули ({count}):</b>"
-        ),
+        "no_modules": "\n\n💭 <b>Модули MCUB не загружены</b>",
+        "modules_header": "\n\n📦 <b>Загруженные модули ({count}):</b>",
         "not_mcub": (
-            "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Это не модуль"
-            " MCUB</b> (определено: <code>{style}</code>)"
+            "❌ <b>Это не модуль MCUB</b> (определено: <code>{style}</code>)"
         ),
-        "no_file": (
-            "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Ответь на файл"
-            " модуля, чтобы его проверить</b>"
-        ),
+        "no_file": "❌ <b>Ответь на файл модуля, чтобы его проверить</b>",
     }
 
     @loader.command(
