@@ -484,8 +484,12 @@ def _restart_source() -> types.SimpleNamespace:
 def _placeholders_source() -> types.SimpleNamespace:
     return types.SimpleNamespace(
         resolve_placeholders=_helpers.resolve_placeholders,
+        register_placeholder=_helpers.register_placeholder,
         register_decorated_placeholders=_helpers.register_decorated_placeholders,
+        unregister_placeholder=_helpers.unregister_placeholder,
         unregister_scope=_helpers.unregister_scope,
+        list_placeholder_keys=_helpers.list_placeholder_keys,
+        format_placeholders=_helpers.format_placeholders,
         config_placeholders=_helpers.config_placeholders,
     )
 

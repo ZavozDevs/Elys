@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import types
 import typing
 import uuid
 
@@ -134,7 +135,19 @@ class MCUBAdapterMixin:
             self._publish("mcub_bot_updates", self._make_bot_command_bridge())
 
     def _publish(self, attr: str, func: typing.Callable) -> None:
-        object.__setattr__(self, attr, func)
+        """Publish a handler as a *bound method* on this adapter.
+
+        Elys identifies which module owns a handler with
+        `cmd.__self__.__class__.__name__` (see `Modules.unregister_commands`,
+        `unregister_watchers`, `unregister_raw_handlers`). Instance attributes
+        skip descriptor binding, so assigning a plain function leaves no
+        `__self__` and unloading raises AttributeError. Binding explicitly is
+        what gives these handlers the same shape as a normal `async def` on an
+        Elys module. Flags set on the function stay reachable, because method
+        objects forward attribute lookups to `__func__`.
+        """
+        bound = func if hasattr(func, "__self__") else types.MethodType(func, self)
+        object.__setattr__(self, attr, bound)
         self._mcub_published.append(attr)
 
     # -- handler factories ------------------------------------------------
@@ -143,7 +156,9 @@ class MCUBAdapterMixin:
         handler = meta["handler"]
         docs = meta.get("docs") or {}
 
-        async def command_handler(message):
+        # The leading parameter is supplied by `types.MethodType` in `_publish`;
+        # `self` is already captured from the enclosing scope.
+        async def command_handler(_adapter, message):
             event = MCUBEvent(message, self.mcub_name, self.kernel)
             return await handler(event)
 
@@ -163,7 +178,7 @@ class MCUBAdapterMixin:
         tags = watcher.get("tags") or {}
         name = watcher["name"]
 
-        async def watcher_handler(message):
+        async def watcher_handler(_adapter, message):
             registrations = self.registrations
             if registrations and name in registrations.disabled_watchers:
                 return None
@@ -185,7 +200,7 @@ class MCUBAdapterMixin:
         return watcher_handler
 
     def _make_inline_handler(self, handler: typing.Callable) -> typing.Callable:
-        async def inline_handler(query):
+        async def inline_handler(_adapter, query):
             from .events import MCUBInlineQuery
 
             return await handler(MCUBInlineQuery(query, kernel=self.kernel))
@@ -201,7 +216,7 @@ class MCUBAdapterMixin:
         happens in ``Events._chosen_inline_handler`` via the compat hook.
         """
 
-        async def inline_temp_handler(query):
+        async def inline_temp_handler(_adapter, query):
             entry = self.host.inline_temp_map.get(key)
             if entry is None:
                 return None
@@ -228,7 +243,7 @@ class MCUBAdapterMixin:
         """
         host = self.host
 
-        async def mcub_callback_handler(call):
+        async def mcub_callback_handler(_adapter, call):
             try:
                 await host.dispatch_callback(call)
             except Exception:
@@ -251,7 +266,7 @@ class MCUBAdapterMixin:
         """
         registrations = self.registrations
 
-        async def mcub_bot_updates(event):
+        async def mcub_bot_updates(_adapter, event):
             text = getattr(event, "raw_text", "") or getattr(event, "text", "") or ""
             if not text.startswith("/"):
                 return None
