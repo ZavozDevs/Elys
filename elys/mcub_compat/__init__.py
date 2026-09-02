@@ -148,6 +148,13 @@ def prepare(module, source: str | None, modules) -> MCUBContext | None:
     module.client = kernel.client
     module.custom_prefix = host.prefix
 
+    # Some modules (e.g. MCUB's loader) inspect `__file__` at module top-level;
+    # supply a sensible fallback when executed from an in-memory spec without origin.
+    if not getattr(module, "__file__", None):
+        spec = getattr(module, "__spec__", None)
+        origin = getattr(spec, "origin", None) if spec is not None else None
+        module.__file__ = origin or f"mcub_modules/{name}.py"
+
     virtualpkg.build_module_namespace(module)
 
     logger.debug("Prepared MCUB module %s (style=%s)", name, style)

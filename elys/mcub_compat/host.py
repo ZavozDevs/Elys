@@ -68,6 +68,10 @@ class MCUBHost:
 
     def rebind(self, modules) -> None:
         self.modules = modules
+        inline_handlers = getattr(self.modules, "inline_handlers", None)
+        if isinstance(inline_handlers, dict):
+            for key in self.inline_temp_map:
+                inline_handlers[key.lower()] = self._create_inline_temp_query_handler(key)
 
     # -- core objects -----------------------------------------------------
 
@@ -207,6 +211,9 @@ class MCUBHost:
         for key, entry in list(self.inline_temp_map.items()):
             if entry.get("module_name") == name:
                 self.inline_temp_map.pop(key, None)
+                inline_handlers = getattr(self.modules, "inline_handlers", None)
+                if isinstance(inline_handlers, dict):
+                    inline_handlers.pop(key.lower(), None)
         try:
             from .helpers import unregister_scope
 
@@ -241,9 +248,49 @@ class MCUBHost:
 
     def publish_inline_temp(self, key: str, entry: dict) -> None:
         self.inline_temp_map[key] = entry
+        inline_handlers = getattr(self.modules, "inline_handlers", None)
+        if isinstance(inline_handlers, dict):
+            inline_handlers[key.lower()] = self._create_inline_temp_query_handler(key)
 
     def revoke_inline_temp(self, key: str) -> None:
         self.inline_temp_map.pop(key, None)
+        inline_handlers = getattr(self.modules, "inline_handlers", None)
+        if isinstance(inline_handlers, dict):
+            inline_handlers.pop(key.lower(), None)
+
+    def _create_inline_temp_query_handler(self, key: str) -> typing.Callable:
+        async def inline_temp_query_handler(*args):
+            query = args[-1] if args else None
+            entry = self.inline_temp_map.get(key)
+            if entry is None:
+                return None
+
+            builder = entry.get("article")
+            if callable(builder):
+                try:
+                    res = builder(query)
+                    if isinstance(res, dict):
+                        return res
+                    if isinstance(res, list) and res and isinstance(res[0], dict):
+                        return res
+                    if hasattr(res, "send_message"):
+                        msg_obj = getattr(res, "send_message", None)
+                        msg_text = getattr(msg_obj, "message", "") or ""
+                        return {
+                            "title": getattr(res, "title", "MCUB") or "MCUB",
+                            "description": getattr(res, "description", "") or "Send to continue",
+                            "message": msg_text or f"<code>{utils.escape_html(key)}</code>",
+                        }
+                except Exception:
+                    logger.exception("MCUB inline_temp article builder failed")
+
+            return self.inline_temp_article(key)
+
+        from .adapter import _inline_everyone
+
+        inline_temp_query_handler.is_inline_handler = True
+        inline_temp_query_handler.security = _inline_everyone()
+        return inline_temp_query_handler
 
     def on_registration_change(self) -> None:
         for adapter in list(self.adapters.values()):
@@ -502,7 +549,28 @@ class _ChosenInlineEvent:
         if self.inline_message_id is None:
             return None
 
-        request_kwargs: dict = {"id": self.inline_message_id}
+        inline_mgr = self._host.inline_manager
+        bot_client = None
+        for candidate in (
+            getattr(inline_mgr, "_bot_client", None),
+            getattr(getattr(inline_mgr, "bot", None), "client", None),
+            self._host.client,
+        ):
+            if candidate is not None and callable(candidate):
+                bot_client = candidate
+                break
+        if bot_client is None:
+            bot_client = self._host.client
+
+        raw_id = self.inline_message_id
+        try:
+            from ..inline.tl import TelethonBot
+
+            coerced_id = TelethonBot._coerce_inline_message_id(raw_id)
+        except Exception:
+            coerced_id = raw_id
+
+        request_kwargs: dict = {"id": coerced_id}
         parse_mode = kwargs.pop("parse_mode", "html")
         if text is not None:
             from .events import to_message_entities
@@ -512,9 +580,12 @@ class _ChosenInlineEvent:
             if entities:
                 request_kwargs["entities"] = entities
         if buttons is not None:
-            markup = self._host.inline_manager.generate_markup(to_elys_markup(buttons))
+            if inline_mgr is not None and hasattr(inline_mgr, "generate_markup"):
+                markup = inline_mgr.generate_markup(to_elys_markup(buttons))
+            else:
+                markup = to_elys_markup(buttons)
             request_kwargs["reply_markup"] = markup
-        return await self._host.client(EditInlineBotMessageRequest(**request_kwargs))
+        return await bot_client(EditInlineBotMessageRequest(**request_kwargs))
 
     async def delete(self):
         return None
