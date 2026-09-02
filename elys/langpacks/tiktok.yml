@@ -897,7 +897,9 @@ elys_info:
   description: ℹ Это безопасно, не ссы
   _ihandle_doc_info: Кинуть инфу о юзерботе
   up-to-date: <b>Свежак</b>
+  up_to_date: <b>Свежак</b>
   update_required: <b>Обновись, э!</b> <code>{prefix}update</code>
+  upd_avail: <b>Обновись, э!</b> <code>{prefix}update</code>
   _cfg_cst_msg: Кастом текст в .info. Юзай {me}, {version}, {build} и прочее
   _cfg_cst_ph: '🤖Кастомные плейсхолдеры: {}'
   _cfg_cst_btn: Кнопка в .info. Пусто = нет кнопки

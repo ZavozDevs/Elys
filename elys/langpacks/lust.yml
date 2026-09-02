@@ -1387,7 +1387,9 @@ elys_info:
   description: ℹ Это не раскроет никакой личной информации ♡ 🫦
   _ihandle_doc_info: Отправить информацию о юзерботе ♡ 🫦
   up-to-date: <b>Актуальная версия</b> ♡ 🫦
+  up_to_date: <b>Актуальная версия</b> ♡ 🫦
   update_required: <b>Требуется Сочная струя обновлений 💦</b> <code>{prefix}update</code>
+  upd_avail: <b>Требуется Сочная струя обновлений 💦</b> <code>{prefix}update</code>
   _cfg_cst_msg: Кастомный текст сообщения в info. Может содержать ключевые слова {me},
     {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage},
     {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver},
