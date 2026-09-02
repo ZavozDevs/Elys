@@ -32,13 +32,28 @@ UNKNOWN = "unknown"
 
 MCUB_STYLES = frozenset({MCUB_CLASS, MCUB_KERNEL, MCUB_LEGACY_CLIENT})
 
+# `# name:` must stay *bare* here. `# meta name:` / `# meta developer:` /
+# `# meta banner:` are the Hikka/Friendly-Telegram convention that Elys
+# inherits, and treating them as MCUB headers made every Hikka module score on
+# both sides at once and get rejected as ambiguous.
 _HEADER_PATTERNS = {
-    "name": r"^\s*#\s*(?:meta\s+)?name\s*:\s*(.+)$",
-    "author": r"^\s*#\s*(?:author|meta\s+developer)\s*:\s*(.+)$",
-    "version": r"^\s*#\s*(?:meta\s+)?version\s*:\s*(.+)$",
-    "description": r"^\s*#\s*(?:meta\s+)?description\s*:\s*(.+)$",
-    "banner_url": r"^\s*#\s*(?:meta\s+)?banner_url\s*:\s*(.+)$",
+    "name": r"^\s*#\s*name\s*:\s*(.+)$",
+    "author": r"^\s*#\s*author\s*:\s*(.+)$",
+    "version": r"^\s*#\s*version\s*:\s*(.+)$",
+    "description": r"^\s*#\s*description\s*:\s*(.+)$",
+    "banner_url": r"^\s*#\s*banner_url\s*:\s*(.+)$",
 }
+
+# Upstream MCUB also accepts `# meta name:`, so it is still read for metadata
+# once a module has been classified -- just never used as a detection signal.
+_META_PATTERNS = {
+    "meta_name": r"^\s*#\s*meta\s+name\s*:\s*(.+)$",
+    "meta_author": r"^\s*#\s*meta\s+developer\s*:\s*(.+)$",
+    "meta_banner": r"^\s*#\s*meta\s+banner\s*:\s*(.+)$",
+}
+
+#: Any `# meta <key>:` directive is Hikka/Elys lineage evidence.
+_HIKKA_META_RE = re.compile(r"^\s*#\s*meta\s+[\w-]+\s*:", re.MULTILINE | re.IGNORECASE)
 
 # MCUB module namespaces that only ever exist inside MCUB.
 _MCUB_IMPORT_ROOTS = (
@@ -86,18 +101,28 @@ _ELYS_BASES = frozenset({"Module", "Library"})
 
 
 def parse_header(code: str) -> dict:
-    """Extract MCUB header comment directives from module source."""
+    """Extract MCUB header comment directives from module source.
+
+    ``# meta ...`` variants land under separate ``meta_*`` keys so that they can
+    be used for metadata after classification without ever influencing it.
+    """
     meta: dict[str, typing.Any] = {}
 
-    for key, pattern in _HEADER_PATTERNS.items():
-        match = re.search(pattern, code, re.MULTILINE | re.IGNORECASE)
-        if match:
-            value = match.group(1).strip()
-            if value:
-                meta[key] = value
+    for patterns in (_HEADER_PATTERNS, _META_PATTERNS):
+        for key, pattern in patterns.items():
+            match = re.search(pattern, code, re.MULTILINE | re.IGNORECASE)
+            if match:
+                value = match.group(1).strip()
+                if value:
+                    meta[key] = value
 
     meta["requires"] = parse_requires(code)
     return meta
+
+
+def has_hikka_meta(code: str) -> bool:
+    """True when the source carries a Hikka-style ``# meta <key>:`` directive."""
+    return bool(_HIKKA_META_RE.search(code))
 
 
 def parse_requires(code: str) -> list[str]:
@@ -171,11 +196,17 @@ class _Scorer(ast.NodeVisitor):
         self.mcub = 0
         self.elys = 0
         self.register_param: str | None = None
+        # Strong, unambiguous markers. Only these decide a classification;
+        # the numeric scores are tie-breakers for modules with no strong marker.
         self.has_module_base = False
+        self.has_mcub_import = False
+        self.has_kernel_api = False
+        self.has_elys_base = False
 
     def visit_Import(self, node: ast.Import) -> None:
         for alias in node.names:
             if alias.name.startswith(_MCUB_IMPORT_ROOTS):
+                self.has_mcub_import = True
                 self.mcub += 2
         self.generic_visit(node)
 
@@ -186,8 +217,10 @@ class _Scorer(ast.NodeVisitor):
         if node.level > 0:
             # `from .. import loader` is the Hikka/Elys idiom.
             if "loader" in names or "utils" in names:
+                self.has_elys_base = True
                 self.elys += 2
         elif module.startswith(_MCUB_IMPORT_ROOTS):
+            self.has_mcub_import = True
             self.mcub += 2
             if "ModuleBase" in names:
                 self.has_module_base = True
@@ -195,6 +228,7 @@ class _Scorer(ast.NodeVisitor):
         elif module in _MCUB_UTIL_MODULES:
             self.mcub += 1
         elif module in {"hikka", "heroku", "hikka.loader", "heroku.loader"}:
+            self.has_elys_base = True
             self.elys += 2
 
         self.generic_visit(node)
@@ -209,10 +243,12 @@ class _Scorer(ast.NodeVisitor):
                 self.has_module_base = True
                 self.mcub += 3
             elif leaf in _ELYS_BASES and (len(chain) == 1 or chain[0] == "loader"):
+                self.has_elys_base = True
                 self.elys += 3
 
         for chain in _decorator_names(node):
             if chain[-1] in _ELYS_ONLY_DECORATORS:
+                self.has_elys_base = True
                 self.elys += 2
 
         self.generic_visit(node)
@@ -223,8 +259,10 @@ class _Scorer(ast.NodeVisitor):
             if leaf in _MCUB_ONLY_DECORATORS:
                 self.mcub += 1
             elif leaf in _ELYS_ONLY_DECORATORS:
+                self.has_elys_base = True
                 self.elys += 2
             elif chain[:2] == ["kernel", "register"]:
+                self.has_kernel_api = True
                 self.mcub += 3
             elif chain[:1] == ["loader"] and leaf in {
                 "raw_handler",
@@ -233,6 +271,7 @@ class _Scorer(ast.NodeVisitor):
                 "unrestricted",
                 "inline_everyone",
             }:
+                self.has_elys_base = True
                 self.elys += 2
 
         self.generic_visit(node)
@@ -243,10 +282,12 @@ class _Scorer(ast.NodeVisitor):
     def visit_Attribute(self, node: ast.Attribute) -> None:
         chain = _dotted(node)
         if chain[:2] == ["kernel", "register"]:
+            self.has_kernel_api = True
             self.mcub += 2
         elif chain[:2] == ["self", "subinline"]:
             self.mcub += 2
         elif chain[:2] == ["loader", "ModuleConfig"]:
+            self.has_elys_base = True
             self.elys += 2
         self.generic_visit(node)
 
@@ -277,30 +318,46 @@ def detect_style(code: str) -> str:
     register_param = _top_level_register(tree)
     header = parse_header(code)
     has_name_header = bool(header.get("name"))
+    kernel_register = register_param in {"kernel", "k"}
 
-    # A `# name:` header only means something in MCUB, and MCUB *requires* it
-    # for function-style modules.
-    if has_name_header and register_param is not None:
-        scorer.mcub += 3
-    elif has_name_header:
-        scorer.mcub += 1
+    # Signals are tiered, because code outranks comments. A base class or an
+    # import is a fact about the module; a header comment is a claim about it,
+    # and the two ecosystems disagree about who owns `# name:`/`# meta name:`.
+    #
+    # Tier 1 - code-level markers. `def register(kernel)` counts here: MCUB
+    # requires it for function-style modules and nothing in the Hikka lineage
+    # produces it (Elys's legacy fallback is `register(module_name)`).
+    code_mcub = (
+        scorer.has_module_base
+        or scorer.has_mcub_import
+        or scorer.has_kernel_api
+        or kernel_register
+    )
+    code_elys = scorer.has_elys_base
 
-    if scorer.mcub and scorer.elys:
+    if code_mcub and code_elys:
         logger.debug(
             "Ambiguous module flavour (mcub=%d elys=%d)", scorer.mcub, scorer.elys
         )
         return AMBIGUOUS
 
-    if scorer.elys:
+    # An Elys/Hikka module stays Elys even if it trips weak MCUB heuristics
+    # such as `import utils` or a method named `callback`.
+    if code_elys:
         return ELYS
 
-    if not scorer.mcub:
-        return UNKNOWN
+    # Tier 2 - header comments, consulted only when the code says nothing.
+    if not code_mcub:
+        if has_hikka_meta(code):
+            # `# meta name:` / `# meta developer:` / `# meta banner:` are Hikka
+            # lineage, never MCUB.
+            return ELYS
+        return ELYS if scorer.elys else UNKNOWN
 
     if scorer.has_module_base:
         return MCUB_CLASS
 
-    if register_param in {"kernel", "k"}:
+    if kernel_register:
         return MCUB_KERNEL
 
     if register_param == "client":

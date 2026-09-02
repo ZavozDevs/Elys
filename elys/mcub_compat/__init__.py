@@ -132,7 +132,13 @@ def prepare(module, source: str | None, modules) -> MCUBContext | None:
 
         raise LoadError(f"MCUB compatibility check failed: {reason}")
 
-    name = meta.get("name") or _fallback_name(getattr(module, "__name__", "mcub"))
+    # Upstream MCUB also honours `# meta name:`; safe to read here because the
+    # module is already classified as MCUB.
+    name = (
+        meta.get("name")
+        or meta.get("meta_name")
+        or _fallback_name(getattr(module, "__name__", "mcub"))
+    )
     registrations = Registrations(name)
     kernel = KernelProxy(name, registrations, host)
 
