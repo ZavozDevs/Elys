@@ -199,6 +199,7 @@ class MCUBHost:
 
     def unregister_adapter(self, name: str) -> None:
         self.adapters.pop(name, None)
+        self.live_configs.pop(name, None)
         registry.forget_module(name)
         self.callback_prefixes = [
             item for item in self.callback_prefixes if item[0] != name
@@ -206,13 +207,34 @@ class MCUBHost:
         for key, entry in list(self.inline_temp_map.items()):
             if entry.get("module_name") == name:
                 self.inline_temp_map.pop(key, None)
+        try:
+            from .helpers import unregister_scope
 
-    def register_inline_handler(self, pattern: str, handler) -> None:
-        for adapter in self.adapters.values():
-            registrations = getattr(adapter, "registrations", None)
-            if registrations is not None and handler in registrations.inline_handlers.values():
-                break
+            unregister_scope(name)
+        except Exception:
+            logger.debug("Failed dropping placeholders for %s", name, exc_info=True)
+
+    def register_inline_handler(
+        self, pattern: str, handler, *, module_name: str | None = None
+    ) -> None:
+        adapter = self._adapter_for_handler(handler, module_name)
+        registrations = getattr(adapter, "registrations", None) if adapter else None
+        if registrations is not None:
+            registrations.inline_handlers[str(pattern).lower()] = handler
         self.on_registration_change()
+
+    def _adapter_for_handler(self, handler, module_name: str | None = None):
+        name = module_name or _module_name_of(handler)
+        if name and name in self.adapters:
+            return self.adapters[name]
+        if name:
+            needle = str(name).lower()
+            for key, adapter in self.adapters.items():
+                if key.lower() == needle:
+                    return adapter
+        if len(self.adapters) == 1:
+            return next(iter(self.adapters.values()))
+        return None
 
     def register_callback_prefix(self, module_name: str, prefix: bytes, handler) -> None:
         self.callback_prefixes.append((module_name, prefix, handler))
@@ -481,8 +503,14 @@ class _ChosenInlineEvent:
             return None
 
         request_kwargs: dict = {"id": self.inline_message_id}
+        parse_mode = kwargs.pop("parse_mode", "html")
         if text is not None:
-            request_kwargs["message"] = text
+            from .events import to_message_entities
+
+            message, entities = to_message_entities(text, parse_mode)
+            request_kwargs["message"] = message
+            if entities:
+                request_kwargs["entities"] = entities
         if buttons is not None:
             markup = self._host.inline_manager.generate_markup(to_elys_markup(buttons))
             request_kwargs["reply_markup"] = markup
@@ -504,6 +532,19 @@ async def _deny(call, strings: Strings) -> None:
         await call.answer(str(message), alert=True)
     except Exception:
         logger.debug("Failed to answer denied MCUB callback", exc_info=True)
+
+
+def _module_name_of(handler) -> str | None:
+    bound = getattr(handler, "__bound_instance__", None) or getattr(
+        handler, "__self__", None
+    )
+    for attr in ("mcub_name", "name", "module_name"):
+        value = getattr(bound, attr, None)
+        if value:
+            return str(value)
+    kernel = getattr(bound, "kernel", None)
+    name = getattr(kernel, "module_name", None)
+    return str(name) if name else None
 
 
 def _config_key(module_name: str) -> str:

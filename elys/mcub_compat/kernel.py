@@ -578,11 +578,11 @@ class KernelProxy:
 
     @property
     def inline(self):
-        return self._host.mcub_inline
+        return BoundInline(self._host.mcub_inline, self)
 
     @property
     def inline_manager(self):
-        return self._host.mcub_inline
+        return self.inline
 
     @property
     def db_manager(self):
@@ -830,7 +830,9 @@ class KernelProxy:
     def store_inline_callback(self, token: str, data: dict) -> None:
         from .buttons import registry
 
-        registry._entries[token] = data
+        entry = dict(data) if isinstance(data, dict) else {"handler": data}
+        entry.setdefault("module_name", self.module_name)
+        registry.put(token, entry, module_name=self.module_name)
 
     def remove_inline_callback_tokens(self, tokens) -> None:
         from .buttons import registry
@@ -1051,6 +1053,31 @@ class KernelProxy:
 
 def make_permissions() -> CallbackPermissionManager:
     return CallbackPermissionManager()
+
+
+class BoundInline:
+    """Per-module view of the shared form engine.
+
+    ``kernel.inline.form`` / ``gallery`` / ``list`` delegate to
+    :class:`MCUBInlineManager`. Registration methods must land on *this*
+    kernel's :class:`Registrations`, otherwise ``kernel.inline.register_*``
+    is a silent no-op.
+    """
+
+    __slots__ = ("_kernel", "_manager")
+
+    def __init__(self, manager, kernel: KernelProxy) -> None:
+        object.__setattr__(self, "_manager", manager)
+        object.__setattr__(self, "_kernel", kernel)
+
+    def register_inline_handler(self, pattern: str, handler) -> None:
+        self._kernel.register_inline_handler(pattern, handler)
+
+    def register_callback_handler(self, pattern, handler) -> None:
+        self._kernel.register_callback_handler(pattern, handler)
+
+    def __getattr__(self, name: str):
+        return getattr(object.__getattribute__(self, "_manager"), name)
 
 
 #: MCUB exposes the registration class as ``core.lib.loader.register.Register``.

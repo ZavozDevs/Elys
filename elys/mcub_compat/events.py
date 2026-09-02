@@ -48,6 +48,42 @@ def _as_text(value: typing.Any) -> str:
     return "" if value is None else str(value)
 
 
+def to_html(text, parse_mode: str = "html") -> str:
+    """Render *text* as HTML. Elys's form/edit path is HTML-only."""
+    if text is None:
+        return text
+    mode = str(parse_mode or "html").lower()
+    if mode in {"md", "markdown"}:
+        try:
+            from elystl.extensions import html as html_parser
+            from elystl.extensions import markdown
+
+            parsed, entities = markdown.parse(str(text))
+            return html_parser.unparse(parsed, entities)
+        except Exception:
+            return str(text)
+    return str(text)
+
+
+def to_message_entities(text, parse_mode: str = "html"):
+    """Return ``(message, entities)`` for a raw Telethon edit request."""
+    if text is None:
+        return None, None
+    mode = str(parse_mode or "html").lower()
+    try:
+        if mode in {"md", "markdown"}:
+            from elystl.extensions import markdown
+
+            return markdown.parse(str(text))
+        if mode == "html":
+            from elystl.extensions import html as html_parser
+
+            return html_parser.parse(str(text))
+    except Exception:
+        logger.debug("parse_mode=%s failed, sending raw text", parse_mode, exc_info=True)
+    return str(text), None
+
+
 class MCUBEvent:
     """Telethon-event facade over an Elys ``Message``."""
 
@@ -290,14 +326,18 @@ class MCUBCallbackEvent:
             return await responder(text, show_alert=alert, **kwargs)
 
     async def edit(self, text=None, buttons=None, *, parse_mode="html", **kwargs):
-        """MCUB names the markup ``buttons``; Elys names it ``reply_markup``."""
+        """MCUB names the markup ``buttons``; Elys names it ``reply_markup``.
+
+        Elys's ``_edit_unit`` hardcodes HTML and rejects a ``parse_mode``
+        kwarg, so markdown is converted here rather than forwarded.
+        """
         from .buttons import to_elys_markup
 
         if buttons is not None:
             kwargs["reply_markup"] = to_elys_markup(buttons)
         kwargs.pop("parse_mode", None)
         if text is not None:
-            kwargs["text"] = text
+            kwargs["text"] = to_html(text, parse_mode)
         await self._call.edit(**kwargs)
         return self
 
