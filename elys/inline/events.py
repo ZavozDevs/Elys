@@ -340,6 +340,13 @@ class Events(InlineUnit):
         if not query:
             return
 
+        # MCUB modules register `inline_temp` handlers under a bare uuid and
+        # expect them to fire when the result is *sent*, not while typing.
+        from ..mcub_compat import handle_chosen_inline
+
+        if await handle_chosen_inline(self, chosen_inline_query, query):
+            return
+
         for unit_id, unit in self._units.items():
             if (
                 unit_id == query
