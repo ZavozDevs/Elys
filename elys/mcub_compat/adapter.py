@@ -121,12 +121,12 @@ class MCUBAdapterMixin:
 
         for pattern, handler in registrations.inline_handlers.items():
             self._publish(
-                f"{pattern}_inline_handler", self._make_inline_handler(handler)
+                f"{pattern}_inline_handler", self._create_inline(handler)
             )
 
         for key in registrations.inline_temp:
             self._publish(
-                f"{key}_inline_handler", self._make_inline_temp_handler(key)
+                f"{key}_inline_handler", self._create_inline_temp_handler(key)
             )
 
         self._publish("mcub_callback_handler", self._make_callback_bridge())
@@ -199,7 +199,11 @@ class MCUBAdapterMixin:
         watcher_handler.no_commands = False
         return watcher_handler
 
-    def _make_inline_handler(self, handler: typing.Callable) -> typing.Callable:
+    # Helper names must not end in `cmd`, `watcher`, `_inline_handler` or
+    # `_callback_handler`. Elys discovers handlers by scanning `dir()` for those
+    # suffixes, so `_make_inline_handler` / `_create_inline_handler` would
+    # themselves be registered as inline commands named `_make` / `_create`.
+    def _create_inline(self, handler: typing.Callable) -> typing.Callable:
         async def inline_handler(_adapter, query):
             from .events import MCUBInlineQuery
 
@@ -209,7 +213,7 @@ class MCUBAdapterMixin:
         inline_handler.security = _inline_everyone()
         return inline_handler
 
-    def _make_inline_temp_handler(self, key: str) -> typing.Callable:
+    def _create_inline_temp_handler(self, key: str) -> typing.Callable:
         """Query-time article for an ``inline_temp`` id.
 
         The handler itself only fires once the user *sends* the result; that
