@@ -29,6 +29,7 @@ import re
 import time
 import typing
 import uuid
+from types import MappingProxyType
 
 from .. import utils
 from ._vendor.colors import Colors
@@ -749,11 +750,52 @@ class KernelProxy:
     async def save_module_config(self, module_name: str, config_data) -> bool:
         return await self._host.save_module_config(module_name, config_data)
 
+    async def delete_module_config(self, module_name: str) -> bool:
+        self._host.live_configs.pop(module_name, None)
+        return await self._host.save_module_config(module_name, {})
+
+    async def get_module_config_key(self, module_name: str, key: str, default=None):
+        stored = await self.get_module_config(module_name) or {}
+        return stored.get(key, default) if isinstance(stored, dict) else default
+
+    async def set_module_config_key(self, module_name: str, key: str, value) -> bool:
+        stored = await self.get_module_config(module_name) or {}
+        if not isinstance(stored, dict):
+            stored = {}
+        stored[key] = value
+        return await self.save_module_config(module_name, stored)
+
+    async def delete_module_config_key(self, module_name: str, key: str) -> bool:
+        stored = await self.get_module_config(module_name) or {}
+        if isinstance(stored, dict):
+            stored.pop(key, None)
+        return await self.save_module_config(module_name, stored)
+
+    def store_module_config_schema(self, module_name: str, config) -> None:
+        """Register a live ``ModuleConfig`` so UIs can render it.
+
+        Upstream stores it in ``_live_module_configs`` and nothing more, so this
+        is the same operation as :meth:`set_live_module_config`. Real MCUB
+        modules call it straight from ``on_load``, so a missing method aborts
+        loading -- it is not optional in practice.
+        """
+        self._host.live_configs[module_name] = config
+
     def set_live_module_config(self, module_name: str, config) -> None:
         self._host.live_configs[module_name] = config
 
     def get_live_module_config(self, module_name: str, default=None):
         return self._host.live_configs.get(module_name, default)
+
+    def save_config(self) -> bool:
+        """Persist kernel config.
+
+        Elys derives ``kernel.config`` from its own database rather than a
+        config.json, and module-scoped writes already live in the override dict,
+        so there is nothing to flush.
+        """
+        self.logger.debug("kernel.save_config() is a no-op on Elys")
+        return True
 
     # -- inline helpers ---------------------------------------------------
 
@@ -863,6 +905,99 @@ class KernelProxy:
 
     async def log_module(self, message: str) -> None:
         self.logger.info(message)
+
+    def log_error(self, message, *args, **kwargs) -> None:
+        self.logger.error(str(message), *args)
+
+    async def send_log_message(self, message: str, **kwargs) -> None:
+        self.logger.info(str(message))
+
+    def get_module_metadata(self, module_name: str) -> dict:
+        """Header metadata (`# name:`, `# version:`, ...) for a loaded module."""
+        adapter = self._host.adapters.get(module_name)
+        if adapter is None:
+            needle = str(module_name).lower()
+            adapter = next(
+                (
+                    item
+                    for name, item in self._host.adapters.items()
+                    if name.lower() == needle
+                ),
+                None,
+            )
+        return dict(getattr(adapter, "mcub_meta", {}) or {})
+
+    async def unregister_module_commands(self, module_name: str) -> bool:
+        """Drop a module's commands, mirroring MCUB's loader teardown."""
+        adapter = self._host.adapters.get(module_name)
+        registrations = getattr(adapter, "registrations", None)
+        if registrations is None:
+            return False
+        registrations.commands.clear()
+        registrations.bot_commands.clear()
+        registrations.aliases.clear()
+        self._on_registration_change()
+        return True
+
+    @property
+    def _inline(self):
+        """Upstream's private handle for the form engine."""
+        return self._host.mcub_inline
+
+    @property
+    def _log(self):
+        return self.logger
+
+    # MCUB's module catalogue lives in its own loader and repository engine.
+    # Elys has `.dlmod`/`.loadmod` instead, so those APIs are genuinely absent
+    # rather than stubbed -- a fake `download_module_from_repo` that silently
+    # did nothing would be worse than a clear failure. Modules that probe with
+    # `getattr(kernel, name, None)` still degrade cleanly, because this raises
+    # AttributeError like any missing attribute.
+    _UNSUPPORTED = MappingProxyType(
+        {
+            "_loader": "MCUB's module loader",
+            "_module_sources": "MCUB's module source registry",
+            "save_module_sources": "MCUB's module source registry",
+            "load_module_from_file": "MCUB's module loader",
+            "load_kernel": "MCUB's kernel switcher",
+            "repositories": "MCUB's repository manager",
+            "default_repo": "MCUB's repository manager",
+            "add_repository": "MCUB's repository manager",
+            "remove_repository": "MCUB's repository manager",
+            "get_repo_name": "MCUB's repository manager",
+            "get_repo_modules_list": "MCUB's repository manager",
+            "download_module_from_repo": "MCUB's repository manager",
+            "ensure_core_message_handlers": "MCUB's dispatcher internals",
+            "ensure_registered_module_handlers": "MCUB's dispatcher internals",
+            "dedupe_event_builders": "MCUB's dispatcher internals",
+            "_debug_event_builders_snapshot": "MCUB's dispatcher internals",
+        }
+    )
+
+    def __getattr__(self, name: str):
+        """Explain missing kernel APIs instead of failing bare.
+
+        Only reached when normal lookup fails, so it costs nothing on the happy
+        path. The message names the attribute and the module asking for it,
+        which is what turns "AttributeError: 'KernelProxy' object has no
+        attribute 'x'" into something actionable.
+        """
+        if name.startswith("__"):
+            raise AttributeError(name)
+
+        owner = KernelProxy._UNSUPPORTED.get(name)
+        if owner:
+            raise AttributeError(
+                f"kernel.{name} is part of {owner}, which the Elys MCUB"
+                f" compatibility layer does not provide (requested by module"
+                f" '{object.__getattribute__(self, 'module_name')}')"
+            )
+        raise AttributeError(
+            f"kernel.{name} is not implemented by the Elys MCUB compatibility"
+            f" layer (requested by module"
+            f" '{object.__getattribute__(self, 'module_name')}')"
+        )
 
     async def process_command(self, event, depth: int = 0) -> bool:
         return await self._host.process_command(event)

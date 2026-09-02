@@ -273,6 +273,10 @@ def make_buttons(buttons, cols: int | None = None):
 # ---------------------------------------------------------------------------
 
 
+#: scope -> {key: {"callback": ..., "description": ...}}
+_PLACEHOLDERS: dict[str, dict[str, dict]] = {}
+
+
 def resolve_placeholders(module, template: str, data: dict | None = None, strict: bool = False) -> str:
     values = dict(data or {})
     try:
@@ -284,22 +288,83 @@ def resolve_placeholders(module, template: str, data: dict | None = None, strict
         return template
 
 
-def register_decorated_placeholders(*args, **kwargs) -> None:
-    """No-op: Elys discovers placeholders through its own registry."""
+def register_placeholder(
+    scope: str, key: str, callback, *, timeout=None, description: str | None = None
+) -> bool:
+    _PLACEHOLDERS.setdefault(scope, {})[key] = {
+        "callback": callback,
+        "timeout": timeout,
+        "description": description,
+    }
+    return True
 
 
-def unregister_scope(*args, **kwargs) -> None:
-    """No-op counterpart to :func:`register_decorated_placeholders`."""
+def register_decorated_placeholders(scope: str, owner) -> int:
+    """Register every ``@placeholders``-marked method on *owner*."""
+    count = 0
+    for attr in dir(owner):
+        bound = getattr(owner, attr, None)
+        if bound is None or not callable(bound):
+            continue
+        meta = getattr(bound, "_mcub_placeholders", None) or getattr(
+            bound, "_placeholders", None
+        )
+        if not meta:
+            continue
+        for entry in meta if isinstance(meta, (list, tuple)) else [meta]:
+            key = (entry or {}).get("key") if isinstance(entry, dict) else None
+            register_placeholder(
+                scope,
+                key or attr,
+                bound,
+                description=(entry or {}).get("description")
+                if isinstance(entry, dict)
+                else None,
+            )
+            count += 1
+    return count
 
 
-def config_placeholders(name: str):
-    getter = getattr(elys_utils, "config_placeholders", None)
-    if callable(getter):
-        try:
-            return getter(name)
-        except Exception:
-            return {}
-    return {}
+def unregister_scope(scope: str) -> int:
+    removed = len(_PLACEHOLDERS.get(scope, {}))
+    _PLACEHOLDERS.pop(scope, None)
+    return removed
+
+
+def unregister_placeholder(scope: str, key: str) -> bool:
+    return _PLACEHOLDERS.get(scope, {}).pop(key, None) is not None
+
+
+def list_placeholder_keys(scope: str) -> list[str]:
+    return sorted(_PLACEHOLDERS.get(scope, {}))
+
+
+def format_placeholders(scope: str) -> str:
+    return ", ".join(f"{{{key}}}" for key in list_placeholder_keys(scope))
+
+
+def config_placeholders(scope: str) -> str | None:
+    """Human-readable placeholder docs, following MCUB's ``str | None``.
+
+    Deliberately backed by this shim's own registry rather than Elys's
+    similarly named helper: the two take different arguments and mean different
+    things, so delegating would produce confident nonsense.
+    """
+    if scope == "any":
+        lines = [
+            f"{{{key}}} - {meta.get('description') or 'No docs'} ({scope_name})"
+            for scope_name, items in sorted(_PLACEHOLDERS.items())
+            for key, meta in sorted(items.items())
+        ]
+        return "\n".join(lines) or None
+
+    items = _PLACEHOLDERS.get(scope, {})
+    if not items:
+        return None
+    return "\n".join(
+        f"{{{key}}} - {meta.get('description') or 'No docs'}"
+        for key, meta in sorted(items.items())
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -369,6 +434,7 @@ __all__ = [
     "extract_command",
     "format_date",
     "format_message",
+    "format_placeholders",
     "format_relative_time",
     "format_time",
     "get_admins",
@@ -384,12 +450,14 @@ __all__ = [
     "get_thread_id",
     "is_termux",
     "is_wsl",
+    "list_placeholder_keys",
     "make_button",
     "make_buttons",
     "parse_arguments",
     "parse_html",
     "parse_kwargs",
     "register_decorated_placeholders",
+    "register_placeholder",
     "relocate_entities",
     "reply_with_html",
     "resolve_peer",
@@ -401,5 +469,6 @@ __all__ = [
     "send_with_html",
     "split_args",
     "telegram_to_html",
+    "unregister_placeholder",
     "unregister_scope",
 ]
