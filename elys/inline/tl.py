@@ -553,14 +553,14 @@ def make_button(
         )
 
     if web_app is not None:
-        app_url = web_app if isinstance(web_app, str) else web_app["url"]
-        return types.KeyboardInlineButton(
-            text, types.InlineButtonTypeWebView(url=app_url)
+        app_url = web_app if isinstance(web_app, str) else web_app.get("url", "")
+        return types.KeyboardButtonWebView(
+            text, app_url, style=Button._get_style(style, icon)
         )
 
     if copy_text is not None:
-        return types.KeyboardInlineButton(
-            text, types.InlineButtonTypeCopy(copy_text=copy_text)
+        return types.KeyboardButtonCopy(
+            text, copy_text, style=Button._get_style(style, icon)
         )
 
     return Button.inline(text, text, style=style, icon=icon)
