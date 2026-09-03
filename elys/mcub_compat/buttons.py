@@ -235,14 +235,44 @@ def _rows(buttons) -> list[list]:
     """
     if buttons is None:
         return []
-    if isinstance(buttons, dict):
+
+    if hasattr(buttons, "rows"):
+        rows = []
+        for r in buttons.rows:
+            if hasattr(r, "buttons"):
+                rows.append(list(r.buttons))
+            elif isinstance(r, (list, tuple)):
+                rows.append(list(r))
+            else:
+                rows.append([r])
+        return rows
+    if hasattr(buttons, "inline_keyboard"):
+        return [list(r) if isinstance(r, (list, tuple)) else [r] for r in buttons.inline_keyboard]
+    if hasattr(buttons, "buttons") and not hasattr(buttons, "text"):
+        btns = buttons.buttons
+        if isinstance(btns, (list, tuple)):
+            return _rows(btns)
+
+    def _is_single_button(item) -> bool:
+        if isinstance(item, dict):
+            return True
+        if isinstance(item, str):
+            return True
+        if isinstance(item, (list, tuple)) and len(item) in (2, 3) and isinstance(item[0], str):
+            return True
+        name = type(item).__name__
+        if name.startswith("KeyboardButton") or name == "Button":
+            return True
+        return False
+
+    if _is_single_button(buttons):
         return [[buttons]]
     if not isinstance(buttons, (list, tuple)):
         return [[buttons]]
 
-    if any(isinstance(item, (list, tuple)) for item in buttons):
+    if any(isinstance(item, (list, tuple)) and not _is_single_button(item) for item in buttons):
         return [
-            list(item) if isinstance(item, (list, tuple)) else [item]
+            list(item) if (isinstance(item, (list, tuple)) and not _is_single_button(item)) else [item]
             for item in buttons
         ]
     return [list(buttons)]
@@ -290,6 +320,15 @@ def _from_dict(button: dict) -> dict | None:
         if button.get("kwargs"):
             spec["kwargs"] = dict(button["kwargs"])
         return spec
+    elif callback is not None:
+        payload = callback.decode() if isinstance(callback, bytes) else str(callback)
+        spec["data"] = payload
+        return spec
+
+    if button.get("callback_data") is not None:
+        payload = button["callback_data"]
+        spec["data"] = payload.decode() if isinstance(payload, bytes) else str(payload)
+        return spec
 
     if button.get("input") is not None and callable(button.get("handler")):
         spec["input"] = button["input"]
@@ -313,10 +352,14 @@ def _from_dict(button: dict) -> dict | None:
             spec["kwargs"] = dict(button["kwargs"])
         return spec
 
-    for key in ("url", "web_app", "copy", "action", "data"):
+    for key in ("url", "web_app", "action", "data"):
         if button.get(key) is not None:
             spec[key] = button[key]
             return spec
+
+    if button.get("copy") is not None or button.get("copy_text") is not None:
+        spec["copy"] = button.get("copy") or button.get("copy_text")
+        return spec
 
     if btn_type in {"callback", "callback_data"}:
         payload = button.get("data") or button.get("callback_data") or ""
@@ -402,6 +445,17 @@ def to_elys_markup(buttons) -> list[list[dict]]:
                 spec = _from_dict(button)
             elif isinstance(button, str):
                 spec = {"text": button, "action": "answer", "message": button}
+            elif isinstance(button, (list, tuple)) and len(button) >= 2:
+                # Handle tuple shorthand: (text, target)
+                text, target = str(button[0]), button[1]
+                if callable(target):
+                    spec = _from_dict({"text": text, "callback": target})
+                elif isinstance(target, str) and (target.startswith("http://") or target.startswith("https://")):
+                    spec = {"text": text, "url": target}
+                elif isinstance(target, (str, bytes)):
+                    spec = _from_dict({"text": text, "callback": target})
+                else:
+                    spec = {"text": text, "action": "answer", "message": text}
             else:
                 spec = _from_tl(button)
             if spec and spec.get("text") is not None:

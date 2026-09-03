@@ -139,6 +139,15 @@ class Gallery(InlineUnit):
             )
             return False
 
+        if hasattr(message, "raw_message") and hasattr(message.raw_message, "id"):
+            message = message.raw_message
+        elif hasattr(message, "_mcub_msg") and hasattr(getattr(message, "_mcub_msg"), "id"):
+            message = getattr(message, "_mcub_msg")
+        elif hasattr(message, "_message") and hasattr(getattr(message, "_message"), "id"):
+            message = getattr(message, "_message")
+        elif hasattr(message, "chat_id") and isinstance(getattr(message, "chat_id"), int) and not isinstance(message, (Message, int)):
+            message = message.chat_id
+
         if not isinstance(message, (Message, int)):
             logger.error(
                 "Invalid type for `message`. Expected `Message` or `int`, got `%s`",
@@ -315,6 +324,7 @@ class Gallery(InlineUnit):
 
         self._units[unit_id]["chat"] = utils.get_chat_id(m)
         self._units[unit_id]["message_id"] = m.id
+        self._units[unit_id]["message"] = m
 
         if isinstance(message, Message) and message.out:
             with contextlib.suppress(Exception):
@@ -327,7 +337,12 @@ class Gallery(InlineUnit):
         if not isinstance(next_handler, ListGalleryHelper):
             asyncio.ensure_future(self._load_gallery_photos(unit_id))
 
-        return InlineMessage(self, unit_id, self._units[unit_id]["inline_message_id"])
+        return InlineMessage(
+            self,
+            unit_id,
+            self._units[unit_id]["inline_message_id"],
+            message=m,
+        )
 
     async def _call_photo(
         self: "InlineManager",

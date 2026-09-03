@@ -20,14 +20,30 @@ class InlineMessage:
         inline_manager: "InlineManager",
         unit_id: str,
         inline_message_id,
+        message: typing.Any = None,
     ):
         self.inline_message_id = inline_message_id
         self.unit_id = unit_id
         self.inline_manager = inline_manager
         self._units = inline_manager._units
+        self._message = message
         self.form = (
             {"id": unit_id, **self._units[unit_id]} if unit_id in self._units else {}
         )
+
+    async def click(self, *args, **kwargs):
+        message = self._message
+        if message is None:
+            unit = self._units.get(self.unit_id) or {}
+            message = unit.get("message")
+            if message is None and unit.get("chat") and unit.get("message_id"):
+                message = await self.inline_manager._client.get_messages(
+                    unit["chat"], ids=unit["message_id"]
+                )
+                self._message = message
+        if message is not None and hasattr(message, "click"):
+            return await message.click(*args, **kwargs)
+        raise AttributeError(f"'{type(self).__name__}' object has no clickable message")
 
     async def edit(self, *args, **kwargs) -> "InlineMessage":
         rich_message = kwargs.pop("rich_message", None)

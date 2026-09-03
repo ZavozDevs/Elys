@@ -552,16 +552,13 @@ class Module:
             )
             # Let's try to reinstall dependencies
             try:
-                requirements = list(
-                    filter(
-                        lambda x: not x.startswith(("-", "_", ".")),
-                        map(
-                            str.strip,
-                            VALID_PIP_PACKAGES.search(code)[1].split(),
-                        ),
-                    )
-                )
-            except TypeError:
+                raw_reqs = VALID_PIP_PACKAGES.search(code)[1]
+                requirements = [
+                    token.strip().rstrip(",")
+                    for token in re.split(r"[,\s]+", raw_reqs.strip())
+                    if token.strip().rstrip(",") and not token.strip().startswith(("-", "_", "."))
+                ]
+            except (TypeError, IndexError, AttributeError):
                 logger.warning(
                     "No valid pip packages specified in code, attemping"
                     " installation from error"

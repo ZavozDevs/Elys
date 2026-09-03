@@ -117,6 +117,19 @@ class MCUBHost:
         """Strings limited to MCUB's global groups (buttons/error/null/...)."""
         return Strings(self.language, {"name": "null"})
 
+    @property
+    def strings(self) -> Strings:
+        return self.global_strings()
+
+    @property
+    def langpack(self) -> str:
+        return self.language
+
+    @property
+    def security(self):
+        dispatcher = getattr(self.modules, "dispatcher", None)
+        return getattr(dispatcher, "security", None)
+
     # -- paths / metadata -------------------------------------------------
 
     @property
@@ -189,7 +202,8 @@ class MCUBHost:
 
     def loaded_modules(self) -> dict:
         return {
-            name: getattr(adapter, "mcub_module", adapter)
+            name: getattr(adapter, "mcub_instance", None)
+            or getattr(adapter, "mcub_module", adapter)
             for name, adapter in self.adapters.items()
         }
 

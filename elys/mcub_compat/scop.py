@@ -99,7 +99,7 @@ def _check_kernel_scope(params: str) -> tuple[bool, str]:
 
 
 def _check_inline_scope(inline_manager) -> tuple[bool, str]:
-    if inline_manager is None or not getattr(inline_manager, "init_complete", False):
+    if inline_manager is None:
         return False, "Module requires an inline bot, but Elys has none configured"
     return True, ""
 

@@ -23,20 +23,21 @@ import re
 logger = logging.getLogger(__name__)
 
 OWNER_PREFIX = "mcub"
-_VALID = re.compile(r"^[a-zA-Z0-9_.\-:]{1,64}$")
+_VALID = re.compile(r"^[а-яА-ЯёЁa-zA-Z0-9_.\-: ]{1,64}$")
+_VALID_KEY = _VALID
 
 
 def _owner(namespace: str) -> str:
     namespace = str(namespace or "unknown")
     if not _VALID.match(namespace):
-        raise ValueError(f"invalid MCUB db namespace: {namespace!r}")
+        namespace = re.sub(r"[^а-яА-ЯёЁa-zA-Z0-9_.\-: ]+", "_", namespace)[:64] or "unknown"
     return f"{OWNER_PREFIX}.{namespace}"
 
 
 def _check_key(key: str) -> str:
     key = str(key)
     if not _VALID.match(key):
-        raise ValueError(f"invalid MCUB db key: {key!r}")
+        key = re.sub(r"[^а-яА-ЯёЁa-zA-Z0-9_.\-: ]+", "_", key)[:64] or "key"
     return key
 
 

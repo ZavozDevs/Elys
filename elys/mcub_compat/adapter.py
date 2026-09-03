@@ -536,6 +536,7 @@ def build_adapter_class(
     style: str,
     meta: dict,
     description: str,
+    module_name: str | None = None,
 ) -> type:
     """Synthesise the per-module adapter class Elys will instantiate.
 
@@ -551,4 +552,6 @@ def build_adapter_class(
         "strings": {"name": name},
         "__doc__": description or f"MCUB module {name}",
     }
+    if module_name:
+        namespace["__module__"] = module_name
     return type(class_name, (get_adapter_base(),), namespace)

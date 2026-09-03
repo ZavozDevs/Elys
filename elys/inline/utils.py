@@ -16,6 +16,7 @@ import functools
 import io
 import itertools
 import logging
+import mimetypes
 import os
 import re
 import typing
@@ -343,11 +344,13 @@ class Utils(InlineUnit):
         disable_security: bool | None = None,
         always_allow: list[int] | None = None,
         disable_web_page_preview: bool = True,
+        link_preview: bool | None = None,
         query: typing.Any | None = None,
         unit_id: str | None = None,
         inline_message_id: str | None = None,
         chat_id: int | None = None,
         message_id: int | None = None,
+        **kwargs,
     ) -> bool:
         """
         Edits unit message
@@ -366,6 +369,9 @@ class Utils(InlineUnit):
         :param query: Callback query
         :return: Status of edit
         """
+        if link_preview is not None:
+            disable_web_page_preview = not link_preview
+
         reply_markup = self._validate_markup(reply_markup) or []
 
         if text is not None and not isinstance(text, str):
@@ -374,12 +380,30 @@ class Utils(InlineUnit):
             )
             return False
 
+        if file and not photo:
+            try:
+                f_ext = os.path.splitext(urlparse(str(file)).path)[1].lower()
+            except Exception:
+                f_ext = ""
+            if f_ext in {".png", ".jpg", ".jpeg", ".webp"}:
+                photo = file
+                file = None
+            elif f_ext in {".gif", ".mp4"}:
+                gif = file
+                file = None
+            else:
+                guess = mimetypes.guess_type(str(file))[0]
+                if guess and guess.startswith("image/"):
+                    photo = file
+                    file = None
+                elif guess and guess.startswith("video/"):
+                    video = file
+                    file = None
+                elif not mime_type and guess:
+                    mime_type = guess
+
         if file and not mime_type:
-            logger.error(
-                "You must pass `mime_type` along with `file` field\n"
-                "It may be either 'application/zip' or 'application/pdf'"
-            )
-            return False
+            mime_type = mimetypes.guess_type(str(file))[0] or "application/octet-stream"
 
         if isinstance(audio, str):
             audio = {"url": audio}

@@ -205,12 +205,15 @@ async def finalize(context: MCUBContext, module) -> type:
         style=context.style,
         meta=context.meta,
         description=description,
+        module_name=getattr(module, "__name__", None),
     )
     adapter_cls.mcub_instance = instance
     adapter_cls.mcub_module = module
     adapter_cls.registrations = context.registrations
     adapter_cls.host = context.host
     adapter_cls.kernel = context.kernel
+    if instance is not None:
+        module._class_instance = instance
 
     module.__dict__[adapter_cls.__name__] = adapter_cls
     module.__mcub_adapter__ = adapter_cls

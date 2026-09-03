@@ -139,6 +139,15 @@ class MCUBInlineManager:
         text = to_html(_stringify_fields(title, fields), parse_mode)
         markup = to_elys_markup(buttons) if buttons else None
 
+        # Check kwargs for media if media argument is None
+        if media is None:
+            for kind in ("photo", "gif", "file", "document", "video", "audio"):
+                val = kwargs.pop(kind, None)
+                if val is not None:
+                    media = val
+                    media_type = "document" if kind == "file" else kind
+                    break
+
         form_kwargs: dict[str, typing.Any] = {
             "ttl": ttl or DEFAULT_TTL,
             "silent": silent,
@@ -157,10 +166,20 @@ class MCUBInlineManager:
             # Elys derives reply_to from a Message object, not a bare chat id.
             logger.debug("MCUB reply_to=%s ignored: Elys forms reply via Message", reply_to)
 
+        target_msg = chat_id
+        if hasattr(target_msg, "raw_message"):
+            target_msg = target_msg.raw_message
+        elif hasattr(target_msg, "_mcub_msg"):
+            target_msg = getattr(target_msg, "_mcub_msg")
+        elif hasattr(target_msg, "_message"):
+            target_msg = getattr(target_msg, "_message")
+        elif hasattr(target_msg, "chat_id") and not isinstance(target_msg, int):
+            target_msg = target_msg.chat_id
+
         try:
             result = await self._inline.form(
                 text=text or " ",
-                message=chat_id,
+                message=target_msg,
                 reply_markup=markup,
                 **form_kwargs,
             )
@@ -336,7 +355,8 @@ class MCUBInlineManager:
             body, media = render(page)
             wrapped = MCUBCallbackEvent(call, kernel=self._host)
             try:
-                await wrapped.edit(body, buttons=self._nav(session_id, page, total, turn, strings))
+                edit_kw = {**media}
+                await wrapped.edit(body, buttons=self._nav(session_id, page, total, turn, strings), **edit_kw)
             except Exception as error:
                 logger.debug("Pagination edit failed: %s", error)
                 await wrapped.answer(str(error), alert=True)
