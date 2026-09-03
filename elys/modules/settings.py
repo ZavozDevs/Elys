@@ -576,13 +576,23 @@ class Settings(loader.Module):
         """Toggle disable specific command of a module: togglecmd <module> <command> or togglecmd <command>"""
         args = utils.get_args(message)
         if not args:
-            await utils.answer(message, self.strings["wrong_usage_tcc"])
+            return await utils.answer(message, self.strings["wrong_usage_tcc"])
 
-        if args and len(args) >= 2:
+        if len(args) >= 2:
             mod_arg, cmd = args[0], args[1]
             mod_inst = self.allmodules.lookup(mod_arg)
             if not mod_inst:
-                await utils.answer(message, self.strings["mod404"].format(mod_arg))
+                return await utils.answer(message, self.strings["mod404"].format(mod_arg))
+        else:
+            cmd = args[0]
+            mod_inst = None
+            for mod in self.allmodules.modules:
+                if cmd.lower() in [c.lower() for c in mod.elys_commands.keys()]:
+                    mod_inst = mod
+                    break
+
+            if not mod_inst:
+                return await utils.answer(message, self.strings["cmd404"])
 
         module_key = mod_inst.__class__.__name__
 
@@ -590,10 +600,15 @@ class Settings(loader.Module):
         current = [x for x in disabled_commands.get(module_key, [])]
 
         if cmd.lower() not in [c.lower() for c in mod_inst.elys_commands.keys()]:
-            await utils.answer(message, self.strings["cmd404"])
+            return await utils.answer(message, self.strings["cmd404"])
 
-        if any(c.lower() == cmd.lower() for c in current):
-            current = [c for c in current if c.lower() != cmd.lower()]
+        canonical_cmd = next(
+            (c for c in mod_inst.elys_commands.keys() if c.lower() == cmd.lower()),
+            cmd,
+        )
+
+        if any(c.lower() == canonical_cmd.lower() for c in current):
+            current = [c for c in current if c.lower() != canonical_cmd.lower()]
             if current:
                 disabled_commands[module_key] = current
             else:
@@ -607,25 +622,25 @@ class Settings(loader.Module):
                 pass
 
             await utils.answer(
-                message, self.strings["cmd_enabled"].format(cmd, module_key)
+                message, self.strings["cmd_enabled"].format(canonical_cmd, module_key)
             )
         else:
-            current.append(cmd)
+            current.append(canonical_cmd)
             disabled_commands[module_key] = current
             self._db.set(main.__name__, "disabled_commands", disabled_commands)
 
             try:
-                self.allmodules.commands.pop(cmd.lower(), None)
+                self.allmodules.commands.pop(canonical_cmd.lower(), None)
                 self.allmodules._rebuild_handlers()
             except Exception:
                 pass
 
             for alias, target in list(self.allmodules.aliases.items()):
-                if target.split()[0].lower() == cmd.lower():
+                if target.split()[0].lower() == canonical_cmd.lower():
                     self.allmodules.aliases.pop(alias, None)
 
             await utils.answer(
-                message, self.strings["cmd_disabled"].format(cmd, module_key)
+                message, self.strings["cmd_disabled"].format(canonical_cmd, module_key)
             )
 
     @loader.command()
@@ -633,12 +648,12 @@ class Settings(loader.Module):
         """Toggle disable entire module: togglemod <module>"""
         args = utils.get_args(message)
         if not args:
-            await utils.answer(message, self.strings["wrong_usage_tmc"])
+            return await utils.answer(message, self.strings["wrong_usage_tmc"])
 
         mod_arg = args[0]
         mod_inst = self.allmodules.lookup(mod_arg)
         if not mod_inst:
-            await utils.answer(message, self.strings["mod404"].format(mod_arg))
+            return await utils.answer(message, self.strings["mod404"].format(mod_arg))
 
         module_key = mod_inst.__class__.__name__
         disabled = self._db.get(main.__name__, "disabled_modules", [])
