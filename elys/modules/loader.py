@@ -831,16 +831,13 @@ class LoaderMod(loader.Module):
         if not did_requires:
             requirements = []
             try:
-                requirements = list(
-                    filter(
-                        lambda x: not x.startswith(("-", "_", ".")),
-                        map(
-                            str.strip,
-                            loader.VALID_PIP_PACKAGES.search(doc)[1].split(),
-                        ),
-                    )
-                )
-            except TypeError:
+                raw_reqs = loader.VALID_PIP_PACKAGES.search(doc)[1]
+                requirements = [
+                    token.strip().rstrip(",")
+                    for token in re.split(r"[,\s]+", raw_reqs.strip())
+                    if token.strip().rstrip(",") and not token.strip().startswith(("-", "_", "."))
+                ]
+            except (TypeError, IndexError, AttributeError):
                 pass
 
             if requirements:
@@ -901,24 +898,35 @@ class LoaderMod(loader.Module):
         blob_link = self.strings["blob_link"] if blob_link else ""
 
         if name is None:
+            uid = None
             try:
                 node = ast.parse(doc)
+
+                def _is_module_base(base: ast.AST) -> bool:
+                    if isinstance(base, ast.Name) and base.id in ("Module", "ModuleBase"):
+                        return True
+                    if isinstance(base, ast.Attribute) and base.attr in ("Module", "ModuleBase"):
+                        return True
+                    return False
+
                 uid = next(
-                    n.name
-                    for n in node.body
-                    if isinstance(n, ast.ClassDef)
-                    and any(
-                        isinstance(base, ast.Attribute)
-                        and base.value.id == "Module"
-                        or isinstance(base, ast.Name)
-                        and base.id == "Module"
-                        for base in n.bases
-                    )
+                    (
+                        n.name
+                        for n in node.body
+                        if isinstance(n, ast.ClassDef)
+                        and any(_is_module_base(base) for base in n.bases)
+                    ),
+                    None,
                 )
             except Exception:
                 logger.debug(
-                    "Can't parse classname from code, using legacy uid instead",
+                    "AST parsing failed while extracting module classname",
                     exc_info=True,
+                )
+
+            if uid is None:
+                logger.debug(
+                    "Can't parse classname from code, using legacy uid instead"
                 )
                 uid = "__extmod_" + str(uuid.uuid4())
         else:

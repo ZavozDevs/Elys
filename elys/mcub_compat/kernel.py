@@ -585,8 +585,51 @@ class KernelProxy:
         return self.inline
 
     @property
+    def subinline(self):
+        return self.inline
+
+    @property
     def db_manager(self):
         return self._host.database(self.module_name)
+
+    @property
+    def db(self):
+        return self.db_manager
+
+    @property
+    def strings(self):
+        return getattr(self._host, "strings", self._host.global_strings())
+
+    @property
+    def langpack(self):
+        return getattr(self._host, "langpack", self._host.language)
+
+    @property
+    def security(self):
+        sec = getattr(self._host, "security", None)
+        if sec is not None:
+            return sec
+        modules = getattr(self._host, "modules", None)
+        dispatcher = getattr(modules, "dispatcher", None)
+        return getattr(dispatcher, "security", None)
+
+    @property
+    def security_chats(self):
+        return self.security
+
+    @property
+    def chat_security(self):
+        return self.security
+
+    @property
+    def loader(self):
+        return self._host.modules
+
+    async def send_message(self, entity, *args, **kwargs):
+        return await self.client.send_message(entity, *args, **kwargs)
+
+    async def edit_message(self, entity, message, *args, **kwargs):
+        return await self.client.edit_message(entity, message, *args, **kwargs)
 
     @property
     def config(self):

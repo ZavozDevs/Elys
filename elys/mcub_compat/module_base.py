@@ -27,6 +27,7 @@ import typing
 from abc import ABC
 from collections.abc import Callable, Mapping
 
+from elystl.tl import types as tl_types
 from .buttons import DEFAULT_TTL, make_callback_button, registry as callback_registry
 from ._vendor.decorators import (  # noqa: F401  (re-exported for module authors)
     bot_command,
@@ -247,7 +248,11 @@ class ModuleBase(ABC):
 
         try:
             payload = copy.deepcopy(dict(strings_dict))
-            if "name" not in payload and all(
+            # If flat dictionary (contains string values instead of locale dicts), expand across all locales first
+            is_flat = any(isinstance(v, str) for v in payload.values()) and "name" not in payload
+            if is_flat:
+                payload = {locale: dict(payload) for locale in _FLAT_STRING_LOCALES}
+            elif "name" not in payload and all(
                 isinstance(v, dict) for v in payload.values()
             ):
                 for problem in Strings.validate(payload):
@@ -753,6 +758,21 @@ class ModuleBase(ABC):
                 icon=icon,
             )
 
+        def switch_inline(self, text, query="", *, same_peer=True, icon=None, style=None):
+            return self.switch(text, query=query, same_peer=same_peer, icon=icon, style=style)
+
+        def web_app(self, text, url, *, icon=None, style=None):
+            factory = getattr(self._telethon_button, "web_app", None)
+            if factory is not None:
+                return self._call("web_app", text, url, style=style, icon=icon)
+            return tl_types.KeyboardButtonSimpleWebView(text=text, url=url)
+
+        def auth(self, text, url, *, icon=None, style=None, **kwargs):
+            return self._call("auth", text, url, style=style, icon=icon, **kwargs)
+
+        def buy(self, text, *, icon=None, style=None):
+            return self._call("buy", text, style=style, icon=icon)
+
         def input(
             self,
             text,
@@ -821,8 +841,15 @@ class ModuleBase(ABC):
             )
 
         def copy(self, text="Copy", copy_text=None, *, icon=None, style=None):
-            return self._call(
-                "copy", text, copy_text=copy_text, style=style, icon=icon
+            factory = getattr(self._telethon_button, "copy", None)
+            if factory is not None:
+                return self._call(
+                    "copy", text, copy_text=copy_text, style=style, icon=icon
+                )
+            return tl_types.KeyboardButtonCopy(
+                text=text,
+                copy_text=copy_text if copy_text is not None else text,
+                style=self._telethon_button._get_style(style, icon),
             )
 
         def request_phone(self, text="Share Phone", *, request_title=None, icon=None, style=None):
@@ -863,6 +890,11 @@ class ModuleBase(ABC):
 
         def style(self, btn, style):
             return btn
+
+        def __getattr__(self, name: str):
+            if hasattr(self._telethon_button, name):
+                return lambda *args, **kwargs: self._call(name, *args, **kwargs)
+            raise AttributeError(f"'ButtonFactory' object has no attribute '{name}'")
 
     class RichButtonFactory:
         """Callback buttons embedded in Telegram rich pages (MCUB ``dev``).

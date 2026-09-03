@@ -27,7 +27,10 @@ Two shapes are needed:
 from __future__ import annotations
 
 import logging
+import mimetypes
+import os
 import typing
+from urllib.parse import urlparse
 
 from .. import utils
 
@@ -215,9 +218,15 @@ class MCUBEvent:
 
     @staticmethod
     def _normalize_send_kwargs(kwargs: dict) -> dict:
+        from .buttons import to_elys_markup
+
+        # If buttons or reply_markup are passed, normalize to reply_markup for utils.answer
+        buttons = kwargs.pop("buttons", None)
         reply_markup = kwargs.pop("reply_markup", None)
-        if reply_markup is not None and "buttons" not in kwargs:
-            kwargs["buttons"] = reply_markup
+        target_markup = buttons if buttons is not None else reply_markup
+        if target_markup is not None:
+            kwargs["reply_markup"] = to_elys_markup(target_markup)
+
         if kwargs.pop("as_html", False):
             kwargs.setdefault("parse_mode", "html")
         kwargs.pop("kernel", None)
@@ -225,14 +234,25 @@ class MCUBEvent:
 
     async def edit(self, text=None, *args, **kwargs):
         kwargs = self._normalize_send_kwargs(kwargs)
+        # Handle file-only edit without text
+        if text is None and "file" in kwargs and "reply_markup" not in kwargs:
+            f = kwargs.pop("file")
+            if self.raw_message.out:
+                return await self.raw_message.edit(file=f, **kwargs)
         return await utils.answer(self.raw_message, text, *args, **kwargs)
 
     async def reply(self, text=None, *args, **kwargs):
         kwargs = self._normalize_send_kwargs(kwargs)
+        # If reply_markup is present, route through utils.answer with reply_to so inline bot is used
+        if "reply_markup" in kwargs:
+            kwargs.setdefault("reply_to", self.id)
+            return await utils.answer(self.raw_message, text, *args, **kwargs)
         return await self.raw_message.reply(text, *args, **kwargs)
 
     async def respond(self, text=None, *args, **kwargs):
         kwargs = self._normalize_send_kwargs(kwargs)
+        if "reply_markup" in kwargs:
+            return await utils.answer(self.raw_message, text, *args, **kwargs)
         return await self.raw_message.respond(text, *args, **kwargs)
 
     async def answer(self, text=None, *args, **kwargs):
@@ -308,6 +328,49 @@ class MCUBCallbackEvent:
             return getattr(message, "text", "") or getattr(message, "message", "") or ""
         return getattr(self._call, "text", "") or ""
 
+    @property
+    def raw_text(self) -> str:
+        return self.text
+
+    @property
+    def peer_id(self):
+        return self.chat_id
+
+    @property
+    def input_chat(self):
+        message = getattr(self._call, "_message", None)
+        if message is not None and hasattr(message, "input_chat"):
+            return message.input_chat
+        return self.chat_id
+
+    @property
+    def client(self):
+        inline_mgr = getattr(self._call, "inline_manager", None)
+        if inline_mgr is not None:
+            return getattr(inline_mgr, "_client", None)
+        if self._kernel is not None:
+            return getattr(self._kernel, "client", None)
+        return None
+
+    async def reply(self, text=None, *args, **kwargs):
+        client = self.client
+        if client is not None and self.chat_id:
+            parse_mode = kwargs.pop("parse_mode", "html")
+            if text is not None:
+                text = to_html(text, parse_mode)
+            reply_to = self.message_id
+            return await client.send_message(self.chat_id, text, reply_to=reply_to, *args, **kwargs)
+        raise AttributeError("Cannot reply from this callback event: client or chat_id unavailable")
+
+    async def respond(self, text=None, *args, **kwargs):
+        client = self.client
+        if client is not None and self.chat_id:
+            parse_mode = kwargs.pop("parse_mode", "html")
+            if text is not None:
+                text = to_html(text, parse_mode)
+            return await client.send_message(self.chat_id, text, *args, **kwargs)
+        raise AttributeError("Cannot respond from this callback event: client or chat_id unavailable")
+
     # -- actions ----------------------------------------------------------
 
     async def answer(self, text: str = "", alert: bool = False, **kwargs):
@@ -336,6 +399,25 @@ class MCUBCallbackEvent:
         if buttons is not None:
             kwargs["reply_markup"] = to_elys_markup(buttons)
         kwargs.pop("parse_mode", None)
+        if "link_preview" in kwargs:
+            kwargs["disable_web_page_preview"] = not kwargs.pop("link_preview")
+        if "file" in kwargs and "photo" not in kwargs:
+            f = kwargs["file"]
+            if isinstance(f, str):
+                try:
+                    ext = os.path.splitext(urlparse(f).path)[1].lower()
+                except Exception:
+                    ext = ""
+                if ext in {".png", ".jpg", ".jpeg", ".webp"}:
+                    kwargs["photo"] = kwargs.pop("file")
+                elif ext in {".gif", ".mp4"}:
+                    kwargs["gif"] = kwargs.pop("file")
+                else:
+                    guess = mimetypes.guess_type(f)[0]
+                    if guess and guess.startswith("image/"):
+                        kwargs["photo"] = kwargs.pop("file")
+                    elif guess and guess.startswith("video/"):
+                        kwargs["video"] = kwargs.pop("file")
         if text is not None:
             kwargs["text"] = to_html(text, parse_mode)
         await self._call.edit(**kwargs)
@@ -392,6 +474,15 @@ class MCUBCallbackEvent:
 
     async def delete(self):
         return await self._call.delete()
+
+    async def click(self, *args, **kwargs):
+        clicker = getattr(self._call, "click", None)
+        if callable(clicker):
+            return await clicker(*args, **kwargs)
+        msg = getattr(self._call, "_message", None)
+        if msg is not None and hasattr(msg, "click"):
+            return await msg.click(*args, **kwargs)
+        raise AttributeError(f"'{type(self._call).__name__}' object has no attribute 'click'")
 
     async def unload(self):
         unload = getattr(self._call, "unload", None)

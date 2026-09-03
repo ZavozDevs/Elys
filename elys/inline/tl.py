@@ -19,6 +19,26 @@ from elystl.tl.types import (
 )
 from elystl.tl import TLObject
 
+if not hasattr(Button, "copy"):
+    @staticmethod
+    def _button_copy(text, copy_text=None, style=None, icon=None):
+        return types.KeyboardButtonCopy(
+            text=text,
+            copy_text=copy_text if copy_text is not None else text,
+            style=Button._get_style(style, icon),
+        )
+    Button.copy = _button_copy
+
+if not hasattr(Button, "web"):
+    @staticmethod
+    def _button_web(text, url=None, style=None, icon=None):
+        return types.KeyboardButtonWebView(
+            text=text,
+            url=url or text,
+            style=Button._get_style(style, icon),
+        )
+    Button.web = _button_web
+
 
 class TelethonBot:
     def __init__(self, client):

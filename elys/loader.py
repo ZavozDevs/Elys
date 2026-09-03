@@ -792,15 +792,12 @@ class Modules:
                     if not match:
                         raise
 
-                    requirements = list(
-                        filter(
-                            lambda x: not x.startswith(("-", "_", ".")),
-                            map(
-                                str.strip,
-                                match.group(1).split(),
-                            ),
-                        )
-                    )
+                    raw_reqs = match.group(1)
+                    requirements = [
+                        token.strip().rstrip(",")
+                        for token in re.split(r"[,\s]+", raw_reqs.strip())
+                        if token.strip().rstrip(",") and not token.strip().startswith(("-", "_", "."))
+                    ]
 
                     exc_name = (getattr(e, "name", None) or "").lower()
 
