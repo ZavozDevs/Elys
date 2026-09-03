@@ -310,7 +310,7 @@ class Help(loader.Module):
         plain_text = (
             f"{reply}<blockquote expandable>{cmds}{inline_cmd}</blockquote>"
             + (
-                f"<blockquote expandable>\n{placeholders}</blockquote>"
+                f"\n<blockquote expandable>{placeholders}</blockquote>"
                 if placeholders
                 else ""
             )
@@ -532,21 +532,23 @@ class Help(loader.Module):
             await utils.answer(message, rich_message=rich_message)
             return
 
+        core_text = "".join(core_).strip()
+        plain_text = "".join(plain_ + (no_commands_ if force else [])).strip()
+
+        partial_notice = (
+            ""
+            if self.lookup("LoaderMod").fully_loaded
+            else f"\n<blockquote expandable>{self.strings['partial_load']}</blockquote>"
+        )
+
         match True:
             case _ if only_core:
                 await utils.answer(
                     message,
                     (
                         self.config["desc_icon"]
-                        + " {}\n <blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>"
-                    ).format(
-                        reply,
-                        "".join(core_),
-                        (
-                            ""
-                            if self.lookup("LoaderMod").fully_loaded
-                            else f"\n\n{self.strings['partial_load']}"
-                        ),
+                        + f" {reply}\n<blockquote expandable>{core_text}</blockquote>"
+                        + partial_notice
                     ),
                     file=banner,
                     invert_media=self.config["invert_media"],
@@ -556,15 +558,8 @@ class Help(loader.Module):
                     message,
                     (
                         self.config["desc_icon"]
-                        + " {}\n <blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>"
-                    ).format(
-                        reply,
-                        "".join(plain_ + (no_commands_ if force else [])),
-                        (
-                            ""
-                            if self.lookup("LoaderMod").fully_loaded
-                            else f"\n\n{self.strings['partial_load']}"
-                        ),
+                        + f" {reply}\n<blockquote expandable>{plain_text}</blockquote>"
+                        + partial_notice
                     ),
                     file=banner,
                     invert_media=self.config["invert_media"],
@@ -574,16 +569,8 @@ class Help(loader.Module):
                     message,
                     (
                         self.config["desc_icon"]
-                        + " {}\n <blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote><blockquote expandable>{}</blockquote>"
-                    ).format(
-                        reply,
-                        "".join(core_),
-                        "".join(plain_ + (no_commands_ if force else [])),
-                        (
-                            ""
-                            if self.lookup("LoaderMod").fully_loaded
-                            else f"\n\n{self.strings['partial_load']}"
-                        ),
+                        + f" {reply}\n<blockquote expandable>{core_text}</blockquote>\n<blockquote expandable>{plain_text}</blockquote>"
+                        + partial_notice
                     ),
                     file=banner,
                     invert_media=self.config["invert_media"],
