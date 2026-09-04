@@ -537,7 +537,7 @@ presets:
     накатывание внутрь... 🔞 набора</b> <code>{}</code> <b>({}/{} модулей)...</b>
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>Нежное накатывание внутрь...
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>Нежное накатывание внутрь...
     🔞 модуля {}...</i>'
   installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Набор</b> <code>{}</code>
     <b>вошло как по маслу, так глубоко~ ♡ 🔞!</b>
@@ -1402,7 +1402,7 @@ elys_info:
     изображении сладко, глубоко и с кайфом ♡ (˘͈ ᵕ ˘͈ ) возбуждено до предела 🔥
   switchinfo_off: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Информация об
     изображении сладко, глубоко и с кайфом ♡ (˘͈ ᵕ ˘͈ ) остужено ❄️
-  desc: '<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Что такое Userbot?</b>
+  desc: '<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>Что такое Userbot?</b>
 
 
     <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> Userbot - это <b>сторонняя
@@ -1702,7 +1702,7 @@ loader:
     {commands}
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
   not_subscribed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Сначала нужно
     подписаться на канал модуля</b> ♡ 🫦
   verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>Для разблокировки

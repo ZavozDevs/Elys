@@ -395,9 +395,9 @@ class UpdaterMod(loader.Module):
         with open("CHANGELOG.md", encoding="utf-8") as f:
             changelog = f.read().split("##")[1].strip()
         if (await self._client.get_me()).premium:
-            changelog.replace(
+            changelog = changelog.replace(
                 "🌑 Elys",
-                "<tg-emoji emoji-id=5237836252400626980>⭐</tg-emoji><tg-emoji emoji-id=5238125033116705019>❤️</tg-emoji><tg-emoji emoji-id=5237713227357397987>❤️</tg-emoji><tg-emoji emoji-id=5238101041429386602>❤️</tg-emoji>",
+                "<tg-emoji emoji-id=5247212990641514265>⭐️</tg-emoji><tg-emoji emoji-id=5249364352644981683>⭐️</tg-emoji><tg-emoji emoji-id=5249140597733761149>⭐️</tg-emoji><tg-emoji emoji-id=5246996296656531063>⭐️</tg-emoji>",
             )
 
         await utils.answer(message, self.strings["changelog"].format(changelog))

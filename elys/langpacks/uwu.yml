@@ -391,7 +391,7 @@ presets:
   installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Instawwing pweset</b> <code>{}</code> <b>({}/{} moduwes)...</b>
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>Instawwing moduwe {}...</i>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>Instawwing moduwe {}...</i>'
   installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Pweset</b> <code>{}</code> <b>instawwed! Yay!</b>
   already_installed: ✅ [Instawwed]
   add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Spwecify a fowdew to add a mowduwle 💕 </b> <code>{prefix}addtofolder <fowdew> <mowduwle></code>
@@ -927,7 +927,7 @@ elys_info:
   _cfg_cst_ph: '🤖Custom pwaceholders: {}'
   _cfg_cst_btn: Custom button fow info. Weave empty to wemove button
   _cfg_banner: UWW to image bannew
-  desc: '<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Usewbot — what is it?</b>
+  desc: '<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>Usewbot — what is it?</b>
 
 
     <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> A usewbot wefews to a <b>diwd-pawty pwogwam</b> dat intewacts with da Tewegwam API to pewfowm <b>automated tasks on behawf of a usew</b>. Dese usewbots can be used to automate vawious tasks such as <b>sending messages, joining channyews, downwoading media, and much mowe</b>.
@@ -1123,7 +1123,7 @@ loader:
     {commands}
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
   verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>To unwock de abiwity to instaww diwd-pawty moduwes, compwete de test in <a href="https://t.me/{}?start=lm_verify">youw bot</a></b>
 translations:
   name: Twanswations

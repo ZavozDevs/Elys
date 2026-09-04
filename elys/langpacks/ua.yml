@@ -382,7 +382,7 @@ presets:
   installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Встановлення набору</b> <code>{}</code> <b>({}/{} модулів)...</b>
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>Встановлення модуля {}...</i>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>Встановлення модуля {}...</i>'
   installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Набір</b> <code>{}</code> <b>встановлено!</b>
   already_installed: ✅ [Встановлено]
   add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Вкажи папку для додавання модуля. </b> <code>{prefix}addtofolder <папка> <модуль></code>
@@ -913,7 +913,7 @@ elys_info:
   _cfg_banner: Посилання на банер-картинку
   switchinfo_on: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Інформація про зображення успішно увімкнена
   switchinfo_off: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> Інформація про зображення успішно вимкнена
-  desc: '<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Що таке Userbot?</b>
+  desc: '<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>Що таке Userbot?</b>
 
 
     <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.
@@ -1110,7 +1110,7 @@ loader:
     {commands}
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
   args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Недостатньо аргументів</b>
   not_subscribed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Спочатку потрібно підписатися на канал модуля</b>
   verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>Щоб розблокувати можливість встановлення сторонніх модулів, пройдіть тест у <a href="https://t.me/{}?start=lm_verify">своєму боті</a></b>

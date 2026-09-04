@@ -395,7 +395,7 @@ presets:
   installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>プリセット</b> <code>{}</code> <b>({}/{}) をインストールしています...</b>
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>モジュール {} をインストール中...</i>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>モジュール {} をインストール中...</i>'
   installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>プリセット</b> <code>{}</code> <b>がインストールされました！</b>
   already_installed: ✅ [インストール済み]
   add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>モジュールを追加するフォルダを指定してください。 </b> <code>{prefix}addtofolder <フォルダ> <モジュール></code>
@@ -939,7 +939,7 @@ elys_info:
   _cfg_cst_ph: '🤖カスタムプレースホルダー: {}'
   _cfg_cst_btn: 情報のカスタムボタン。ボタンを削除するには空のままにしてください
   _cfg_banner: 画像バナーのURL
-  desc: '<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>ユーザーボットとは？</b>
+  desc: '<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>ユーザーボットとは？</b>
 
 
     <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> ユーザーボットとは、Telegram API と対話して<b>ユーザーに代わって自動化されたタスクを実行するサードパーティのプログラム</b>のことです。これらのユーザーボットは、<b>メッセージの送信、チャンネルへの参加、メディアのダウンロードなど</b>、さまざまなタスクを自動化するために使用できます。
@@ -1135,7 +1135,7 @@ loader:
     {commands}
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
   verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>サードパーティ モジュールをインストールする機能のロックを解除するには、<a href="https://t.me/{}?start=lm_verify">ボット</a></b> でテストを完了してください。
 translations:
   name: Translations
