@@ -765,7 +765,7 @@ test:
   hint: Set a hint
   ping_emoji: Emoji that appears when ping does not increase significantly
   back: ↩️ Back
-  banner_url: 'Image for your ping, for example: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/ping_cmd.png'
+  banner_url: 'Image for your ping, for example: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
   logs_caption: '<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>Elys logs with verbosity</b> <code>{}</code>
 
 

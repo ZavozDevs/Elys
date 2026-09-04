@@ -352,7 +352,7 @@ class Module:
         )
         await call.edit(
             text,
-            photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/declined_jr.png",
+            photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/declined_jr.png",
         )
 
     async def request_join(
@@ -437,7 +437,7 @@ class Module:
 
         await self.inline.bot.send_photo(
             self.tg_id,
-            "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/join_request.png",
+            "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/join_request.png",
             caption=caption,
             reply_markup=self.inline.generate_markup(
                 [

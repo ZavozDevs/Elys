@@ -246,7 +246,7 @@ class UpdaterMod(loader.Module):
     async def poller_announcement(self):
         async with aiohttp.ClientSession() as session:
             try:
-                url = "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/announcment.txt"
+                url = "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/announcment.txt"
                 r = await session.get(
                     url,
                     timeout=aiohttp.ClientTimeout(total=10),
@@ -324,7 +324,7 @@ class UpdaterMod(loader.Module):
             if manual_update:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/updated.png?v=1",
+                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png",
                     caption=self.strings["update_required"].format(
                         current[:6],
                         '<a href="https://github.com/ZavozDevs/Elys/compare/{}...{}">{}</a>'.format(
@@ -347,7 +347,7 @@ class UpdaterMod(loader.Module):
             else:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/updated.png",
+                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png",
                     caption=self.strings["autoupdate_notifier"].format(
                         self._pending[:6],
                         changelog,
@@ -991,7 +991,7 @@ class UpdaterMod(loader.Module):
         if not self.config["autoupdate"] and not self.get("autoupdate_answered", False):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/unit_alpha.png",
+                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/unit_alpha.png",
                 caption=self.strings["autoupdate"],
                 reply_markup=self.inline.generate_markup(
                     [

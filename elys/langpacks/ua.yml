@@ -704,7 +704,7 @@ test:
   hint: Встановіть підказку
   ping_emoji: Емоджі, який з'являється, коли пінг не збільшується суттєво
   back: ↩️ Назад
-  banner_url: 'Картинка для вашого пінгу, наприклад: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/ping_cmd.png'
+  banner_url: 'Картинка для вашого пінгу, наприклад: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
   logs_caption: '<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>Логи Elys рівня</b> <code>{}</code>
 
 

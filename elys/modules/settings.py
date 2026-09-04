@@ -136,7 +136,7 @@ class Settings(loader.Module):
                 current_user=getpass.getuser(),
                 devs_str=devs_str,
                 designers_str=designers_str,
-                banner_url="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png?v=1",
+                banner_url="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_cmd.png",
             )
             await utils.answer(
                 message,
@@ -160,7 +160,7 @@ class Settings(loader.Module):
                 designers_str,
             )
             + (branch_text),
-            file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_cmd.png?v=1",
+            file="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_cmd.png",
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
 
@@ -727,13 +727,13 @@ class Settings(loader.Module):
                 self.strings["choose_installation"],
                 message,
                 reply_markup=self._markup(),
-                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_installation.png",
+                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_installation.png",
             )
         ):
 
             await self.client.send_file(
                 message.peer_id,
-                "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys_installation.png",
+                "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_installation.png",
                 caption=self.strings["vds_install"],
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )

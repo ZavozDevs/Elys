@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/logo.png" height="90" alt="Elys Logo">
+  <img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/logo.png" height="90" alt="Elys Logo">
   <h1>Elys Userbot</h1>
   <p>Продвинутый юзербот для Telegram с повышенной безопасностью и современными функциями</p>
 

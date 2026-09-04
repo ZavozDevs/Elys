@@ -134,7 +134,7 @@ class TokenObtainment(InlineUnit):
 
                 if "DOCKER" in os.environ:
                     m = await conv.send_file(
-                        "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/elys.png"
+                        "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys.png"
                     )
                 else:
                     m = await conv.send_file(main.BASE_PATH / "assets" / "elys.png")

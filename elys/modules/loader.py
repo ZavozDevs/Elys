@@ -619,7 +619,7 @@ class LoaderMod(loader.Module):
         )
         await call.edit(
             text,
-            photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/joined_jr.png",
+            photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/joined_jr.png",
         )
 
     async def install_requirements(self, requirements: list):
