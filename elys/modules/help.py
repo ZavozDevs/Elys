@@ -50,7 +50,7 @@ class Help(loader.Module):
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji>",
+                "<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji>",
                 lambda: "Desc emoji",
             ),
             loader.ConfigValue(

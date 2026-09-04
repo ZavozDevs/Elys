@@ -380,7 +380,7 @@ presets:
   installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Installation des Sets</b> <code>{}</code> <b>({}/{} Module)...</b>
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>Installation des Moduls {}...</i>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>Installation des Moduls {}...</i>'
   installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Set</b> <code>{}</code> <b>wurde installiert!</b>
   already_installed: ✅ [Installiert]
   add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Geben Sie einen Ordner an, um ein Modul hinzuzufügen. </b> <code>{prefix}addtofolder <ordner> <modul></code>
@@ -1099,8 +1099,8 @@ loader:
     {commands}
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
-  finding_module_in_repos: <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Suche Modul in Repositories...</b>
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
+  finding_module_in_repos: <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>Suche Modul in Repositories...</b>
   modules_unloaded: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>Entladene Module:</b> {}
   modules_not_unloaded: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Nicht entladen:</b> {}
   not_subscribed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Du musst zuerst den Kanal des Moduls abonnieren</b>

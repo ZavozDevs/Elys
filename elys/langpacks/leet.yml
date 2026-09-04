@@ -391,7 +391,7 @@ presets:
   installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>1n574ll1ng pr3537</b> <code>{}</code> <b>({}/{} m0d5)...</b>
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <i>1n574ll1ng m0dul3 {}...</i>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>1n574ll1ng m0dul3 {}...</i>'
   installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Pr3537</b> <code>{}</code> <b>1n574ll3d!</b>
   already_installed: ✅ [1n574ll3d]
   add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>5p3c1fy 4 f0ld3r t0 4dd 4 m0dul3. </b> <code>{prefix}addtofolder <f0ld3r> <m0dul3></code>
@@ -927,7 +927,7 @@ elys_info:
   _cfg_cst_ph: '🤖Cu570m pl4c3h0ld3r5: {}'
   _cfg_cst_btn: Cu570m bu770n 4 1nf0. L34v3 3mp7y 2 r3m0v3 bu770n
   _cfg_banner: URL 2 1m4g3 b4nn3r
-  desc: '<tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <b>Us3rb07 — wh47 15 17?</b>
+  desc: '<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>Us3rb07 — wh47 15 17?</b>
 
 
     <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> 4 u53rb07 r3f3r5 2 4 <b>3rd-p4r7y pr0gr4m</b> 7h47 1n73r4c75 w17h 7h3 T3l3gr4m 4P1 2 p3rf0rm <b>4u70m473d 745k5 0n b3h4lf 0f 4 u53r</b>. 7h353 u53rb075 c4n b3 u53d 2 4u70m473 v4r10u5 745k5 5uch 45 <b>s3nd1ng m5g5, j01n1ng ch4nn3l5, d0wnl04d1ng m3d14, & much m0r3</b>.
@@ -1123,7 +1123,7 @@ loader:
     {commands}
 
 
-    <tg-emoji emoji-id=5188377234380954537>🌟</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
+    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
   verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>70 unl0ck 7h3 4b1l17y 70 1n574ll 7h1rd-p4r7y m0dul35, c0mpl373 7h3 7357 1n <a href="https://t.me/{}?start=lm_verify">y0ur b07</a></b>
 translations:
   name: 7r4n5l4710n5
