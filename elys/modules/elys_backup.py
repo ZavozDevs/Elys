@@ -40,7 +40,7 @@ class ElysBackupMod(loader.Module):
         if not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/unit_alpha.png",
+                photo="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/unit_alpha.png",
                 caption=self.strings["period"],
                 reply_markup=self.inline.generate_markup(
                     utils.chunks(

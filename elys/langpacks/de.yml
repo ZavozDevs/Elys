@@ -702,7 +702,7 @@ test:
   hint: Geben Sie einen Hinweis an
   ping_emoji: Emoji, das bei einer leichten Ping-Erhöhung angezeigt wird.
   back: ↩️ Zurück
-  banner_url: 'Bild für Ihren Ping, zum Beispiel: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys/ping_cmd.png'
+  banner_url: 'Bild für Ihren Ping, zum Beispiel: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
   logs_caption: '<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>Elys-Logs des Levels</b> <code>{}</code>
 
 
