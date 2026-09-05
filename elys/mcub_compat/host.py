@@ -1,4 +1,4 @@
-# ©️ Codrago, 2024-2030
+# ©️ ZavozDevs, 2026-2030
 # This file is a part of Elys Userbot
 # 🌐 https://github.com/ZavozDevs/Elys
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
