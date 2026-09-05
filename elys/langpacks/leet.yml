@@ -800,7 +800,7 @@ updater:
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U mu57 pr0v1d3 numb3r 0f c0mm175 2 r0llb4ck!</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U'r3 r0ll1ng b4ck 2 f4r!</b>
   rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>R u 5ur3 u w4n7 2 r0llb4ck {num} c0mm17(-5)?</b>
-  rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>R0ll1ng {num} c0mm175 b4ck...</b>
+  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>R0ll1ng {num} c0mm175 b4ck...</b>
   autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> N3w 3li5 upd473!
 
 
@@ -983,9 +983,9 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> L00k1ng 4 m0dul35 1n r3p05.
-  loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> L04d1ng 7h3 m0dul3.
-  ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> I'm d0wnl04d1ng 7h3 m0dul3 45 4 f1l3.
+  finding_module_in_repos: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> L00k1ng 4 m0dul35 1n r3p05.
+  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> L04d1ng 7h3 m0dul3.
+  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> I'm d0wnl04d1ng 7h3 m0dul3 45 4 f1l3.
   no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>M0dul3</b> <code>{}</code> <b>c4nn07 b3 3xp0r73d 45 4 f1l3</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>N0 3x4c7 m47ch h45 b33n f0und, 50 7h3 cl05357 r35ul7 15 sh0wn 1n5734d</i>
   args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>U mu57 sp3c1fy 4rg5</b>
@@ -1101,7 +1101,7 @@ loader:
   _cls_doc: L04d5 m0dul35
   basic_auth_doc: B451c 4u7h 4 m0dul3 r3p0
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Ch00s3 4 r3p0 2 1n574ll 4ll m0dul35 fr0m:</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>1n574ll1ng 4ll m0dul35 fr0m r3p0...</b>
+  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>1n574ll1ng 4ll m0dul35 fr0m r3p0...</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>4ll m0dul35 fr0m r3p0 1n574ll3d 5ucc355fully!</b>
   dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>N0 m0dul35 f0und 1n 7h15 r3p0, f4gg07!</b>
   dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>50m3 m0dul35 f41l3d 2 1n574ll, b17ch:</b>

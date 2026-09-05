@@ -781,7 +781,7 @@ updater:
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Sie müssen die Anzahl der Commits angeben, die zurückgesetzt werden sollen!</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Du rollst zu weit zurück!</b>
   rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Sind Sie sicher, dass Sie {num} Commit(s) zurücksetzen möchten?</b>
-  rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>{num} Commits zurücksetzen...</b>
+  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>{num} Commits zurücksetzen...</b>
   autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> Neues Elys-Update!
 
 
@@ -962,8 +962,8 @@ loader:
 
 
     {not_exact}'
-  loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Das Modul wird geladen.
-  ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Ich lade das Modul als Datei herunter.
+  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Das Modul wird geladen.
+  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Ich lade das Modul als Datei herunter.
   no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>Modul</b> <code>{}</code> <b>kann nicht als Datei exportiert werden</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>Es wurde keine genaue Übereinstimmung gefunden, daher wird stattdessen das nächstgelegene Ergebnis angezeigt</i>
   args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Sie müssen Argumente angeben</b>
@@ -1076,7 +1076,7 @@ loader:
   _cmd_doc_delrepo: Lösche ein zusätzliches Repository
   basic_auth_doc: Authentifizierung für den Zugriff auf das Repository
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Wähle ein Repository aus, um alle Module daraus zu installieren:</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>Installiere alle Module aus dem Repository...</b>
+  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>Installiere alle Module aus dem Repository...</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>Alle Module aus dem Repository erfolgreich installiert!</b>
   dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Keine Module in diesem Repository gefunden!</b>
   dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Einige Module konnten nicht installiert werden:</b>
