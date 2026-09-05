@@ -1,0 +1,4 @@
+{
+  "name": "Elys Userbot",
+  "install": "bash .cursor/install.sh"
+}
