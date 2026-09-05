@@ -221,15 +221,21 @@ class Choice(Validator):
     """
     Check whether entered value is in the allowed list
     :param possible_values: Allowed values to be passed to config param
+    :param allow_custom: Whether to allow custom values
     """
 
     def __init__(
         self,
         possible_values: list[ConfigAllowedTypes],
         /,
+        allow_custom: bool = False,
     ):
         super().__init__(
-            functools.partial(self._validate, possible_values=possible_values),
+            functools.partial(
+                self._validate,
+                possible_values=possible_values,
+                allow_custom=allow_custom,
+            ),
             translator.getdict(
                 "validators.choice",
                 possible=" / ".join(list(map(str, possible_values))),
@@ -243,8 +249,11 @@ class Choice(Validator):
         /,
         *,
         possible_values: list[ConfigAllowedTypes],
+        allow_custom: bool = False,
     ) -> ConfigAllowedTypes:
         if value not in possible_values:
+            if allow_custom:
+                return value
             raise ValidationError(
                 f"Passed value ({value}) is not one of the following:"
                 f" {' / '.join(list(map(str, possible_values)))}"
