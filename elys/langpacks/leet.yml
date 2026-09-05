@@ -1012,7 +1012,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3qu1r3m3n75 1n574ll4710n f41l3d</b>
   requirements_restarted: 🚀 <b>Ur u53rb07 15 r3574r73d, 4f73r r3574r7, 1n574ll 7h3 m0dul3 4g41n.</b>
-  requirements_installing: '<tg-emoji emoji-id=5873225338984599714>🚀</tg-emoji> <b>1n574ll1ng r3qu1r3m3n75:
+  requirements_installing: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>1n574ll1ng r3qu1r3m3n75:
 
 
     {}</b>'
