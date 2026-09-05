@@ -387,6 +387,11 @@ class Settings(loader.Module):
                 if len(target_parts) > 1:
                     rest = f"{target_parts[1]} {rest}" if rest else target_parts[1]
 
+            # Resolve system alias (e.g. lm -> loadmod, dlm -> dlmod)
+            if cmd not in self.allmodules.commands:
+                if real_cmd := self.allmodules.find_alias(cmd):
+                    cmd = real_cmd.lower().strip()
+
             if cmd not in self.allmodules.commands:
                 await utils.answer(
                     message,
