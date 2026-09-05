@@ -30,7 +30,10 @@ from ..inline.types import BotInlineMessage, InlineCall
 class InlineStuff(loader.Module):
     """Provides support for inline stuff"""
 
-    strings = {"name": "InlineStuff"}
+    strings = {
+        "name": "InlineStuff",
+        "premium_logo": "{e:glowing_star}",
+    }
 
     @loader.watcher(
         "out",
@@ -129,7 +132,7 @@ class InlineStuff(loader.Module):
                     "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/start_cmd.png",
                     caption=self.strings["this_is_elys"].format(
                         (
-                            "<tg-emoji emoji-id=5463379725441341739>🌟</tg-emoji>"
+                            self.strings["premium_logo"]
                             if self._client.elys_me.premium is True
                             else "🌟"
                         ),

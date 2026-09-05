@@ -76,6 +76,13 @@ class LoaderMod(loader.Module):
 
     strings = {
         "name": "Loader",
+        "load_error": "{e:cross} <b>{}</b>",
+        "mod_doc_i": "<i>\n{e:info} {}</i>\n\n",
+        "lib_li": (
+            "{e:bullet}"
+            " <code>{}</code> <b>{}</b> <code>{}</code>"
+        ),
+        "emoji_done": "{e:check}",
     }
 
     def __init__(self):
@@ -111,7 +118,7 @@ class LoaderMod(loader.Module):
             ),
             loader.ConfigValue(
                 "command_emoji",
-                "<tg-emoji emoji-id=5197195523794157505>▫️</tg-emoji>",
+                "{e:bullet}",
                 lambda: "Emoji for command",
             ),
             loader.ConfigValue(
@@ -1084,9 +1091,8 @@ class LoaderMod(loader.Module):
                     if isinstance(e, loader.LoadError):
                         await utils.answer(
                             message,
-                            (
-                                "<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji>"
-                                f" <b>{utils.escape_html(str(e))}</b>"
+                            self.strings["load_error"].format(
+                                utils.escape_html(str(e))
                             ),
                         )
                     elif isinstance(e, ScamDetectionError):
@@ -1185,9 +1191,8 @@ class LoaderMod(loader.Module):
                     if isinstance(e, loader.LoadError):
                         await utils.answer(
                             message,
-                            (
-                                "<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji>"
-                                f" <b>{utils.escape_html(str(e))}</b>"
+                            self.strings["load_error"].format(
+                                utils.escape_html(str(e))
                             ),
                         )
                     elif isinstance(e, ScamDetectionError):
@@ -1216,9 +1221,8 @@ class LoaderMod(loader.Module):
                 if message:
                     await utils.answer(
                         message,
-                        (
-                            "<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji>"
-                            f" <b>{utils.escape_html(str(e))}</b>"
+                        self.strings["load_error"].format(
+                            utils.escape_html(str(e))
                         ),
                     )
                 return False
@@ -1310,9 +1314,8 @@ class LoaderMod(loader.Module):
         mod_doc = ""
 
         if instance.__doc__:
-            mod_doc += (
-                "<i>\n<tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji>"
-                f" {utils.escape_html(inspect.getdoc(instance))}</i>\n\n"
+            mod_doc += self.strings["mod_doc_i"].format(
+                utils.escape_html(inspect.getdoc(instance))
             )
 
         subscribe = ""
@@ -1323,8 +1326,7 @@ class LoaderMod(loader.Module):
             value = getattr(instance, key)
             if isinstance(value, loader.Library):
                 depends_from.append(
-                    "<tg-emoji emoji-id=5197195523794157505>▫️</tg-emoji>"
-                    " <code>{}</code> <b>{}</b> <code>{}</code>".format(
+                    self.strings["lib_li"].format(
                         value.__class__.__name__,
                         self.strings["by"],
                         (
@@ -1651,7 +1653,7 @@ class LoaderMod(loader.Module):
 
         msg = (
             self.strings["unloaded"].format(
-                "<tg-emoji emoji-id=5784993237412351403>✅</tg-emoji>",
+                self.strings["emoji_done"],
                 ", ".join(
                     [(mod[:-3] if mod.endswith("Mod") else mod) for mod in worked]
                 ),

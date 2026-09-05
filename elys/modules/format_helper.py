@@ -27,8 +27,8 @@ class FormatHelperMod(loader.Module):
 
     strings = {
         "name": "FormatHelper",
-        "no_args_or_reply": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Укажи текст для форматирования или ответь на сообщение</b>",
-        "no_content": "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>В сообщении нет текста</b>",
+        "no_args_or_reply": "{e:stop} <b>Укажи текст для форматирования или ответь на сообщение</b>",
+        "no_content": "{e:stop} <b>В сообщении нет текста</b>",
     }
 
     async def _send_or_code(

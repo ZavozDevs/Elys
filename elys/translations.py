@@ -1,16 +1,16 @@
-# ©️ Dan Gazizullin, 2021-2023
+# © Dan Gazizullin, 2021-2023
 # This file is a part of Hikka Userbot
 # 🌐 https://github.com/hikariatama/Hikka
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
-# ©️ Codrago, 2024-2030
+# © Codrago, 2024-2030
 # This file is a part of Heroku Userbot
 # 🌐 https://github.com/coddrago/Heroku
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
-# ©️ ZavozDevs, 2026-2030
+# © ZavozDevs, 2026-2030
 # This file is a part of Elys Userbot
 # 🌐 https://github.com/ZavozDevs/Elys
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
@@ -26,6 +26,7 @@ from ruamel.yaml import YAML
 
 from . import utils
 from .database import Database
+from .emojis import render_emojis
 from .tl_cache import CustomTelegramClient
 from .types import Module
 
@@ -53,7 +54,7 @@ MEME_LANGUAGES = {
     "uwu": "🏴‍☠️ UwU",
     "tiktok": "🏴‍☠️ TikTokKid",
     "neofit": "🏴‍☠️ Neofit",
-    "lust": "🫦 Похоть",
+    "lust": "🫠 Похоть",
 }
 
 
@@ -90,7 +91,7 @@ def fmt(text: str, kwargs: dict) -> str:
         if f"{{{key}}}" in text:
             text = text.replace(f"{{{key}}}", str(value))
 
-    return text
+    return render_emojis(text)
 
 
 class BaseTranslator:
@@ -145,7 +146,8 @@ class BaseTranslator:
         return self._data.get(key, False)
 
     def gettext(self, text: str) -> typing.Any:
-        return self.getkey(text) or text
+        res = self.getkey(text) or text
+        return render_emojis(res) if isinstance(res, str) else res
 
     async def load_module_translations(
         self, pack_url: str, cache_path: Path = None
@@ -249,11 +251,12 @@ class ExternalTranslator(BaseTranslator):
             )
 
     def get(self, key: str, lang: str) -> str:
-        return self.data[lang].get(key, False) or key
+        res = self.data[lang].get(key, False) or key
+        return render_emojis(res) if isinstance(res, str) else res
 
     def getdict(self, key: str, **kwargs) -> dict:
         return {
-            lang: fmt(self.data[lang].get(key, False) or key, kwargs)
+            lang: render_emojis(fmt(self.data[lang].get(key, False) or key, kwargs))
             for lang in self.data
         }
 
@@ -271,7 +274,8 @@ class Strings:
 
     def get(self, key: str, lang: str | None = None) -> str:
         try:
-            return self._translator.raw_data[lang][f"{self._mod.__module__}.{key}"]
+            res = self._translator.raw_data[lang][f"{self._mod.__module__}.{key}"]
+            return render_emojis(res) if isinstance(res, str) else res
         except KeyError:
             return self[key]
 
@@ -306,7 +310,7 @@ class Strings:
         return False
 
     def __getitem__(self, key: str) -> str:
-        return (
+        res = (
             self.external_strings.get(key, None)
             or self._lookup_translator(key)
             or (
@@ -345,6 +349,7 @@ class Strings:
             )
             or self._base_strings.get(key, f"Unknown strings: {key}")
         )
+        return render_emojis(res) if isinstance(res, str) else res
 
     def __call__(
         self,

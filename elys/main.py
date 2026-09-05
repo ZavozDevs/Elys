@@ -1118,20 +1118,20 @@ class Elys:
                     log_chat_id,
                     "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_started.png",
                     caption=(
-                        "{} <b>{} started!</b>\n\n<tg-emoji emoji-id=5231065262228250587>⚙</tg-emoji> <b>GitHub commit SHA: <a"
-                        ' href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>\n<tg-emoji emoji-id=5873225338984599714>🔎</tg-emoji>'
-                        " <b>Update status: {}</b>\n<tg-emoji emoji-id=5870903672937911120>🕶</tg-emoji> <b>Prefix:</b> <code>{}</code>"
-                    ).format(
-                        (
-                            utils.get_platform_emoji()
-                            if client.elys_me.premium is True
-                            else "🌟 Elys"
-                        ),
-                        ".".join(list(map(str, list(__version__)))),
-                        build,
-                        build[:7],
-                        upd,
-                        "." if pref is None else pref,
+                        client.loader.lookup("translations")
+                        .strings("started_caption")
+                        .format(
+                            (
+                                utils.get_platform_emoji()
+                                if client.elys_me.premium is True
+                                else "🌟 Elys"
+                            ),
+                            ".".join(list(map(str, list(__version__)))),
+                            build,
+                            build[:7],
+                            upd,
+                            "." if pref is None else pref,
+                        )
                     ),
                     message_thread_id=message_thread_id,
                 )

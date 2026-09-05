@@ -116,6 +116,15 @@ class ElysConfigMod(loader.Module):
             "<i>⏳ Waiting for message... (it will be deleted automatically)</i>"
         ),
         "cancel_btn": "🚫 Cancel",
+        "config_option_li": (
+            "{e:bullet} <code>{}</code>: {}"
+        ),
+        "config_option_li_sub": (
+            "∟ {e:bullet} <code>{}</code>: {}"
+        ),
+        "folder_mod_li": (
+            "{e:bullet} <b>{}</b>"
+        ),
     }
 
     def __init__(self):
@@ -1894,7 +1903,9 @@ class ElysConfigMod(loader.Module):
         if category is not None:
             params = list(grouped.get(category, []))
             option_lines = [
-                f"<tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <code>{utils.escape_html(p)}</code>: {fmt_value(p)}"
+                self.strings["config_option_li"].format(
+                    utils.escape_html(p), fmt_value(p)
+                )
                 for p in params
             ]
             options_text = "\n".join(option_lines) if option_lines else "No options"
@@ -1961,7 +1972,9 @@ class ElysConfigMod(loader.Module):
         elif folder is not None:
             params = list(module.config)
             option_lines = [
-                f"<tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <code>{utils.escape_html(p)}</code>: {fmt_value(p)}"
+                self.strings["config_option_li"].format(
+                    utils.escape_html(p), fmt_value(p)
+                )
                 for p in params
             ]
             text = "\n".join(option_lines) if option_lines else "No options"
@@ -2025,7 +2038,7 @@ class ElysConfigMod(loader.Module):
                     continue
                 sections.append(
                     "\n".join(
-                        "<tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <code>{}</code>: {}".format(
+                        self.strings["config_option_li"].format(
                             utils.escape_html(p), fmt_value(p)
                         )
                         for p in visible
@@ -2041,7 +2054,7 @@ class ElysConfigMod(loader.Module):
                 ]
             else:
                 cat_lines = [
-                    "∟ <tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <code>{}</code>: {}".format(
+                    self.strings["config_option_li_sub"].format(
                         utils.escape_html(p), fmt_value(p)
                     )
                     for p in section_params
@@ -2291,11 +2304,11 @@ class ElysConfigMod(loader.Module):
                     except Exception:
                         raw_parts.append(f"<code>{utils.escape_html(param)}</code>")
                 text_parts.append(
-                    f"<tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <b>{utils.escape_html(mod_name)}</b>"
+                    self.strings["folder_mod_li"].format(utils.escape_html(mod_name))
                 )
             except Exception:
                 text_parts.append(
-                    f"<tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> <b>{utils.escape_html(mod_name)}</b>"
+                    self.strings["folder_mod_li"].format(utils.escape_html(mod_name))
                 )
 
         await call.edit(

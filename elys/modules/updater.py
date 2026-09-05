@@ -59,7 +59,15 @@ os.environ["GIT_ASKPASS"] = "echo"
 class UpdaterMod(loader.Module):
     """Updates itself, tracks latest Elys releases, and notifies you, if update is required"""
 
-    strings = {"name": "Updater"}
+    strings = {
+        "name": "Updater",
+        "premium_logo": (
+            "{e:star}"
+            "{e:star}"
+            "{e:star}"
+            "{e:star}"
+        ),
+    }
     _GIT_FETCH_INTERVAL = 1800
     _EMFILE_FETCH_BACKOFF = 900
 
@@ -403,7 +411,7 @@ class UpdaterMod(loader.Module):
         if (await self._client.get_me()).premium:
             changelog = changelog.replace(
                 "🌑 Elys",
-                "<tg-emoji emoji-id=5247212990641514265>⭐️</tg-emoji><tg-emoji emoji-id=5249364352644981683>⭐️</tg-emoji><tg-emoji emoji-id=5249140597733761149>⭐️</tg-emoji><tg-emoji emoji-id=5246996296656531063>⭐️</tg-emoji>",
+                self.strings["premium_logo"],
             )
 
         await utils.answer(message, self.strings["changelog"].format(changelog))
