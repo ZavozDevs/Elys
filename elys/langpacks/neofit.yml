@@ -506,9 +506,9 @@ settings:
     <b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>elys-tl:</b> <i>{}</i>
 
 
-    <tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Devs: {}</b>
+    <tg-emoji emoji-id="5249457712349097667">🔧</tg-emoji> <b>Devs: {}</b>
 
-    <tg-emoji emoji-id=5393546778433846015>🎨</tg-emoji> <b>Designers: {}</b>'
+    <tg-emoji emoji-id="5249090625789271993">🖌️</tg-emoji> <b>Designers: {}</b>'
   confirm_cleardb: '⚠️ <b>Warning: Drop Database? Data loss imminent.</b>'
   cleardb_confirm: 🗑 DROP DATABASE
   cancel: 🚫 ^C
