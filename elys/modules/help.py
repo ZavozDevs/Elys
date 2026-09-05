@@ -90,9 +90,31 @@ class Help(loader.Module):
             ),
         )
 
-    def _get_banner_url(self, doc: str):
-        match = re.search(r"# ?meta banner: ?(.+)", doc)
-        return match.group(1).strip() if match else None
+    def _get_banner_url(
+        self, doc: typing.Any = None, instance: typing.Any = None
+    ) -> str | None:
+        if instance is None and not isinstance(doc, (str, bytes)) and doc is not None:
+            instance = doc
+            doc = getattr(instance, "__source__", None) or getattr(instance, "__doc__", None)
+
+        if instance is not None:
+            banner = getattr(instance, "banner_url", None)
+            if banner:
+                return banner
+            mcub_instance = getattr(instance, "mcub_instance", None)
+            banner = getattr(mcub_instance, "banner_url", None)
+            if banner:
+                return banner
+
+        if isinstance(doc, bytes):
+            doc = doc.decode("utf-8", errors="ignore")
+
+        if isinstance(doc, str):
+            match = re.search(r"# ?(?:meta )?banner(?:_url)?: ?(.+)", doc)
+            if match:
+                return match.group(1).strip()
+
+        return None
 
     @loader.command(
         ru_doc="[args] | Спрячет ваши модули",
@@ -260,14 +282,18 @@ class Help(loader.Module):
         banner_url = None
         if self.config["show_preview_in_help"]:
             try:
-                source = getattr(module, "__source__", None)
-                if source:
-                    banner_url = self._get_banner_url(source)
-                    if banner_url:
-                        banner_kwargs = {
-                            "file": InputMediaWebPage(banner_url, optional=True),
-                            "invert_media": True,
-                        }
+                banner_url = getattr(module, "banner_url", None) or getattr(
+                    getattr(module, "mcub_instance", None), "banner_url", None
+                )
+                if not banner_url:
+                    source = getattr(module, "__source__", None)
+                    banner_url = self._get_banner_url(source, module)
+
+                if banner_url:
+                    banner_kwargs = {
+                        "file": InputMediaWebPage(banner_url, optional=True),
+                        "invert_media": True,
+                    }
             except Exception:
                 pass
 

@@ -151,11 +151,33 @@ VALID_APT_PACKAGES = re.compile(
     re.MULTILINE,
 )
 
+IMPORT_TO_PIP = {
+    "PIL": "Pillow",
+    "Image": "Pillow",
+    "cv2": "opencv-python",
+    "sklearn": "scikit-learn",
+    "bs4": "beautifulsoup4",
+    "yaml": "PyYAML",
+    "dotenv": "python-dotenv",
+    "google.generativeai": "google-generativeai",
+    "speech_recognition": "SpeechRecognition",
+    "dateutil": "python-dateutil",
+    "Crypto": "pycryptodome",
+    "usb": "pyusb",
+    "gi": "PyGObject",
+    "wx": "wxPython",
+    "pkg_resources": "setuptools",
+    "elystl": "Heroku-TL-New",
+    "markdown_it": "markdown-it-py",
+}
+
 IMPORT_PIP_ALIASES = {
     "sklearn": "scikit-learn",
     "pil": "Pillow",
     "elystl": "Heroku-TL-New",
     "markdown_it": "markdown-it-py",
+    **IMPORT_TO_PIP,
+    **{k.lower(): v for k, v in IMPORT_TO_PIP.items()},
 }
 
 USER_INSTALL = "PIP_TARGET" not in os.environ and "VIRTUAL_ENV" not in os.environ
@@ -788,25 +810,42 @@ class Modules:
                     if isinstance(data, bytes):
                         data = data.decode("utf-8", errors="ignore")
 
-                    match = VALID_PIP_PACKAGES.search(data)
-                    if not match:
-                        raise
+                    from .mcub_compat.detect import parse_requires
 
-                    raw_reqs = match.group(1)
-                    requirements = [
-                        token.strip().rstrip(",")
-                        for token in re.split(r"[,\s]+", raw_reqs.strip())
-                        if token.strip().rstrip(",") and not token.strip().startswith(("-", "_", "."))
-                    ]
+                    requirements = parse_requires(data)
+                    if not requirements:
+                        match = VALID_PIP_PACKAGES.search(data)
+                        if match:
+                            raw_reqs = match.group(1)
+                            requirements = [
+                                token.strip().rstrip(",")
+                                for token in re.split(r"[,\s]+", raw_reqs.strip())
+                                if token.strip().rstrip(",")
+                                and not token.strip().startswith(("-", "_", "."))
+                            ]
 
                     exc_name = (getattr(e, "name", None) or "").lower()
-
-                    requirements.extend(
-                        [IMPORT_PIP_ALIASES.get(exc_name, exc_name or e.name or "")]
+                    raw_exc = getattr(e, "name", None) or ""
+                    mapped_exc = (
+                        IMPORT_PIP_ALIASES.get(exc_name)
+                        or IMPORT_PIP_ALIASES.get(raw_exc)
+                        or raw_exc
                     )
+                    if mapped_exc and mapped_exc not in requirements:
+                        requirements.append(mapped_exc)
+
+                    if not requirements:
+                        raise
+
+                    resolved_reqs = [
+                        IMPORT_PIP_ALIASES.get(
+                            req.lower(), IMPORT_PIP_ALIASES.get(req, req)
+                        )
+                        for req in requirements
+                    ]
 
                     result = await self.lookup("LoaderMod").install_requirements(
-                        requirements
+                        resolved_reqs
                     )
 
                     importlib.invalidate_caches()

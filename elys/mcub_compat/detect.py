@@ -127,21 +127,28 @@ def has_hikka_meta(code: str) -> bool:
 
 def parse_requires(code: str) -> list[str]:
     """Parse ``# requires:`` pip declarations plus ``dependencies = [...]``."""
+    if isinstance(code, bytes):
+        code = code.decode("utf-8", errors="ignore")
+    if not isinstance(code, str):
+        return []
+
     found: list[str] = []
 
     for match in re.finditer(
         r"^\s*#\s*requires\s*:\s*(.*)$", code, re.MULTILINE | re.IGNORECASE
     ):
         for token in re.split(r"[,\s]+", match.group(1).strip()):
-            token = token.strip()
+            token = token.strip().rstrip(",")
             if token and not token.startswith(("-", "_", ".")):
                 found.append(token)
 
-    match = re.search(r"^\s*dependencies\s*=\s*\[([^\]]*)\]", code, re.MULTILINE)
+    match = re.search(
+        r"^\s*dependencies\s*=\s*[\[\(]([^\]\)]*)[\]\)]", code, re.MULTILINE
+    )
     if match:
         for token in re.findall(r"""['"]([^'"]+)['"]""", match.group(1)):
-            token = token.strip()
-            if token:
+            token = token.strip().rstrip(",")
+            if token and not token.startswith(("-", "_", ".")):
                 found.append(token)
 
     return list(dict.fromkeys(found))

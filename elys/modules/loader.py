@@ -211,9 +211,31 @@ class LoaderMod(loader.Module):
             },
         )
 
-    def _get_banner_url(self, doc: str) -> str | None:
-        match = re.search(r"# ?meta banner: ?(.+)", doc)
-        return match.group(1).strip() if match else None
+    def _get_banner_url(
+        self, doc: typing.Any = None, instance: typing.Any = None
+    ) -> str | None:
+        if instance is None and not isinstance(doc, (str, bytes)) and doc is not None:
+            instance = doc
+            doc = getattr(instance, "__source__", None) or getattr(instance, "__doc__", None)
+
+        if instance is not None:
+            banner = getattr(instance, "banner_url", None)
+            if banner:
+                return banner
+            mcub_instance = getattr(instance, "mcub_instance", None)
+            banner = getattr(mcub_instance, "banner_url", None)
+            if banner:
+                return banner
+
+        if isinstance(doc, bytes):
+            doc = doc.decode("utf-8", errors="ignore")
+
+        if isinstance(doc, str):
+            match = re.search(r"# ?(?:meta )?banner(?:_url)?: ?(.+)", doc)
+            if match:
+                return match.group(1).strip()
+
+        return None
 
     def _repo_to_label(self, repo: str) -> str:
         parsed = urlparse(repo)
@@ -840,6 +862,11 @@ class LoaderMod(loader.Module):
             except (TypeError, IndexError, AttributeError):
                 pass
 
+            if not requirements:
+                from ..mcub_compat.detect import parse_requires
+
+                requirements = parse_requires(doc)
+
             if requirements:
                 result = await self.install_requirements(requirements)
                 if not result:
@@ -1377,7 +1404,7 @@ class LoaderMod(loader.Module):
             or message.web_preview
         ):
             try:
-                banner_url = self._get_banner_url(doc)
+                banner_url = self._get_banner_url(doc, instance)
                 if banner_url:
                     banner_kwargs = {
                         "file": InputMediaWebPage(banner_url, optional=True),

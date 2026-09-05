@@ -63,6 +63,26 @@ EVENT_TYPE_ALIASES = {
 
 BOT_ONLY_EVENTS = frozenset({"inlinequery", "inline", "callbackquery", "callback"})
 
+IMPORT_TO_PIP = {
+    "PIL": "Pillow",
+    "Image": "Pillow",
+    "cv2": "opencv-python",
+    "sklearn": "scikit-learn",
+    "bs4": "beautifulsoup4",
+    "yaml": "PyYAML",
+    "dotenv": "python-dotenv",
+    "google.generativeai": "google-generativeai",
+    "speech_recognition": "SpeechRecognition",
+    "dateutil": "python-dateutil",
+    "Crypto": "pycryptodome",
+    "usb": "pyusb",
+    "gi": "PyGObject",
+    "wx": "wxPython",
+    "pkg_resources": "setuptools",
+    "elystl": "Heroku-TL-New",
+    "markdown_it": "markdown-it-py",
+}
+
 
 class ModuleLoggerAdapter(logging.LoggerAdapter):
     """``[ModuleName] message`` prefixing, matching MCUB's log format."""
@@ -642,6 +662,17 @@ class KernelProxy:
     @property
     def version_manager(self):
         return self._host.version_manager
+
+    def resolve_pip_name(self, import_name: str) -> str:
+        """Resolve an import name to its corresponding PyPI package name."""
+        if not import_name:
+            return import_name
+        if import_name in IMPORT_TO_PIP:
+            return IMPORT_TO_PIP[import_name]
+        for k, v in IMPORT_TO_PIP.items():
+            if k.lower() == import_name.lower():
+                return v
+        return import_name
 
     # -- identity ---------------------------------------------------------
 

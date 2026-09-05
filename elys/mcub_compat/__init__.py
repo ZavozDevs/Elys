@@ -182,8 +182,10 @@ async def finalize(context: MCUBContext, module) -> type:
     so Elys's own ``vars(module)`` scan picks it up unchanged.
     """
     instance = None
+    mcub_class = None
 
     if context.style == MCUB_CLASS:
+        mcub_class = _find_module_base(module)
         instance = _instantiate_class_module(context, module)
     else:
         await _run_register(context, module)
@@ -206,8 +208,11 @@ async def finalize(context: MCUBContext, module) -> type:
         meta=context.meta,
         description=description,
         module_name=getattr(module, "__name__", None),
+        mcub_class=mcub_class or (type(instance) if instance is not None else None),
     )
     adapter_cls.mcub_instance = instance
+    if instance is not None and not getattr(adapter_cls, "banner_url", None):
+        adapter_cls.banner_url = getattr(instance, "banner_url", None)
     adapter_cls.mcub_module = module
     adapter_cls.registrations = context.registrations
     adapter_cls.host = context.host

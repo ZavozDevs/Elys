@@ -15,6 +15,7 @@ import copy
 import logging
 import os
 import random
+import re
 import time
 import traceback
 import typing
@@ -484,19 +485,43 @@ class Form(InlineUnit):
             match True:
                 case _ if "rich_message" in form:
                     rich_value = form["rich_message"]
-                    if not isinstance(rich_value, str):
-                        raise TypeError("Inline bot Rich forms require HTML text")
-                    await inline_query.answer(
-                        [
-                            await inline_query.rich_article(
-                                title="Elys",
-                                html=rich_value,
-                                buttons=self.generate_markup(form["uid"]),
-                                id=utils.rand(20),
-                            )
-                        ],
-                        cache_time=0,
-                    )
+                    try:
+                        if not isinstance(rich_value, str):
+                            rich_value = str(rich_value)
+                        await inline_query.answer(
+                            [
+                                await inline_query.rich_article(
+                                    title="Elys",
+                                    html=rich_value,
+                                    buttons=self.generate_markup(form["uid"]),
+                                    id=utils.rand(20),
+                                )
+                            ],
+                            cache_time=0,
+                        )
+                    except Exception as rich_exc:
+                        logger.warning(
+                            "Rich inline form failed, falling back to standard article: %s",
+                            rich_exc,
+                        )
+                        fallback_text = (
+                            form_text
+                            or re.sub(r"<[^>]+>", "", str(rich_value))
+                            or "Elys Form"
+                        )
+                        await inline_query.answer(
+                            [
+                                await inline_query.builder.article(
+                                    title="Elys",
+                                    text=fallback_text,
+                                    parse_mode="HTML",
+                                    link_preview=False,
+                                    buttons=self.generate_markup(form["uid"]),
+                                    id=utils.rand(20),
+                                )
+                            ],
+                            cache_time=0,
+                        )
                 case _ if "photo" in form:
                     await inline_query.answer(
                         [
