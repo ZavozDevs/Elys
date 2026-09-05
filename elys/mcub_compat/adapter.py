@@ -66,6 +66,7 @@ class MCUBAdapterMixin:
     mcub_name: str = "MCUB"
     mcub_style: str = "mcub_class"
     mcub_meta: dict = {}
+    banner_url: str | None = None
     strings = {"name": "MCUB"}
 
     # Set by the loader before `complete_registration`.
@@ -81,6 +82,13 @@ class MCUBAdapterMixin:
         self._mcub_event_handlers: list[tuple] = []
         self._mcub_published: list[str] = []
         self._mcub_ready = False
+
+        self.banner_url = (
+            getattr(self, "banner_url", None)
+            or getattr(self.mcub_instance, "banner_url", None)
+            or self.mcub_meta.get("banner_url")
+            or self.mcub_meta.get("meta_banner")
+        )
 
         if self.host is not None:
             self.host.register_adapter(self.mcub_name, self)
@@ -123,7 +131,7 @@ class MCUBAdapterMixin:
 
         for pattern, handler in registrations.inline_handlers.items():
             self._publish(
-                f"{pattern}_inline_handler", self._create_inline(handler)
+                f"{pattern}_inline_handler", self._create_inline(handler, pattern)
             )
 
         for key in registrations.inline_temp:
@@ -205,7 +213,9 @@ class MCUBAdapterMixin:
     # `_callback_handler`. Elys discovers handlers by scanning `dir()` for those
     # suffixes, so `_make_inline_handler` / `_create_inline_handler` would
     # themselves be registered as inline commands named `_make` / `_create`.
-    def _create_inline(self, handler: typing.Callable) -> typing.Callable:
+    def _create_inline(
+        self, handler: typing.Callable, pattern: str = ""
+    ) -> typing.Callable:
         async def inline_handler(_adapter, query):
             from .events import MCUBInlineQuery
 
@@ -213,6 +223,80 @@ class MCUBAdapterMixin:
 
         inline_handler.is_inline_handler = True
         inline_handler.security = _inline_everyone()
+
+        doc = getattr(handler, "__doc__", None)
+        if not doc and hasattr(handler, "__original__"):
+            doc = getattr(handler.__original__, "__doc__", None)
+
+        if not pattern and self.registrations and self.registrations.inline_handlers:
+            for pat, h in self.registrations.inline_handlers.items():
+                if h is handler:
+                    pattern = pat
+                    break
+
+        cmd_meta = (
+            self.registrations.commands.get(pattern.lower())
+            if pattern and self.registrations and self.registrations.commands
+            else None
+        )
+        cmd_docs = (cmd_meta.get("docs") or {}) if cmd_meta else {}
+        cmd_handler = cmd_meta.get("handler") if cmd_meta else None
+
+        if not doc and cmd_meta:
+            doc = (
+                cmd_docs.get("ru")
+                or getattr(cmd_handler, "ru_doc", None)
+                or getattr(cmd_handler, "doc_ru", None)
+                or cmd_docs.get("en")
+                or getattr(cmd_handler, "en_doc", None)
+                or getattr(cmd_handler, "doc_en", None)
+                or getattr(cmd_handler, "__doc__", None)
+                or self._pick_doc(cmd_docs)
+            )
+
+        if doc:
+            inline_handler.__doc__ = doc
+
+        ru_doc = (
+            getattr(handler, "ru_doc", None)
+            or getattr(handler, "doc_ru", None)
+            or (
+                getattr(handler.__original__, "ru_doc", None)
+                if hasattr(handler, "__original__")
+                else None
+            )
+            or (
+                getattr(handler.__original__, "doc_ru", None)
+                if hasattr(handler, "__original__")
+                else None
+            )
+            or cmd_docs.get("ru")
+            or getattr(cmd_handler, "ru_doc", None)
+            or getattr(cmd_handler, "doc_ru", None)
+        )
+        if ru_doc:
+            inline_handler.ru_doc = ru_doc
+
+        en_doc = (
+            getattr(handler, "en_doc", None)
+            or getattr(handler, "doc_en", None)
+            or (
+                getattr(handler.__original__, "en_doc", None)
+                if hasattr(handler, "__original__")
+                else None
+            )
+            or (
+                getattr(handler.__original__, "doc_en", None)
+                if hasattr(handler, "__original__")
+                else None
+            )
+            or cmd_docs.get("en")
+            or getattr(cmd_handler, "en_doc", None)
+            or getattr(cmd_handler, "doc_en", None)
+        )
+        if en_doc:
+            inline_handler.en_doc = en_doc
+
         return inline_handler
 
     def _create_inline_temp_handler(self, key: str) -> typing.Callable:
@@ -537,6 +621,8 @@ def build_adapter_class(
     meta: dict,
     description: str,
     module_name: str | None = None,
+    mcub_class: type | None = None,
+    banner_url: str | None = None,
 ) -> type:
     """Synthesise the per-module adapter class Elys will instantiate.
 
@@ -545,10 +631,17 @@ def build_adapter_class(
     class rather than through ``__init__``.
     """
     class_name = f"MCUB_{_flag_key(name)}"
+    banner = (
+        banner_url
+        or (getattr(mcub_class, "banner_url", None) if mcub_class else None)
+        or meta.get("banner_url")
+        or meta.get("meta_banner")
+    )
     namespace = {
         "mcub_name": name,
         "mcub_style": style,
         "mcub_meta": dict(meta),
+        "banner_url": banner,
         "strings": {"name": name},
         "__doc__": description or f"MCUB module {name}",
     }

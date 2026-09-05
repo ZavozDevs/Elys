@@ -42,13 +42,23 @@ def command(
     return decorator
 
 
-def inline(pattern: str) -> Callable:
+def inline(
+    pattern: str,
+    *,
+    doc: dict | None = None,
+    doc_ru: str | None = None,
+    doc_en: str | None = None,
+    **kwargs: Any,
+) -> Callable:
     """Class-level decorator for registering inline handlers."""
+    extra_docs = _validate_doc_kwargs(kwargs)
+    inline_meta = {"doc": doc, "doc_ru": doc_ru, "doc_en": doc_en}
+    inline_meta.update(extra_docs)
 
     def decorator(func: Callable) -> Callable:
         if not hasattr(func, "_mcub_inline"):
             func._mcub_inline = []
-        func._mcub_inline.append(pattern)
+        func._mcub_inline.append((pattern, inline_meta))
         return func
 
     return decorator

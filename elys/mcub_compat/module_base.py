@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import asyncio
 import copy
+import functools
 import logging
 import typing
 from abc import ABC
@@ -139,7 +140,8 @@ class ModuleBase(ABC):
                 continue
             for pattern, meta in getattr(attr, "_mcub_commands", []):
                 cls._cmd_registry.append((pattern, attr, meta))
-            for pattern in getattr(attr, "_mcub_inline", []):
+            for item in getattr(attr, "_mcub_inline", []):
+                pattern = item[0] if isinstance(item, tuple) and len(item) == 2 else item
                 cls._inline_registry.append((pattern, attr))
             for info in getattr(attr, "_mcub_callbacks", []):
                 cls._callback_registry.append((attr, info["ttl"]))
@@ -304,10 +306,41 @@ class ModuleBase(ABC):
             self._register.bot_command(pattern, **cmd_kwargs)(handler)
 
         for pattern, func in cls._inline_registry:
+            inline_meta = {}
+            for entry in getattr(func, "_mcub_inline", []):
+                if isinstance(entry, tuple) and len(entry) == 2 and entry[0] == pattern:
+                    inline_meta = entry[1]
+                    break
+
+            @functools.wraps(func)
             async def inline_handler(query, _func=func):
                 return await _func(self, query)
 
             inline_handler.__original__ = func
+            doc_str = (
+                getattr(func, "__doc__", None)
+                or inline_meta.get("doc_ru")
+                or inline_meta.get("doc_en")
+                or (
+                    inline_meta.get("doc", {}).get("ru")
+                    if isinstance(inline_meta.get("doc"), dict)
+                    else None
+                )
+                or (
+                    inline_meta.get("doc", {}).get("en")
+                    if isinstance(inline_meta.get("doc"), dict)
+                    else None
+                )
+            )
+            if doc_str:
+                inline_handler.__doc__ = doc_str
+            if inline_meta.get("doc_ru"):
+                inline_handler.ru_doc = inline_meta["doc_ru"]
+            if inline_meta.get("doc_en"):
+                inline_handler.en_doc = inline_meta["doc_en"]
+            if inline_meta.get("doc") and isinstance(inline_meta["doc"], dict):
+                inline_handler.doc = inline_meta["doc"]
+
             self.kernel.register_inline_handler(pattern, inline_handler)
 
         for func, ttl in cls._callback_registry:
