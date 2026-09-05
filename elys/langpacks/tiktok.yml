@@ -494,9 +494,9 @@ settings:
     <b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>elys-tl:</b> <i>{}</i>
 
 
-    <tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>Кодеры: {}</b>
+    <tg-emoji emoji-id="5249457712349097667">🔧</tg-emoji> <b>Кодеры: {}</b>
 
-    <tg-emoji emoji-id=5393546778433846015>🎨</tg-emoji> <b>Дизайнеры: {}</b>'
+    <tg-emoji emoji-id="5249090625789271993">🖌️</tg-emoji> <b>Дизайнеры: {}</b>'
   _cls_doc: Базовые настройки
   confirm_cleardb: ⚠️ <b>Ты реально хочешь вайпнуть базу данных? Все слетит!</b>
   cleardb_confirm: 🗑 Вайпнуть базу

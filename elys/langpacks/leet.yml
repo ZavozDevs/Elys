@@ -512,9 +512,9 @@ settings:
     <b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>elys-tl:</b> <i>{}</i>
 
 
-    <tg-emoji emoji-id=5228879218363872764>⌨</tg-emoji> <b>D3v5: {}</b>
+    <tg-emoji emoji-id="5249457712349097667">🔧</tg-emoji> <b>D3v5: {}</b>
 
-    <tg-emoji emoji-id=5393546778433846015>🎨</tg-emoji> <b>D351gn3r5: {}</b>'
+    <tg-emoji emoji-id="5249090625789271993">🖌️</tg-emoji> <b>D351gn3r5: {}</b>'
   confirm_cleardb: ⚠️ <b>R u 5ur3, 7h47 u w4n7 2 cl34r DB?</b>
   cleardb_confirm: 🗑 Cl34r DB
   cancel: 🚫 C4nc3l
