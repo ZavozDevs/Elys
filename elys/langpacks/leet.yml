@@ -1,6 +1,6 @@
 elys_security:
   name: 3li5S3cur17y
-  invalid_name: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1nv4l1d s3cur17y gr0up n4m3</b>
+  invalid_name: '{e:stop} <b>1nv4l1d s3cur17y gr0up n4m3</b>'
   no_command: 🚫 <b>C0mm4nd</b> <code>{}</code> <b>n07 f0und!</b>
   permissions: 🔐 <b>H3r3 u c4n c0nf1g p3rm15510nz 4</b> <code>{}{}</code>
   close_menu: 🙈 Cl053 7h15 m3nu
@@ -17,28 +17,28 @@ elys_security:
   group_member: 👥 1n gr0up
   pm: 🤙 1n PM
   everyone: 🌍 3v3ry1 (1nl1n3)
-  owner_list: '<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>Us3rz 1n gr0up</b> <code>owner</code><b>:</b>
+  owner_list: '{e:owner} <b>Us3rz 1n gr0up</b> <code>owner</code><b>:</b>
 
 
     <blockquote expandable>{}</blockquote>'
-  no_owner: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>7h3r3 15 n0 u53rz 1n gr0up</b> <code>owner</code>
-  owner_added: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a> 4dd3d 2 gr0up</b> <code>owner</code>
-  owner_removed: <tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a> r3m0v3d fr0m gr0up</b> <code>owner</code>
-  no_user: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Sp3c1fy u53r 2 p3rm17</b>
-  not_a_user: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>Sp3c1f13d 3n717y 15 n07 4 u53r</b>
-  li: <tg-emoji emoji-id=4974307891025543730>▫️</tg-emoji> <b><a href="tg://user?id={}">{}</a></b>
+  no_owner: '{e:owner} <b>7h3r3 15 n0 u53rz 1n gr0up</b> <code>owner</code>'
+  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> 4dd3d 2 gr0up</b> <code>owner</code>'
+  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> r3m0v3d fr0m gr0up</b> <code>owner</code>'
+  no_user: '{e:stop} <b>Sp3c1fy u53r 2 p3rm17</b>'
+  not_a_user: '{e:warn} <b>Sp3c1f13d 3n717y 15 n07 4 u53r</b>'
+  li: '{e:bullet} <b><a href="tg://user?id={}">{}</a></b>'
   warning: '⚠️ <b>Plz, c0nf1rm, 7h47 u w4n7 2 4dd <a href="tg://user?id={}">{}</a> 2 gr0up</b> <code>{}</code><b>!
 
     7h15 4c710n m4y r3v34l p3r50n4l 1nf0 & gr4n7 full/p4r714l 4cc355 2 u53rb07 4 7h15 u53r</b>'
   cancel: 🚫 C4nc3l
   confirm: 👑 C0nf1rm
   enable_nonick_btn: 🔰 3n4bl3
-  self: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>U c4n'7 pr0m073/d3m073 ur53lf!</b>
+  self: "{e:warn} <b>U c4n'7 pr0m073/d3m073 ur53lf!</b>"
   suggest_nonick: 🔰 <i>D0 u w4n7 2 3n4bl3 N0N1ck 4 7h15 u53r?</i>
   user_nn: 🔰 <b>N0N1ck 4 <a href="tg://user?id={}">{}</a> 3n4bl3d</b>
-  what: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U n33d 2 sp3c1fy 7h3 7yp3 0f 74rg37 45 157 4rg (</b><code>user</code> <b>0r</b> <code>chat</code><b>)</b>
-  no_target: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U d1dn'7 sp3c1fy 7h3 74rg37 0f s3c rul3</b>
-  no_rule: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U d1dn'7 sp3c1fy 7h3 rul3 (m0dul3 0r cmd)</b>
+  what: '{e:stop} <b>U n33d 2 sp3c1fy 7h3 7yp3 0f 74rg37 45 157 4rg (</b><code>user</code> <b>0r</b> <code>chat</code><b>)</b>'
+  no_target: "{e:stop} <b>U d1dn'7 sp3c1fy 7h3 74rg37 0f s3c rul3</b>"
+  no_rule: "{e:stop} <b>U d1dn'7 sp3c1fy 7h3 rul3 (m0dul3 0r cmd)</b>"
   confirm_rule: 🔐 <b>Plz, c0nf1rm 7h47 u w4n7 2 g1v3 {} <a href='{}'>{}</a> 4 p3rm 2 u53 {}</b> <code>{}</code> <b>{}?</b>
   rule_added: 🔐 <b>U g4v3 {} <a href='{}'>{}</a> 4 p3rm 2 u53 {}</b> <code>{}</code> <b>{}</b>
   confirm_btn: 👑 C0nf1rm
@@ -47,14 +47,14 @@ elys_security:
 
 
     {}'
-  rules: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>74rg373d s3c rul3z:</b>
+  rules: '{e:unlock} <b>74rg373d s3c rul3z:</b>
 
 
     <blockquote expandable>{}</blockquote>'
-  no_rules: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>N0 74rg373d s3c rul3z</b>
-  owner_target: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>7h15 u53r 15 0wn3r & c4n'7 b3 pr0m073d by 74rg373d s3c</b>
-  rules_removed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>74rg373d s3c rul3z 4 <a href="{}">{}</a> r3m0v3d</b>
-  rule_removed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>74rg373d s3c rul3 4 <a href="{}">{}</a> (</b><code>{}</code><b>) r3m0v3d</b>
+  no_rules: '{e:stop} <b>N0 74rg373d s3c rul3z</b>'
+  owner_target: "{e:warn} <b>7h15 u53r 15 0wn3r & c4n'7 b3 pr0m073d by 74rg373d s3c</b>"
+  rules_removed: '{e:unlock} <b>74rg373d s3c rul3z 4 <a href="{}">{}</a> r3m0v3d</b>'
+  rule_removed: '{e:unlock} <b>74rg373d s3c rul3 4 <a href="{}">{}</a> (</b><code>{}</code><b>) r3m0v3d</b>'
   chat_inline: ⚠️ <b>U c4n'7 cr3473 4n 1nl1n3 cmd rul3 4 ch475!</b>
   for: '4'
   forever: 43v3r
@@ -83,41 +83,41 @@ elys_security:
   _cmd_doc_tsecclr: <"user"/"chat"/"sgroup"> - Clr 74rg373d s3c rul3z
   _cmd_doc_tsecrm: <"user"/"chat"/"sgroup"> <rule> - R3m0v3 74rg373d s3c rul3
   _cls_doc: C7rl s3cur17y s3771ng5
-  querysec_info: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> H3r3 u c4n t0ggl3 th3 p3rm15510n 2 3x3cu73 1nl1n3 qu3r135 f0r 3x73rn4l u53rz
+  querysec_info: '{e:lock} H3r3 u c4n t0ggl3 th3 p3rm15510n 2 3x3cu73 1nl1n3 qu3r135 f0r 3x73rn4l u53rz'
   until: un71l
   sgroup: s3c gr0up
-  sgroup_info: '<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>S3cur17y gr0up</b> <code>{}</code> <b>1nf0:</b>
+  sgroup_info: '{e:lock} <b>S3cur17y gr0up</b> <code>{}</code> <b>1nf0:</b>
 
 
     {}
 
     {}'
-  created_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>S3cur17y gr0up</b> <code>{}</code> <b>cr3473d</b>
-  sgroup_already_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>S3cur17y gr0up</b> <code>{}</code> <b>4lr34dy 3x1575</b>
-  no_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>N0 4rg5 sp3c1f13d</b>
-  sgroup_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>S3cur17y gr0up</b> <code>{}</code> <b>n07 f0und</b>
-  no_users: <tg-emoji emoji-id=5870772616305839506>👥</tg-emoji> <b>N0 u53rz</b>
-  users_list: '<tg-emoji emoji-id=5870772616305839506>👥</tg-emoji> <b>Us3rz:</b>
+  created_sgroup: '{e:lock} <b>S3cur17y gr0up</b> <code>{}</code> <b>cr3473d</b>'
+  sgroup_already_exists: '{e:stop} <b>S3cur17y gr0up</b> <code>{}</code> <b>4lr34dy 3x1575</b>'
+  no_args: '{e:stop} <b>N0 4rg5 sp3c1f13d</b>'
+  sgroup_not_found: '{e:stop} <b>S3cur17y gr0up</b> <code>{}</code> <b>n07 f0und</b>'
+  no_users: '{e:users} <b>N0 u53rz</b>'
+  users_list: '{e:users} <b>Us3rz:</b>
 
     {}
 
     '
-  no_permissions: <tg-emoji emoji-id=5870450390679425417>🗒</tg-emoji> <b>N0 p3rm5</b>
-  permissions_list: '<tg-emoji emoji-id=5870450390679425417>🗒</tg-emoji> <b>P3rm15510nz:</b>
+  no_permissions: '{e:perms} <b>N0 p3rm5</b>'
+  permissions_list: '{e:perms} <b>P3rm15510nz:</b>
 
     {}
 
     '
-  sgroup_li: <tg-emoji emoji-id=4974264756668990388>▫️</tg-emoji> <code>{}</code> · <b>{} u53r(5)</b> · <b>{} rul3(5)</b>
-  sgroups_list: '<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>S3cur17y gr0up5:</b>
+  sgroup_li: '{e:bullet} <code>{}</code> · <b>{} u53r(5)</b> · <b>{} rul3(5)</b>'
+  sgroups_list: '{e:lock} <b>S3cur17y gr0up5:</b>
 
 
     {}'
-  deleted_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>S3cur17y gr0up</b> <code>{}</code> <b>d3l373d</b>
-  user_already_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Us3r</b> <code>{}</code> <b>4lr34dy 1n s3c gr0up</b> <code>{}</code>
-  user_added_to_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Us3r</b> <code>{}</code> <b>4dd3d 2 s3c gr0up</b> <code>{}</code>
-  user_not_in_sgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Us3r</b> <code>{}</code> <b>15 n07 1n s3c gr0up</b> <code>{}</code>
-  user_removed_from_sgroup: <tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Us3r</b> <code>{}</code> <b>r3m0v3d fr0m s3c gr0up</b> <code>{}</code>
+  deleted_sgroup: '{e:lock} <b>S3cur17y gr0up</b> <code>{}</code> <b>d3l373d</b>'
+  user_already_in_sgroup: '{e:stop} <b>Us3r</b> <code>{}</code> <b>4lr34dy 1n s3c gr0up</b> <code>{}</code>'
+  user_added_to_sgroup: '{e:lock} <b>Us3r</b> <code>{}</code> <b>4dd3d 2 s3c gr0up</b> <code>{}</code>'
+  user_not_in_sgroup: '{e:stop} <b>Us3r</b> <code>{}</code> <b>15 n07 1n s3c gr0up</b> <code>{}</code>'
+  user_removed_from_sgroup: '{e:lock} <b>Us3r</b> <code>{}</code> <b>r3m0v3d fr0m s3c gr0up</b> <code>{}</code>'
   _cmd_doc_delsgroup: <name> - D3l s3c gr0up
   _cmd_doc_sgroup: <name> - Sh0w s3c gr0up 1nf0
   _cmd_doc_sgroups: L157 s3c gr0up5
@@ -126,39 +126,39 @@ elys_security:
   _cmd_doc_sgroupdel: <name> [user/reply] - R3m0v3 u53r fr0m s3c gr0up
 elys_settings:
   name: 3li5S3771ng5
-  watchers: '<tg-emoji emoji-id=5424885441100782420>👀</tg-emoji> <b>W47ch3rz:</b>
+  watchers: '{e:watch} <b>W47ch3rz:</b>
 
 
     <blockquote expandable><b>{}</b></blockquote>'
-  no_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>N0 4rg5 sp3c1f13d</b>
-  invoke404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1n73rn4l d3bug m37h0d</b> <code>{}</code> <b>n07 f0und, 3rg0 c4n'7 b3 1nv0k3d</b>
-  module404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>M0dul3</b> <code>{}</code> <b>n07 f0und</b>
-  invoke: '<tg-emoji emoji-id=5215519585150706301>👍</tg-emoji> <b>1nv0k3d 1n73rn4l d3bug m37h0d</b> <code>{}</code>
+  no_args: '{e:stop} <b>N0 4rg5 sp3c1f13d</b>'
+  invoke404: "{e:stop} <b>1n73rn4l d3bug m37h0d</b> <code>{}</code> <b>n07 f0und, 3rg0 c4n'7 b3 1nv0k3d</b>"
+  module404: '{e:stop} <b>M0dul3</b> <code>{}</code> <b>n07 f0und</b>'
+  invoke: '{e:thumbup} <b>1nv0k3d 1n73rn4l d3bug m37h0d</b> <code>{}</code>
 
 
-    <tg-emoji emoji-id=5784891605601225888>🔵</tg-emoji> <b>R35ul7:
+    {e:blue_circle} <b>R35ul7:
 
     {}</b>'
-  invoking: <tg-emoji emoji-id=5213452215527677338>⏳</tg-emoji> <b>1nv0k1ng 1n73rn4l d3bug m37h0d</b> <code>{}</code> <b>0f</b> <code>{}</code><b>...</b>
-  mod404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>W47ch3r {} n07 f0und</b>
-  disabled: <tg-emoji emoji-id=5424885441100782420>👀</tg-emoji> <b>W47ch3r {} 15 n0w <u>d154bl3d</u></b>
-  enabled: <tg-emoji emoji-id=5424885441100782420>👀</tg-emoji> <b>W47ch3r {} 15 n0w <u>3n4bl3d</u></b>
-  args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U n33d 2 sp3c1fy w47ch3r n4m3</b>
-  user_nn: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>N0N1ck 4 7h15 u53r 15 n0w {}</b>
-  no_cmd: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Plz, sp3c1fy cmd 2 70ggl3 N0N1ck 4</b>
-  cmd_nn: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>N0N1ck 4</b> <code>{}</code> <b>15 n0w {}</b>
-  cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Cmd n07 f0und</b>
+  invoking: '{e:wait} <b>1nv0k1ng 1n73rn4l d3bug m37h0d</b> <code>{}</code> <b>0f</b> <code>{}</code><b>...</b>'
+  mod404: '{e:stop} <b>W47ch3r {} n07 f0und</b>'
+  disabled: '{e:watch} <b>W47ch3r {} 15 n0w <u>d154bl3d</u></b>'
+  enabled: '{e:watch} <b>W47ch3r {} 15 n0w <u>3n4bl3d</u></b>'
+  args: '{e:stop} <b>U n33d 2 sp3c1fy w47ch3r n4m3</b>'
+  user_nn: '{e:magic} <b>N0N1ck 4 7h15 u53r 15 n0w {}</b>'
+  no_cmd: '{e:magic} <b>Plz, sp3c1fy cmd 2 70ggl3 N0N1ck 4</b>'
+  cmd_nn: '{e:magic} <b>N0N1ck 4</b> <code>{}</code> <b>15 n0w {}</b>'
+  cmd404: '{e:magic} <b>Cmd n07 f0und</b>'
   inline_settings: ⚙️ <b>H3r3 u c4n c0nf1g ur 3li5 s3771ng5</b>
   confirm_update: 🧭 <b>Plz, c0nf1rm 7h47 u w4n7 2 upd473. Ur u53rb07 w1ll b3 r3574r73d</b>
-  confirm_restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Plz, c0nf1rm 7h47 u w4n7 2 r3574r7</b>
+  confirm_restart: '{e:think} <b>Plz, c0nf1rm 7h47 u w4n7 2 r3574r7</b>'
   btn_restart: 🔄 R3574r7
   btn_update: 🧭 Upd473
   close_menu: 😌 Cl053 m3nu
   suggest_subscribe: ✅ Sugg357 5ub5cr1b3 2 ch4nn3l
   do_not_suggest_subscribe: 🚫 Sugg357 5ub5cr1b3 2 ch4nn3l
-  private_not_allowed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>7h15 cmd mu57 b3 3x3cu73d 1n ch47</b>
+  private_not_allowed: '{e:stop} <b>7h15 cmd mu57 b3 3x3cu73d 1n ch47</b>'
   nonick_warning: W4rn1ng! U 3n4bl3d N0N1ck w/ d3f4ul7 pr3f1x! U m4y g37 mu73d 1n 3li5 ch475. Ch4ng3 pr3f1x 0r d154bl3 N0N1ck!
-  reply_required: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3ply 2 4 m5g 0f u53r, wh1ch n33d5 2 b3 4dd3d 2 N0N1ck</b>
+  reply_required: '{e:stop} <b>R3ply 2 4 m5g 0f u53r, wh1ch n33d5 2 b3 4dd3d 2 N0N1ck</b>'
   deauth_confirm: '⚠️ <b>7h15 4c710n w1ll fully r3m0v3 3li5 fr0m 7h15 4cc & c4n''7 b3 r3v3r73d!</b>
 
 
@@ -176,19 +176,19 @@ elys_settings:
   deauth_confirm_btn: 😢 D3l373
   uninstall: 😢 <b>Un1n574ll1ng 3li5...</b>
   uninstalled: 😢 <b>3li5 un1n574ll3d.</b>
-  cmd_nn_list: '<tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>N0N1ck 15 3n4bl3d 4 7h353 cmd5:</b>
+  cmd_nn_list: '{e:magic} <b>N0N1ck 15 3n4bl3d 4 7h353 cmd5:</b>
 
 
     <blockquote expandable>{}</blockquote>'
-  user_nn_list: '<tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>N0N1ck 15 3n4bl3d 4 7h353 u53rz:</b>
+  user_nn_list: '{e:magic} <b>N0N1ck 15 3n4bl3d 4 7h353 u53rz:</b>
 
 
     <blockquote expandable>{}</blockquote>'
-  chat_nn_list: '<tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>N0N1ck 15 3n4bl3d 4 7h353 ch475:</b>
+  chat_nn_list: '{e:magic} <b>N0N1ck 15 3n4bl3d 4 7h353 ch475:</b>
 
 
     <blockquote expandable>{}</blockquote>'
-  nothing: <tg-emoji emoji-id=5427052514094619126>🤷‍♀️</tg-emoji> <b>N07h1ng 2 sh0w...</b>
+  nothing: '{e:shrug} <b>N07h1ng 2 sh0w...</b>'
   btn_yes: 🚸 0p3n 4nyw4y
   btn_no: 🔻 C4nc3l
   _cmd_doc_invoke: <module or `core`> <method> - 0nly 4 d3bugg1ng purp0535. D0 N07 U53 1F U R N07 4 D3V
@@ -214,8 +214,8 @@ elys_settings:
     [-i - 0nly 1nc0m1ng]'
   _cmd_doc_watchers: L157 curr3n7 w47ch3rz
   _cls_doc: 4dv4nc3d s3771ng5 4 3li5 Us3rb07
-  core_protection_already_removed: <tg-emoji emoji-id=6003424016977628379>🔒</tg-emoji> <b>C0r3 pr073c710n 15 4lr34dy r3m0v3d</b>
-  core_protection_already_enabled: <tg-emoji emoji-id=6003424016977628379>🔒</tg-emoji> <b>C0r3 pr073c710n 15 4lr34dy s37 up</b>
+  core_protection_already_removed: '{e:lock} <b>C0r3 pr073c710n 15 4lr34dy r3m0v3d</b>'
+  core_protection_already_enabled: '{e:lock} <b>C0r3 pr073c710n 15 4lr34dy s37 up</b>'
   core_protection_confirm: '⚠️ <b>R34D C4R3FULLY!</b>
 
 
@@ -238,11 +238,11 @@ terminal:
   name: T3rm1n4l
   fw_protect: H0w l0ng 2 w417 1n s3c5 b37w33n 3d175 1n cmd5
   command_protect: 8l0ck cl34rly d357ruc71v3 73rm1n4l cmd5 b3f0r3 3x3cu710n
-  what_to_kill: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3ply 2 4 73rm1n4l cmd 2 73rm1n473 17</b>
-  kill_fail: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>C0uld n07 k1ll pr0c355</b>
-  killed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>K1ll3d</b>
-  no_cmd: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>N0 cmd 15 runn1ng 1n 7h47 m5g</b>
-  running: <tg-emoji emoji-id=5472111548572900003>⌨️</tg-emoji><b> Sy573m c4ll</b> <code>{}</code>
+  what_to_kill: '{e:stop} <b>R3ply 2 4 73rm1n4l cmd 2 73rm1n473 17</b>'
+  kill_fail: '{e:stop} <b>C0uld n07 k1ll pr0c355</b>'
+  killed: '{e:stop} <b>K1ll3d</b>'
+  no_cmd: '{e:stop} <b>N0 cmd 15 runn1ng 1n 7h47 m5g</b>'
+  running: '{e:keyboard}<b> Sy573m c4ll</b> <code>{}</code>'
   finished: '
 
     <b>Ex17 c0d3</b> <code>{}</code>'
@@ -254,23 +254,23 @@ terminal:
   stderr: '</code></pre>
 
 
-    <b><tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> S7d3rr:</b>
+    <b>{e:stop} S7d3rr:</b>
 
     <pre><code class="language-stderr">'
   end: </code></pre>
   time_exec: '
 
-    <tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Ex3cu710n 71m3: {}s</b>'
-  auth_fail: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>4u7h f41l3d, plz 7ry 4g41n</b>
-  auth_needed: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji><a href="tg://user?id={}"> 1n73r4c71v3 4u7h r3qu1r3d</a>
-  auth_msg: <tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Plz 3d17 7h15 m5g 2 7h3 p455w0rd 4</b> <code>{}</code> <b>2 run</b> <code>{}</code>
-  dangerous_command: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h3 3x3cu710n 0f 7h15 cmd (<code>{}</code>) w45 c4nc3ll3d 4 ur s4f37y.</b>
+    {e:dizzy} <b>Ex3cu710n 71m3: {}s</b>'
+  auth_fail: '{e:stop} <b>4u7h f41l3d, plz 7ry 4g41n</b>'
+  auth_needed: '{e:unlock}<a href="tg://user?id={}"> 1n73r4c71v3 4u7h r3qu1r3d</a>'
+  auth_msg: '{e:unlock} <b>Plz 3d17 7h15 m5g 2 7h3 p455w0rd 4</b> <code>{}</code> <b>2 run</b> <code>{}</code>'
+  dangerous_command: '{e:cross} <b>7h3 3x3cu710n 0f 7h15 cmd (<code>{}</code>) w45 c4nc3ll3d 4 ur s4f37y.</b>
 
 
-    <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i>7h15 15 n07 4n 3rr, bu7 4 s4f37y m345ur3. D0 n07 r3p0r7 17 1n supp0r7 ch47.</i>'
-  auth_locked: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>4u7h f41l3d, plz 7ry 4g41n l473r</b>
-  auth_ongoing: <tg-emoji emoji-id=5213452215527677338>⏳</tg-emoji> <b>4u7h3n71c471ng...</b>
-  done: <tg-emoji emoji-id=5314250708508220914>✅</tg-emoji> <b>D0n3</b>
+    {e:tip}<i>7h15 15 n07 4n 3rr, bu7 4 s4f37y m345ur3. D0 n07 r3p0r7 17 1n supp0r7 ch47.</i>'
+  auth_locked: '{e:stop} <b>4u7h f41l3d, plz 7ry 4g41n l473r</b>'
+  auth_ongoing: '{e:wait} <b>4u7h3n71c471ng...</b>'
+  done: '{e:check} <b>D0n3</b>'
   _cmd_doc_apt: Sh0r7h4nd 4 '.terminal apt'
   _cmd_doc_terminal: <command> - Ex3cu73 b45h cmd
   _cmd_doc_terminate: '[-f 2 f0rc3 k1ll] - U53 1n r3ply 2 s3nd SIGTERM 2 4 pr0c355'
@@ -281,11 +281,11 @@ terminal:
   btn_continue: c0n71nu3 1npu7
   inline_hint: 73rm1n4l
   inline_hint_desc: 574r7 7yp1ng 4 c0mm4nd
-  exec_error: '<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>3x3cu710n 3rr0r:</b>
+  exec_error: '{e:stop} <b>3x3cu710n 3rr0r:</b>
 
     <code>{}</code>'
 elys_web:
-  host_denied: <tg-emoji emoji-id=6037254263187443802>💬</tg-emoji> S35510n 4dd1710n cmd5 r n07 4v41l4bl3 0n ur h0571ng, plz c0n74c7 ur h0571ng 4dm1n157r4710n.
+  host_denied: '{e:chat} S35510n 4dd1710n cmd5 r n07 4v41l4bl3 0n ur h0571ng, plz c0n74c7 ur h0571ng 4dm1n157r4710n.'
   btn_yes: 🚸 C0nf1rm 4nyw4y
   btn_no: 🔻 Cl053
   invalid_target: R3ply 2 7h3 m5g 0f 7h3 p3r50n u w4n7 2 4dd, 0r sp3c1fy 7h31r c0rr3c7 @username/id.
@@ -334,28 +334,28 @@ elys_backup:
   never: ✅ I w1ll n07 m4k3 4u70 b4ckup5. C4n b3 c4nc3ll3d u51ng <code>{prefix}set_backup_period</code>
   never_bot: ✅ I w1ll n07 m4k3 4u70 b4ckup5. C4n b3 c4nc3ll3d u51ng {prefix}set_backup_period
   invalid_args: 🚫 <b>Plz sp3c1fy 7h3 c0rr3c7 fr3qu3ncy 1n hr5, 0r `0` 2 d154bl3</b>
-  backup_caption: <tg-emoji emoji-id=5469718869536940860>👆</tg-emoji> <b>7h15 15 ur DB b4ckup. D0 n07 sh4r3 17 w17h 4ny1, 17 c0n741n5 p3r50n4l 1nf0. 1f u n33d 2 r3570r3 17, u53</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>1n r35p0n53 2 7h15 f1l3.</b>
+  backup_caption: '{e:hand_up} <b>7h15 15 ur DB b4ckup. D0 n07 sh4r3 17 w17h 4ny1, 17 c0n741n5 p3r50n4l 1nf0. 1f u n33d 2 r3570r3 17, u53</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>1n r35p0n53 2 7h15 f1l3.</b>'
   backupall_info: 👆 <b>7h15 15 ur b4ckup 0f DB & m0d5. D0 n07 g1v3 17 2 4ny1, 17 c0n741n5 p3r50n4l 1nf0. 1f u n33d 2 r3570r3 17, u53</b> <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>1n r35p0n53 2 7h15 f1l3.</b>
-  restoring_backup: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>R3570r1ng b4ckup, 1n574ll1ng d3p5 & m0d5...</b>
-  all_restored: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>Ur full b4ckup h45 b33n r3570r3d, r3574r71ng...</b>
+  restoring_backup: '{e:sync} <b>R3570r1ng b4ckup, 1n574ll1ng d3p5 & m0d5...</b>'
+  all_restored: '{e:sync} <b>Ur full b4ckup h45 b33n r3570r3d, r3574r71ng...</b>'
   all_restored_bot: 🔄 Ur full b4ckup h45 b33n r3570r3d, r3574r71ng...
-  reply_to_file: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3ply w17h .json 0r .zip f1l3</b>
-  db_restored: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>DB upd473d, r3574r71ng...</b>
-  modules_backup: '<tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>M0dul35 b4ckup ({})</b>
+  reply_to_file: '{e:stop} <b>R3ply w17h .json 0r .zip f1l3</b>'
+  db_restored: '{e:sync} <b>DB upd473d, r3574r71ng...</b>'
+  modules_backup: '{e:rocket} <b>M0dul35 b4ckup ({})</b>
 
 
     <b>U c4n r3570r3 17 u51ng:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
-  mods_restored: <tg-emoji emoji-id=5774134533590880843>🔄</tg-emoji> <b>M0d5 r3570r3d, r3574r71ng</b>
-  backup_sent: <tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>B4ckup h45 b33n s3n7 7o 7h3 <a href={}>d474b453 ch47</a></b>
-  backupall_sent: <tg-emoji emoji-id=5431736674147114227>🗂</tg-emoji> <b>B4ckup 0f th3 d4t4b453 & m0dul35 53n7 2 <a href={}>d4t4b453 ch47</a></b>
+  mods_restored: '{e:sync} <b>M0d5 r3570r3d, r3574r71ng</b>'
+  backup_sent: '{e:rocket} <b>B4ckup h45 b33n s3n7 7o 7h3 <a href={}>d474b453 ch47</a></b>'
+  backupall_sent: '{e:rocket} <b>B4ckup 0f th3 d4t4b453 & m0dul35 53n7 2 <a href={}>d4t4b453 ch47</a></b>'
   db_warning: '❗️ Hikka b4ckup d373c73d. 1f u c0n71nu3, 7h3 u53rb07 w1ll <b>7ry</b> 2 c0nv3r7 17 2 4 f0rm47 su174bl3 4 3li5.
 
     7h3r3 m4y b3 50m3 3rr0r5 1n 7h3 c0nv3r510n. C0n71nu3?'
   advice_converting: U c4n m4nu4lly r3pl4c3 <a>'hikka.'</a> w17h <a>'elys.'</a> 1n 7h3 b4ckup c0n73n7. 7h15 15 n3c3554ry 4 l04d1ng 17.
   converting_db: 🔄 C0nv3r71ng...
-  probably_zip: <tg-emoji emoji-id=5210952531676504517>❗️</tg-emoji> <b>7h3 b4ckup fr0m 7h3 f1l3 c0uld n07 b3 r3570r3d. U r pr0b4bly 7ry1ng 2 r3570r3 4 full b4ckup (.zip 0r .backup). 1n 7h47 c453, u53</b> <code>{}restoreall</code> <b>1n r3ply 2 7h3 f1l3.</b>
+  probably_zip: '{e:stop} <b>7h3 b4ckup fr0m 7h3 f1l3 c0uld n07 b3 r3570r3d. U r pr0b4bly 7ry1ng 2 r3570r3 4 full b4ckup (.zip 0r .backup). 1n 7h47 c453, u53</b> <code>{}restoreall</code> <b>1n r3ply 2 7h3 f1l3.</b>'
   _cls_doc: Pr0c35535 DB & m0dul3 b4ckup5
   _cmd_doc_backupdb: Cr3473 4 DB b4ckup [w1ll b3 s3n7 2 PM]
   _cmd_doc_backupmods: Cr3473 4 b4ckup 0f m0d5 [w1ll b3 s3n7 2 PM]
@@ -387,27 +387,27 @@ presets:
     {}'
   back: 🔙 B4ck
   install: 📦 1n574ll
-  installing: <tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>1n574ll1ng pr3537</b> <code>{}</code><b>...</b>
-  installing_module: '<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>1n574ll1ng pr3537</b> <code>{}</code> <b>({}/{} m0d5)...</b>
+  installing: '{e:wait} <b>1n574ll1ng pr3537</b> <code>{}</code><b>...</b>'
+  installing_module: '{e:wait} <b>1n574ll1ng pr3537</b> <code>{}</code> <b>({}/{} m0d5)...</b>
 
 
-    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <i>1n574ll1ng m0dul3 {}...</i>'
-  installed: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Pr3537</b> <code>{}</code> <b>1n574ll3d!</b>
+    {e:star} <i>1n574ll1ng m0dul3 {}...</i>'
+  installed: '{e:party} <b>Pr3537</b> <code>{}</code> <b>1n574ll3d!</b>'
   already_installed: ✅ [1n574ll3d]
-  add_to_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>5p3c1fy 4 f0ld3r t0 4dd 4 m0dul3. </b> <code>{prefix}addtofolder <f0ld3r> <m0dul3></code>
-  already_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>M0dul3 1z 41r34dy 1n th3 f0ld3r</b> <code>{}</code>
-  added_to_folder: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>M0dul3 {} 4dd3d t0 f0ld3r</b> <code>{}</code>
-  module_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>M0dul3 {} n0t f0und</b>
-  folder_load_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>5p3c1fy 4 f0ld3r t0 l04d m0dul3z. </b> <code>{prefix}fl <f0ld3r></code>
-  folder_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>F0ld3r {} n0t f0und</b>
-  no_modules_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>N0 m0dul3z 1n f0ld3r {}</b>
-  folder: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>F0ld3r</b> {}
+  add_to_folder_usage: '{e:stop} <b>5p3c1fy 4 f0ld3r t0 4dd 4 m0dul3. </b> <code>{prefix}addtofolder <f0ld3r> <m0dul3></code>'
+  already_in_folder: '{e:stop} <b>M0dul3 1z 41r34dy 1n th3 f0ld3r</b> <code>{}</code>'
+  added_to_folder: '{e:party} <b>M0dul3 {} 4dd3d t0 f0ld3r</b> <code>{}</code>'
+  module_not_found: '{e:stop} <b>M0dul3 {} n0t f0und</b>'
+  folder_load_usage: '{e:stop} <b>5p3c1fy 4 f0ld3r t0 l04d m0dul3z. </b> <code>{prefix}fl <f0ld3r></code>'
+  folder_not_found: '{e:stop} <b>F0ld3r {} n0t f0und</b>'
+  no_modules_in_folder: '{e:stop} <b>N0 m0dul3z 1n f0ld3r {}</b>'
+  folder: '{e:folder} <b>F0ld3r</b> {}
 
 
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lp 1n r3ply t0 7h1z m3zz4g3 t0 1nzt4ll</b>'
-  remove_from_folder_usage: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>5p3c1fy f0ld3r 4nd m0dul3 t0 r3m0v3. </b> <code>{prefix}removefromfolder <f0ld3r> <m0dul3></code>
-  removed_from_folder: <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>Modul3 {} r3m0v3d fr0m f0ld3r</b> <code>{}</code>
-  module_not_in_folder: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Modul3 {} 15 n07 1n f0ld3r {}</b>
+    {e:glowing_star} <b>{prefix}lp 1n r3ply t0 7h1z m3zz4g3 t0 1nzt4ll</b>'
+  remove_from_folder_usage: '{e:stop} <b>5p3c1fy f0ld3r 4nd m0dul3 t0 r3m0v3. </b> <code>{prefix}removefromfolder <f0ld3r> <m0dul3></code>'
+  removed_from_folder: '{e:party} <b>Modul3 {} r3m0v3d fr0m f0ld3r</b> <code>{}</code>'
+  module_not_in_folder: '{e:stop} <b>Modul3 {} 15 n07 1n f0ld3r {}</b>'
   _cmd_doc_presets: '| P4ck5 0f m0d5 2 l04d'
   _cmd_doc_loadpreset: Cu570m pr3537 l04d3r. R3ply 2 f1l3 0r 53nd f1l3 w17h cmd.
   _cmd_doc_addtofolder: <f0ld3r> <m0dul3> - 4dd m0dul3 2 cu570m f0ld3r
@@ -422,14 +422,13 @@ settings:
   wsl: 💻 WSL
   userland: 🐧 Us3rL4nd
   jamhost: 🧃 J4mH057
-  choose_installation: <tg-emoji emoji-id=5363805650327450240>🌟</tg-emoji> <b>Ch0053 ur 3li5 1n574ll4710n 0p710n:</b>
-  vds_install: '<tg-emoji emoji-id=5471952986970267163>💎</tg-emoji> 7h3 1n574ll pr0c355 0n 4 VDS 15 d0n3 w17h 4 51ngl3 cmd:
+  choose_installation: '{e:glowing_star} <b>Ch0053 ur 3li5 1n574ll4710n 0p710n:</b>'
+  vds_install: '{e:diamond} 7h3 1n574ll pr0c355 0n 4 VDS 15 d0n3 w17h 4 51ngl3 cmd:
 
     <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
 
     <i>N073: 1f u d0 n07 h4v3 sudo pr1v5, 0m17 7h3 c0rr35p0nd1ng p4r7 0f 7h3 cmd.</i>'
-  wsl_install: "<b>D0wnl04d WSL.</b> 2 d0 7h15, 0p3n P0w3rSh3ll 45 4dm1n & 7yp3 <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>2 1n574ll WSL, u n33d W1nd0w5 10 bu1ld 2004 0r W1nd0w5 11 0f 4ny v3r & 4 PC w17h v1r7u4l1z4710n supp0r7. 4 1n574ll4710n 0n 34rl13r v3r5 0f 7h3 OS, r3f3r 2</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">7h15 p4g3</a>\n\n⬜️ <b>R3574r7 ur PC & l4unch 7h3 Ubuntu 22.04.x 4pp</b> \n\n⬜️ <b>P4573 7h3 cmd 1n70 17 (RMB):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>1f y3ll0w w4rn1ng5 4pp34r, 7yp3</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>r3pl4c1ng /home/username/.local/bin w17h 7h3 p47h m3n710n3d 1n 7h3 m5g</i>\n\n⬜️ <b>P4573 7h3 cmd (RMB):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>Wh3r3 2 g37 API_ID & API_HASH?</b>:\
-    \ <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">V1d30</a>"
+  wsl_install: "<b>D0wnl04d WSL.</b> 2 d0 7h15, 0p3n P0w3rSh3ll 45 4dm1n & 7yp3 <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>2 1n574ll WSL, u n33d W1nd0w5 10 bu1ld 2004 0r W1nd0w5 11 0f 4ny v3r & 4 PC w17h v1r7u4l1z4710n supp0r7. 4 1n574ll4710n 0n 34rl13r v3r5 0f 7h3 OS, r3f3r 2</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">7h15 p4g3</a>\n\n⬜️ <b>R3574r7 ur PC & l4unch 7h3 Ubuntu 22.04.x 4pp</b> \n\n⬜️ <b>P4573 7h3 cmd 1n70 17 (RMB):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>1f y3ll0w w4rn1ng5 4pp34r, 7yp3</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>r3pl4c1ng /home/username/.local/bin w17h 7h3 p47h m3n710n3d 1n 7h3 m5g</i>\n\n⬜️ <b>P4573 7h3 cmd (RMB):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>Wh3r3 2 g37 API_ID & API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">V1d30</a>"
   userland_install: '<b>1n574ll Us3rL4nd fr0m 7h15</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">l1nk</a>
 
 
@@ -448,23 +447,23 @@ settings:
 
 
     V01là! U h4v3 1n574ll3d 3li5 0n Us3rL4nd.</b>'
-  too_many_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>2 m4ny 4rg5</b>
-  blacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Ch47 {} bl4ckl1573d fr0m u53rb07</b>
-  unblacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Ch47 {} unbl4ckl1573d fr0m u53rb07</b>
-  user_blacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Us3r {} bl4ckl1573d fr0m u53rb07</b>
-  user_unblacklisted: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>Us3r {} unbl4ckl1573d fr0m u53rb07</b>
-  what_prefix: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Wh47 sh0uld 7h3 pr3f1x b3 s37 2?</b>
-  prefix_incorrect: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Pr3f1x mu57 b3 1 symb0l 1n l3ng7h</b>
+  too_many_args: '{e:stop} <b>2 m4ny 4rg5</b>'
+  blacklisted: '{e:thumbup} <b>Ch47 {} bl4ckl1573d fr0m u53rb07</b>'
+  unblacklisted: '{e:thumbup} <b>Ch47 {} unbl4ckl1573d fr0m u53rb07</b>'
+  user_blacklisted: '{e:thumbup} <b>Us3r {} bl4ckl1573d fr0m u53rb07</b>'
+  user_unblacklisted: '{e:thumbup} <b>Us3r {} unbl4ckl1573d fr0m u53rb07</b>'
+  what_prefix: '{e:question} <b>Wh47 sh0uld 7h3 pr3f1x b3 s37 2?</b>'
+  prefix_incorrect: '{e:stop} <b>Pr3f1x mu57 b3 1 symb0l 1n l3ng7h</b>'
   prefix_set: '{} <b>Cmd pr3f1x upd473d. U53 7h3 f0ll0w1ng cmd 2 ch4ng3 17 b4ck:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix}</code></pre>'
   entity_prefix_set: '{} <b>Cmd pr3f1x upd473d 4 {entity_name}. U53 7h3 f0ll0w1ng cmd 2 ch4ng3 17 b4ck:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix} {entity_id}</code></pre>'
-  id_not_found_scgroup: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> 7h15 3n717y d035 n07 3x157 1n 4ny s3c gr0up. 7h3r3f0r3, 4dd1ng 4 pr3f1x 4 17 15 p01n7l355
-  invalid_id_or_username: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> 1nv4l1d id/username w45 g1v3n
-  alias_created: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>4l145 cr3473d. 4cc355 17 w17h</b> <code>{}</code>
-  aliases_created: '<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>4dd3d {count} 4l14535:</b>
+  id_not_found_scgroup: '{e:stop} 7h15 3n717y d035 n07 3x157 1n 4ny s3c gr0up. 7h3r3f0r3, 4dd1ng 4 pr3f1x 4 17 15 p01n7l355'
+  invalid_id_or_username: '{e:stop} 1nv4l1d id/username w45 g1v3n'
+  alias_created: '{e:thumbup} <b>4l145 cr3473d. 4cc355 17 w17h</b> <code>{}</code>'
+  aliases_created: '{e:thumbup} <b>4dd3d {count} 4l14535:</b>
 
     <blockquote expandable>{aliases}</blockquote>'
   aliases_created_line: '{aliases} f0r {command}'
@@ -472,49 +471,49 @@ settings:
 
 
     <blockquote expandable>{}</blockquote>'
-  aliases_file: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>Y0ur 4l145</b>
+  aliases_file: '{e:folder} <b>Y0ur 4l145</b>
 
 
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}la 1n r3ply t0 th1s m3ss4g3 t0 1mp0rt</b>'
+    {e:glowing_star} <b>{prefix}la 1n r3ply t0 th1s m3ss4g3 t0 1mp0rt</b>'
   aliases: '<b>🔗 4l14535:</b>
 
     '
   happy_beta: '
 
 
-    <tg-emoji emoji-id=5465188915990255885>🌟</tg-emoji> <b>Y0u 4r3 4 h4ppy 0wn3r 0f 7h3 <code>{}</code> v3r510n!</b>'
+    {e:glowing_star} <b>Y0u 4r3 4 h4ppy 0wn3r 0f 7h3 <code>{}</code> v3r510n!</b>'
   stable_branch: '
 
 
-    <tg-emoji emoji-id=5427009714745541184>🟢</tg-emoji> <b>U r u51ng 7h3 574bl3 br4nch</b> <code>{}</code><b>!</b>'
-  no_command: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Cmd</b> <code>{}</code> <b>d035 n07 3x157</b>
-  no_command_loaded: '<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Cmd</b> <code>{}</code> <b>d035 n07 3x157</b>
+    {e:green_circle} <b>U r u51ng 7h3 574bl3 br4nch</b> <code>{}</code><b>!</b>'
+  no_command: '{e:stop} <b>Cmd</b> <code>{}</code> <b>d035 n07 3x157</b>'
+  no_command_loaded: '{e:stop} <b>Cmd</b> <code>{}</code> <b>d035 n07 3x157</b>
 
 
     <b>L04d3d 4l145:</b> <blockquote expandable>{}</blockquote>'
-  alias_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>4l145</b> <code>{alias}</code> <b>4lr34dy 3x1575 f0r c0mm4nd</b> <code>{command}</code>
-  alias_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U mu57 pr0v1d3 4 cmd & 7h3 4l145 4 17</b>
+  alias_exists: '{e:stop} <b>4l145</b> <code>{alias}</code> <b>4lr34dy 3x1575 f0r c0mm4nd</b> <code>{command}</code>'
+  alias_args: '{e:stop} <b>U mu57 pr0v1d3 4 cmd & 7h3 4l145 4 17</b>'
   unstable: '
 
 
-    <tg-emoji emoji-id=5355133243773435190>❕</tg-emoji> <b>U r u51ng 4n un574bl3 br4nch</b> <code>{}</code><b>!</b>'
-  delalias_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U mu57 pr0v1d3 7h3 4l145 n4m3</b>
-  alias_removed: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>4l145</b> <code>{}</code> <b>r3m0v3d</b>.
-  aliases_removed: '<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>R3m0v3d {count} 4l14535:</b>
+    {e:grey_exclamation} <b>U r u51ng 4n un574bl3 br4nch</b> <code>{}</code><b>!</b>'
+  delalias_args: '{e:stop} <b>U mu57 pr0v1d3 7h3 4l145 n4m3</b>'
+  alias_removed: '{e:thumbup} <b>4l145</b> <code>{}</code> <b>r3m0v3d</b>.'
+  aliases_removed: '{e:thumbup} <b>R3m0v3d {count} 4l14535:</b>
 
     <blockquote expandable>{aliases}</blockquote>'
-  aliases_cleared: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>4ll 4l14535 r3m0v3d</b>.
-  no_alias: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>4l145</b> <code>{}</code> <b>d035 n07 3x157</b>
-  db_cleared: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>DB cl34r3d</b>
+  aliases_cleared: '{e:thumbup} <b>4ll 4l14535 r3m0v3d</b>.'
+  no_alias: '{e:stop} <b>4l145</b> <code>{}</code> <b>d035 n07 3x157</b>'
+  db_cleared: '{e:thumbup} <b>DB cl34r3d</b>'
   elys: '{} <b>{}.{}.{}</b> <i>{}</i>
 
 
-    <b><tg-emoji emoji-id=5289608677244811430>📁</tg-emoji> <b>elys-tl:</b> <i>{}</i>
+    <b>{e:folder} <b>elys-tl:</b> <i>{}</i>
 
 
-    <tg-emoji emoji-id="5249457712349097667">🔧</tg-emoji> <b>D3v5: {}</b>
+    {e:wrench} <b>D3v5: {}</b>
 
-    <tg-emoji emoji-id="5249090625789271993">🖌️</tg-emoji> <b>D351gn3r5: {}</b>'
+    {e:theme} <b>D351gn3r5: {}</b>'
   confirm_cleardb: ⚠️ <b>R u 5ur3, 7h47 u w4n7 2 cl34r DB?</b>
   cleardb_confirm: 🗑 Cl34r DB
   cancel: 🚫 C4nc3l
@@ -526,9 +525,9 @@ settings:
   mod_disabled: M0dul3 {} d154bl3d
   cmd_enabled: Cmd {} 3n4bl3d 1n m0dul3 {}
   cmd_disabled: Cmd {} d154bl3d 1n m0dul3 {}
-  not_a_user: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>3n717y {} 15 n07 4 u53r</b>
-  who_to_blacklist: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Wh0 2 bl4ckl157?</b>
-  who_to_unblacklist: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Wh0 2 unbl4ckl157?</b>
+  not_a_user: '{e:warn} <b>3n717y {} 15 n07 4 u53r</b>'
+  who_to_blacklist: '{e:question} <b>Wh0 2 bl4ckl157?</b>'
+  who_to_unblacklist: '{e:question} <b>Wh0 2 unbl4ckl157?</b>'
   _cmd_doc_addalias: S37 4n 4l145 4 4 cmd
   _cmd_doc_aliases: Pr1n7 4ll ur 4l14535
   _cmd_doc_blacklist: '[chat_id] [module] - Bl4ckl157 7h3 b07 fr0m 0p3r471ng s0m3wh3r3'
@@ -544,8 +543,8 @@ settings:
   _cmd_doc_unblacklistuser: '[user_id] - 4ll0w 7h15 u53r 2 run p3rm1773d cmd5'
   _cfg_nonstandart_prefixes: 4ll0w n0n-574nd4r7 pr3f1x35 l1k3 fl4g5 0r m0r3 7h4n 1 symb0l
   _cls_doc: C7rl c0r3 u53rb07 s3771ng5
-  cmd404: <tg-emoji emoji-id=5469791106591890404>🪄</tg-emoji> <b>Cmd n07 f0und</b>
-  mod404: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>W47ch3r {} n07 f0und</b>
+  cmd404: '{e:magic} <b>Cmd n07 f0und</b>'
+  mod404: '{e:stop} <b>W47ch3r {} n07 f0und</b>'
   rnhost: ❤️‍🔥 RnHost
   rnhost_install: '<b>❤️‍🔥 H0w 2 1n574ll 3li5 0n RnHost?</b>
 
@@ -558,34 +557,34 @@ settings:
   _cfg_rich_mode: 5h0w 3li5 45 4 R1ch m3554g3.
   rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>C0mp0n3nt</th><th>Curr3nt r3l3453</th></tr><tr><td><b>V3r510n</b></td><td><code>{version}</code></td></tr><tr><td><b>Bu1ld</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API l4y3r</b></td><td><code>{layer}</code></td></tr><tr><td><b>Curr3nt u53r</b></td><td><code>{current_user}</code></td></tr><tr><td><b>D3v3l0p3r5</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>C0mp0n3nt</th><th>Curr3nt r3l3453</th></tr><tr><td><b>V3r510n</b></td><td><code>{version}</code></td></tr><tr><td><b>Bu1ld</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API l4y3r</b></td><td><code>{layer}</code></td></tr><tr><td><b>Curr3nt u53r</b></td><td><code>{current_user}</code></td></tr><tr><td><b>D3v3l0p3r5</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
-  no_aliases: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>U h4v3 n0 54v3d 4l14535 y37</b>
+  no_aliases: '{e:stop} <b>U h4v3 n0 54v3d 4l14535 y37</b>'
 elys_config:
   name: 3li5C0nf1g
-  choose_core: <tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Ch0053 4 c473g0ry</b>
-  configure: <tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Ch0053 4 m0d 2 c0nf1g</b>
+  choose_core: '{e:gear} <b>Ch0053 4 c473g0ry</b>'
+  configure: '{e:gear} <b>Ch0053 4 m0d 2 c0nf1g</b>'
   configure_lib: 📦 <b>Ch0053 4 l1b 2 c0nf1g</b>
-  configuring_mod: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Ch0053 c0nf1g 0p710n 4 m0d</b> <code>{}</code>
+  configuring_mod: '{e:gear} <b>Ch0053 c0nf1g 0p710n 4 m0d</b> <code>{}</code>
 
 
     <b>Curr3n7 0p75:</b>
 
 
     {}'
-  configuring_folder: '<tg-emoji emoji-id=5433653135799228968>📁</tg-emoji> <b>Ch0053 c0nf1g 0p710n 4 f0ld3r</b> <code>{}</code>
+  configuring_folder: '{e:folder} <b>Ch0053 c0nf1g 0p710n 4 f0ld3r</b> <code>{}</code>
 
 
     <b>Curr3n7 0p75:</b>
 
 
     {}'
-  configuring_lib: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Ch0053 c0nf1g 0p710n 4 l1b</b> <code>{}</code>
+  configuring_lib: '{e:gear} <b>Ch0053 c0nf1g 0p710n 4 l1b</b> <code>{}</code>
 
 
     <b>Curr3n7 0p75:</b>
 
 
     {}'
-  configuring_category: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Ch0053 c0nf1g 0p710n 4 m0d</b> <code>{}</code> <b>1n c473g0ry</b> <code>{}</code>
+  configuring_category: '{e:gear} <b>Ch0053 c0nf1g 0p710n 4 m0d</b> <code>{}</code> <b>1n c473g0ry</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -593,7 +592,7 @@ elys_config:
     <b>Curr3n7 0p75:</b>
 
     {}'
-  configuring_category_lib: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Ch0053 c0nf1g 0p710n 4 l1b</b> <code>{}</code> <b>1n c473g0ry</b> <code>{}</code>
+  configuring_category_lib: '{e:gear} <b>Ch0053 c0nf1g 0p710n 4 l1b</b> <code>{}</code> <b>1n c473g0ry</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -611,8 +610,8 @@ elys_config:
     <i>{}</i>'
   category_uncategorized: '
 
-    <b><tg-emoji emoji-id=5253713110111365241>▫️</tg-emoji> 07h3r</b>'
-  configuring_option: '<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>C0nf1gur1ng 0p710n</b> <code>{}</code> <b>0f m0d</b> <code>{}</code>
+    <b>{e:bullet} 07h3r</b>'
+  configuring_option: '{e:gear} <b>C0nf1gur1ng 0p710n</b> <code>{}</code> <b>0f m0d</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -624,7 +623,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>C0nf1gur1ng 0p710n</b> <code>{}</code> <b>0f l1b</b> <code>{}</code>
+  configuring_option_lib: '{e:rocket} <b>C0nf1gur1ng 0p710n</b> <code>{}</code> <b>0f l1b</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -636,10 +635,10 @@ elys_config:
 
 
     {}'
-  option_saved: '<tg-emoji emoji-id=5318933532825888187>⚙️</tg-emoji> <b>0p710n</b> <code>{}</code> <b>0f m0d</b> <code>{}</code><b> s4v3d!</b>
+  option_saved: '{e:recycle} <b>0p710n</b> <code>{}</code> <b>0f m0d</b> <code>{}</code><b> s4v3d!</b>
 
     <b>Curr3n7: {}</b>'
-  option_saved_lib: '<tg-emoji emoji-id=5431736674147114227>📦</tg-emoji> <b>0p710n</b> <code>{}</code> <b>0f l1b</b> <code>{}</code><b> s4v3d!</b>
+  option_saved_lib: '{e:rocket} <b>0p710n</b> <code>{}</code> <b>0f l1b</b> <code>{}</code><b> s4v3d!</b>
 
     <b>Curr3n7: {}</b>'
   option_reset: '♻️ <b>0p710n</b> <code>{}</code> <b>0f m0d</b> <code>{}</code> <b>h45 b33n r3537 2 d3f4ul7</b>
@@ -681,17 +680,17 @@ elys_config:
   chat_input_prompt_remove_lib: "➖ <b>53nd 173m 2 r3m0v3 fr0m <code>{}</code> 0f l1b <code>{}</code>.</b>\n\n<b>Curren7: {}</b>\n\n<i>⏳ W4171ng... (w1ll b3 d3l373d)</i>"
   series_min_len_error: "⚠️ <b>C4n'7 r3m0v3 fr0m <code>{}</code>: l157 r3qu1r35 47 l3457 {} 173m(5).</b>\n\n3n73r n3w v4lu3 0r r3537 2 d3f4ul7."
   series_empty_error: "⚠️ <b>L157 <code>{}</code> 15 4lr34dy 3mp7y.</b>"
-  series_not_found_error: "🚫 <b>173m <code>{}</code> n07 f0und 1n <code>{}</code>.</b>"
+  series_not_found_error: "\U0001F6AB <b>173m <code>{}</code> n07 f0und 1n <code>{}</code>.</b>"
   cancel_btn: 🚫 C4nc3l
   _cmd_doc_config: C0nf1g m0dul35
   _cmd_doc_fconfig: <module_name> <property_name> <config_value> - s37 7h3 c0nf1g v4lu3 4 7h3 m0dul3
   _cls_doc: 1n73r4c71v3 c0nf1gur470r 4 3li5 Us3rb07
 inline_stuff:
   name: 1nl1n3S7uff
-  bot_username_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Sp3c1f13d b07 u53rn4m3 15 1nv4l1d. 17 mu57 3nd w17h</b> <code>bot</code> <b>& c0n741n 47 l3457 4 symb0l5</b>
-  token_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Sp3c1f13d b07 70k3n 15 1nv4l1d. 17 mu57 c0n741n 8-10 numb3r5, </b><code>:</code> <b>& 34-36 symb0l5</b>
-  bot_username_occupied: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>7h15 u53rn4m3 15 4lr34dy 0ccup13d</b>
-  bot_updated: <tg-emoji emoji-id=6318792204118656433>🎉</tg-emoji> <b>C0nf1g 5ucc355fully s4v3d. R3574r7 u53rb07 2 4pply ch4ng35</b>
+  bot_username_invalid: '{e:stop} <b>Sp3c1f13d b07 u53rn4m3 15 1nv4l1d. 17 mu57 3nd w17h</b> <code>bot</code> <b>& c0n741n 47 l3457 4 symb0l5</b>'
+  token_invalid: '{e:stop} <b>Sp3c1f13d b07 70k3n 15 1nv4l1d. 17 mu57 c0n741n 8-10 numb3r5, </b><code>:</code> <b>& 34-36 symb0l5</b>'
+  bot_username_occupied: '{e:stop} <b>7h15 u53rn4m3 15 4lr34dy 0ccup13d</b>'
+  bot_updated: '{e:party} <b>C0nf1g 5ucc355fully s4v3d. R3574r7 u53rb07 2 4pply ch4ng35</b>'
   this_is_elys: '{} <b>H1! 7h15 15 3li5 — p0w3rful m0dul4r T3l3gr4m u53rb07. U c4n 1n574ll 17 2 ur 4cc!</b>'
   support_chat_caption: Supp0r7 ch47
   profile_cmd: 'ℹ️ Us3rb07 M41n 1nf0
@@ -704,37 +703,37 @@ inline_stuff:
     • CPU U54g3: {cpu_usage}%
 
     • H0571ng: {host}</blockquote>'
-  restart: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> Ur Elys 15 b31ng r3574r73d..
+  restart: '{e:think} Ur Elys 15 b31ng r3574r73d..'
   prefix_reset: 🔀 Pr3f1x r3537!
   _cmd_doc_ch_elys_bot: <username> - Ch4ng3 ur 3li5 1nl1n3 b07 u53rn4m3
   _cls_doc: Pr0v1d35 supp0r7 4 1nl1n3 57uff
   _cmd_doc_ch_bot_token: <70k3n> - Ch4ng3 1nl1n3 b07 70k3n
 test:
   name: T3573r
-  set_loglevel: <tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>Plz sp3c1fy v3rb0517y 45 4n 1n73g3r 0r 57r1ng</b>
-  no_logs: <tg-emoji emoji-id=5355133243773435190>🤷‍♀️</tg-emoji> <b>U d0n'7 h4v3 4ny l0g5 47 v3rb0517y</b> <code>{}</code><b>.</b>
+  set_loglevel: '{e:grey_exclamation} <b>Plz sp3c1fy v3rb0517y 45 4n 1n73g3r 0r 57r1ng</b>'
+  no_logs: "{e:grey_exclamation} <b>U d0n'7 h4v3 4ny l0g5 47 v3rb0517y</b> <code>{}</code><b>.</b>"
   configping: 'Ur cu570m 73x7. U c4n u53 pl4c3h0ld3r5: {ping} - 7h47''5 ur p1ng. {uptime} - 17''5 ur up71m3. {ping_hint} - 7h15 15 7h3 s4m3 h1n7 45 1n 7h3 3li5 m0dul3, 17 15 ch053n w17h r4nd0m ch4nc3, 4l50 u c4n sp3c1fy 7h15 h1n7 1n 7h3 c0nf1g. U c4n u53 7h3 {hostname} pl4c3h0ld3r 1f u n33d 7h3 h057n4m3 0f ur s3rv3r'
   configpingph: '🤖Cu570m pl4c3h0ld3r5: {}'
   hint: S37 4 h1n7
   ping_emoji: 3m0j1 7h47 4pp34r5 wh3n p1ng d035 n07 1ncr3453 51gn1f1c4n7ly
   back: ↩️ B4ck
   banner_url: '1m4g3 4 ur p1ng, e.g.: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
-  logs_caption: '<tg-emoji emoji-id=5350594756126721186>🌟</tg-emoji> <b>3li5 l0g5 w17h v3rb0517y</b> <code>{}</code>
+  logs_caption: '{e:glowing_star} <b>3li5 l0g5 w17h v3rb0517y</b> <code>{}</code>
 
 
-    <tg-emoji emoji-id=5228879218363872764>⚪️</tg-emoji> <b>V3r510n: {}.{}.{}</b>{}'
-  suspend_invalid_time: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1nv4l1d 71m3 2 su5p3nd</b>
-  suspended: <tg-emoji emoji-id=5452023368054216810>🥶</tg-emoji> <b>B07 su5p3nd3d 4 {}</b>
+    {e:white_circle} <b>V3r510n: {}.{}.{}</b>{}'
+  suspend_invalid_time: '{e:stop} <b>1nv4l1d 71m3 2 su5p3nd</b>'
+  suspended: '{e:cold_face} <b>B07 su5p3nd3d 4 {}</b>'
   confidential: ⚠️ <b>L0g l3v3l</b> <code>{}</code> <b>m4y r3v34l ur c0nf1d3n714l 1nf0, b3 c4r3ful</b>
   confidential_text: '⚠️ <b>L0g l3v3l</b> <code>{0}</code> <b>m4y r3v34l ur c0nf1d3n714l 1nf0, b3 c4r3ful</b>
 
     <b>7yp3</b> <code>.logs {0} -f</code> <b>2 1gn0r3 7h15 w4rn1ng</b>'
   choose_loglevel: 💁‍♂️ <b>Ch0053 l0g l3v3l</b>
-  bad_module: <tg-emoji emoji-id=5355133243773435190>🚫</tg-emoji> <b>M0dul3 n07 f0und</b>
-  debugging_enabled: '<tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>D3bugg1ng m0d3 3n4bl3d 4 m0dul3</b> <code>{0}</code>
+  bad_module: '{e:grey_exclamation} <b>M0dul3 n07 f0und</b>'
+  debugging_enabled: '{e:check} <b>D3bugg1ng m0d3 3n4bl3d 4 m0dul3</b> <code>{0}</code>
 
     <i>G0 2 d1r n4m3d `debug_modules`, 3d17 f1l3 n4m3d `{0}.py` & s33 ch4ng35 1n r34l 71m3</i>'
-  debugging_disabled: <tg-emoji emoji-id=5332533929020761310>✅</tg-emoji> <b>D3bugg1ng d154bl3d</b>
+  debugging_disabled: '{e:check} <b>D3bugg1ng d154bl3d</b>'
   send_anyway: 📤 S3nd 4nyw4y
   cancel: 🚫 C4nc3l
   logs_cleared: 🗑 <b>L0g5 cl34r3d</b>
@@ -750,11 +749,11 @@ test:
   _cfg_rich_mode: 5h0w p1ng 45 4 R1ch m3554g3.
 updater:
   name: Upd473r
-  source: <tg-emoji emoji-id=5208634061085492935>📖</tg-emoji> <b>R34d 7h3 s0urc3 c0d3 fr0m</b> <a href='{}'>h3r3</a>
-  restarting_caption: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>Ur {} 15 r3574r71ng...</b>
-  downloading: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>D0wnl04d1ng upd4735...</b>
-  installing: <tg-emoji emoji-id=5346022209389372742>🤔</tg-emoji> <b>1n574ll1ng upd4735...</b>
-  success: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>R3574r7 5ucc355ful! {}</b>
+  source: "{e:book} <b>R34d 7h3 s0urc3 c0d3 fr0m</b> <a href='{}'>h3r3</a>"
+  restarting_caption: '{e:think} <b>Ur {} 15 r3574r71ng...</b>'
+  downloading: '{e:think} <b>D0wnl04d1ng upd4735...</b>'
+  installing: '{e:think} <b>1n574ll1ng upd4735...</b>'
+  success: '{e:think} <b>R3574r7 5ucc355ful! {}</b>
 
     <i>Bu7 571ll l04d1ng m0d5...</i>
 
@@ -762,46 +761,46 @@ updater:
   origin_cfg_doc: G17 0r1g1n URL, 4 wh3r3 2 upd473 fr0m
   btn_restart: 🔄 R3574r7
   btn_update: 🧭 Upd473
-  restart_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>R u 5ur3 u w4n7 2 r3574r7?</b>
-  secure_boot_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>R u 5ur3 u w4n7 2 r3574r7 1n s3cur3 b007 m0d3?</b>
-  update_confirm: '<tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>R u 5ur3 u w4n7 2 upd473?
+  restart_confirm: '{e:question} <b>R u 5ur3 u w4n7 2 r3574r7?</b>'
+  secure_boot_confirm: '{e:question} <b>R u 5ur3 u w4n7 2 r3574r7 1n s3cur3 b007 m0d3?</b>'
+  update_confirm: '{e:question} <b>R u 5ur3 u w4n7 2 upd473?
 
 
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
-  no_update: <tg-emoji emoji-id=5465496001856950230>🌟</tg-emoji> <b>U r 0n 7h3 l47357 v3r510n, pull upd4735 4nyw4y?</b>
+  no_update: '{e:glowing_star} <b>U r 0n 7h3 l47357 v3r510n, pull upd4735 4nyw4y?</b>'
   cancel: 🚫 C4nc3l
-  branch_menu: "<blockquote><tg-emoji emoji-id=5253952855185829086>⚙️</tg-emoji> <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n<blockquote><tg-emoji emoji-id=5253780051471642059>🛡</tg-emoji> <b>master</b> - стабильная\n<tg-emoji emoji-id=5253877736207821121>🔥</tg-emoji> <b>beta</b> - бета-версия\n<tg-emoji emoji-id=5256099067523510898>⚡️</tg-emoji> <b>dev</b> - разработка (нестабильная)</blockquote>"
-  branch_switching: "<blockquote><tg-emoji emoji-id=5253464392850221514>🔃</tg-emoji> <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
-  branch_switched: "<blockquote><tg-emoji emoji-id=5255813619702049821>✅</tg-emoji> <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
-  branch_switch_fail: "<blockquote><tg-emoji emoji-id=5253864872780769235>❗️</tg-emoji> <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
+  branch_menu: "<blockquote>{e:gear} <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield} <b>master</b> - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_switching: "<blockquote>{e:repeat} <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
+  branch_switched: "<blockquote>{e:check} <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote>{e:exclamation} <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
   branch_btn_later: 'Позже'
   branch_btn_close: 'Закрыть'
   stop_ub_confirm: Y0ur {} w1ll b3 570pp3d, 4r3 y0u 5ur3?
-  full_success: '<tg-emoji emoji-id=5427295759567449937>✅</tg-emoji> <b>Us3rb07 15 fully l04d3d! {}</b>
+  full_success: '{e:check} <b>Us3rb07 15 fully l04d3d! {}</b>
 
     <i>Full r3574r7 700k {}s</i>'
   ub_stop: Ur {emoji} h45 b33n 570pp3d
-  full_fail: '<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Us3rb07 15 fully l04d3d, bu7 4n 3rr0r 0ccurr3d! {}
+  full_fail: '{e:stop} <b>Us3rb07 15 fully l04d3d, bu7 4n 3rr0r 0ccurr3d! {}
 
     <i>Full r3574r7 700k {}s
 
     F41l3d 2 l04d {} m0d5</i>'
-  secure_boot_complete: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>S3cur3 b007 c0mpl373d! {}</b>
+  secure_boot_complete: '{e:unlock} <b>S3cur3 b007 c0mpl373d! {}</b>
 
     <i>R3574r7 700k {}s</i>'
-  secure_boot_fail: '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>S3cur3 b007 c0mpl373d, bu7 4n 3rr0r 0ccurr3d! {}</b>
+  secure_boot_fail: '{e:unlock} <b>S3cur3 b007 c0mpl373d, bu7 4n 3rr0r 0ccurr3d! {}</b>
 
     <i>R3574r7 700k {}s
 
     F41l3d 2 l04d {} m0d5</i>'
-  invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U mu57 pr0v1d3 numb3r 0f c0mm175 2 r0llb4ck!</b>
-  rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U'r3 r0ll1ng b4ck 2 f4r!</b>
-  rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>R u 5ur3 u w4n7 2 r0llb4ck {num} c0mm17(-5)?</b>
-  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>R0ll1ng {num} c0mm175 b4ck...</b>
-  autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> N3w 3li5 upd473!
+  invalid_args: '{e:stop} <b>U mu57 pr0v1d3 numb3r 0f c0mm175 2 r0llb4ck!</b>'
+  rollback_too_far: "{e:stop} <b>U'r3 r0ll1ng b4ck 2 f4r!</b>"
+  rollback_confirm: '{e:question} <b>R u 5ur3 u w4n7 2 r0llb4ck {num} c0mm17(-5)?</b>'
+  rollback_process: '{e:clock} <b>R0ll1ng {num} c0mm175 b4ck...</b>'
+  autoupdate_notifier: '{e:new} N3w 3li5 upd473!
 
 
     🔮 N3w 3li5 v3r #{} 15 4v41l4bl3
@@ -835,7 +834,7 @@ updater:
   _cmd_doc_update: D0wnl04d5 u53rb07 upd4735
   _cmd_doc_rollback: R0llb4ck5 u53rb07 upd4735
   _cls_doc: Upd4735 1753lf, 7r4ck5 l47357 3li5 r3l34535, & n071f135 u, 1f upd473 15 r3qu1r3d
-  update_required: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> <b>3li5 Upd473 4v41l4bl3!</b>
+  update_required: '{e:new} <b>3li5 Upd473 4v41l4bl3!</b>
 
 
     N3w 3li5 v3r r3l3453d.
@@ -852,18 +851,18 @@ updater:
   latest_disabled: N071f1c4710n5 4b0u7 7h3 l47357 upd473 h4v3 b33n suppr3553d
   update: 🔄 Upd473
   ignore: 🚫 1gn0r3
-  changelog: <tg-emoji emoji-id=5434144690511290129>📰</tg-emoji> <b>Ch4ng3l0g 0f 7h3 l457 m4j0r upd473:</b><blockquote expandable>{}</blockquote>
+  changelog: '{e:newspaper} <b>Ch4ng3l0g 0f 7h3 l457 m4j0r upd473:</b><blockquote expandable>{}</blockquote>'
   _cmd_doc_autoupdate: 70ggl3 4u70m471c upd4735
   _cmd_doc_changelog: 5h0w ch4ng3l0g 0f 7h3 l457 m4j0r upd473
   _cmd_doc_ubstop: 570p y0ur u53rb07
 api_protection:
   name: 4P1L1m173r
   warning: "⚠️ <b>W4RN1NG!</b>\n\nUr 4cc 3xc33d3d 7h3 l1m17 0f r3qu3575, sp3c1f13d 1n c0nf1g. 1n 0rd3r 2 pr3v3n7 T3l3gr4m 4P1 Fl00d, u53rb07 h45 b33n <b>fully fr0z3n</b> 4 {} s3c5. Fur7h3r 1nf0 15 pr0v1d3d 1n 4774ch3d f1l3. \n\n17 15 r3c0mm3nd3d 2 g37 h3lp 1n <code>{prefix}support</code> gr0up!\n\n1f u 7h1nk, 7h47 17 15 4n 1n73nd3d b3h4v10r, 7h3n w417 un71l u53rb07 g375 unl0ck3d & n3x7 71m3, wh3n u w1ll b3 g01ng 2 p3rf0rm such 4n 0p, u53 <code>{prefix}suspend_api_protect</code> &lt;time in seconds&gt;"
-  args_invalid: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1nv4l1d 4rg5</b>
-  suspended_for: <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>4P1 Fl00d Pr073c710n 15 d154bl3d 4 {} s3c5</b>
-  'true': <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>Pr073c710n 3n4bl3d</b>
-  'false': <tg-emoji emoji-id=5458450833857322148>👌</tg-emoji> <b>Pr073c710n d154bl3d</b>
-  u_sure: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>R u 5ur3?</b>
+  args_invalid: '{e:stop} <b>1nv4l1d 4rg5</b>'
+  suspended_for: '{e:ok_hand} <b>4P1 Fl00d Pr073c710n 15 d154bl3d 4 {} s3c5</b>'
+  'true': '{e:ok_hand} <b>Pr073c710n 3n4bl3d</b>'
+  'false': '{e:ok_hand} <b>Pr073c710n d154bl3d</b>'
+  u_sure: '{e:warn} <b>R u 5ur3?</b>'
   _cfg_time_sample: 71m3 s4mpl3 7hr0ugh wh1ch 7h3 b07 w1ll c0un7 r3qu3575
   _cfg_threshold: 7hr35h0ld 0f r3qu3575 2 7r1gg3r pr073c710n
   _cfg_local_floodwait: Fr33z3 u53rb07 4 7h15 4m0un7 0f 71m3, 1f r3qu357 l1m17 3xc33d5
@@ -880,26 +879,26 @@ help:
   undoc: 🦥 N0 d0c5
   all_header: <b>{} m0d5 4v41l4bl3, {} h1dd3n:</b>
   no_mod: 🚫 <b>Sp3c1fy m0dul3 2 h1d3</b>
-  help_lib: '<tg-emoji emoji-id=5404553572727660202>❌</tg-emoji> <b>P4ck4g3</b> <code>{}</code> <b>15 4 l1b.</b>
+  help_lib: '{e:money} <b>P4ck4g3</b> <code>{}</code> <b>15 4 l1b.</b>
 
-    <tg-emoji emoji-id=5404553572727660202>❌</tg-emoji> <b>L1b5 d0 n07 h4v3 d35cr1p710n5...</b>'
-  developer: '<tg-emoji emoji-id=5287454910059654880>🫶</tg-emoji> D3v3l0p3r: {}'
+    {e:money} <b>L1b5 d0 n07 h4v3 d35cr1p710n5...</b>'
+  developer: '{e:heart_hands} D3v3l0p3r: {}'
   hidden_shown: '<b>{} m0dul35 h1dd3n, {} m0dul35 sh0wn:</b>
 
     {}
 
     {}'
-  offchats: '<tg-emoji emoji-id=6019130940012370273>❔</tg-emoji> <a href="https://t.me/ElysTalk"><b>Supp0r7 ch47</b></a>
+  offchats: '{e:grey_question} <a href="https://t.me/ElysTalk"><b>Supp0r7 ch47</b></a>
 
 
-    <tg-emoji emoji-id=6019151079114021083>💬</tg-emoji> <a href="https://t.me/heroku_offtop"><b>0ff70p ch47</b></a>
+    {e:chat} <a href="https://t.me/heroku_offtop"><b>0ff70p ch47</b></a>
 
 
-    <tg-emoji emoji-id=6019094432790354513>📢</tg-emoji> <a href="https://t.me/heroku_ub"><b>0ff1c14l ch4nn3l</b></a>'
-  partial_load: <tg-emoji emoji-id=5355133243773435190>☝️</tg-emoji> <b>Us3rb07 15 n07 fully l04d3d, 50 n07 4ll m0dul35 r sh0wn</b>
-  not_exact: <tg-emoji emoji-id=5355133243773435190>☝️</tg-emoji> <b>N0 3x4c7 m47ch 0ccur3d, 50 7h3 cl05357 r35ul7 15 sh0wn 1n5734d</b>
+    {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>0ff1c14l ch4nn3l</b></a>'
+  partial_load: '{e:grey_exclamation} <b>Us3rb07 15 n07 fully l04d3d, 50 n07 4ll m0dul35 r sh0wn</b>'
+  not_exact: '{e:grey_exclamation} <b>N0 3x4c7 m47ch 0ccur3d, 50 7h3 cl05357 r35ul7 15 sh0wn 1n5734d</b>'
   request_join: U r3qu3573d l1nk 4 3li5 supp0r7 ch47
-  core_notice: <tg-emoji emoji-id=5355133243773435190>☝️</tg-emoji> <b>7h15 15 4 c0r3 m0dul3. U c4n'7 unl04d 17 n0r r3pl4c3</b>
+  core_notice: "{e:grey_exclamation} <b>7h15 15 4 c0r3 m0dul3. U c4n'7 unl04d 17 n0r r3pl4c3</b>"
   show_preview_in_help: '5h0w # m374 b4nn3r 1n h3lp pr3v13w [m0dul3]'
   _cls_doc: 5h0w5 h3lp f0r m0dul35 4nd c0mm4nd5
   _cmd_doc_help: '[m0dul3] - 5h0w h3lp f0r m0dul35 4nd c0mm4nd5'
@@ -911,9 +910,8 @@ help:
   rich_placeholders: Pl4c3h0ld3r5
   rich_commands: C0mm4nd5
 elys_info:
-  info_message: "{}\n<blockquote>┌\n├  【<tg-emoji emoji-id=5883964170268840032>\U0001F464</tg-emoji>】 <b>0wn3r</b>: {me}\n├  【<tg-emoji emoji-id=5931415565955503486>\U0001F916</tg-emoji>】 <b>V3r510n</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5778335621491723621>\U0001F4F7</tg-emoji>】 <b>Pr3f1x</b>: {prefix}⠀ ⠀ \n├  【<tg-emoji emoji-id=5843799474362652262>\U0001F504</tg-emoji>】 <b>Up71m3</b>: {uptime}\n├  【<tg-emoji emoji-id=5879770735999717115>\U0001F464</tg-emoji>】 <b>Br4nch</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5775887550262546277>❗️</tg-emoji>】 <b>CPU</b>: {cpu_usage}\n├  【<tg-emoji emoji-id=5931409969613116639>\U0001F6E1</tg-emoji>】 <b>RAM</b>: {ram_usage}\n├  【<tg-emoji emoji-id=5931472654660800739>\U0001F4CA</tg-emoji>】 <b>P1ng</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【<tg-emoji emoji-id=5926783847453692661>\U0001F6E1</tg-emoji>】 <b>Upd473</b>: {upd}\n├  【<tg-emoji emoji-id=5931415565955503486>\U0001F916</tg-emoji>】 <b>H057</b>:\
-    \ {platform}\n├  【<tg-emoji emoji-id=5819078828017849357>\U0001F916</tg-emoji>】 <b>OS</b>: {os}\n├  【<tg-emoji emoji-id=5819078828017849357>\U0001F916</tg-emoji>】 <b>Py7h0n V3r</b>: {python_ver}\n└</blockquote>"
-  non_detectable: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>7h15 c0mp0n3n7 c4nn07 b3 d373c73d 0n ur s3rv3r!</b>
+  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>0wn3r</b>: {me}\n├  【{e:bot}】 <b>V3r510n</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>Pr3f1x</b>: {prefix}⠀ ⠀ \n├  【{e:sync}】 <b>Up71m3</b>: {uptime}\n├  【{e:user}】 <b>Br4nch</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>CPU</b>: {cpu_usage}\n├  【{e:shield}】 <b>RAM</b>: {ram_usage}\n├  【{e:chart}】 <b>P1ng</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield}】 <b>Upd473</b>: {upd}\n├  【{e:bot}】 <b>H057</b>: {platform}\n├  【{e:bot}】 <b>OS</b>: {os}\n├  【{e:bot}】 <b>Py7h0n V3r</b>: {python_ver}\n└</blockquote>"
+  non_detectable: '{e:stop} <b>7h15 c0mp0n3n7 c4nn07 b3 d373c73d 0n ur s3rv3r!</b>'
   ping_emoji: 3m0j1 4 p1ng 1n ur 1nf0
   send_info: S3nd u53rb07 1nf0
   description: ℹ 7h15 w1ll n07 c0mpr0m153 4ny s3n5171v3 1nf0
@@ -921,37 +919,37 @@ elys_info:
   up_to_date: <b>Up-2-d473</b>
   update_required: <b>Upd473 r3qu1r3d</b> <code>{prefix}update</code>
   upd_avail: <b>Upd473 r3qu1r3d</b> <code>{prefix}update</code>
-  switchinfo_on: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> 1m4g3 1nf0 7urn3d 0n 5ucc355fully
-  switchinfo_off: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> 1m4g3 1nf0 7urn3d 0ff 5ucc355fully
+  switchinfo_on: '{e:check} 1m4g3 1nf0 7urn3d 0n 5ucc355fully'
+  switchinfo_off: '{e:check} 1m4g3 1nf0 7urn3d 0ff 5ucc355fully'
   _cfg_cst_msg: Cu570m m5g 4 1nf0. M4y c0n741n {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} k3yw0rd5
   _cfg_cst_ph: '🤖Cu570m pl4c3h0ld3r5: {}'
   _cfg_cst_btn: Cu570m bu770n 4 1nf0. L34v3 3mp7y 2 r3m0v3 bu770n
   _cfg_banner: URL 2 1m4g3 b4nn3r
-  desc: '<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <b>Us3rb07 — wh47 15 17?</b>
+  desc: '{e:star} <b>Us3rb07 — wh47 15 17?</b>
 
 
-    <tg-emoji emoji-id=5472238129849048175>😎</tg-emoji> 4 u53rb07 r3f3r5 2 4 <b>3rd-p4r7y pr0gr4m</b> 7h47 1n73r4c75 w17h 7h3 T3l3gr4m 4P1 2 p3rf0rm <b>4u70m473d 745k5 0n b3h4lf 0f 4 u53r</b>. 7h353 u53rb075 c4n b3 u53d 2 4u70m473 v4r10u5 745k5 5uch 45 <b>s3nd1ng m5g5, j01n1ng ch4nn3l5, d0wnl04d1ng m3d14, & much m0r3</b>.
+    {e:owner} 4 u53rb07 r3f3r5 2 4 <b>3rd-p4r7y pr0gr4m</b> 7h47 1n73r4c75 w17h 7h3 T3l3gr4m 4P1 2 p3rf0rm <b>4u70m473d 745k5 0n b3h4lf 0f 4 u53r</b>. 7h353 u53rb075 c4n b3 u53d 2 4u70m473 v4r10u5 745k5 5uch 45 <b>s3nd1ng m5g5, j01n1ng ch4nn3l5, d0wnl04d1ng m3d14, & much m0r3</b>.
 
 
-    <tg-emoji emoji-id=5474667187258006816>😎</tg-emoji> Us3rb075 r d1ff3r3n7 fr0m r3gul4r T3l3gr4m b075 45 <b>7h3y run 0n 7h3 u53r''5 4cc</b> r47h3r 7h4n 4 b07 4cc. 7h15 m34n5 7h47 u53rb075 c4n 4cc355 m0r3 f347ur35 & h4v3 gr3473r fl3x1b1l17y 1n 73rm5 0f 7h3 4c710n5 7h3y c4n p3rf0rm.
+    {e:owner} Us3rb075 r d1ff3r3n7 fr0m r3gul4r T3l3gr4m b075 45 <b>7h3y run 0n 7h3 u53r''5 4cc</b> r47h3r 7h4n 4 b07 4cc. 7h15 m34n5 7h47 u53rb075 c4n 4cc355 m0r3 f347ur35 & h4v3 gr3473r fl3x1b1l17y 1n 73rm5 0f 7h3 4c710n5 7h3y c4n p3rf0rm.
 
 
-    <tg-emoji emoji-id=5472267631979405211>🚫</tg-emoji> H0w3v3r, 17 15 1mp0r74n7 2 n073 7h47 <b>u53rb075 r n07 0ff1c14lly supp0r73d by T3l3gr4m</b> & 7h31r u53 m4y v10l473 7h3 pl47f0rm''5 73rm5 0f s3rv1c3. 45 such, <b>u53rz sh0uld 3x3rc153 c4u710n wh3n u51ng u53rb075</b> & 3n5ur3 7h47 7h3y r n07 b31ng u53d 4 m4l1c10u5 purp0535.
+    {e:stop} H0w3v3r, 17 15 1mp0r74n7 2 n073 7h47 <b>u53rb075 r n07 0ff1c14lly supp0r73d by T3l3gr4m</b> & 7h31r u53 m4y v10l473 7h3 pl47f0rm''5 73rm5 0f s3rv1c3. 45 such, <b>u53rz sh0uld 3x3rc153 c4u710n wh3n u51ng u53rb075</b> & 3n5ur3 7h47 7h3y r n07 b31ng u53d 4 m4l1c10u5 purp0535.
 
 
     '
-  no_font: <tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> Wh3r3 15 7h3 l1nk 0r r3ply 2 7h3 f0n7?
-  no_banner: '<tg-emoji emoji-id=6010394680179562842>😶</tg-emoji> <b>N07h1ng w45 f0und 47 7h3 sp3c1f13d l1nk </b><code>{link></code><b>.
+  no_font: '{e:trash} Wh3r3 15 7h3 l1nk 0r r3ply 2 7h3 f0n7?'
+  no_banner: '{e:silent} <b>N07h1ng w45 f0und 47 7h3 sp3c1f13d l1nk </b><code>{link></code><b>.
 
 
     Ch3ck 7h3 1n73gr17y 0f ur f1l3 47 7h3 l1nk, & 4l50 m4k3 5ur3 7h47 7h3 l1nk p01n75 d1r3c7ly 2 7h3 f1l3.</b>'
-  font_installed: '<tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <b>F0n7 1n574ll3d 5ucc355fully!</b>
+  font_installed: '{e:party} <b>F0n7 1n574ll3d 5ucc355fully!</b>
 
-    <tg-emoji emoji-id=5436040291507247633>🎉</tg-emoji> <i>U c4n n0w 3nj0y u51ng 17.</i>'
-  incorrect_format_font: '<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> <b>1nv4l1d f0n7 f0rm47!</b>
+    {e:party} <i>U c4n n0w 3nj0y u51ng 17.</i>'
+  incorrect_format_font: '{e:trash} <b>1nv4l1d f0n7 f0rm47!</b>
 
     <blockquote>Supp0r73d f0rm475 -> otf, ttf</blockquote>'
-  incorrect_img_format: '<tg-emoji emoji-id=5465665476971471368>❌</tg-emoji> <b>1nv4l1d 1m4g3 f0rm47</b>
+  incorrect_img_format: '{e:trash} <b>1nv4l1d 1m4g3 f0rm47</b>
 
     <blockquote>Supp0r73d f0rm475 -> jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: S3nd 1nf0 4k4 'Wh47 15 3li5?'
@@ -961,79 +959,78 @@ elys_info:
   _cls_doc: Sh0w u53rb07 1nf0
   name: ElysInfo
   _cfg_rich_mode: 5h0w 1nf0 45 4 R1ch m3554g3.
-  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>0v3rv13w</summary><table><tr><th>0v3rv13w</th><th>0wn3r</th></tr><tr><td>【<tg-emoji emoji-id=5883964170268840032>👤</tg-emoji>】 <b>0wn3r</b></td><td>{me}</td></tr><tr><td>【<tg-emoji emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>V3r5i0n</b></td><td>{version}</td></tr><tr><td>【<tg-emoji emoji-id=5778335621491723621>📷</tg-emoji>】 <b>Pr3f1x</b></td><td>{prefix}</td></tr><tr><td>【<tg-emoji emoji-id=5843799474362652262>🔄</tg-emoji>】 <b>Upt1m3</b></td><td>{uptime}</td></tr><tr><td>【<tg-emoji emoji-id=5879770735999717115>👤</tg-emoji>】 <b>Br4nch</b></td><td>{branch}</td></tr></table></details><details><summary>5747u5</summary><table><tr><th>5747u5</th><th>Upd4t35</th></tr><tr><td>【<tg-emoji emoji-id=5926783847453692661>🛡</tg-emoji>】 <b>Upd4t35</b></td><td>{upd}</td></tr><tr><td>【<tg-emoji emoji-id=5775887550262546277>❗️</tg-emoji>】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【<tg-emoji emoji-id=5931409969613116639>🛡</tg-emoji>】
-    <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【<tg-emoji emoji-id=5931472654660800739>📊</tg-emoji>】 <b>P1ng</b></td><td>{ping}</td></tr></table></details><details><summary>3nv1r0nm3n7</summary><table><tr><th>3nv1r0nm3n7</th><th>05</th></tr><tr><td>【<tg-emoji emoji-id=5931415565955503486>🤖</tg-emoji>】 <b>H057</b></td><td>{platform}</td></tr><tr><td>【<tg-emoji emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>05</b></td><td>{os}</td></tr><tr><td>【<tg-emoji emoji-id=5819078828017849357>🤖</tg-emoji>】 <b>Py7h0n</b></td><td>{python_ver}</td></tr></table></details>
+  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>0v3rv13w</summary><table><tr><th>0v3rv13w</th><th>0wn3r</th></tr><tr><td>【{e:user}】 <b>0wn3r</b></td><td>{me}</td></tr><tr><td>【{e:bot}】 <b>V3r5i0n</b></td><td>{version}</td></tr><tr><td>【{e:camera}】 <b>Pr3f1x</b></td><td>{prefix}</td></tr><tr><td>【{e:sync}】 <b>Upt1m3</b></td><td>{uptime}</td></tr><tr><td>【{e:user}】 <b>Br4nch</b></td><td>{branch}</td></tr></table></details><details><summary>5747u5</summary><table><tr><th>5747u5</th><th>Upd4t35</th></tr><tr><td>【{e:shield}】 <b>Upd4t35</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield}】 <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>P1ng</b></td><td>{ping}</td></tr></table></details><details><summary>3nv1r0nm3n7</summary><table><tr><th>3nv1r0nm3n7</th><th>05</th></tr><tr><td>【{e:bot}】 <b>H057</b></td><td>{platform}</td></tr><tr><td>【{e:bot}】 <b>05</b></td><td>{os}</td></tr><tr><td>【{e:bot}】 <b>Py7h0n</b></td><td>{python_ver}</td></tr></table></details>
   show_preview_in_help: 'Sh0w # m374 b4nn3r pr3v13w 1n h3lp [m0dul3]?'
 loader:
   name: L04d3r
-  link: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>F1l3 0f</b> {class_name}
+  link: '{e:folder} <b>F1l3 0f</b> {class_name}
 
 
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lm 1n r3ply 2 7h15 m5g 2 1n574ll</b>
+    {e:glowing_star} <b>{prefix}lm 1n r3ply 2 7h15 m5g 2 1n574ll</b>
 
 
-    <tg-emoji emoji-id=4916086774649848789>🔗</tg-emoji> <code>{prefix}dlm {url}</code>
-
-
-    {not_exact}'
-  file: '<tg-emoji emoji-id=5256113064821926998>📁</tg-emoji> <b>F1l3 0f</b> {class_name}
-
-
-    <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{prefix}lm 1n r3ply 2 7h15 m5g 2 1n574ll</b>
+    {e:link} <code>{prefix}dlm {url}</code>
 
 
     {not_exact}'
-  finding_module_in_repos: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> L00k1ng 4 m0dul35 1n r3p05.
-  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> L04d1ng 7h3 m0dul3.
-  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> I'm d0wnl04d1ng 7h3 m0dul3 45 4 f1l3.
-  no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>M0dul3</b> <code>{}</code> <b>c4nn07 b3 3xp0r73d 45 4 f1l3</b>
-  not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>N0 3x4c7 m47ch h45 b33n f0und, 50 7h3 cl05357 r35ul7 15 sh0wn 1n5734d</i>
-  args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>U mu57 sp3c1fy 4rg5</b>
+  file: '{e:folder} <b>F1l3 0f</b> {class_name}
+
+
+    {e:glowing_star} <b>{prefix}lm 1n r3ply 2 7h15 m5g 2 1n574ll</b>
+
+
+    {not_exact}'
+  finding_module_in_repos: '{e:clock} L00k1ng 4 m0dul35 1n r3p05.'
+  loading_module_via_file: '{e:clock} L04d1ng 7h3 m0dul3.'
+  ml_load_module: "{e:clock} I'm d0wnl04d1ng 7h3 m0dul3 45 4 f1l3."
+  no_ml: '{e:cross} <b>M0dul3</b> <code>{}</code> <b>c4nn07 b3 3xp0r73d 45 4 f1l3</b>'
+  not_exact: '{e:grey_exclamation} <i>N0 3x4c7 m47ch h45 b33n f0und, 50 7h3 cl05357 r35ul7 15 sh0wn 1n5734d</i>'
+  args: '{e:stop} <b>U mu57 sp3c1fy 4rg5</b>'
   repo_config_doc: URL 2 4 m0dul3 r3p0
-  avail_header: <tg-emoji emoji-id=5440551785284510215>🎢</tg-emoji> <b>M0dul35 fr0m r3p0</b>
-  no_module: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>M0dul3 n07 4v41l4bl3 1n r3p0.</b>
-  no_file: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>F1l3 n07 f0und</b>
-  provide_module: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Pr0v1d3 4 m0dul3 2 l04d</b>
-  bad_unicode: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1nv4l1d Un1c0d3 f0rm4771ng 1n m0dul3</b>
-  load_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>L04d1ng f41l3d. S33 l0g5 4 d3741l5</b>
-  loaded: <tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>M0dul3</b> <code>{}</code>{} <b>l04d3d {}</b>{}{}{}{}{}{}{}{}
+  avail_header: '{e:roller_coaster} <b>M0dul35 fr0m r3p0</b>'
+  no_module: '{e:stop} <b>M0dul3 n07 4v41l4bl3 1n r3p0.</b>'
+  no_file: '{e:stop} <b>F1l3 n07 f0und</b>'
+  provide_module: '{e:warn} <b>Pr0v1d3 4 m0dul3 2 l04d</b>'
+  bad_unicode: '{e:stop} <b>1nv4l1d Un1c0d3 f0rm4771ng 1n m0dul3</b>'
+  load_failed: '{e:stop} <b>L04d1ng f41l3d. S33 l0g5 4 d3741l5</b>'
+  loaded: '{e:glowing_star} <b>M0dul3</b> <code>{}</code>{} <b>l04d3d {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Wh47 cl455 n33d5 2 b3 unl04d3d?</b>
   unloaded: '{} <b>M0dul3 {} unl04d3d.</b>'
-  unload_suggestions: '<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>M0dul3</b> <code>{}</code> <b>n07 f0und.</b>
+  unload_suggestions: '{e:shield} <b>M0dul3</b> <code>{}</code> <b>n07 f0und.</b>
 
 
     <b>M4yb3 u m34n7:</b>'
-  modules_unloaded: '<tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>Unl04d3d {unloaded_num} m0dul35:</b>
+  modules_unloaded: '{e:check} <b>Unl04d3d {unloaded_num} m0dul35:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: <tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>M0dul3 n07 unl04d3d.</b>
-  modules_not_unloaded: '<tg-emoji emoji-id=5253780051471642059>❌</tg-emoji> <b>F41l3d 2 unl04d {not_unloaded} m0dul35.</b>
+  not_unloaded: '{e:shield} <b>M0dul3 n07 unl04d3d.</b>'
+  modules_not_unloaded: '{e:shield} <b>F41l3d 2 unl04d {not_unloaded} m0dul35.</b>
 
     <blockquote expandable>{errors}</blockquote>'
-  requirements_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3qu1r3m3n75 1n574ll4710n f41l3d</b>
+  requirements_failed: '{e:stop} <b>R3qu1r3m3n75 1n574ll4710n f41l3d</b>'
   requirements_restarted: 🚀 <b>Ur u53rb07 15 r3574r73d, 4f73r r3574r7, 1n574ll 7h3 m0dul3 4g41n.</b>
-  requirements_installing: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>1n574ll1ng r3qu1r3m3n75:
+  requirements_installing: '{e:think} <b>1n574ll1ng r3qu1r3m3n75:
 
 
     {}</b>'
-  requirements_restart: <tg-emoji emoji-id=5875145601682771643>🚀</tg-emoji> <b>R3qu1r3m3n75 1n574ll3d, bu7 4 r3574r7 15 r3qu1r3d 4</b> <code>{}</code> <b>2 4pply</b>
-  all_modules_deleted: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>4ll m0dul35 d3l373d</b>
-  undoc: <tg-emoji emoji-id=5427052514094619126>🤷‍♀️</tg-emoji> N0 d0c5
+  requirements_restart: '{e:rocket} <b>R3qu1r3m3n75 1n574ll3d, bu7 4 r3574r7 15 r3qu1r3d 4</b> <code>{}</code> <b>2 4pply</b>'
+  all_modules_deleted: '{e:check} <b>4ll m0dul35 d3l373d</b>'
+  undoc: '{e:shrug} N0 d0c5'
   ihandler: '
 
-    <tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <code>{}</code> {}'
-  inline_init_failed: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h15 m0dul3 r3qu1r35 3li5 1nl1n3 f347ur3 & 1n1714l1z4710n 0f 1nl1n3M4n4g3r f41l3d</b>
+    {e:bot} <code>{}</code> {}'
+  inline_init_failed: '{e:cross} <b>7h15 m0dul3 r3qu1r35 3li5 1nl1n3 f347ur3 & 1n1714l1z4710n 0f 1nl1n3M4n4g3r f41l3d</b>
 
     <i>Plz, r3m0v3 1 0f ur 0ld b075 fr0m @BotFather & r3574r7 u53rb07 2 l04d 7h15 m0dul3</i>'
-  version_incompatible: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h15 m0dul3 r3qu1r35 3li5 {}+
+  version_incompatible: '{e:cross} <b>7h15 m0dul3 r3qu1r35 3li5 {}+
 
     Plz, upd473 w17h</b> <code>.update</code>'
-  ffmpeg_required: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h15 m0dul3 r3qu1r35 FFMPEG, wh1ch 15 n07 1n574ll3d</b>
+  ffmpeg_required: '{e:cross} <b>7h15 m0dul3 r3qu1r35 FFMPEG, wh1ch 15 n07 1n574ll3d</b>'
   developer: '
 
 
-    <tg-emoji emoji-id=5287454910059654880>🫶</tg-emoji> <b>D3v:</b> {}'
-  depends_from: "\n\n<tg-emoji emoji-id=5341492148468465410>\U0001F4E6</tg-emoji> <b>D3p3nd3nc135:</b> \n{}"
+    {e:heart_hands} <b>D3v:</b> {}'
+  depends_from: "\n\n{e:package} <b>D3p3nd3nc135:</b> \n{}"
   by: by
   module_fs: 💿 <b>W0uld u l1k3 2 s4v3 7h15 m0dul3 2 f1l35y573m, 50 17 w0n'7 g37 unl04d3d 4f73r r3574r7?</b>
   save: 💿 S4v3
@@ -1046,15 +1043,15 @@ loader:
   modlink: '
 
 
-    <tg-emoji emoji-id=6037284117505116849>🌐</tg-emoji> <b>L1nk:</b> <code>{}</code>'
+    {e:globe} <b>L1nk:</b> <code>{}</code>'
   blob_link: '
 
 
-    <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>D0 n07 u53 `blob` l1nk5 2 d0wnl04d m0dul35. C0n51d3r sw17ch1ng 2 `raw` 1n5734d</b>'
+    {e:warn} <b>D0 n07 u53 `blob` l1nk5 2 d0wnl04d m0dul35. C0n51d3r sw17ch1ng 2 `raw` 1n5734d</b>'
   suggest_subscribe: '
 
 
-    <tg-emoji emoji-id=5435957248314579621>⭐️</tg-emoji> <b>7h15 m0dul3 15 m4d3 by {}. D0 u w4n7 2 j01n 7h15 ch4nn3l 2 supp0r7 d3v?</b>'
+    {e:star} <b>7h15 m0dul3 15 m4d3 by {}. D0 u w4n7 2 j01n 7h15 ch4nn3l 2 supp0r7 d3v?</b>'
   subscribe: 💬 Sub5cr1b3
   no_subscribe: 🚫 D0n'7 sub5cr1b3
   subscribed: 💬 Sub5cr1b3d
@@ -1062,36 +1059,36 @@ loader:
   confirm_clearmodules: ⚠️ <b>R u 5ur3 u w4n7 2 cl34r 4ll m0dul35?</b>
   clearmodules: 🗑 Cl34r m0dul35
   cancel: 🚫 C4nc3l
-  overwrite_module: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h15 m0dul3 4773mp73d 2 0v3rr1d3 7h3 c0r3 1 (</b><code>{}</code><b>)</b>
+  overwrite_module: '{e:cross} <b>7h15 m0dul3 4773mp73d 2 0v3rr1d3 7h3 c0r3 1 (</b><code>{}</code><b>)</b>
 
 
-    <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i> D0n''7 r3p0r7 17 45 bug. 17''5 4 s3cur17y m345ur3 2 pr3v3n7 r3pl4c1ng c0r3 m0dul35 w17h 50m3 junk</i>'
-  scam_module: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h3 m0dul3</b> <code>{name}</code> <b>15 4 sc4m, plz r3p0r7 17 2 7h3 supp0r7 gr0up (</b><code>{prefix}support</code><b>)</b>
+    {e:tip}<i> D0n''7 r3p0r7 17 45 bug. 17''5 4 s3cur17y m345ur3 2 pr3v3n7 r3pl4c1ng c0r3 m0dul35 w17h 50m3 junk</i>'
+  scam_module: '{e:cross} <b>7h3 m0dul3</b> <code>{name}</code> <b>15 4 sc4m, plz r3p0r7 17 2 7h3 supp0r7 gr0up (</b><code>{prefix}support</code><b>)</b>
 
 
     <tg-spoiler><i>Pr073c710n h45 570pp3d 175 l04d1ng.</i></tg-spoiler>'
-  overwrite_command: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>7h15 m0dul3 4773mp73d 2 0v3rr1d3 7h3 c0r3 cmd (</b><code>{}{}</code><b>)</b>
+  overwrite_command: '{e:cross} <b>7h15 m0dul3 4773mp73d 2 0v3rr1d3 7h3 c0r3 cmd (</b><code>{}{}</code><b>)</b>
 
 
-    <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i> D0n''7 r3p0r7 17 45 bug. 17''5 4 s3cur17y m345ur3 2 pr3v3n7 r3pl4c1ng c0r3 m0dul35'' cmd5 w17h 50m3 junk</i>'
-  unload_core: '<tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>U c4n''7 unl04d c0r3 m0dul3</b> <code>{}</code><b></b>
+    {e:tip}<i> D0n''7 r3p0r7 17 45 bug. 17''5 4 s3cur17y m345ur3 2 pr3v3n7 r3pl4c1ng c0r3 m0dul35'' cmd5 w17h 50m3 junk</i>'
+  unload_core: '{e:cross} <b>U c4n''7 unl04d c0r3 m0dul3</b> <code>{}</code><b></b>
 
 
-    <tg-emoji emoji-id=5472146462362048818>💡</tg-emoji><i> D0n''7 r3p0r7 17 45 bug. 17''5 4 s3cur17y m345ur3 2 pr3v3n7 r3pl4c1ng c0r3 m0dul35 w17h 50m3 junk</i>'
-  cannot_unload_lib: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>U c4n'7 unl04d l1br4ry</b>
-  wait_channel_approve: '<tg-emoji emoji-id=5469741319330996757>💫</tg-emoji> <b>M0dul3</b> <code>{}</code> <b>r3qu3575 p3rm 2 j01n ch4nn3l <a href="https://t.me/{}">{}</a>.
+    {e:tip}<i> D0n''7 r3p0r7 17 45 bug. 17''5 4 s3cur17y m345ur3 2 pr3v3n7 r3pl4c1ng c0r3 m0dul35 w17h 50m3 junk</i>'
+  cannot_unload_lib: "{e:cross} <b>U c4n'7 unl04d l1br4ry</b>"
+  wait_channel_approve: '{e:dizzy} <b>M0dul3</b> <code>{}</code> <b>r3qu3575 p3rm 2 j01n ch4nn3l <a href="https://t.me/{}">{}</a>.
 
 
-    <b><tg-emoji emoji-id=5467666648263564704>❓</tg-emoji> R3450n: {}</b>
+    <b>{e:question} R3450n: {}</b>
 
 
     <i>W4171ng 4 <a href="https://t.me/{}">4ppr0v4l</a>...</i>'
-  installing: <tg-emoji emoji-id=5325792861885570739>🕔</tg-emoji> <b>1n574ll1ng m0dul3</b> <code>{}</code><b>...</b>
-  repo_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3p0</b> <code>{}</code> <b>15 4lr34dy 4dd3d</b>
-  repo_added: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>R3p0</b> <code>{}</code> <b>4dd3d</b>
-  no_repo: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U n33d 2 sp3c1fy r3p0 2 4dd</b>
-  repo_not_exists: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>R3p0</b> <code>{}</code> <b>15 n07 4dd3d</b>
-  repo_deleted: <tg-emoji emoji-id=5784993237412351403>✅</tg-emoji> <b>R3p0</b> <code>{}</code> <b>d3l373d</b>
+  installing: '{e:clock} <b>1n574ll1ng m0dul3</b> <code>{}</code><b>...</b>'
+  repo_exists: '{e:stop} <b>R3p0</b> <code>{}</code> <b>15 4lr34dy 4dd3d</b>'
+  repo_added: '{e:check} <b>R3p0</b> <code>{}</code> <b>4dd3d</b>'
+  no_repo: '{e:stop} <b>U n33d 2 sp3c1fy r3p0 2 4dd</b>'
+  repo_not_exists: '{e:stop} <b>R3p0</b> <code>{}</code> <b>15 n07 4dd3d</b>'
+  repo_deleted: '{e:check} <b>R3p0</b> <code>{}</code> <b>d3l373d</b>'
   _cmd_doc_addrepo: 4dd 4 r3p0 2 7h3 l157 0f r3p05
   _cmd_doc_clearmodules: D3l373 4ll 1n574ll3d m0dul35
   _cmd_doc_delrepo: R3m0v3 4 r3p0 fr0m 7h3 l157 0f r3p05
@@ -1100,50 +1097,50 @@ loader:
   _cmd_doc_unloadmod: Unl04d m0dul3 by cl455 n4m3
   _cls_doc: L04d5 m0dul35
   basic_auth_doc: B451c 4u7h 4 m0dul3 r3p0
-  choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Ch00s3 4 r3p0 2 1n574ll 4ll m0dul35 fr0m:</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>1n574ll1ng 4ll m0dul35 fr0m r3p0...</b>
-  installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>4ll m0dul35 fr0m r3p0 1n574ll3d 5ucc355fully!</b>
-  dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>N0 m0dul35 f0und 1n 7h15 r3p0, f4gg07!</b>
-  dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>50m3 m0dul35 f41l3d 2 1n574ll, b17ch:</b>
+  choose_repo: '{e:folders} <b>Ch00s3 4 r3p0 2 1n574ll 4ll m0dul35 fr0m:</b>'
+  installing_all_from_repo: '{e:clock} <b>1n574ll1ng 4ll m0dul35 fr0m r3p0...</b>'
+  installed_all_from_repo: '{e:glowing_star} <b>4ll m0dul35 fr0m r3p0 1n574ll3d 5ucc355fully!</b>'
+  dlm_all_from_repo_error_nomods: '{e:warn} <b>N0 m0dul35 f0und 1n 7h15 r3p0, f4gg07!</b>'
+  dlm_all_from_repo_error_somemods: '{e:warn} <b>50m3 m0dul35 f41l3d 2 1n574ll, b17ch:</b>
 
     '
   show_banner_doc: '5h0w # m374 b4nn3r l1k3 pr3v13w?'
-  '404': <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>M0dul3 n07 f0und</b>
+  '404': '{e:stop} <b>M0dul3 n07 f0und</b>'
   _cmd_doc_dlmall: 1n574ll 4ll m0dul35 fr0m 53l3c73d r3p0
   _cmd_doc_ml: <m0dul3> - 53nd m0dul3 45 4 f1l3
-  result: '<tg-emoji emoji-id=5337183664630709422>🔎</tg-emoji> <b>534rch r35ul7 f0r</b> <code>{query}</code>
+  result: '{e:inspect} <b>534rch r35ul7 f0r</b> <code>{query}</code>
 
 
-    <tg-emoji emoji-id=5258270535710317499>📦</tg-emoji> <b>{name}</b> by <b>{dev}</b>
+    {e:package} <b>{name}</b> by <b>{dev}</b>
 
-    <tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> <i>{cls_doc}</i>
+    {e:info} <i>{cls_doc}</i>
 
-    <tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <b>C0mm4nd5:</b>
+    {e:bot} <b>C0mm4nd5:</b>
 
     {commands}
 
 
-    <tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji> <code>{prefix}dlmod {mhash}</code>'
-  verify_required: <tg-emoji emoji-id=5188463524568926712>⚠️</tg-emoji> <b>70 unl0ck 7h3 4b1l17y 70 1n574ll 7h1rd-p4r7y m0dul35, c0mpl373 7h3 7357 1n <a href="https://t.me/{}?start=lm_verify">y0ur b07</a></b>
+    {e:star} <code>{prefix}dlmod {mhash}</code>'
+  verify_required: '{e:warn} <b>70 unl0ck 7h3 4b1l17y 70 1n574ll 7h1rd-p4r7y m0dul35, c0mpl373 7h3 7357 1n <a href="https://t.me/{}?start=lm_verify">y0ur b07</a></b>'
 translations:
   name: 7r4n5l4710n5
   lang_saved: '{} <b>L4ngu4g3 54v3d!</b>'
-  pack_saved: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>7r4n5l473 p4ck 54v3d!</b>
-  incorrect_language: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1nc0rr3c7 l4ngu4g3 sp3c1f13d</b>
-  lang_removed: <tg-emoji emoji-id=5197474765387864959>👍</tg-emoji> <b>7r4n5l4710n5 r3537 2 d3f4ul7 15</b>
-  check_pack: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>1nv4l1d p4ck f0rm47 1n url</b>
-  check_url: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U n33d 2 sp3c1fy v4l1d url c0n741n1ng 4 l4ngp4ck</b>
-  too_long: <tg-emoji emoji-id=5341492148468465410>📁</tg-emoji> <b>Cmd 0u7pu7 s33m5 2 b3 2 l0ng, 50 17'5 s3n7 1n f1l3.</b>
-  choose_language: <tg-emoji emoji-id=5454219968948229067>🗽</tg-emoji> <b>Ch0053 l4ngu4g3</b>
+  pack_saved: '{e:thumbup} <b>7r4n5l473 p4ck 54v3d!</b>'
+  incorrect_language: '{e:stop} <b>1nc0rr3c7 l4ngu4g3 sp3c1f13d</b>'
+  lang_removed: '{e:thumbup} <b>7r4n5l4710n5 r3537 2 d3f4ul7 15</b>'
+  check_pack: '{e:stop} <b>1nv4l1d p4ck f0rm47 1n url</b>'
+  check_url: '{e:stop} <b>U n33d 2 sp3c1fy v4l1d url c0n741n1ng 4 l4ngp4ck</b>'
+  too_long: "{e:package} <b>Cmd 0u7pu7 s33m5 2 b3 2 l0ng, 50 17'5 s3n7 1n f1l3.</b>"
+  choose_language: '{e:statue} <b>Ch0053 l4ngu4g3</b>'
   off_langs: 🏴‍☠️ 0ff1c14l L4ngP4cks
   meme_langs: 🏴‍☠️ M3m3 L4ngP4cks
-  not_official: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>7h15 l4ngu4g3 15 n07 0ff1c14lly supp0r73d</b>
+  not_official: '{e:warn} <b>7h15 l4ngu4g3 15 n07 0ff1c14lly supp0r73d</b>'
   requested_join: '💫 <b>M0dul3</b> <code>{}</code> <b>r3qu3573d 2 j01n ch4nn3l <a href=''https://t.me/{}''>{}</a></b>
 
 
     <b>❓ R3450n:</b> <i>{}</i>'
-  fw_error: <tg-emoji emoji-id=5877458226823302157>🕒</tg-emoji> <b>C4ll</b> <code>{}</code> <b>c4u53d Fl00dW417 0f {} 0n m37h0d</b> <code>{}</code>
-  rpc_error: <tg-emoji emoji-id=5877477244938489129>🚫</tg-emoji> <b>C4ll</b> <code>{}</code> <b>f41l3d du3 2 RPC 3rr:</b> <code>{}</code>
+  fw_error: '{e:clock} <b>C4ll</b> <code>{}</code> <b>c4u53d Fl00dW417 0f {} 0n m37h0d</b> <code>{}</code>'
+  rpc_error: '{e:stop} <b>C4ll</b> <code>{}</code> <b>f41l3d du3 2 RPC 3rr:</b> <code>{}</code>'
   _cmd_doc_dllangpack: '[l1nk 2 p4ck] - 4dd 3x73rn4l 7r4n5l4710n p4ck'
   _cmd_doc_setlang: '[l4ngu4g3] - ch4ng3 d3f4ul7 l4ngu4g3'
   downloaded_langs: D0wnl04d3d
@@ -1163,40 +1160,40 @@ translations:
   _cls_doc: Pr0c35535 1n73rn4l 7r4n5l4710n5
 eval:
   name: 3v4lu470r
-  eval: '<tg-emoji emoji-id={}>💻</tg-emoji><b> C0d3:</b>
+  eval: '{e:laptop}<b> C0d3:</b>
 
     <pre><code class="language-{}">{}</code></pre>
 
 
-    <tg-emoji emoji-id=5197688912457245639>✅</tg-emoji><b> R35ul7:</b>
+    {e:check}<b> R35ul7:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
-  eval_py: '<tg-emoji emoji-id={}>💻</tg-emoji><b> C0d3:</b>
+  eval_py: '{e:laptop}<b> C0d3:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
-  err: '<tg-emoji emoji-id={}>💻</tg-emoji><b> C0d3:</b>
+  err: '{e:laptop}<b> C0d3:</b>
 
     <pre><code class="language-{}">{}</code></pre>
 
 
-    <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>3rr0r:</b>
+    {e:stop} <b>3rr0r:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
-  compiling: <tg-emoji emoji-id=5325787248363314644>🫥</tg-emoji> <b>C0mp1l1ng c0d3...</b>
-  no_compiler: <tg-emoji emoji-id={}>💻</tg-emoji> <b>{} c0mp1l3r 15 n07 1n574ll3d 0n 7h3 sy573m.</b>
+  compiling: '{e:melting_face} <b>C0mp1l1ng c0d3...</b>'
+  no_compiler: '{e:laptop} <b>{} c0mp1l3r 15 n07 1n574ll3d 0n 7h3 sy573m.</b>'
   time_exec: '
 
-    <tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>Ex3cu710n 71m3: {}s</b>'
+    {e:dizzy} <b>Ex3cu710n 71m3: {}s</b>'
   eval_result: '
 
 
-    <tg-emoji emoji-id=5197688912457245639>✅</tg-emoji><b> R35ul7:</b>
+    {e:check}<b> R35ul7:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
   print_outp: '
 
 
-    <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji><b> Pr1n7 R35ul7:</b>
+    {e:check}<b> Pr1n7 R35ul7:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
   _cmd_doc_e: 3v4lu4735 py7h0n c0d3
@@ -1211,10 +1208,10 @@ eval:
   _cls_doc: 3v4lu4735 c0d3 1n v4r10u5 l4ng5
 translate:
   name: 7r4n5l470r
-  no_args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>N0 4rg5 pr0v1d3d</b>
-  error: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Un4bl3 2 7r4n5l473 73x7</b>
+  no_args: '{e:stop} <b>N0 4rg5 pr0v1d3d</b>'
+  error: '{e:stop} <b>Un4bl3 2 7r4n5l473 73x7</b>'
   language: en
-  translated_text: '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji> 7r4n5l473d 73x7:</blockquote>
+  translated_text: '<blockquote>{e:memo} 7r4n5l473d 73x7:</blockquote>
 
 
     {tr_text}'
@@ -1222,27 +1219,27 @@ translate:
   _cls_doc: 7r4n5l4735 73x7 (0bv10u5ly)
 quickstart:
   name: Qu1ck574r7
-  base: '<tg-emoji emoji-id=5463379725441341739>🌟</tg-emoji> <b>H3110.</b> Y0ur <b>{}</b> us3rb0t 15 n0w 1n5t4113d.
+  base: '{e:glowing_star} <b>H3110.</b> Y0ur <b>{}</b> us3rb0t 15 n0w 1n5t4113d.
 
 
-    <tg-emoji emoji-id=5134202243486057363>💫</tg-emoji> <b>N33d h31p?</b> J01n <a href="https://t.me/ElysTalk">0ur 5upp0rt ch4t</a>. W3 h31p <b>3v3ry0n3</b>.
+    {e:dizzy} <b>N33d h31p?</b> J01n <a href="https://t.me/ElysTalk">0ur 5upp0rt ch4t</a>. W3 h31p <b>3v3ry0n3</b>.
 
 
-    <tg-emoji emoji-id=4940480187436369099>💁‍♀️</tg-emoji> <b>Qu1ck Gu1d3:</b>
+    {e:tipping_hand} <b>Qu1ck Gu1d3:</b>
 
 
-    <tg-emoji emoji-id=5456197350416486261>1️⃣</tg-emoji> <b>Wr1t3</b> <code>.help</code> <b>t0 533 th3 115t 0f m0du135</b>
+    {e:num_1} <b>Wr1t3</b> <code>.help</code> <b>t0 533 th3 115t 0f m0du135</b>
 
-    <tg-emoji emoji-id=5456261689026581678>2️⃣</tg-emoji> <b>Wr1t3</b> <code>.help &lt;M0du13 n4m3/c0mm4nd&gt;</code> <b>t0 533 th3 d35cr1pt10n 0f th3 m0du13</b>
+    {e:num_2} <b>Wr1t3</b> <code>.help &lt;M0du13 n4m3/c0mm4nd&gt;</code> <b>t0 533 th3 d35cr1pt10n 0f th3 m0du13</b>
 
-    <tg-emoji emoji-id=5458366235886522404>3️⃣</tg-emoji> <b>Wr1t3</b> <code>.dlmod &lt;11nk&gt;</code> <b>t0 104d 4 m0du13 fr0m 4 11nk</b>
+    {e:num_3} <b>Wr1t3</b> <code>.dlmod &lt;11nk&gt;</code> <b>t0 104d 4 m0du13 fr0m 4 11nk</b>
 
-    <tg-emoji emoji-id=5456207331920483861>4️⃣</tg-emoji> <b>Wr1t3</b> <code>.loadmod</code> <b>1n r35p0n53 t0 4 f113 t0 104d 4 m0du13 fr0m 1t</b>
+    {e:num_4} <b>Wr1t3</b> <code>.loadmod</code> <b>1n r35p0n53 t0 4 f113 t0 104d 4 m0du13 fr0m 1t</b>
 
-    <tg-emoji emoji-id=5456185418997340146>5️⃣</tg-emoji> <b>Wr1t3</b> <code>.unloadmod &lt;M0du13 n4m3&gt;</code> <b>t0 un104d 4 m0du13</b>
+    {e:num_5} <b>Wr1t3</b> <code>.unloadmod &lt;M0du13 n4m3&gt;</code> <b>t0 un104d 4 m0du13</b>
 
 
-    <tg-emoji emoji-id=5456178297941561360>💡</tg-emoji> <b>3li5 5upp0rt5 m0du135 fr0m H1kk4, Fr13nd1y-T313gr4m, 4nd G33kTG, 45 w311 45 1t5 0wn.</b>
+    {e:tip} <b>3li5 5upp0rt5 m0du135 fr0m H1kk4, Fr13nd1y-T313gr4m, 4nd G33kTG, 45 w311 45 1t5 0wn.</b>
 
     '
   language_saved: 🇬🇧 L4ngu4g3 54v3d!
@@ -1291,12 +1288,12 @@ $inline:
   opening_form: ' <b>0p3n1ng f0rm...</b>'
   opening_gallery: ' <b>0p3n1ng g4ll3ry...</b>'
   opening_list: ' <b>0p3n1ng l157...</b>'
-  inline403: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>U c4n'7 s3nd 1nl1n3 un175 1n 7h15 ch47</b>
-  invoke_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Un17 1nv0k3 f41l3d! M0r3 1nf0 1n l0g5</b>
-  invoke_failed_logs: '<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Un17 1nv0k3 f41l3d!</b>
+  inline403: "{e:stop} <b>U c4n'7 s3nd 1nl1n3 un175 1n 7h15 ch47</b>"
+  invoke_failed: '{e:stop} <b>Un17 1nv0k3 f41l3d! M0r3 1nf0 1n l0g5</b>'
+  invoke_failed_logs: '{e:stop} <b>Un17 1nv0k3 f41l3d!</b>
 
 
-    <tg-emoji emoji-id=5226512880362332956>📖</tg-emoji> <b>L0g5:</b>
+    {e:book} <b>L0g5:</b>
 
 
     <pre><code class="language-logs">{}</code></pre>'
@@ -1316,7 +1313,7 @@ $inline:
   command: 🌟 Cmd «{}»
   button403: U r n07 4ll0w3d 2 pr355 7h15 bu770n!
   keep_id: ⚠️ D0 n07 r3m0v3 ID! {}
-  no_query_results: '<tg-emoji emoji-id=5440660757194744323>‼️</tg-emoji> <b>F41L3D 70 CR34T3 F0RM</b>
+  no_query_results: '{e:double_exclamation} <b>F41L3D 70 CR34T3 F0RM</b>
 
 
     P0551BL3 W4Y5 70 F1X 7H3 3RR0R:
@@ -1334,9 +1331,9 @@ elys_plugin_security:
   _cls_doc: M4n4g3 3x73rn4l m0dul3 53cur17y 0v3rr1d35
   _cmd_doc_external: <m0dul3> - D3ny full u53rb07 4cc355 f0r m0dul3
   _cmd_doc_unexternal: <m0dul3> - Gr4n7 full u53rb07 4cc355 f0r m0dul3
-  no_hash: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Y0u mu57 5p3c1fy 4 m0dul3 n4m3</b>
-  hash_not_found: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>M0dul3 w17h 7h15 n4m3 n07 f0und</b>
-  hash_not_found_suggest: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>N0 m47ch35. Cl05357:</b> <code>{}</code>
+  no_hash: '{e:stop} <b>Y0u mu57 5p3c1fy 4 m0dul3 n4m3</b>'
+  hash_not_found: '{e:stop} <b>M0dul3 w17h 7h15 n4m3 n07 f0und</b>'
+  hash_not_found_suggest: '{e:warn} <b>N0 m47ch35. Cl05357:</b> <code>{}</code>'
 loader_restrictor:
   q1: Wh47 c4n 4ny m0dul3 y0u 1n574ll 4c7u4lly d0?
   q1_ans1: 3x4c7ly wh47 175 d35cr1p710n 54y5 - n07h1ng m0r3
@@ -1362,9 +1359,9 @@ loader_restrictor:
   q4_ans3: N0, bu7 7h3 u53rb07'5 b451c pr073c710n 5h0uld c47ch 5uch 4c71v17y
   q4_ans4: N07 n3c3554r1ly - 4 m0dul3 c4n 4c7 1nv151bly, w17h0u7 4ny n071f1c4710n5, un71l 17'5 700 l473
   q4_hint: '5734l7h 15 7h3 m41n d4ng3r 0f m4l1c10u5 m0dul35: w17h0u7 ch3ck1ng 7h3 c0d3 b3f0r3h4nd, y0u m1gh7 51mply n07 n071c3 4 pr0bl3m un71l 17''5 700 l473'
-  timeout: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>Y0u d1dn'7 4n5w3r 4ll 7h3 qu35710n5 1n 71m3. Y0u c4n 7ry 4g41n by 53nd1ng</b> <code>/start lm_verify</code>
-  failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Wr0ng 4n5w3r. 70 unl0ck 7h1rd-p4r7y m0dul3 1n574ll4710n, 7ry 4g41n by 53nd1ng</b> <code>/start lm_verify</code>
-  already_passed: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>Y0u'v3 4lr34dy p4553d 7h3 ch3ck - 7h1rd-p4r7y m0dul3 1n574ll4710n 15 unl0ck3d</b>
-  unlocked: <tg-emoji emoji-id=5118861066981344121>✅</tg-emoji> <b>Ch3ck p4553d, 7h1rd-p4r7y m0dul3 1n574ll4710n 15 unl0ck3d</b>
-  unlock_prompt: <tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>70 unl0ck 7h1rd-p4r7y m0dul3 1n574ll4710n, c0mpl373 4 5h0r7 ch3ck</b>
+  timeout: "{e:warn} <b>Y0u d1dn'7 4n5w3r 4ll 7h3 qu35710n5 1n 71m3. Y0u c4n 7ry 4g41n by 53nd1ng</b> <code>/start lm_verify</code>"
+  failed: '{e:stop} <b>Wr0ng 4n5w3r. 70 unl0ck 7h1rd-p4r7y m0dul3 1n574ll4710n, 7ry 4g41n by 53nd1ng</b> <code>/start lm_verify</code>'
+  already_passed: "{e:check} <b>Y0u'v3 4lr34dy p4553d 7h3 ch3ck - 7h1rd-p4r7y m0dul3 1n574ll4710n 15 unl0ck3d</b>"
+  unlocked: '{e:check} <b>Ch3ck p4553d, 7h1rd-p4r7y m0dul3 1n574ll4710n 15 unl0ck3d</b>'
+  unlock_prompt: '{e:warn} <b>70 unl0ck 7h1rd-p4r7y m0dul3 1n574ll4710n, c0mpl373 4 5h0r7 ch3ck</b>'
   unlock_prompt_btn: 74k3 7h3 ch3ck

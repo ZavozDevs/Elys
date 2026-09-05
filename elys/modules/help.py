@@ -36,7 +36,12 @@ logger = logging.getLogger(__name__)
 class Help(loader.Module):
     """Shows help for modules and commands"""
 
-    strings = {"name": "Help"}
+    strings = {
+        "name": "Help",
+        "module_header": "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{}</b>:",
+        "mod_doc": "\n<i><tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> {}\n</i>",
+        "inline_cmd_li": "\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <code>{}</code> {}",
+    }
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -213,17 +218,12 @@ class Help(loader.Module):
             else utils.escape_html(name)
         )
 
-        reply = "{} <b>{}</b>:".format(
-            "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji>",
-            _name,
-        )
+        reply = self.strings["module_header"].format(_name)
         inline_cmd = ""
         cmds = ""
         if module.__doc__:
-            reply += (
-                "\n<i><tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> "
-                + utils.escape_html(inspect.getdoc(module))
-                + "\n</i>"
+            reply += self.strings["mod_doc"].format(
+                utils.escape_html(inspect.getdoc(module))
             )
 
         if isinstance(self.lookup(args), loader.Library):
@@ -237,16 +237,13 @@ class Help(loader.Module):
 
         if hasattr(module, "inline_handlers"):
             for name, fun in module.inline_handlers.items():
-                inline_cmd += (
-                    "\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji>"
-                    " <code>{}</code> {}".format(
-                        f"@{self.inline.bot_username} {name}",
-                        (
-                            utils.escape_html(inspect.getdoc(fun))
-                            if fun.__doc__
-                            else self.strings["undoc"]
-                        ),
-                    )
+                inline_cmd += self.strings["inline_cmd_li"].format(
+                    f"@{self.inline.bot_username} {name}",
+                    (
+                        utils.escape_html(inspect.getdoc(fun))
+                        if fun.__doc__
+                        else self.strings["undoc"]
+                    ),
                 )
 
         lines = []

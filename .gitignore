@@ -184,3 +184,6 @@ agent/
 TODO.md
 todo.md
 *.patch
+
+# local tooling, not part of the bot
+tmp/

@@ -50,6 +50,7 @@ class TestMod(loader.Module):
 
     strings = {
         "name": "Tester",
+        "placeholder_error": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji>",
     }
 
     def __init__(self):
@@ -408,7 +409,7 @@ class TestMod(loader.Module):
             placeholders_msg = self.config["custom_message"].format(**data)
         except KeyError:
             logger.exception("Missing placeholder in custom_message")
-            placeholders_msg = "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji>"
+            placeholders_msg = self.strings["placeholder_error"]
 
         if self.config["rich_mode"]:
             rich_message = placeholders_msg.replace("\r\n", "<br>").replace(

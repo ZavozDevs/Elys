@@ -51,8 +51,8 @@ class ElysSecurityMod(loader.Module):
     """Control security settings"""
 
     strings = {
-        "invalid_name": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Неправильное имя</b>",
-        "no_command": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Команда</b> <code>{}</code> <b>не найдена!</b>",
+        "invalid_name": "{e:stop} <b>Неправильное имя</b>",
+        "no_command": "{e:stop} <b>Команда</b> <code>{}</code> <b>не найдена!</b>",
         "permissions": "🔐 <b>Здесь можно настроить разрешения для команды</b> <code>{}{}</code>",
         "close_menu": "🙈 Закрыть это меню",
         "global": "🔐 <b>Здесь можно настроить глобальную исключающую маску. Если тумблер выключен здесь, он выключен для всех команд</b>",
@@ -67,30 +67,30 @@ class ElysSecurityMod(loader.Module):
         "group_admin": "🧑\u200d⚖️ Админ (любой)",
         "group_member": "👥 В группе",
         "pm": "🤙 В лс",
-        "owner_list": "<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>Пользователи группы</b> <code>owner</code><b>:</b>\n\n<blockquote expandable>{}</blockquote>",
-        "no_owner": "<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b>Нет пользователей в группе</b> <code>owner</code>",
-        "no_user": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Укажи, кому выдавать права</b>",
-        "not_a_user": "<tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>Указанная цель - не пользователь</b>",
+        "owner_list": "{e:owner} <b>Пользователи группы</b> <code>owner</code><b>:</b>\n\n<blockquote expandable>{}</blockquote>",
+        "no_owner": "{e:owner} <b>Нет пользователей в группе</b> <code>owner</code>",
+        "no_user": "{e:stop} <b>Укажи, кому выдавать права</b>",
+        "not_a_user": "{e:warn} <b>Указанная цель - не пользователь</b>",
         "cancel": "🚫 Отмена",
         "confirm": "👑 Подтвердить",
-        "self": "<tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>Нельзя управлять своими правами!</b>",
+        "self": "{e:warn} <b>Нельзя управлять своими правами!</b>",
         "warning": '⚠️ <b>Ты действительно хочешь добавить <a href="tg://user?id={}">{}</a> в группу</b> <code>{}</code><b>!\nЭто действие может передать частичный или полный доступ к юзерботу этому пользователю!</b>',
         "suggest_nonick": "🔰 <i>Хочешь ли ты включить NoNick для этого пользователя?</i>",
         "user_nn": '🔰 <b>NoNick для <a href="tg://user?id={}">{}</a> включен</b>',
         "enable_nonick_btn": "🔰 Включить",
-        "owner_added": '<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a> добавлен в группу</b> <code>owner</code>',
-        "owner_removed": '<tg-emoji emoji-id=5386399931378440814>😎</tg-emoji> <b><a href="tg://user?id={}">{}</a> удален из группы</b> <code>owner</code>',
-        "what": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Вам нужно указать тип цели первым аргументов (</b><code>user</code> <b>or</b> <code>chat</code><b>)</b>",
-        "no_target": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Не указана цель правила безопасности</b>",
-        "no_rule": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Не указано правило безопасности (модуль или команда)</b>",
+        "owner_added": '{e:owner} <b><a href="tg://user?id={}">{}</a> добавлен в группу</b> <code>owner</code>',
+        "owner_removed": '{e:owner} <b><a href="tg://user?id={}">{}</a> удален из группы</b> <code>owner</code>',
+        "what": "{e:stop} <b>Вам нужно указать тип цели первым аргументов (</b><code>user</code> <b>or</b> <code>chat</code><b>)</b>",
+        "no_target": "{e:stop} <b>Не указана цель правила безопасности</b>",
+        "no_rule": "{e:stop} <b>Не указано правило безопасности (модуль или команда)</b>",
         "confirm_rule": "🔐 <b>Пожалуйста, подтвердите что хотите выдать {} <a href='{}'>{}</a> право использовать {}</b> <code>{}</code> <b>{}</b>",
         "multiple_rules": "🔐 <b>Не получилось однозначно распознать правила безопасности. Выберите то, которое имели ввиду:</b>\n\n{}",
         "rule_added": "🔐 <b>Вы выдали {} <a href='{}'>{}</a> право использовать {}</b> <code>{}</code> <b>{}</b>",
-        "rules": "<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Таргетированные правила безопасности:</b>\n\n<blockquote expandable>{}</blockquote>",
-        "no_rules": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Нет таргетированных правил безопасности</b>",
-        "owner_target": "<tg-emoji emoji-id=5447644880824181073>⚠️</tg-emoji> <b>Этот пользователь - владелец, его права не могут управляться таргетированной безопасностью</b>",
-        "rules_removed": '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Правила таргетированной безопасности для <a href="{}">{}</a> удалены</b>',
-        "rule_removed": '<tg-emoji emoji-id=5472308992514464048>🔐</tg-emoji> <b>Удалено правило безопасности для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>',
+        "rules": "{e:unlock} <b>Таргетированные правила безопасности:</b>\n\n<blockquote expandable>{}</blockquote>",
+        "no_rules": "{e:stop} <b>Нет таргетированных правил безопасности</b>",
+        "owner_target": "{e:warn} <b>Этот пользователь - владелец, его права не могут управляться таргетированной безопасностью</b>",
+        "rules_removed": '{e:unlock} <b>Правила таргетированной безопасности для <a href="{}">{}</a> удалены</b>',
+        "rule_removed": '{e:unlock} <b>Удалено правило безопасности для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>',
         "chat_inline": "⚠️ <b>Вы не можете создать правило inline-команды для чатов!</b>",
         "for": "на",
         "forever": "навсегда",
@@ -107,29 +107,33 @@ class ElysSecurityMod(loader.Module):
         "minutes": "минут(-ы)",
         "second": "секунда",
         "seconds": "секунд(-ы)",
-        "querysec_info": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> Здесь вы можете переключить возможность использования инлайн запросов для всех сторонних пользователей",
+        "querysec_info": "{e:lock} Здесь вы можете переключить возможность использования инлайн запросов для всех сторонних пользователей",
         "until": "до",
         "sgroup": "группа безопасности",
-        "sgroup_info": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Информация о группе безопасности</b> <code>{}</code>:\n\n{}\n{}",
-        "created_sgroup": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Создана группа безопасности</b> <code>{}</code>",
-        "sgroup_already_exists": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Группа безопасности</b> <code>{}</code> <b>уже существует</b>",
-        "no_args": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Не указаны аргументы</b>",
-        "sgroup_not_found": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Группа безопасности</b> <code>{}</code> <b>не найдена</b>",
-        "no_users": "<tg-emoji emoji-id=5870772616305839506>👥</tg-emoji> <b>Нет пользователей</b>",
-        "users_list": "<tg-emoji emoji-id=5870772616305839506>👥</tg-emoji> <b>Пользователи:</b>\n{}\n",
-        "no_permissions": "<tg-emoji emoji-id=5870450390679425417>🗒</tg-emoji> <b>Нет разрешений</b>",
-        "permissions_list": "<tg-emoji emoji-id=5870450390679425417>🗒</tg-emoji> <b>Права доступа:</b>\n{}\n",
-        "sgroup_li": "<tg-emoji emoji-id=4974264756668990388>▫️</tg-emoji> <code>{}</code> · <b>{} пользовател(-ей)</b> · <b>{} правил(-о)</b>",
-        "sgroups_list": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Группы безопасности:</b>\n\n{}",
-        "deleted_sgroup": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Группа безопасности</b> <code>{}</code> <b>удалена</b>",
-        "user_already_in_sgroup": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Пользователь</b> <code>{}</code> <b>уже состоит в группе безопасности</b> <code>{}</code>",
-        "user_added_to_sgroup": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Пользователь</b> <code>{}</code> <b>добавлен в группу безопасности</b> <code>{}</code>",
-        "user_not_in_sgroup": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Пользователь</b> <code>{}</code> <b>не состоит в группе безопасности</b> <code>{}</code>",
-        "user_removed_from_sgroup": "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji> <b>Пользователь</b> <code>{}</code> <b>удален из группы</b> <code>{}</code>",
+        "sgroup_info": "{e:lock} <b>Информация о группе безопасности</b> <code>{}</code>:\n\n{}\n{}",
+        "created_sgroup": "{e:lock} <b>Создана группа безопасности</b> <code>{}</code>",
+        "sgroup_already_exists": "{e:stop} <b>Группа безопасности</b> <code>{}</code> <b>уже существует</b>",
+        "no_args": "{e:stop} <b>Не указаны аргументы</b>",
+        "sgroup_not_found": "{e:stop} <b>Группа безопасности</b> <code>{}</code> <b>не найдена</b>",
+        "no_users": "{e:users} <b>Нет пользователей</b>",
+        "users_list": "{e:users} <b>Пользователи:</b>\n{}\n",
+        "no_permissions": "{e:perms} <b>Нет разрешений</b>",
+        "permissions_list": "{e:perms} <b>Права доступа:</b>\n{}\n",
+        "sgroup_li": "{e:bullet} <code>{}</code> · <b>{} пользовател(-ей)</b> · <b>{} правил(-о)</b>",
+        "sgroups_list": "{e:lock} <b>Группы безопасности:</b>\n\n{}",
+        "deleted_sgroup": "{e:lock} <b>Группа безопасности</b> <code>{}</code> <b>удалена</b>",
+        "user_already_in_sgroup": "{e:stop} <b>Пользователь</b> <code>{}</code> <b>уже состоит в группе безопасности</b> <code>{}</code>",
+        "user_added_to_sgroup": "{e:lock} <b>Пользователь</b> <code>{}</code> <b>добавлен в группу безопасности</b> <code>{}</code>",
+        "user_not_in_sgroup": "{e:stop} <b>Пользователь</b> <code>{}</code> <b>не состоит в группе безопасности</b> <code>{}</code>",
+        "user_removed_from_sgroup": "{e:lock} <b>Пользователь</b> <code>{}</code> <b>удален из группы</b> <code>{}</code>",
         "name": "ElysSecurity",
         "cancel_btn": "🚫 Отмена",
         "confirm_btn": "👑 Подтвердить",
-        "li": '<tg-emoji emoji-id=4974307891025543730>▫️</tg-emoji> <b><a href="tg://user?id={}">{}</a></b>',
+        "li": '{e:bullet} <b><a href="tg://user?id={}">{}</a></b>',
+        "perm_li": "{e:bullet} <b>{}</b> <code>{}</code> <b>{}</b>",
+        "tsec_chat_li": '{e:users} <b><a href=\'{}\'>{}</a> {} {} {}</b> <code>{}</code>',
+        "tsec_user_li": '{e:user} <b><a href=\'{}\'>{}</a> {} {} {}</b> <code>{}</code>',
+        "tsec_sgroup_li": "{e:lock} <code>{}</code> <b>{} {} {}</b> <code>{}</code>",
     }
 
     async def client_ready(self):
@@ -413,8 +417,7 @@ class ElysSecurityMod(loader.Module):
                 (
                     self.strings["permissions_list"].format(
                         "\n".join(
-                            "<tg-emoji emoji-id=4974307891025543730>▫️</tg-emoji>"
-                            " <b>{}</b> <code>{}</code> <b>{}</b>".format(
+                            self.strings["perm_li"].format(
                                 self.strings[rule["rule_type"]],
                                 rule["rule"],
                                 (
@@ -1383,8 +1386,7 @@ class ElysSecurityMod(loader.Module):
                 self.strings["rules"].format(
                     "\n".join(
                         [
-                            "<tg-emoji emoji-id=6037355667365300960>👥</tg-emoji> <b><a"
-                            " href='{}'>{}</a> {} {} {}</b> <code>{}</code>".format(
+                            self.strings["tsec_chat_li"].format(
                                 rule["entity_url"],
                                 utils.escape_html(rule["entity_name"]),
                                 self._convert_time(int(rule["expires"] - time.time())),
@@ -1395,8 +1397,7 @@ class ElysSecurityMod(loader.Module):
                             for rule in self._client.dispatcher.security.tsec_chat
                         ]
                         + [
-                            "<tg-emoji emoji-id=6037122016849432064>👤</tg-emoji> <b><a"
-                            " href='{}'>{}</a> {} {} {}</b> <code>{}</code>".format(
+                            self.strings["tsec_user_li"].format(
                                 rule["entity_url"],
                                 utils.escape_html(rule["entity_name"]),
                                 self._convert_time(int(rule["expires"] - time.time())),
@@ -1409,8 +1410,7 @@ class ElysSecurityMod(loader.Module):
                         + [
                             "\n".join(
                                 [
-                                    "<tg-emoji emoji-id=5870704313440932932>🔒</tg-emoji>"
-                                    " <code>{}</code> <b>{} {} {}</b> <code>{}</code>".format(
+                                    self.strings["tsec_sgroup_li"].format(
                                         utils.escape_html(group.name),
                                         self._convert_time(
                                             int(rule["expires"] - time.time())

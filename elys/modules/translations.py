@@ -30,7 +30,23 @@ logger = logging.getLogger(__name__)
 class Translations(loader.Module):
     """Processes internal translations"""
 
-    strings = {"name": "Translations"}
+    strings = {
+        "name": "Translations",
+        "flag_gb": "{e:flag_gb}",
+        "flag_uz": "{e:flag_uz}",
+        "flag_ru": "{e:flag_ru}",
+        "flag_ua": "{e:flag_ua}",
+        "flag_it": "{e:flag_it}",
+        "flag_de": "{e:flag_de}",
+        "flag_es": "{e:flag_es}",
+        "flag_tr": "{e:flag_tr}",
+        "flag_kz": "{e:flag_kz}",
+        "flag_tt": "{e:dumpling}",
+        "flag_jp": "{e:flag_jp}",
+        "flag_fr": "{e:flag_fr}",
+        "flag_pirate": "{e:pirate_flag}",
+        "flag_folder": "{e:folder}",
+    }
 
     async def _change_language(self, call: InlineCall, lang: str):
         lang = translations.normalize_language(lang)
@@ -187,19 +203,19 @@ class Translations(loader.Module):
     def _get_flag(self, lang: str) -> str:
         lang = translations.normalize_language(lang)
         emoji_flags = {
-            "🇬🇧": "<tg-emoji emoji-id=6323589145717376403>🇬🇧</tg-emoji>",
-            "🇺🇿": "<tg-emoji emoji-id=6323430017179059570>🇺🇿</tg-emoji>",
-            "🇷🇺": "<tg-emoji emoji-id=6323139226418284334>🇷🇺</tg-emoji>",
-            "🇺🇦": "<tg-emoji emoji-id=5276140694891666474>🇺🇦</tg-emoji>",
-            "🇮🇹": "<tg-emoji emoji-id=6323471399188957082>🇮🇹</tg-emoji>",
-            "🇩🇪": "<tg-emoji emoji-id=6320817337033295141>🇩🇪</tg-emoji>",
-            "🇪🇸": "<tg-emoji emoji-id=6323315062379382237>🇪🇸</tg-emoji>",
-            "🇹🇷": "<tg-emoji emoji-id=6321003171678259486>🇹🇷</tg-emoji>",
-            "🇰🇿": "<tg-emoji emoji-id=5228718354658769982>🇰🇿</tg-emoji>",
-            "🥟": "<tg-emoji emoji-id=5382337996123020810>🥟</tg-emoji>",
-            "🇯🇵": "<tg-emoji emoji-id=5456261908069885892>🇯🇵</tg-emoji>",
-            "🇫🇷": "<tg-emoji emoji-id=5202132623060640759>🇫🇷</tg-emoji>",
-            "🏴‍☠️": "<tg-emoji emoji-id=5386372293263892965>🏴‍☠️</tg-emoji>",
+            "🇬🇧": self.strings["flag_gb"],
+            "🇺🇿": self.strings["flag_uz"],
+            "🇷🇺": self.strings["flag_ru"],
+            "🇺🇦": self.strings["flag_ua"],
+            "🇮🇹": self.strings["flag_it"],
+            "🇩🇪": self.strings["flag_de"],
+            "🇪🇸": self.strings["flag_es"],
+            "🇹🇷": self.strings["flag_tr"],
+            "🇰🇿": self.strings["flag_kz"],
+            "🥟": self.strings["flag_tt"],
+            "🇯🇵": self.strings["flag_jp"],
+            "🇫🇷": self.strings["flag_fr"],
+            "🏴‍☠️": self.strings["flag_pirate"],
         }
 
         lang2country = {
@@ -248,7 +264,7 @@ class Translations(loader.Module):
                         (
                             self._get_flag(lang)
                             if not utils.check_url(lang)
-                            else "<tg-emoji emoji-id=5433653135799228968>📁</tg-emoji>"
+                            else self.strings["flag_folder"]
                         )
                         for lang in args.split()
                     ]

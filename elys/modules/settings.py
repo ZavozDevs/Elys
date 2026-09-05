@@ -33,7 +33,11 @@ logger = logging.getLogger(__name__)
 class Settings(loader.Module):
     """Elys settings & info module"""
 
-    strings = {"name": "Settings", "_cfg_rich_mode": "Use rich text in outputs"}
+    strings = {
+        "name": "Settings",
+        "_cfg_rich_mode": "Use rich text in outputs",
+        "emoji_ok": "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji>",
+    }
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -307,7 +311,7 @@ class Settings(loader.Module):
                 return await utils.answer(
                     message,
                     self.strings["entity_prefix_set"].format(
-                        "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji>",
+                        self.strings["emoji_ok"],
                         entity_name=utils.escape_html(entity.first_name),
                         newprefix=utils.escape_html(args[0]),
                         oldprefix=utils.escape_html(oldprefix),
@@ -325,7 +329,7 @@ class Settings(loader.Module):
         await utils.answer(
             message,
             self.strings["prefix_set"].format(
-                "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji>",
+                self.strings["emoji_ok"],
                 newprefix=utils.escape_html(args[0]),
                 oldprefix=utils.escape_html(oldprefix),
             ),
