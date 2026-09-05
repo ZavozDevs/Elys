@@ -1147,10 +1147,8 @@ class Modules:
             return None
 
         for command_name, _command in self.commands.items():
-            aliases = []
-            if getattr(_command, "alias", None) and not (
-                aliases := getattr(_command, "aliases", None)
-            ):
+            aliases = getattr(_command, "aliases", None)
+            if not aliases and getattr(_command, "alias", None):
                 aliases = [_command.alias]
 
             if not aliases:
@@ -1477,7 +1475,11 @@ class Modules:
         """Make an alias"""
         cmd_clean = cmd.lower().strip()
         if cmd_clean not in self.commands:
-            return False
+            real_cmd = self.find_alias(cmd_clean)
+            if real_cmd and real_cmd in self.commands:
+                cmd_clean = real_cmd
+            else:
+                return False
 
         args_clean = args.strip() if args else None
         self.aliases[alias.lower().strip()] = (
