@@ -47,14 +47,14 @@ elys_security:
 
 
     {}'
-  rules: '{e:unlock} <b>ターゲットセキュリティルール:</b>
+  rules: '{e:keylock} <b>ターゲットセキュリティルール:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>ターゲットセキュリティルールはありません</b>'
   owner_target: '{e:warn} <b>このユーザーは所有者であるため、ターゲットセキュリティによる昇格はできません</b>'
-  rules_removed: '{e:unlock} <b><a href="{}">{}</a> のターゲットセキュリティルールを削除しました</b>'
-  rule_removed: '{e:unlock} <b><a href="{}">{}</a> のターゲットセキュリティルール（</b><code>{}</code><b>）を削除しました</b>'
+  rules_removed: '{e:keylock} <b><a href="{}">{}</a> のターゲットセキュリティルールを削除しました</b>'
+  rule_removed: '{e:keylock} <b><a href="{}">{}</a> のターゲットセキュリティルール（</b><code>{}</code><b>）を削除しました</b>'
   chat_inline: ⚠️ <b>チャット用のインラインコマンドルールは作成できません！</b>
   for: '期間:'
   forever: 無期限
@@ -266,8 +266,8 @@ terminal:
 
     {e:dizzy} <b>実行時間: {}秒</b>'
   auth_fail: '{e:stop} <b>認証に失敗しました。もう一度お試しください</b>'
-  auth_needed: '{e:unlock}<a href="tg://user?id={}"> インタラクティブ認証が必要です</a>'
-  auth_msg: '{e:unlock} <b>このメッセージを編集して、</b><code>{}</code> <b>を実行するための</b> <code>{}</code> <b>のパスワードを入力してください</b>'
+  auth_needed: '{e:lock}<a href="tg://user?id={}"> インタラクティブ認証が必要です</a>'
+  auth_msg: '{e:lock} <b>このメッセージを編集して、</b><code>{}</code> <b>を実行するための</b> <code>{}</code> <b>のパスワードを入力してください</b>'
   dangerous_command: '{e:cross} <b>このコマンド (<code>{}</code>) の実行は安全のためにキャンセルされました。</b>
 
 
@@ -345,21 +345,21 @@ elys_backup:
   all_restored_bot: 🔄 完全バックアップが復元されました。再起動しています...
   reply_to_file: '{e:stop} <b>.json または .zip ファイルに返信してください</b>'
   db_restored: '{e:sync} <b>データベースが更新されました。再起動しています...</b>'
-  modules_backup: '{e:rocket} <b>モジュールバックアップ ({})</b>
+  modules_backup: '{e:package} <b>モジュールバックアップ ({})</b>
 
 
     <b>以下を使用して復元できます:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>モジュールが復元されました。再起動します</b>'
-  backup_sent: '{e:rocket} <b>バックアップは<a href={}>データベースチャット</a>に送信されました</b>'
-  backupall_sent: '{e:rocket} <b>データベースとモジュールのバックアップが<a href={}>「データベースチャット」</a>に送信されました</b>'
+  backup_sent: '{e:package} <b>バックアップは<a href={}>データベースチャット</a>に送信されました</b>'
+  backupall_sent: '{e:package} <b>データベースとモジュールのバックアップが<a href={}>「データベースチャット」</a>に送信されました</b>'
   db_warning: '❗️ Hikka バックアップが検出されました。続行すると、ユーザーボットは Elys に適した形式への変換を<b>試行</b>します。
 
     変換中にエラーが発生する可能性があります。続行しますか？'
   advice_converting: バックアップコンテンツ内の <a>'hikka.'</a> を <a>'elys.'</a> に手動で置換できます。これは読み込みに必要です。
   converting_db: 🔄 変換中...
-  probably_zip: '{e:stop} <b>ファイルからのバックアップを復元できませんでした。おそらく完全バックアップ (.zip または .backup) を復元しようとしています。その場合は、ファイルへの返信として</b> <code>{}restoreall</code> <b>を使用してください。</b>'
+  probably_zip: '{e:warn} <b>ファイルからのバックアップを復元できませんでした。おそらく完全バックアップ (.zip または .backup) を復元しようとしています。その場合は、ファイルへの返信として</b> <code>{}restoreall</code> <b>を使用してください。</b>'
   _cls_doc: データベースとモジュールのバックアップを処理します
   _cmd_doc_backupdb: データベースのバックアップを作成します [PMに送信されます]
   _cmd_doc_backupmods: モジュールのバックアップを作成します [PMに送信されます]
@@ -627,7 +627,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:rocket} <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>を設定中</b>
+  configuring_option_lib: '{e:package} <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>を設定中</b>
 
     <i>ℹ️ {}</i>
 
@@ -639,10 +639,10 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:recycle} <b>モジュール</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
+  option_saved: '{e:gear} <b>モジュール</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
 
     <b>現在: {}</b>'
-  option_saved_lib: '{e:rocket} <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
+  option_saved_lib: '{e:package} <b>ライブラリ</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>が保存されました！</b>
 
     <b>現在: {}</b>'
   option_reset: '♻️ <b>モジュール</b> <code>{}</code> <b>のオプション</b> <code>{}</code> <b>がデフォルトにリセットされました</b>
@@ -714,8 +714,8 @@ inline_stuff:
   _cmd_doc_ch_bot_token: <token> - インラインボットのトークンを変更
 test:
   name: Tester
-  set_loglevel: '{e:grey_exclamation} <b>詳細レベルを整数または文字列で指定してください</b>'
-  no_logs: '{e:grey_exclamation} <b>詳細レベル</b> <code>{}</code> <b>のログはありません。</b>'
+  set_loglevel: '{e:stop} <b>詳細レベルを整数または文字列で指定してください</b>'
+  no_logs: '{e:shrug} <b>詳細レベル</b> <code>{}</code> <b>のログはありません。</b>'
   configping: 'カスタムテキスト。プレースホルダーを使用できます: {ping} - あなたの Ping。 {uptime} - 稼働時間。 {ping_hint} - elys モジュールと同じヒント（ランダムな確率で選択）、設定で指定することも可能。 {hostname} - サーバーのホスト名が必要な場合'
   configpingph: '🤖カスタムプレースホルダー: {}'
   hint: ヒントを設定
@@ -733,7 +733,7 @@ test:
 
     <b>警告を無視するには</b> <code>.logs {0} -f</code> <b>と入力してください</b>'
   choose_loglevel: 💁‍♂️ <b>ログレベルを選択してください</b>
-  bad_module: '{e:grey_exclamation} <b>モジュールが見つかりません</b>'
+  bad_module: '{e:stop} <b>モジュールが見つかりません</b>'
   debugging_enabled: '{e:check} <b>モジュール</b> <code>{0}</code> <b>のデバッグモードが有効になりました</b>
 
     <i>`debug_modules` ディレクトリに移動し、`{0}.py` という名前のファイルを編集して、変更をリアルタイムで確認してください</i>'
@@ -792,10 +792,10 @@ updater:
     <i>完全な再起動に {}秒かかりました
 
     {} 個のモジュールを読み込めませんでした</i>'
-  secure_boot_complete: '{e:unlock} <b>セキュアブートが完了しました！ {}</b>
+  secure_boot_complete: '{e:lock} <b>セキュアブートが完了しました！ {}</b>
 
     <i>再起動に {}秒かかりました</i>'
-  secure_boot_fail: '{e:unlock} <b>セキュアブートが完了しましたが、エラーが発生しました！ {}</b>
+  secure_boot_fail: '{e:lock} <b>セキュアブートが完了しましたが、エラーが発生しました！ {}</b>
 
     <i>再起動に {}秒かかりました
 
@@ -892,9 +892,9 @@ help:
   undoc: 🦥 ドキュメントなし
   all_header: <b>{} 個のモジュールが利用可能、{} 個が非表示:</b>
   no_mod: 🚫 <b>非表示にするモジュールを指定してください</b>
-  help_lib: '{e:money} <b>パッケージ</b> <code>{}</code> <b>はライブラリです。</b>
+  help_lib: '{e:cross} <b>パッケージ</b> <code>{}</code> <b>はライブラリです。</b>
 
-    {e:money} <b>ライブラリには説明がありません...</b>'
+    {e:cross} <b>ライブラリには説明がありません...</b>'
   developer: '{e:heart_hands} 開発者: {}'
   hidden_shown: '<b>{} 個のモジュールが非表示、{} 個のモジュールが表示中:</b>
 
@@ -908,10 +908,10 @@ help:
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>公式チャンネル</b></a>'
-  partial_load: '{e:grey_exclamation} <b>ユーザーボットが完全に読み込まれていないため、一部のモジュールは表示されません</b>'
-  not_exact: '{e:grey_exclamation} <b>完全一致が発生しなかったため、最も近い結果が表示されています</b>'
+  partial_load: '{e:point_up} <b>ユーザーボットが完全に読み込まれていないため、一部のモジュールは表示されません</b>'
+  not_exact: '{e:point_up} <b>完全一致が発生しなかったため、最も近い結果が表示されています</b>'
   request_join: Elys サポートチャットへのリンクをリクエストしました
-  core_notice: '{e:grey_exclamation} <b>これはコアモジュールです。アンロードや置換はできません</b>'
+  core_notice: '{e:point_up} <b>これはコアモジュールです。アンロードや置換はできません</b>'
   _cls_doc: モジュールとコマンドのヘルプを表示します
   _cmd_doc_help: '[module] - モジュールとコマンドのヘルプを表示'
   _cmd_doc_helphide: <module ...> - help でモジュールを非表示/表示
@@ -951,7 +951,7 @@ elys_info:
 
 
     '
-  no_font: '{e:trash} フォントへのリンクまたは返信はどこですか？'
+  no_font: '{e:cross} フォントへのリンクまたは返信はどこですか？'
   no_banner: '{e:silent} <b>指定されたリンク </b><code>{link></code><b> には何も見つかりませんでした。
 
 
@@ -959,10 +959,10 @@ elys_info:
   font_installed: '{e:party} <b>フォントが正常にインストールされました！</b>
 
     {e:party} <i>これでお楽しみいただけます。</i>'
-  incorrect_format_font: '{e:trash} <b>無効なフォント形式です！</b>
+  incorrect_format_font: '{e:cross} <b>無効なフォント形式です！</b>
 
     <blockquote>サポートされている形式 -> otf, ttf</blockquote>'
-  incorrect_img_format: '{e:trash} <b>無効な画像形式です</b>
+  incorrect_img_format: '{e:cross} <b>無効な画像形式です</b>
 
     <blockquote>サポートされている形式 -> jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: '''Elys とは？''という情報を送信します'
@@ -993,11 +993,11 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:clock} リポジトリ内のモジュールを探しています。'
-  loading_module_via_file: '{e:clock} モジュールを読み込んでいます。'
-  ml_load_module: '{e:clock} モジュールをファイルとしてダウンロードしています。'
+  finding_module_in_repos: '{e:sync} リポジトリ内のモジュールを探しています。'
+  loading_module_via_file: '{e:sync} モジュールを読み込んでいます。'
+  ml_load_module: '{e:sync} モジュールをファイルとしてダウンロードしています。'
   no_ml: '{e:cross} <b>モジュール</b> <code>{}</code> <b>はファイルとしてエクスポートできません</b>'
-  not_exact: '{e:grey_exclamation} <i>完全一致が見つからなかったため、最も近い結果が表示されています</i>'
+  not_exact: '{e:warn} <i>完全一致が見つからなかったため、最も近い結果が表示されています</i>'
   args: '{e:stop} <b>引数を指定する必要があります</b>'
   repo_config_doc: モジュールリポジトリへのURL
   avail_header: '{e:roller_coaster} <b>リポジトリからのモジュール</b>'
@@ -1009,15 +1009,15 @@ loader:
   loaded: '{e:glowing_star} <b>モジュール</b> <code>{}</code>{} <b>が読み込まれました {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>どのクラスをアンロードする必要がありますか？</b>
   unloaded: '{} <b>モジュール {} がアンロードされました。</b>'
-  unload_suggestions: '{e:shield} <b>モジュール</b> <code>{}</code> <b>が見つかりません。</b>
+  unload_suggestions: '{e:cross} <b>モジュール</b> <code>{}</code> <b>が見つかりません。</b>
 
 
     <b>もしかして:</b>'
   modules_unloaded: '{e:check} <b>{unloaded_num} 個のモジュールをアンロードしました:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:shield} <b>モジュールはアンロードされませんでした。</b>'
-  modules_not_unloaded: '{e:shield} <b>{not_unloaded} 個のモジュールのアンロードに失敗しました。</b>
+  not_unloaded: '{e:cross} <b>モジュールはアンロードされませんでした。</b>'
+  modules_not_unloaded: '{e:cross} <b>{not_unloaded} 個のモジュールのアンロードに失敗しました。</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>要件のインストールに失敗しました</b>'
@@ -1111,7 +1111,7 @@ loader:
   _cls_doc: モジュールを読み込みます
   basic_auth_doc: モジュールリポジトリの基本認証
   choose_repo: '{e:folders} <b>すべてのモジュールをインストールするリポジトリを選択してください:</b>'
-  installing_all_from_repo: '{e:clock} <b>リポジトリからすべてのモジュールをインストール中...</b>'
+  installing_all_from_repo: '{e:wait} <b>リポジトリからすべてのモジュールをインストール中...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>リポジトリからすべてのモジュールが正常にインストールされました！</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>このリポジトリにモジュールが見つかりません！</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>一部のモジュールのインストールに失敗しました:</b>

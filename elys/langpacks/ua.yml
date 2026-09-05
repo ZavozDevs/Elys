@@ -43,14 +43,14 @@ elys_security:
 
     {}'
   rule_added: 🔐 <b>Ви надали {} <a href='{}'>{}</a> право використовувати {}</b> <code>{}</code> <b>{}</b>
-  rules: '{e:unlock} <b>Таргетовані правила безпеки:</b>
+  rules: '{e:keylock} <b>Таргетовані правила безпеки:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Немає таргетованих правил безпеки</b>'
   owner_target: '{e:warn} <b>Цей користувач - власник, його права не можуть керуватися таргетованою безпекою</b>'
-  rules_removed: '{e:unlock} <b>Правила таргетованої безпеки для <a href="{}">{}</a> видалено</b>'
-  rule_removed: '{e:unlock} <b>Видалено правило безпеки для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
+  rules_removed: '{e:keylock} <b>Правила таргетованої безпеки для <a href="{}">{}</a> видалено</b>'
+  rule_removed: '{e:keylock} <b>Видалено правило безпеки для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
   chat_inline: ⚠️ <b>Ви не можете створити правило inline-команди для чатів!</b>
   for: на
   forever: назавжди
@@ -253,8 +253,8 @@ terminal:
 
     {e:dizzy} <b>Час виконання:  {}s</b>'
   auth_fail: '{e:stop} <b>Аутентифікація невдала, спробуй ще раз</b>'
-  auth_needed: '{e:unlock}<a href="tg://user?id={}"> Необхідна аутентифікація</a>'
-  auth_msg: '{e:unlock} <b>Будь-ласка, відредагуй це повідомлення з паролем від рута для</b> <code>{}</code> <b>, щоб виконати</b> <code>{}</code>'
+  auth_needed: '{e:lock}<a href="tg://user?id={}"> Необхідна аутентифікація</a>'
+  auth_msg: '{e:lock} <b>Будь-ласка, відредагуй це повідомлення з паролем від рута для</b> <code>{}</code> <b>, щоб виконати</b> <code>{}</code>'
   auth_locked: '{e:stop} <b>Аутентифікація не вдалась. Спробуй пізніше</b>'
   auth_ongoing: '{e:wait} <b>Аутентифікація...</b>'
   done: '{e:check} <b>Ура</b>'
@@ -333,21 +333,21 @@ elys_backup:
   all_restored_bot: 🔄 Вашу повну резервну копію відновлено, перезапуск...
   reply_to_file: '{e:stop} <b>Відповісти за допомогою файлу .json або .zip</b>'
   db_restored: '{e:sync} <b>База даних оновлена, перезапуск...</b>'
-  modules_backup: '{e:rocket} <b>Резервна копія модулів ({})</b>
+  modules_backup: '{e:package} <b>Резервна копія модулів ({})</b>
 
 
     <b>Ви можете відновити її за допомогою:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Модулі відновлено, перезапуск</b>'
-  backup_sent: '{e:rocket} <b>Резервну копію надіслано до <a href={}>чату з базами даних</a></b>'
-  backupall_sent: '{e:rocket} <b>Резервна копія бази та модулів надіслана в <a href={}>чат з базами даних</a></b>'
+  backup_sent: '{e:package} <b>Резервну копію надіслано до <a href={}>чату з базами даних</a></b>'
+  backupall_sent: '{e:package} <b>Резервна копія бази та модулів надіслана в <a href={}>чат з базами даних</a></b>'
   db_warning: '❗️ Виявлено резервну копію Hikka. Якщо ви продовжите, користувач-бот <b>спробує</b> конвертувати її у формат, придатний для Elys.
 
     Під час конвертації можуть бути деякі помилки. Продовжити?'
   advice_converting: Ви можете вручну замінити <a>'hikka.'</a> на <a>'elys.'</a> у вмісті резервної копії. Це необхідно для її завантаження.
   converting_db: 🔄 Конвертування...
-  probably_zip: '{e:stop} <b>Не вдалося відновити бекап з файлу. Ймовірно, ви намагаєтеся відновити повний бекап (.zip або .backup). У цьому випадку використовуйте</b> <code>{}restoreall</code> <b>у відповідь на файл.</b>'
+  probably_zip: '{e:warn} <b>Не вдалося відновити бекап з файлу. Ймовірно, ви намагаєтеся відновити повний бекап (.zip або .backup). У цьому випадку використовуйте</b> <code>{}restoreall</code> <b>у відповідь на файл.</b>'
   _cls_doc: Обробляє резервні копії бази даних і модулів
   _cmd_doc_backupdb: Створити резервну копію бази даних [буде надіслано на PM]
   _cmd_doc_backupmods: Створити резервну копію модів [буде надіслано в личку]
@@ -609,7 +609,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:rocket} <b>Керування параметром</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code>
+  configuring_option_lib: '{e:package} <b>Керування параметром</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -621,10 +621,10 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:recycle} <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> збережено!</b>
+  option_saved: '{e:gear} <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> збережено!</b>
 
     <b>Поточне: {}</b>'
-  option_saved_lib: '{e:rocket} <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b> збережено!</b>
+  option_saved_lib: '{e:package} <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b> збережено!</b>
 
     <b>Поточне: {}</b>'
   option_reset: '♻️ <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> зкинуто до значення за замовчуванням</b>
@@ -696,8 +696,8 @@ inline_stuff:
   _cls_doc: Налаштування inline-бота
   _cmd_doc_ch_bot_token: <token> - Змінити токен inline-бота
 test:
-  set_loglevel: '{e:grey_exclamation} <b>Вкажи рівень логів числом або рядком</b>'
-  no_logs: '{e:grey_exclamation} <b>У тебе немає логів рівня</b> <code>{}</code><b>.</b>'
+  set_loglevel: '{e:stop} <b>Вкажи рівень логів числом або рядком</b>'
+  no_logs: '{e:shrug} <b>У тебе немає логів рівня</b> <code>{}</code><b>.</b>'
   configping: 'Ваш текст. Ви можете використовувати заміщення: {ping} - Це ваш пінг, {uptime} - Це ваш час роботи. {ping_hint} - Це той самий підказка, що й у модулі elys, вона вибирається випадково, також ви можете вказати цю підказку у конфігурації. Ви можте використовувати плейсхолдер {hostname} якщо вам потрібен hostname вашого сервера'
   configpingph: '🤖Кастомні плейсхолдери: {}'
   hint: Встановіть підказку
@@ -749,10 +749,10 @@ updater:
     <i>Повне перезавантаження зайняло {} сек
 
     Не вдалося завантажити {} модулів</i>'
-  secure_boot_complete: '{e:unlock} <b>Безпечне завантаження завершено! {}</b>
+  secure_boot_complete: '{e:lock} <b>Безпечне завантаження завершено! {}</b>
 
     <i>Перезавантаження зайняло {} сек</i>'
-  secure_boot_fail: '{e:unlock} <b>Безпечне завантаження завершено, але сталася помилка! {}</b>
+  secure_boot_fail: '{e:lock} <b>Безпечне завантаження завершено, але сталася помилка! {}</b>
 
     <i>Перезавантаження зайняло {} сек
 
@@ -861,9 +861,9 @@ help:
   undoc: 🦥 Немає опису
   all_header: <b>{} модулів доступно, {} приховано:</b>
   no_mod: 🚫 <b>Вкажи модуль(-і), які потрібно приховати</b>
-  help_lib: '{e:money} <b>Пакет</b> <code>{}</code> <b>є бібліотекою.</b>
+  help_lib: '{e:cross} <b>Пакет</b> <code>{}</code> <b>є бібліотекою.</b>
 
-    {e:money} <b>У бібліотек немає опису...</b>'
+    {e:cross} <b>У бібліотек немає опису...</b>'
   developer: '{e:heart_hands} Розробник: {}'
   hidden_shown: '<b>{} модулів приховано, {} модулів показано:</b>
 
@@ -878,10 +878,10 @@ help:
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Офiцiйний канал</b></a>'
   _cls_doc: Показує допомогу за модулями
-  partial_load: '{e:grey_exclamation} <b>Юзербот ще не завантажився повністю, тому показані не всі модулі</b>'
-  not_exact: '{e:grey_exclamation} <b>Точного збігу не знайшлося, тому було обрано найбільш підходяще</b>'
+  partial_load: '{e:point_up} <b>Юзербот ще не завантажився повністю, тому показані не всі модулі</b>'
+  not_exact: '{e:point_up} <b>Точного збігу не знайшлося, тому було обрано найбільш підходяще</b>'
   request_join: Ви запросили посилання на чат допомоги Elys
-  core_notice: '{e:grey_exclamation} <b>Це вбудований модуль. Ви не можете його вивантажити або замінити</b>'
+  core_notice: '{e:point_up} <b>Це вбудований модуль. Ви не можете його вивантажити або замінити</b>'
   _cmd_doc_help: '[модуль] [-f] - Показати команди'
   _cmd_doc_helphide: '<модуль або модулі> - Сховати модуль(-і) з help
 
@@ -924,7 +924,7 @@ elys_info:
 
 
     '
-  no_font: '{e:trash} Де посилання чи відповідь з шрифтом?'
+  no_font: '{e:cross} Де посилання чи відповідь з шрифтом?'
   no_banner: '{e:silent} <b>За вказаним посиланням </b><code>{link}</code><b> нічого не знайдено.
 
 
@@ -932,10 +932,10 @@ elys_info:
   font_installed: '{e:party} <b>Шрифт успішно встановлено!</b>
 
     {e:party} <i>Тепер ви можете ним користуватися.</i>'
-  incorrect_format_font: '{e:trash} <b>Невірний формат шрифту!</b>
+  incorrect_format_font: '{e:cross} <b>Невірний формат шрифту!</b>
 
     <blockquote>Підтримувані формати → otf, ttf</blockquote>'
-  incorrect_img_format: '{e:trash} <b>Невірний формат зображення</b>
+  incorrect_img_format: '{e:cross} <b>Невірний формат зображення</b>
 
     <blockquote>Підтримувані формати → jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Надіслати інформацію на кшталт 'Що таке Elys?'
@@ -964,11 +964,11 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:clock} Пошук модулів у сховищах.'
-  loading_module_via_file: '{e:clock} Завантаження модуля.'
-  ml_load_module: '{e:clock} Я завантажую модуль як файл.'
+  finding_module_in_repos: '{e:sync} Пошук модулів у сховищах.'
+  loading_module_via_file: '{e:sync} Завантаження модуля.'
+  ml_load_module: '{e:sync} Я завантажую модуль як файл.'
   no_ml: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не можна вивантажити файлом</b>'
-  not_exact: '{e:grey_exclamation} <i>Точного збігу не знайдено, тому замість нього показано найближчий результат</i>'
+  not_exact: '{e:warn} <i>Точного збігу не знайдено, тому замість нього показано найближчий результат</i>'
   repo_config_doc: Посилання для завантаження модулів
   add_repo_config_doc: Додаткові репозиторії
   avail_header: '{e:roller_coaster} <b>Офіційні модулі з репозиторію</b>'
@@ -980,15 +980,15 @@ loader:
   loaded: '{e:glowing_star} <b>Модуль</b> <code>{}</code>{} <b>завантажено {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Мені самому придумати що вивантажити?</b>
   unloaded: '{} <b>Модуль {} вивантажено.</b>'
-  unload_suggestions: '{e:shield} <b>Модуль</b> <code>{}</code> <b>не знайдено.</b>
+  unload_suggestions: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не знайдено.</b>
 
 
     <b>Можливо, ти мав на увазі:</b>'
   modules_unloaded: '{e:check} <b>Вивантажено {unloaded_num} модулів:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:shield} <b>Модуль не вивантажено.</b>'
-  modules_not_unloaded: '{e:shield} <b>Не вдалося вивантажити {not_unloaded} модулів.</b>
+  not_unloaded: '{e:cross} <b>Модуль не вивантажено.</b>'
+  modules_not_unloaded: '{e:cross} <b>Не вдалося вивантажити {not_unloaded} модулів.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Помилка встановлення залежностей</b>'
@@ -1084,7 +1084,7 @@ loader:
   _cmd_doc_delrepo: Видалити додатковий репозиторій
   basic_auth_doc: Авторизація для доступу до репозиторію
   choose_repo: '{e:folders} <b>Обери репозиторій, з якого встановити всі модулі:</b>'
-  installing_all_from_repo: '{e:clock} <b>Встановлюю всі модулі з репозиторію...</b>'
+  installing_all_from_repo: '{e:wait} <b>Встановлюю всі модулі з репозиторію...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Всі модулі з репозиторію успішно встановлено!</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>У цьому репозиторії не знайдено жодного модуля!</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Деякі модулі не вдалося встановити:</b>
