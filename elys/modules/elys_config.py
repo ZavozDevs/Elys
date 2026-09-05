@@ -358,6 +358,8 @@ class ElysConfigMod(loader.Module):
     ):
         try:
             self.lookup(mod).config[option] = query
+            with contextlib.suppress(Exception):
+                self._db.set(self.strings["name"], f"{mod}_{option}_custom_val", query)
         except loader.validators.ValidationError as e:
             await call.edit(
                 self.strings["validation_error"].format(e.args[0]),
@@ -1131,6 +1133,169 @@ class ElysConfigMod(loader.Module):
 
         await call.answer("✅")
 
+    async def _choice_nav(
+        self,
+        call: InlineCall,
+        mod: str,
+        option: str,
+        direction: int,
+        obj_type: bool | str = False,
+    ):
+        """Navigate left/right through Choice options and immediately apply."""
+        validator = self.lookup(mod).config._config[option].validator
+        possible_values = list(validator.validate.keywords["possible_values"])
+        allow_custom = validator.validate.keywords.get("allow_custom", False)
+
+        total_slots = len(possible_values) + (1 if allow_custom else 0)
+        current = self.lookup(mod).config[option]
+
+        try:
+            idx = possible_values.index(current)
+        except ValueError:
+            idx = len(possible_values) if allow_custom else 0
+
+        new_idx = (idx + direction) % total_slots
+
+        if allow_custom and new_idx == len(possible_values):
+            saved_custom = self._db.get(self.strings["name"], f"{mod}_{option}_custom_val", None)
+            new_value = saved_custom or "custom"
+        else:
+            new_value = possible_values[new_idx]
+
+        try:
+            self.lookup(mod).config[option] = new_value
+        except loader.validators.ValidationError as e:
+            await call.answer(str(e.args[0]), alert=True)
+            return
+
+        await call.answer("✅")
+        return await self.inline__configure_option(
+            call,
+            mod=mod,
+            config_opt=option,
+            obj_type=obj_type,
+        )
+
+    def _generate_choice_markup(
+        self,
+        call: InlineCall,
+        mod: str,
+        option: str,
+        obj_type: bool | str = False,
+    ) -> list:
+        validator = self.lookup(mod).config._config[option].validator
+        possible_values = list(validator.validate.keywords["possible_values"])
+        allow_custom = validator.validate.keywords.get("allow_custom", False)
+
+        total_slots = len(possible_values) + (1 if allow_custom else 0)
+        current = self.lookup(mod).config[option]
+
+        try:
+            idx = possible_values.index(current)
+            is_custom = False
+        except ValueError:
+            idx = len(possible_values)
+            is_custom = True
+
+        use_chat_input = self.config["chat_input"] and not self._is_hidden(mod, option)
+        inline_msg_id = getattr(call, "inline_message_id", None)
+        enter_btn = (
+            {
+                "text": "✍️ " + (self.strings.get("enter_url_btn") or "Enter URL"),
+                "callback": self.inline__prompt_chat_input,
+                "args": ("set", mod, option),
+                "kwargs": {"obj_type": obj_type},
+            }
+            if use_chat_input
+            else {
+                "text": "✍️ " + (self.strings.get("enter_url_btn") or "Enter URL"),
+                "input": "Enter custom URL:",
+                "handler": self.inline__set_config,
+                "args": (mod, option, inline_msg_id),
+                "kwargs": {"obj_type": obj_type},
+            }
+        )
+
+        middle_btn_text = (
+            f"[{idx + 1}/{total_slots}] Custom"
+            if (allow_custom and is_custom)
+            else f"[{idx + 1}/{total_slots}]"
+        )
+
+        middle_btn = (
+            (
+                {
+                    "text": middle_btn_text,
+                    "callback": self.inline__prompt_chat_input,
+                    "args": ("set", mod, option),
+                    "kwargs": {"obj_type": obj_type},
+                }
+                if use_chat_input
+                else {
+                    "text": middle_btn_text,
+                    "input": "Enter custom URL:",
+                    "handler": self.inline__set_config,
+                    "args": (mod, option, inline_msg_id),
+                    "kwargs": {"obj_type": obj_type},
+                }
+            )
+            if (allow_custom and is_custom)
+            else {
+                "text": middle_btn_text,
+                "callback": self._choice_nav,
+                "args": (mod, option, 0),
+                "kwargs": {"obj_type": obj_type},
+            }
+        )
+
+        rows = []
+        if allow_custom and is_custom:
+            rows.append([enter_btn])
+
+        rows.append([
+            {
+                "text": "⬅️",
+                "callback": self._choice_nav,
+                "args": (mod, option, -1),
+                "kwargs": {"obj_type": obj_type},
+            },
+            middle_btn,
+            {
+                "text": "➡️",
+                "callback": self._choice_nav,
+                "args": (mod, option, 1),
+                "kwargs": {"obj_type": obj_type},
+            },
+        ])
+
+        if self.lookup(mod).config[option] != self.lookup(mod).config.getdef(option):
+            rows.append([
+                {
+                    "text": self.strings["set_default_btn"],
+                    "callback": self.inline__reset_default,
+                    "args": (mod, option),
+                    "kwargs": {"obj_type": obj_type},
+                }
+            ])
+
+        rows.append([
+            {
+                "text": self.strings["back_btn"],
+                "callback": self.inline__configure,
+                "args": (mod,),
+                "style": "primary",
+                "kwargs": self._guess_back_to_page(mod, option, obj_type),
+            },
+            {
+                "text": self.strings["close_btn"],
+                "action": "close",
+                "style": "danger",
+            },
+        ])
+
+        return rows
+
+
     async def _multi_choice_set_value(
         self,
         call: InlineCall,
@@ -1161,91 +1326,6 @@ class ElysConfigMod(loader.Module):
             call, mod=mod, config_opt=option, force_hidden=False, obj_type=obj_type
         )
         await call.answer("✅")
-
-    def _generate_choice_markup(
-        self,
-        call: InlineCall,
-        mod: str,
-        option: str,
-        obj_type: bool | str = False,
-    ) -> list:
-        possible_values = list(
-            self.lookup(mod)
-            .config._config[option]
-            .validator.validate.keywords["possible_values"]
-        )
-        use_chat_input = self.config["chat_input"] and not self._is_hidden(mod, option)
-        inline_msg_id = getattr(call, "inline_message_id", None)
-        return [
-            [
-                (
-                    {
-                        "text": self.strings["enter_value_btn"],
-                        "callback": self.inline__prompt_chat_input,
-                        "args": ("set", mod, option),
-                        "kwargs": {"obj_type": obj_type},
-                    }
-                    if use_chat_input
-                    else {
-                        "text": self.strings["enter_value_btn"],
-                        "input": self.strings["enter_value_desc"],
-                        "handler": self.inline__set_config,
-                        "args": (mod, option, inline_msg_id),
-                        "kwargs": {"obj_type": obj_type},
-                    }
-                )
-            ],
-            *utils.chunks(
-                [
-                    {
-                        "text": (
-                            f"{'☑️' if self.lookup(mod).config[option] == value else '🔘'} "
-                            f"{value if len(str(value)) < 20 else str(value)[:20]}"
-                        ),
-                        "callback": self._choice_set_value,
-                        "args": (mod, option, value, obj_type),
-                    }
-                    for value in possible_values
-                ],
-                2,
-            )[
-                : (
-                    6
-                    if self.lookup(mod).config[option]
-                    != self.lookup(mod).config.getdef(option)
-                    else 7
-                )
-            ],
-            [
-                *(
-                    [
-                        {
-                            "text": self.strings["set_default_btn"],
-                            "callback": self.inline__reset_default,
-                            "args": (mod, option),
-                            "kwargs": {"obj_type": obj_type},
-                        }
-                    ]
-                    if self.lookup(mod).config[option]
-                    != self.lookup(mod).config.getdef(option)
-                    else []
-                )
-            ],
-            [
-                {
-                    "text": self.strings["back_btn"],
-                    "callback": self.inline__configure,
-                    "args": (mod,),
-                    "style": "primary",
-                    "kwargs": self._guess_back_to_page(mod, option, obj_type),
-                },
-                {
-                    "text": self.strings["close_btn"],
-                    "action": "close",
-                    "style": "danger",
-                },
-            ],
-        ]
 
     def _generate_multi_choice_markup(
         self,
@@ -1471,8 +1551,11 @@ class ElysConfigMod(loader.Module):
                     )
                     return
                 case "Choice":
+                    current_val = self.lookup(mod).config[config_opt]
+                    photo_url = str(current_val) if current_val and str(current_val).startswith("http") else None
+                    choice_text = (f'<a href="{photo_url}">&#8203;</a>' + text) if photo_url else text
                     await call.edit(
-                        text,
+                        choice_text,
                         reply_markup=additonal_button_row
                         + self._put_pagination_before_nav(
                             self._generate_choice_markup(
@@ -1480,6 +1563,8 @@ class ElysConfigMod(loader.Module):
                             ),
                             pagination,
                         ),
+                        disable_web_page_preview=False,
+                        link_preview=True,
                     )
                     return
                 case "MultiChoice":
@@ -2263,6 +2348,8 @@ class ElysConfigMod(loader.Module):
 
         form_kwargs = dict(draft.kwargs)
         form_kwargs.pop("inline_message_id", None)
+        form_kwargs.pop("disable_web_page_preview", None)
+        form_kwargs.pop("link_preview", None)
 
         await self.inline.form(
             draft.text,

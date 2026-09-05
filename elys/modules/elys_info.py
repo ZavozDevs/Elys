@@ -22,20 +22,126 @@ import getpass
 import inspect
 import logging
 import platform as lib_platform
+import os
 import re
 import time
 import typing
+import urllib.parse
 
 import elystl
 import psutil
+import requests
 from elystl.errors import WebpageMediaEmptyError
 from elystl.tl.types import Message
 from elystl.types import InputMediaWebPage
 from elystl.utils import get_display_name
+from PIL import Image, ImageDraw, ImageFont
 
 from .. import loader, utils, version
 
 logger = logging.getLogger(__name__)
+
+_CUSTOM_BANNER_CACHE: dict[str, str] = {}
+
+
+def generate_custom_banner(nickname: str) -> str | None:
+    text = nickname.strip().upper()
+    if not text:
+        return None
+    if text in _CUSTOM_BANNER_CACHE:
+        return _CUSTOM_BANNER_CACHE[text]
+
+    base_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets")
+    os.makedirs(base_dir, exist_ok=True)
+    base_path = os.path.join(base_dir, "elys_banner_base.png")
+    if not os.path.exists(base_path):
+        try:
+            r = requests.get(
+                "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png",
+                timeout=15,
+            )
+            if r.status_code == 200:
+                with open(base_path, "wb") as f:
+                    f.write(r.content)
+        except Exception:
+            return None
+    if not os.path.exists(base_path):
+        return None
+
+    try:
+        im = Image.open(base_path).convert("RGB")
+        draw = ImageDraw.Draw(im)
+
+        # Erase INFO below the line
+        draw.rectangle([1220, 544, 1930, 648], fill=(6, 6, 6))
+
+        font_candidates = [
+            "/usr/share/fonts/TTF/DejaVuSans-Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+            "/usr/share/fonts/liberation/LiberationSans-Bold.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+            "/usr/share/fonts/TTF/OpenSans-Bold.ttf",
+            "/usr/share/fonts/TTF/FiraSans-Bold.ttf",
+        ]
+        font_path = next((f for f in font_candidates if os.path.exists(f)), None)
+        target_height = 80
+        letter_spacing = 8
+        font = (
+            ImageFont.truetype(font_path, target_height)
+            if font_path
+            else ImageFont.load_default()
+        )
+
+        def get_text_width(txt, fnt, sp):
+            total_w = 0
+            for char in txt:
+                bbox = fnt.getbbox(char)
+                total_w += (bbox[2] - bbox[0]) + sp
+            return total_w - sp if txt else 0
+
+        w = get_text_width(text, font, letter_spacing)
+        max_w = 850
+        if w > max_w:
+            scale = max_w / w
+            target_height = max(30, int(target_height * scale))
+            letter_spacing = max(2, int(letter_spacing * scale))
+            font = ImageFont.truetype(font_path, target_height)
+            w = get_text_width(text, font, letter_spacing)
+
+        center_x = 1577
+        center_y = 593
+        cur_x = center_x - w / 2
+
+        for char in text:
+            bbox = font.getbbox(char)
+            char_w = bbox[2] - bbox[0]
+            char_h = bbox[3] - bbox[1]
+            char_y = center_y - char_h / 2 - bbox[1]
+            draw.text((cur_x, char_y), char, fill=(152, 152, 152), font=font)
+            cur_x += char_w + letter_spacing
+
+        temp_path = f"/tmp/elys_banner_{abs(hash(text))}.png"
+        im.save(temp_path, "PNG")
+
+        with open(temp_path, "rb") as f:
+            resp = requests.post(
+                "https://freeimage.host/api/1/upload",
+                data={
+                    "key": "6d207e02198a847aa98d0a2a901485a5",
+                    "action": "upload",
+                    "format": "json",
+                },
+                files={"source": f},
+                timeout=15,
+            )
+            data = resp.json()
+            if data.get("status_code") == 200:
+                url = data["image"]["url"]
+                _CUSTOM_BANNER_CACHE[text] = url
+                return url
+    except Exception as e:
+        logger.error("Failed to generate custom banner for %s: %s", nickname, e)
+    return None
 
 
 @loader.tds
@@ -65,7 +171,18 @@ class ElysInfoMod(loader.Module):
                 "banner_url",
                 "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png",
                 lambda: self.strings["_cfg_banner"],
-                validator=loader.validators.RandomLink(),
+                validator=loader.validators.Choice(
+                    [
+                        "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png",
+                    ],
+                    allow_custom=True,
+                ),
+            ),
+            loader.ConfigValue(
+                "banner_text",
+                "",
+                "Custom nickname on banner (empty for username)",
+                validator=loader.validators.String(),
             ),
             loader.ConfigValue(
                 "ping_emoji",
@@ -75,7 +192,7 @@ class ElysInfoMod(loader.Module):
             ),
             loader.ConfigValue(
                 "quote_media",
-                False,
+                True,
                 "Switch preview media to quote",
                 validator=loader.validators.Boolean(),
             ),
@@ -254,14 +371,59 @@ class ElysInfoMod(loader.Module):
             **data,
         )
 
+    async def client_ready(self):
+        try:
+            nick = (
+                self.config["banner_text"]
+                or (
+                    self._client.elys_me.username
+                    and self._client.elys_me.username.replace("@", "")
+                )
+                or "ROM4IK"
+            )
+            display_name = get_display_name(self._client.elys_me) or nick
+
+            validator = self.config._config["banner_url"].validator
+            possible_values = validator.validate.keywords["possible_values"]
+            possible_values.clear()
+            possible_values.append("https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png")
+
+            async def _resolve_banner(text: str, cache_prefix: str) -> str | None:
+                cached_name = self._db.get(self.strings["name"], f"custom_banner_{cache_prefix}_name", None)
+                cached_url = self._db.get(self.strings["name"], f"custom_banner_{cache_prefix}_url", None)
+                if cached_name == text and cached_url:
+                    return cached_url
+                url = await asyncio.to_thread(generate_custom_banner, text)
+                if url:
+                    self._db.set(self.strings["name"], f"custom_banner_{cache_prefix}_name", text)
+                    self._db.set(self.strings["name"], f"custom_banner_{cache_prefix}_url", url)
+                return url
+
+            url_nick = await _resolve_banner(nick, "nick")
+            if url_nick and url_nick not in possible_values:
+                possible_values.append(url_nick)
+
+            if display_name.strip().upper() != nick.strip().upper():
+                url_name = await _resolve_banner(display_name, "name")
+                if url_name and url_name not in possible_values:
+                    possible_values.append(url_name)
+
+            if self.config["banner_url"] not in possible_values and self.config["banner_url"] != "custom" and not (self.config["banner_url"] and str(self.config["banner_url"]).startswith("http")):
+                self.config["banner_url"] = possible_values[1] if len(possible_values) > 1 else possible_values[0]
+        except Exception as e:
+            logger.error("Error in client_ready for ElysInfo: %s", e)
+
     @loader.command()
     async def infocmd(self, message: Message):
         start = time.perf_counter_ns()
         target_message = None
-        media = str(self.config["banner_url"]) if self.config["banner_url"] else None
+        
+        raw_banner = str(self.config["banner_url"]) if self.config["banner_url"] else None
+        media_url = raw_banner if raw_banner and raw_banner.startswith("http") else None
 
-        if self.config["banner_url"] and self.config["quote_media"] is True:
-            media = InputMediaWebPage(str(self.config["banner_url"]), optional=True)
+        media = media_url
+        if media_url and self.config["quote_media"] is True:
+            media = InputMediaWebPage(media_url, optional=True)
 
         async def _on_placeholders_ready(updated_data):
             for _ in range(60):
