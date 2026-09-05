@@ -1024,7 +1024,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>要件のインストールに失敗しました</b>
   requirements_restarted: 🚀 <b>ユーザーボットが再起動されました。再起動後、モジュールを再度インストールしてください。</b>
-  requirements_installing: '<tg-emoji emoji-id=5873225338984599714>🚀</tg-emoji> <b>要件をインストールしています:
+  requirements_installing: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>要件をインストールしています:
 
 
     {}</b>'

@@ -990,7 +990,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Зависимости не встали</b>
   requirements_restarted: 🚀 <b>Ребутаюсь, потом ставь модуль снова.</b>
-  requirements_installing: '<tg-emoji emoji-id=5873225338984599714>🚀</tg-emoji> <b>Ставлю либы:
+  requirements_installing: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>Ставлю либы:
 
 
     {}</b>'

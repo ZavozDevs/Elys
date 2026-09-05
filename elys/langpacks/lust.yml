@@ -1538,10 +1538,10 @@ loader:
     <blockquote expandable>{errors}</blockquote> ♡ 🫦'
   requirements_failed: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ой,
     ошибочка... накажи меня хорошенько шлепками, папочка~ (｡•́︿•̀｡) 🔞 установки зависимостей</b>
-  requirements_restarted: <tg-emoji emoji-id=5873225338984599714>🚀</tg-emoji> <b>Ваш
+  requirements_restarted: <tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>Ваш
     твой покорный фембойчик Elys ♡ сладенько течёт и перезагружается... (⁄ ⁄>⁄ ▽ ⁄<⁄)
     ♡, после перезагрузки выполните установку модуля еще раз.</b>
-  requirements_installing: '<tg-emoji emoji-id=5873225338984599714>🚀</tg-emoji> <b>Устанавливаю
+  requirements_installing: '<tg-emoji emoji-id=5345988476716226868>🤔</tg-emoji> <b>Устанавливаю
     зависимости:
 
 
