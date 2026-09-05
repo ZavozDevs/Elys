@@ -15,6 +15,7 @@ import difflib
 import inspect
 import logging
 import re
+import typing
 
 from elystl.tl.types import Message
 from elystl.types import InputMediaWebPage
