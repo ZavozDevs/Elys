@@ -140,11 +140,12 @@ users:
 
 branding:
   star:
-    id: "5237836252400626980"
+    id: "5246701816518843050"
     fallback: "⭐"
   glowing_star:
-    id: "5134452506935427991"
+    id: "5237990626410142523"
     fallback: "🌟"
+    aliases: ["star_glow"]
   sparkles:
     id: "5249255582598210678"
     fallback: "✨"
