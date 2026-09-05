@@ -43,14 +43,14 @@ elys_security:
 
     {}'
   rule_added: 🔐 <b>Все, дал {} <a href='{}'>{}</a> право юзать {}</b> <code>{}</code> <b>{}</b>
-  rules: '{e:unlock} <b>Таргет правила (для избранных):</b>
+  rules: '{e:keylock} <b>Таргет правила (для избранных):</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Пусто тут, как в голове у тиктокера</b>'
   owner_target: '{e:warn} <b>Э, это овнер, он и так босс, не трогай его права</b>'
-  rules_removed: '{e:unlock} <b>Снес правила для <a href="{}">{}</a></b>'
-  rule_removed: '{e:unlock} <b>Минус правило для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
+  rules_removed: '{e:keylock} <b>Снес правила для <a href="{}">{}</a></b>'
+  rule_removed: '{e:keylock} <b>Минус правило для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
   chat_inline: ⚠️ <b>Инлайн в чате не настроишь, ты че!</b>
   for: на
   forever: навсегда (пожизненно)
@@ -249,8 +249,8 @@ terminal:
 
     {e:dizzy} <b>Ждал: {}с</b>'
   auth_fail: '{e:stop} <b>Пароль не тот, пробуй еще</b>'
-  auth_needed: '{e:unlock}<a href="tg://user?id={}"> Введи пароль, хакер</a>'
-  auth_msg: '{e:unlock} <b>Редачь это сообщение и пиши пароль от рута для</b> <code>{}</code> <b>, чтоб запустить</b> <code>{}</code>'
+  auth_needed: '{e:lock}<a href="tg://user?id={}"> Введи пароль, хакер</a>'
+  auth_msg: '{e:lock} <b>Редачь это сообщение и пиши пароль от рута для</b> <code>{}</code> <b>, чтоб запустить</b> <code>{}</code>'
   auth_locked: '{e:stop} <b>Не фортануло с паролем. Попозже приходи</b>'
   auth_ongoing: '{e:wait} <b>Проверяю пароль...</b>'
   done: '{e:check} <b>Готово</b>'
@@ -329,21 +329,21 @@ elys_backup:
   all_restored_bot: 🔄 Фулл бэкап накатил, ребутаюсь...
   reply_to_file: '{e:stop} <b>Реплайни на .json или .zip, ну</b>'
   db_restored: '{e:sync} <b>Базу накатил, ребут...</b>'
-  modules_backup: '{e:rocket} <b>Бэкап модов ({})</b>
+  modules_backup: '{e:package} <b>Бэкап модов ({})</b>
 
 
     <b>Восстановить:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Моды вернул, ребут</b>'
-  backup_sent: '{e:rocket} <b>Скинул бэкап в <a href={}>чат базы</a></b>'
-  backupall_sent: '{e:rocket} <b>Дропнул бэкап базы и модулей в <a href={}>чат базы</a></b>'
+  backup_sent: '{e:package} <b>Скинул бэкап в <a href={}>чат базы</a></b>'
+  backupall_sent: '{e:package} <b>Дропнул бэкап базы и модулей в <a href={}>чат базы</a></b>'
   db_warning: '❗️ О, бэкап от Hikka. <b>Попробую</b> переделать под Elys.
 
     Может кринжануть. Пробуем?'
   advice_converting: Можешь сам поменять <a>'hikka.'</a> на <a>'elys.'</a> в файле. Так надо.
   converting_db: 🔄 Шаманю над базой...
-  probably_zip: '{e:stop} <b>Не вышло. Если это фулл бэкап (.zip/.backup), юзай</b> <code>{}restoreall</code> <b>реплаем.</b>'
+  probably_zip: '{e:warn} <b>Не вышло. Если это фулл бэкап (.zip/.backup), юзай</b> <code>{}restoreall</code> <b>реплаем.</b>'
   _cls_doc: Работает с бэкапами (сейвами)
   _cmd_doc_backupdb: Сделать бэкап базы [придет в лс]
   _cmd_doc_backupmods: Сделать бэкап модов [придет в лс]
@@ -605,7 +605,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:rocket} <b>Крутим настройку</b> <code>{}</code> <b>либы</b> <code>{}</code>
+  configuring_option_lib: '{e:package} <b>Крутим настройку</b> <code>{}</code> <b>либы</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -617,10 +617,10 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:recycle} <b>Настройку</b> <code>{}</code> <b>для</b> <code>{}</code><b> сохранил!</b>
+  option_saved: '{e:gear} <b>Настройку</b> <code>{}</code> <b>для</b> <code>{}</code><b> сохранил!</b>
 
     <b>Щас: {}</b>'
-  option_saved_lib: '{e:rocket} <b>Настройку</b> <code>{}</code> <b>для либы</b> <code>{}</code><b> сохранил!</b>
+  option_saved_lib: '{e:package} <b>Настройку</b> <code>{}</code> <b>для либы</b> <code>{}</code><b> сохранил!</b>
 
     <b>Щас: {}</b>'
   option_reset: '♻️ <b>Сбросил</b> <code>{}</code> <b>для</b> <code>{}</code><b> в дефолт</b>
@@ -692,8 +692,8 @@ inline_stuff:
   _cls_doc: Настройка inline-бота
   _cmd_doc_ch_bot_token: <token> - Сменить токен inline-бота
 test:
-  set_loglevel: '{e:grey_exclamation} <b>Уровень логов дай (числом или словом)</b>'
-  no_logs: '{e:grey_exclamation} <b>Нет логов уровня</b> <code>{}</code><b>.</b>'
+  set_loglevel: '{e:stop} <b>Уровень логов дай (числом или словом)</b>'
+  no_logs: '{e:shrug} <b>Нет логов уровня</b> <code>{}</code><b>.</b>'
   configping: 'Твой текст пинга. Юзай: {ping}, {uptime}, {ping_hint} (рофл фраза). Можно {hostname} сервера.'
   configpingph: '🤖Кастомные плейсхолдеры: {}'
   hint: Подсказка
@@ -745,10 +745,10 @@ updater:
     <i>Ребут занял {} сек
 
     {} модулей не загрузилось</i>'
-  secure_boot_complete: '{e:unlock} <b>Сейф бут все! {}</b>
+  secure_boot_complete: '{e:lock} <b>Сейф бут все! {}</b>
 
     <i>Заняло {} сек</i>'
-  secure_boot_fail: '{e:unlock} <b>Сейф бут все, но что-то пошло не так! {}</b>
+  secure_boot_fail: '{e:lock} <b>Сейф бут все, но что-то пошло не так! {}</b>
 
     <i>Заняло {} сек
 
@@ -857,9 +857,9 @@ help:
   undoc: 🦥 Хз че это
   all_header: <b>{} модов тут, {} в стелсе:</b>
   no_mod: 🚫 <b>Какой модуль прячем?</b>
-  help_lib: '{e:money} <b>Пакет</b> <code>{}</code> <b>это либа.</b>
+  help_lib: '{e:cross} <b>Пакет</b> <code>{}</code> <b>это либа.</b>
 
-    {e:money} <b>У либ нет описания, лол...</b>'
+    {e:cross} <b>У либ нет описания, лол...</b>'
   developer: '{e:heart_hands} Разработчик: {}'
   hidden_shown: '<b>{} модов скрыто, {} показано:</b>
 
@@ -874,10 +874,10 @@ help:
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Канал</b></a>'
   _cls_doc: Хелпа по модулям
-  partial_load: '{e:grey_exclamation} <b>Юзербот еще грузится, не все моды видно</b>'
-  not_exact: '{e:grey_exclamation} <b>Точно не нашел, вот похожее</b>'
+  partial_load: '{e:point_up} <b>Юзербот еще грузится, не все моды видно</b>'
+  not_exact: '{e:point_up} <b>Точно не нашел, вот похожее</b>'
   request_join: Ссылку на саппорт запросил
-  core_notice: '{e:grey_exclamation} <b>Это встроенный (core) модуль. Не трогай его</b>'
+  core_notice: '{e:point_up} <b>Это встроенный (core) модуль. Не трогай его</b>'
   _cmd_doc_help: '[модуль] [-f] - Показать хелп'
   _cmd_doc_helphide: <модули> - Спрятать модули из хелпа (через пробел)
   _cmd_doc_support: Дать ссылку на чат
@@ -918,7 +918,7 @@ elys_info:
 
 
     '
-  no_font: '{e:trash} Где ссылка или реплай на шрифт, алло?'
+  no_font: '{e:cross} Где ссылка или реплай на шрифт, алло?'
   no_banner: '{e:silent} <b>По ссылке </b><code>{link}</code><b> пусто.
 
 
@@ -926,10 +926,10 @@ elys_info:
   font_installed: '{e:party} <b>Шрифт поставил!</b>
 
     {e:party} <i>Кайфуй.</i>'
-  incorrect_format_font: '{e:trash} <b>Формат кринж!</b>
+  incorrect_format_font: '{e:cross} <b>Формат кринж!</b>
 
     <blockquote>Надо -> otf, ttf</blockquote>'
-  incorrect_img_format: '{e:trash} <b>Формат картинки не тот</b>
+  incorrect_img_format: '{e:cross} <b>Формат картинки не тот</b>
 
     <blockquote>Надо -> jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Скинуть 'Что такое Elys?'
@@ -958,11 +958,11 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:clock} Ищу в репо...'
-  loading_module_via_file: '{e:clock} Гружу...'
-  ml_load_module: '{e:clock} Качаю как файл...'
+  finding_module_in_repos: '{e:sync} Ищу в репо...'
+  loading_module_via_file: '{e:sync} Гружу...'
+  ml_load_module: '{e:sync} Качаю как файл...'
   no_ml: '{e:cross} <b>Модуль</b> <code>{}</code> <b>нельзя выгрузить файлом</b>'
-  not_exact: '{e:grey_exclamation} <i>Точно такого нет, вот похожее</i>'
+  not_exact: '{e:warn} <i>Точно такого нет, вот похожее</i>'
   args: '{e:stop} <b>Аргументы где?</b>'
   repo_config_doc: Ссылка на репо
   add_repo_config_doc: Доп. репозитории
@@ -975,15 +975,15 @@ loader:
   loaded: '{e:glowing_star} <b>Модуль</b> <code>{}</code>{} <b>залетел {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Че выгружать?</b>
   unloaded: '{} <b>Модуль {} выкинул.</b>'
-  unload_suggestions: '{e:shield} <b>Модуль</b> <code>{}</code> <b>не нашел.</b>
+  unload_suggestions: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не нашел.</b>
 
 
     <b>Может, ты про:</b>'
   modules_unloaded: '{e:check} <b>Выкинул {unloaded_num} модов:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:shield} <b>Не выкинул.</b>'
-  modules_not_unloaded: '{e:shield} <b>Не смог выкинуть {not_unloaded} модов.</b>
+  not_unloaded: '{e:cross} <b>Не выкинул.</b>'
+  modules_not_unloaded: '{e:cross} <b>Не смог выкинуть {not_unloaded} модов.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Зависимости не встали</b>'
@@ -1079,7 +1079,7 @@ loader:
   _cmd_doc_delrepo: Удалить репо
   basic_auth_doc: Вход в репо
   choose_repo: '{e:folders} <b>Сигма, выбери репозиторий, из которого будем качать все модули, ризз или ливни:</b>'
-  installing_all_from_repo: '{e:clock} <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>'
+  installing_all_from_repo: '{e:wait} <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Все модули из репозитория успешно установлены! Сигма момент</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>В этой репе нет ни одного модуля. Кринж</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Плаки, плаки. Некоторые модули не установились, кароче фейл, щавель не зашёл:</b>

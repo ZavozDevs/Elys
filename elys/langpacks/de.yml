@@ -43,14 +43,14 @@ elys_security:
 
     {}'
   rule_added: 🔐 <b>Sie haben {} <a href='{}'>{}</a> das Recht gegeben, {}</b> <code>{}</code> <b>{}</b> zu verwenden
-  rules: '{e:unlock} <b>Zielgerichtete Sicherheitsregeln:</b>
+  rules: '{e:keylock} <b>Zielgerichtete Sicherheitsregeln:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Keine zielgerichteten Sicherheitsregeln</b>'
   owner_target: '{e:warn} <b>Dieser Benutzer ist ein Besitzer, seine Rechte können nicht durch zielgerichtete Sicherheit verwaltet werden</b>'
-  rules_removed: '{e:unlock} <b>Zielgerichtete Sicherheitsregeln für <a href="{}">{}</a> wurden entfernt</b>'
-  rule_removed: '{e:unlock} <b>Die Sicherheitsregel für <a href="{}">{}</a> wurde entfernt (</b><code>{}</code><b>)</b>'
+  rules_removed: '{e:keylock} <b>Zielgerichtete Sicherheitsregeln für <a href="{}">{}</a> wurden entfernt</b>'
+  rule_removed: '{e:keylock} <b>Die Sicherheitsregel für <a href="{}">{}</a> wurde entfernt (</b><code>{}</code><b>)</b>'
   chat_inline: ⚠️ <b>Sie können keine Inline-Befehlregel für Chats erstellen!</b>
   for: für
   forever: für immer
@@ -253,8 +253,8 @@ terminal:
 
     {e:dizzy} <b>Ausführungszeit: {}s</b>'
   auth_fail: '{e:stop} <b>Authentifizierung fehlgeschlagen, bitte erneut versuchen</b>'
-  auth_needed: '{e:unlock}<a href="tg://user?id={}"> Authentifizierung erforderlich</a>'
-  auth_msg: '{e:unlock} <b>Bitte bearbeiten Sie diese Nachricht mit dem Root-Passwort für</b> <code>{}</code> <b>, um</b> <code>{}</code> <b>auszuführen</b>'
+  auth_needed: '{e:lock}<a href="tg://user?id={}"> Authentifizierung erforderlich</a>'
+  auth_msg: '{e:lock} <b>Bitte bearbeiten Sie diese Nachricht mit dem Root-Passwort für</b> <code>{}</code> <b>, um</b> <code>{}</code> <b>auszuführen</b>'
   auth_locked: '{e:stop} <b>Authentifizierung fehlgeschlagen. Bitte später erneut versuchen</b>'
   auth_ongoing: '{e:wait} <b>Authentifizierung...</b>'
   done: '{e:check} <b>Geschafft</b>'
@@ -333,19 +333,19 @@ elys_backup:
   all_restored_bot: 🔄 Ihre vollständige Sicherung wurde wiederhergestellt, Neustart...
   reply_to_file: '{e:stop} <b>Antworten Sie mit einer JSON- oder ZIP-Datei</b>'
   db_restored: '{e:sync} <b>Datenbank aktualisiert, Neustart läuft…</b>'
-  modules_backup: '{e:rocket} <b>Modulsicherung ({})</b>
+  modules_backup: '{e:package} <b>Modulsicherung ({})</b>
 
 
     <b>Sie können sie wiederherstellen mit:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Module wiederhergestellt, Neustart</b>'
-  backup_sent: '{e:rocket} <b>Die Sicherung wurde an den <a href={}>Datenbank-Chat</a> gesendet</b>'
-  backupall_sent: '{e:rocket} <b>Backup der Datenbank und Module wurde an den <a href={}>Datenbank-Chat</a> gesendet</b>'
+  backup_sent: '{e:package} <b>Die Sicherung wurde an den <a href={}>Datenbank-Chat</a> gesendet</b>'
+  backupall_sent: '{e:package} <b>Backup der Datenbank und Module wurde an den <a href={}>Datenbank-Chat</a> gesendet</b>'
   db_warning: ❗️ Hikka-Backup erkannt. Wenn Sie fortfahren, <b>versucht</b> der Userbot, es in ein für Elys geeignetes Format zu konvertieren. Möglicherweise treten Fehler bei der Konvertierung auf. Fortfahren?
   advice_converting: Sie können <a>'hikka.'</a> im Backup-Inhalt manuell durch <a>'elys.'</a> ersetzen. Dies ist zum Laden erforderlich.
   converting_db: 🔄 Konvertierung läuft …
-  probably_zip: '{e:stop} <b>Die Sicherung aus der Datei konnte nicht wiederhergestellt werden. Wahrscheinlich versuchen Sie, eine vollständige Sicherung (.zip oder .backup) wiederherzustellen. In diesem Fall verwenden Sie</b> <code>{}restoreall</code> <b>als Antwort auf die Datei.</b>'
+  probably_zip: '{e:warn} <b>Die Sicherung aus der Datei konnte nicht wiederhergestellt werden. Wahrscheinlich versuchen Sie, eine vollständige Sicherung (.zip oder .backup) wiederherzustellen. In diesem Fall verwenden Sie</b> <code>{}restoreall</code> <b>als Antwort auf die Datei.</b>'
   _cls_doc: Verarbeitet Datenbank- und Modulsicherungen
   _cmd_doc_backupdb: Datenbanksicherung erstellen [wird per PN gesendet]
   _cmd_doc_backupmods: Erstelle ein Backup der Mods [wird per PN gesendet]
@@ -607,7 +607,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:rocket} <b>Parameterverwaltung</b> <code>{}</code> <b>der Bibliothek</b> <code>{}</code>
+  configuring_option_lib: '{e:package} <b>Parameterverwaltung</b> <code>{}</code> <b>der Bibliothek</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -619,10 +619,10 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:recycle} <b>Parameter</b> <code>{}</code> <b>des Moduls</b> <code>{}</code><b> gespeichert!</b>
+  option_saved: '{e:gear} <b>Parameter</b> <code>{}</code> <b>des Moduls</b> <code>{}</code><b> gespeichert!</b>
 
     <b>Aktuell: {}</b>'
-  option_saved_lib: '{e:rocket} <b>Parameter</b> <code>{}</code> <b>der Bibliothek</b> <code>{}</code><b> gespeichert!</b>
+  option_saved_lib: '{e:package} <b>Parameter</b> <code>{}</code> <b>der Bibliothek</b> <code>{}</code><b> gespeichert!</b>
 
     <b>Aktuell: {}</b>'
   option_reset: '♻️ <b>Parameter</b> <code>{}</code> <b>des Moduls</b> <code>{}</code><b> auf den Standardwert zurückgesetzt</b>
@@ -694,8 +694,8 @@ inline_stuff:
   _cls_doc: Inline-Bot-Integration konfigurieren
   _cmd_doc_ch_bot_token: <token> - Inline-Bot-Token ändern
 test:
-  set_loglevel: '{e:grey_exclamation} <b>Gib das Log-Level als Zahl oder String an</b>'
-  no_logs: '{e:grey_exclamation} <b>Es gibt keine Logs mit dem Level</b> <code>{}</code><b>.</b>'
+  set_loglevel: '{e:stop} <b>Gib das Log-Level als Zahl oder String an</b>'
+  no_logs: '{e:shrug} <b>Es gibt keine Logs mit dem Level</b> <code>{}</code><b>.</b>'
   configping: 'Ihr benutzerdefinierter Text. Platzhalter können verwendet werden: {ping} - Ihr Ping, {uptime} - Ihre Uptime, {ping_hint} - Hinweis. Sie können den Platzhaltername {hostname} verwenden, wenn Sie den Hostname Ihres Servers benötigen'
   configpingph: '🤖Benutzerdefinierte Platzhalter: {}'
   hint: Geben Sie einen Hinweis an
@@ -747,10 +747,10 @@ updater:
     <i>Der vollständige Neustart dauerte {} Sekunden
 
     {} Module konnten nicht geladen werden</i>'
-  secure_boot_complete: '{e:unlock} <b>Sicherer Start abgeschlossen! {}</b>
+  secure_boot_complete: '{e:lock} <b>Sicherer Start abgeschlossen! {}</b>
 
     <i>Der Neustart dauerte {} Sekunden</i>'
-  secure_boot_fail: '{e:unlock} <b>Sicherer Start abgeschlossen, aber ein Fehler ist aufgetreten! {}</b>
+  secure_boot_fail: '{e:lock} <b>Sicherer Start abgeschlossen, aber ein Fehler ist aufgetreten! {}</b>
 
     <i>Der Neustart dauerte {} Sekunden
 
@@ -859,9 +859,9 @@ help:
   undoc: 🦥 Keine Beschreibung
   all_header: <b>{} Module verfügbar, {} verborgen:</b>
   no_mod: 🚫 <b>Gib das Modul(-e) an, das(-e) versteckt werden soll(en)</b>
-  help_lib: '{e:money} <b>Das Paket</b> <code>{}</code> <b>ist eine Bibliothek.</b>
+  help_lib: '{e:cross} <b>Das Paket</b> <code>{}</code> <b>ist eine Bibliothek.</b>
 
-    {e:money} <b>Bibliotheken haben keine Beschreibung...</b>'
+    {e:cross} <b>Bibliotheken haben keine Beschreibung...</b>'
   developer: '{e:heart_hands} Entwickler: {}'
   hidden_shown: '<b>{} Module verborgen, {} Module angezeigt:</b>
 
@@ -876,10 +876,10 @@ help:
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Offizieller Kanal</b></a>'
   _cls_doc: Zeigt Hilfe zu Modulen an
-  partial_load: '{e:grey_exclamation} <b>Der Userbot ist noch nicht vollständig geladen, daher werden nicht alle Module angezeigt</b>'
-  not_exact: '{e:grey_exclamation} <b>Es wurde keine exakte Übereinstimmung gefunden, daher wurde die passendste Auswahl getroffen</b>'
+  partial_load: '{e:point_up} <b>Der Userbot ist noch nicht vollständig geladen, daher werden nicht alle Module angezeigt</b>'
+  not_exact: '{e:point_up} <b>Es wurde keine exakte Übereinstimmung gefunden, daher wurde die passendste Auswahl getroffen</b>'
   request_join: Du hast nach einem Link zum Hilfe-Chat von Elys gefragt
-  core_notice: '{e:grey_exclamation} <b>Dies ist ein eingebautes Modul. Du kannst es nicht entladen oder ersetzen</b>'
+  core_notice: '{e:point_up} <b>Dies ist ein eingebautes Modul. Du kannst es nicht entladen oder ersetzen</b>'
   _cmd_doc_help: '[Modul] [-f] - Zeigt Hilfe an'
   _cmd_doc_helphide: '<Modul oder Module> - Versteckt das Modul(-e) aus der Hilfe
 
@@ -919,7 +919,7 @@ elys_info:
 
 
     '
-  no_font: '{e:trash} Wo ist der Link oder die Antwort mit der Schriftart?'
+  no_font: '{e:cross} Wo ist der Link oder die Antwort mit der Schriftart?'
   no_banner: '{e:silent} <b>Unter der angegebenen Link</b> <code>{link}</code> <b>wurde nichts gefunden.
 
 
@@ -927,10 +927,10 @@ elys_info:
   font_installed: '{e:party} <b>Schriftart erfolgreich installiert!</b>
 
     {e:party} <i>Du kannst sie jetzt nutzen.</i>'
-  incorrect_format_font: '{e:trash} <b>Ungültiges Schriftart-Format!</b>
+  incorrect_format_font: '{e:cross} <b>Ungültiges Schriftart-Format!</b>
 
     <blockquote>Unterstützte Formate → otf, ttf</blockquote>'
-  incorrect_img_format: '{e:trash} <b>Ungültiges Bildformat</b>
+  incorrect_img_format: '{e:cross} <b>Ungültiges Bildformat</b>
 
     <blockquote>Unterstützte Formate → jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Sende Informationen im Stil von 'Was ist Elys?'
@@ -959,10 +959,10 @@ loader:
 
 
     {not_exact}'
-  loading_module_via_file: '{e:clock} Das Modul wird geladen.'
-  ml_load_module: '{e:clock} Ich lade das Modul als Datei herunter.'
+  loading_module_via_file: '{e:sync} Das Modul wird geladen.'
+  ml_load_module: '{e:sync} Ich lade das Modul als Datei herunter.'
   no_ml: '{e:cross} <b>Modul</b> <code>{}</code> <b>kann nicht als Datei exportiert werden</b>'
-  not_exact: '{e:grey_exclamation} <i>Es wurde keine genaue Übereinstimmung gefunden, daher wird stattdessen das nächstgelegene Ergebnis angezeigt</i>'
+  not_exact: '{e:warn} <i>Es wurde keine genaue Übereinstimmung gefunden, daher wird stattdessen das nächstgelegene Ergebnis angezeigt</i>'
   args: '{e:stop} <b>Sie müssen Argumente angeben</b>'
   repo_config_doc: Link zum Modul-Download
   add_repo_config_doc: Zusätzliche Repositories
@@ -975,11 +975,11 @@ loader:
   loaded: '{e:glowing_star} <b>Modul</b> <code>{}</code>{} <b>wurde geladen {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Was soll entladen werden?</b>
   unloaded: '{} <b>Modul {} wurde entladen.</b>'
-  unload_suggestions: '{e:shield} <b>Modul</b> <code>{}</code> <b>wurde nicht gefunden.</b>
+  unload_suggestions: '{e:cross} <b>Modul</b> <code>{}</code> <b>wurde nicht gefunden.</b>
 
 
     <b>Meintest du vielleicht:</b>'
-  not_unloaded: '{e:shield} <b>Modul wurde nicht entladen.</b>'
+  not_unloaded: '{e:cross} <b>Modul wurde nicht entladen.</b>'
   requirements_failed: '{e:stop} <b>Fehler bei der Installation der Abhängigkeiten</b>'
   requirements_restarted: 🚀 <b>Dein Userbot wird neu gestartet, nach dem Neustart installiere das Modul erneut.</b>
   requirements_installing: '{e:think} <b>Installiere Abhängigkeiten:
@@ -1073,7 +1073,7 @@ loader:
   _cmd_doc_delrepo: Lösche ein zusätzliches Repository
   basic_auth_doc: Authentifizierung für den Zugriff auf das Repository
   choose_repo: '{e:folders} <b>Wähle ein Repository aus, um alle Module daraus zu installieren:</b>'
-  installing_all_from_repo: '{e:clock} <b>Installiere alle Module aus dem Repository...</b>'
+  installing_all_from_repo: '{e:wait} <b>Installiere alle Module aus dem Repository...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Alle Module aus dem Repository erfolgreich installiert!</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>Keine Module in diesem Repository gefunden!</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Einige Module konnten nicht installiert werden:</b>

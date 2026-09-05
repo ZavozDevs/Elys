@@ -47,14 +47,14 @@ elys_security:
 
 
     {}'
-  rules: '{e:unlock} <b>iptables -L -v -n:</b>
+  rules: '{e:keylock} <b>iptables -L -v -n:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>iptables: No rules defined</b>'
   owner_target: '{e:warn} <b>User is UID 0. Firewall bypassed.</b>'
-  rules_removed: '{e:unlock} <b>iptables -F <a href="{}">{}</a></b>'
-  rule_removed: '{e:unlock} <b>iptables -D <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
+  rules_removed: '{e:keylock} <b>iptables -F <a href="{}">{}</a></b>'
+  rule_removed: '{e:keylock} <b>iptables -D <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
   chat_inline: '⚠️ <b>NotImplementedError: Inline chats not supported yet!</b>'
   for: while
   forever: while(true)
@@ -260,8 +260,8 @@ terminal:
 
     {e:dizzy} <b>real {}s</b>'
   auth_fail: '{e:stop} <b>403 Forbidden</b>'
-  auth_needed: '{e:unlock}<a href="tg://user?id={}"> sudo password required</a>'
-  auth_msg: '{e:unlock} <b>Input password for</b> <code>{}</code> <b>exec</b> <code>{}</code>'
+  auth_needed: '{e:lock}<a href="tg://user?id={}"> sudo password required</a>'
+  auth_msg: '{e:lock} <b>Input password for</b> <code>{}</code> <b>exec</b> <code>{}</code>'
   dangerous_command: '{e:cross} <b>SystemHalt: (<code>{}</code>) blocked by safety protocol.</b>
 
 
@@ -339,21 +339,21 @@ elys_backup:
   all_restored_bot: 🔄 Snapshot restored. Rebooting...
   reply_to_file: '{e:stop} <b>IOError: Reply with .json/.zip required</b>'
   db_restored: '{e:sync} <b>DB imported. Rebooting...</b>'
-  modules_backup: '{e:rocket} <b>Modules Dump ({})</b>
+  modules_backup: '{e:package} <b>Modules Dump ({})</b>
 
 
     <b>Restore cmd:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Modules restored. Rebooting...</b>'
-  backup_sent: '{e:rocket} <b>Dump > <a href={}>log channel</a></b>'
-  backupall_sent: '{e:rocket} <b>Dump > <a href={}>log channel</a></b>'
+  backup_sent: '{e:package} <b>Dump > <a href={}>log channel</a></b>'
+  backupall_sent: '{e:package} <b>Dump > <a href={}>log channel</a></b>'
   db_warning: '❗️ Migration detected (Hikka -> Elys). Starting conversion.
 
     Possible data corruption. Proceed?'
   advice_converting: 'Tip: sed ''s/hikka./elys./g'' dump.json manually.'
   converting_db: 🔄 Migrating schema...
-  probably_zip: '{e:stop} <b>Restore failed. File might be zip. Use</b> <code>{}restoreall</code><b>.</b>'
+  probably_zip: '{e:warn} <b>Restore failed. File might be zip. Use</b> <code>{}restoreall</code><b>.</b>'
   _cls_doc: Backup & Restore Manager
   _cmd_doc_backupdb: mysqldump (DB)
   _cmd_doc_backupmods: tar -czf modules
@@ -618,7 +618,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:rocket} <b>Edit param</b> <code>{}</code> <b>in</b> <code>{}</code>
+  configuring_option_lib: '{e:package} <b>Edit param</b> <code>{}</code> <b>in</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -630,10 +630,10 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:recycle} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
+  option_saved: '{e:gear} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
 
     <b>Value: {}</b>'
-  option_saved_lib: '{e:rocket} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
+  option_saved_lib: '{e:package} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
 
     <b>Value: {}</b>'
   option_reset: '♻️ <b>Reset</b> <code>{}</code> <b>in</b> <code>{}</code> <b>to default</b>
@@ -705,8 +705,8 @@ inline_stuff:
   _cmd_doc_ch_bot_token: <token> - Replace inline bot token
 test:
   name: Tester
-  set_loglevel: '{e:grey_exclamation} <b>TypeError: Verbosity must be int or string</b>'
-  no_logs: '{e:grey_exclamation} <b>/var/log/elys empty for level</b> <code>{}</code><b>.</b>'
+  set_loglevel: '{e:stop} <b>TypeError: Verbosity must be int or string</b>'
+  no_logs: '{e:shrug} <b>/var/log/elys empty for level</b> <code>{}</code><b>.</b>'
   configping: 'Custom text. Vars: {ping}, {uptime}, {ping_hint}, {hostname}'
   configpingph: '🤖 Vars: {}'
   hint: Set hint
@@ -724,7 +724,7 @@ test:
 
     <b>Use</b> <code>.logs {0} -f</code> <b>to bypass</b>'
   choose_loglevel: 💁‍♂️ <b>Select log level</b>
-  bad_module: '{e:grey_exclamation} <b>Module not found</b>'
+  bad_module: '{e:stop} <b>Module not found</b>'
   debugging_enabled: '{e:check} <b>Debug mode:</b> <code>{0}</code>
 
     <i>Watching `debug_modules/{0}.py` for changes...</i>'
@@ -781,10 +781,10 @@ updater:
     <i>Runtime: {}s
 
     Failed imports: {}</i>'
-  secure_boot_complete: '{e:unlock} <b>Safe Mode Active! {}</b>
+  secure_boot_complete: '{e:lock} <b>Safe Mode Active! {}</b>
 
     <i>Runtime: {}s</i>'
-  secure_boot_fail: '{e:unlock} <b>Safe Mode Error! {}</b>
+  secure_boot_fail: '{e:lock} <b>Safe Mode Error! {}</b>
 
     <i>Runtime: {}s
 
@@ -878,9 +878,9 @@ help:
   undoc: 🦥 No Man Page
   all_header: <b>{} mods installed, {} hidden:</b>
   no_mod: 🚫 <b>Specify module</b>
-  help_lib: '{e:money} <b>{} is a Library.</b>
+  help_lib: '{e:cross} <b>{} is a Library.</b>
 
-    {e:money} <b>Libraries have no docs.</b>'
+    {e:cross} <b>Libraries have no docs.</b>'
   developer: '{e:heart_hands} Dev: {}'
   hidden_shown: '<b>{} hidden, {} shown:</b>
 
@@ -894,10 +894,10 @@ help:
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Channel</b></a>'
-  partial_load: '{e:grey_exclamation} <b>Partial boot detected. Module list incomplete.</b>'
-  not_exact: '{e:grey_exclamation} <b>Fuzzy match result.</b>'
+  partial_load: '{e:point_up} <b>Partial boot detected. Module list incomplete.</b>'
+  not_exact: '{e:point_up} <b>Fuzzy match result.</b>'
   request_join: Link requested
-  core_notice: '{e:grey_exclamation} <b>Kernel module. Cannot unload/replace.</b>'
+  core_notice: '{e:point_up} <b>Kernel module. Cannot unload/replace.</b>'
   _cls_doc: Prints module and command manuals
   _cmd_doc_help: '[module] - Print help for modules and commands'
   _cmd_doc_helphide: <module ...> - Hide/show modules in help output
@@ -937,11 +937,11 @@ elys_info:
 
 
     '
-  no_font: '{e:trash} Font not found in reply/link.'
+  no_font: '{e:cross} Font not found in reply/link.'
   no_banner: '{e:silent} <b>404: Link </b><code>{link></code> <b>unreachable.</b>'
   font_installed: '{e:party} <b>Font installed.</b>'
-  incorrect_format_font: '{e:trash} <b>FormatError (support: otf, ttf)</b>'
-  incorrect_img_format: '{e:trash} <b>FormatError (support: jpg, png, bmp, webp)</b>'
+  incorrect_format_font: '{e:cross} <b>FormatError (support: otf, ttf)</b>'
+  incorrect_img_format: '{e:cross} <b>FormatError (support: jpg, png, bmp, webp)</b>'
   _cmd_doc_ubinfo: About
   _cmd_doc_info: SystemInfo
   _cmd_doc_setinfo: <text> - Edit Info Template
@@ -970,11 +970,11 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:clock} Grepping Repos...'
-  loading_module_via_file: '{e:clock} Import...'
-  ml_load_module: '{e:clock} wget...'
+  finding_module_in_repos: '{e:sync} Grepping Repos...'
+  loading_module_via_file: '{e:sync} Import...'
+  ml_load_module: '{e:sync} wget...'
   no_ml: '{e:cross} <b>Module</b> <code>{}</code> <b>cannot be exported as file</b>'
-  not_exact: '{e:grey_exclamation} <i>Fuzzy match.</i>'
+  not_exact: '{e:warn} <i>Fuzzy match.</i>'
   args: '{e:stop} <b>Missing Args</b>'
   repo_config_doc: Repo URL
   avail_header: '{e:roller_coaster} <b>Mods in Repo</b>'
@@ -986,15 +986,15 @@ loader:
   loaded: '{e:glowing_star} <b>Module</b> <code>{}</code>{} <b>imported {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Class name required for unload</b>
   unloaded: '{} <b>Module {} removed.</b>'
-  unload_suggestions: '{e:shield} <b>Module</b> <code>{}</code> <b>not found.</b>
+  unload_suggestions: '{e:cross} <b>Module</b> <code>{}</code> <b>not found.</b>
 
 
     <b>Closest matches:</b>'
   modules_unloaded: '{e:check} <b>Unloaded {unloaded_num} mods:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:shield} <b>Unload failed.</b>'
-  modules_not_unloaded: '{e:shield} <b>Failed to unload {not_unloaded} mods.</b>
+  not_unloaded: '{e:cross} <b>Unload failed.</b>'
+  modules_not_unloaded: '{e:cross} <b>Failed to unload {not_unloaded} mods.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Pip install failed</b>'
@@ -1076,7 +1076,7 @@ loader:
   _cls_doc: Module Loader
   basic_auth_doc: Basic Auth credentials
   choose_repo: '{e:folders} <b>Choose a repository to install all modules from I use Arch btw:</b>'
-  installing_all_from_repo: '{e:clock} <b>Cloning repo and installing all modules via git pull && makepkg -si...</b>'
+  installing_all_from_repo: '{e:wait} <b>Cloning repo and installing all modules via git pull && makepkg -si...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>All modules from repository installed successfully! (no errors, chad moment)</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>No modules found in this repository! RTFM or gtfo, normie.</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Some modules failed to install:</b>

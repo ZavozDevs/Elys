@@ -47,14 +47,14 @@ elys_security:
 
 
     {}'
-  rules: '{e:unlock} <b>Tawgeted secuwity wuwes:</b>
+  rules: '{e:keylock} <b>Tawgeted secuwity wuwes:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Nyo tawgeted secuwity wuwes UwU</b>'
   owner_target: "{e:warn} <b>Dis usew is ownew and can't be pwomoted by tawgeted secuwity</b>"
-  rules_removed: '{e:unlock} <b>Tawgeted secuwity wuwes fow <a href="{}">{}</a> wemoved</b>'
-  rule_removed: '{e:unlock} <b>Tawgeted secuwity wuwe fow <a href="{}">{}</a> (</b><code>{}</code><b>) wemoved</b>'
+  rules_removed: '{e:keylock} <b>Tawgeted secuwity wuwes fow <a href="{}">{}</a> wemoved</b>'
+  rule_removed: '{e:keylock} <b>Tawgeted secuwity wuwe fow <a href="{}">{}</a> (</b><code>{}</code><b>) wemoved</b>'
   chat_inline: ⚠️ <b>You can't cweate an inwine command wuwe fow chats! >.<</b>
   for: fow
   forever: fowevew
@@ -262,8 +262,8 @@ terminal:
 
     {e:dizzy} <b>Execution time: {}s</b>'
   auth_fail: '{e:stop} <b>Audentication faiwed, pwease twy again ;w;</b>'
-  auth_needed: '{e:unlock}<a href="tg://user?id={}"> Intewactive audentication wequiwed</a>'
-  auth_msg: '{e:unlock} <b>Pwease edit dis message to da passwowd fow</b> <code>{}</code> <b>to wun</b> <code>{}</code>'
+  auth_needed: '{e:lock}<a href="tg://user?id={}"> Intewactive audentication wequiwed</a>'
+  auth_msg: '{e:lock} <b>Pwease edit dis message to da passwowd fow</b> <code>{}</code> <b>to wun</b> <code>{}</code>'
   dangerous_command: '{e:cross} <b>Da execution of dis command (<code>{}</code>) was cancewwed fow youw safety. OwO</b>
 
 
@@ -341,21 +341,21 @@ elys_backup:
   all_restored_bot: 🔄 Youw fuww backup has been westowed, westawting...
   reply_to_file: '{e:stop} <b>Wepwy with .json ow .zip fiwe</b>'
   db_restored: '{e:sync} <b>Database updated, westawting...</b>'
-  modules_backup: '{e:rocket} <b>Moduwes backup ({})</b>
+  modules_backup: '{e:package} <b>Moduwes backup ({})</b>
 
 
     <b>You can westowe it using:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Moduwes westowed, westawting</b>'
-  backup_sent: '{e:rocket} <b>Backup sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
-  backupall_sent: '{e:rocket} <b>Backup of databwase an moduwules sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
+  backup_sent: '{e:package} <b>Backup sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
+  backupall_sent: '{e:package} <b>Backup of databwase an moduwules sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
   db_warning: '❗️ Hikka backup detected. If you continyue, da usewbot wiww <b>twy</b> to convewt it to a fowmat suitabwe fow Elys.
 
     Thewe may be some ewwows in da convewsion. Continyue?'
   advice_converting: You can manyuawwy wepwace <a>'hikka.'</a> with <a>'elys.'</a> in da backup content. Dis is nyecessawy fow woading it.
   converting_db: 🔄 Convewting...
-  probably_zip: '{e:stop} <b>Da backup fwom da fiwe couwd nyot be westowed. You awe pwobabwy twying to westowe a fuww backup (.zip ow .backup). In dat case, use</b> <code>{}restoreall</code> <b>in wepwy to da fiwe.</b>'
+  probably_zip: '{e:warn} <b>Da backup fwom da fiwe couwd nyot be westowed. You awe pwobabwy twying to westowe a fuww backup (.zip ow .backup). In dat case, use</b> <code>{}restoreall</code> <b>in wepwy to da fiwe.</b>'
   _cls_doc: Pwocesses database and moduwe backups
   _cmd_doc_backupdb: Cweate a database backup [wiww be sent to PM]
   _cmd_doc_backupmods: Cweate a backup of mods [wiww be sent to PM]
@@ -623,7 +623,7 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:rocket} <b>Configuwing option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code>
+  configuring_option_lib: '{e:package} <b>Configuwing option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -635,10 +635,10 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:recycle} <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code><b> saved!</b>
+  option_saved: '{e:gear} <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code><b> saved!</b>
 
     <b>Cuwwent: {}</b>'
-  option_saved_lib: '{e:rocket} <b>Option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code><b> saved!</b>
+  option_saved_lib: '{e:package} <b>Option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code><b> saved!</b>
 
     <b>Cuwwent: {}</b>'
   option_reset: '♻️ <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code> <b>has been weset to defauwt</b>
@@ -710,8 +710,8 @@ inline_stuff:
   _cmd_doc_ch_bot_token: <token> - Change inwine bot token
 test:
   name: Testew
-  set_loglevel: '{e:grey_exclamation} <b>Pwease specify vewbosity as an integew ow stwing</b>'
-  no_logs: "{e:grey_exclamation} <b>You don't have any wogs at vewbosity</b> <code>{}</code><b>.</b>"
+  set_loglevel: '{e:stop} <b>Pwease specify vewbosity as an integew ow stwing</b>'
+  no_logs: "{e:shrug} <b>You don't have any wogs at vewbosity</b> <code>{}</code><b>.</b>"
   configping: 'Youw custom text. You can use pwacehowdews: {ping} - Dat''s youw ping. {uptime} - It''s youw uptime. {ping_hint} - Dis is da same hint as in da elys moduwe, it is chosen with wandom chance, awso you can specify dis hint in da config. You can use da {hostname} pwacehowdew if you nyeed da hostnyame of youw sewvew'
   configpingph: '🤖 Custom pwaceholders: {}'
   hint: Set a hint
@@ -729,7 +729,7 @@ test:
 
     <b>Type</b> <code>.logs {0} -f</code> <b>to ignyowe dis wawning</b>'
   choose_loglevel: 💁‍♂️ <b>Choose wog wevew</b>
-  bad_module: '{e:grey_exclamation} <b>Moduwe nyot found</b>'
+  bad_module: '{e:stop} <b>Moduwe nyot found</b>'
   debugging_enabled: '{e:check} <b>Debugging mode enyabwed fow moduwe</b> <code>{0}</code>
 
     <i>Go to diwectowy nyamed `debug_modules`, edit fiwe nyamed `{0}.py` and see changes in weaw time</i>'
@@ -788,10 +788,10 @@ updater:
     <i>Fuww westawt took {}s
 
     Faiwed to woad {} moduwes</i>'
-  secure_boot_complete: '{e:unlock} <b>Secuwe boot compweted! {}</b>
+  secure_boot_complete: '{e:lock} <b>Secuwe boot compweted! {}</b>
 
     <i>Westawt took {}s</i>'
-  secure_boot_fail: '{e:unlock} <b>Secuwe boot compweted, but an ewwow occuwwed! {}</b>
+  secure_boot_fail: '{e:lock} <b>Secuwe boot compweted, but an ewwow occuwwed! {}</b>
 
     <i>Westawt took {}s
 
@@ -879,9 +879,9 @@ help:
   undoc: 🦥 Nyo docs
   all_header: <b>{} mods avaiwabwe, {} hidden:</b>
   no_mod: 🚫 <b>Specify moduwe to hide</b>
-  help_lib: '{e:money} <b>Package</b> <code>{}</code> <b>is a wibwawy.</b>
+  help_lib: '{e:cross} <b>Package</b> <code>{}</code> <b>is a wibwawy.</b>
 
-    {e:money} <b>Wibwawies do nyot have descwiptions...</b>'
+    {e:cross} <b>Wibwawies do nyot have descwiptions...</b>'
   developer: '{e:heart_hands} Devewopew: {}'
   hidden_shown: '<b>{} moduwes hidden, {} moduwes shown:</b>
 
@@ -895,10 +895,10 @@ help:
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Officiaw channyew</b></a>'
-  partial_load: '{e:grey_exclamation} <b>Usewbot is nyot fuwwy woaded, so nyot aww moduwes awe shown</b>'
-  not_exact: '{e:grey_exclamation} <b>Nyo exact match occuwed, so da cwosest wesuwt is shown instead</b>'
+  partial_load: '{e:point_up} <b>Usewbot is nyot fuwwy woaded, so nyot aww moduwes awe shown</b>'
+  not_exact: '{e:point_up} <b>Nyo exact match occuwed, so da cwosest wesuwt is shown instead</b>'
   request_join: You wequested wink fow Elys suppowt chat
-  core_notice: "{e:grey_exclamation} <b>Dis is a cowe moduwe. You can't unwoad it nyow wepwace</b>"
+  core_notice: "{e:point_up} <b>Dis is a cowe moduwe. You can't unwoad it nyow wepwace</b>"
   show_preview_in_help: 'Show # meta bannyew in hewp pweview [moduwe] pwease~ :3 OwO'
   _cls_doc: Shows hewp fow moduwes and commands
   _cmd_doc_help: '[moduwe] - Show hewp fow moduwes and commands'
@@ -938,7 +938,7 @@ elys_info:
 
 
     '
-  no_font: '{e:trash} Whewe is da wink ow wepwy to da font?'
+  no_font: '{e:cross} Whewe is da wink ow wepwy to da font?'
   no_banner: '{e:silent} <b>Nyothing was found at da specified wink </b><code>{link></code><b>.
 
 
@@ -946,10 +946,10 @@ elys_info:
   font_installed: '{e:party} <b>Font instawwed successfuwwy!</b>
 
     {e:party} <i>You can nyow enjoy using it.</i>'
-  incorrect_format_font: '{e:trash} <b>Invawid font fowmat!</b>
+  incorrect_format_font: '{e:cross} <b>Invawid font fowmat!</b>
 
     <blockquote>Suppowted fowmats -> otf, ttf</blockquote>'
-  incorrect_img_format: '{e:trash} <b>Invawid image fowmat</b>
+  incorrect_img_format: '{e:cross} <b>Invawid image fowmat</b>
 
     <blockquote>Suppowted fowmats -> jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Send info aka 'What is Elys?'
@@ -980,11 +980,11 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:clock} Wooking fow moduwes in wepositowies.'
-  loading_module_via_file: '{e:clock} Woading da moduwe.'
-  ml_load_module: "{e:clock} I'm downwoading da moduwe as a fiwe."
+  finding_module_in_repos: '{e:sync} Wooking fow moduwes in wepositowies.'
+  loading_module_via_file: '{e:sync} Woading da moduwe.'
+  ml_load_module: "{e:sync} I'm downwoading da moduwe as a fiwe."
   no_ml: '{e:cross} <b>Moduwe</b> <code>{}</code> <b>cannyot be expowted as a fiwe</b>'
-  not_exact: '{e:grey_exclamation} <i>Nyo exact match has been found, so da cwosest wesuwt is shown instead</i>'
+  not_exact: '{e:warn} <i>Nyo exact match has been found, so da cwosest wesuwt is shown instead</i>'
   args: '{e:stop} <b>You must specify awguments</b>'
   repo_config_doc: UWW to a moduwe wepo
   avail_header: '{e:roller_coaster} <b>Moduwes fwom wepo</b>'
@@ -996,15 +996,15 @@ loader:
   loaded: '{e:glowing_star} <b>Moduwe</b> <code>{}</code>{} <b>woaded {}</b>{}{}{}{}{}{}'
   no_class: <b>What cwass nyeeds to be unwoaded?</b>
   unloaded: '{} <b>Moduwe {} unwoaded.</b>'
-  unload_suggestions: '{e:shield} <b>Moduwe</b> <code>{}</code> <b>nyot found.</b>
+  unload_suggestions: '{e:cross} <b>Moduwe</b> <code>{}</code> <b>nyot found.</b>
 
 
     <b>Maybe you meant:</b>'
   modules_unloaded: '{e:check} <b>Unwoaded {unloaded_num} moduwes:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:shield} <b>Moduwe nyot unwoaded.</b>'
-  modules_not_unloaded: '{e:shield} <b>Faiwed to unwoad {not_unloaded} moduwes.</b>
+  not_unloaded: '{e:cross} <b>Moduwe nyot unwoaded.</b>'
+  modules_not_unloaded: '{e:cross} <b>Faiwed to unwoad {not_unloaded} moduwes.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Wequiwements instawwation faiwed</b>'
@@ -1098,7 +1098,7 @@ loader:
   _cls_doc: Woads moduwes
   basic_auth_doc: Basic aud fow moduwe wepo
   choose_repo: '{e:folders} <b>Pwease chwoose a wepositowy to instaww aww moduwes fwom, senpai~ :3</b>'
-  installing_all_from_repo: '{e:clock} <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>'
+  installing_all_from_repo: '{e:wait} <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Aww moduwes fwom wepositowy instawwed successfuwwy! OwO yippee~</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>Nyooo moduwes found in dis wepositowy! >///< Awe you suwe, mastew?</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Some moduwes faiwed to instaww... sowwy senpai :c</b>
