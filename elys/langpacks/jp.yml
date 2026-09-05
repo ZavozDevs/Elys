@@ -803,7 +803,7 @@ updater:
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ロールバックするコミット数を指定する必要があります！</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>ロールバックしすぎています！</b>
   rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>本当に {num} コミット分ロールバックしますか？</b>
-  rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>{num} コミット分ロールバックしています...</b>
+  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>{num} コミット分ロールバックしています...</b>
   autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> 新しい Elys アップデート！
 
 
@@ -995,9 +995,9 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> リポジトリ内のモジュールを探しています。
-  loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> モジュールを読み込んでいます。
-  ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> モジュールをファイルとしてダウンロードしています。
+  finding_module_in_repos: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> リポジトリ内のモジュールを探しています。
+  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> モジュールを読み込んでいます。
+  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> モジュールをファイルとしてダウンロードしています。
   no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>モジュール</b> <code>{}</code> <b>はファイルとしてエクスポートできません</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>完全一致が見つからなかったため、最も近い結果が表示されています</i>
   args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>引数を指定する必要があります</b>
@@ -1113,7 +1113,7 @@ loader:
   _cls_doc: モジュールを読み込みます
   basic_auth_doc: モジュールリポジトリの基本認証
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>すべてのモジュールをインストールするリポジトリを選択してください:</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>リポジトリからすべてのモジュールをインストール中...</b>
+  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>リポジトリからすべてのモジュールをインストール中...</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>リポジトリからすべてのモジュールが正常にインストールされました！</b>
   dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>このリポジトリにモジュールが見つかりません！</b>
   dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>一部のモジュールのインストールに失敗しました:</b>

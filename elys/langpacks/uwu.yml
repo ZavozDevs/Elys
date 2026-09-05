@@ -800,7 +800,7 @@ updater:
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>You must pwovide nyumbew of commits to wowwback!</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>You'we wowwing back too faw!</b>
   rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Awe you suwe you want to wowwback {num} commit(-s)?</b>
-  rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>Wowwing {num} commits back...</b>
+  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>Wowwing {num} commits back...</b>
   autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> Nyew Elys update!
 
 
@@ -983,9 +983,9 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Wooking fow moduwes in wepositowies.
-  loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Woading da moduwe.
-  ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> I'm downwoading da moduwe as a fiwe.
+  finding_module_in_repos: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Wooking fow moduwes in wepositowies.
+  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Woading da moduwe.
+  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> I'm downwoading da moduwe as a fiwe.
   no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>Moduwe</b> <code>{}</code> <b>cannyot be expowted as a fiwe</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>Nyo exact match has been found, so da cwosest wesuwt is shown instead</i>
   args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>You must specify awguments</b>
@@ -1101,7 +1101,7 @@ loader:
   _cls_doc: Woads moduwes
   basic_auth_doc: Basic aud fow moduwe wepo
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Pwease chwoose a wepositowy to instaww aww moduwes fwom, senpai~ :3</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>
+  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>Aww moduwes fwom wepositowy instawwed successfuwwy! OwO yippee~</b>
   dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Nyooo moduwes found in dis wepositowy! >///< Awe you suwe, mastew?</b>
   dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Some moduwes faiwed to instaww... sowwy senpai :c</b>

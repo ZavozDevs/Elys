@@ -778,7 +778,7 @@ updater:
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Сколько коммитов откатить то?</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Куда так далеко откатываешь!</b>
   rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Точно откатываем {num} коммит(-а,-ов)?</b>
-  rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>Откатываю {num} коммитов...</b>
+  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>Откатываю {num} коммитов...</b>
   autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> Обнова Elys!
 
 
@@ -960,9 +960,9 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Ищу в репо...
-  loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Гружу...
-  ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Качаю как файл...
+  finding_module_in_repos: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Ищу в репо...
+  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Гружу...
+  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Качаю как файл...
   no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>Модуль</b> <code>{}</code> <b>нельзя выгрузить файлом</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>Точно такого нет, вот похожее</i>
   args: <tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>Аргументы где?</b>
@@ -1081,7 +1081,7 @@ loader:
   _cmd_doc_delrepo: Удалить репо
   basic_auth_doc: Вход в репо
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Сигма, выбери репозиторий, из которого будем качать все модули, ризз или ливни:</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>
+  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>Все модули из репозитория успешно установлены! Сигма момент</b>
   dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>В этой репе нет ни одного модуля. Кринж</b>
   dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Плаки, плаки. Некоторые модули не установились, кароче фейл, щавель не зашёл:</b>

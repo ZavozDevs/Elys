@@ -783,7 +783,7 @@ updater:
   invalid_args: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ви повинні вказати кількість комітів для відкату!</b>
   rollback_too_far: <tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Ви відкочуєтесь занадто далеко!</b>
   rollback_confirm: <tg-emoji emoji-id=5382187118216879236>❓</tg-emoji> <b>Ви впевнені, що хочете відкотити {num} коміт (-а, -ів)?</b>
-  rollback_process: <tg-emoji emoji-id=5873204392429096339>🕗</tg-emoji> <b>Відкот {num} коміт(-a,-ів)...</b>
+  rollback_process: <tg-emoji emoji-id=5345778951031658558>🕗</tg-emoji> <b>Відкот {num} коміт(-a,-ів)...</b>
   autoupdate_notifier: '<tg-emoji emoji-id=5361979468887893611>🆕</tg-emoji> Нова версія Elys!
 
 
@@ -967,9 +967,9 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Пошук модулів у сховищах.
-  loading_module_via_file: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Завантаження модуля.
-  ml_load_module: <tg-emoji emoji-id=5873204392429096339>🔄</tg-emoji> Я завантажую модуль як файл.
+  finding_module_in_repos: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Пошук модулів у сховищах.
+  loading_module_via_file: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Завантаження модуля.
+  ml_load_module: <tg-emoji emoji-id=5345778951031658558>🔄</tg-emoji> Я завантажую модуль як файл.
   no_ml: <tg-emoji emoji-id=5287372146039861774>❌</tg-emoji> <b>Модуль</b> <code>{}</code> <b>не можна вивантажити файлом</b>
   not_exact: <tg-emoji emoji-id=5355133243773435190>⚠️</tg-emoji> <i>Точного збігу не знайдено, тому замість нього показано найближчий результат</i>
   repo_config_doc: Посилання для завантаження модулів
@@ -1087,7 +1087,7 @@ loader:
   _cmd_doc_delrepo: Видалити додатковий репозиторій
   basic_auth_doc: Авторизація для доступу до репозиторію
   choose_repo: <tg-emoji emoji-id=5873153278023307367>🗂️</tg-emoji> <b>Обери репозиторій, з якого встановити всі модулі:</b>
-  installing_all_from_repo: <tg-emoji emoji-id=5873204392429096339>⏳</tg-emoji> <b>Встановлюю всі модулі з репозиторію...</b>
+  installing_all_from_repo: <tg-emoji emoji-id=5345778951031658558>⏳</tg-emoji> <b>Встановлюю всі модулі з репозиторію...</b>
   installed_all_from_repo: <tg-emoji emoji-id=5429092129638980960>🌟</tg-emoji> <b>Всі модулі з репозиторію успішно встановлено!</b>
   dlm_all_from_repo_error_nomods: <tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>У цьому репозиторії не знайдено жодного модуля!</b>
   dlm_all_from_repo_error_somemods: '<tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Деякі модулі не вдалося встановити:</b>

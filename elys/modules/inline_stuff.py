@@ -172,7 +172,7 @@ class InlineStuff(loader.Module):
                                         "callback": self.restart,
                                         "style": "primary",
                                         "args": (message,),
-                                        "emoji_id": "5873204392429096339",
+                                        "emoji_id": "5345778951031658558",
                                     }
                                 ],
                                 [
