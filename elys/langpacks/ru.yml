@@ -929,6 +929,18 @@ help:
   module_header: '{e:glowing_star} <b>{}</b>:'
   mod_doc: "\n<i>{e:info} {}\n</i>"
   inline_cmd_li: "\n{e:bot} <code>{}</code> {}"
+  preview_header: '{e:glowing_star} <b>{}</b>:'
+  preview_status: "\n<i>{e:warn} <b>Модуль не установлен</b> (предпросмотр)\n</i>"
+  preview_downloading: '{e:wait} <b>Загрузка предпросмотра модуля...</b>'
+  preview_fetch_err: '{e:stop} <b>Не удалось скачать модуль по ссылке</b>'
+  preview_parse_err: '{e:stop} <b>Не удалось проанализировать модуль</b>'
+  preview_no_cmds: '{e:dizzy} Команды не найдены'
+  preview_requires: "\n\n📦 <b>Зависимости:</b> {}"
+  preview_install_url: "\n\n💡 <i>Для установки:</i> {}"
+  preview_install_reply: "\n\n💡 <i>Для установки ответьте на файл:</i> {}"
+  preview_install_btn: '📥 Установить модуль'
+  preview_installing: '{e:wait} <b>Установка модуля...</b>'
+  btn_close: '❌ Закрыть'
 elys_info:
   info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D67E\U0001D6A0\U0001D697\U0001D68E\U0001D69B</b>: {me}\n├  【{e:bot}】 <b>\U0001D685\U0001D68E\U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>\U0001D67F\U0001D69B\U0001D68E\U0001D68F\U0001D692\U0001D6A1</b>: {prefix}⠀ ⠀ \n├  【{e:sync}】 <b>\U0001D684\U0001D699\U0001D69D\U0001D692\U0001D696\U0001D68E</b>: {uptime}\n├  【{e:user}】 <b>\U0001D671\U0001D69B\U0001D68A\U0001D697\U0001D68C\U0001D691</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>\U0001D672\U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield}】 <b>\U0001D681\U0001D670\U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\U0001D692\U0001D697\U0001D690</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield}】 <b>\U0001D684\U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E</b>: {upd}\n├  【{e:bot}】 <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>: {platform}\n├  【{e:bot}】 <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot}】 <b>\U0001D67F\U0001D6A2\U0001D69D\U0001D691\U0001D698\U0001D697 \U0001D685\U0001D68E\U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
   non_detectable: '{e:stop} <b>Этот компонент невозможно обнаружить на вашем сервере!</b>'
