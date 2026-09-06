@@ -61,23 +61,9 @@ def generate_custom_banner(nickname: str, template: str = "classic") -> str | No
     except Exception:
         pass
 
-    ethno_candidates = [
-        os.path.join(assets_dir, "ethnocentric.ttf") if assets_dir else None,
-        "/home/rom4ik/Elys/assets/ethnocentric.ttf",
-        os.path.join(tempfile.gettempdir(), "ethnocentric.ttf"),
-    ]
-    ethno_path = next((f for f in ethno_candidates if f and os.path.exists(f)), None)
-    if not ethno_path and os.path.exists("/home/rom4ik/Загрузки/Ethnocentric.zip"):
-        try:
-            import zipfile
-
-            with zipfile.ZipFile("/home/rom4ik/Загрузки/Ethnocentric.zip", "r") as z:
-                target_path = os.path.join(tempfile.gettempdir(), "ethnocentric.ttf")
-                with z.open("ethnocentric rg.ttf") as src, open(target_path, "wb") as dst:
-                    dst.write(src.read())
-                ethno_path = target_path
-        except Exception:
-            pass
+    ethno_path = os.path.join(assets_dir, "ethnocentric.ttf") if assets_dir else None
+    if not (ethno_path and os.path.exists(ethno_path)):
+        ethno_path = None
 
     font_candidates = [
         "/usr/share/fonts/TTF/DejaVuSans-Bold.ttf",
@@ -93,15 +79,8 @@ def generate_custom_banner(nickname: str, template: str = "classic") -> str | No
     font_path = ethno_path if (is_latin and ethno_path) else fallback_font
 
     if template == "anime":
-        anime_candidates = [
-            os.path.join(assets_dir, "banner_anime.png") if assets_dir else None,
-            "/home/rom4ik/Elys/assets/banner_anime.png",
-            "/home/rom4ik/Загрузки/Frame 3(1).png",
-            "/home/rom4ik/Загрузки/Frame 3.png",
-            os.path.join(tempfile.gettempdir(), "elys_banner_anime.png"),
-        ]
-        base_path = next((f for f in anime_candidates if f and os.path.exists(f)), None)
-        if not base_path:
+        base_path = os.path.join(assets_dir, "banner_anime.png") if assets_dir else None
+        if not (base_path and os.path.exists(base_path)):
             return None
         center_x = 1803
         center_y = 395
@@ -110,14 +89,8 @@ def generate_custom_banner(nickname: str, template: str = "classic") -> str | No
         target_height = 80
         letter_spacing = 8
     elif template == "anime_white":
-        white_candidates = [
-            os.path.join(assets_dir, "banner_anime_white.png") if assets_dir else None,
-            "/home/rom4ik/Elys/assets/banner_anime_white.png",
-            "/home/rom4ik/Загрузки/Frame 3(2).png",
-            os.path.join(tempfile.gettempdir(), "elys_banner_anime_white.png"),
-        ]
-        base_path = next((f for f in white_candidates if f and os.path.exists(f)), None)
-        if not base_path:
+        base_path = os.path.join(assets_dir, "banner_anime_white.png") if assets_dir else None
+        if not (base_path and os.path.exists(base_path)):
             return None
         center_x = 484
         center_y = 388
@@ -453,7 +426,8 @@ class ElysInfoMod(loader.Module):
                     self._client.elys_me.username
                     and self._client.elys_me.username.replace("@", "")
                 )
-                or "ROM4IK"
+                or get_display_name(self._client.elys_me)
+                or "ELYS"
             )
             display_name = get_display_name(self._client.elys_me) or nick
 
