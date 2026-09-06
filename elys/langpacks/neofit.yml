@@ -148,7 +148,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Command not found in PATH</b>'
   inline_settings: ⚙️ <b>/etc/environment config</b>
   confirm_update: 🧭 <b>git pull &amp;&amp; systemctl restart?</b>
-  confirm_restart: '{e:think} <b>sudo reboot now?</b>'
+  confirm_restart: '{e:warn} <b>sudo reboot now?</b>'
   btn_restart: 🔄 sudo reboot
   btn_update: 🧭 git pull
   close_menu: 😌 exit
@@ -698,7 +698,7 @@ inline_stuff:
     • CPU: {cpu_usage}%
 
     • Host: {host}</blockquote>'
-  restart: '{e:think} Restarting daemon..'
+  restart: '{e:loading} Restarting daemon..'
   prefix_reset: 🔀 Prefix reset.
   _cmd_doc_ch_elys_bot: <username> - Change inline bot username
   _cls_doc: Inline Mode Handler
@@ -753,10 +753,10 @@ test:
 updater:
   name: Updater
   source: "{e:book} <b>Source:</b> <a href='{}'>GitHub</a>"
-  restarting_caption: '{e:think} <b>Rebooting {}...</b>'
-  downloading: '{e:think} <b>git fetch...</b>'
-  installing: '{e:think} <b>pip install...</b>'
-  success: '{e:think} <b>Boot success! {}</b>
+  restarting_caption: '{e:loading} <b>Rebooting {}...</b>'
+  downloading: '{e:loading} <b>git fetch...</b>'
+  installing: '{e:loading} <b>pip install...</b>'
+  success: '{e:done} <b>Boot success! {}</b>
 
     <i>Async loading modules...</i>
 
@@ -970,8 +970,8 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:sync} Grepping Repos...'
-  loading_module_via_file: '{e:sync} Import...'
+  finding_module_in_repos: '{e:loading} Grepping Repos...'
+  loading_module_via_file: '{e:loading} Import...'
   ml_load_module: '{e:sync} wget...'
   no_ml: '{e:cross} <b>Module</b> <code>{}</code> <b>cannot be exported as file</b>'
   not_exact: '{e:warn} <i>Fuzzy match.</i>'
@@ -999,7 +999,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Pip install failed</b>'
   requirements_restarted: 🚀 <b>Rebooting to apply deps. Re-install required.</b>
-  requirements_installing: '{e:think} <b>Resolving dependencies:
+  requirements_installing: '{e:wave_loading} <b>Resolving dependencies:
 
 
     {}</b>'
@@ -1061,7 +1061,7 @@ loader:
 
 
     <i>Awaiting auth...</i>'
-  installing: '{e:clock} <b>Installing</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading} <b>Installing</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Repo</b> <code>{}</code> <b>exists</b>'
   repo_added: '{e:check} <b>Repo</b> <code>{}</code> <b>added</b>'
   no_repo: '{e:stop} <b>Repo URL required</b>'
@@ -1076,7 +1076,7 @@ loader:
   _cls_doc: Module Loader
   basic_auth_doc: Basic Auth credentials
   choose_repo: '{e:folders} <b>Choose a repository to install all modules from I use Arch btw:</b>'
-  installing_all_from_repo: '{e:wait} <b>Cloning repo and installing all modules via git pull && makepkg -si...</b>'
+  installing_all_from_repo: '{e:loading} <b>Cloning repo and installing all modules via git pull && makepkg -si...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>All modules from repository installed successfully! (no errors, chad moment)</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>No modules found in this repository! RTFM or gtfo, normie.</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Some modules failed to install:</b>

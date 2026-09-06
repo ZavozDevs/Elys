@@ -17,7 +17,11 @@ system:
   check:
     id: "5118861066981344121"
     fallback: "✅"
-    aliases: ["ok", "done", "success"]
+    aliases: ["ok"]
+  done:
+    id: "5427295759567449937"
+    fallback: "✅"
+    aliases: ["ok_done", "reboot_done"]
   warn:
     id: "5312383351217201533"
     fallback: "⚠️"
@@ -237,10 +241,14 @@ ui:
     id: "5424885441100782420"
     fallback: "👀"
     aliases: ["eyes"]
-  think:
+  loading:
     id: "5346022209389372742"
     fallback: "🤔"
-    aliases: ["thinking"]
+    aliases: ["expressive_loading", "md3_loading", "load", "loader_loading"]
+  wave_loading:
+    id: "5345988476716226868"
+    fallback: "🤔"
+    aliases: ["wavy_loading", "wave_load", "requirements_loading"]
   dizzy:
     id: "5134202243486057363"
     fallback: "💫"

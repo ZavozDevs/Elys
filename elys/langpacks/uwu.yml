@@ -150,7 +150,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Command nyot found</b>'
   inline_settings: ⚙️ <b>Hewe you can configuwe youw Elys settings UwU</b>
   confirm_update: 🧭 <b>P-Pwease, confiwm dat you want to update. Youw usewbot wiww be westawted ~</b>
-  confirm_restart: '{e:think} <b>Pwease, confiwm dat you want to westawt</b>'
+  confirm_restart: '{e:warn} <b>Pwease, confiwm dat you want to westawt</b>'
   btn_restart: 🔄 Westawt
   btn_update: 🧭 Update
   close_menu: 😌 Cwose menyu
@@ -703,7 +703,7 @@ inline_stuff:
     • CPU Usage: {cpu_usage}%
 
     • Hosting: {host}</blockquote>'
-  restart: '{e:think} Youw Elys is being westawted..'
+  restart: '{e:loading} Youw Elys is being westawted..'
   prefix_reset: 🔀 Pwefix weset!
   _cmd_doc_ch_elys_bot: <username> - Change youw Elys inwine bot usewnyame
   _cls_doc: Pwovides suppowt fow inwine stuff
@@ -750,10 +750,10 @@ test:
 updater:
   name: Upwdatew
   source: "{e:book} <b>Wead da souwce code fwom</b> <a href='{}'>hewe</a>"
-  restarting_caption: '{e:think} <b>Youw {} is westawting...</b>'
-  downloading: '{e:think} <b>Downwoading updates...</b>'
-  installing: '{e:think} <b>Instawwing updates...</b>'
-  success: '{e:think} <b>Westawt successfuw! {}</b>
+  restarting_caption: '{e:loading} <b>Youw {} is westawting...</b>'
+  downloading: '{e:loading} <b>Downwoading updates...</b>'
+  installing: '{e:loading} <b>Instawwing updates...</b>'
+  success: '{e:done} <b>Westawt successfuw! {}</b>
 
     <i>But stiww woading moduwes...</i>
 
@@ -980,8 +980,8 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:sync} Wooking fow moduwes in wepositowies.'
-  loading_module_via_file: '{e:sync} Woading da moduwe.'
+  finding_module_in_repos: '{e:loading} Wooking fow moduwes in wepositowies.'
+  loading_module_via_file: '{e:loading} Woading da moduwe.'
   ml_load_module: "{e:sync} I'm downwoading da moduwe as a fiwe."
   no_ml: '{e:cross} <b>Moduwe</b> <code>{}</code> <b>cannyot be expowted as a fiwe</b>'
   not_exact: '{e:warn} <i>Nyo exact match has been found, so da cwosest wesuwt is shown instead</i>'
@@ -1009,7 +1009,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Wequiwements instawwation faiwed</b>'
   requirements_restarted: 🚀 <b>Youw usewbot is westawted, aftew westawt, instaww da moduwe again.</b>
-  requirements_installing: '{e:think} <b>Instawwing wequiwements:
+  requirements_installing: '{e:wave_loading} <b>Instawwing wequiwements:
 
 
     {}</b>'
@@ -1083,7 +1083,7 @@ loader:
 
 
     <i>Waiting fow <a href="https://t.me/{}">appwovaw</a>...</i>'
-  installing: '{e:clock} <b>Instawwing moduwe</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading} <b>Instawwing moduwe</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Wepo</b> <code>{}</code> <b>is awweady added</b>'
   repo_added: '{e:check} <b>Wepo</b> <code>{}</code> <b>added</b>'
   no_repo: '{e:stop} <b>You nyeed to specify wepo to add</b>'
@@ -1098,7 +1098,7 @@ loader:
   _cls_doc: Woads moduwes
   basic_auth_doc: Basic aud fow moduwe wepo
   choose_repo: '{e:folders} <b>Pwease chwoose a wepositowy to instaww aww moduwes fwom, senpai~ :3</b>'
-  installing_all_from_repo: '{e:wait} <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>'
+  installing_all_from_repo: '{e:loading} <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Aww moduwes fwom wepositowy instawwed successfuwwy! OwO yippee~</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>Nyooo moduwes found in dis wepositowy! >///< Awe you suwe, mastew?</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Some moduwes faiwed to instaww... sowwy senpai :c</b>

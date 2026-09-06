@@ -138,7 +138,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Нет такой команды, лол</b>'
   inline_settings: ⚙️ <b>Тут настройки Elys, не сломай</b>
   confirm_update: 🧭 <b>Обновляемся? Юб ребутнется</b>
-  confirm_restart: '{e:think} <b>Ребутаем шарманку?</b>'
+  confirm_restart: '{e:warn} <b>Ребутаем шарманку?</b>'
   btn_restart: 🔄 Ребут
   btn_update: 🧭 Обнова
   close_menu: 😌 Закрыть (ну нафиг)
@@ -685,7 +685,7 @@ inline_stuff:
     • Проц грузит: {cpu_usage}%
 
     • Хост: {host}</blockquote>'
-  restart: '{e:think} Ребутаюсь...'
+  restart: '{e:loading} Ребутаюсь...'
   prefix_reset: 🔀 Префикс сбросил!
   _cmd_doc_ch_elys_bot: <юзернейм> - Сменить ник инлайн бота
   name: InlineStuff
@@ -728,10 +728,10 @@ test:
   _cfg_rich_mode: Показывать ping как Rich-сообщение.
 updater:
   source: "{e:book} <b>Сурсы (код) тут:</b> <a href='{}'>тык</a>"
-  restarting_caption: '{e:think} <b>Твой {} ребутается...</b>'
-  downloading: '{e:think} <b>Качаю обнову...</b>'
-  installing: '{e:think} <b>Ставлю обнову...</b>'
-  success: '{e:think} <b>Ребут успешный! {}</b>
+  restarting_caption: '{e:loading} <b>Твой {} ребутается...</b>'
+  downloading: '{e:loading} <b>Качаю обнову...</b>'
+  installing: '{e:loading} <b>Ставлю обнову...</b>'
+  success: '{e:done} <b>Ребут успешный! {}</b>
 
     <i>Модули еще грузятся...</i>
 
@@ -958,8 +958,8 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:sync} Ищу в репо...'
-  loading_module_via_file: '{e:sync} Гружу...'
+  finding_module_in_repos: '{e:loading} Ищу в репо...'
+  loading_module_via_file: '{e:loading} Гружу...'
   ml_load_module: '{e:sync} Качаю как файл...'
   no_ml: '{e:cross} <b>Модуль</b> <code>{}</code> <b>нельзя выгрузить файлом</b>'
   not_exact: '{e:warn} <i>Точно такого нет, вот похожее</i>'
@@ -988,7 +988,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Зависимости не встали</b>'
   requirements_restarted: 🚀 <b>Ребутаюсь, потом ставь модуль снова.</b>
-  requirements_installing: '{e:think} <b>Ставлю либы:
+  requirements_installing: '{e:wave_loading} <b>Ставлю либы:
 
 
     {}</b>'
@@ -1069,7 +1069,7 @@ loader:
 
 
     <i>Ждем <a href="https://t.me/{}">добро</a>...</i>'
-  installing: '{e:clock} <b>Ставлю модуль</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading} <b>Ставлю модуль</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Репо</b> <code>{}</code> <b>уже есть</b>'
   repo_added: '{e:check} <b>Репо</b> <code>{}</code> <b>добавил</b>'
   no_repo: '{e:stop} <b>Какое репо добавить?</b>'
@@ -1079,7 +1079,7 @@ loader:
   _cmd_doc_delrepo: Удалить репо
   basic_auth_doc: Вход в репо
   choose_repo: '{e:folders} <b>Сигма, выбери репозиторий, из которого будем качать все модули, ризз или ливни:</b>'
-  installing_all_from_repo: '{e:wait} <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>'
+  installing_all_from_repo: '{e:loading} <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Все модули из репозитория успешно установлены! Сигма момент</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>В этой репе нет ни одного модуля. Кринж</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Плаки, плаки. Некоторые модули не установились, кароче фейл, щавель не зашёл:</b>

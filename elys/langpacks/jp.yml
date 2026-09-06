@@ -154,7 +154,7 @@ elys_settings:
   cmd404: '{e:magic} <b>コマンドが見つかりません</b>'
   inline_settings: ⚙️ <b>ここでは Elys の設定を行えます</b>
   confirm_update: 🧭 <b>アップデートすることを確認してください。ユーザーボットは再起動されます</b>
-  confirm_restart: '{e:think} <b>再起動することを確認してください</b>'
+  confirm_restart: '{e:warn} <b>再起動することを確認してください</b>'
   btn_restart: 🔄 再起動
   btn_update: 🧭 アップデート
   close_menu: 😌 メニューを閉じる
@@ -707,7 +707,7 @@ inline_stuff:
     • CPU 使用率: {cpu_usage}%
 
     • ホスティング: {host}</blockquote>'
-  restart: '{e:think} Elys を再起動しています...'
+  restart: '{e:loading} Elys を再起動しています...'
   prefix_reset: 🔀 プレフィックスをリセットしました！
   _cmd_doc_ch_elys_bot: <username> - Elys インラインボットのユーザー名を変更します
   _cls_doc: インライン機能のサポートを提供します
@@ -754,10 +754,10 @@ test:
 updater:
   name: Updater
   source: "{e:book} <b>ソースコードは</b> <a href='{}'>こちら</a> <b>からお読みください</b>"
-  restarting_caption: '{e:think} <b>{} を再起動しています...</b>'
-  downloading: '{e:think} <b>更新をダウンロードしています...</b>'
-  installing: '{e:think} <b>更新をインストールしています...</b>'
-  success: '{e:think} <b>再起動に成功しました！ {}</b>
+  restarting_caption: '{e:loading} <b>{} を再起動しています...</b>'
+  downloading: '{e:loading} <b>更新をダウンロードしています...</b>'
+  installing: '{e:loading} <b>更新をインストールしています...</b>'
+  success: '{e:done} <b>再起動に成功しました！ {}</b>
 
     <i>まだモジュールを読み込んでいます...</i>
 
@@ -993,8 +993,8 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:sync} リポジトリ内のモジュールを探しています。'
-  loading_module_via_file: '{e:sync} モジュールを読み込んでいます。'
+  finding_module_in_repos: '{e:loading} リポジトリ内のモジュールを探しています。'
+  loading_module_via_file: '{e:loading} モジュールを読み込んでいます。'
   ml_load_module: '{e:sync} モジュールをファイルとしてダウンロードしています。'
   no_ml: '{e:cross} <b>モジュール</b> <code>{}</code> <b>はファイルとしてエクスポートできません</b>'
   not_exact: '{e:warn} <i>完全一致が見つからなかったため、最も近い結果が表示されています</i>'
@@ -1022,7 +1022,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>要件のインストールに失敗しました</b>'
   requirements_restarted: 🚀 <b>ユーザーボットが再起動されました。再起動後、モジュールを再度インストールしてください。</b>
-  requirements_installing: '{e:think} <b>要件をインストールしています:
+  requirements_installing: '{e:wave_loading} <b>要件をインストールしています:
 
 
     {}</b>'
@@ -1096,7 +1096,7 @@ loader:
 
 
     <i><a href="https://t.me/{}">承認</a>を待っています...</i>'
-  installing: '{e:clock} <b>モジュール</b> <code>{}</code> <b>をインストールしています...</b>'
+  installing: '{e:loading} <b>モジュール</b> <code>{}</code> <b>をインストールしています...</b>'
   repo_exists: '{e:stop} <b>リポジトリ</b> <code>{}</code> <b>は既に追加されています</b>'
   repo_added: '{e:check} <b>リポジトリ</b> <code>{}</code> <b>が追加されました</b>'
   no_repo: '{e:stop} <b>追加するリポジトリを指定する必要があります</b>'
@@ -1111,7 +1111,7 @@ loader:
   _cls_doc: モジュールを読み込みます
   basic_auth_doc: モジュールリポジトリの基本認証
   choose_repo: '{e:folders} <b>すべてのモジュールをインストールするリポジトリを選択してください:</b>'
-  installing_all_from_repo: '{e:wait} <b>リポジトリからすべてのモジュールをインストール中...</b>'
+  installing_all_from_repo: '{e:loading} <b>リポジトリからすべてのモジュールをインストール中...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>リポジトリからすべてのモジュールが正常にインストールされました！</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>このリポジトリにモジュールが見つかりません！</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>一部のモジュールのインストールに失敗しました:</b>

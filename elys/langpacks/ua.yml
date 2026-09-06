@@ -142,7 +142,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Команду не знайдено</b>'
   inline_settings: ⚙️ <b>Тут можна керувати налаштуваннями Elys</b>
   confirm_update: 🧭 <b>Підтвердіть оновлення. Юзербота буде перезавантажено</b>
-  confirm_restart: '{e:think} <b>Підтвердіть перезавантаження</b>'
+  confirm_restart: '{e:warn} <b>Підтвердіть перезавантаження</b>'
   btn_restart: 🔄 Перезавнтаження
   btn_update: 🧭 Оновлення
   close_menu: 😌 Закрити меню
@@ -689,7 +689,7 @@ inline_stuff:
     • Використання CPU: {cpu_usage}%
 
     • Хостинг: {host}</blockquote>'
-  restart: '{e:think} Ваш Elys перезапускається...'
+  restart: '{e:loading} Ваш Elys перезапускається...'
   prefix_reset: 🔀 Префікс скинутий!
   _cmd_doc_ch_elys_bot: <юзернейм> - Змінити юзернейм інлайн бота
   name: InlineStuff
@@ -732,10 +732,10 @@ test:
   _cfg_rich_mode: Показувати ping як Rich-повідомлення.
 updater:
   source: "{e:book} <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>"
-  restarting_caption: '{e:think} <b>Твій {} перезавантажується...</b>'
-  downloading: '{e:think} <b>Завантаження оновлень...</b>'
-  installing: '{e:think} <b>Встановлення оновлень...</b>'
-  success: '{e:think} <b>Перезавантаження успішне! {}</b>
+  restarting_caption: '{e:loading} <b>Твій {} перезавантажується...</b>'
+  downloading: '{e:loading} <b>Завантаження оновлень...</b>'
+  installing: '{e:loading} <b>Встановлення оновлень...</b>'
+  success: '{e:done} <b>Перезавантаження успішне! {}</b>
 
     <i>Але модулі ще завантажуються...</i>
 
@@ -964,8 +964,8 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:sync} Пошук модулів у сховищах.'
-  loading_module_via_file: '{e:sync} Завантаження модуля.'
+  finding_module_in_repos: '{e:loading} Пошук модулів у сховищах.'
+  loading_module_via_file: '{e:loading} Завантаження модуля.'
   ml_load_module: '{e:sync} Я завантажую модуль як файл.'
   no_ml: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не можна вивантажити файлом</b>'
   not_exact: '{e:warn} <i>Точного збігу не знайдено, тому замість нього показано найближчий результат</i>'
@@ -993,7 +993,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Помилка встановлення залежностей</b>'
   requirements_restarted: 🚀 <b>Ваш юзербот перезапущено, після перезапуску встановіть модуль знову.</b>
-  requirements_installing: '{e:think} <b>Встановлюю залежності:
+  requirements_installing: '{e:wave_loading} <b>Встановлюю залежності:
 
 
     {}</b>'
@@ -1074,7 +1074,7 @@ loader:
 
 
     <i>Очікування <a href="https://t.me/{}">підтвердження</a>...</i>'
-  installing: '{e:clock} <b>Встановлюю модуль</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading} <b>Встановлюю модуль</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Репозиторій</b> <code>{}</code> <b>вже додано</b>'
   repo_added: '{e:check} <b>Репозиторій</b> <code>{}</code> <b>додано</b>'
   no_repo: '{e:stop} <b>Ви повинні вказати репозиторій для додавання</b>'
@@ -1084,7 +1084,7 @@ loader:
   _cmd_doc_delrepo: Видалити додатковий репозиторій
   basic_auth_doc: Авторизація для доступу до репозиторію
   choose_repo: '{e:folders} <b>Обери репозиторій, з якого встановити всі модулі:</b>'
-  installing_all_from_repo: '{e:wait} <b>Встановлюю всі модулі з репозиторію...</b>'
+  installing_all_from_repo: '{e:loading} <b>Встановлюю всі модулі з репозиторію...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>Всі модулі з репозиторію успішно встановлено!</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>У цьому репозиторії не знайдено жодного модуля!</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Деякі модулі не вдалося встановити:</b>

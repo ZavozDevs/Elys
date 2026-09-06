@@ -201,7 +201,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Command not found</b>'
   inline_settings: ⚙️ <b>Here you can configure your Elys settings</b>
   confirm_update: 🧭 <b>Please, confirm that you want to update. Your userbot will be restarted</b>
-  confirm_restart: '{e:think} <b>Please, confirm that you want to restart</b>'
+  confirm_restart: '{e:warn} <b>Please, confirm that you want to restart</b>'
   btn_restart: 🔄 Restart
   btn_update: 🧭 Update
   close_menu: 😌 Close menu
@@ -758,7 +758,7 @@ inline_stuff:
     • CPU Usage: {cpu_usage}%
 
     • Hosting: {host}</blockquote>'
-  restart: '{e:think} Your Elys is being restarted..'
+  restart: '{e:loading} Your Elys is being restarted..'
   prefix_reset: 🔀 Prefix reset!
   _cmd_doc_ch_elys_bot: <username> - Change your Elys inline bot username
   _cls_doc: Provides support for inline stuff
@@ -807,10 +807,10 @@ test:
 updater:
   name: Updater
   source: "{e:book} <b>Read the source code from</b> <a href='{}'>here</a>"
-  restarting_caption: '{e:think} <b>Your {} is restarting...</b>'
-  downloading: '{e:think} <b>Downloading updates...</b>'
-  installing: '{e:think} <b>Installing updates...</b>'
-  success: '{e:think} <b>Restart successful! {}</b>
+  restarting_caption: '{e:loading} <b>Your {} is restarting...</b>'
+  downloading: '{e:loading} <b>Downloading updates...</b>'
+  installing: '{e:loading} <b>Installing updates...</b>'
+  success: '{e:done} <b>Restart successful! {}</b>
 
     <i>But still loading modules...</i>
 
@@ -1048,8 +1048,8 @@ loader:
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:sync} Looking for modules in repositories.'
-  loading_module_via_file: '{e:sync} Loading the module.'
+  finding_module_in_repos: '{e:loading} Looking for modules in repositories.'
+  loading_module_via_file: '{e:loading} Loading the module.'
   ml_load_module: "{e:sync} I'm downloading the module as a file."
   no_ml: '{e:cross} <b>Module</b> <code>{}</code> <b>cannot be exported as a file</b>'
   not_exact: '{e:warn} <i>No exact match has been found, so the closest result is shown instead</i>'
@@ -1077,7 +1077,7 @@ loader:
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Requirements installation failed</b>'
   requirements_restarted: 🚀 <b>Your userbot is restarted, after restart, install the module again.</b>
-  requirements_installing: '{e:think} <b>Installing requirements:
+  requirements_installing: '{e:wave_loading} <b>Installing requirements:
 
 
     {}</b>'
@@ -1151,7 +1151,7 @@ loader:
 
 
     <i>Waiting for <a href="https://t.me/{}">approval</a>...</i>'
-  installing: '{e:clock} <b>Installing module</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading} <b>Installing module</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Repo</b> <code>{}</code> <b>is already added</b>'
   repo_added: '{e:check} <b>Repo</b> <code>{}</code> <b>added</b>'
   no_repo: '{e:stop} <b>You need to specify repo to add</b>'
@@ -1166,7 +1166,7 @@ loader:
   _cls_doc: Loads modules
   basic_auth_doc: Basic auth for module repo
   choose_repo: '{e:folders} <b>Choose a repository to install all modules from:</b>'
-  installing_all_from_repo: '{e:wait} <b>Installing all modules from repository...</b>'
+  installing_all_from_repo: '{e:loading} <b>Installing all modules from repository...</b>'
   installed_all_from_repo: '{e:glowing_star} <b>All modules from repository installed successfully!</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>No modules found in this repository!</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Some modules failed to install:</b>
