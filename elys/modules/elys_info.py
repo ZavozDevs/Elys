@@ -51,9 +51,7 @@ def generate_custom_banner(nickname: str) -> str | None:
     if text in _CUSTOM_BANNER_CACHE:
         return _CUSTOM_BANNER_CACHE[text]
 
-    base_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets")
-    os.makedirs(base_dir, exist_ok=True)
-    base_path = os.path.join(base_dir, "elys_banner_base.png")
+    base_path = "/tmp/elys_banner_base.png"
     if not os.path.exists(base_path):
         try:
             r = requests.get(
