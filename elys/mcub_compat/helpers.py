@@ -16,21 +16,22 @@ from __future__ import annotations
 
 import datetime
 import logging
+import time
 
 from .. import utils as elys_utils
-from ._vendor.arg_parser import (  # noqa: F401  (re-exported)
+from ._vendor.arg_parser import (  # noqa: F401
     ArgumentParser,
     extract_command,
     parse_arguments,
     parse_kwargs,
     split_args,
 )
-from ._vendor.html_parser import (  # noqa: F401  (re-exported)
+from ._vendor.html_parser import (  # noqa: F401
     format_message,
     parse_html,
     telegram_to_html,
 )
-from ._vendor.strings import Strings  # noqa: F401  (re-exported)
+from ._vendor.strings import Strings  # noqa: F401
 
 logger = logging.getLogger(__name__)
 
@@ -172,7 +173,7 @@ async def get_sender_info(event) -> str:
     message = _unwrap(event)
     try:
         sender = await message.get_sender()
-    except Exception:
+    except Exception:  # noqa: BLE001
         return str(getattr(message, "sender_id", "unknown"))
     name = getattr(sender, "first_name", None) or getattr(sender, "title", None) or ""
     username = getattr(sender, "username", None)
@@ -188,7 +189,7 @@ async def get_admins(event_or_client, chat_id: int | None = None) -> list[dict]:
         async for user in client.iter_participants(chat_id, filter=None):
             if getattr(user, "participant", None) is not None:
                 admins.append({"id": user.id, "username": user.username})
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         logger.debug("get_admins failed: %s", error)
     return admins
 
@@ -197,7 +198,7 @@ async def resolve_peer(client, identifier):
     try:
         entity = await client.get_entity(identifier)
         return entity.id
-    except Exception:
+    except Exception:  # noqa: BLE001
         return None
 
 
@@ -229,11 +230,13 @@ def _format_span(seconds) -> str:
 def format_date(timestamp, fmt: str = "%Y-%m-%d %H:%M") -> str:
     if isinstance(timestamp, datetime.datetime):
         return timestamp.strftime(fmt)
-    return datetime.datetime.fromtimestamp(float(timestamp)).strftime(fmt)
+    return datetime.datetime.fromtimestamp(
+        float(timestamp), tz=datetime.timezone.utc
+    ).strftime(fmt)
 
 
 def format_relative_time(timestamp) -> str:
-    delta = datetime.datetime.now().timestamp() - float(timestamp)
+    delta = time.time() - float(timestamp)
     if delta < 0:
         return "in the future"
     return f"{_format_span(delta)} ago"

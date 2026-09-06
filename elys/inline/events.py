@@ -23,7 +23,7 @@ from asyncio import Event
 
 from elystl.tl.types import UpdateBotInlineSend
 
-from .. import utils, security
+from .. import security, utils
 from .types import BotInlineCall, InlineCall, InlineQuery, InlineUnit
 
 if typing.TYPE_CHECKING:
@@ -416,12 +416,12 @@ class Events(InlineUnit):
 
             try:
                 doc = inspect.getdoc(fun)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 doc = "🦥 No docs"
 
             try:
                 thumb = getattr(fun, "thumb_url", None) or fun.__self__.elys_meta_pic
-            except Exception:
+            except Exception:  # noqa: BLE001
                 thumb = None
 
             thumb = thumb or "https://img.icons8.com/fluency/50/000000/info-squared.png"
@@ -483,7 +483,7 @@ class Events(InlineUnit):
                     ),
                     text=(
                         self.translator.getkey("inline.inline_cmds_msg").format(
-                            "\n".join(map(lambda x: x[1], _help))
+                            "\n".join((x[1] for x in _help))
                         )
                     ),
                     parse_mode="HTML",

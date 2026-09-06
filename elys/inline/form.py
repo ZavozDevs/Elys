@@ -16,6 +16,7 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+import asyncio
 import contextlib
 import copy
 import logging
@@ -25,9 +26,8 @@ import re
 import time
 import traceback
 import typing
-from collections.abc import Callable
-import asyncio
 from asyncio import Event
+from collections.abc import Callable
 from urllib.parse import urlparse
 
 import grapheme
@@ -157,11 +157,11 @@ class Form(InlineUnit):
 
         if hasattr(message, "raw_message") and hasattr(message.raw_message, "id"):
             message = message.raw_message
-        elif hasattr(message, "_mcub_msg") and hasattr(getattr(message, "_mcub_msg"), "id"):
-            message = getattr(message, "_mcub_msg")
-        elif hasattr(message, "_message") and hasattr(getattr(message, "_message"), "id"):
-            message = getattr(message, "_message")
-        elif hasattr(message, "chat_id") and isinstance(getattr(message, "chat_id"), int) and not isinstance(message, (Message, int)):
+        elif hasattr(message, "_mcub_msg") and hasattr(message._mcub_msg, "id"):
+            message = message._mcub_msg
+        elif hasattr(message, "_message") and hasattr(message._message, "id"):
+            message = message._message
+        elif hasattr(message, "chat_id") and isinstance(message.chat_id, int) and not isinstance(message, (Message, int)):
             message = message.chat_id
 
         if not isinstance(message, (Message, int)):
@@ -188,7 +188,7 @@ class Form(InlineUnit):
         try:
             path = urlparse(photo).path
             ext = os.path.splitext(path)[1]
-        except Exception:
+        except Exception:  # noqa: BLE001
             ext = None
 
         if photo is not None and ext in {".gif", ".mp4"}:
@@ -291,7 +291,7 @@ class Form(InlineUnit):
                     + self.translator.getkey("inline.opening_form"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 status_message = None
         else:
             status_message = None
@@ -456,7 +456,7 @@ class Form(InlineUnit):
                                 title=button["input"],
                                 description=(
                                     self.translator.getkey("inline.keep_id").format(
-                                        random.choice(VERIFICATION_EMOJIES)
+                                        random.choice(VERIFICATION_EMOJIES)  # nosec B311
                                     )
                                 ),
                                 text=(
@@ -505,7 +505,7 @@ class Form(InlineUnit):
                             ],
                             cache_time=0,
                         )
-                    except Exception as rich_exc:
+                    except Exception as rich_exc:  # noqa: BLE001
                         logger.warning(
                             "Rich inline form failed, falling back to standard article: %s",
                             rich_exc,
@@ -646,7 +646,7 @@ class Form(InlineUnit):
                         ],
                         cache_time=0,
                     )
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             if form["uid"] in self._error_events:
                 self._error_events[form["uid"]].set()
                 self._error_events[form["uid"]] = e

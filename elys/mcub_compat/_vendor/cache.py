@@ -20,9 +20,9 @@ def _key_for_log(key: Any) -> str:
     """Return a stable, non-revealing key label for debug logs."""
     try:
         raw = repr(key)
-    except Exception:
+    except Exception:  # noqa: BLE001
         raw = f"<{type(key).__name__}>"
-    digest = hashlib.sha1(raw.encode("utf-8", errors="replace")).hexdigest()[:12]
+    digest = hashlib.sha1(raw.encode("utf-8", errors="replace"), usedforsecurity=False).hexdigest()[:12]
     return f"{type(key).__name__}:{digest}"
 
 

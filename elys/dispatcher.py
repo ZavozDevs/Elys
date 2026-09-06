@@ -24,10 +24,10 @@ import contextlib
 import copy
 import inspect
 import logging
-from collections.abc import Callable
 import re
 import sys
 import traceback
+from collections.abc import Callable
 
 from elystl import events
 from elystl.errors import FloodWaitError, RPCError
@@ -450,13 +450,13 @@ class CommandDispatcher:
             return False
 
         if message.is_channel and message.edit_date and not message.is_group:
-            async for event in self._client.iter_admin_log(
+            async for log_event in self._client.iter_admin_log(
                 chat_id,
                 limit=10,
                 edit=True,
             ):
-                if event.action.prev_message.id == message.id:
-                    if event.user_id != self._client.tg_id:
+                if log_event.action.prev_message.id == message.id:
+                    if log_event.user_id != self._client.tg_id:
                         logger.debug("Ignoring edit in channel")
                         return False
 
@@ -479,7 +479,7 @@ class CommandDispatcher:
                 message.raw_text = new_text
 
         if (
-            f"{str(chat_id)}.{func.__self__.__module__}" in blacklist_chats
+            f"{chat_id!s}.{func.__self__.__module__}" in blacklist_chats
             or whitelist_modules
             and f"{chat_id}.{func.__self__.__module__}" not in whitelist_modules
         ):
@@ -499,8 +499,8 @@ class CommandDispatcher:
             if isinstance(event, tuple(handler.updates)):
                 try:
                     await handler(event)
-                except Exception as e:
-                    logger.exception("Error in raw handler %s: %s", handler.id, e)
+                except Exception:
+                    logger.exception("Error in raw handler %s", handler.id)
 
     async def handle_command(
         self,
@@ -723,9 +723,9 @@ class CommandDispatcher:
                     or "in" in bl[modname]
                     and message.out
                 )
-                or f"{str(chat_id)}.{func.__self__.__module__}" in blacklist_chats
+                or f"{chat_id!s}.{func.__self__.__module__}" in blacklist_chats
                 or whitelist_modules
-                and f"{str(chat_id)}.{func.__self__.__module__}"
+                and f"{chat_id!s}.{func.__self__.__module__}"
                 not in whitelist_modules
                 or await self._handle_tags(event, func)
             ):
@@ -733,7 +733,7 @@ class CommandDispatcher:
 
             # Avoid weird AttributeErrors in weird dochub modules by settings placeholder
             # of attributes
-            for placeholder in {"text", "raw_text", "out"}:
+            for placeholder in ("text", "raw_text", "out"):
                 try:
                     if not hasattr(message, placeholder):
                         setattr(message, placeholder, "")
@@ -762,5 +762,5 @@ class CommandDispatcher:
         _elys_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
         try:
             await func(message)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             await exception_handler(e, message, *args)

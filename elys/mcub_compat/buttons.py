@@ -261,9 +261,7 @@ def _rows(buttons) -> list[list]:
         if isinstance(item, (list, tuple)) and len(item) in (2, 3) and isinstance(item[0], str):
             return True
         name = type(item).__name__
-        if name.startswith("KeyboardButton") or name == "Button":
-            return True
-        return False
+        return bool(name.startswith("KeyboardButton") or name == "Button")
 
     if _is_single_button(buttons):
         return [[buttons]]
@@ -450,7 +448,7 @@ def to_elys_markup(buttons) -> list[list[dict]]:
                 text, target = str(button[0]), button[1]
                 if callable(target):
                     spec = _from_dict({"text": text, "callback": target})
-                elif isinstance(target, str) and (target.startswith("http://") or target.startswith("https://")):
+                elif isinstance(target, str) and (target.startswith(("http://", "https://"))):
                     spec = {"text": text, "url": target}
                 elif isinstance(target, (str, bytes)):
                     spec = _from_dict({"text": text, "callback": target})

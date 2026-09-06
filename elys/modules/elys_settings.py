@@ -43,7 +43,7 @@ ALL_INVOKES = [
 class ElysSettingsMod(loader.Module):
     """Advanced settings for Elys Userbot"""
 
-    strings = {"name": "ElysSettings"}
+    strings = {"name": "ElysSettings"}  # noqa: RUF012
 
     def get_watchers(self) -> tuple:
         return [
@@ -73,7 +73,7 @@ class ElysSettingsMod(loader.Module):
 
         watchers, disabled_watchers = self.get_watchers()
 
-        if args.lower() not in map(lambda x: x.lower(), watchers):
+        if args.lower() not in (x.lower() for x in watchers):
             await utils.answer(message, self.strings["mod404"].format(args))
             return
 
@@ -146,7 +146,7 @@ class ElysSettingsMod(loader.Module):
         if args.lower() not in [watcher.lower() for watcher in watchers]:
             return await utils.answer(message, self.strings["mod404"].format(args))
 
-        args = [watcher for watcher in watchers if watcher.lower() == args.lower()][0]
+        args = next(watcher for watcher in watchers if watcher.lower() == args.lower())
 
         if chats or pm or out or incoming:
             disabled_watchers[args] = [
@@ -282,7 +282,7 @@ class ElysSettingsMod(loader.Module):
         for user_id in self._db.get(main.__name__, "nonickusers", []).copy():
             try:
                 user = await self._client.get_entity(user_id)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 self._db.set(
                     main.__name__,
                     "nonickusers",
@@ -295,10 +295,7 @@ class ElysSettingsMod(loader.Module):
                 continue
 
             users += [
-                '▫️ <b><a href="tg://user?id={}">{}</a></b>'.format(
-                    user_id,
-                    utils.escape_html(get_display_name(user)),
-                )
+                f'▫️ <b><a href="tg://user?id={user_id}">{utils.escape_html(get_display_name(user))}</a></b>'
             ]
 
         if not users:
@@ -316,7 +313,7 @@ class ElysSettingsMod(loader.Module):
         for chat in self._db.get(main.__name__, "nonickchats", []):
             try:
                 chat_entity = await self._client.get_entity(int(chat))
-            except Exception:
+            except Exception:  # noqa: BLE001
                 self._db.set(
                     main.__name__,
                     "nonickchats",
@@ -327,10 +324,7 @@ class ElysSettingsMod(loader.Module):
                 continue
 
             chats += [
-                '▫️ <b><a href="{}">{}</a></b>'.format(
-                    utils.get_entity_url(chat_entity),
-                    utils.escape_html(get_display_name(chat_entity)),
-                )
+                f'▫️ <b><a href="{utils.get_entity_url(chat_entity)}">{utils.escape_html(get_display_name(chat_entity))}</a></b>'
             ]
 
         if not chats:

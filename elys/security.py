@@ -213,8 +213,7 @@ class SecurityManager:
 
         sgroup_users = []
         for g in self._sgroups.values():
-            for u in g.users:
-                sgroup_users.append(u)
+            sgroup_users.extend(g.users)
 
         tsec_users = [rule["target"] for rule in self._tsec_user]
         ub_owners = self.owner.copy()
@@ -272,7 +271,7 @@ class SecurityManager:
 
         if all(
             not rule.startswith(rule_type)
-            for rule_type in {"command", "module", "inline"}
+            for rule_type in ("command", "module", "inline")
         ):
             raise ValueError(f"Invalid rule: {rule}")
 
@@ -471,18 +470,19 @@ class SecurityManager:
 
         logger.debug("Checking security match for %s", config)
 
-        if config & SUDO or config & SUPPORT:
-            if not self._last_warning or time.time() - self._last_warning > 60 * 60:
-                import warnings
+        if (config & SUDO or config & SUPPORT) and (
+            not self._last_warning or time.time() - self._last_warning > 60 * 60
+        ):
+            import warnings
 
-                warnings.warn(
-                    (
-                        "You are using module containing SUDO or SUPPORT security"
-                        " groups, which are deprecated. It might behave strangely"
-                    ),
-                    DeprecationWarning,
-                )
-                self._last_warning = time.time()
+            warnings.warn(
+                (
+                    "You are using module containing SUDO or SUPPORT security"
+                    " groups, which are deprecated. It might behave strangely"
+                ),
+                DeprecationWarning,
+            )
+            self._last_warning = time.time()
 
         f_group_owner = config & GROUP_OWNER
         f_group_admin_add_admins = config & GROUP_ADMIN_ADD_ADMINS
@@ -518,7 +518,7 @@ class SecurityManager:
 
         try:
             chat = utils.get_chat_id(message)
-        except Exception:
+        except Exception:  # noqa: BLE001
             chat = None
 
         try:
@@ -526,7 +526,7 @@ class SecurityManager:
             if usernames:
                 for username in usernames:
                     cmd = cmd.replace(f"@{username}", "")
-        except Exception:
+        except Exception:  # noqa: BLE001
             cmd = None
 
         if callable(func):

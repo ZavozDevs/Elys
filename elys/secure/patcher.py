@@ -8,6 +8,8 @@ from elystl.sessions import SQLiteSession
 from ..tl_cache import CustomTelegramClient
 from .customtl import ConnectionTcpFull, MTProtoState
 
+logger = logging.getLogger(__name__)
+
 
 def patch(client: CustomTelegramClient, session: SQLiteSession):
     session_id = re.findall(r"\d+", session.filename)[-1]
@@ -17,4 +19,4 @@ def patch(client: CustomTelegramClient, session: SQLiteSession):
     socket_path = Path(__file__).parent.parent.parent / f"elys-{session_id}-proxy.sock"
     client.connect = functools.partial(client.connect, unix_socket_path=socket_path)
 
-    logging.warning("Patched mtprotostate")
+    logger.warning("Patched mtprotostate")

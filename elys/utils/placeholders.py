@@ -29,24 +29,20 @@ def get_loading_placeholder(client=None) -> str:
     """
     Returns custom loading emoji for Telegram Premium users, or plain text fallback.
     """
-    try:
+    with contextlib.suppress(Exception):
         if client:
             me = getattr(client, "elys_me", None)
             if me and getattr(me, "premium", False):
                 return LOADING_EMOJI_PREMIUM
-    except Exception:
-        pass
 
     for ph_data in custom_placeholders.values():
         instance = ph_data.get("module_instance")
         if instance and hasattr(instance, "client") and instance.client:
-            try:
+            with contextlib.suppress(Exception):
                 me = getattr(instance.client, "elys_me", None)
                 if me and getattr(me, "premium", False):
                     return LOADING_EMOJI_PREMIUM
                 break
-            except Exception:
-                pass
 
     return LOADING_EMOJI_PLAIN
 
@@ -55,23 +51,19 @@ def is_async_enabled(client=None) -> bool:
     """
     Checks if async placeholders are enabled in ElysConfig.
     """
-    try:
+    with contextlib.suppress(Exception):
         if client and hasattr(client, "loader"):
             cfg = client.loader.lookup("ElysConfig")
             if cfg and "async_placeholders" in cfg.config:
                 return bool(cfg.config["async_placeholders"])
-    except Exception:
-        pass
 
     for ph_data in custom_placeholders.values():
         instance = ph_data.get("module_instance")
         if instance and hasattr(instance, "lookup"):
-            try:
+            with contextlib.suppress(Exception):
                 cfg = instance.lookup("ElysConfig")
                 if cfg and "async_placeholders" in cfg.config:
                     return bool(cfg.config["async_placeholders"])
-            except Exception:
-                pass
 
     return True
 
@@ -115,7 +107,7 @@ async def get_placeholder(placeholder: str, data: dict | None = None) -> str:
                 callback_data = str(callback(data))
             except TypeError:
                 callback_data = str(callback())
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         logger.debug("Failed to evaluate placeholder %s: %s", placeholder, e)
         callback_data = ""
 
@@ -162,7 +154,7 @@ async def get_placeholders(
         if task in done:
             try:
                 data[name] = task.result()
-            except Exception:
+            except Exception:  # noqa: BLE001
                 data[name] = ""
         else:
             data[name] = get_loading_placeholder(client)
@@ -193,7 +185,7 @@ async def get_placeholders(
                     )
                     with contextlib.suppress(Exception):
                         await utils_other.answer(message, new_text)
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 logger.debug("Background placeholder resolver error: %s", e)
 
         asyncio.create_task(_background_resolver())

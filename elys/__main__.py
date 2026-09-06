@@ -22,7 +22,7 @@ import getpass
 import hashlib
 import os
 import shutil
-import subprocess
+import subprocess  # nosec B404
 import sys
 from pathlib import Path
 
@@ -104,7 +104,7 @@ def get_file_hash(filename):
 
 
 def deps():
-    subprocess.run(
+    subprocess.run(  # nosec B603
         [
             sys.executable,
             "-m",
@@ -129,7 +129,7 @@ if (
     getpass.getuser() == "root"
     and "--root" not in " ".join(sys.argv)
     and not {"-h", "--help"} & set(sys.argv)
-    and all(trigger not in os.environ for trigger in {"DOCKER", "NO_SUDO"})
+    and all(trigger not in os.environ for trigger in ("DOCKER", "NO_SUDO"))
 ):
     print("\U0001f6ab" * 15)
     print("You attempted to run Elys on behalf of root user")
@@ -147,7 +147,7 @@ if (
         print("Added NO_SUDO in your environment variables")
         restart()
 
-if sys.version_info < (3, 10, 0):
+if sys.version_info < (3, 10, 0):  # noqa: UP036
     print("\U0001f6ab Error: you must use at least Python version 3.10.0")
 elif __package__ != "elys":
     print("🚫 Error: you cannot run this as a script; you must execute as a package")
@@ -155,18 +155,13 @@ elif __package__ != "elys":
 else:
     try:
         import elystl
-    except Exception:
-        pass
-    else:
-        try:
-            import elystl  # noqa: F811
 
-            if tuple(map(int, elystl.__version__.split("."))) < (1, 0, 0):
-                raise ImportError
-        except ImportError:
-            print("\U0001f504 Installing dependencies...")
-            deps()
-            restart()
+        if tuple(int(x) for x in elystl.__version__.split(".") if x.isdigit()) < (1, 0, 0):
+            raise ImportError
+    except Exception:  # noqa: BLE001
+        print("\U0001f504 Installing dependencies...")
+        deps()
+        restart()
 
     try:
         from . import log
@@ -175,7 +170,7 @@ else:
         from . import main
     except ImportError as e:
         print(
-            f"{str(e)}\n\U0001f504 Attempting dependencies installation... Just wait ⏱"
+            f"{e!s}\n\U0001f504 Attempting dependencies installation... Just wait ⏱"
         )
         deps()
         restart()

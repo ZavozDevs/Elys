@@ -127,7 +127,4 @@ def passes_filters(event, tags: typing.Mapping) -> bool:
 
     if "from_id" in tags and getattr(event, "sender_id", None) != tags["from_id"]:
         return False
-    if "chat_id" in tags and getattr(event, "chat_id", None) != tags["chat_id"]:
-        return False
-
-    return True
+    return not ("chat_id" in tags and getattr(event, "chat_id", None) != tags["chat_id"])

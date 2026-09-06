@@ -16,25 +16,26 @@ module: the callback-token router and the ``inline_temp`` map.
 
 from __future__ import annotations
 
+import contextlib
 import logging
 import os
 import time
 import typing
 
 from .. import utils
-from .buttons import entry_allows_user, invoke_by_signature, invoke_callback, registry
-from .db import MCUBDatabase
-from .inline import MCUBInlineManager
 from ._vendor.cache import TTLCache
 from ._vendor.permissions import CallbackPermissionManager
 from ._vendor.strings import Strings
+from .buttons import entry_allows_user, invoke_by_signature, invoke_callback, registry
+from .db import MCUBDatabase
+from .inline import MCUBInlineManager
 
 logger = logging.getLogger(__name__)
 
-_host: "MCUBHost | None" = None
+_host: MCUBHost | None = None
 
 
-def get_host(modules=None) -> "MCUBHost":
+def get_host(modules=None) -> MCUBHost:
     """Return the process-wide host, creating it on first use."""
     global _host
     if _host is None:
@@ -47,7 +48,7 @@ def get_host(modules=None) -> "MCUBHost":
     return _host
 
 
-def peek_host() -> "MCUBHost | None":
+def peek_host() -> MCUBHost | None:
     return _host
 
 
@@ -91,7 +92,7 @@ class MCUBHost:
     def prefix(self) -> str:
         try:
             return self.modules.get_prefix()
-        except Exception:
+        except Exception:  # noqa: BLE001
             return "."
 
     @property
@@ -183,7 +184,7 @@ class MCUBHost:
             return True
         try:
             return user_id in self.client.dispatcher.security._owner
-        except Exception:
+        except Exception:  # noqa: BLE001
             return False
 
     def lookup_module(self, module_name: str):
@@ -407,12 +408,10 @@ class MCUBHost:
         loader_mod = self.modules.lookup("LoaderMod")
         if loader_mod is None:
             return False, "Loader is unavailable"
-        try:
+        with contextlib.suppress(Exception):
             source = await utils.run_sync(utils.check_url, url)
             if not source:
                 return False, "Invalid url"
-        except Exception:
-            pass
         return False, "install_from_url is not supported from MCUB modules on Elys"
 
     # -- shared dispatch --------------------------------------------------
@@ -444,13 +443,11 @@ class MCUBHost:
                 logger.exception(
                     "MCUB callback handler from %s failed", entry.get("module_name")
                 )
-                try:
+                with contextlib.suppress(Exception):
                     await call.answer(
                         "Error occurred while processing request. More info in logs",
                         alert=True,
                     )
-                except Exception:
-                    pass
             return True
 
         for module_name, prefix, handler in list(self.callback_prefixes):
@@ -557,8 +554,9 @@ class _ChosenInlineEvent:
         return None
 
     async def edit(self, text=None, buttons=None, **kwargs):
-        from .buttons import to_elys_markup
         from elystl.tl.functions.messages import EditInlineBotMessageRequest
+
+        from .buttons import to_elys_markup
 
         if self.inline_message_id is None:
             return None
@@ -581,7 +579,7 @@ class _ChosenInlineEvent:
             from ..inline.tl import TelethonBot
 
             coerced_id = TelethonBot._coerce_inline_message_id(raw_id)
-        except Exception:
+        except Exception:  # noqa: BLE001
             coerced_id = raw_id
 
         request_kwargs: dict = {"id": coerced_id}
@@ -611,7 +609,7 @@ class _ChosenInlineEvent:
 async def _deny(call, strings: Strings) -> None:
     try:
         message = strings("error").get("permission_denied") or "Permission denied"
-    except Exception:
+    except Exception:  # noqa: BLE001
         message = "Permission denied"
     try:
         await call.answer(str(message), alert=True)

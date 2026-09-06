@@ -21,6 +21,7 @@
 import argparse
 import asyncio
 import collections
+import contextlib
 import importlib
 import json
 import logging
@@ -35,6 +36,7 @@ import typing
 from getpass import getpass
 from pathlib import Path
 
+import elystl
 from elystl import events
 from elystl.errors import (
     ApiIdInvalidError,
@@ -57,8 +59,6 @@ from elystl.sessions import MemorySession, SQLiteSession
 from elystl.tl.functions.account import GetPasswordRequest
 from elystl.tl.functions.auth import CheckPasswordRequest
 from elystl.tl.functions.contacts import UnblockRequest
-
-import elystl
 
 sys.modules.setdefault("herokutl", elystl)
 sys.modules.setdefault("hikkatl", elystl)
@@ -96,7 +96,7 @@ try:
 
     _elystl_md.unparse = _safe_md_unparse
 except Exception:
-    pass
+    logging.getLogger(__name__).debug("Failed to patch elystl html/md unparse", exc_info=True)
 
 from . import database, loader, utils, version  # noqa: E402
 from ._internal import print_banner, restart  # noqa: E402
@@ -106,6 +106,8 @@ from .secure import patcher  # noqa: E402
 from .tl_cache import CustomTelegramClient  # noqa: E402
 from .translations import Translator  # noqa: E402
 from .version import __version__  # noqa: E402
+
+logger = logging.getLogger(__name__)
 
 BASE_DIR = (
     "/data"
@@ -160,7 +162,7 @@ def generate_app_name() -> str:
     :return: Random app name
     :example: "Cresco Cibus Consilium"
     """
-    return " ".join(random.choices(LATIN_MOCK, k=3))
+    return " ".join(random.choices(LATIN_MOCK, k=3))  # nosec B311
 
 
 def get_app_name() -> str:
@@ -326,7 +328,7 @@ def generate_random_system_version():
         ("AmigaOS", "3.1"),
         ("Commodore", "64 OS"),
     ]
-    os_name, os_version = random.choice(os_choices)
+    os_name, os_version = random.choice(os_choices)  # nosec B311
 
     version = f"{os_name} {os_version}"
     return version
@@ -490,7 +492,7 @@ def parse_arguments() -> dict:
         help="Remove saved sessions and config, then exit",
     )
     arguments = parser.parse_args()
-    logging.debug(arguments)
+    logger.debug(arguments)
     return arguments
 
 
@@ -578,7 +580,7 @@ class Elys:
             if not secret:
                 raise ValueError("--proxy-secret is required for --type-proxy mtproxy")
 
-            logging.debug("Using MTProxy: %s:%s", host, port)
+            logger.debug("Using MTProxy: %s:%s", host, port)
             self.proxy = (host, port, secret)
             self.conn = ConnectionTcpMTProxyRandomizedIntermediate
             return
@@ -588,7 +590,7 @@ class Elys:
                 "--proxy-secret can only be used with --type-proxy mtproxy"
             )
 
-        logging.debug("Using %s proxy: %s:%s", proxy_type, host, port)
+        logger.debug("Using %s proxy: %s:%s", proxy_type, host, port)
         self.proxy = {
             "proxy_type": proxy_type,
             "addr": host,
@@ -616,7 +618,7 @@ class Elys:
             try:
                 shutil.move(entry.path, target)
             except OSError:
-                logging.exception(
+                logger.exception(
                     "Failed to migrate legacy session file %s", entry.path
                 )
 
@@ -650,7 +652,7 @@ class Elys:
                 save_config_key("api_id", int(api_id))
                 save_config_key("api_hash", api_hash)
                 (Path(BASE_DIR) / "api_token.txt").unlink()
-                logging.debug("Migrated api_token.txt to config.json")
+                logger.debug("Migrated api_token.txt to config.json")
 
             api_token = api_token_type(
                 get_config_key("api_id"),
@@ -725,7 +727,7 @@ class Elys:
         try:
             db = client.elys_db
             existing = db.get("elys.inline", "custom_bot", False)
-        except Exception:
+        except Exception:  # noqa: BLE001
             existing = False
 
         if (
@@ -758,7 +760,7 @@ class Elys:
                     else:
                         print("Bot username is occupied. Try again or leave it empty")
                         continue
-                except Exception:
+                except Exception:  # noqa: BLE001
                     print("Something went wrong")
 
         if delay_restart:
@@ -790,7 +792,7 @@ class Elys:
             )
             try:
                 return getpass("> ")
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return input("> ")
 
         await client.start(
@@ -822,7 +824,7 @@ class Elys:
                 else:
                     print("Bot username is occupied. Try again or leave it empty")
                     continue
-            except Exception:
+            except Exception:  # noqa: BLE001
                 print("Something went wrong")
 
         await self.save_client_session(client)
@@ -862,7 +864,7 @@ class Elys:
 
         try:
             await client.get_entity(f"{username}")
-        except Exception:
+        except Exception:  # noqa: BLE001
             return True
 
     async def _initial_setup(self) -> bool:
@@ -954,7 +956,7 @@ class Elys:
                     )
                     try:
                         _2fa = getpass("> ")
-                    except Exception:
+                    except Exception:  # noqa: BLE001
                         _2fa = input("> ")
 
                     try:
@@ -1017,7 +1019,7 @@ class Elys:
                     lang_code="en",
                     system_lang_code="en-US",
                 )
-                if session.server_address == "0.0.0.0":
+                if session.server_address == "0.0.0.0":  # nosec B104
                     patcher.patch(client, session)
 
                 await client.connect()
@@ -1025,7 +1027,7 @@ class Elys:
 
                 self.clients += [client]
             except sqlite3.OperationalError:
-                logging.error(
+                logger.error(
                     "Check that this is the only instance running. "
                     "If that doesn't help, delete the file '%s'",
                     session.filename,
@@ -1039,13 +1041,13 @@ class Elys:
                 run_config()
                 return False
             except PhoneNumberInvalidError:
-                logging.error(
+                logger.error(
                     "Phone number is incorrect. Use international format (+XX...) "
                     "and don't put spaces in it."
                 )
                 self.sessions.remove(session)
             except (AuthKeyUnregisteredError, InteractiveAuthRequired):
-                logging.error(
+                logger.error(
                     "Session %s was terminated and re-auth is required",
                     session.filename,
                 )
@@ -1096,7 +1098,7 @@ class Elys:
 
             if not self.omit_log:
                 print(logo)
-                logging.debug(
+                logger.debug(
                     "\n🌟 Elys %s #%s (%s) started",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
@@ -1135,15 +1137,15 @@ class Elys:
                     ),
                     message_thread_id=message_thread_id,
                 )
-            except Exception as badge_error:
-                logging.debug(f"Failed to send badge photo: {badge_error}")
-            logging.debug(
+            except Exception as badge_error:  # noqa: BLE001
+                logger.debug(f"Failed to send badge photo: {badge_error}")
+            logger.debug(
                 "· Started for %s · Prefix: «%s» ·",
                 client.tg_id,
                 client.elys_db.get(__name__, "command_prefix", False) or ".",
             )
         except Exception:
-            logging.exception("Badge error")
+            logger.exception("Badge error")
 
     async def _add_dispatcher(
         self,
@@ -1189,8 +1191,8 @@ class Elys:
         db = database.Database(client)
         client.elys_db = db
         await db.init()
-        logging.debug("Got DB")
-        logging.debug("Loading logging config...")
+        logger.debug("Got DB")
+        logger.debug("Loading logging config...")
 
         translator = Translator(client, db)
 
@@ -1222,7 +1224,7 @@ class Elys:
             return
 
         self.loop.set_exception_handler(
-            lambda _, x: logging.error(
+            lambda _, x: logger.error(
                 "Exception on event loop! %s",
                 x["message"],
                 exc_info=x.get("exception", None),
@@ -1238,11 +1240,9 @@ class Elys:
                 for t in (inline._task, inline._cleaner_task):
                     if t:
                         t.cancel()
-                try:
+                with contextlib.suppress(Exception):
                     await inline._dp.stop_polling()
                     await inline.bot.session.close()
-                except Exception:
-                    pass
         for c in self.clients:
             await c.disconnect()
         for task in asyncio.all_tasks():
@@ -1258,23 +1258,21 @@ class Elys:
                     signal.SIGINT, lambda: asyncio.create_task(self._shutdown_handler())
                 )
             except NotImplementedError:
-                logging.warning("Signal handlers not supported on this platform.")
+                logger.warning("Signal handlers not supported on this platform.")
         else:
-            logging.info("Running on Windows — skipping signal handler.")
+            logger.info("Running on Windows — skipping signal handler.")
 
         try:
             self.loop.run_until_complete(self._main())
         except KeyboardInterrupt:
-            logging.info("KeyboardInterrupt received.")
+            logger.info("KeyboardInterrupt received.")
             self.loop.run_until_complete(self._shutdown_handler())
-        except Exception as e:
-            logging.exception("Unexpected exception in main loop: %s", e)
+        except Exception:
+            logger.exception("Unexpected exception in main loop")
         finally:
-            logging.info("Bye!")
-            try:
+            logger.info("Bye!")
+            with contextlib.suppress(Exception):
                 self.loop.run_until_complete(self._shutdown_handler())
-            except Exception:
-                pass
 
 
 elys = Elys()

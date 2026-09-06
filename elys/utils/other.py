@@ -67,7 +67,7 @@ def rand(size: int, /) -> str:
     :return: Random string
     """
     return "".join(
-        [random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(size)]
+        [random.choice("abcdefghijklmnopqrstuvwxyz1234567890") for _ in range(size)]  # nosec B311
     )
 
 
@@ -85,7 +85,7 @@ async def invite_inline_bot(
 
     try:
         await client(InviteToChannelRequest(peer, [client.loader.inline.bot_username]))
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         raise RuntimeError(
             f"Can't invite inline bot to old asset chat, which is required by module: {e}"
         )
@@ -235,9 +235,9 @@ def get_iso_time() -> str:
     Get current time in ISO format
     :return: ISO formatted time string
     """
-    from datetime import datetime
+    from datetime import datetime, timezone
 
-    return datetime.utcnow().isoformat() + "Z"
+    return datetime.now(tz=timezone.utc).replace(tzinfo=None).isoformat() + "Z"
 
 
 def safe_getattr(obj, attr, default=None):

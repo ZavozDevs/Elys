@@ -35,17 +35,16 @@ from elystl.tl.types import (
     Chat,
     InputDocument,
     InputReplyToMessage,
-    MessageMediaPhoto,
     MessageMediaDocument,
+    MessageMediaPhoto,
     MessageMediaWebPage,
     MessageReplyHeader,
 )
 
-from .other import _copy_tl
-from .entity import get_chat_id, FormattingEntity
-
 from ..inline.types import BotInlineCall, BotInlineMessage, InlineCall, InlineMessage
 from ..types import ElysReplyMarkup, ListLike
+from .entity import FormattingEntity, get_chat_id
+from .other import _copy_tl
 
 emoji_pattern = re.compile(
     "["
@@ -167,7 +166,7 @@ def smart_split(
         if bytes_offset + length * 2 >= bytes_length:
             yield parser.unparse(
                 text[text_offset:],
-                list(sorted(pending_entities, key=lambda x: (x.offset, -x.length))),
+                sorted(pending_entities, key=lambda x: (x.offset, -x.length)),
             )
             break
 
@@ -265,7 +264,7 @@ def smart_split(
         current_text = text[text_offset:split_index]
         yield parser.unparse(
             current_text,
-            list(sorted(current_entities, key=lambda x: (x.offset, -x.length))),
+            sorted(current_entities, key=lambda x: (x.offset, -x.length)),
         )
 
         text_offset = split_index + exclude
@@ -416,14 +415,12 @@ async def answer(
 
         try:
             if edit:
-                try:
+                with contextlib.suppress(Exception):
                     return await _edit_rich_message(
                         message,
                         rich_message,
                         reply_markup=reply_markup,
                     )
-                except Exception:
-                    pass
 
             return await _send_rich_message(
                 message,
@@ -448,14 +445,12 @@ async def answer(
                 clean_rich = re.sub(r"<img.*?>", "", clean_rich)
                 try:
                     if edit:
-                        try:
+                        with contextlib.suppress(Exception):
                             return await _edit_rich_message(
                                 message,
                                 clean_rich,
                                 reply_markup=reply_markup,
                             )
-                        except Exception:
-                            pass
 
                     return await _send_rich_message(
                         message,
@@ -465,7 +460,7 @@ async def answer(
                         silent=silent_target,
                     )
                 except Exception:
-                    pass
+                    logger.debug("Failed sending cleaned rich message", exc_info=True)
             raise
 
     if reply_markup is not None:
@@ -516,12 +511,12 @@ async def answer(
         if len(text) >= 4096 and not hasattr(message, "elys_grepped"):
             try:
                 if not message.client.loader.inline.init_complete:
-                    raise
+                    raise RuntimeError("Inline init not complete")
 
                 strings = list(smart_split(text, entities, 4096))
 
                 if len(strings) > 10:
-                    raise
+                    raise RuntimeError("Too many chunks for inline list")
 
                 list_ = await message.client.loader.inline.list(
                     message=message,
@@ -529,10 +524,10 @@ async def answer(
                 )
 
                 if not list_:
-                    raise
+                    raise RuntimeError("Inline list creation failed")
 
                 return list_
-            except Exception:
+            except Exception:  # noqa: BLE001
                 file = io.BytesIO(text.encode("utf-8"))
                 file.name = "command_result.txt"
 
@@ -720,7 +715,7 @@ def is_serializable(x: typing.Any, /) -> bool:
     try:
         json.dumps(x)
         return True
-    except Exception:
+    except Exception:  # noqa: BLE001
         return False
 
 

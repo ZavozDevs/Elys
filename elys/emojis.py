@@ -8,6 +8,7 @@ import logging
 import re
 import typing
 from pathlib import Path
+
 from ruamel.yaml import YAML
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,6 @@ SYMBOL_TO_ALIAS: dict[str, str] = {}
 
 
 def _load_registry() -> None:
-    global EMOJI_REGISTRY, SYMBOL_TO_ALIAS
     EMOJI_REGISTRY.clear()
     SYMBOL_TO_ALIAS.clear()
 
@@ -35,7 +35,7 @@ def _load_registry() -> None:
         if not isinstance(data, dict):
             return
 
-        for _category, entries in data.items():
+        for entries in data.values():
             if not isinstance(entries, dict):
                 continue
             for primary_alias, info in entries.items():

@@ -25,8 +25,7 @@ import time
 import traceback
 import typing
 
-from elystl.errors.rpcerrorlist import FloodWaitError
-from elystl.errors.rpcerrorlist import ChatSendInlineForbiddenError
+from elystl.errors.rpcerrorlist import ChatSendInlineForbiddenError, FloodWaitError
 from elystl.tl.types import Message
 
 from .. import main, utils
@@ -101,11 +100,11 @@ class List(InlineUnit):
 
         if hasattr(message, "raw_message") and hasattr(message.raw_message, "id"):
             message = message.raw_message
-        elif hasattr(message, "_mcub_msg") and hasattr(getattr(message, "_mcub_msg"), "id"):
-            message = getattr(message, "_mcub_msg")
-        elif hasattr(message, "_message") and hasattr(getattr(message, "_message"), "id"):
-            message = getattr(message, "_message")
-        elif hasattr(message, "chat_id") and isinstance(getattr(message, "chat_id"), int) and not isinstance(message, (Message, int)):
+        elif hasattr(message, "_mcub_msg") and hasattr(message._mcub_msg, "id"):
+            message = message._mcub_msg
+        elif hasattr(message, "_message") and hasattr(message._message, "id"):
+            message = message._message
+        elif hasattr(message, "chat_id") and isinstance(message.chat_id, int) and not isinstance(message, (Message, int)):
             message = message.chat_id
 
         if not isinstance(message, (Message, int)):
@@ -209,7 +208,7 @@ class List(InlineUnit):
                     + self.translator.getkey("inline.opening_list"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 status_message = None
         else:
             status_message = None
@@ -283,7 +282,7 @@ class List(InlineUnit):
         self: "InlineManager",
         call,
         page: int | str,
-        unit_id: str = None,
+        unit_id: str | None = None,
     ):
         match True:
             case _ if page == "close":
@@ -357,7 +356,7 @@ class List(InlineUnit):
                         ],
                         cache_time=60,
                     )
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     if unit["uid"] in self._error_events:
                         self._error_events[unit["uid"]].set()
                         self._error_events[unit["uid"]] = e

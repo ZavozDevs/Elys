@@ -20,8 +20,9 @@
 
 __version__ = (0, 1, 1)
 
+import contextlib
 import os
-import subprocess
+import subprocess  # nosec B404
 
 NO_GIT = os.environ.get("ELYS_NO_GIT") == "1"
 
@@ -31,7 +32,7 @@ def get_branch() -> str:
         return os.environ.get("ELYS_BRANCH", "master")
 
     # 1. Direct .git/HEAD read (fast, zero external dependencies)
-    try:
+    with contextlib.suppress(Exception):
         git_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".git"))
         head_file = os.path.join(git_dir, "HEAD")
         if os.path.isfile(head_file):
@@ -39,25 +40,22 @@ def get_branch() -> str:
                 head_content = f.read().strip()
                 if head_content.startswith("ref: refs/heads/"):
                     return head_content[len("ref: refs/heads/") :].strip()
-    except Exception:
-        pass
 
     # 2. Subprocess git branch --show-current
-    try:
-        proc = subprocess.run(
+    with contextlib.suppress(Exception):
+        proc = subprocess.run(  # nosec B603 B607
             ["git", "branch", "--show-current"],
             cwd=os.path.abspath(os.path.join(os.path.dirname(__file__), "..")),
             capture_output=True,
             text=True,
             timeout=2,
+            check=False,
         )
         if proc.returncode == 0 and proc.stdout.strip():
             return proc.stdout.strip()
-    except Exception:
-        pass
 
     # 3. GitPython fallback
-    try:
+    with contextlib.suppress(Exception):
         import git
 
         with git.Repo(
@@ -68,8 +66,6 @@ def get_branch() -> str:
             for branch_ref in repo.branches:
                 if branch_ref.commit == repo.head.commit:
                     return branch_ref.name
-    except Exception:
-        pass
 
     return os.environ.get("ELYS_BRANCH", "master")
 

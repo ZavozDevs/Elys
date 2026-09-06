@@ -10,6 +10,7 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+import contextlib
 import io
 import logging
 
@@ -25,7 +26,7 @@ logger = logging.getLogger(__name__)
 class FormatHelperMod(loader.Module):
     """Помощник для работы с форматированием сообщений (Rich HTML, Telegram HTML, Markdown)"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "FormatHelper",
         "no_args_or_reply": "{e:stop} <b>Укажи текст для форматирования или ответь на сообщение</b>",
         "no_content": "{e:stop} <b>В сообщении нет текста</b>",
@@ -59,24 +60,20 @@ class FormatHelperMod(loader.Module):
         rich_html = None
 
         if getattr(target, "_elys_rich_message_native", None) is not None:
-            try:
+            with contextlib.suppress(Exception):
                 from ..utils.rich import rich_message_to_html
 
                 rich_html = rich_message_to_html(target._elys_rich_message_native)
-            except Exception:
-                pass
 
         if not rich_html and getattr(target, "rich_message", None):
             val = getattr(target, "rich_message", None)
             if isinstance(val, str):
                 rich_html = val
             else:
-                try:
+                with contextlib.suppress(Exception):
                     from ..utils.rich import rich_message_to_html
 
                     rich_html = rich_message_to_html(val)
-                except Exception:
-                    pass
 
         if not rich_html:
             try:
@@ -85,13 +82,13 @@ class FormatHelperMod(loader.Module):
                     target.id,
                     raw=False,
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 rich_html = None
 
         if not rich_html and getattr(target, "message", None):
             try:
                 rich_html = html.unparse(target.message, target.entities or [])
-            except Exception:
+            except Exception:  # noqa: BLE001
                 rich_html = getattr(target, "raw_text", None) or getattr(
                     target, "message", ""
                 )
@@ -155,7 +152,7 @@ class FormatHelperMod(loader.Module):
 
             try:
                 rendered = html.unparse(reply.message, reply.entities or [])
-            except Exception:
+            except Exception:  # noqa: BLE001
                 rendered = getattr(reply, "raw_text", None) or getattr(
                     reply, "message", ""
                 )
@@ -189,7 +186,7 @@ class FormatHelperMod(loader.Module):
 
             try:
                 rendered = markdown.unparse(reply.message, reply.entities or [])
-            except Exception:
+            except Exception:  # noqa: BLE001
                 rendered = getattr(reply, "raw_text", None) or getattr(
                     reply, "message", ""
                 )

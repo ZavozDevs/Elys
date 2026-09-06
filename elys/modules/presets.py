@@ -109,7 +109,7 @@ PRESETS = {
 class Presets(loader.Module):
     """Suggests new Elys users a packs of modules to load"""
 
-    strings = {"name": "Presets"}
+    strings = {"name": "Presets"}  # noqa: RUF012
 
     async def client_ready(self):
         self._markup_gen = functools.partial(
@@ -206,9 +206,9 @@ class Presets(loader.Module):
                 self.strings[f"_{preset}_title"],
                 self.strings[f"_{preset}_desc"],
                 "\n".join(
-                    map(
-                        lambda x: x[0],
-                        sorted(
+                    (
+                        x[0]
+                        for x in sorted(
                             [
                                 (
                                     "{} <b>{}</b>".format(
@@ -231,7 +231,7 @@ class Presets(loader.Module):
                             ],
                             key=lambda x: x[1],
                             reverse=True,
-                        ),
+                        )
                     )
                 ),
             ),
@@ -301,9 +301,9 @@ class Presets(loader.Module):
                 self.strings[f"_{preset}_title"],
                 self.strings[f"_{preset}_desc"],
                 "\n".join(
-                    map(
-                        lambda x: x[0],
-                        sorted(
+                    (
+                        x[0]
+                        for x in sorted(
                             [
                                 (
                                     "{} <b>{}</b>".format(
@@ -320,7 +320,7 @@ class Presets(loader.Module):
                             ],
                             key=lambda x: x[1],
                             reverse=True,
-                        ),
+                        )
                     )
                 ),
             ),
@@ -390,7 +390,7 @@ class Presets(loader.Module):
         await message.delete()
         try:
             description = data["description"]
-        except Exception:
+        except Exception:  # noqa: BLE001
             description = self.lookup("help").strings["undoc"]
 
         modules_list = []

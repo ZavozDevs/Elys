@@ -150,7 +150,7 @@ class BaseTranslator:
         return render_emojis(res) if isinstance(res, str) else res
 
     async def load_module_translations(
-        self, pack_url: str, cache_path: Path = None
+        self, pack_url: str, cache_path: Path | None = None
     ) -> bool | dict:
         try:
             content = (await utils.run_sync(requests.get, pack_url)).text

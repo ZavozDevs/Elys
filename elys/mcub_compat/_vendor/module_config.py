@@ -357,9 +357,9 @@ class NoneType(Validator):
 
     def validate(self, value: Any) -> None:
         if value is None:
-            return None
+            return
         if isinstance(value, str) and value.strip().lower() in {"", "none", "null"}:
-            return None
+            return
         raise ValidationError("Expected None")
 
 

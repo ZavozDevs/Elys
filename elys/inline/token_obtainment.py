@@ -96,11 +96,11 @@ class TokenObtainment(InlineUnit):
                     pass
                 else:
                     uid = utils.rand(6)
-                    genran = "".join(random.choice(main.LATIN_MOCK))
+                    genran = "".join(random.choice(main.LATIN_MOCK))  # nosec B311
                     username = f"@{genran}_{uid}_bot"
             else:
                 uid = utils.rand(6)
-                genran = "".join(random.choice(main.LATIN_MOCK))
+                genran = "".join(random.choice(main.LATIN_MOCK))  # nosec B311
                 username = f"@{genran}_{uid}_bot"
 
             self._token = None
@@ -148,7 +148,7 @@ class TokenObtainment(InlineUnit):
 
                 logger.debug(">> <Photo>")
                 logger.debug("<< %s", r.raw_text)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 await fw_protect()
                 m = await conv.send_message("/cancel")
                 r = await conv.get_response()
@@ -302,7 +302,7 @@ class TokenObtainment(InlineUnit):
 
                         logger.debug(">> <Photo>")
                         logger.debug("<< %s", r.raw_text)
-                    except Exception:
+                    except Exception:  # noqa: BLE001
                         await fw_protect()
                         m = await conv.send_message("/cancel")
                         r = await conv.get_response()

@@ -20,6 +20,7 @@
 
 import asyncio
 import contextlib
+import functools
 import inspect
 import io
 import linecache
@@ -28,18 +29,19 @@ import re
 import sys
 import traceback
 import typing
-import functools
-from logging.handlers import RotatingFileHandler
 from collections.abc import Coroutine
+from logging.handlers import RotatingFileHandler
 
 import elystl
 from elystl.errors import PersistentTimestampOutdatedError, TimeoutError
-from elystl.errors.rpcbaseerrors import ServerError, RPCError
+from elystl.errors.rpcbaseerrors import RPCError, ServerError
 from elystl.errors.rpcerrorlist import FloodWaitError
 
 from . import utils
 from .tl_cache import CustomTelegramClient
-from .types import BotInlineCall, Module, CoreOverwriteError
+from .types import BotInlineCall, CoreOverwriteError, Module
+
+logger = logging.getLogger(__name__)
 
 INTERNET_ERRORS = (
     TimeoutError,
@@ -63,14 +65,9 @@ def getlines(filename: str, module_globals=None) -> str:
         if filename.startswith("<") and filename.endswith(">"):
             module = filename[1:-1].split(maxsplit=1)[-1]
             if (module.startswith("elys.modules")) and module in sys.modules:
-                return list(
-                    map(
-                        lambda x: f"{x}\n",
-                        sys.modules[module].__loader__.get_source().splitlines(),
-                    )
-                )
+                return [f"{x}\n" for x in sys.modules[module].__loader__.get_source().splitlines()]
     except Exception:
-        logging.debug("Can't get lines for %s", filename, exc_info=True)
+        logger.debug("Can't get lines for %s", filename, exc_info=True)
 
     return old(filename, module_globals)
 
@@ -91,7 +88,7 @@ def override_text(exception: Exception) -> str | None:
             return "✈️ <b>Telegram has problems with their datacenters.</b>"
 
         case CoreOverwriteError():
-            return f"⚠️ {str(exception)}"
+            return f"⚠️ {exception!s}"
 
         case ServerError():
             return "📡 <b>Telegram servers are currently experiencing issues. Please try again later.</b>"
@@ -149,7 +146,7 @@ class ElysException:
                                 dictionary[key] = f"{str(value)[:512]}..."
                             else:
                                 dictionary[key] = str(value)
-                        except Exception:
+                        except Exception:  # noqa: BLE001
                             dictionary[key] = f"<{value.__class__.__name__}>"
 
             return dictionary
@@ -199,11 +196,8 @@ class ElysException:
             ).format(
                 (
                     (
-                        "🔮 <b>Cause: method </b><code>{}</code><b> of"
-                        " </b><code>{}</code>\n\n"
-                    ).format(
-                        utils.escape_html(caller.__name__),
-                        utils.escape_html(caller.__self__.__class__.__name__),
+                        f"🔮 <b>Cause: method </b><code>{utils.escape_html(caller.__name__)}</code><b> of"
+                        f" </b><code>{utils.escape_html(caller.__self__.__class__.__name__)}</code>\n\n"
                     )
                     if (
                         caller
@@ -322,7 +316,7 @@ class TelegramLogsHandler(logging.Handler):
         allmods = self._mods[client_id]
         topic_id = await utils.get_topic_id(allmods.db, "Logs")
         if not topic_id:
-            logging.debug(
+            logger.debug(
                 f"No logs topic found for client {client_id}. Creating new one."
             )
             topic = await utils.asset_forum_topic(
@@ -456,19 +450,16 @@ class TelegramLogsHandler(logging.Handler):
                     attempt += 1
                     await asyncio.sleep(e.seconds)
                 except RuntimeError:
-                    logging.debug(
+                    logger.debug(
                         "RuntimeError in sender, probably event loop is closed, skipping",
                         exc_info=True,
                     )
                     break
                 except Exception:
-                    logging.debug("Failed to send log message", exc_info=True)
+                    logger.debug("Failed to send log message", exc_info=True)
                     break
             if attempt > 2:
-                logging.debug(
-                    "Failed to send log message after retries, skipping",
-                    exc_info=True,
-                )
+                logger.debug("Failed to send log message after retries, skipping")
 
     def emit(self, record: logging.LogRecord):
         try:
@@ -488,7 +479,7 @@ class TelegramLogsHandler(logging.Handler):
 
             if not isinstance(caller, int):
                 caller = None
-        except Exception:
+        except Exception:  # noqa: BLE001
             caller = None
 
         record.elys_caller = caller
@@ -500,7 +491,7 @@ class TelegramLogsHandler(logging.Handler):
                         comment = record.msg % record.args
                     else:
                         comment = str(record.msg)
-                except Exception:
+                except Exception:  # noqa: BLE001
                     comment = f"{record.msg} {record.args}"
 
                 exc = ElysException.from_exc_info(

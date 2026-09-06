@@ -179,7 +179,7 @@ def get_ram_usage() -> float:
         for child in current_process.children(recursive=True):
             mem += child.memory_info()[0] / 2.0**20
         return round(mem, 1)
-    except Exception:
+    except Exception:  # noqa: BLE001
         return 0
 
 
@@ -197,7 +197,7 @@ def get_ram_usage_system() -> dict:
             "used": round(vm.used / 1024 / 1024),
             "total": round(vm.total / 1024 / 1024),
         }
-    except Exception:
+    except Exception:  # noqa: BLE001
         return {"error": "Failed to get RAM usage"}
 
 
@@ -217,7 +217,7 @@ def get_swap_usage() -> dict:
             "used": round(swap.used / 1024 / 1024),
             "total": round(swap.total / 1024 / 1024),
         }
-    except Exception:
+    except Exception:  # noqa: BLE001
         return {"error": "Failed to get swap usage"}
 
 
@@ -235,9 +235,9 @@ def get_cpu_usage():
         try:
             cpu_percent = psutil.cpu_percent(interval=0)
             return f"{cpu_percent:.2f}" if cpu_percent != 0 else "0.00"
-        except Exception:
+        except Exception:  # noqa: BLE001
             return "0.00"
-    except Exception:
+    except Exception:  # noqa: BLE001
         return "0.00"
 
 
@@ -256,7 +256,7 @@ def get_ip_address() -> str:
 
         response = requests.get("https://api.ipify.org?format=json", timeout=5)
         return response.json()["ip"]
-    except Exception:
+    except Exception:  # noqa: BLE001
         return "Unknown"
 
 
@@ -275,5 +275,5 @@ def get_disk_usage() -> dict:
             "free": round(disk.free / (1024**3), 2),
             "percent": disk.percent,
         }
-    except Exception:
+    except Exception:  # noqa: BLE001
         return {"total": 0, "used": 0, "free": 0, "percent": 0}

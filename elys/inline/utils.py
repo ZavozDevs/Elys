@@ -64,13 +64,14 @@ class Utils(InlineUnit):
         )
 
     def _get_placeholder_emoji(self) -> str:
-        try:
-            if hasattr(self, "_client") and hasattr(self._client, "loader"):
-                if mod := self._client.loader.lookup("ElysConfig"):
-                    if emoji := mod.config.get("cfg_emoji"):
-                        return str(emoji)
-        except Exception:
-            pass
+        with contextlib.suppress(Exception):
+            if (
+                hasattr(self, "_client")
+                and hasattr(self._client, "loader")
+                and (mod := self._client.loader.lookup("ElysConfig"))
+                and (emoji := mod.config.get("cfg_emoji"))
+            ):
+                return str(emoji)
 
         return "🌟"
 
@@ -233,8 +234,8 @@ class Utils(InlineUnit):
                         "Contact developer of module."
                     )
                     return None
-                except Exception as e:
-                    logger.exception(f"Unexpected error creating button: {e}")
+                except Exception:
+                    logger.exception("Unexpected error creating button")
                     return None
 
             markup.append(line)
@@ -389,7 +390,7 @@ class Utils(InlineUnit):
         if file and not photo:
             try:
                 f_ext = os.path.splitext(urlparse(str(file)).path)[1].lower()
-            except Exception:
+            except Exception:  # noqa: BLE001
                 f_ext = ""
             if f_ext in {".png", ".jpg", ".jpeg", ".webp"}:
                 photo = file
@@ -476,7 +477,7 @@ class Utils(InlineUnit):
         try:
             path = urlparse(photo).path
             ext = os.path.splitext(path)[1]
-        except Exception:
+        except Exception:  # noqa: BLE001
             ext = None
 
         if photo is not None and ext in {".gif", ".mp4"}:
@@ -513,7 +514,7 @@ class Utils(InlineUnit):
                     (unit.get("text") or "") if inline_message_id else message_id,
                     buttons=self.generate_markup(reply_markup),
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return False
 
             commit_unit_update()
@@ -618,7 +619,7 @@ class Utils(InlineUnit):
                     call.message.chat.id,
                     call.message.message_id,
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return False
 
             return True
@@ -626,7 +627,7 @@ class Utils(InlineUnit):
         if chat_id and message_id:
             try:
                 await self.bot.delete_message(chat_id, message_id)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return False
 
             return True
@@ -657,7 +658,7 @@ class Utils(InlineUnit):
                 del self._units[unit_id]
             else:
                 return False
-        except Exception:
+        except Exception:  # noqa: BLE001
             return False
 
         return True

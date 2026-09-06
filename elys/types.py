@@ -65,31 +65,31 @@ if typing.TYPE_CHECKING:
     from .loader import Modules
 
 __all__ = [
-    "JSONSerializable",
-    "ElysReplyMarkup",
-    "ListLike",
-    "Command",
-    "StringLoader",
-    "Module",
-    "get_commands",
-    "get_inline_handlers",
-    "get_callback_handlers",
     "BotInlineCall",
+    "BotInlineMessage",
     "BotMessage",
+    "Command",
+    "ElysReplyMarkup",
     "InlineCall",
     "InlineMessage",
     "InlineQuery",
     "InlineUnit",
-    "BotInlineMessage",
+    "JSONSerializable",
+    "ListLike",
+    "Module",
     "PointerDict",
     "PointerList",
+    "StringLoader",
+    "get_callback_handlers",
+    "get_commands",
+    "get_inline_handlers",
 ]
 
 logger = logging.getLogger(__name__)
 
 
-JSONSerializable = typing.Union[str, int, float, bool, list, dict, None]
-ListLike = typing.Union[list, set, tuple]
+JSONSerializable = str | int | float | bool | list | dict | None
+ListLike = list | set | tuple
 Command = typing.Callable[..., typing.Awaitable[typing.Any]]
 
 
@@ -118,7 +118,7 @@ class StringLoader(SourceLoader):
 
 
 class Module:
-    strings = {"name": "Unknown"}
+    strings = {"name": "Unknown"}  # noqa: RUF012
 
     """There is no help for this module"""
 
@@ -130,7 +130,7 @@ class Module:
 
     def internal_init(self):
         """Called after the class is initialized in order to pass the client and db. Do not call it yourself"""
-        self.allmodules: "Modules"
+        self.allmodules: Modules
 
         self.db = self.allmodules.db
         self._db = self.allmodules.db
@@ -268,7 +268,7 @@ class Module:
         self,
         message: Message | InlineMessage,
         frames: list[str],
-        interval: float | int,
+        interval: float,
         *,
         inline: bool = False,
     ) -> None:
@@ -617,9 +617,7 @@ class Module:
         if not lib_obj.__class__.__name__.endswith("Lib"):
             _raise(
                 ImportError(
-                    "Invalid library. Classname {} does not end with 'Lib'".format(
-                        lib_obj.__class__.__name__
-                    )
+                    f"Invalid library. Classname {lib_obj.__class__.__name__} does not end with 'Lib'"
                 )
             )
 
@@ -653,7 +651,7 @@ class Module:
 
             try:
                 await lib_obj.init()
-            except Exception:
+            except Exception:  # noqa: BLE001
                 _raise(RuntimeError("Library init() failed"))
 
         if hasattr(lib_obj, "config"):
@@ -813,8 +811,8 @@ class ModuleConfig(dict):
     """Stores config for modules and apparently libraries"""
 
     def __init__(self, *entries: typing.Union[str, "ConfigValue", "ConfigCategory"]):
-        self._option_categories: dict[str, str] = dict()
-        self._categories: dict[str, "ConfigCategory"] = dict()
+        self._option_categories: dict[str, str] = {}
+        self._categories: dict[str, ConfigCategory] = {}
 
         if all(isinstance(entry, (ConfigValue, ConfigCategory)) for entry in entries):
             # New config format processing
@@ -860,7 +858,7 @@ class ModuleConfig(dict):
                 # Compatibility tweak
                 # does nothing in Elys
                 ret = ret(message)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 ret = ret()
 
         return ret
@@ -954,10 +952,8 @@ class ConfigValue:
         ignore_validation: bool = False,
     ):
         if key == "value":
-            try:
+            with contextlib.suppress(Exception):
                 value = ast.literal_eval(value)
-            except Exception:
-                pass
 
             # Convert value to list if it's tuple just not to mess up
             # with json convertations
@@ -975,9 +971,9 @@ class ConfigValue:
 
                     try:
                         value = self.validator.validate(value)
-                    except validators.ValidationError as e:
+                    except validators.ValidationError:
                         if not ignore_validation:
-                            raise e
+                            raise
 
                         logger.debug(
                             "Config value was broken (%s), so it was reset to %s",
@@ -1025,7 +1021,7 @@ class ConfigCategory(list):
         self,
         name: str,
         *config_values: ConfigValue,
-        doc: typing.Callable[[], str] | str | "ConfigValue" = "No description",
+        doc: typing.Callable[[], str] | str | ConfigValue = "No description",
     ):
         super().__init__(config_values)
         self.name = str(name)
@@ -1035,7 +1031,7 @@ class ConfigCategory(list):
         if callable(self.doc):
             try:
                 return self.doc()
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return "No description"
         return self.doc
 

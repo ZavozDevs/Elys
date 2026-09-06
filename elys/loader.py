@@ -69,47 +69,47 @@ if typing.TYPE_CHECKING:
     from .tl_cache import CustomTelegramClient
 
 __all__ = [
-    "Modules",
-    "InfiniteLoop",
     "Command",
+    "ConfigCategory",
+    "ConfigValue",
     "CoreOverwriteError",
     "CoreUnloadError",
+    "Database",
+    "InfiniteLoop",
+    "InlineManager",
     "InlineMessage",
     "JSONSerializable",
     "Library",
     "LibraryConfig",
     "LoadError",
     "Module",
+    "ModuleConfig",
+    "Modules",
     "SelfSuspend",
     "SelfUnload",
     "StopLoop",
     "StringLoader",
-    "get_commands",
-    "get_inline_handlers",
-    "get_callback_handlers",
-    "validators",
-    "Database",
-    "InlineManager",
     "Strings",
     "Translator",
-    "ConfigCategory",
-    "ConfigValue",
-    "ModuleConfig",
-    "owner",
-    "group_owner",
-    "group_admin_add_admins",
-    "group_admin_change_info",
-    "group_admin_ban_users",
-    "group_admin_delete_messages",
-    "group_admin_pin_messages",
-    "group_admin_invite_users",
+    "get_callback_handlers",
+    "get_commands",
+    "get_inline_handlers",
     "group_admin",
+    "group_admin_add_admins",
+    "group_admin_ban_users",
+    "group_admin_change_info",
+    "group_admin_delete_messages",
+    "group_admin_invite_users",
+    "group_admin_pin_messages",
     "group_member",
-    "pm",
-    "unrestricted",
+    "group_owner",
     "inline_everyone",
     "loop",
     "need_update",
+    "owner",
+    "pm",
+    "unrestricted",
+    "validators",
 ]
 
 logger = logging.getLogger(__name__)
@@ -604,7 +604,7 @@ class Modules:
         self.inline_handlers = {}
         self.callback_handlers = {}
         self.aliases = {}
-        self.modules: list["Module" | None] = []  # skipcq: PTC-W0052
+        self.modules: list[Module | None] = []  # skipcq: PTC-W0052
         self.libraries = []
         self.watchers = []
         self._log_handlers = []
@@ -635,7 +635,7 @@ class Modules:
         try:
             disabled_modules = set(self._db.get(main.__name__, "disabled_modules", []))
             disabled_commands = self._db.get(main.__name__, "disabled_commands", {})
-        except Exception:
+        except Exception:  # noqa: BLE001
             disabled_modules = set()
             disabled_commands = {}
 
@@ -651,9 +651,9 @@ class Modules:
             if cls_name in disabled_modules:
                 continue
 
-            disabled_for_mod = set(
+            disabled_for_mod = {
                 x.lower() for x in disabled_commands.get(cls_name, [])
-            )
+            }
 
             for cmd_name, cmd_func in module.elys_commands.items():
                 if cmd_name.lower() not in disabled_for_mod:
@@ -681,14 +681,12 @@ class Modules:
 
         settings = self.lookup("settings")
         if settings:
-            try:
+            with contextlib.suppress(Exception):
                 for alias, cmd in settings.get("aliases", {}).items():
                     if alias.lower().strip() not in self.aliases:
                         _cmd = cmd.split(maxsplit=1)
                         if _cmd[0].lower() in self.commands:
                             self.add_alias(alias, *_cmd)
-            except Exception:
-                pass
 
         logger.debug(
             (
@@ -772,8 +770,8 @@ class Modules:
                 loaded += [await self.register_module(spec, module_name, origin)]
 
                 logger.debug("Successfully loaded %s from filesystem", module_name)
-            except Exception as e:
-                logger.exception("Failed to load module %s due to %s:", mod, e)
+            except Exception:
+                logger.exception("Failed to load module %s:", mod)
 
         return loaded
 
@@ -981,9 +979,7 @@ class Modules:
             _elys_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         if instance.__origin__.startswith("<core"):
-            self._core_commands += list(
-                map(lambda x: x.lower(), list(instance.elys_commands))
-            )
+            self._core_commands += [x.lower() for x in list(instance.elys_commands)]
 
         for _command, cmd in instance.elys_commands.items():
             # Restrict overwriting core modules' commands
@@ -1120,7 +1116,7 @@ class Modules:
     def get_approved_channel(self):
         return self.__approve.pop(0) if self.__approve else None
 
-    def get_prefix(self, ent_id: int = None) -> str:
+    def get_prefix(self, ent_id: int | None = None) -> str:
         """Get command prefix"""
         from . import main
 
@@ -1162,9 +1158,7 @@ class Modules:
                 ):
                     raise CoreOverwriteError(
                         module=(
-                            module.__class__.__name__[:-3]
-                            if module.__class__.__name__.endswith("Mod")
-                            else module.__class__.__name__
+                            module.__class__.__name__.removesuffix("Mod")
                         )
                     )
 
@@ -1234,14 +1228,14 @@ class Modules:
         try:
             disabled_modules = self._db.get(main.__name__, "disabled_modules", [])
             disabled_commands = self._db.get(main.__name__, "disabled_commands", {})
-        except Exception:
+        except Exception:  # noqa: BLE001
             disabled_modules = []
             disabled_commands = {}
 
         module_name = None
         try:
             module_name = func.__self__.__class__.__name__
-        except Exception:
+        except Exception:  # noqa: BLE001
             module_name = None
 
         if module_name and module_name in disabled_modules:
@@ -1305,16 +1299,16 @@ class Modules:
 
         try:
             mod.config_complete()
-        except Exception as e:
-            logger.exception("Failed to send mod config complete signal due to %s", e)
+        except Exception:
+            logger.exception("Failed to send mod config complete signal")
             raise
 
     async def send_ready_one_wrapper(self, *args, **kwargs):
         """Wrapper for send_ready_one"""
         try:
             await self.send_ready_one(*args, **kwargs)
-        except Exception as e:
-            logger.exception("Failed to send mod init complete signal due to %s", e)
+        except Exception:
+            logger.exception("Failed to send mod init complete signal")
 
     async def send_ready(self):
         """Send all data to all modules"""
@@ -1345,28 +1339,24 @@ class Modules:
                 await mod.client_ready(self.client, self._db)
             else:
                 await mod.client_ready()
-        except SelfUnload as e:
+        except SelfUnload:
             if no_self_unload:
-                raise e
+                raise
 
             logger.debug("Unloading %s, because it raised SelfUnload", mod)
             self.modules.remove(mod)
             self._rebuild_handlers()
             return
-        except SelfSuspend as e:
+        except SelfSuspend:
             if no_self_unload:
-                raise e
+                raise
 
             logger.debug("Suspending %s, because it raised SelfSuspend", mod)
             return
-        except Exception as e:
+        except Exception:
             logger.exception(
-                (
-                    "Failed to send mod init complete signal for %s due to %s,"
-                    " attempting unload"
-                ),
+                "Failed to send mod init complete signal for %s, attempting unload",
                 mod,
-                e,
             )
             self.modules.remove(mod)
             self._rebuild_handlers()
@@ -1394,7 +1384,7 @@ class Modules:
 
         for _, method in utils.iter_attrs(mod):
             if isinstance(method, InfiniteLoop):
-                setattr(method, "module_instance", mod)
+                method.module_instance = mod
 
                 if method.autostart:
                     method.start()
@@ -1516,7 +1506,7 @@ class Modules:
                     handler.id,
                 )
 
-    def add_alias(self, alias: str, cmd: str, args: str = None) -> bool:
+    def add_alias(self, alias: str, cmd: str, args: str | None = None) -> bool:
         """Make an alias"""
         cmd_clean = cmd.lower().strip()
         if cmd_clean not in self.commands:
@@ -1549,7 +1539,7 @@ class Modules:
                     module.config_complete(reload_dynamic_translate=True)
                 except TypeError:
                     module.config_complete()
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 logger.debug(
                     "Can't complete dynamic translations reload of %s due to %s",
                     module,

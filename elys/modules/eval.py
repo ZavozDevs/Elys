@@ -20,7 +20,7 @@ import contextlib
 import itertools
 import os
 import re
-import subprocess
+import subprocess  # nosec B404
 import sys
 import tempfile
 import time
@@ -42,7 +42,7 @@ from ..log import ElysException
 class Evaluator(loader.Module):
     """Evaluates code in various languages"""
 
-    strings = {"name": "Evaluator"}
+    strings = {"name": "Evaluator"}  # noqa: RUF012
 
     class _SecureDB:
         """
@@ -96,7 +96,7 @@ class Evaluator(loader.Module):
                 )
             print_output = output_print.getvalue()
 
-        except Exception:
+        except Exception:  # noqa: BLE001
             item = ElysException.from_exc_info(*sys.exc_info())
             print_output = output_print.getvalue()
 
@@ -166,7 +166,7 @@ class Evaluator(loader.Module):
     @loader.command()
     async def ecpp(self, message: Message, c: bool = False):
         try:
-            subprocess.check_output(
+            subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                 ["gcc" if c else "g++", "--version"],
                 stderr=subprocess.STDOUT,
                 timeout=10,
@@ -180,7 +180,7 @@ class Evaluator(loader.Module):
                 ),
             )
             return
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["no_compiler"].format(
@@ -195,11 +195,11 @@ class Evaluator(loader.Module):
         error = False
         with tempfile.TemporaryDirectory() as tmpdir:
             file = os.path.join(tmpdir, "code.cpp")
-            with open(file, "w") as f:
+            with open(file, "w") as f:  # noqa: ASYNC230
                 f.write(code)
 
             try:
-                result = subprocess.check_output(
+                result = subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                     ["gcc" if c else "g++", "-o", "code", "code.cpp"],
                     cwd=tmpdir,
                     stderr=subprocess.STDOUT,
@@ -214,7 +214,7 @@ class Evaluator(loader.Module):
 
             if not result:
                 try:
-                    result = subprocess.check_output(
+                    result = subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                         ["./code"],
                         cwd=tmpdir,
                         stderr=subprocess.STDOUT,
@@ -246,7 +246,7 @@ class Evaluator(loader.Module):
     @loader.command()
     async def ers(self, message: Message):
         try:
-            subprocess.check_output(
+            subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                 ["rustc", "--version"],
                 stderr=subprocess.STDOUT,
                 timeout=10,
@@ -260,7 +260,7 @@ class Evaluator(loader.Module):
                 ),
             )
             return
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["no_compiler"].format(
@@ -280,11 +280,11 @@ class Evaluator(loader.Module):
         error = False
         with tempfile.TemporaryDirectory() as tmpdir:
             file = os.path.join(tmpdir, "code.rs")
-            with open(file, "w") as f:
+            with open(file, "w") as f:  # noqa: ASYNC230
                 f.write(code)
 
             try:
-                result = subprocess.check_output(
+                result = subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                     ["rustc", "code.rs", "-o", "code"],
                     cwd=tmpdir,
                     stderr=subprocess.STDOUT,
@@ -299,7 +299,7 @@ class Evaluator(loader.Module):
 
             if not result:
                 try:
-                    result = subprocess.check_output(
+                    result = subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                         ["./code"],
                         cwd=tmpdir,
                         stderr=subprocess.STDOUT,
@@ -327,7 +327,7 @@ class Evaluator(loader.Module):
     @loader.command()
     async def eg(self, message: Message):
         try:
-            subprocess.check_output(
+            subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                 ["go", "version"],
                 stderr=subprocess.STDOUT,
                 timeout=10,
@@ -341,7 +341,7 @@ class Evaluator(loader.Module):
                 ),
             )
             return
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["no_compiler"].format(
@@ -361,11 +361,11 @@ class Evaluator(loader.Module):
         error = False
         with tempfile.TemporaryDirectory() as tmpdir:
             file = os.path.join(tmpdir, "code.go")
-            with open(file, "w") as f:
+            with open(file, "w") as f:  # noqa: ASYNC230
                 f.write(code)
 
             try:
-                result = subprocess.check_output(
+                result = subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                     ["go", "run", "code.go"],
                     cwd=tmpdir,
                     stderr=subprocess.STDOUT,
@@ -393,7 +393,7 @@ class Evaluator(loader.Module):
     @loader.command()
     async def enode(self, message: Message):
         try:
-            subprocess.check_output(
+            subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                 ["node", "--version"],
                 stderr=subprocess.STDOUT,
                 timeout=10,
@@ -407,7 +407,7 @@ class Evaluator(loader.Module):
                 ),
             )
             return
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["no_compiler"].format(
@@ -421,11 +421,11 @@ class Evaluator(loader.Module):
         error = False
         with tempfile.TemporaryDirectory() as tmpdir:
             file = os.path.join(tmpdir, "code.js")
-            with open(file, "w") as f:
+            with open(file, "w") as f:  # noqa: ASYNC230
                 f.write(code)
 
             try:
-                result = subprocess.check_output(
+                result = subprocess.check_output(  # nosec B603 B607  # noqa: ASYNC221
                     ["node", "code.js"],
                     cwd=tmpdir,
                     stderr=subprocess.STDOUT,

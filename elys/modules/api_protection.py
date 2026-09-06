@@ -55,9 +55,7 @@ GROUPS = [
 
 
 CONSTRUCTORS = {
-    (entity_name[0].lower() + entity_name[1:]).rsplit("Request", 1)[0]: getattr(
-        cur_entity, "CONSTRUCTOR_ID"
-    )
+    (entity_name[0].lower() + entity_name[1:]).rsplit("Request", 1)[0]: cur_entity.CONSTRUCTOR_ID
     for group in GROUPS
     for entity_name in dir(getattr(functions, group))
     if hasattr(
@@ -72,7 +70,7 @@ CONSTRUCTORS = {
 class APIRatelimiterMod(loader.Module):
     """Helps userbot avoid spamming Telegram API"""
 
-    strings = {"name": "APILimiter"}
+    strings = {"name": "APILimiter"}  # noqa: RUF012
 
     def __init__(self):
         self._ratelimiter: list[tuple] = []
@@ -117,12 +115,7 @@ class APIRatelimiterMod(loader.Module):
 
     async def on_forbidden_methods_update(self):
         self._client.forbid_constructors(
-            list(
-                map(
-                    lambda x: CONSTRUCTORS[x],
-                    self.config["forbidden_methods"],
-                )
-            )
+            [CONSTRUCTORS[x] for x in self.config["forbidden_methods"]]
         )
 
     async def _install_protection(self):
@@ -136,9 +129,9 @@ class APIRatelimiterMod(loader.Module):
             sender: "MTProtoSender",  # type: ignore  # noqa: F821
             request: TLRequest,
             ordered: bool = False,
-            flood_sleep_threshold: int = None,
+            flood_sleep_threshold: int | None = None,
         ):
-            await asyncio.sleep(random.randint(1, 5) / 100)
+            await asyncio.sleep(random.randint(1, 5) / 100)  # nosec B311
             req = (request,) if not is_list_like(request) else request
             for r in req:
                 if (
@@ -187,7 +180,7 @@ class APIRatelimiterMod(loader.Module):
                         )
 
                         # It is intented to use time.sleep instead of asyncio.sleep
-                        time.sleep(int(self.config["local_floodwait"]))
+                        time.sleep(int(self.config["local_floodwait"]))  # noqa: ASYNC251
                         self._lock = False
 
             return await old_call(sender, request, ordered, flood_sleep_threshold)

@@ -27,9 +27,9 @@ import time
 
 try:
     import redis
-except ImportError as e:
+except ImportError:
     if "RAILWAY" in os.environ:
-        raise e
+        raise
 
 
 import typing
@@ -49,13 +49,13 @@ from .tl_cache import CustomTelegramClient
 from .types import JSONSerializable
 
 __all__ = [
-    "Database",
-    "PointerList",
-    "PointerDict",
-    "NamedTupleMiddlewareDict",
-    "NamedTupleMiddlewareList",
     "BaseSerializingMiddlewareDict",
     "BaseSerializingMiddlewareList",
+    "Database",
+    "NamedTupleMiddlewareDict",
+    "NamedTupleMiddlewareList",
+    "PointerDict",
+    "PointerList",
 ]
 
 logger = logging.getLogger(__name__)
@@ -138,7 +138,7 @@ class Database(dict):
                     "Found existing content channel with ID %s in database",
                     existing_channel_id,
                 )
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 logger.warning(
                     f"Saved channel ID {existing_channel_id} not found via get_entity ({e}), checking dialogs..."
                 )
@@ -234,11 +234,14 @@ class Database(dict):
 
             if isinstance(v, dict):
                 v_copy = dict(v)
-                if new_key == "elys.main" and "disabled_modules" in v_copy:
-                    if isinstance(v_copy["disabled_modules"], list):
-                        v_copy["disabled_modules"] = [
-                            mod_renames.get(m, m) for m in v_copy["disabled_modules"]
-                        ]
+                if (
+                    new_key == "elys.main"
+                    and "disabled_modules" in v_copy
+                    and isinstance(v_copy["disabled_modules"], list)
+                ):
+                    v_copy["disabled_modules"] = [
+                        mod_renames.get(m, m) for m in v_copy["disabled_modules"]
+                    ]
                 if new_key in migrated and isinstance(migrated[new_key], dict):
                     migrated[new_key].update(v_copy)
                 else:
@@ -375,10 +378,9 @@ class Database(dict):
         if isinstance(forums_cache, dict):
             if "elys-userbot" in forums_cache and isinstance(
                 forums_cache["elys-userbot"], dict
-            ):
-                if tid := forums_cache["elys-userbot"].get("Assets"):
-                    return tid
-            for _, topics in forums_cache.items():
+            ) and (tid := forums_cache["elys-userbot"].get("Assets")):
+                return tid
+            for topics in forums_cache.values():
                 if isinstance(topics, dict) and (tid := topics.get("Assets")):
                     return tid
 
@@ -406,7 +408,7 @@ class Database(dict):
                         self.save()
                         return found_topic.id
             except Exception:
-                pass
+                logger.debug("Failed to find Assets topic", exc_info=True)
 
         return None
 
@@ -580,7 +582,7 @@ class Database(dict):
             if isinstance(value, list):
                 for item in self._get_raw(owner, key, default):
                     if not isinstance(item, dict):
-                        raise ValueError(
+                        raise TypeError(
                             "Item type can only be specified for dedicated keys and"
                             " can't be mixed with other ones"
                         )
@@ -592,7 +594,7 @@ class Database(dict):
             if isinstance(value, dict):
                 for item in self._get_raw(owner, key, default).values():
                     if not isinstance(item, dict):
-                        raise ValueError(
+                        raise TypeError(
                             "Item type can only be specified for dedicated keys and"
                             " can't be mixed with other ones"
                         )

@@ -24,12 +24,11 @@ import time
 import typing
 from collections.abc import Callable
 
-from elystl import TelegramClient
-from elystl import helpers
+from elystl import TelegramClient, helpers
 from elystl import utils as tl_utils
-from elystl.extensions import html as html_parser
 from elystl._updates import ChannelState, Entity, EntityType, SessionState
 from elystl.errors.rpcerrorlist import TopicDeletedError
+from elystl.extensions import html as html_parser
 from elystl.hints import EntityLike
 from elystl.network import MTProtoSender
 from elystl.tl import functions
@@ -64,8 +63,8 @@ from .types import (
 if typing.TYPE_CHECKING:
     from .database import Database
     from .dispatcher import CommandDispatcher
-    from .loader import Modules
     from .inline.core import InlineManager
+    from .loader import Modules
 
 logger = logging.getLogger(__name__)
 
@@ -117,14 +116,14 @@ class CustomTelegramClient(TelegramClient):
                 typing.Any,
             ]
         ) = None
-        self.dispatcher: "CommandDispatcher"
+        self.dispatcher: CommandDispatcher
         self.tg_id: int
         self._tg_id: int
-        self.elys_me: "User"
-        self.hikka_me: "User"
-        self.elys_db: "Database"
-        self.loader: "Modules"
-        self.elys_inline: "InlineManager"
+        self.elys_me: User
+        self.hikka_me: User
+        self.elys_db: Database
+        self.loader: Modules
+        self.elys_inline: InlineManager
 
     async def start(
         self,
@@ -154,7 +153,7 @@ class CustomTelegramClient(TelegramClient):
                 print("Enter your 2FA password:", flush=True)
                 try:
                     return getpass.getpass("> ")
-                except Exception:
+                except Exception:  # noqa: BLE001
                     return input("> ")
 
         return await super().start(
@@ -272,7 +271,7 @@ class CustomTelegramClient(TelegramClient):
 
                 text, _ = html_parser.parse(rich_message_to_html(rich_message))
                 return text or " "
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return " "
         return " "
 
@@ -602,7 +601,7 @@ class CustomTelegramClient(TelegramClient):
             raise ValueError("raw_updates_processor is already set")
 
         if not callable(value):
-            raise ValueError("raw_updates_processor must be callable")
+            raise TypeError("raw_updates_processor must be callable")
 
         self._raw_updates_processor = value
 
@@ -654,7 +653,7 @@ class CustomTelegramClient(TelegramClient):
             try:
                 hashable_entity = next(
                     getattr(entity, attr)
-                    for attr in {"user_id", "channel_id", "chat_id", "id"}
+                    for attr in ("user_id", "channel_id", "chat_id", "id")
                     if getattr(entity, attr, None)
                 )
             except StopIteration:
@@ -734,7 +733,7 @@ class CustomTelegramClient(TelegramClient):
             try:
                 hashable_entity = next(
                     getattr(entity, attr)
-                    for attr in {"user_id", "channel_id", "chat_id", "id"}
+                    for attr in ("user_id", "channel_id", "chat_id", "id")
                     if getattr(entity, attr, None)
                 )
             except StopIteration:
@@ -747,7 +746,7 @@ class CustomTelegramClient(TelegramClient):
             try:
                 hashable_user = next(
                     getattr(user, attr)
-                    for attr in {"user_id", "channel_id", "chat_id", "id"}
+                    for attr in ("user_id", "channel_id", "chat_id", "id")
                     if getattr(user, attr, None)
                 )
             except StopIteration:
@@ -840,7 +839,7 @@ class CustomTelegramClient(TelegramClient):
             try:
                 hashable_entity = next(
                     getattr(entity, attr)
-                    for attr in {"channel_id", "chat_id", "id"}
+                    for attr in ("channel_id", "chat_id", "id")
                     if getattr(entity, attr, None)
                 )
             except StopIteration:
@@ -892,7 +891,7 @@ class CustomTelegramClient(TelegramClient):
             try:
                 hashable_entity = next(
                     getattr(entity, attr)
-                    for attr in {"user_id", "chat_id", "id"}
+                    for attr in ("user_id", "chat_id", "id")
                     if getattr(entity, attr, None)
                 )
             except StopIteration:

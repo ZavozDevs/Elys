@@ -38,9 +38,9 @@ from elystl.tl.types import User
 from elystl.utils import parse_phone
 
 from .. import loader, main, security, utils
-from ..loader import LOADED_MODULES_PATH
 from .._internal import restart
 from ..inline.types import InlineCall
+from ..loader import LOADED_MODULES_PATH
 from ..tl_cache import CustomTelegramClient
 from ..version import __version__
 
@@ -51,7 +51,7 @@ logger = logging.getLogger(__name__)
 class ElysWebMod(loader.Module):
     """Elys Accounts and Web Interface Manager"""
 
-    strings = {"name": "ElysAccounts"}
+    strings = {"name": "ElysAccounts"}  # noqa: RUF012
 
     @loader.command()
     async def addacc(self, message: Message):
@@ -75,7 +75,7 @@ class ElysWebMod(loader.Module):
 
             try:
                 user = await self._client.get_entity(user_id)
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 logger.error(f"Error while fetching user: {e}")
 
         if not user or not isinstance(user, User) or user.bot:
@@ -103,9 +103,9 @@ class ElysWebMod(loader.Module):
                 ],
                 photo="",
             ):
-                raise Exception
+                raise RuntimeError("Approve failed")
 
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["add_user_insecure"].format(
@@ -499,7 +499,7 @@ class ElysWebMod(loader.Module):
                 photo="",
             ):
                 raise RuntimeError("Inline form was not created")
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["switch_insecure"].format(

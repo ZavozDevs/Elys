@@ -12,11 +12,11 @@
 
 import logging
 import os
-import subprocess
+import subprocess  # nosec B404
 from typing import Literal
 
-import git
 import elystl
+import git
 
 from .. import version
 
@@ -53,7 +53,7 @@ def get_git_hash() -> str | Literal[False]:
     try:
         with git.Repo() as repo:
             return repo.head.commit.hexsha
-    except Exception:
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -69,7 +69,7 @@ def get_commit_url() -> str:
         if not hash_:
             return "Unknown"
         return f'<a href="https://github.com/ZavozDevs/Elys/commit/{hash_}">#{hash_[:7]}</a>'
-    except Exception:
+    except Exception:  # noqa: BLE001
         return "Unknown"
 
 
@@ -80,11 +80,12 @@ def get_git_status() -> str:
     if _is_no_git():
         return "Git disabled"
     try:
-        process = subprocess.run(
+        process = subprocess.run(  # nosec B603 B607
             ["git", "status", "--porcelain"],
             capture_output=True,
             text=True,
             timeout=5,
+            check=False,
         )
 
         if process.returncode != 0:
@@ -101,7 +102,7 @@ def get_git_status() -> str:
 
     except subprocess.TimeoutExpired:
         return "Unknown"
-    except Exception:
+    except Exception:  # noqa: BLE001
         return "Unknown"
 
 
@@ -118,7 +119,7 @@ def get_last_commit_message() -> str:
             if isinstance(message, bytes):
                 return message.decode(errors="replace").strip()
             return message.strip()
-    except Exception:
+    except Exception:  # noqa: BLE001
         return "Unknown"
 
 
@@ -132,7 +133,7 @@ def get_commit_count() -> int:
     try:
         with git.Repo() as repo:
             return len(list(repo.iter_commits()))
-    except Exception:
+    except Exception:  # noqa: BLE001
         return 0
 
 

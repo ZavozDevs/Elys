@@ -21,12 +21,12 @@ import contextlib
 import getpass
 import inspect
 import logging
-import platform as lib_platform
 import os
+import platform as lib_platform
 import re
+import tempfile
 import time
 import typing
-import urllib.parse
 
 import elystl
 import psutil
@@ -51,7 +51,7 @@ def generate_custom_banner(nickname: str) -> str | None:
     if text in _CUSTOM_BANNER_CACHE:
         return _CUSTOM_BANNER_CACHE[text]
 
-    base_path = "/tmp/elys_banner_base.png"
+    base_path = os.path.join(tempfile.gettempdir(), "elys_banner_base.png")
     if not os.path.exists(base_path):
         try:
             r = requests.get(
@@ -61,7 +61,7 @@ def generate_custom_banner(nickname: str) -> str | None:
             if r.status_code == 200:
                 with open(base_path, "wb") as f:
                     f.write(r.content)
-        except Exception:
+        except Exception:  # noqa: BLE001
             return None
     if not os.path.exists(base_path):
         return None
@@ -118,7 +118,9 @@ def generate_custom_banner(nickname: str) -> str | None:
             draw.text((cur_x, char_y), char, fill=(152, 152, 152), font=font)
             cur_x += char_w + letter_spacing
 
-        temp_path = f"/tmp/elys_banner_{abs(hash(text))}.png"
+        temp_path = os.path.join(
+            tempfile.gettempdir(), f"elys_banner_{abs(hash(text))}.png"
+        )
         im.save(temp_path, "PNG")
 
         with open(temp_path, "rb") as f:
@@ -137,8 +139,8 @@ def generate_custom_banner(nickname: str) -> str | None:
                 url = data["image"]["url"]
                 _CUSTOM_BANNER_CACHE[text] = url
                 return url
-    except Exception as e:
-        logger.error("Failed to generate custom banner for %s: %s", nickname, e)
+    except Exception:
+        logger.exception("Failed to generate custom banner for %s", nickname)
     return None
 
 
@@ -146,7 +148,7 @@ def generate_custom_banner(nickname: str) -> str | None:
 class ElysInfoMod(loader.Module):
     """Show userbot info"""
 
-    strings = {"name": "ElysInfo"}
+    strings = {"name": "ElysInfo"}  # noqa: RUF012
 
     def __init__(self):
         self.config = loader.ModuleConfig(
@@ -251,14 +253,11 @@ class ElysInfoMod(loader.Module):
                     if is_avail
                     else self.strings["up_to_date"]
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 upd = ""
 
         me = (
-            '<b><a href="tg://user?id={}">{}</a></b>'.format(
-                self._client.elys_me.id,
-                utils.escape_html(get_display_name(self._client.elys_me)),
-            )
+            f'<b><a href="tg://user?id={self._client.elys_me.id}">{utils.escape_html(get_display_name(self._client.elys_me))}</a></b>'
             .replace("{", "")
             .replace("}", "")
         )
@@ -339,7 +338,7 @@ class ElysInfoMod(loader.Module):
                         if is_avail
                         else self.strings["up_to_date"]
                     )
-                except Exception:
+                except Exception:  # noqa: BLE001
                     data["upd"] = ""
                 if inspect.iscoroutinefunction(on_ready_callback):
                     await on_ready_callback(data)
@@ -406,16 +405,22 @@ class ElysInfoMod(loader.Module):
                 if url_name and url_name not in possible_values:
                     possible_values.append(url_name)
 
-            if self.config["banner_url"] not in possible_values and self.config["banner_url"] != "custom" and not (self.config["banner_url"] and str(self.config["banner_url"]).startswith("http")):
-                self.config["banner_url"] = possible_values[1] if len(possible_values) > 1 else possible_values[0]
-        except Exception as e:
-            logger.error("Error in client_ready for ElysInfo: %s", e)
+            if (
+                self.config["banner_url"] not in possible_values
+                and self.config["banner_url"] != "custom"
+                and not (self.config["banner_url"] and str(self.config["banner_url"]).startswith("http"))
+            ):
+                self.config["banner_url"] = (
+                    possible_values[1] if len(possible_values) > 1 else possible_values[0]
+                )
+        except Exception:
+            logger.exception("Error in client_ready for ElysInfo")
 
     @loader.command()
     async def infocmd(self, message: Message):
         start = time.perf_counter_ns()
         target_message = None
-        
+
         raw_banner = str(self.config["banner_url"]) if self.config["banner_url"] else None
         media_url = raw_banner if raw_banner and raw_banner.startswith("http") else None
 
@@ -467,7 +472,7 @@ class ElysInfoMod(loader.Module):
                                 file=media,
                                 invert_media=self.config["invert_media"],
                             )
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     logger.debug("Failed to update placeholders: %s", e)
 
         if self.config["rich_mode"]:

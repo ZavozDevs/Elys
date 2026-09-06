@@ -14,7 +14,7 @@ import math
 import re
 import sys
 from bisect import bisect_left
-from typing import NamedTuple, Optional, cast
+from typing import NamedTuple, cast
 
 ERROR_CORRECT_L = 1
 ERROR_CORRECT_M = 0
@@ -39,9 +39,8 @@ for i in range(255):
 
 def rs_blocks(version, error_correction):
     if error_correction not in RS_BLOCK_OFFSET:  # pragma: no cover
-        raise Exception(
-            "bad rs block @ version: %s / error_correction: %s"
-            % (version, error_correction)
+        raise ValueError(
+            f"bad rs block @ version: {version} / error_correction: {error_correction}"
         )
     offset = RS_BLOCK_OFFSET[error_correction]
     rs_block = RS_BLOCK_TABLE[(version - 1) * 4 + offset]
@@ -284,7 +283,7 @@ def gexp(n):
 class Polynomial:
     def __init__(self, num, shift):
         if not num:  # pragma: no cover
-            raise Exception(f"{len(num)}/{shift}")
+            raise ValueError(f"{len(num)}/{shift}")
 
         offset = 0
         for offset in range(len(num)):
@@ -789,9 +788,7 @@ def _lost_point_level2(modules, modules_count):
                 # reduce 33.3% of runtime via next().
                 # None: raise nothing if there is no next item.
                 next(modules_range_iter, None)
-            elif top_right != this_row[col]:
-                continue
-            elif top_right != next_row[col]:
+            elif top_right != this_row[col] or top_right != next_row[col]:
                 continue
             else:
                 lost_point += 3
@@ -1092,8 +1089,7 @@ def create_data(version, error_correction, data_list):
     bit_limit = sum(block.data_count * 8 for block in rs_blocks_)
     if len(buffer) > bit_limit:
         raise DataOverflowError(
-            "Code length overflow. Data size (%s) > size available (%s)"
-            % (len(buffer), bit_limit)
+            f"Code length overflow. Data size ({len(buffer)}) > size available ({bit_limit})"
         )
 
     # Terminate the bits (add up to four 0s).
@@ -1121,7 +1117,7 @@ class DataOverflowError(Exception):
     pass
 
 
-ModulesType = list[list[Optional[bool]]]
+ModulesType = list[list[bool | None]]
 # Cache modules generated just based on the QR Code version
 precomputed_qr_blanks: dict[int, ModulesType] = {}
 
@@ -1134,7 +1130,7 @@ def _check_box_size(size):
 def _check_border(size):
     if int(size) < 0:
         raise ValueError(
-            "Invalid border value (was %s, expected 0 or larger than that)" % size
+            f"Invalid border value (was {size}, expected 0 or larger than that)"
         )
 
 

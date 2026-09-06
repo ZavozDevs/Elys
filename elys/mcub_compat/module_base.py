@@ -29,8 +29,8 @@ from abc import ABC
 from collections.abc import Callable, Mapping
 
 from elystl.tl import types as tl_types
-from .buttons import DEFAULT_TTL, make_callback_button, registry as callback_registry
-from ._vendor.decorators import (  # noqa: F401  (re-exported for module authors)
+
+from ._vendor.decorators import (  # noqa: F401
     bot_command,
     callback,
     command,
@@ -59,6 +59,8 @@ from ._vendor.rich_buttons import (
     validate_rich_page_button,
 )
 from ._vendor.strings import Strings
+from .buttons import DEFAULT_TTL, make_callback_button
+from .buttons import registry as callback_registry
 
 logger = logging.getLogger(__name__)
 
@@ -94,31 +96,31 @@ class ModuleBase(ABC):
     name: str = "Unnamed"
     version: str = "1.0.0"
     author: str = "unknown"
-    description: dict | str = {}
-    dependencies: list = []
+    description: dict | str = {}  # noqa: RUF012
+    dependencies: list = []  # noqa: RUF012
     banner_url: str | None = None
 
-    strings: dict = {}
+    strings: dict = {}  # noqa: RUF012
     config: typing.Any = None
 
     # Declared explicitly rather than generated through `vars()` in the class
     # body: mutating the class namespace that way is a CPython implementation
     # detail, and these are only defaults anyway -- `__init_subclass__` rebuilds
     # all of them for every concrete module.
-    _cmd_registry: list = []
-    _inline_registry: list = []
-    _callback_registry: list = []
-    _watcher_registry: list = []
-    _loop_registry: list = []
-    _event_registry: list = []
-    _method_registry: list = []
-    _on_install_registry: list = []
-    _uninstall_registry: list = []
-    _bot_cmd_registry: list = []
-    _owner_registry: list = []
-    _permission_registry: list = []
-    _error_handler_registry: list = []
-    _inline_temp_registry: list = []
+    _cmd_registry: list = []  # noqa: RUF012
+    _inline_registry: list = []  # noqa: RUF012
+    _callback_registry: list = []  # noqa: RUF012
+    _watcher_registry: list = []  # noqa: RUF012
+    _loop_registry: list = []  # noqa: RUF012
+    _event_registry: list = []  # noqa: RUF012
+    _method_registry: list = []  # noqa: RUF012
+    _on_install_registry: list = []  # noqa: RUF012
+    _uninstall_registry: list = []  # noqa: RUF012
+    _bot_cmd_registry: list = []  # noqa: RUF012
+    _owner_registry: list = []  # noqa: RUF012
+    _permission_registry: list = []  # noqa: RUF012
+    _error_handler_registry: list = []  # noqa: RUF012
+    _inline_temp_registry: list = []  # noqa: RUF012
 
     def __getattribute__(self, name: str):
         # `strings`/`config` start life as plain class dicts; route reads through
@@ -135,7 +137,7 @@ class ModuleBase(ABC):
         for registry in _REGISTRY_NAMES:
             setattr(cls, registry, [])
 
-        for _, attr in cls.__dict__.items():
+        for attr in cls.__dict__.values():
             if not callable(attr):
                 continue
             for pattern, meta in getattr(attr, "_mcub_commands", []):
@@ -260,7 +262,7 @@ class ModuleBase(ABC):
                 for problem in Strings.validate(payload):
                     self.log.warning("strings validation: %s", problem)
             return Strings(self.kernel, payload)
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             self.log.error("Failed to initialise strings: %s", error)
             return None
 
@@ -414,7 +416,7 @@ class ModuleBase(ABC):
 
         try:
             return passes_filters(event, tags)
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             self.log.warning("permission filter failed for %s: %s", tags, error)
             return False
 
@@ -644,8 +646,7 @@ class ModuleBase(ABC):
 
         if name is None:
             name = url.split("/")[-1]
-            if name.endswith(".py"):
-                name = name[:-3]
+            name = name.removesuffix(".py")
             if not name:
                 return None
 
@@ -653,12 +654,12 @@ class ModuleBase(ABC):
             raise ValueError(f"Refusing to import library from non-HTTP url: {url}")
 
         try:
-            with urllib.request.urlopen(url) as response:  # noqa: S310
+            with urllib.request.urlopen(url) as response:  # noqa: ASYNC210 # nosec B310
                 code = response.read().decode("utf-8")
 
             module = types.ModuleType(name)
             sys.modules[name] = module
-            exec(code, module.__dict__)  # noqa: S102
+            exec(code, module.__dict__)  # nosec B102
             self.log.info("Imported library: %s from %s", name, url)
             return module
         except Exception as error:
@@ -671,7 +672,7 @@ class ModuleBase(ABC):
         try:
             await self.kernel.save_module_config(self.name, self._config.to_dict())
             self.kernel.set_live_module_config(self.name, self._config)
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             self.log.warning("Failed to save config for %s: %s", self.name, error)
 
     def _make_callback_button(self, text, callback_func, **kwargs):
@@ -689,7 +690,7 @@ class ModuleBase(ABC):
     # ------------------------------------------------------------------
 
     @property
-    def Button(self) -> "ModuleBase.ButtonFactory":
+    def Button(self) -> ModuleBase.ButtonFactory:
         if not hasattr(self, "_button_factory"):
             factory_cls = getattr(type(self), "ButtonFactory", None)
             if isinstance(factory_cls, type) and issubclass(
@@ -713,7 +714,7 @@ class ModuleBase(ABC):
             self._strings_base = Strings(outer.kernel, {"name": "null"})
 
         @property
-        def rich(self) -> "ModuleBase.RichButtonFactory":
+        def rich(self) -> ModuleBase.RichButtonFactory:
             if not hasattr(self, "_rich_button_factory"):
                 self._rich_button_factory = ModuleBase.RichButtonFactory(self._outer)
             return self._rich_button_factory
@@ -1150,7 +1151,7 @@ class ModuleBase(ABC):
                 if saved:
                     self._config.from_dict(saved)
                 self.kernel.set_live_module_config(self.name, self._config)
-            except Exception as error:
+            except Exception as error:  # noqa: BLE001
                 self.log.warning("Failed to load config for %s: %s", self.name, error)
 
         for func in self._method_funcs:
@@ -1158,7 +1159,7 @@ class ModuleBase(ABC):
                 result = func(self)
                 if asyncio.iscoroutine(result):
                     await result
-            except Exception as error:
+            except Exception as error:  # noqa: BLE001
                 self.log.error(
                     "@method error in %s.%s: %s",
                     type(self).__name__,
@@ -1172,7 +1173,7 @@ class ModuleBase(ABC):
                 result = func(self)
                 if asyncio.iscoroutine(result):
                     await result
-            except Exception as error:
+            except Exception as error:  # noqa: BLE001
                 self.log.error(
                     "@on_install error in %s.%s: %s",
                     type(self).__name__,
@@ -1195,7 +1196,7 @@ class ModuleBase(ABC):
                 result = func(self)
                 if asyncio.iscoroutine(result):
                     await result
-            except Exception as error:
+            except Exception as error:  # noqa: BLE001
                 self.log.error(
                     "@uninstall error in %s.%s: %s",
                     type(self).__name__,

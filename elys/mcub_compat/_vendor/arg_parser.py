@@ -293,9 +293,7 @@ class ArgumentValidator:
         count = len(parser.args)
         if count < min_count:
             return False
-        if max_count is not None and count > max_count:
-            return False
-        return True
+        return not (max_count is not None and count > max_count)
 
     @staticmethod
     def validate_types(parser: ArgumentParser, *types: type) -> bool:
@@ -398,7 +396,7 @@ class PipelineParser:
     """
 
     # Checked in order; longest operators must come before their prefixes.
-    _OPERATORS: list[tuple[str, str]] = [
+    _OPERATORS: list[tuple[str, str]] = [  # noqa: RUF012
         ("|> ", "|>"),
         (" || ", "||"),  # длиннee " | " - ДO нeгo
         (" | ", "|"),

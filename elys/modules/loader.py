@@ -39,9 +39,9 @@ from importlib.machinery import ModuleSpec
 from urllib.parse import urlparse
 
 import requests
-from elystl.tl.custom import Message
 from elystl.errors.common import ScamDetectionError
 from elystl.errors.rpcerrorlist import MediaCaptionTooLongError
+from elystl.tl.custom import Message
 from elystl.tl.functions.channels import JoinChannelRequest
 from elystl.tl.types import Channel, InputMediaWebPage
 
@@ -74,7 +74,7 @@ class ModuleInstallError(RuntimeError):
 class LoaderMod(loader.Module):
     """Loads modules"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Loader",
         "load_error": "{e:cross} <b>{}</b>",
         "mod_doc_i": "<i>\n{e:info} {}</i>\n\n",
@@ -136,10 +136,7 @@ class LoaderMod(loader.Module):
                     "https://raw.githubusercontent.com/coddrago/modules/main"
                 ),
                 utils.array_sum(
-                    map(
-                        lambda x: list(x.values()),
-                        (await self.get_repo_list()).values(),
-                    )
+                    (list(x.values()) for x in (await self.get_repo_list()).values())
                 ),
             )
         )
@@ -790,7 +787,7 @@ class LoaderMod(loader.Module):
 
         if any(
             line.replace(" ", "") == "#scope:ffmpeg" for line in doc.splitlines()
-        ) and os.system("ffmpeg -version 1>/dev/null 2>/dev/null"):
+        ) and shutil.which("ffmpeg") is None:
             logger.error(
                 "Module %s requires ffmpeg, but ffmpeg is not installed",
                 module_label,
@@ -945,9 +942,7 @@ class LoaderMod(loader.Module):
                 def _is_module_base(base: ast.AST) -> bool:
                     if isinstance(base, ast.Name) and base.id in ("Module", "ModuleBase"):
                         return True
-                    if isinstance(base, ast.Attribute) and base.attr in ("Module", "ModuleBase"):
-                        return True
-                    return False
+                    return bool(isinstance(base, ast.Attribute) and base.attr in ("Module", "ModuleBase"))
 
                 uid = next(
                     (
@@ -1020,7 +1015,7 @@ class LoaderMod(loader.Module):
                 requirements = [loader.IMPORT_PIP_ALIASES.get(e.name.lower(), e.name)]
 
                 if not requirements:
-                    raise Exception("Nothing to install") from e
+                    raise RuntimeError("Nothing to install") from e
 
                 logger.debug("Installing requirements: %s", requirements)
 
@@ -1106,8 +1101,8 @@ class LoaderMod(loader.Module):
                             ),
                         )
                 return False
-        except Exception as e:
-            logger.exception("Loading external module failed due to %s", e)
+        except Exception:
+            logger.exception("Loading external module failed")
 
             if message is not None:
                 await utils.answer(message, self.strings["load_failed"])
@@ -1129,24 +1124,23 @@ class LoaderMod(loader.Module):
                 async def inner_proxy():
                     nonlocal message
                     while True:
-                        if hasattr(instance, "elys_wait_channel_approve"):
-                            if message:
-                                (
+                        if hasattr(instance, "elys_wait_channel_approve") and message:
+                            (
+                                module,
+                                channel,
+                                reason,
+                            ) = instance.elys_wait_channel_approve
+                            message = await utils.answer(
+                                message,
+                                self.strings["wait_channel_approve"].format(
                                     module,
-                                    channel,
-                                    reason,
-                                ) = instance.elys_wait_channel_approve
-                                message = await utils.answer(
-                                    message,
-                                    self.strings["wait_channel_approve"].format(
-                                        module,
-                                        channel.username,
-                                        utils.escape_html(channel.title),
-                                        utils.escape_html(reason),
-                                        self.inline.bot_username,
-                                    ),
-                                )
-                                return
+                                    channel.username,
+                                    utils.escape_html(channel.title),
+                                    utils.escape_html(reason),
+                                    self.inline.bot_username,
+                                ),
+                            )
+                            return
 
                         await asyncio.sleep(0.1)
 
@@ -1241,8 +1235,8 @@ class LoaderMod(loader.Module):
                         ),
                     )
                 return False
-        except Exception as e:
-            logger.exception("Module threw because of %s", e)
+        except Exception:
+            logger.exception("Module threw")
 
             if message is not None:
                 await utils.answer(message, self.strings["load_failed"])
@@ -1301,7 +1295,7 @@ class LoaderMod(loader.Module):
                 )
                 else self._client.get_entity
             )(developer)
-        except Exception:
+        except Exception:  # noqa: BLE001
             developer_entity = None
 
         if not isinstance(developer_entity, Channel):
@@ -1337,7 +1331,7 @@ class LoaderMod(loader.Module):
                     )
                 )
         placeholders = utils.help_placeholders(
-            getattr(getattr(instance, "__class__"), "__name__"), self
+            instance.__class__.__name__, self
         )
 
         depends_from = (
@@ -1368,37 +1362,36 @@ class LoaderMod(loader.Module):
             )
 
         if developer:
-            if developer.startswith("@") and developer not in self.get(
-                "do_not_subscribe", []
+            if (
+                developer.startswith("@")
+                and developer not in self.get("do_not_subscribe", [])
+                and developer_entity
+                and getattr(developer_entity, "left", True)
+                and self._db.get(main.__name__, "suggest_subscribe", True)
             ):
-                if (
-                    developer_entity
-                    and getattr(developer_entity, "left", True)
-                    and self._db.get(main.__name__, "suggest_subscribe", True)
-                ):
-                    subscribe = self.strings["suggest_subscribe"].format(
-                        f"@{utils.escape_html(developer_entity.username)}"
-                    )
-                    subscribe_markup = [
-                        {
-                            "text": self.strings["subscribe"],
-                            "callback": self._inline__subscribe,
-                            "args": (
-                                developer_entity.id,
-                                functools.partial(loaded_msg, use_subscribe=False),
-                                True,
-                            ),
-                        },
-                        {
-                            "text": self.strings["no_subscribe"],
-                            "callback": self._inline__subscribe,
-                            "args": (
-                                developer,
-                                functools.partial(loaded_msg, use_subscribe=False),
-                                False,
-                            ),
-                        },
-                    ]
+                subscribe = self.strings["suggest_subscribe"].format(
+                    f"@{utils.escape_html(developer_entity.username)}"
+                )
+                subscribe_markup = [
+                    {
+                        "text": self.strings["subscribe"],
+                        "callback": self._inline__subscribe,
+                        "args": (
+                            developer_entity.id,
+                            functools.partial(loaded_msg, use_subscribe=False),
+                            True,
+                        ),
+                    },
+                    {
+                        "text": self.strings["no_subscribe"],
+                        "callback": self._inline__subscribe,
+                        "args": (
+                            developer,
+                            functools.partial(loaded_msg, use_subscribe=False),
+                            False,
+                        ),
+                    },
+                ]
 
             developer = self.strings["developer"].format(utils.escape_html(developer))
         else:
@@ -1411,15 +1404,13 @@ class LoaderMod(loader.Module):
             and not message.document
             or message.web_preview
         ):
-            try:
+            with contextlib.suppress(Exception):
                 banner_url = self._get_banner_url(doc, instance)
                 if banner_url:
                     banner_kwargs = {
                         "file": InputMediaWebPage(banner_url, optional=True),
                         "invert_media": True,
                     }
-            except Exception:
-                pass
 
         if any(
             line.replace(" ", "") == "#scope:disable_onload_docs"
@@ -1593,7 +1584,7 @@ class LoaderMod(loader.Module):
             public_name = str(getattr(module, "name", "") or module.strings["name"])
             names = {
                 classname,
-                classname[:-3] if classname.endswith("Mod") else classname,
+                classname.removesuffix("Mod"),
                 public_name,
             }
             score = max(
@@ -1655,7 +1646,7 @@ class LoaderMod(loader.Module):
             self.strings["unloaded"].format(
                 self.strings["emoji_done"],
                 ", ".join(
-                    [(mod[:-3] if mod.endswith("Mod") else mod) for mod in worked]
+                    [(mod.removesuffix("Mod")) for mod in worked]
                 ),
             )
             if worked
@@ -1671,19 +1662,14 @@ class LoaderMod(loader.Module):
                         continue
                     low = key.lower()
                     for mod_name in worked:
-                        base = mod_name[:-3] if mod_name.endswith("Mod") else mod_name
+                        base = mod_name.removesuffix("Mod")
                         candidates = {mod_name.lower(), base.lower()}
                         if any(
-                            low == c
-                            or low.startswith(c + ".")
-                            or low.startswith(c + "_")
-                            or c in low
+                            low == c or low.startswith((c + ".", c + "_")) or c in low
                             for c in candidates
                         ):
-                            try:
+                            with contextlib.suppress(Exception):
                                 del self._db[key]
-                            except Exception:
-                                pass
 
                 try:
                     self._db.save()
@@ -1721,8 +1707,7 @@ class LoaderMod(loader.Module):
             await utils.answer(message, self.strings["no_repo"])
             return
 
-        if args.endswith("/"):
-            args = args[:-1]
+        args = args.removesuffix("/")
 
         if not args.startswith("https://") and not args.startswith("http://"):
             args = f"https://{args}"
@@ -1740,7 +1725,7 @@ class LoaderMod(loader.Module):
             r.raise_for_status()
             if not r.text.strip():
                 raise ValueError
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(message, self.strings["no_repo"])
             return
 
@@ -1758,8 +1743,7 @@ class LoaderMod(loader.Module):
             await utils.answer(message, self.strings["no_repo"])
             return
 
-        if args.endswith("/"):
-            args = args[:-1]
+        args = args.removesuffix("/")
 
         if args not in self.config["ADDITIONAL_REPOS"]:
             await utils.answer(message, self.strings["repo_not_exists"])
@@ -1897,22 +1881,21 @@ class LoaderMod(loader.Module):
         ):
             if not (
                 class_name := next(
-                    reversed(
-                        sorted(
-                            [
-                                module.strings["name"].lower()
-                                for module in self.allmodules.modules
-                            ]
-                            + [
-                                module.__class__.__name__.lower()
-                                for module in self.allmodules.modules
-                            ],
-                            key=lambda x: difflib.SequenceMatcher(
-                                None,
-                                args.lower(),
-                                x,
-                            ).ratio(),
-                        )
+                    sorted(
+                        [
+                            module.strings["name"].lower()
+                            for module in self.allmodules.modules
+                        ]
+                        + [
+                            module.__class__.__name__.lower()
+                            for module in self.allmodules.modules
+                        ],
+                        key=lambda x: difflib.SequenceMatcher(
+                            None,
+                            args.lower(),
+                            x,
+                        ).ratio(),
+                        reverse=True,
                     ),
                     None,
                 )
@@ -1925,7 +1908,7 @@ class LoaderMod(loader.Module):
         try:
             module = self.lookup(class_name)
             sys_module = inspect.getmodule(module)
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(message, self.strings["404"])
             return
 

@@ -277,10 +277,8 @@ class InlineManager(
         self.init_complete = True
 
         if self._bot_client:
-            try:
+            with contextlib.suppress(Exception):
                 await self._bot_client.disconnect()
-            except Exception:
-                pass
 
         bot_uid = self._token.split(":", 1)[0]
         self._cleanup_stale_bot_sessions(bot_uid)
@@ -330,10 +328,8 @@ class InlineManager(
             return False
 
         if self._db.get("elys.inline", "needs_inline_setup", False):
-            try:
+            with contextlib.suppress(Exception):
                 await self._configure_inline_bot(self.bot_username)
-            except Exception:
-                pass
 
             self._db.set("elys.inline", "needs_inline_setup", False)
 
@@ -345,10 +341,8 @@ class InlineManager(
         for folder in _folders.filters:
             if getattr(folder, "title", None) == "Elys":
                 if any(
-                    [
-                        isinstance(peer, InputPeerUser) and peer.user_id == self.bot_id
+                    isinstance(peer, InputPeerUser) and peer.user_id == self.bot_id
                         for peer in folder.include_peer
-                    ]
                 ):
                     break
 
@@ -388,7 +382,7 @@ class InlineManager(
             await self._client(UnblockRequest(id=self.bot_id))
             return True
         except Exception:
-            pass
+            logger.debug("Ping bot via typing action failed", exc_info=True)
 
         try:
             m = await self._client.send_message(self.bot_username, "/start elys init")
@@ -506,7 +500,7 @@ class InlineManager(
         event = asyncio.Event()
         self._error_events[unit_id] = event
 
-        q: "InlineResults" = None  # type: ignore  # noqa: F821
+        q: InlineResults = None  # type: ignore  # noqa: F821
         exception: Exception = None
 
         async def result_getter():
@@ -537,7 +531,7 @@ class InlineManager(
             raise exception  # skipcq: PYL-E0702
 
         if not q:
-            raise Exception("No query results")
+            raise RuntimeError("No query results")
 
         return await q[0].click(
             utils.get_chat_id(message) if isinstance(message, Message) else message,

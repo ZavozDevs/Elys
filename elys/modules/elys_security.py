@@ -50,7 +50,7 @@ from ..security import (
 class ElysSecurityMod(loader.Module):
     """Control security settings"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "invalid_name": "{e:stop} <b>Неправильное имя</b>",
         "no_command": "{e:stop} <b>Команда</b> <code>{}</code> <b>не найдена!</b>",
         "permissions": "🔐 <b>Здесь можно настроить разрешения для команды</b> <code>{}{}</code>",
@@ -350,7 +350,7 @@ class ElysSecurityMod(loader.Module):
             await utils.answer(message, self.strings["no_args"])
             return
 
-        if not all([i.isalnum() for i in args]):
+        if not all(i.isalnum() for i in args):
             await utils.answer(message, self.strings["invalid_name"])
             return
 
@@ -616,7 +616,7 @@ class ElysSecurityMod(loader.Module):
             ttl=5 * 60,
         )
 
-    async def _resolve_user(self, message: Message, args_raw: str = None):
+    async def _resolve_user(self, message: Message, args_raw: str | None = None):
         args = (utils.get_args_raw(message) if args_raw is None else args_raw).replace(
             "@", ""
         )
@@ -664,7 +664,7 @@ class ElysSecurityMod(loader.Module):
         message: Message | InlineCall,
         group: str,
         confirmed: bool = False,
-        user: int = None,
+        user: int | None = None,
         enable_nonick: bool = False,
         force: bool = False,
     ):
@@ -880,7 +880,9 @@ class ElysSecurityMod(loader.Module):
         return (
             self.strings["forever"]
             if not timestamp
-            else datetime.datetime.fromtimestamp(timestamp).strftime(
+            else datetime.datetime.fromtimestamp(
+                timestamp, tz=datetime.timezone.utc
+            ).strftime(
                 "%Y-%m-%d %H:%M:%S"
             )
         )

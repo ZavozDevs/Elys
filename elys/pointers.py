@@ -212,33 +212,34 @@ class PointerList(list):
     def __str__(self):
         return f"PointerList({list(self)})"
 
-    def __getitem__(self, __i: typing.SupportsIndex | slice):
-        value = super().__getitem__(__i)
-        if isinstance(__i, slice):
+    def __getitem__(self, i: typing.SupportsIndex | slice, /):
+        value = super().__getitem__(i)
+        if isinstance(i, slice):
             return [_wrap(v, self._save) for v in value]
         return _wrap(value, self._save)
 
-    def __delitem__(self, __i: typing.SupportsIndex | slice) -> None:
-        a = super().__delitem__(__i)
+    def __delitem__(self, i: typing.SupportsIndex | slice, /) -> None:
+        a = super().__delitem__(i)
         self._save()
         return a
 
     def __setitem__(
         self,
-        __i: typing.SupportsIndex | slice,
-        __v: typing.Any,
+        i: typing.SupportsIndex | slice,
+        v: typing.Any,
+        /,
     ) -> None:
-        a = super().__setitem__(__i, __v)
+        a = super().__setitem__(i, v)
         self._save()
         return a
 
-    def __iadd__(self, __x: typing.Iterable) -> "Self":  # type: ignore  # noqa: F821
-        a = super().__iadd__(__x)
+    def __iadd__(self, x: typing.Iterable, /) -> "Self":  # type: ignore  # noqa: F821
+        a = super().__iadd__(x)
         self._save()
         return a
 
-    def __imul__(self, __x: int) -> "Self":  # type: ignore  # noqa: F821
-        a = super().__imul__(__x)
+    def __imul__(self, x: int, /) -> "Self":  # type: ignore  # noqa: F821
+        a = super().__imul__(x)
         self._save()
         return a
 
@@ -359,8 +360,8 @@ class PointerDict(dict):
     def values(self):
         return (_wrap(v, self._save) for v in super().values())
 
-    def update(self, __m: dict) -> None:
-        super().update(__m)
+    def update(self, m: dict, /) -> None:
+        super().update(m)
         self._save()
 
     def setdefault(self, key: str, default: typing.Any = None) -> typing.Any:

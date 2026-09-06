@@ -147,7 +147,7 @@ class InfiniteLoop:
                     self.fail_count = 0
                 except asyncio.CancelledError:
                     break
-                except Exception as exc:
+                except Exception as exc:  # noqa: BLE001
                     self.last_error = exc
                     self.fail_count += 1
                     logger.error(
@@ -222,7 +222,7 @@ class RegisterProxy:
 
     MAX_LOOPS_PER_MODULE = 5
 
-    def __init__(self, kernel: "KernelProxy", registrations: Registrations) -> None:
+    def __init__(self, kernel: KernelProxy, registrations: Registrations) -> None:
         self.kernel = kernel
         self._reg = registrations
 
@@ -543,8 +543,7 @@ class RegisterProxy:
     def _normalize_command(self, pattern: str) -> str:
         prefix = re.escape(self.kernel.custom_prefix)
         cmd = re.sub(rf"^(\^|\\)?{prefix}", "", str(pattern))
-        if cmd.endswith("$"):
-            cmd = cmd[:-1]
+        cmd = cmd.removesuffix("$")
         return cmd.strip().lower()
 
     def __repr__(self) -> str:
@@ -945,7 +944,7 @@ class KernelProxy:
             from elystl.extensions import html as html_parser
 
             return html_parser.unparse(text, entities)
-        except Exception:
+        except Exception:  # noqa: BLE001
             return text
 
     async def get_thread_id(self, event):

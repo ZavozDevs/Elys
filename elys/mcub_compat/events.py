@@ -63,7 +63,7 @@ def to_html(text, parse_mode: str = "html") -> str:
 
             parsed, entities = markdown.parse(str(text))
             return html_parser.unparse(parsed, entities)
-        except Exception:
+        except Exception:  # noqa: BLE001
             return str(text)
     return str(text)
 
@@ -142,7 +142,7 @@ class MCUBEvent:
         message = self.raw_message
         try:
             return utils.get_chat_id(message)
-        except Exception:
+        except Exception:  # noqa: BLE001
             return getattr(message, "chat_id", None)
 
     @property
@@ -359,7 +359,7 @@ class MCUBCallbackEvent:
             if text is not None:
                 text = to_html(text, parse_mode)
             reply_to = self.message_id
-            return await client.send_message(self.chat_id, text, reply_to=reply_to, *args, **kwargs)
+            return await client.send_message(self.chat_id, text, *args, reply_to=reply_to, **kwargs)
         raise AttributeError("Cannot reply from this callback event: client or chat_id unavailable")
 
     async def respond(self, text=None, *args, **kwargs):
@@ -406,7 +406,7 @@ class MCUBCallbackEvent:
             if isinstance(f, str):
                 try:
                     ext = os.path.splitext(urlparse(f).path)[1].lower()
-                except Exception:
+                except Exception:  # noqa: BLE001
                     ext = ""
                 if ext in {".png", ".jpg", ".jpeg", ".webp"}:
                     kwargs["photo"] = kwargs.pop("file")

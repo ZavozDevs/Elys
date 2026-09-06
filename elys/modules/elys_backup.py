@@ -17,6 +17,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import asyncio
+import contextlib
 import datetime
 import io
 import logging
@@ -24,10 +25,9 @@ import os
 import re
 import time
 import zipfile
-import orjson
-
 from pathlib import Path
 
+import orjson
 from elystl.tl.types import Message
 
 from .. import loader, utils
@@ -40,7 +40,7 @@ logger = logging.getLogger(__name__)
 class ElysBackupMod(loader.Module):
     """Handles database and modules backups"""
 
-    strings = {"name": "ElysBackup"}
+    strings = {"name": "ElysBackup"}  # noqa: RUF012
 
     async def client_ready(self):
         if not self.get("period"):
@@ -158,7 +158,7 @@ class ElysBackupMod(loader.Module):
                     ] = found_topic.id
                     self._db.save()
                     return found_topic.id
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             logger.debug(f"Could not find Backups topic on Telegram: {e}")
 
         return None
@@ -243,7 +243,7 @@ class ElysBackupMod(loader.Module):
                 for root, _, files in os.walk(loader.LOADED_MODULES_DIR):
                     for file in files:
                         if file.endswith(f"{self.tg_id}.py"):
-                            with open(os.path.join(root, file), "rb") as f:
+                            with open(os.path.join(root, file), "rb") as f:  # noqa: ASYNC230
                                 zipf.writestr(file, f.read())
                 zipf.writestr(
                     "db_mods.json",
@@ -261,7 +261,7 @@ class ElysBackupMod(loader.Module):
                 z.writestr("db.json", db.getvalue())
                 z.writestr("mods.zip", mods.getvalue())
 
-            archive.name = f"backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.backup"
+            archive.name = f"backup-{datetime.datetime.now(tz=datetime.timezone.utc):%d-%m-%Y-%H-%M}.backup"
 
             backup_topic_id = await self._get_backup_topic_id()
             if not backup_topic_id:
@@ -321,14 +321,12 @@ class ElysBackupMod(loader.Module):
             # Try to get message from content channel or from caller chat
             msg = None
             if self._content_channel_id:
-                try:
+                with contextlib.suppress(Exception):
                     msgs = await self._client.get_messages(
                         self._content_channel_id, ids=[call.message.message_id]
                     )
                     if msgs and msgs[0] and msgs[0].media:
                         msg = msgs[0]
-                except Exception:
-                    pass
 
             if not msg:
                 msgs = await self._client.get_messages(
@@ -347,25 +345,27 @@ class ElysBackupMod(loader.Module):
                 with zf.open("db.json") as f:
                     self._apply_restored_db(f.read().decode())
 
-                with zf.open("mods.zip") as modzip_bytes:
-                    with zipfile.ZipFile(io.BytesIO(modzip_bytes.read())) as modzip:
-                        if "db_mods.json" in modzip.namelist():
-                            with modzip.open("db_mods.json", "r") as modules:
-                                db_mods = orjson.loads(modules.read().decode())
-                                if isinstance(db_mods, dict):
-                                    self.lookup("LoaderMod").set(
-                                        "loaded_modules", db_mods
-                                    )
+                with (
+                    zf.open("mods.zip") as modzip_bytes,
+                    zipfile.ZipFile(io.BytesIO(modzip_bytes.read())) as modzip,
+                ):
+                    if "db_mods.json" in modzip.namelist():
+                        with modzip.open("db_mods.json", "r") as modules:
+                            db_mods = orjson.loads(modules.read().decode())
+                            if isinstance(db_mods, dict):
+                                self.lookup("LoaderMod").set(
+                                    "loaded_modules", db_mods
+                                )
 
-                        for name in modzip.namelist():
-                            if name == "db_mods.json" or not Path(name).name.endswith(
-                                ".py"
-                            ):
-                                continue
+                    for name in modzip.namelist():
+                        if name == "db_mods.json" or not Path(name).name.endswith(
+                            ".py"
+                        ):
+                            continue
 
-                            path = loader.LOADED_MODULES_PATH / Path(name).name
-                            with modzip.open(name, "r") as module:
-                                path.write_bytes(module.read())
+                        path = loader.LOADED_MODULES_PATH / Path(name).name
+                        with modzip.open(name, "r") as module:
+                            path.write_bytes(module.read())
 
             await self.inline.bot(
                 call.answer(self.strings["all_restored_bot"], show_alert=True)
@@ -397,12 +397,12 @@ class ElysBackupMod(loader.Module):
         for old, new in mod_renames.items():
             fixed = fixed.replace(f'"{old}"', f'"{new}"')
         txt = io.BytesIO(fixed.encode())
-        txt.name = f"db-converted-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
+        txt.name = f"db-converted-{datetime.datetime.now(tz=datetime.timezone.utc):%d-%m-%Y-%H-%M}.json"
         return txt
 
     @staticmethod
     def _message_id(message) -> int:
-        return getattr(message, "message_id", getattr(message, "id"))
+        return getattr(message, "message_id", message.id)
 
     async def convert(self, call: BotInlineCall, ans, file):
         match ans:
@@ -428,7 +428,7 @@ class ElysBackupMod(loader.Module):
         txt = io.BytesIO(
             orjson.dumps(self._db, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS)
         )
-        txt.name = f"db-backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
+        txt.name = f"db-backup-{datetime.datetime.now(tz=datetime.timezone.utc):%d-%m-%Y-%H-%M}.json"
 
         if not getattr(self, "_content_channel_id", None):
             self._content_channel_id = await utils.wait_for_content_channel(self._db)
@@ -499,14 +499,14 @@ class ElysBackupMod(loader.Module):
             for root, _, files in os.walk(loader.LOADED_MODULES_DIR):
                 for file in files:
                     if file.endswith(f"{self.tg_id}.py"):
-                        with open(os.path.join(root, file), "rb") as f:
+                        with open(os.path.join(root, file), "rb") as f:  # noqa: ASYNC230
                             zipf.writestr(file, f.read())
                             mods_quantity += 1
 
             zipf.writestr("db_mods.json", db_mods)
 
         archive = io.BytesIO(result.getvalue())
-        archive.name = f"mods-{datetime.datetime.now():%d-%m-%Y-%H-%M}.zip"
+        archive.name = f"mods-{datetime.datetime.now(tz=datetime.timezone.utc):%d-%m-%Y-%H-%M}.zip"
 
         if not getattr(self, "_content_channel_id", None):
             self._content_channel_id = await utils.wait_for_content_channel(self._db)
@@ -550,7 +550,7 @@ class ElysBackupMod(loader.Module):
         file = await reply.download_media(bytes)
         try:
             decoded_text = orjson.loads(file.decode())
-        except Exception:
+        except Exception:  # noqa: BLE001
             try:
                 file = io.BytesIO(file)
                 file.name = "mods.zip"
@@ -606,7 +606,7 @@ class ElysBackupMod(loader.Module):
             for root, _, files in os.walk(loader.LOADED_MODULES_DIR):
                 for file in files:
                     if file.endswith(f"{self.tg_id}.py"):
-                        with open(os.path.join(root, file), "rb") as f:
+                        with open(os.path.join(root, file), "rb") as f:  # noqa: ASYNC230
                             zipf.writestr(file, f.read())
             zipf.writestr(
                 "db_mods.json",
@@ -624,7 +624,7 @@ class ElysBackupMod(loader.Module):
             z.writestr("db.json", db.getvalue())
             z.writestr("mods.zip", mods.getvalue())
 
-        archive.name = f"elys-{datetime.datetime.now():%d-%m-%Y-%H-%M}.backup"
+        archive.name = f"elys-{datetime.datetime.now(tz=datetime.timezone.utc):%d-%m-%Y-%H-%M}.backup"
 
         if not getattr(self, "_content_channel_id", None):
             self._content_channel_id = await utils.wait_for_content_channel(self._db)
@@ -678,25 +678,27 @@ class ElysBackupMod(loader.Module):
                 with zf.open("db.json") as f:
                     self._apply_restored_db(f.read().decode())
 
-                with zf.open("mods.zip") as modzip_bytes:
-                    with zipfile.ZipFile(io.BytesIO(modzip_bytes.read())) as modzip:
-                        if "db_mods.json" in modzip.namelist():
-                            with modzip.open("db_mods.json", "r") as modules:
-                                db_mods = orjson.loads(modules.read().decode())
-                                if isinstance(db_mods, dict):
-                                    self.lookup("LoaderMod").set(
-                                        "loaded_modules", db_mods
-                                    )
+                with (
+                    zf.open("mods.zip") as modzip_bytes,
+                    zipfile.ZipFile(io.BytesIO(modzip_bytes.read())) as modzip,
+                ):
+                    if "db_mods.json" in modzip.namelist():
+                        with modzip.open("db_mods.json", "r") as modules:
+                            db_mods = orjson.loads(modules.read().decode())
+                            if isinstance(db_mods, dict):
+                                self.lookup("LoaderMod").set(
+                                    "loaded_modules", db_mods
+                                )
 
-                        for name in modzip.namelist():
-                            if name == "db_mods.json" or not Path(name).name.endswith(
-                                ".py"
-                            ):
-                                continue
+                    for name in modzip.namelist():
+                        if name == "db_mods.json" or not Path(name).name.endswith(
+                            ".py"
+                        ):
+                            continue
 
-                            path = loader.LOADED_MODULES_PATH / Path(name).name
-                            with modzip.open(name, "r") as module:
-                                path.write_bytes(module.read())
+                        path = loader.LOADED_MODULES_PATH / Path(name).name
+                        with modzip.open(name, "r") as module:
+                            path.write_bytes(module.read())
         except Exception:
             logger.exception("Restore all failed")
             await utils.answer(status_message, self.strings["reply_to_file"])

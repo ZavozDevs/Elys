@@ -24,14 +24,13 @@ import errno
 import json
 import logging
 import os
-import subprocess
+import subprocess  # nosec B404
 import sys
 import time
 import typing
 
 import aiohttp
 import git
-from git import GitCommandError, Repo
 from elystl.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
@@ -43,6 +42,7 @@ from elystl.tl.types import (
     Message,
     TextWithEntities,
 )
+from git import GitCommandError, Repo
 
 from .. import loader, utils, version
 from .._internal import restart
@@ -59,7 +59,7 @@ os.environ["GIT_ASKPASS"] = "echo"
 class UpdaterMod(loader.Module):
     """Updates itself, tracks latest Elys releases, and notifies you, if update is required"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Updater",
         "premium_logo": (
             "{e:star}"
@@ -166,18 +166,17 @@ class UpdaterMod(loader.Module):
 
     @staticmethod
     def _get_remote_head_commit(repo_dir: str, branch: str) -> str | None:
-        try:
-            res = subprocess.run(
+        with contextlib.suppress(Exception):
+            res = subprocess.run(  # nosec B603 B607
                 ["git", "ls-remote", "--heads", "origin", branch],
                 cwd=repo_dir,
                 capture_output=True,
                 text=True,
                 timeout=15,
+                check=False,
             )
             if res.returncode == 0 and res.stdout.strip():
                 return res.stdout.strip().split()[0]
-        except Exception:
-            pass
         return None
 
     def _get_update_state(
@@ -203,11 +202,10 @@ class UpdaterMod(loader.Module):
 
             if needs_fetch:
                 logger.debug("Fetching changelog from %s", repo.remote("origin").url)
-                subprocess.run(
+                subprocess.run(  # nosec B603 B607
                     ["git", "fetch", "--quiet", "origin", target_branch],
                     cwd=repo.working_dir,
                     timeout=60,
-                    capture_output=True,
                     check=False,
                 )
                 self._last_git_fetch = now
@@ -222,7 +220,7 @@ class UpdaterMod(loader.Module):
                     latest,
                     self._format_changelog(commits) if commits else False,
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return current, current, False
 
     def get_changelog(self) -> str | typing.Literal[False]:
@@ -230,7 +228,7 @@ class UpdaterMod(loader.Module):
             return False
         try:
             return self._get_update_state(force_fetch=True)[2]
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             self._log_git_poll_error(e)
             return False
 
@@ -242,7 +240,7 @@ class UpdaterMod(loader.Module):
                 return next(
                     repo.iter_commits(f"origin/{version.branch}", max_count=1)
                 ).hexsha
-        except Exception:
+        except Exception:  # noqa: BLE001
             return ""
 
     async def check_for_updates(self) -> bool:
@@ -253,7 +251,7 @@ class UpdaterMod(loader.Module):
                 self._get_update_state
             )
             return bool(changelog and pending != current)
-        except Exception:
+        except Exception:  # noqa: BLE001
             return False
 
     @loader.loop(interval=1800, autostart=True)
@@ -276,7 +274,7 @@ class UpdaterMod(loader.Module):
                         )
                         self.set("announcement", announcement)
             except Exception:
-                pass
+                logger.debug("Failed to check announcements", exc_info=True)
 
     @loader.loop(interval=60, autostart=True)
     async def poller(self):
@@ -293,7 +291,7 @@ class UpdaterMod(loader.Module):
             current, self._pending, changelog = await asyncio.to_thread(
                 self._get_update_state
             )
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             self._log_git_poll_error(e)
             return
 
@@ -332,7 +330,7 @@ class UpdaterMod(loader.Module):
                     else:
                         logger.info("Got a major update, updating manually")
                         manual_update = True
-                except Exception:
+                except Exception:  # noqa: BLE001
                     manual_update = True
 
             if manual_update:
@@ -341,11 +339,7 @@ class UpdaterMod(loader.Module):
                     "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png",
                     caption=self.strings["update_required"].format(
                         current[:6],
-                        '<a href="https://github.com/ZavozDevs/Elys/compare/{}...{}">{}</a>'.format(
-                            current[:12],
-                            self._pending[:12],
-                            self._pending[:6],
-                        ),
+                        f'<a href="https://github.com/ZavozDevs/Elys/compare/{current[:12]}...{self._pending[:12]}">{self._pending[:6]}</a>',
                         changelog,
                     ),
                     reply_markup=self._markup(),
@@ -406,7 +400,7 @@ class UpdaterMod(loader.Module):
     @loader.command()
     async def changelog(self, message: Message):
         """Shows the changelog of the last major update"""
-        with open("CHANGELOG.md", encoding="utf-8") as f:
+        with open("CHANGELOG.md", encoding="utf-8") as f:  # noqa: ASYNC230
             changelog = f.read().split("##")[1].strip()
         if (await self._client.get_me()).premium:
             changelog = changelog.replace(
@@ -419,7 +413,7 @@ class UpdaterMod(loader.Module):
     @loader.command()
     async def restart(self, message: Message):
         args = utils.get_args_raw(message)
-        secure_boot = any(trigger in args for trigger in {"--secure-boot", "-sb"})
+        secure_boot = any(trigger in args for trigger in ("--secure-boot", "-sb"))
         try:
             if (
                 "-f" in args
@@ -444,8 +438,8 @@ class UpdaterMod(loader.Module):
                     ],
                 )
             ):
-                raise
-        except Exception:
+                raise RuntimeError("Form display failed")
+        except Exception:  # noqa: BLE001
             await self.restart_common(message, secure_boot)
 
     async def inline_restart(self, call: InlineCall, secure_boot: bool = False):
@@ -609,7 +603,7 @@ class UpdaterMod(loader.Module):
         # Now we have downloaded new code, install requirements
         logger.debug("Installing new requirements...")
         try:
-            subprocess.run(
+            subprocess.run(  # nosec B603
                 [
                     sys.executable,
                     "-m",
@@ -643,7 +637,7 @@ class UpdaterMod(loader.Module):
 
             def _fetch_upcoming():
                 with git.Repo() as repo:
-                    subprocess.run(
+                    subprocess.run(  # nosec B603 B607
                         ["git", "fetch", "--quiet", "origin", str(version.branch)],
                         cwd=repo.working_dir,
                         timeout=60,
@@ -681,8 +675,8 @@ class UpdaterMod(loader.Module):
                     ],
                 )
             ):
-                raise
-        except Exception:
+                raise RuntimeError("Form display failed")
+        except Exception:  # noqa: BLE001
             await self.inline_update(message)
 
     async def _git_switch_branch(self, target_branch: str) -> bool:
@@ -916,13 +910,13 @@ class UpdaterMod(loader.Module):
 
                 def _hard_reset():
                     root_repo = os.path.dirname(utils.get_base_dir())
-                    subprocess.run(
+                    subprocess.run(  # nosec B603 B607
                         ["git", "fetch", "origin", str(version.branch)],
                         cwd=root_repo,
                         check=False,
                         capture_output=True,
                     )
-                    subprocess.run(
+                    subprocess.run(  # nosec B603 B607
                         ["git", "reset", "--hard", f"origin/{version.branch}"],
                         cwd=root_repo,
                         check=False,
@@ -931,7 +925,7 @@ class UpdaterMod(loader.Module):
 
                 await asyncio.to_thread(_hard_reset)
             except Exception:
-                pass
+                logger.debug("Hard reset failed", exc_info=True)
 
         try:
             with contextlib.suppress(Exception):
@@ -1130,7 +1124,7 @@ class UpdaterMod(loader.Module):
         start = self.get("restart_ts")
         try:
             took = round(time.time() - start)
-        except Exception:
+        except Exception:  # noqa: BLE001
             took = "n/a"
 
         msg = self.strings["success"].format(utils.ascii_face(), took)
@@ -1153,7 +1147,7 @@ class UpdaterMod(loader.Module):
 
         try:
             took = round(time.time() - start)
-        except Exception:
+        except Exception:  # noqa: BLE001
             took = "n/a"
 
         self.set("restart_ts", None)
@@ -1162,7 +1156,7 @@ class UpdaterMod(loader.Module):
         modules_count = self.db.get("Updater", "modules_count")
         try:
             modules_count = int(modules_count)
-        except Exception:
+        except Exception:  # noqa: BLE001
             modules_count = len(self.allmodules.modules)
 
         if modules_count <= len(self.allmodules.modules):
@@ -1245,7 +1239,7 @@ class UpdaterMod(loader.Module):
             self.strings["ub_stop"].format(emoji=utils.get_platform_emoji()),
         )
 
-        exit()
+        sys.exit()
 
     @loader.command()
     async def ubstop(self, message: Message):

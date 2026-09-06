@@ -16,9 +16,9 @@
 # You can redistribute it and/or modify it under the terms of the GNU AGPLv3
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
+import random
 import re
 import string
-import random
 
 from elystl.tl.types import Message
 
@@ -30,7 +30,7 @@ from ..inline.types import BotInlineMessage, InlineCall
 class InlineStuff(loader.Module):
     """Provides support for inline stuff"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "InlineStuff",
         "premium_logo": "{e:glowing_star}",
     }
@@ -73,7 +73,7 @@ class InlineStuff(loader.Module):
         try:
             await self._client.get_entity(username)
             return False
-        except Exception:
+        except Exception:  # noqa: BLE001
             return True
 
     @loader.command()
@@ -88,7 +88,7 @@ class InlineStuff(loader.Module):
             from .. import main
 
             uid = utils.rand(7)
-            genran = "".join(random.choice(main.LATIN_MOCK))
+            genran = "".join(random.choice(main.LATIN_MOCK))  # nosec B311
             args = f"{genran}_{uid}_bot"
 
         if (

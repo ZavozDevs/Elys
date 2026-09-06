@@ -25,11 +25,11 @@ import re
 import time
 
 import bs4
+import requests
 from deep_translator import GoogleTranslator
 from elystl.extensions import html
 from elystl.tl import functions, types
 from elystl.tl.custom import Message
-import requests
 
 from .. import loader, utils
 
@@ -42,7 +42,7 @@ LANG_CODE_RE = re.compile(r"^[a-zA-Z]{2,3}(?:-[a-zA-Z0-9]{2,4})?$")
 class Translator(loader.Module):
     """Translates text"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Translator",
         "no_args": (
             "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>No"
@@ -223,9 +223,7 @@ class Translator(loader.Module):
                 else (
                     attrs
                     if (
-                        attrs.startswith("emoji-id=")
-                        or attrs.startswith("id=")
-                        or attrs.startswith("document_id=")
+                        attrs.startswith(("emoji-id=", "id=", "document_id="))
                     )
                     else f'emoji-id="{attrs}"'
                 )
@@ -241,7 +239,7 @@ class Translator(loader.Module):
             tag_pattern = rf"(?i)<\s*a\s*{re.escape(idx)}\s*>(.*?)<\s*/\s*a\s*(?:{re.escape(idx)})?\s*>"
             attrs_str = (
                 attrs
-                if (attrs.startswith("href=") or attrs.startswith("url="))
+                if (attrs.startswith(("href=", "url=")))
                 else f"href={attrs}"
             )
             res = re.sub(
@@ -351,7 +349,7 @@ class Translator(loader.Module):
                     time.sleep(0.4 * (attempt + 1))
                     continue
                 return result
-            except Exception:
+            except Exception:  # noqa: BLE001
                 if attempt == 2:
                     break
                 time.sleep(0.3 * (attempt + 1))
@@ -401,7 +399,7 @@ class Translator(loader.Module):
                 btn_map,
                 date_map,
             )
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             logger.warning(
                 "External translation with masked HTML failed: %s, falling back to plain text",
                 e,
@@ -524,7 +522,7 @@ class Translator(loader.Module):
                             if message.out:
                                 await message.delete()
                             return
-                    except Exception as e:
+                    except Exception as e:  # noqa: BLE001
                         logger.warning(
                             "Translator: translate_rich_message failed: %s, falling back to TranslateTextRequest",
                             e,
@@ -564,7 +562,7 @@ class Translator(loader.Module):
                             )
                         else:
                             tr_text = text
-                    except Exception as e:
+                    except Exception as e:  # noqa: BLE001
                         logger.warning(
                             "Translator: TranslateTextRequest failed: %s, falling back",
                             e,

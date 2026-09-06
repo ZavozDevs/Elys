@@ -170,9 +170,9 @@ class MCUBInlineManager:
         if hasattr(target_msg, "raw_message"):
             target_msg = target_msg.raw_message
         elif hasattr(target_msg, "_mcub_msg"):
-            target_msg = getattr(target_msg, "_mcub_msg")
+            target_msg = target_msg._mcub_msg
         elif hasattr(target_msg, "_message"):
-            target_msg = getattr(target_msg, "_message")
+            target_msg = target_msg._message
         elif hasattr(target_msg, "chat_id") and not isinstance(target_msg, int):
             target_msg = target_msg.chat_id
 
@@ -183,8 +183,8 @@ class MCUBInlineManager:
                 reply_markup=markup,
                 **form_kwargs,
             )
-        except Exception as error:
-            logger.exception("MCUB inline form failed: %s", error)
+        except Exception:
+            logger.exception("MCUB inline form failed")
             return (False, None) if auto_send else None
 
         if not auto_send:
@@ -357,7 +357,7 @@ class MCUBInlineManager:
             try:
                 edit_kw = {**media}
                 await wrapped.edit(body, buttons=self._nav(session_id, page, total, turn, strings), **edit_kw)
-            except Exception as error:
+            except Exception as error:  # noqa: BLE001
                 logger.debug("Pagination edit failed: %s", error)
                 await wrapped.answer(str(error), alert=True)
 
@@ -413,8 +413,8 @@ class MCUBInlineManager:
             if not results:
                 return False, None
             message = await results[result_index].click(chat_id, reply_to=reply_to)
-        except Exception as error:
-            logger.exception("MCUB inline query failed: %s", error)
+        except Exception:
+            logger.exception("MCUB inline query failed")
             return False, None
 
         return self._wrap(message, query)

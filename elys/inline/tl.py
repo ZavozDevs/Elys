@@ -1,10 +1,11 @@
+import contextlib
 import io
 import typing
 
 from elystl import Button
-from elystl.extensions import html as html_parser
 from elystl import utils as tl_utils
-from elystl.tl import types
+from elystl.extensions import html as html_parser
+from elystl.tl import TLObject, types
 from elystl.tl.functions.messages import (
     EditInlineBotMessageRequest,
     EditMessageRequest,
@@ -17,7 +18,6 @@ from elystl.tl.types import (
     InputRichMessageHTML,
     InputRichMessageMarkdown,
 )
-from elystl.tl import TLObject
 
 if not hasattr(Button, "copy"):
     @staticmethod
@@ -67,10 +67,8 @@ class TelethonBot:
             return media
 
         if hasattr(file, "seek"):
-            try:
+            with contextlib.suppress(Exception):
                 file.seek(0)
-            except Exception:
-                pass
 
         return file
 
@@ -85,10 +83,8 @@ class TelethonBot:
             and not hasattr(message, "message_id")
             and hasattr(message, "id")
         ):
-            try:
+            with contextlib.suppress(Exception):
                 message.message_id = message.id
-            except Exception:
-                pass
 
         return message
 
@@ -243,7 +239,7 @@ class TelethonBot:
 
                 text, _ = html_parser.parse(rich_message_to_html(rich_message))
                 return text or " "
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return " "
         return " "
 

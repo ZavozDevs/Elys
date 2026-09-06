@@ -48,7 +48,7 @@ for mod in os.scandir(DEBUG_MODS_DIR):
 class TestMod(loader.Module):
     """Perform operations based on userbot self-testing"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Tester",
         "placeholder_error": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji>",
     }
@@ -228,8 +228,8 @@ class TestMod(loader.Module):
                         + [[{"text": self.strings["cancel"], "action": "close"}]],
                     )
                 else:
-                    raise
-            except Exception as e:
+                    raise RuntimeError("Inline not available")
+            except Exception as e:  # noqa: BLE001
                 await utils.answer(message, self.strings["set_loglevel"] + f"\n{e}")
 
             return
@@ -245,16 +245,12 @@ class TestMod(loader.Module):
             ]
         )
 
-        named_lvl = (
-            lvl
-            if lvl not in logging._levelToName
-            else logging._levelToName[lvl]  # skipcq: PYL-W0212
-        )
+        named_lvl = logging._levelToName.get(lvl, lvl)  # skipcq: PYL-W0212
 
         if lvl < logging.WARNING and not force:
             try:
                 if not self.inline.init_complete:
-                    raise
+                    raise RuntimeError("Inline init not complete")
 
                 cfg = {
                     "text": self.strings["confidential"].format(named_lvl),
@@ -269,10 +265,10 @@ class TestMod(loader.Module):
                 }
                 if isinstance(message, Message):
                     if not await self.inline.form(**cfg, message=message):
-                        raise
+                        raise RuntimeError("Form display failed")
                 else:
                     await message.edit(**cfg)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 await utils.answer(
                     message,
                     self.strings["confidential_text"].format(named_lvl),
@@ -342,7 +338,7 @@ class TestMod(loader.Module):
                     message,
                     self.strings["suspended"].format(time_sleep),
                 )
-                time.sleep(time_sleep)
+                time.sleep(time_sleep)  # noqa: ASYNC251
         except ValueError:
             await utils.answer(message, self.strings["suspend_invalid_time"])
 
@@ -363,7 +359,7 @@ class TestMod(loader.Module):
             "ping": round((time.perf_counter_ns() - start) / 10**6, 3),
             "uptime": utils.formatted_uptime(),
             "ping_hint": (
-                (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""
+                (self.config["hint"]) if random.choice([0, 0, 1]) == 1 else ""  # nosec B311
             ),
             "hostname": lib_platform.node(),
             "user": getpass.getuser(),
@@ -395,7 +391,7 @@ class TestMod(loader.Module):
                                 file=banner,
                                 invert_media=self.config["invert_media"],
                             )
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     logger.debug("Failed to update ping placeholders: %s", e)
 
         data = await utils.get_placeholders(

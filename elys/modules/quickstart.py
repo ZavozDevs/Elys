@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 class Quickstart(loader.Module):
     """Notifies user about userbot installation"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Quickstart",
         "support_chat_reason": (
             "Elys help is only available in this chat. By agreeing to join the chat,"
@@ -54,7 +54,7 @@ class Quickstart(loader.Module):
                     logger.debug(
                         f"Found existing content channel with ID {existing_channel_id}"
                     )
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     logger.warning(
                         f"Saved channel ID {existing_channel_id} not found via get_entity ({e}), checking dialogs..."
                     )
@@ -82,7 +82,7 @@ class Quickstart(loader.Module):
             if existing_forum_id:
                 try:
                     forum_entity = await self.client.get_entity(existing_forum_id)
-                except Exception:
+                except Exception:  # noqa: BLE001
                     forum_entity = None
 
             if not forum_entity:
@@ -99,14 +99,14 @@ class Quickstart(loader.Module):
                                     enabled=True,
                                 )
                             )
-                        except Exception as e:
+                        except Exception as e:  # noqa: BLE001
                             logger.debug(
                                 f"Channel might already be a forum or conversion failed: {e}"
                             )
 
                     forum_entity = content_channel
                     self.db.set("elys.forums", "forum_id", int(content_channel.id))
-                except Exception:
+                except Exception:  # noqa: BLE001
                     forum_entity = content_channel
 
             required_topics = [
@@ -152,7 +152,7 @@ class Quickstart(loader.Module):
                 "ElysTalk",
                 self.strings["support_chat_reason"],
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             logger.debug("Support chat @ElysTalk is not available yet")
 
         self.mark = lambda: [

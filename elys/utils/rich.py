@@ -150,9 +150,10 @@ def _list_item(value) -> str:
     if getattr(value, "checkbox", False):
         text = ("[x] " if getattr(value, "checked", False) else "[ ] ") + text
     attributes = []
-    if name == "PageListOrderedItemBlocks" or name == "PageListOrderedItemText":
-        if getattr(value, "num", None) is not None:
-            attributes.append(f' value="{_attribute(value.num)}"')
+    if name in {"PageListOrderedItemBlocks", "PageListOrderedItemText"} and getattr(
+        value, "num", None
+    ) is not None:
+        attributes.append(f' value="{_attribute(value.num)}"')
     return f"<li{''.join(attributes)}>{text}</li>"
 
 

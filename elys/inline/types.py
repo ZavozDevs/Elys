@@ -4,7 +4,7 @@ import typing
 
 from elystl.tl import types
 
-ElysReplyMarkup = typing.Union[list[list[dict]], list[dict], dict]
+ElysReplyMarkup = list[list[dict]] | list[dict] | dict
 
 logger = logging.getLogger(__name__)
 
@@ -134,7 +134,7 @@ class _MessageProxy:
         )
 
     async def answer_photo(
-        self, photo, *, caption: str = None, reply_markup=None, **kwargs
+        self, photo, *, caption: str | None = None, reply_markup=None, **kwargs
     ):
         return await self.inline_manager.bot.send_photo(
             self.chat_id,
@@ -198,7 +198,7 @@ class BotInlineMessage:
         )
 
     async def answer_photo(
-        self, photo, *, caption: str = None, reply_markup=None, **kwargs
+        self, photo, *, caption: str | None = None, reply_markup=None, **kwargs
     ):
         return await self.inline_manager.bot.send_photo(
             self.chat_id,

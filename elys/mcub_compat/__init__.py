@@ -29,6 +29,7 @@ import inspect
 import logging
 
 from . import detect, virtualpkg
+from ._vendor import MCUB_BRANCH, MCUB_UPSTREAM, MCUB_VERSION
 from .adapter import MCUBAdapterMixin, build_adapter_class, get_adapter_base
 from .detect import (
     AMBIGUOUS,
@@ -45,7 +46,6 @@ from .detect import (
 from .host import get_host, peek_host
 from .kernel import KernelProxy, Registrations
 from .module_base import ModuleBase
-from ._vendor import MCUB_BRANCH, MCUB_UPSTREAM, MCUB_VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -59,10 +59,10 @@ __all__ = [
     "MCUB_STYLES",
     "MCUB_UPSTREAM",
     "MCUB_VERSION",
+    "UNKNOWN",
     "MCUBAdapterMixin",
     "MCUBContext",
     "ModuleBase",
-    "UNKNOWN",
     "build_adapter_class",
     "detect_style",
     "diagnostics",

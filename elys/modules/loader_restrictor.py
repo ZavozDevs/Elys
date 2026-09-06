@@ -14,10 +14,10 @@
 
 import asyncio
 import logging
-
 from dataclasses import dataclass
 
 from elystl.extensions import html
+from elystl.tl.custom import Message
 from elystl.tl.types import (
     InputMediaPoll,
     Poll,
@@ -25,7 +25,6 @@ from elystl.tl.types import (
     TextWithEntities,
     UpdateMessagePollVote,
 )
-from elystl.tl.custom import Message
 
 from .. import loader
 from ..inline.types import BotInlineCall, BotInlineMessage
@@ -70,7 +69,7 @@ QUESTIONS = [
 
 @loader.tds
 class LoaderRestrictor(loader.Module):
-    strings = {"name": "LoaderRestrictor"}
+    strings = {"name": "LoaderRestrictor"}  # noqa: RUF012
 
     async def client_ready(self):
         self.poll: PollStatus | None = None
@@ -125,7 +124,7 @@ class LoaderRestrictor(loader.Module):
         if self.get("passed", False):
             return
 
-        if not self.poll or not update.poll_id == self.poll.poll_id:
+        if not self.poll or update.poll_id != self.poll.poll_id:
             return
 
         correct = update.positions[0] == QUESTIONS[self.poll.step].answer_index

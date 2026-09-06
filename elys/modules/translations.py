@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 class Translations(loader.Module):
     """Processes internal translations"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Translations",
         "flag_gb": "{e:flag_gb}",
         "flag_uz": "{e:flag_uz}",
@@ -231,7 +231,7 @@ class Translations(loader.Module):
             "uz": "🇺🇿",
         }
 
-        for meme in translations.MEME_LANGUAGES.keys():
+        for meme in translations.MEME_LANGUAGES:
             lang2country[meme] = "🏴‍☠️"
 
         lang = lang2country.get(lang) or utils.get_lang_flag(lang)

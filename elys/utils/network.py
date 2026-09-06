@@ -23,7 +23,7 @@ def get_hostname() -> str:
     """
     try:
         return socket.gethostname()
-    except Exception:
+    except Exception:  # noqa: BLE001
         return "Unknown"
 
 
@@ -52,7 +52,7 @@ def is_port_open(host: str, port: int) -> bool:
         result = sock.connect_ex((host, port))
         sock.close()
         return result == 0
-    except Exception:
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -71,5 +71,5 @@ def get_network_interfaces() -> dict[str, str]:
                     interfaces[name] = addr.address
                     break
         return interfaces
-    except Exception:
+    except Exception:  # noqa: BLE001
         return {}

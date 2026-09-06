@@ -22,10 +22,10 @@ import logging
 import os
 import re
 import shlex
+import signal
 import time
 import typing
 from collections.abc import Callable
-import signal
 
 import elystl
 
@@ -38,7 +38,7 @@ BANNER_BAD = "https://x0.at/4AAH.jpg"
 
 
 def hash_msg(message):
-    return f"{str(utils.get_chat_id(message))}/{str(message.id)}"
+    return f"{utils.get_chat_id(message)!s}/{message.id!s}"
 
 
 async def read_stream(func: Callable, stream, delay: float):
@@ -131,12 +131,12 @@ class MessageEditor:
 
 
 class SudoMessageEditor(MessageEditor):
-    PASS_REQ = ["[sudo] password for", "[sudo] пароль для"]
-    WRONG_PASS = [
+    PASS_REQ = ["[sudo] password for", "[sudo] пароль для"]  # noqa: RUF012
+    WRONG_PASS = [  # noqa: RUF012
         r"\[sudo\] password for (.*): Sorry, try again\.",
         r"\[sudo\] пароль для (.*): Попробуйте еще раз.\.",
     ]
-    TOO_MANY_TRIES = [r"\[sudo\] password for (.*): sudo: [0-9]+ incorrect password attempts", r"\[sudo\] пароль для (.*): sudo: [0-9]+ неверные попытки ввода пароля"]  # fmt: skip
+    TOO_MANY_TRIES = [r"\[sudo\] password for (.*): sudo: [0-9]+ incorrect password attempts", r"\[sudo\] пароль для (.*): sudo: [0-9]+ неверные попытки ввода пароля"]  # fmt: skip  # noqa: RUF012
 
     def __init__(self, message, command, config, strings, request_message):
         super().__init__(message, command, config, strings, request_message)
@@ -373,12 +373,12 @@ class InlineMessageEditor:
 class TerminalMod(loader.Module):
     """Runs commands"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Terminal",
     }
 
     COMMAND_PROTECT = "command_protect"
-    DANGEROUS_RM_TARGETS = {
+    DANGEROUS_RM_TARGETS = {  # noqa: RUF012
         "/",
         "/bin",
         "/boot",
@@ -394,11 +394,11 @@ class TerminalMod(loader.Module):
         "/usr",
         "/var",
     }
-    DANGEROUS_RM_FILES = {
+    DANGEROUS_RM_FILES = {  # noqa: RUF012
         "/etc/passwd",
         "/etc/shadow",
     }
-    DANGEROUS_COMMANDS = [
+    DANGEROUS_COMMANDS = [  # noqa: RUF012
         r"dd\s+.*if=.*of=/dev/",
         r"mkfs\.",
         r"fdisk\s+\/dev/",
@@ -740,7 +740,7 @@ class TerminalMod(loader.Module):
                 cwd=utils.get_base_dir(),
                 preexec_fn=os.setsid,
             )
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             with contextlib.suppress(Exception):
                 await editor.form.edit(
                     self.strings["exec_error"].format(utils.escape_html(str(e)))
@@ -793,7 +793,7 @@ class TerminalMod(loader.Module):
                 cwd=utils.get_base_dir(),
                 preexec_fn=os.setsid,
             )
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             await utils.answer(
                 message,
                 self.strings["exec_error"].format(utils.escape_html(str(e))),

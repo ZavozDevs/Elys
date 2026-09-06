@@ -80,7 +80,7 @@ def validate_remote_url(url: str) -> tuple[bool, str]:
     """Mirror MCUB's remote-URL gate for ``import_lib`` and installers."""
     try:
         parsed = urlparse(str(url))
-    except Exception:
+    except Exception:  # noqa: BLE001
         return False, "Malformed URL"
     if parsed.scheme not in _ALLOWED_SCHEMES:
         return False, "Only http(s) URLs are allowed"
@@ -386,15 +386,12 @@ class Scheduler:
 
     def add_interval_task(self, *args, **kwargs):
         self._warn("add_interval_task")
-        return None
 
     def add_daily_task(self, *args, **kwargs):
         self._warn("add_daily_task")
-        return None
 
     def add_task(self, *args, **kwargs):
         self._warn("add_task")
-        return None
 
     def cancel_task(self, *args, **kwargs) -> bool:
         return False

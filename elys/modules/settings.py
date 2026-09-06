@@ -20,6 +20,7 @@ import contextlib
 import getpass
 import logging
 import random
+
 import elystl
 from elystl.tl.types import Message, User
 
@@ -33,7 +34,7 @@ logger = logging.getLogger(__name__)
 class Settings(loader.Module):
     """Elys settings & info module"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Settings",
         "_cfg_rich_mode": "Use rich text in outputs",
         "emoji_ok": "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji>",
@@ -101,7 +102,7 @@ class Settings(loader.Module):
             chatid = utils.get_chat_id(message)
 
         module = self.allmodules.get_classname(module)
-        return f"{str(chatid)}.{module}" if module else chatid
+        return f"{chatid!s}.{module}" if module else chatid
 
     @loader.command(
         ru_doc="Информация об Elys",
@@ -265,7 +266,7 @@ class Settings(loader.Module):
                 args[1] = int(args[1])
             try:
                 entity = await self.client.get_entity(args[1])
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return await utils.answer(
                     message, self.strings["invalid_id_or_username"]
                 )
@@ -278,8 +279,7 @@ class Settings(loader.Module):
             if entity.id != self.tg_id:
                 sgroup_users = []
                 for g in self._client.dispatcher.security._sgroups.values():
-                    for u in g.users:
-                        sgroup_users.append(u)
+                    sgroup_users.extend(g.users)
 
                 tsec_users = [
                     rule["target"]
@@ -398,9 +398,10 @@ class Settings(loader.Module):
                     rest = f"{target_parts[1]} {rest}" if rest else target_parts[1]
 
             # Resolve system alias (e.g. lm -> loadmod, dlm -> dlmod)
-            if cmd not in self.allmodules.commands:
-                if real_cmd := self.allmodules.find_alias(cmd):
-                    cmd = real_cmd.lower().strip()
+            if cmd not in self.allmodules.commands and (
+                real_cmd := self.allmodules.find_alias(cmd)
+            ):
+                cmd = real_cmd.lower().strip()
 
             if cmd not in self.allmodules.commands:
                 await utils.answer(
@@ -602,7 +603,7 @@ class Settings(loader.Module):
             cmd = args[0]
             mod_inst = None
             for mod in self.allmodules.modules:
-                if cmd.lower() in [c.lower() for c in mod.elys_commands.keys()]:
+                if cmd.lower() in [c.lower() for c in mod.elys_commands]:
                     mod_inst = mod
                     break
 
@@ -614,11 +615,11 @@ class Settings(loader.Module):
         disabled_commands = self._db.get(main.__name__, "disabled_commands", {})
         current = [x for x in disabled_commands.get(module_key, [])]
 
-        if cmd.lower() not in [c.lower() for c in mod_inst.elys_commands.keys()]:
+        if cmd.lower() not in [c.lower() for c in mod_inst.elys_commands]:
             return await utils.answer(message, self.strings["cmd404"])
 
         canonical_cmd = next(
-            (c for c in mod_inst.elys_commands.keys() if c.lower() == cmd.lower()),
+            (c for c in mod_inst.elys_commands if c.lower() == cmd.lower()),
             cmd,
         )
 
@@ -630,11 +631,9 @@ class Settings(loader.Module):
                 disabled_commands.pop(module_key, None)
 
             self._db.set(main.__name__, "disabled_commands", disabled_commands)
-            try:
+            with contextlib.suppress(Exception):
                 self.allmodules.register_commands(mod_inst)
                 self.allmodules._rebuild_handlers()
-            except Exception:
-                pass
 
             await utils.answer(
                 message, self.strings["cmd_enabled"].format(canonical_cmd, module_key)
@@ -644,11 +643,9 @@ class Settings(loader.Module):
             disabled_commands[module_key] = current
             self._db.set(main.__name__, "disabled_commands", disabled_commands)
 
-            try:
+            with contextlib.suppress(Exception):
                 self.allmodules.commands.pop(canonical_cmd.lower(), None)
                 self.allmodules._rebuild_handlers()
-            except Exception:
-                pass
 
             for alias, target in list(self.allmodules.aliases.items()):
                 if target.split()[0].lower() == canonical_cmd.lower():
@@ -676,26 +673,22 @@ class Settings(loader.Module):
         if module_key in disabled:
             disabled = [m for m in disabled if m != module_key]
             self._db.set(main.__name__, "disabled_modules", disabled)
-            try:
+            with contextlib.suppress(Exception):
                 self.allmodules.register_commands(mod_inst)
                 self.allmodules.register_watchers(mod_inst)
                 self.allmodules.register_raw_handlers(mod_inst)
                 self.allmodules.register_inline_stuff(mod_inst)
                 self.allmodules._rebuild_handlers()
-            except Exception:
-                pass
             await utils.answer(message, self.strings["mod_enabled"].format(module_key))
         else:
             disabled += [module_key]
             self._db.set(main.__name__, "disabled_modules", disabled)
-            try:
+            with contextlib.suppress(Exception):
                 self.allmodules.unregister_commands(mod_inst, "disable")
                 self.allmodules.unregister_watchers(mod_inst, "disable")
                 self.allmodules.unregister_raw_handlers(mod_inst, "disable")
                 self.allmodules.unregister_inline_stuff(mod_inst, "disable")
                 self.allmodules._rebuild_handlers()
-            except Exception:
-                pass
             await utils.answer(message, self.strings["mod_disabled"].format(module_key))
 
     @loader.command()
@@ -713,11 +706,9 @@ class Settings(loader.Module):
             module_key = mod_arg
 
         if module_key in self._db:
-            try:
+            with contextlib.suppress(Exception):
                 del self._db[module_key]
                 self._db.save()
-            except Exception:
-                pass
 
         disabled_commands = self._db.get(main.__name__, "disabled_commands", {})
         disabled_commands.pop(module_key, None)

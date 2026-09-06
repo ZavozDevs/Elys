@@ -27,11 +27,11 @@ from collections.abc import Callable
 
 
 async def fw_protect():
-    await asyncio.sleep(random.randint(1000, 2000) / 1000)
+    await asyncio.sleep(random.randint(1000, 2000) / 1000)  # nosec B311
 
 
 def get_startup_callback() -> Callable:
-    return lambda *_: os.execl(
+    return lambda *_: os.execl(  # nosec B606
         sys.executable,
         sys.executable,
         "-m",
@@ -53,7 +53,7 @@ def die():
 
 def restart():
     if "--sandbox" in " ".join(sys.argv):
-        exit(0)
+        sys.exit(0)
 
     if "ELYS_DO_NOT_RESTART2" in os.environ:
         print(

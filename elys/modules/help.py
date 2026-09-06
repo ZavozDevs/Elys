@@ -17,6 +17,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import asyncio
+import contextlib
 import difflib
 import inspect
 import logging
@@ -25,7 +26,6 @@ import typing
 
 from elystl.tl.types import Message
 from elystl.types import InputMediaWebPage
-
 
 from .. import loader, utils
 
@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 class Help(loader.Module):
     """Shows help for modules and commands"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "Help",
         "module_header": "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{}</b>:",
         "mod_doc": "\n<i><tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> {}\n</i>",
@@ -185,18 +185,17 @@ class Help(loader.Module):
                 module = self.lookup(
                     next(
                         (
-                            reversed(
-                                sorted(
-                                    [
-                                        module.strings["name"]
-                                        for module in self.allmodules.modules
-                                    ],
-                                    key=lambda x: difflib.SequenceMatcher(
-                                        None,
-                                        args.lower(),
-                                        x,
-                                    ).ratio(),
-                                )
+                            sorted(
+                                [
+                                    module.strings["name"]
+                                    for module in self.allmodules.modules
+                                ],
+                                key=lambda x: difflib.SequenceMatcher(
+                                    None,
+                                    args.lower(),
+                                    x,
+                                ).ratio(),
+                                reverse=True,
                             )
                         ),
                         None,
@@ -256,10 +255,7 @@ class Help(loader.Module):
                     (
                         " ({})".format(
                             ", ".join(
-                                "<code>{}{}</code>".format(
-                                    utils.escape_html(self.get_prefix()),
-                                    alias,
-                                )
+                                f"<code>{utils.escape_html(self.get_prefix())}{alias}</code>"
                                 for alias in self.find_aliases(name)
                             )
                         )
@@ -285,7 +281,7 @@ class Help(loader.Module):
         banner_kwargs = {}
         banner_url = None
         if self.config["show_preview_in_help"]:
-            try:
+            with contextlib.suppress(Exception):
                 banner_url = getattr(module, "banner_url", None) or getattr(
                     getattr(module, "mcub_instance", None), "banner_url", None
                 )
@@ -298,8 +294,6 @@ class Help(loader.Module):
                         "file": InputMediaWebPage(banner_url, optional=True),
                         "invert_media": True,
                     }
-            except Exception:
-                pass
 
         if self.config["rich_mode"]:
             rich_reply = reply.replace("\r\n", "<br>").replace("\n", "<br>")
@@ -330,7 +324,7 @@ class Help(loader.Module):
                 try:
                     await utils.answer(message, rich_message=rich_message)
                     return
-                except Exception:
+                except Exception:  # noqa: BLE001
                     await utils.answer(message, rich_message=base_rich_message)
                     return
 
@@ -359,7 +353,7 @@ class Help(loader.Module):
                 plain_text,
                 **banner_kwargs,
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             await utils.answer(
                 message,
                 plain_text,

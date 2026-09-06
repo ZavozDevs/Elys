@@ -147,11 +147,11 @@ class Gallery(InlineUnit):
 
         if hasattr(message, "raw_message") and hasattr(message.raw_message, "id"):
             message = message.raw_message
-        elif hasattr(message, "_mcub_msg") and hasattr(getattr(message, "_mcub_msg"), "id"):
-            message = getattr(message, "_mcub_msg")
-        elif hasattr(message, "_message") and hasattr(getattr(message, "_message"), "id"):
-            message = getattr(message, "_message")
-        elif hasattr(message, "chat_id") and isinstance(getattr(message, "chat_id"), int) and not isinstance(message, (Message, int)):
+        elif hasattr(message, "_mcub_msg") and hasattr(message._mcub_msg, "id"):
+            message = message._mcub_msg
+        elif hasattr(message, "_message") and hasattr(message._message, "id"):
+            message = message._message
+        elif hasattr(message, "chat_id") and isinstance(message.chat_id, int) and not isinstance(message, (Message, int)):
             message = message.chat_id
 
         if not isinstance(message, (Message, int)):
@@ -279,7 +279,7 @@ class Gallery(InlineUnit):
                     + self.translator.getkey("inline.opening_gallery"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 status_message = None
         else:
             status_message = None
@@ -522,7 +522,7 @@ class Gallery(InlineUnit):
         try:
             path = urlparse(media).path
             ext = os.path.splitext(path)[1]
-        except Exception:
+        except Exception:  # noqa: BLE001
             ext = None
 
         if self._units[unit_id].get("gif", False) or ext in {".gif", ".mp4"}:
@@ -559,12 +559,10 @@ class Gallery(InlineUnit):
                 if deleted:
                     self._units.get(unit_id, {}).pop("slideshow", None)
                     await self._unload_unit(unit_id)
-                try:
+                with contextlib.suppress(Exception):
                     await call.answer(
                         "" if deleted else "Error occurred", show_alert=not deleted
                     )
-                except Exception:
-                    pass
                 return
             case _ if page < 0:
                 await call.answer("No way back")
@@ -718,7 +716,7 @@ class Gallery(InlineUnit):
                     try:
                         path = urlparse(unit["photo_url"]).path
                         ext = os.path.splitext(path)[1]
-                    except Exception:
+                    except Exception:  # noqa: BLE001
                         ext = None
 
                     args = {
@@ -753,7 +751,7 @@ class Gallery(InlineUnit):
                         ],
                         cache_time=0,
                     )
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     if unit["uid"] in self._error_events:
                         self._error_events[unit["uid"]].set()
                         self._error_events[unit["uid"]] = e

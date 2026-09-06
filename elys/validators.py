@@ -18,16 +18,15 @@
 
 import functools
 import re
-import typing
 from collections.abc import Callable
 
-import grapheme
 import emoji
+import grapheme
 
 from . import utils
 from .translations import SUPPORTED_LANGUAGES, translator
 
-ConfigAllowedTypes = typing.Union[tuple, list, str, int, bool, None]
+ConfigAllowedTypes = tuple | list | str | int | bool | None
 
 ALLOWED_EMOJIS = set(emoji.EMOJI_DATA.keys())
 
@@ -419,10 +418,7 @@ class Link(Validator):
 
     @staticmethod
     def _validate(value: ConfigAllowedTypes, /) -> str:
-        try:
-            if not utils.check_url(value):
-                raise Exception("Invalid URL")
-        except Exception:
+        if not utils.check_url(value):
             raise ValidationError(f"Passed value ({value}) is not a valid URL")
 
         return value
@@ -529,7 +525,7 @@ class RegExp(Validator):
         try:
             re.compile(regex, flags=flags)
         except re.error as e:
-            raise Exception(f"{regex} is not a valid regex") from e
+            raise ValueError(f"{regex} is not a valid regex") from e
 
         if description is None:
             doc = translator.getdict("validators.regex", regex=regex)
@@ -655,7 +651,7 @@ class TelegramID(Validator):
 
         try:
             value = int(str(value).strip())
-        except Exception:
+        except Exception:  # noqa: BLE001
             raise e
 
         if str(value).startswith("-100"):
@@ -715,8 +711,6 @@ class NoneType(Validator):
     def _validate(value: ConfigAllowedTypes, /) -> None:
         if not value:
             raise ValidationError(f"Passed value ({value}) is not None")
-
-        return None
 
 
 class Hidden(Validator):
@@ -840,8 +834,7 @@ class EntityLike(RegExp):
         value = super()._validate(value, regex=regex, flags=flags)
 
         if value.isdigit():
-            if value.startswith("-100"):
-                value = value[4:]
+            value = value.removeprefix("-100")
 
             value = int(value)
 
@@ -860,7 +853,7 @@ class RandomLinkList(list):
 
         if not self:
             return ""
-        return str(random.choice(self))
+        return str(random.choice(self))  # nosec B311
 
     def __bytes__(self):
         return str(self).encode("utf-8")

@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import weakref
 from typing import Any
 
@@ -57,12 +58,10 @@ def _load_langpacks() -> dict[str, dict[str, Any]]:
 def reload_packs() -> None:
     global _LANGPACKS_CACHE
     _LANGPACKS_CACHE = None
-    try:
+    with contextlib.suppress(ImportError):
         from .langpacks import clear_langpacks_cache
 
         clear_langpacks_cache()
-    except ImportError:
-        pass
     current = {}
     for inst in list(Strings._instances):
         old_locale = inst._locale
@@ -71,12 +70,10 @@ def reload_packs() -> None:
             current[module_name] = inst
     for module_name, inst in current.items():
         data = {"name": module_name}
-        try:
+        with contextlib.suppress(Exception):
             new_data = inst._load_from_langpacks(module_name, data)
             inst._data = new_data
             inst.set_locale(old_locale)
-        except Exception:
-            pass
 
 
 class _MissingKey(str):
@@ -196,7 +193,7 @@ class Strings:
                 self._locale = (
                     kernel_or_lang.config.get("language", fallback) or fallback
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 self._locale = fallback
 
         # Check for langpacks mode with "name" key
@@ -264,7 +261,7 @@ class Strings:
                 return _wrap_group_value(key, value, strict=self._strict)
             return value
 
-        for _locale, locale_dict in self._data.items():
+        for locale_dict in self._data.values():
             if locale_dict and key in locale_dict:
                 value = locale_dict[key]
                 if isinstance(value, dict):
@@ -321,7 +318,7 @@ class Strings:
             return []
 
         available = get_available_locales()
-        locales = [k for k in data.keys() if k in available]
+        locales = [k for k in data if k in available]
         if not locales:
             return [f"no valid locale keys found, expected one of: {available}"]
 

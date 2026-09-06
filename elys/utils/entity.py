@@ -11,6 +11,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import asyncio
+import contextlib
 import inspect
 import logging
 import random
@@ -20,8 +21,8 @@ import time
 import typing
 from urllib.parse import urlparse
 
-import emoji
 import elystl
+import emoji
 import requests
 from elystl import hints
 from elystl.tl.custom.message import Message
@@ -72,27 +73,27 @@ from ..tl_cache import CustomTelegramClient
 from ..types import Module
 from .other import invite_inline_bot, run_sync
 
-FormattingEntity = typing.Union[
-    MessageEntityUnknown,
-    MessageEntityMention,
-    MessageEntityHashtag,
-    MessageEntityBotCommand,
-    MessageEntityUrl,
-    MessageEntityEmail,
-    MessageEntityBold,
-    MessageEntityItalic,
-    MessageEntityCode,
-    MessageEntityPre,
-    MessageEntityTextUrl,
-    MessageEntityMentionName,
-    MessageEntityPhone,
-    MessageEntityCashtag,
-    MessageEntityUnderline,
-    MessageEntityStrike,
-    MessageEntityBlockquote,
-    MessageEntityBankCard,
-    MessageEntitySpoiler,
-]
+FormattingEntity = (
+    MessageEntityUnknown
+    | MessageEntityMention
+    | MessageEntityHashtag
+    | MessageEntityBotCommand
+    | MessageEntityUrl
+    | MessageEntityEmail
+    | MessageEntityBold
+    | MessageEntityItalic
+    | MessageEntityCode
+    | MessageEntityPre
+    | MessageEntityTextUrl
+    | MessageEntityMentionName
+    | MessageEntityPhone
+    | MessageEntityCashtag
+    | MessageEntityUnderline
+    | MessageEntityStrike
+    | MessageEntityBlockquote
+    | MessageEntityBankCard
+    | MessageEntitySpoiler
+)
 
 parser = elystl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
@@ -203,7 +204,7 @@ def check_url(url: str) -> bool:
     """
     try:
         return bool(urlparse(url).netloc)
-    except Exception:
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -267,15 +268,14 @@ async def asset_channel(
     async for d in client.iter_dialogs():
         if d.title == title:
             client._channels_cache[title] = {"peer": d.entity, "exp": int(time.time())}
-            if invite_bot:
-                if all(
-                    participant.id != client.loader.inline.bot_id
-                    for participant in await client.get_participants(
-                        d.entity, limit=100
-                    )
-                ):
-                    await fw_protect()
-                    await invite_inline_bot(client, d.entity)
+            if invite_bot and all(
+                participant.id != client.loader.inline.bot_id
+                for participant in await client.get_participants(
+                    d.entity, limit=100
+                )
+            ):
+                await fw_protect()
+                await invite_inline_bot(client, d.entity)
 
             return d.entity, False
 
@@ -326,7 +326,7 @@ async def asset_channel(
                 if not isinstance(folder, elystl.tl.types.DialogFilterDefault)
                 and folder.title.text.lower() == _folder.lower()
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             folder = None
 
         if folder and not any(
@@ -487,17 +487,16 @@ async def get_topic_id(db: "Database", topic_name: str) -> int | None:
         # Check default key first
         if "elys-userbot" in forums_cache and isinstance(
             forums_cache["elys-userbot"], dict
-        ):
-            if topic_id := forums_cache["elys-userbot"].get(topic_name):
-                return topic_id
+        ) and (topic_id := forums_cache["elys-userbot"].get(topic_name)):
+            return topic_id
 
         # Search across all cached channel entities
-        for _, topics in forums_cache.items():
+        for topics in forums_cache.values():
             if isinstance(topics, dict) and (topic_id := topics.get(topic_name)):
                 return topic_id
 
         return None
-    except Exception:
+    except Exception:  # noqa: BLE001
         return None
 
 
@@ -535,7 +534,7 @@ async def set_avatar(
 
     await fw_protect()
 
-    try:
+    with contextlib.suppress(Exception):
         await client.delete_messages(
             peer,
             message_ids=[
@@ -546,8 +545,6 @@ async def set_avatar(
                 ).message.id
             ],
         )
-    except Exception:
-        pass
 
     return True
 
@@ -565,10 +562,10 @@ async def get_target(message: Message, arg_no: int = 0) -> int | None:
         isinstance(entity, MessageEntityMentionName)
         for entity in (message.entities or [])
     ):
-        e = sorted(
+        e = min(
             filter(lambda x: isinstance(x, MessageEntityMentionName), message.entities),
             key=lambda x: x.offset,
-        )[0]
+        )
         return e.user_id
 
     if len(get_args(message)) > arg_no:
@@ -794,7 +791,7 @@ def ascii_face() -> str:
     :return: ASCII-art face
     """
     return escape_html(
-        random.choice(
+        random.choice(  # nosec B311
             [
                 "ヽ(๑◠ܫ◠๑)ﾉ",
                 "(◕ᴥ◕ʋ)",

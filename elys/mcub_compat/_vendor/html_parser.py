@@ -43,7 +43,7 @@ def _utf16_slice(text: str, offset: int, length: int) -> str:
         if start_byte >= end_byte:
             return ""
         return utf16_bytes[start_byte:end_byte].decode("utf-16-le")
-    except Exception:
+    except Exception:  # noqa: BLE001
         if offset < len(text):
             return text[offset : min(offset + length, len(text))]
         return ""
@@ -266,7 +266,7 @@ class HTMLDecorator:
             try:
                 email_text = _utf16_slice(text_content, entity.offset, entity.length)
                 attrs["href"] = f"mailto:{email_text}"
-            except Exception:
+            except Exception:  # noqa: BLE001
                 attrs["href"] = "mailto:"
         elif isinstance(entity, MessageEntityCustomEmoji):
             tag = "tg-emoji"

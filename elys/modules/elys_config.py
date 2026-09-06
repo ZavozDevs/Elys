@@ -21,6 +21,7 @@ import asyncio
 import contextlib
 import difflib
 import functools
+import logging
 import typing
 from math import ceil
 
@@ -32,6 +33,8 @@ from elystl.tl.types import Message
 from .. import loader, translations, utils
 from ..inline.types import InlineCall
 from ..types import ElysReplyMarkup
+
+logger = logging.getLogger(__name__)
 
 # Everywhere in this module, we use the following naming convention:
 # `obj_type` of non-core module = False
@@ -76,7 +79,7 @@ class _InlineFormDraft:
 class ElysConfigMod(loader.Module):
     """Interactive configurator for Elys Userbot"""
 
-    strings = {
+    strings = {  # noqa: RUF012
         "name": "ElysConfig",
         "_cfg_chat_input": (
             "Enter config values via regular chat message instead of inline"
@@ -174,22 +177,18 @@ class ElysConfigMod(loader.Module):
         if isinstance(chat, int):
             try:
                 return elystl.utils.resolve_id(chat)[0]
-            except Exception:
+            except Exception:  # noqa: BLE001
                 return chat
         if hasattr(chat, "chat_id") or hasattr(chat, "chat"):
-            try:
+            with contextlib.suppress(Exception):
                 chat_id = getattr(chat, "chat_id", None) or getattr(
                     getattr(chat, "chat", None), "id", None
                 )
                 if chat_id is not None:
                     return elystl.utils.resolve_id(chat_id)[0]
-            except Exception:
-                pass
-        try:
+        with contextlib.suppress(Exception):
             peer_id = elystl.utils.get_peer_id(chat)
             return elystl.utils.resolve_id(peer_id)[0]
-        except Exception:
-            pass
         return None
 
     @staticmethod
@@ -280,7 +279,7 @@ class ElysConfigMod(loader.Module):
             return bool(
                 validator and getattr(validator, "internal_id", None) == "Hidden"
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             return False
 
     @staticmethod
@@ -1295,7 +1294,6 @@ class ElysConfigMod(loader.Module):
 
         return rows
 
-
     async def _multi_choice_set_value(
         self,
         call: InlineCall,
@@ -1492,7 +1490,7 @@ class ElysConfigMod(loader.Module):
                     validator.doc["en"],
                 )
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             doc = None
             validator = None
             args += [""]
@@ -1796,18 +1794,14 @@ class ElysConfigMod(loader.Module):
                 return
 
             prefixes = {".", "/"}
-            try:
+            with contextlib.suppress(Exception):
                 if hasattr(self, "get_prefixes"):
                     prefixes.update(self.get_prefixes())
                 elif hasattr(self._client, "loader"):
                     prefixes.update(self._client.loader.get_prefixes())
-            except Exception:
-                pass
-            try:
+            with contextlib.suppress(Exception):
                 if hasattr(self, "get_prefix"):
                     prefixes.add(self.get_prefix())
-            except Exception:
-                pass
 
             cancel_cmds = {"/cancel", ".cancel"} | {f"{p}cancel" for p in prefixes if p}
 
@@ -1885,18 +1879,14 @@ class ElysConfigMod(loader.Module):
         raw_text = (msg.raw_text or getattr(msg, "message", "") or "").strip()
 
         prefixes = {".", "/"}
-        try:
+        with contextlib.suppress(Exception):
             if hasattr(self, "get_prefixes"):
                 prefixes.update(self.get_prefixes())
             elif hasattr(self._client, "loader"):
                 prefixes.update(self._client.loader.get_prefixes())
-        except Exception:
-            pass
-        try:
+        with contextlib.suppress(Exception):
             if hasattr(self, "get_prefix"):
                 prefixes.add(self.get_prefix())
-        except Exception:
-            pass
 
         cancel_cmds = {"/cancel", ".cancel"} | {f"{p}cancel" for p in prefixes if p}
 
@@ -1976,7 +1966,7 @@ class ElysConfigMod(loader.Module):
         def fmt_value(option: str) -> str:
             value = self._get_inline_value(mod, option)
             if len(value) >= 200:
-                value = list(utils.smart_split(*html.parse(value), 200))[0] + "..."
+                value = next(iter(utils.smart_split(*html.parse(value), 200))) + "..."
             return value
 
         close_btn = {
@@ -2202,7 +2192,7 @@ class ElysConfigMod(loader.Module):
                     if callable(mod.strings)
                     else mod.__class__.__name__
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 mod_name = mod.__class__.__name__
 
             cls_name = mod.__class__.__name__
@@ -2255,7 +2245,7 @@ class ElysConfigMod(loader.Module):
                 folders[folder_name][mod_name] = [p for p in mod.config]
         try:
             preset_folders = self.db.get("presets", "folders")
-        except Exception:
+        except Exception:  # noqa: BLE001
             preset_folders = {}
 
         if preset_folders:
@@ -2277,6 +2267,7 @@ class ElysConfigMod(loader.Module):
                                     ]
                                 break
                         except Exception:
+                            logger.debug("Failed processing module for folder %s", folder_name, exc_info=True)
                             continue
 
         return folders
@@ -2388,12 +2379,12 @@ class ElysConfigMod(loader.Module):
                         raw_parts.append(
                             f"<code>{utils.escape_html(param)}</code>: <code>{utils.escape_html(raw_value)}</code>"
                         )
-                    except Exception:
+                    except Exception:  # noqa: BLE001
                         raw_parts.append(f"<code>{utils.escape_html(param)}</code>")
                 text_parts.append(
                     self.strings["folder_mod_li"].format(utils.escape_html(mod_name))
                 )
-            except Exception:
+            except Exception:  # noqa: BLE001
                 text_parts.append(
                     self.strings["folder_mod_li"].format(utils.escape_html(mod_name))
                 )
@@ -2504,9 +2495,13 @@ class ElysConfigMod(loader.Module):
             return query, instance, self._get_config_obj_type(instance)
 
         fuzzy_name, _ = self._fuzzy_lookup_configurable(query)
-        if fuzzy_name and (instance := self.lookup(fuzzy_name)):
-            if hasattr(instance, "config") and instance.config:
-                return fuzzy_name, instance, self._get_config_obj_type(instance)
+        if (
+            fuzzy_name
+            and (instance := self.lookup(fuzzy_name))
+            and hasattr(instance, "config")
+            and instance.config
+        ):
+            return fuzzy_name, instance, self._get_config_obj_type(instance)
 
         return None, None, None
 
@@ -2658,7 +2653,7 @@ class ElysConfigMod(loader.Module):
             )
             return
 
-        if args_s[1] in instance.config.keys():
+        if args_s[1] in instance.config:
             await self._send_initial_config_form(
                 message,
                 self.inline__configure_option,

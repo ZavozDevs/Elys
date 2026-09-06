@@ -65,9 +65,9 @@ class MCUBAdapterMixin:
     # Populated by `build_adapter_class`.
     mcub_name: str = "MCUB"
     mcub_style: str = "mcub_class"
-    mcub_meta: dict = {}
+    mcub_meta: dict = {}  # noqa: RUF012
     banner_url: str | None = None
-    strings = {"name": "MCUB"}
+    strings = {"name": "MCUB"}  # noqa: RUF012
 
     # Set by the loader before `complete_registration`.
     mcub_instance: typing.Any = None
