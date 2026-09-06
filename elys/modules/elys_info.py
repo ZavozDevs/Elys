@@ -44,46 +44,117 @@ logger = logging.getLogger(__name__)
 _CUSTOM_BANNER_CACHE: dict[str, str] = {}
 
 
-def generate_custom_banner(nickname: str) -> str | None:
+def generate_custom_banner(nickname: str, template: str = "classic") -> str | None:
     text = nickname.strip().upper()
     if not text:
         return None
-    if text in _CUSTOM_BANNER_CACHE:
-        return _CUSTOM_BANNER_CACHE[text]
+    cache_key = f"{template}:{text}"
+    if cache_key in _CUSTOM_BANNER_CACHE:
+        return _CUSTOM_BANNER_CACHE[cache_key]
 
-    base_path = os.path.join(tempfile.gettempdir(), "elys_banner_base.png")
-    if not os.path.exists(base_path):
+    assets_dir = None
+    try:
+        from .. import utils
+
+        base = utils.get_base_dir()
+        assets_dir = os.path.join(os.path.dirname(base), "assets")
+    except Exception:
+        pass
+
+    ethno_candidates = [
+        os.path.join(assets_dir, "ethnocentric.ttf") if assets_dir else None,
+        "/home/rom4ik/Elys/assets/ethnocentric.ttf",
+        os.path.join(tempfile.gettempdir(), "ethnocentric.ttf"),
+    ]
+    ethno_path = next((f for f in ethno_candidates if f and os.path.exists(f)), None)
+    if not ethno_path and os.path.exists("/home/rom4ik/Загрузки/Ethnocentric.zip"):
         try:
-            r = requests.get(
-                "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png",
-                timeout=15,
-            )
-            if r.status_code == 200:
-                with open(base_path, "wb") as f:
-                    f.write(r.content)
-        except Exception:  # noqa: BLE001
+            import zipfile
+
+            with zipfile.ZipFile("/home/rom4ik/Загрузки/Ethnocentric.zip", "r") as z:
+                target_path = os.path.join(tempfile.gettempdir(), "ethnocentric.ttf")
+                with z.open("ethnocentric rg.ttf") as src, open(target_path, "wb") as dst:
+                    dst.write(src.read())
+                ethno_path = target_path
+        except Exception:
+            pass
+
+    font_candidates = [
+        "/usr/share/fonts/TTF/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/TTF/OpenSans-Bold.ttf",
+        "/usr/share/fonts/TTF/FiraSans-Bold.ttf",
+    ]
+    fallback_font = next((f for f in font_candidates if os.path.exists(f)), None)
+
+    is_latin = all(ord(c) < 128 for c in text)
+    font_path = ethno_path if (is_latin and ethno_path) else fallback_font
+
+    if template == "anime":
+        anime_candidates = [
+            os.path.join(assets_dir, "banner_anime.png") if assets_dir else None,
+            "/home/rom4ik/Elys/assets/banner_anime.png",
+            "/home/rom4ik/Загрузки/Frame 3(1).png",
+            "/home/rom4ik/Загрузки/Frame 3.png",
+            os.path.join(tempfile.gettempdir(), "elys_banner_anime.png"),
+        ]
+        base_path = next((f for f in anime_candidates if f and os.path.exists(f)), None)
+        if not base_path:
             return None
-    if not os.path.exists(base_path):
-        return None
+        center_x = 1803
+        center_y = 395
+        fill = (255, 255, 255)
+        max_w = 700
+        target_height = 80
+        letter_spacing = 8
+    elif template == "anime_white":
+        white_candidates = [
+            os.path.join(assets_dir, "banner_anime_white.png") if assets_dir else None,
+            "/home/rom4ik/Elys/assets/banner_anime_white.png",
+            "/home/rom4ik/Загрузки/Frame 3(2).png",
+            os.path.join(tempfile.gettempdir(), "elys_banner_anime_white.png"),
+        ]
+        base_path = next((f for f in white_candidates if f and os.path.exists(f)), None)
+        if not base_path:
+            return None
+        center_x = 484
+        center_y = 388
+        fill = (255, 255, 255)
+        max_w = 700
+        target_height = 80
+        letter_spacing = 8
+    else:
+        base_path = os.path.join(tempfile.gettempdir(), "elys_banner_base.png")
+        if not os.path.exists(base_path):
+            try:
+                r = requests.get(
+                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png",
+                    timeout=15,
+                )
+                if r.status_code == 200:
+                    with open(base_path, "wb") as f:
+                        f.write(r.content)
+            except Exception:  # noqa: BLE001
+                return None
+        if not os.path.exists(base_path):
+            return None
+        center_x = 1577
+        center_y = 593
+        fill = (152, 152, 152)
+        max_w = 850
+        target_height = 80
+        letter_spacing = 8
 
     try:
         im = Image.open(base_path).convert("RGB")
         draw = ImageDraw.Draw(im)
 
-        # Erase INFO below the line
-        draw.rectangle([1220, 544, 1930, 648], fill=(6, 6, 6))
+        if template == "classic":
+            # Erase INFO below the line
+            draw.rectangle([1220, 544, 1930, 648], fill=(6, 6, 6))
 
-        font_candidates = [
-            "/usr/share/fonts/TTF/DejaVuSans-Bold.ttf",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-            "/usr/share/fonts/liberation/LiberationSans-Bold.ttf",
-            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
-            "/usr/share/fonts/TTF/OpenSans-Bold.ttf",
-            "/usr/share/fonts/TTF/FiraSans-Bold.ttf",
-        ]
-        font_path = next((f for f in font_candidates if os.path.exists(f)), None)
-        target_height = 80
-        letter_spacing = 8
         font = (
             ImageFont.truetype(font_path, target_height)
             if font_path
@@ -98,49 +169,55 @@ def generate_custom_banner(nickname: str) -> str | None:
             return total_w - sp if txt else 0
 
         w = get_text_width(text, font, letter_spacing)
-        max_w = 850
         if w > max_w:
             scale = max_w / w
             target_height = max(30, int(target_height * scale))
             letter_spacing = max(2, int(letter_spacing * scale))
-            font = ImageFont.truetype(font_path, target_height)
+            font = (
+                ImageFont.truetype(font_path, target_height)
+                if font_path
+                else ImageFont.load_default()
+            )
             w = get_text_width(text, font, letter_spacing)
 
-        center_x = 1577
-        center_y = 593
         cur_x = center_x - w / 2
-
         for char in text:
             bbox = font.getbbox(char)
             char_w = bbox[2] - bbox[0]
             char_h = bbox[3] - bbox[1]
             char_y = center_y - char_h / 2 - bbox[1]
-            draw.text((cur_x, char_y), char, fill=(152, 152, 152), font=font)
+            draw.text((cur_x, char_y), char, fill=fill, font=font)
             cur_x += char_w + letter_spacing
 
         temp_path = os.path.join(
-            tempfile.gettempdir(), f"elys_banner_{abs(hash(text))}.png"
+            tempfile.gettempdir(), f"elys_banner_{template}_{abs(hash(text))}.png"
         )
-        im.save(temp_path, "PNG")
+        im.save(temp_path, "PNG", optimize=True)
 
-        with open(temp_path, "rb") as f:
-            resp = requests.post(
-                "https://freeimage.host/api/1/upload",
-                data={
-                    "key": "6d207e02198a847aa98d0a2a901485a5",
-                    "action": "upload",
-                    "format": "json",
-                },
-                files={"source": f},
-                timeout=15,
-            )
-            data = resp.json()
-            if data.get("status_code") == 200:
-                url = data["image"]["url"]
-                _CUSTOM_BANNER_CACHE[text] = url
-                return url
+        for attempt in range(3):
+            try:
+                with open(temp_path, "rb") as f:
+                    resp = requests.post(
+                        "https://freeimage.host/api/1/upload",
+                        data={
+                            "key": "6d207e02198a847aa98d0a2a901485a5",
+                            "action": "upload",
+                            "format": "json",
+                        },
+                        files={"source": f},
+                        timeout=45,
+                    )
+                    data = resp.json()
+                    if data.get("status_code") == 200:
+                        url = data["image"]["url"]
+                        _CUSTOM_BANNER_CACHE[cache_key] = url
+                        return url
+            except Exception:
+                if attempt == 2:
+                    raise
+                time.sleep(1)
     except Exception:
-        logger.exception("Failed to generate custom banner for %s", nickname)
+        logger.exception("Failed to generate custom banner for %s (%s)", nickname, template)
     return None
 
 
@@ -385,30 +462,70 @@ class ElysInfoMod(loader.Module):
             possible_values.clear()
             possible_values.append("https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys_info.png")
 
-            async def _resolve_banner(text: str, cache_prefix: str) -> str | None:
-                cached_name = self._db.get(self.strings["name"], f"custom_banner_{cache_prefix}_name", None)
-                cached_url = self._db.get(self.strings["name"], f"custom_banner_{cache_prefix}_url", None)
+            async def _resolve_banner(
+                text: str, cache_prefix: str, template: str = "classic"
+            ) -> str | None:
+                cached_name = self._db.get(
+                    self.strings["name"], f"custom_banner_{cache_prefix}_name", None
+                )
+                cached_url = self._db.get(
+                    self.strings["name"], f"custom_banner_{cache_prefix}_url", None
+                )
                 if cached_name == text and cached_url:
                     return cached_url
-                url = await asyncio.to_thread(generate_custom_banner, text)
+                url = await asyncio.to_thread(generate_custom_banner, text, template)
                 if url:
-                    self._db.set(self.strings["name"], f"custom_banner_{cache_prefix}_name", text)
-                    self._db.set(self.strings["name"], f"custom_banner_{cache_prefix}_url", url)
+                    self._db.set(
+                        self.strings["name"], f"custom_banner_{cache_prefix}_name", text
+                    )
+                    self._db.set(
+                        self.strings["name"], f"custom_banner_{cache_prefix}_url", url
+                    )
                 return url
 
-            url_nick = await _resolve_banner(nick, "nick")
+            has_different_name = display_name.strip().upper() != nick.strip().upper()
+
+            # Classic template banners
+            url_nick = await _resolve_banner(nick, "classic_nick_v2", "classic")
             if url_nick and url_nick not in possible_values:
                 possible_values.append(url_nick)
 
-            if display_name.strip().upper() != nick.strip().upper():
-                url_name = await _resolve_banner(display_name, "name")
+            if has_different_name:
+                url_name = await _resolve_banner(display_name, "classic_name_v2", "classic")
                 if url_name and url_name not in possible_values:
                     possible_values.append(url_name)
+
+            # Anime template 1 (dark-haired girl on left)
+            url_anime_nick = await _resolve_banner(nick, "anime_nick_v4", "anime")
+            if url_anime_nick and url_anime_nick not in possible_values:
+                possible_values.append(url_anime_nick)
+
+            if has_different_name:
+                url_anime_name = await _resolve_banner(display_name, "anime_name_v4", "anime")
+                if url_anime_name and url_anime_name not in possible_values:
+                    possible_values.append(url_anime_name)
+
+            # Anime template 2 (white-haired girl on right)
+            url_anime_white_nick = await _resolve_banner(
+                nick, "anime_white_nick_v1", "anime_white"
+            )
+            if url_anime_white_nick and url_anime_white_nick not in possible_values:
+                possible_values.append(url_anime_white_nick)
+
+            if has_different_name:
+                url_anime_white_name = await _resolve_banner(
+                    display_name, "anime_white_name_v1", "anime_white"
+                )
+                if url_anime_white_name and url_anime_white_name not in possible_values:
+                    possible_values.append(url_anime_white_name)
 
             if (
                 self.config["banner_url"] not in possible_values
                 and self.config["banner_url"] != "custom"
-                and not (self.config["banner_url"] and str(self.config["banner_url"]).startswith("http"))
+                and not (
+                    self.config["banner_url"]
+                    and str(self.config["banner_url"]).startswith("http")
+                )
             ):
                 self.config["banner_url"] = (
                     possible_values[1] if len(possible_values) > 1 else possible_values[0]
