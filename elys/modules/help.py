@@ -44,18 +44,14 @@ class Help(loader.Module):
         "module_header": "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{}</b>:",
         "mod_doc": "\n<i><tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> {}\n</i>",
         "inline_cmd_li": "\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <code>{}</code> {}",
-        "preview_header": "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{}</b>:",
-        "preview_status": "\n<i><tg-emoji emoji-id=5312383351217201533>⚠️</tg-emoji> <b>Модуль не установлен</b> (предпросмотр)\n</i>",
-        "preview_downloading": "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Загрузка предпросмотра модуля...</b>",
-        "preview_fetch_err": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Не удалось скачать модуль по ссылке</b>",
-        "preview_parse_err": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji> <b>Не удалось проанализировать модуль</b>",
-        "preview_no_cmds": "Команды не найдены",
-        "preview_requires": "\n\n📦 <b>Зависимости:</b> {}",
-        "preview_install_url": "\n\n💡 <i>Для установки:</i> {}",
-        "preview_install_reply": "\n\n💡 <i>Для установки ответьте на файл:</i> {}",
-        "preview_install_btn": "📥 Установить модуль",
-        "preview_installing": "<tg-emoji emoji-id=5451732530048802485>⏳</tg-emoji> <b>Установка модуля...</b>",
-        "btn_close": "❌ Закрыть",
+        "preview_downloading": "<i>Загрузка предпросмотра модуля...</i>",
+        "preview_fetch_err": "<b>Не удалось скачать модуль по ссылке</b>",
+        "preview_parse_err": "<b>Не удалось проанализировать модуль</b>",
+        "preview_install_url": "\n\n<i>Это предпросмотр. Для установки:</i> {}",
+        "preview_install_reply": "\n\n<i>Это предпросмотр. Для установки:</i> {} ответом на файл",
+        "preview_install_btn": "📥 Установить",
+        "preview_installing": "<i>Установка модуля...</i>",
+        "btn_close": "Закрыть",
     }
 
     def __init__(self):
@@ -857,8 +853,7 @@ class Help(loader.Module):
             else utils.escape_html(name)
         )
 
-        reply = self.strings["preview_header"].format(_name)
-        reply += self.strings["preview_status"]
+        reply = self.strings["module_header"].format(_name)
 
         if doc:
             reply += self.strings["mod_doc"].format(utils.escape_html(doc))
@@ -897,20 +892,11 @@ class Help(loader.Module):
             )
 
         cmds = "\n".join(lines)
-        if cmds or inline_cmd:
-            cmds_block = (
-                f"<blockquote expandable>{cmds}{inline_cmd}</blockquote>"
-            )
-        else:
-            cmds_block = f"\n<blockquote expandable><i>{self.strings['preview_no_cmds']}</i></blockquote>"
-
-        reqs_block = ""
-        if requires:
-            reqs_block = self.strings["preview_requires"].format(
-                ", ".join(
-                    f"<code>{utils.escape_html(r)}</code>" for r in requires
-                )
-            )
+        cmds_block = (
+            f"<blockquote expandable>{cmds}{inline_cmd}</blockquote>"
+            if (cmds or inline_cmd)
+            else ""
+        )
 
         dev_block = (
             f"\n\n{self.strings['developer'].format(utils.escape_html(developer))}"
@@ -955,13 +941,12 @@ class Help(loader.Module):
             )
             base_rich_message = (
                 f"{rich_reply}<details><summary>{self.strings.get('rich_commands', 'Commands')}</summary>{rich_commands}{rich_inline}</details>"
-                + (f"<p>{reqs_block.strip()}</p>" if reqs_block else "")
                 + (
                     f"<p>{self.strings['developer'].format(utils.escape_html(developer))}</p>"
                     if developer
                     else ""
                 )
-                + (f"<p>{install_hint.strip()}</p>" if install_hint else "")
+                + f"<p>{install_hint.strip()}</p>"
             )
             if banner_url:
                 rich_message = (
@@ -984,9 +969,7 @@ class Help(loader.Module):
             )
             return
 
-        plain_text = (
-            f"{reply}{cmds_block}{reqs_block}{dev_block}{install_hint}"
-        )
+        plain_text = f"{reply}{cmds_block}{dev_block}{install_hint}"
 
         try:
             await utils.answer(
