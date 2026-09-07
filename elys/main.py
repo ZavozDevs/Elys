@@ -75,9 +75,25 @@ try:
     def _safe_html_unparse(text, entities):
         if text is None:
             return ""
-        return _orig_html_unparse(text, entities)
+        res = _orig_html_unparse(text, entities)
+        from . import emojis
+
+        if emojis.is_alt_emoji_format():
+            res = emojis.convert_to_alt_emoji(res)
+        return res
 
     _elystl_html.unparse = _safe_html_unparse
+
+    _orig_html_parse = _elystl_html.parse
+
+    def _safe_html_parse(html_text):
+        if html_text and isinstance(html_text, str) and "tg://emoji?id=" in html_text:
+            from . import emojis
+
+            html_text = emojis.convert_to_tg_emoji(html_text)
+        return _orig_html_parse(html_text)
+
+    _elystl_html.parse = _safe_html_parse
 
     _orig_html_add_surrogates = getattr(_elystl_html, "_add_surrogates", None)
     if _orig_html_add_surrogates:
@@ -116,33 +132,54 @@ try:
             if url.startswith("tg://emoji?id="):
                 eid_str = url.split("id=")[-1].split("&")[0]
                 if eid_str.isdigit():
-                    self._stack.append(
-                        {
-                            "tag": tag_lower,
-                            "entity_cls": MessageEntityCustomEmoji,
-                            "args": {"document_id": int(eid_str)},
-                            "start_offset": len(self.text),
-                            "meta": None,
-                        }
-                    )
-                    return
+                    if hasattr(self, "_stack"):
+                        self._stack.append(
+                            {
+                                "tag": tag_lower,
+                                "entity_cls": MessageEntityCustomEmoji,
+                                "args": {"document_id": int(eid_str)},
+                                "start_offset": len(self.text),
+                                "meta": None,
+                            }
+                        )
+                        return
+                    if hasattr(self, "_building_entities"):
+                        if hasattr(self, "_open_tags"):
+                            if hasattr(self._open_tags, "appendleft"):
+                                self._open_tags.appendleft(tag)
+                            else:
+                                self._open_tags.append(tag)
+                        if hasattr(self, "_open_tags_meta"):
+                            if hasattr(self._open_tags_meta, "appendleft"):
+                                self._open_tags_meta.appendleft(None)
+                            else:
+                                self._open_tags_meta.append(None)
+                        self._building_entities[tag] = MessageEntityCustomEmoji(
+                            offset=len(self.text),
+                            length=0,
+                            document_id=int(eid_str),
+                        )
+                        return
         return _orig_html_handle_starttag(self, tag, attrs)
 
     _elystl_html.HTMLToTelegramParser.handle_starttag = _safe_html_handle_starttag
 
-    _orig_html_custom_emoji = _elystl_html.HtmlDecoration.custom_emoji
+    if hasattr(_elystl_html, "HtmlDecoration") and hasattr(
+        _elystl_html.HtmlDecoration, "custom_emoji"
+    ):
+        _orig_html_custom_emoji = _elystl_html.HtmlDecoration.custom_emoji
 
-    def _safe_html_custom_emoji(self, value, document_id):
-        from . import emojis
+        def _safe_html_custom_emoji(self, value, document_id):
+            from . import emojis
 
-        if emojis.is_alt_emoji_format():
-            return (
-                f'<a href="tg://emoji?id={_elystl_html.escape(str(document_id), quote=True)}">'
-                f"{value}</a>"
-            )
-        return _orig_html_custom_emoji(self, value, document_id)
+            if emojis.is_alt_emoji_format():
+                return (
+                    f'<a href="tg://emoji?id={_elystl_html.escape(str(document_id), quote=True)}">'
+                    f"{value}</a>"
+                )
+            return _orig_html_custom_emoji(self, value, document_id)
 
-    _elystl_html.HtmlDecoration.custom_emoji = _safe_html_custom_emoji
+        _elystl_html.HtmlDecoration.custom_emoji = _safe_html_custom_emoji
 
     _orig_parse_message_text = _elystl_mp.MessageParseMethods._parse_message_text
 
