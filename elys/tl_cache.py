@@ -1006,7 +1006,27 @@ class CustomTelegramClient(TelegramClient):
             kwargs["_topic_no_retry"] = True
             return await self._topic_guesser(native_method, stack, *args, **kwargs)
 
+    def _convert_entities_if_alt(self, kwargs: dict):
+        from . import emojis
+
+        if emojis.is_alt_emoji_format() and kwargs.get("formatting_entities"):
+            from elystl.tl.types import MessageEntityCustomEmoji, MessageEntityTextUrl
+
+            kwargs["formatting_entities"] = [
+                (
+                    MessageEntityTextUrl(
+                        offset=e.offset,
+                        length=e.length,
+                        url=f"tg://emoji?id={e.document_id}",
+                    )
+                    if isinstance(e, MessageEntityCustomEmoji)
+                    else e
+                )
+                for e in kwargs["formatting_entities"]
+            ]
+
     async def send_file(self, *args, **kwargs) -> Message:
+        self._convert_entities_if_alt(kwargs)
         return await self._topic_guesser(
             super().send_file,
             inspect.stack(),
@@ -1015,6 +1035,7 @@ class CustomTelegramClient(TelegramClient):
         )
 
     async def send_message(self, *args, **kwargs) -> Message:
+        self._convert_entities_if_alt(kwargs)
         return await self._topic_guesser(
             super().send_message,
             inspect.stack(),
@@ -1023,12 +1044,27 @@ class CustomTelegramClient(TelegramClient):
         )
 
     async def _parse_message_text(self, message, parse_mode):
-        if isinstance(message, str):
-            from . import emojis
+        from . import emojis
 
-            if emojis.is_alt_emoji_format():
-                message = emojis.convert_to_alt_emoji(message)
-        return await super()._parse_message_text(message, parse_mode)
+        if isinstance(message, str) and emojis.is_alt_emoji_format():
+            message = emojis.convert_to_alt_emoji(message)
+        text, entities = await super()._parse_message_text(message, parse_mode)
+        if emojis.is_alt_emoji_format() and entities:
+            from elystl.tl.types import MessageEntityCustomEmoji, MessageEntityTextUrl
+
+            entities = [
+                (
+                    MessageEntityTextUrl(
+                        offset=e.offset,
+                        length=e.length,
+                        url=f"tg://emoji?id={e.document_id}",
+                    )
+                    if isinstance(e, MessageEntityCustomEmoji)
+                    else e
+                )
+                for e in entities
+            ]
+        return text, entities
 
     async def _call(
         self,

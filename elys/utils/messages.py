@@ -511,6 +511,21 @@ async def answer(
         if emojis.is_alt_emoji_format():
             response = emojis.convert_to_alt_emoji(response)
         text, entities = parse_mode.parse(response)
+        if emojis.is_alt_emoji_format() and entities:
+            from elystl.tl.types import MessageEntityCustomEmoji, MessageEntityTextUrl
+
+            entities = [
+                (
+                    MessageEntityTextUrl(
+                        offset=e.offset,
+                        length=e.length,
+                        url=f"tg://emoji?id={e.document_id}",
+                    )
+                    if isinstance(e, MessageEntityCustomEmoji)
+                    else e
+                )
+                for e in entities
+            ]
 
         if len(text) >= 4096 and not hasattr(message, "elys_grepped"):
             try:

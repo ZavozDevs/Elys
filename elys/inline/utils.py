@@ -49,7 +49,7 @@ logger = logging.getLogger(__name__)
 
 VALID_BUTTON_STYLES = {"danger", "primary", "success"}
 TG_EMOJI_RE = re.compile(
-    r"""(?:<tg-emoji\b[^>]*\bemoji-id\s*=\s*['"]?\d+['"]?[^>]*>(.*?)</tg-emoji>|<a\b[^>]*\bhref\s*=\s*['"]tg://emoji\?id=\d+['"][^>]*>(.*?)</a>)""",
+    r"<tg-emoji\b[^>]*\bemoji-id\s*=\s*['\"]?\d+['\"]?[^>]*>(.*?)</tg-emoji>",
     flags=re.IGNORECASE | re.DOTALL,
 )
 

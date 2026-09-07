@@ -94,12 +94,6 @@ class TelegramHTMLParser(HTMLParser):
             href = attrs_dict.get("href", "")
             if href.startswith("mailto:"):
                 self._open_entities[tag] = MessageEntityEmail(self._utf16_offset, 0)
-            elif href.startswith("tg://emoji?id="):
-                emoji_id = href.split("id=")[-1].split("&")[0]
-                if emoji_id and emoji_id.isdigit():
-                    self._open_entities[tag] = MessageEntityCustomEmoji(
-                        self._utf16_offset, 0, document_id=int(emoji_id)
-                    )
             elif href:
                 self._open_entities[tag] = MessageEntityTextUrl(
                     self._utf16_offset, 0, url=href
