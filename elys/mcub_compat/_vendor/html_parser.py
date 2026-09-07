@@ -94,6 +94,12 @@ class TelegramHTMLParser(HTMLParser):
             href = attrs_dict.get("href", "")
             if href.startswith("mailto:"):
                 self._open_entities[tag] = MessageEntityEmail(self._utf16_offset, 0)
+            elif href.startswith("tg://emoji?id="):
+                emoji_id = href.split("id=")[-1].split("&")[0]
+                if emoji_id and emoji_id.isdigit():
+                    self._open_entities[tag] = MessageEntityCustomEmoji(
+                        self._utf16_offset, 0, document_id=int(emoji_id)
+                    )
             elif href:
                 self._open_entities[tag] = MessageEntityTextUrl(
                     self._utf16_offset, 0, url=href
@@ -269,8 +275,14 @@ class HTMLDecorator:
             except Exception:  # noqa: BLE001
                 attrs["href"] = "mailto:"
         elif isinstance(entity, MessageEntityCustomEmoji):
-            tag = "tg-emoji"
-            attrs["emoji-id"] = str(getattr(entity, "document_id", ""))
+            from elys.emojis import is_alt_emoji_format
+
+            if is_alt_emoji_format():
+                tag = "a"
+                attrs["href"] = f"tg://emoji?id={getattr(entity, 'document_id', '')}"
+            else:
+                tag = "tg-emoji"
+                attrs["emoji-id"] = str(getattr(entity, "document_id", ""))
 
         return tag, attrs
 

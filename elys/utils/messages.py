@@ -506,6 +506,10 @@ async def answer(
     )
 
     if isinstance(response, str) and not kwargs.pop("asfile", False):
+        from .. import emojis
+
+        if emojis.is_alt_emoji_format():
+            response = emojis.convert_to_alt_emoji(response)
         text, entities = parse_mode.parse(response)
 
         if len(text) >= 4096 and not hasattr(message, "elys_grepped"):

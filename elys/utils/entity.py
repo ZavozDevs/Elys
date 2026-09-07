@@ -183,17 +183,32 @@ def remove_html(text: str, escape: bool = False, keep_emojis: bool = False) -> s
     :param keep_emojis: Keep custom emojis
     :return: Text without HTML
     """
-    return (escape_html if escape else str)(
-        re.sub(
-            (
-                r"(<\/?a.*?>|<\/?b>|<\/?i>|<\/?u>|<\/?strong>|<\/?em>|<\/?code.*?>|<\/?strike>|<\/?del>|<\/?pre.*?>|<\/?blockquote.*?>)"
-                if keep_emojis
-                else r"(<\/?a.*?>|<\/?b>|<\/?i>|<\/?u>|<\/?strong>|<\/?em>|<\/?code.*?>|<\/?strike>|<\/?del>|<\/?pre.*?>|<\/?emoji.*?>|<\/?blockquote.*?>)"
-            ),
-            "",
+    if keep_emojis:
+        emojis_found = []
+
+        def _save_emoji(m):
+            emojis_found.append(m.group(0))
+            return f"\x00EMOJI{len(emojis_found) - 1}\x00"
+
+        text = re.sub(
+            r"<(?P<t>tg-emoji|emoji|e)\b[^>]*>.*?</(?P=t)>",
+            _save_emoji,
             text,
+            flags=re.IGNORECASE | re.DOTALL,
         )
-    )
+        text = re.sub(
+            r"""<a\b[^>]*\bhref=["']?tg://emoji\?id=\d+["']?[^>]*>.*?</a>""",
+            _save_emoji,
+            text,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+        cleaned = re.sub(r"</?[a-zA-Z0-9_-]+(\s+[^>]*)?>", "", text)
+        for idx, em in enumerate(emojis_found):
+            cleaned = cleaned.replace(f"\x00EMOJI{idx}\x00", em)
+        return (escape_html if escape else str)(cleaned)
+
+    cleaned = re.sub(r"</?[a-zA-Z0-9_-]+(\s+[^>]*)?>", "", text)
+    return (escape_html if escape else str)(cleaned)
 
 
 def check_url(url: str) -> bool:

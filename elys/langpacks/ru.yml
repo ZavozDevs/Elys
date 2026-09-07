@@ -546,6 +546,7 @@ settings:
 
     3. Войдите в свой аккаунт по полученной ссылке.'
   _cfg_rich_mode: Показывать elys как Rich-сообщение.
+  _cfg_alt_emoji_format: 'Использовать формат <a href="tg://emoji?id=..."> вместо <tg-emoji> для премиум-эмодзи (экспериментально)'
   rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Текущий релиз</th></tr><tr><td><b>Версия</b></td><td><code>{version}</code></td></tr><tr><td><b>Сборка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Слой API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Текущий пользователь</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Разработчики</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Текущий релиз</th></tr><tr><td><b>Версия</b></td><td><code>{version}</code></td></tr><tr><td><b>Сборка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Слой API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Текущий пользователь</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Разработчики</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   no_aliases: '{e:stop} <b>У тебя пока нет сохраненных алиасов</b>'
@@ -664,6 +665,7 @@ elys_config:
   libraries: 📦 Библиотеки
   _cfg_chat_input: Вводить значения конфига обычным сообщением в чат вместо инлайн-запроса (экспериментально)
   _cfg_switch_layout: Автоматически инвертировать раскладку клавиатуры для команд (например, .рудз -> .help)
+  _cfg_alt_emoji_format: 'Использовать формат <a href="tg://emoji?id=..."> вместо <tg-emoji> для премиум-эмодзи (экспериментально)'
   chat_input_prompt_set: "✍️ <b>Отправь новое значение для параметра <code>{}</code> модуля <code>{}</code> обычным сообщением в этот чат.</b>\n\n<b>Текущее: {}</b>\n\n<i>⏳ Ожидание сообщения... (сообщение будет автоматически удалено)</i>"
   chat_input_prompt_set_lib: "✍️ <b>Отправь новое значение для параметра <code>{}</code> библиотеки <code>{}</code> обычным сообщением в этот чат.</b>\n\n<b>Текущее: {}</b>\n\n<i>⏳ Ожидание сообщения... (сообщение будет автоматически удалено)</i>"
   chat_input_prompt_add: "➕ <b>Отправь элемент для добавления в <code>{}</code> модуля <code>{}</code> обычным сообщением в этот чат.</b>\n\n<b>Текущее: {}</b>\n\n<i>⏳ Ожидание сообщения... (сообщение будет автоматически удалено)</i>"

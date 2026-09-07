@@ -542,6 +542,7 @@ settings:
 
     3. Увійдіть у свій акаунт за отриманим посиланням.'
   _cfg_rich_mode: Показувати Elys як Rich-повідомлення.
+  _cfg_alt_emoji_format: 'Використовувати формат <a href="tg://emoji?id=..."> замість <tg-emoji> для преміум-емодзі (експериментально)'
   rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Поточний реліз</th></tr><tr><td><b>Версія</b></td><td><code>{version}</code></td></tr><tr><td><b>Збірка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Шар API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Поточний користувач</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Розробники</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Поточний реліз</th></tr><tr><td><b>Версія</b></td><td><code>{version}</code></td></tr><tr><td><b>Збірка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Шар API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Поточний користувач</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Розробники</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   no_aliases: '{e:stop} <b>У тебе поки немає збережених аліасів</b>'
@@ -659,6 +660,7 @@ elys_config:
   libraries: 📦 Бібліотеки
   _cfg_chat_input: Вводити значення конфігу звичайним повідомленням у чат замість інлайн-запиту (експериментально)
   _cfg_switch_layout: Автоматично інвертувати розкладку клавіатури для команд (наприклад, .рудз -> .help)
+  _cfg_alt_emoji_format: 'Використовувати формат <a href="tg://emoji?id=..."> замість <tg-emoji> для преміум-емодзі (експериментально)'
   chat_input_prompt_set: "✍️ <b>Надішли нове значення для параметра <code>{}</code> модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
   chat_input_prompt_set_lib: "✍️ <b>Надішли нове значення для параметра <code>{}</code> бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
   chat_input_prompt_add: "➕ <b>Надішли елемент для додавання до <code>{}</code> модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"

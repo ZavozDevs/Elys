@@ -99,6 +99,16 @@ def _load_yaml(file_path: Path, *, icon_syntax: bool = False) -> dict[str, Any]:
 
 def _render_premium_emoji(value: Any) -> Any:
     if isinstance(value, str):
+        from elys.emojis import is_alt_emoji_format
+
+        if is_alt_emoji_format():
+            return _PREMIUM_EMOJI_RE.sub(
+                lambda match: (
+                    f'<a href="tg://emoji?id={match.group(1)}">'
+                    f"{html.escape(match.group(2))}</a>"
+                ),
+                value,
+            )
         return _PREMIUM_EMOJI_RE.sub(
             lambda match: (
                 f'<tg-emoji emoji-id="{match.group(1)}">'

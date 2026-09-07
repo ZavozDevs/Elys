@@ -37,6 +37,10 @@ class Settings(loader.Module):
     strings = {  # noqa: RUF012
         "name": "Settings",
         "_cfg_rich_mode": "Use rich text in outputs",
+        "_cfg_alt_emoji_format": (
+            "Use experimental <a href=\"tg://emoji?id=...\"> format instead of"
+            " <tg-emoji> for custom emojis"
+        ),
         "emoji_ok": "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji>",
     }
 
@@ -59,9 +63,33 @@ class Settings(loader.Module):
                 lambda: self.strings["_cfg_rich_mode"],
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "alt_emoji_format",
+                False,
+                lambda: self.strings["_cfg_alt_emoji_format"],
+                validator=loader.validators.Boolean(),
+                on_change=self._on_alt_emoji_format_change,
+            ),
         )
 
+    def _on_alt_emoji_format_change(self):
+        from .. import emojis
+
+        val = bool(self.config["alt_emoji_format"])
+        emojis.set_alt_emoji_format(val)
+        with contextlib.suppress(Exception):
+            cfg = self.lookup("ElysConfig")
+            if (
+                cfg
+                and "alt_emoji_format" in cfg.config
+                and cfg.config["alt_emoji_format"] != val
+            ):
+                cfg.config["alt_emoji_format"] = val
+
     async def client_ready(self):
+        from .. import emojis
+
+        emojis.set_alt_emoji_format(bool(self.config.get("alt_emoji_format", False)))
         self._markup = lambda: utils.chunks(
             [
                 {

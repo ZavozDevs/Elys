@@ -647,7 +647,7 @@ class CustomTelegramClient(TelegramClient):
 
         # Will be used to determine, which client caused logging messages
         # parsed via inspect.stack()
-        _elys_client_id_logging_tag = copy.copy(self.tg_id)  # noqa: F841
+        _elys_client_id_logging_tag = copy.copy(self.tg_id)
 
         if not hashable(entity):
             try:
@@ -724,7 +724,7 @@ class CustomTelegramClient(TelegramClient):
 
         # Will be used to determine, which client caused logging messages
         # parsed via inspect.stack()
-        _elys_client_id_logging_tag = copy.copy(self.tg_id)  # noqa: F841
+        _elys_client_id_logging_tag = copy.copy(self.tg_id)
 
         entity = await self.get_entity(entity)
         user = await self.get_entity(user) if user else None
@@ -1021,6 +1021,14 @@ class CustomTelegramClient(TelegramClient):
             *args,
             **kwargs,
         )
+
+    async def _parse_message_text(self, message, parse_mode):
+        if isinstance(message, str):
+            from . import emojis
+
+            if emojis.is_alt_emoji_format():
+                message = emojis.convert_to_alt_emoji(message)
+        return await super()._parse_message_text(message, parse_mode)
 
     async def _call(
         self,

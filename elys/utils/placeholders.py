@@ -25,6 +25,14 @@ LOADING_EMOJI_PREMIUM = "<tg-emoji emoji-id=5345778951031658558>😭</tg-emoji>"
 LOADING_EMOJI_PLAIN = ">_<"
 
 
+def _get_premium_loading_emoji() -> str:
+    from .. import emojis
+
+    if emojis.is_alt_emoji_format():
+        return emojis.convert_to_alt_emoji(LOADING_EMOJI_PREMIUM)
+    return LOADING_EMOJI_PREMIUM
+
+
 def get_loading_placeholder(client=None) -> str:
     """
     Returns custom loading emoji for Telegram Premium users, or plain text fallback.
@@ -33,7 +41,7 @@ def get_loading_placeholder(client=None) -> str:
         if client:
             me = getattr(client, "elys_me", None)
             if me and getattr(me, "premium", False):
-                return LOADING_EMOJI_PREMIUM
+                return _get_premium_loading_emoji()
 
     for ph_data in custom_placeholders.values():
         instance = ph_data.get("module_instance")
@@ -41,7 +49,7 @@ def get_loading_placeholder(client=None) -> str:
             with contextlib.suppress(Exception):
                 me = getattr(instance.client, "elys_me", None)
                 if me and getattr(me, "premium", False):
-                    return LOADING_EMOJI_PREMIUM
+                    return _get_premium_loading_emoji()
                 break
 
     return LOADING_EMOJI_PLAIN

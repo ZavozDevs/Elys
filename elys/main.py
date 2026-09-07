@@ -65,8 +65,10 @@ sys.modules.setdefault("hikkatl", elystl)
 sys.modules.setdefault("telethon", elystl)
 
 try:
+    import elystl.client.messageparse as _elystl_mp
     import elystl.extensions.html as _elystl_html
     import elystl.extensions.markdown as _elystl_md
+    from elystl.tl.types import MessageEntityCustomEmoji
 
     _orig_html_unparse = _elystl_html.unparse
 
@@ -95,17 +97,75 @@ try:
         return _orig_md_unparse(text, entities)
 
     _elystl_md.unparse = _safe_md_unparse
+
+    _orig_html_handle_starttag = _elystl_html.HTMLToTelegramParser.handle_starttag
+
+    def _safe_html_handle_starttag(self, tag, attrs):
+        tag_lower = tag.lower()
+        if tag_lower in ("a", "link"):
+            attrs_dict = {
+                k.lower(): v if v is not None else ""
+                for k, v in dict(attrs).items()
+            }
+            url = (
+                attrs_dict.get("href")
+                or attrs_dict.get("url")
+                or attrs_dict.get("link")
+                or ""
+            )
+            if url.startswith("tg://emoji?id="):
+                eid_str = url.split("id=")[-1].split("&")[0]
+                if eid_str.isdigit():
+                    self._stack.append(
+                        {
+                            "tag": tag_lower,
+                            "entity_cls": MessageEntityCustomEmoji,
+                            "args": {"document_id": int(eid_str)},
+                            "start_offset": len(self.text),
+                            "meta": None,
+                        }
+                    )
+                    return
+        return _orig_html_handle_starttag(self, tag, attrs)
+
+    _elystl_html.HTMLToTelegramParser.handle_starttag = _safe_html_handle_starttag
+
+    _orig_html_custom_emoji = _elystl_html.HtmlDecoration.custom_emoji
+
+    def _safe_html_custom_emoji(self, value, document_id):
+        from . import emojis
+
+        if emojis.is_alt_emoji_format():
+            return (
+                f'<a href="tg://emoji?id={_elystl_html.escape(str(document_id), quote=True)}">'
+                f"{value}</a>"
+            )
+        return _orig_html_custom_emoji(self, value, document_id)
+
+    _elystl_html.HtmlDecoration.custom_emoji = _safe_html_custom_emoji
+
+    _orig_parse_message_text = _elystl_mp.MessageParseMethods._parse_message_text
+
+    async def _safe_parse_message_text(self, message, parse_mode):
+        if isinstance(message, str):
+            from . import emojis
+
+            if emojis.is_alt_emoji_format():
+                message = emojis.convert_to_alt_emoji(message)
+        return await _orig_parse_message_text(self, message, parse_mode)
+
+    _elystl_mp.MessageParseMethods._parse_message_text = _safe_parse_message_text
 except Exception:
     logging.getLogger(__name__).debug("Failed to patch elystl html/md unparse", exc_info=True)
 
-from . import database, loader, utils, version  # noqa: E402
-from ._internal import print_banner, restart  # noqa: E402
-from .dispatcher import CommandDispatcher  # noqa: E402
-from .qr import QRCode  # noqa: E402
-from .secure import patcher  # noqa: E402
-from .tl_cache import CustomTelegramClient  # noqa: E402
-from .translations import Translator  # noqa: E402
-from .version import __version__  # noqa: E402
+from . import database, loader, utils, version
+from ._internal import print_banner, restart
+from .dispatcher import CommandDispatcher
+from .qr import QRCode
+from .secure import patcher
+from .tl_cache import CustomTelegramClient
+from .translations import Translator
+from .version import __version__
 
 logger = logging.getLogger(__name__)
 

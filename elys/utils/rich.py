@@ -91,6 +91,10 @@ def _text(value) -> str:
             or getattr(value, "text", None)
             or "⭐️"
         )
+        from .. import emojis
+
+        if emojis.is_alt_emoji_format():
+            return f'<a href="tg://emoji?id={doc_id}">{_escape(alt)}</a>'
         return f'<tg-emoji emoji-id="{doc_id}">{_escape(alt)}</tg-emoji>'
     if name == "TextImage":
         return f'<i>[image:{_attribute(getattr(value, "document_id", ""))}]</i>'

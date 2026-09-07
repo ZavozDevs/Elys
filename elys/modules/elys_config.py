@@ -88,6 +88,10 @@ class ElysConfigMod(loader.Module):
         "_cfg_switch_layout": (
             "Automatically invert keyboard layout for commands (e.g. .рудз -> .help)"
         ),
+        "_cfg_alt_emoji_format": (
+            "Use experimental <a href=\"tg://emoji?id=...\"> format instead of"
+            " <tg-emoji> for custom emojis"
+        ),
         "chat_input_prompt_set": (
             "✍️ <b>Send new value for <code>{}</code> of module <code>{}</code>"
             " as a message to this chat.</b>\n\n<b>Current: {}</b>\n\n"
@@ -156,8 +160,37 @@ class ElysConfigMod(loader.Module):
                 lambda: self.strings["_cfg_switch_layout"],
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "alt_emoji_format",
+                False,
+                lambda: self.strings["_cfg_alt_emoji_format"],
+                validator=loader.validators.Boolean(),
+                on_change=self._on_alt_emoji_format_change,
+            ),
         )
         self._active_chat_inputs: dict[str, dict] = {}
+
+    def _on_alt_emoji_format_change(self):
+        from .. import emojis
+
+        val = bool(self.config["alt_emoji_format"])
+        emojis.set_alt_emoji_format(val)
+        with contextlib.suppress(Exception):
+            settings_mod = self.lookup("Settings")
+            if (
+                settings_mod
+                and "alt_emoji_format" in settings_mod.config
+                and settings_mod.config["alt_emoji_format"] != val
+            ):
+                settings_mod.config["alt_emoji_format"] = val
+
+    async def client_ready(self):
+        from .. import emojis
+
+        if self.config.get("alt_emoji_format"):
+            emojis.set_alt_emoji_format(True)
+        elif emojis.is_alt_emoji_format():
+            self.config["alt_emoji_format"] = True
 
     def on_unload(self):
         for session in list(self._active_chat_inputs.values()):
@@ -229,22 +262,31 @@ class ElysConfigMod(loader.Module):
 
     @staticmethod
     def prep_value(value: typing.Any) -> typing.Any:
+        from .. import emojis
+
         if isinstance(value, str):
-            return f"<b><code>{utils.escape_html(value.strip())}</code></b>"
+            val_to_show = value
+            if emojis.is_alt_emoji_format():
+                val_to_show = emojis.convert_to_alt_emoji(val_to_show)
+            return f"<b><code>{utils.escape_html(val_to_show.strip())}</code></b>"
 
         if isinstance(value, list) and value:
+            items = []
+            for item in value:
+                s = str(item)
+                if emojis.is_alt_emoji_format():
+                    s = emojis.convert_to_alt_emoji(s)
+                items.append(f"<b><code>{utils.escape_html(s)}</code></b>")
             return (
                 "<b><code>[</code></b>\n    "
-                + "\n    ".join(
-                    [
-                        f"<b><code>{utils.escape_html(str(item))}</code></b>"
-                        for item in value
-                    ]
-                )
+                + "\n    ".join(items)
                 + "\n<b><code>]</code></b>"
             )
 
-        return f"<b><code>{utils.escape_html(value)}</code></b>"
+        val_to_show = str(value)
+        if emojis.is_alt_emoji_format():
+            val_to_show = emojis.convert_to_alt_emoji(val_to_show)
+        return f"<b><code>{utils.escape_html(val_to_show)}</code></b>"
 
     def hide_value(self, value: typing.Any) -> str:
         if isinstance(value, list) and value:
@@ -738,7 +780,7 @@ class ElysConfigMod(loader.Module):
             mod_instance.config[option] = new_list
         except loader.validators.ValidationError as e:
             err_msg = str(e.args[0])
-            if not err_msg.startswith(("<tg-emoji", "🚫", "⚠️", "❌")):
+            if not err_msg.startswith(("<tg-emoji", "<a ", "🚫", "⚠️", "❌")):
                 err_msg = self.strings["validation_error"].format(err_msg)
             await call.edit(
                 err_msg,
@@ -875,7 +917,7 @@ class ElysConfigMod(loader.Module):
             mod_instance.config[option] = new_items
         except loader.validators.ValidationError as e:
             err_msg = str(e.args[0])
-            if not err_msg.startswith(("<tg-emoji", "🚫", "⚠️", "❌")):
+            if not err_msg.startswith(("<tg-emoji", "<a ", "🚫", "⚠️", "❌")):
                 err_msg = self.strings["validation_error"].format(err_msg)
             await call.edit(
                 err_msg,
