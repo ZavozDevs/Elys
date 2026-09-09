@@ -291,8 +291,22 @@ class InlineManager(
             receive_updates=True,
         )
 
+        # Telegram restricts bot accounts from calling help.getAppConfig (avoids BotMethodInvalidError in elystl)
+        if hasattr(self._bot_client, "appconfig"):
+            async def _noop_appconfig_get(*args, **kwargs):
+                return {}
+
+            async def _noop_appconfig_refresh(*args, **kwargs):
+                return
+
+            self._bot_client.appconfig.get = _noop_appconfig_get
+            self._bot_client.appconfig._refresh_loop = _noop_appconfig_refresh
+
         try:
             await self._bot_client.start(bot_token=self._token)
+            if getattr(self._bot_client, "_appconfig_handle", None):
+                with contextlib.suppress(Exception):
+                    self._bot_client._appconfig_handle.cancel()
             self.bot = TelethonBot(self._bot_client)
             self._bot = self.bot
             self._register_builtin_handlers()
