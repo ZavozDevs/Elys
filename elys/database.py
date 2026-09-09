@@ -465,10 +465,13 @@ class Database(dict):
     def get(
         self,
         owner: str,
-        key: str,
+        key: str | None = None,
         default: JSONSerializable | None = None,
     ) -> JSONSerializable:
-        """Get database key snapshot"""
+        """Get database key snapshot, or entire owner dictionary if key is omitted"""
+        if key is None or not isinstance(key, str):
+            actual_default = key if key is not None and not isinstance(key, str) else default
+            return copy.deepcopy(super().get(owner, actual_default))
         return copy.deepcopy(self._get_raw(owner, key, default))
 
     def _get_raw(
@@ -499,8 +502,23 @@ class Database(dict):
                         return self[old_owner][key]
             return default
 
-    def set(self, owner: str, key: str, value: JSONSerializable) -> bool:
-        """Set database key"""
+    def set(
+        self,
+        owner: str,
+        key: str | dict,
+        value: JSONSerializable = None,
+    ) -> bool:
+        """Set database key or entire owner dictionary"""
+        if isinstance(key, dict) and value is None:
+            if not utils.is_serializable(owner):
+                raise RuntimeError(
+                    "Attempted to write object to "
+                    f"{owner=} ({type(owner)=}) of database. It is not "
+                    "JSON-serializable key which will cause errors"
+                )
+            super().__setitem__(owner, copy.deepcopy(key))
+            return self.save()
+
         if not utils.is_serializable(owner):
             raise RuntimeError(
                 "Attempted to write object to "

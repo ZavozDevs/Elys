@@ -182,18 +182,18 @@ class ElysBackupMod(loader.Module):
 
         # Preserve current runtime essentials so restoring an external/old DB
         # doesn't destroy the current active Telegram forums/topics and bot token
-        current_forums = self._db.get("elys.forums")
+        current_forums = dict.get(self._db, "elys.forums", {}).copy()
         current_bot_token = self._db.get("elys.inline", "bot_token", None)
 
         self._db.clear()
         self._db.update(**db_data)
 
         if current_forums and isinstance(current_forums, dict):
-            restored_forums = self._db.get("elys.forums")
+            restored_forums = dict.get(self._db, "elys.forums")
             if not isinstance(restored_forums, dict) or not self._db.get(
                 "elys.forums", "channel_id", None
             ):
-                self._db.set("elys.forums", current_forums)
+                self._db["elys.forums"] = current_forums.copy()
             else:
                 cached = self._db.get("elys.forums", "forums_cache", {})
                 current_cached = current_forums.get("forums_cache", {})
@@ -210,10 +210,8 @@ class ElysBackupMod(loader.Module):
                 if current_forums.get("forum_id"):
                     self._db.set("elys.forums", "forum_id", current_forums["forum_id"])
 
-        if current_bot_token:
-            inline_cfg = self._db.get("elys.inline", {})
-            if isinstance(inline_cfg, dict) and not inline_cfg.get("bot_token"):
-                self._db.set("elys.inline", "bot_token", current_bot_token)
+        if current_bot_token and not self._db.get("elys.inline", "bot_token", None):
+            self._db.set("elys.inline", "bot_token", current_bot_token)
 
         self._db.save()
 
