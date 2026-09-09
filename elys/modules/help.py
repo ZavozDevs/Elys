@@ -193,27 +193,24 @@ class Help(loader.Module):
             )[1]:
                 module = method.__self__
             else:
-                module = self.lookup(
-                    next(
-                        (
-                            sorted(
-                                [
-                                    module.strings["name"]
-                                    for module in self.allmodules.modules
-                                ],
-                                key=lambda x: difflib.SequenceMatcher(
-                                    None,
-                                    args.lower(),
-                                    x,
-                                ).ratio(),
-                                reverse=True,
-                            )
-                        ),
+                candidates = sorted(
+                    [
+                        getattr(mod, "strings", {}).get("name", getattr(mod, "name", mod.__class__.__name__))
+                        for mod in self.allmodules.modules
+                    ],
+                    key=lambda x: difflib.SequenceMatcher(
                         None,
-                    )
+                        args.lower(),
+                        x.lower(),
+                    ).ratio(),
+                    reverse=True,
                 )
+                module = self.lookup(candidates[0]) if candidates else None
 
                 exact = False
+
+        if not module:
+            return
 
         try:
             name = module.strings("name")

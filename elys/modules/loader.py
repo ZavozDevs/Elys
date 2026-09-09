@@ -1879,30 +1879,27 @@ class LoaderMod(loader.Module):
                 None,
             )
         ):
-            if not (
-                class_name := next(
-                    sorted(
-                        [
-                            module.strings["name"].lower()
-                            for module in self.allmodules.modules
-                        ]
-                        + [
-                            module.__class__.__name__.lower()
-                            for module in self.allmodules.modules
-                        ],
-                        key=lambda x: difflib.SequenceMatcher(
-                            None,
-                            args.lower(),
-                            x,
-                        ).ratio(),
-                        reverse=True,
-                    ),
+            candidates = sorted(
+                [
+                    module.strings["name"].lower()
+                    for module in self.allmodules.modules
+                ]
+                + [
+                    module.__class__.__name__.lower()
+                    for module in self.allmodules.modules
+                ],
+                key=lambda x: difflib.SequenceMatcher(
                     None,
-                )
-            ):
+                    args.lower(),
+                    x,
+                ).ratio(),
+                reverse=True,
+            )
+            if not candidates:
                 await utils.answer(message, self.strings["404"])
                 return
 
+            class_name = candidates[0]
             exact = False
 
         try:
