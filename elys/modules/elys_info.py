@@ -29,7 +29,6 @@ import time
 import typing
 
 import elystl
-import psutil
 import requests
 from elystl.errors import WebpageMediaEmptyError
 from elystl.tl.types import Message
@@ -268,7 +267,24 @@ class ElysInfoMod(loader.Module):
 
     def _get_cpu_info(self) -> str | None:
         try:
-            return f"{psutil.cpu_count(logical=False)} ({psutil.cpu_count()}) core(-s); {psutil.cpu_percent()}% total"
+            logical = os.cpu_count() or 1
+            physical = logical
+            try:
+                with open("/proc/cpuinfo") as f:
+                    cores = set()
+                    phys_id = 0
+                    core_id = 0
+                    for line in f:
+                        if line.startswith("physical id"):
+                            phys_id = int(line.split(":")[1])
+                        elif line.startswith("core id"):
+                            core_id = int(line.split(":")[1])
+                            cores.add((phys_id, core_id))
+                    if cores:
+                        physical = len(cores)
+            except Exception:
+                pass
+            return f"{physical} ({logical}) core(-s); {utils.get_cpu_usage()}% total"
         except PermissionError:
             return None
         except Exception:

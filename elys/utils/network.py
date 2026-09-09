@@ -61,15 +61,49 @@ def get_network_interfaces() -> dict[str, str]:
     Get network interfaces and their IP addresses
     :return: Dictionary of interface: IP
     """
-    import psutil
+    interfaces = {}
+    try:
+        import fcntl
+        import struct
+
+        names = [name for _, name in socket.if_nameindex()]
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        for ifname in names:
+            try:
+                addr = socket.inet_ntoa(
+                    fcntl.ioctl(
+                        s.fileno(),
+                        0x8915,  # SIOCGIFADDR
+                        struct.pack("256s", ifname.encode("utf-8")[:15]),
+                    )[20:24]
+                )
+                interfaces[ifname] = addr
+            except Exception:  # noqa: BLE001
+                pass
+        s.close()
+        if interfaces:
+            return interfaces
+    except Exception:  # noqa: BLE001
+        pass
 
     try:
-        interfaces = {}
+        import psutil
+
         for name, addrs in psutil.net_if_addrs().items():
             for addr in addrs:
                 if addr.family == socket.AF_INET:
                     interfaces[name] = addr.address
                     break
-        return interfaces
+        if interfaces:
+            return interfaces
     except Exception:  # noqa: BLE001
-        return {}
+        pass
+
+    try:
+        hostname = socket.gethostname()
+        for ip in socket.gethostbyname_ex(hostname)[2]:
+            interfaces[hostname] = ip
+    except Exception:  # noqa: BLE001
+        pass
+
+    return interfaces

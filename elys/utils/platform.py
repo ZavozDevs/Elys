@@ -13,6 +13,8 @@
 import contextlib
 import logging
 import os
+import shutil
+import sys
 import time
 from datetime import timedelta
 
@@ -169,18 +171,80 @@ def formatted_uptime() -> str:
     return time_formatted
 
 
+def _read_meminfo() -> dict[str, int]:
+    """Reads /proc/meminfo into a dictionary with integer values in kB."""
+    info: dict[str, int] = {}
+    try:
+        with open("/proc/meminfo") as f:
+            for line in f:
+                parts = line.split(":", 1)
+                if len(parts) == 2:
+                    info[parts[0].strip()] = int(parts[1].split()[0])
+    except Exception:  # noqa: BLE001
+        pass
+    return info
+
+
+def _get_windows_memory() -> dict[str, int]:
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        class MEMORYSTATUSEX(ctypes.Structure):
+            _fields_ = [
+                ("dwLength", wintypes.DWORD),
+                ("dwMemoryLoad", wintypes.DWORD),
+                ("ullTotalPhys", ctypes.c_uint64),
+                ("ullAvailPhys", ctypes.c_uint64),
+                ("ullTotalPageFile", ctypes.c_uint64),
+                ("ullAvailPageFile", ctypes.c_uint64),
+                ("ullTotalVirtual", ctypes.c_uint64),
+                ("ullAvailVirtual", ctypes.c_uint64),
+                ("ullAvailExtendedVirtual", ctypes.c_uint64),
+            ]
+
+        stat = MEMORYSTATUSEX()
+        stat.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+        if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat)):
+            return {
+                "total_phys": stat.ullTotalPhys,
+                "avail_phys": stat.ullAvailPhys,
+                "total_page": stat.ullTotalPageFile,
+                "avail_page": stat.ullAvailPageFile,
+            }
+    except Exception:  # noqa: BLE001
+        pass
+    return {}
+
+
 def get_ram_usage() -> float:
-    """Returns current process tree memory usage in MB"""
+    """Returns current process memory usage in MB"""
+    # Linux / Android (Termux) / WSL: /proc/self/status VmRSS is fastest (<15 µs)
+    try:
+        with open("/proc/self/status") as f:
+            for line in f:
+                if line.startswith("VmRSS:"):
+                    return round(int(line.split()[1]) / 1024, 1)
+    except Exception:  # noqa: BLE001
+        pass
+
+    # POSIX fallback (macOS / BSD)
+    try:
+        import resource
+
+        rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        scale = 1024 * 1024 if sys.platform == "darwin" else 1024
+        return round(rss / scale, 1)
+    except Exception:  # noqa: BLE001
+        pass
+
+    # Fallback to psutil if available
     try:
         import psutil
 
-        current_process = psutil.Process(os.getpid())
-        mem = current_process.memory_info()[0] / 2.0**20
-        for child in current_process.children(recursive=True):
-            mem += child.memory_info()[0] / 2.0**20
-        return round(mem, 1)
+        return round(psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024, 1)
     except Exception:  # noqa: BLE001
-        return 0
+        return 0.0
 
 
 def get_ram_usage_system() -> dict:
@@ -188,7 +252,44 @@ def get_ram_usage_system() -> dict:
     Get system-wide RAM usage information
     :return: Dictionary with used, total in MB and percent
     """
-    try:
+    mem = _read_meminfo()
+    if mem and "MemTotal" in mem:
+        total = mem["MemTotal"] // 1024
+        available = mem.get("MemAvailable", mem.get("MemFree", 0)) // 1024
+        used = max(0, total - available)
+        percent = round((used / total) * 100, 1) if total else 0.0
+        return {
+            "percent": percent,
+            "used": used,
+            "total": total,
+        }
+
+    if IS_WINDOWS:
+        win_mem = _get_windows_memory()
+        if win_mem:
+            total = round(win_mem["total_phys"] / 1024 / 1024)
+            avail = round(win_mem["avail_phys"] / 1024 / 1024)
+            used = max(0, total - avail)
+            percent = round((used / total) * 100, 1) if total else 0.0
+            return {
+                "percent": percent,
+                "used": used,
+                "total": total,
+            }
+
+    with contextlib.suppress(Exception):
+        page_size = os.sysconf("SC_PAGE_SIZE")
+        total = (page_size * os.sysconf("SC_PHYS_PAGES")) // (1024 * 1024)
+        avail = (page_size * os.sysconf("SC_AVPHYS_PAGES")) // (1024 * 1024)
+        used = max(0, total - avail)
+        percent = round((used / total) * 100, 1) if total else 0.0
+        return {
+            "percent": percent,
+            "used": used,
+            "total": total,
+        }
+
+    with contextlib.suppress(Exception):
         import psutil
 
         vm = psutil.virtual_memory()
@@ -197,8 +298,8 @@ def get_ram_usage_system() -> dict:
             "used": round(vm.used / 1024 / 1024),
             "total": round(vm.total / 1024 / 1024),
         }
-    except Exception:  # noqa: BLE001
-        return {"error": "Failed to get RAM usage"}
+
+    return {"error": "Failed to get RAM usage"}
 
 
 def get_swap_usage() -> dict:
@@ -206,7 +307,21 @@ def get_swap_usage() -> dict:
     Get swap usage information
     :return: Dictionary with used, total in MB and percent, or error string
     """
-    try:
+    mem = _read_meminfo()
+    if mem and "SwapTotal" in mem:
+        total = mem["SwapTotal"] // 1024
+        if total == 0:
+            return {"error": "Swap is not configured on this system"}
+        free = mem.get("SwapFree", 0) // 1024
+        used = max(0, total - free)
+        percent = round((used / total) * 100, 1) if total else 0.0
+        return {
+            "percent": percent,
+            "used": used,
+            "total": total,
+        }
+
+    with contextlib.suppress(Exception):
         import psutil
 
         swap = psutil.swap_memory()
@@ -217,28 +332,55 @@ def get_swap_usage() -> dict:
             "used": round(swap.used / 1024 / 1024),
             "total": round(swap.total / 1024 / 1024),
         }
-    except Exception:  # noqa: BLE001
-        return {"error": "Failed to get swap usage"}
+
+    return {"error": "Swap is not configured on this system"}
 
 
-def get_cpu_usage():
+_prev_cpu_times: tuple[float, float] | None = None
+
+with contextlib.suppress(Exception):
+    with open("/proc/stat") as _f:
+        _line = _f.readline()
+        if _line.startswith("cpu "):
+            _fields = [float(x) for x in _line.split()[1:]]
+            _prev_cpu_times = (_fields[3] + (_fields[4] if len(_fields) > 4 else 0.0), sum(_fields))
+
+
+def get_cpu_usage() -> str:
     """
-    Get CPU usage percentage using system-wide metrics
-    Falls back to psutil.cpu_percent() to avoid /proc/stat permission issues
+    Get CPU usage percentage using system-wide metrics.
+    Uses /proc/stat delta calculation without blocking sleep.
     """
-    import psutil
-
+    global _prev_cpu_times
     try:
-        cpu_percent = psutil.cpu_percent(interval=0.1)
+        with open("/proc/stat") as f:
+            first_line = f.readline()
+        if first_line.startswith("cpu "):
+            fields = [float(x) for x in first_line.split()[1:]]
+            idle = fields[3] + (fields[4] if len(fields) > 4 else 0.0)
+            total = sum(fields)
+
+            if _prev_cpu_times is not None:
+                last_idle, last_total = _prev_cpu_times
+                delta_total = total - last_total
+                delta_idle = idle - last_idle
+                _prev_cpu_times = (idle, total)
+                if delta_total > 0:
+                    percent = max(0.0, min(100.0, (1.0 - (delta_idle / delta_total)) * 100))
+                    return f"{percent:.2f}"
+            else:
+                _prev_cpu_times = (idle, total)
+                return "0.00"
+    except (PermissionError, FileNotFoundError, Exception):  # noqa: BLE001
+        pass
+
+    with contextlib.suppress(Exception):
+        import psutil
+
+        cpu_percent = psutil.cpu_percent(interval=0)
         return f"{cpu_percent:.2f}"
-    except PermissionError:
-        try:
-            cpu_percent = psutil.cpu_percent(interval=0)
-            return f"{cpu_percent:.2f}" if cpu_percent != 0 else "0.00"
-        except Exception:  # noqa: BLE001
-            return "0.00"
-    except Exception:  # noqa: BLE001
-        return "0.00"
+
+    return "0.00"
 
 
 init_ts = time.perf_counter()
@@ -266,6 +408,21 @@ def get_disk_usage() -> dict:
     :return: Dictionary with total, used, free in GB
     """
     try:
+        path = "/"
+        if not os.path.exists(path):
+            path = os.path.expanduser("~")
+        total, used, free = shutil.disk_usage(path)
+        percent = round((used / total) * 100, 1) if total else 0.0
+        return {
+            "total": round(total / (1024**3), 2),
+            "used": round(used / (1024**3), 2),
+            "free": round(free / (1024**3), 2),
+            "percent": percent,
+        }
+    except Exception:  # noqa: BLE001
+        pass
+
+    with contextlib.suppress(Exception):
         import psutil
 
         disk = psutil.disk_usage("/")
@@ -275,5 +432,5 @@ def get_disk_usage() -> dict:
             "free": round(disk.free / (1024**3), 2),
             "percent": disk.percent,
         }
-    except Exception:  # noqa: BLE001
-        return {"total": 0, "used": 0, "free": 0, "percent": 0}
+
+    return {"total": 0, "used": 0, "free": 0, "percent": 0}
