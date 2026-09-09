@@ -143,6 +143,18 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3 git python3-p
 > Вуаля! Вы установили Elys на UserLAnd.
 </details>
 
+<details>
+  <summary><b>Телефон (Termux)</b></summary>
+  
+1. <b>Установите Termux из</b> <a href="https://github.com/termux/termux-app/releases">GitHub Releases</a> или <a href="https://f-droid.org/packages/com.termux/">F-Droid</a> (не используйте версию из Google Play).
+2. <b>Запустите Termux и выполните команду:</b>
+```bash
+pkg update -y && pkg install git python -y && git clone https://github.com/ZavozDevs/Elys && cd Elys && pip install -r requirements.txt && python3 -m elys
+```
+3. <b>В конце установки появится ссылка для веб-авторизации или выполните вход прямо в терминале.</b>
+> **🪐 Вуаля! Вы установили Elys в Termux.**
+</details>
+
 ### Официальные хостинги
 <details>
 <summary><b>❤️‍🔥 RnHost</b></summary>

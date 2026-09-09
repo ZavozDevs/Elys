@@ -101,6 +101,7 @@ class Settings(loader.Module):
                     "vds",
                     "wsl",
                     "userland",
+                    "termux",
                     "rnhost",
                 ]
             ],
@@ -755,7 +756,11 @@ class Settings(loader.Module):
         args = utils.get_args_raw(message)
 
         if (
-            not args or args not in {"-vds", "-wsl", "-ul", "-jh", "-hh", "-lh"}
+            not args
+            or not any(
+                flag in args
+                for flag in {"-vds", "-wsl", "-ul", "-tm", "-termux", "-rn"}
+            )
         ) and not (
             await self.inline.form(
                 self.strings["choose_installation"],
@@ -778,6 +783,8 @@ class Settings(loader.Module):
                 await utils.answer(message, self.strings["wsl_install"])
             case _ if "-ul" in args:
                 await utils.answer(message, self.strings["userland_install"])
+            case _ if "-tm" in args or "-termux" in args:
+                await utils.answer(message, self.strings["termux_install"])
             case _ if "-rn" in args:
                 await utils.answer(message, self.strings["rnhost_install"])
 

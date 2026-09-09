@@ -149,6 +149,20 @@ python3 -m elys
 > **Voila! You have installed Elys on UserLAnd.**
 </details>
 
+<details>
+  <summary><b>Phone (Termux)</b></summary>
+  
+  1. <b>Install Termux from</b> <a href="https://github.com/termux/termux-app/releases">GitHub Releases</a> or <a href="https://f-droid.org/packages/com.termux/">F-Droid</a> (do not use Google Play version).
+  2. <b>Launch Termux and run:</b>
+    
+  ```bash
+  pkg update -y && pkg install git python -y && git clone https://github.com/ZavozDevs/Elys && cd Elys && pip install -r requirements.txt && python3 -m elys
+  ```
+
+  3. <b>At the end of the installation, follow the web link or complete authorization in the terminal.</b>
+  > **🪐 Voila! You have installed Elys on Termux.**
+</details>
+
 ### Official hostings
 <details>
 <summary><b>❤️‍🔥 RnHost</b></summary>
