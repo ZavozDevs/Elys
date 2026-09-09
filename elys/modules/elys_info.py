@@ -24,6 +24,7 @@ import logging
 import os
 import platform as lib_platform
 import re
+import sys
 import time
 import typing
 
@@ -126,13 +127,48 @@ class ElysInfoMod(loader.Module):
             return None
 
     def _get_os_name(self):
-        try:
-            with open("/etc/os-release") as f:
-                for line in f:
-                    if line.startswith("PRETTY_NAME"):
-                        return line.split("=")[1].strip().strip('"')
-        except FileNotFoundError:
-            return self.strings["non_detectable"]
+        # 1. Standard Linux / Termux os-release
+        paths = ["/etc/os-release"]
+        if "PREFIX" in os.environ:
+            paths.append(os.path.join(os.environ["PREFIX"], "etc", "os-release"))
+
+        for path in paths:
+            try:
+                with open(path) as f:
+                    for line in f:
+                        if line.startswith("PRETTY_NAME"):
+                            return line.split("=")[1].strip().strip('"')
+            except FileNotFoundError:
+                pass
+
+        # 2. Android / Termux version detection via getprop
+        if sys.platform == "android" or "TERMUX_VERSION" in os.environ:
+            try:
+                import subprocess
+
+                rel = subprocess.check_output(
+                    ["getprop", "ro.build.version.release"], text=True, timeout=1
+                ).strip()
+                if rel:
+                    return f"Android {rel}"
+            except Exception:
+                pass
+            return "Android"
+
+        # 3. macOS
+        if sys.platform == "darwin":
+            mac_ver = lib_platform.mac_ver()[0]
+            return f"macOS {mac_ver}" if mac_ver else "macOS"
+
+        # 4. Windows
+        if sys.platform == "win32":
+            return f"Windows {lib_platform.release()}"
+
+        # 5. Generic fallback
+        if lib_platform.system():
+            return f"{lib_platform.system()} {lib_platform.release()}"
+
+        return self.strings["non_detectable"]
 
     async def _render_info(
         self,

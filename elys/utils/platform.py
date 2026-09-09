@@ -26,8 +26,13 @@ logger = logging.getLogger(__name__)
 IS_DOCKER = "DOCKER" in os.environ
 IS_HIKKAHOST = "HIKKAHOST" in os.environ
 IS_RNHOST = "RNHOST" in os.environ or "RN_HOST" in os.environ
-IS_MACOS = "com.apple" in os.environ.get("PATH", "")
+IS_MACOS = "com.apple" in os.environ.get("PATH", "") or sys.platform == "darwin"
 IS_USERLAND = "userland" in os.environ.get("USER", "")
+IS_TERMUX = (
+    "TERMUX_VERSION" in os.environ
+    or "com.termux" in os.environ.get("PREFIX", "")
+    or sys.platform == "android"
+)
 IS_WSL = False
 IS_WINDOWS = False
 with contextlib.suppress(Exception):
@@ -65,6 +70,9 @@ def get_named_platform() -> str:
 
         case _ if IS_USERLAND:
             return "UserLand"
+
+        case _ if IS_TERMUX:
+            return "Termux"
 
         case _ if IS_HIKKAHOST:
             return "HikkaHost"
@@ -110,6 +118,9 @@ def get_named_platform_emoji() -> str:
         case _ if IS_USERLAND:
             return "🐧 "
 
+        case _ if IS_TERMUX:
+            return "🪐 "
+
         case _ if IS_HIKKAHOST:
             return "🌼 "
 
@@ -142,6 +153,8 @@ def get_platform_emoji() -> str:
             platform_prefix = "<tg-emoji emoji-id=5395745114494624362>🌼</tg-emoji>"
         case _ if IS_USERLAND:
             platform_prefix = "<tg-emoji emoji-id=5458877818031077824>🐧</tg-emoji>"
+        case _ if IS_TERMUX:
+            platform_prefix = "<tg-emoji emoji-id=5350588498359377932>🪐</tg-emoji>"
         case _ if IS_RNHOST:
             platform_prefix = "<tg-emoji emoji-id=5276415504079164229>❤️‍🔥</tg-emoji>"
         case _ if IS_DOCKER:
