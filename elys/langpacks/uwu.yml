@@ -447,6 +447,8 @@ settings:
 
 
     Voiwà! You have instawwed Elys on UsewWAnd.</b>'
+  termux: 🪐 Tewmux
+  termux_install: "<b>🪐 Instawwing Elys in Tewmux (Andwoid) nya~:</b>\n\n1. Downwoad <b>Tewmux</b> fwom <a href=\"https://github.com/termux/termux-app/releases\">GitHub Weweases</a> ow <a href=\"https://f-droid.org/packages/com.termux/\">F-Dwoid</a> (Googwe Pway vewsion is bwoken >w<).\n\n2. Open Tewmux and wun dis command:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. At da end a wink wiww appeaw — fowwow it to wogin nya!\n\n🪐 <b>Voiwà! Elys is wunning in Tewmux! ✨</b>"
   too_many_args: '{e:stop} <b>Too many awgs >w<</b>'
   blacklisted: '{e:thumbup} <b>Chat {} bwackwisted fwom usewbot</b>'
   unblacklisted: '{e:thumbup} <b>Chat {} unbwackwisted fwom usewbot</b>'

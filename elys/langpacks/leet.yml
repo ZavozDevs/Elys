@@ -447,6 +447,8 @@ settings:
 
 
     V01là! U h4v3 1n574ll3d 3li5 0n Us3rL4nd.</b>'
+  termux: 🪐 T3rmux
+  termux_install: "<b>🪐 1n574ll 3li5 1n T3rmux (Andr01d):</b>\n\n1. D0wnl04d <b>T3rmux</b> fr0m <a href=\"https://github.com/termux/termux-app/releases\">G17Hub R3l34535</a> 0r <a href=\"https://f-droid.org/packages/com.termux/\">F-Dr01d</a> (G00gl3 Pl4y v3r 15 d3pr3c473d).\n\n2. 0p3n T3rmux & run:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. 47 7h3 3nd 0f 7h3 1n574ll, 4 l1nk w1ll 4pp34r — f0ll0w 17 2 l0g1n v14 br0w53r 0r 4u7h 1n 73rm1n4l.\n\n🪐 <b>V01là! U h4v3 1n574ll3d 3li5 1n T3rmux.</b>"
   too_many_args: '{e:stop} <b>2 m4ny 4rg5</b>'
   blacklisted: '{e:thumbup} <b>Ch47 {} bl4ckl1573d fr0m u53rb07</b>'
   unblacklisted: '{e:thumbup} <b>Ch47 {} unbl4ckl1573d fr0m u53rb07</b>'

@@ -442,6 +442,8 @@ settings:
 
 
     <b>Login via link.</b>'
+  termux: 🪐 Termux
+  termux_install: "<b>🪐 Termux Deploy (Android):</b>\n\n1. <b>Termux:</b> Get via <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> or <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (no Play Store).\n\n2. <b>Run:</b>\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. Auth via generated link or terminal.\n\n🪐 <b>Termux ready.</b>"
   too_many_args: '{e:stop} <b>Too many arguments</b>'
   blacklisted: '{e:thumbup} <b>Chat {} added to blacklist</b>'
   unblacklisted: '{e:thumbup} <b>Chat {} removed from blacklist</b>'

@@ -432,6 +432,8 @@ settings:
 
 
     Voilà! Du hast Elys auf UserLAnd installiert.</b>'
+  termux: 🪐 Termux
+  termux_install: "<b>🪐 Installation von Elys in Termux (Android):</b>\n\n1. Lade <b>Termux</b> von <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> oder <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> herunter (Google Play-Version ist veraltet und nicht unterstützt).\n\n2. Öffne Termux und gib den Befehl ein:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. Am Ende der Installation erscheint ein Link — folge ihm zur Web-Autorisierung oder logge dich im Terminal ein.\n\n🪐 <b>Voilà! Du hast Elys in Termux installiert.</b>"
   too_many_args: '{e:stop} <b>Zu viele Argumente</b>'
   blacklisted: '{e:thumbup} <b>Chat {} wurde zur Blacklist des Userbots hinzugefügt</b>'
   unblacklisted: '{e:thumbup} <b>Chat {} wurde aus der Blacklist des Userbots entfernt</b>'

@@ -451,6 +451,8 @@ settings:
 
 
     これで UserLAnd に Elys がインストールされました。</b>'
+  termux: 🪐 Termux
+  termux_install: "<b>🪐 Termux (Android) への Elys のインストール:</b>\n\n1. <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> または <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> から <b>Termux</b> をダウンロードしてインストールします (Google Play 版は非推奨です)。\n\n2. Termux を開き、次のコマンドを入力します:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. インストールの最後にリンクが表示されるので、それに従ってブラウザでログインするか、ターミナルで認証します。\n\n🪐 <b>これで Termux に Elys がインストールされました。</b>"
   too_many_args: '{e:stop} <b>引数が多すぎます</b>'
   blacklisted: '{e:thumbup} <b>チャット {} をユーザーボットのブラックリストに追加しました</b>'
   unblacklisted: '{e:thumbup} <b>チャット {} をユーザーボットのブラックリストから削除しました</b>'

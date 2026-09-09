@@ -434,6 +434,8 @@ settings:
 
 
     Вуаля! Ви встановили Elys на UserLAnd.</b>'
+  termux: 🪐 Termux
+  termux_install: "<b>🪐 Встановлення Elys в Termux (Android):</b>\n\n1. Завантаж та встанови <b>Termux</b> з <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> або <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (версія з Google Play застаріла і не підтримується).\n\n2. Відкрий Termux та встав команду:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. В кінці встановлення з'явиться посилання — переходь за ним для авторизації через браузер або увійди прямо в терміналі.\n\n🪐 <b>Вуаля! Ви встановили Elys в Termux.</b>"
   too_many_args: '{e:stop} <bЗанадто багато аргументів</b>'
   blacklisted: '{e:thumbup} <b>Чат {} додано до чорного списку юзербота</b>'
   unblacklisted: '{e:thumbup} <b>Чат {} видалено з чорного списку юзербота</b>'

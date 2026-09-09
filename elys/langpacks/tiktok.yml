@@ -430,6 +430,8 @@ settings:
 
 
     Вуаля! Ты хакер на телефоне.</b>'
+  termux: 🪐 Termux
+  termux_install: "<b>🪐 Ставим Elys в Termux на мобилу:</b>\n\n1. Качай нормальный <b>Termux</b> с <a href=\"https://github.com/termux/termux-app/releases\">GitHub</a> или <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (с Google Play не качай, там тухляк).\n\n2. Открывай Termux и вставляй одну строчку:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. Вылезет ссылка — тыкай и входи в акк, либо пиши прямо в консоли.\n\n🪐 <b>Вуаля! Бот на телефоне в кармане.</b>"
   too_many_args: '{e:stop} <b>Много букв, короче пиши</b>'
   blacklisted: '{e:thumbup} <b>Чат {} в мусорке (ЧС)</b>'
   unblacklisted: '{e:thumbup} <b>Чат {} вернул из мусорки</b>'

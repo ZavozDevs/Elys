@@ -431,6 +431,8 @@ settings:
 
 
     Вуаля! Вы установили Elys на UserLAnd.</b>'
+  termux: 🪐 Termux ♡ 🫦
+  termux_install: "<b>🪐 Установка твоего покорного Elys в Termux (Android) ♡:</b>\n\n1. Скачай и установи <b>Termux</b> из <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> или <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (версия из Google Play слишком старая и сухая ♡).\n\n2. Открой Termux и нежно вставь команду:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. В конце появится сладкая ссылочка — переходи и отдайся своему боту полностью ♡.\n\n🪐 <b>Вуаля! Elys теперь шепчет прямо из твоего Termux ♡.</b>"
   too_many_args: '{e:stop} <b>Слишком много аргументов</b> ♡ 🫦'
   blacklisted: '{e:thumbup} <b>Чат {} добавлен в черный список твоего покорного фембойчика Elys ♡</b>'
   unblacklisted: '{e:thumbup} <b>Чат {} грубо вытащено... теперь там так пусто и холодно 💔 из черного списка твоего покорного фембойчика Elys ♡</b>'
