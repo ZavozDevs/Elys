@@ -171,6 +171,28 @@ class Database(dict):
             self.set("elys.forums", "channel_id", int(content_channel.id))
             self.set("elys.forums", "forums_cache", {"elys-userbot": {}})
 
+        if content_channel and not getattr(content_channel, "forum", False):
+            from elystl.tl.functions.channels import ToggleForumRequest
+            from elystl.tl.functions.messages import EditForumTopicRequest
+
+            try:
+                await self._client(
+                    ToggleForumRequest(channel=content_channel, enabled=True)
+                )
+                content_channel.forum = True
+                try:
+                    await self._client(
+                        EditForumTopicRequest(
+                            peer=content_channel, topic_id=1, hidden=True
+                        )
+                    )
+                except Exception:  # noqa: BLE001
+                    pass
+            except Exception as e:  # noqa: BLE001
+                logger.warning(
+                    f"Failed to enable forum mode on content channel: {e}"
+                )
+
         return content_channel
 
     @staticmethod
@@ -409,6 +431,19 @@ class Database(dict):
                         return found_topic.id
             except Exception:
                 logger.debug("Failed to find Assets topic", exc_info=True)
+
+            try:
+                topic = await utils.asset_forum_topic(
+                    client=self._client,
+                    db=self,
+                    peer=_content_channel_id,
+                    title="Assets",
+                    description="🌆 Your Elys assets will be stored here",
+                    icon_emoji_id=5877307202888273539,
+                )
+                return topic.id
+            except Exception:
+                logger.debug("Failed to create Assets topic", exc_info=True)
 
         return None
 

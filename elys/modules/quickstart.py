@@ -87,9 +87,7 @@ class Quickstart(loader.Module):
 
             if not forum_entity:
                 try:
-                    if not (
-                        hasattr(content_channel, "forum") or not content_channel.forum
-                    ):
+                    if not getattr(content_channel, "forum", False):
                         from elystl.tl.functions.channels import ToggleForumRequest
 
                         try:
@@ -99,6 +97,7 @@ class Quickstart(loader.Module):
                                     enabled=True,
                                 )
                             )
+                            content_channel.forum = True
                         except Exception as e:  # noqa: BLE001
                             logger.debug(
                                 f"Channel might already be a forum or conversion failed: {e}"
@@ -110,6 +109,11 @@ class Quickstart(loader.Module):
                     forum_entity = content_channel
 
             required_topics = [
+                (
+                    "Logs",
+                    "📊 Inline logs and error reports will be stored here",
+                    5877307202888273539,
+                ),
                 (
                     "Assets",
                     "🌆 Your Elys assets will be stored here",

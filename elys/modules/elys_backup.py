@@ -166,6 +166,19 @@ class ElysBackupMod(loader.Module):
         except Exception as e:  # noqa: BLE001
             logger.debug(f"Could not find Backups topic on Telegram: {e}")
 
+        try:
+            topic = await utils.asset_forum_topic(
+                client=self._client,
+                db=self._db,
+                peer=self._content_channel_id,
+                title="Backups",
+                description="💾 Your Elys backups will be stored here",
+                icon_emoji_id=5877307202888273539,
+            )
+            return topic.id
+        except Exception as e:  # noqa: BLE001
+            logger.error(f"Failed to create Backups topic: {e}")
+
         return None
 
     def _apply_restored_db(self, raw_db_str: str) -> None:

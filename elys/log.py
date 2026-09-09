@@ -319,15 +319,19 @@ class TelegramLogsHandler(logging.Handler):
             logger.debug(
                 f"No logs topic found for client {client_id}. Creating new one."
             )
-            topic = await utils.asset_forum_topic(
-                allmods.client,
-                allmods.db,
-                allmods.logchat,
-                "Logs",
-                "📊 Inline logs and error reports will be stored here",
-                5877307202888273539,
-            )
-            topic_id = topic.id
+            try:
+                topic = await utils.asset_forum_topic(
+                    allmods.client,
+                    allmods.db,
+                    allmods.logchat,
+                    "Logs",
+                    "📊 Inline logs and error reports will be stored here",
+                    5877307202888273539,
+                )
+                topic_id = topic.id
+            except Exception as e:  # noqa: BLE001
+                logger.error(f"Failed to create Logs topic: {e}")
+                topic_id = None
         return topic_id
 
     async def sender(self):

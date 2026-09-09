@@ -27,7 +27,11 @@ import requests
 from elystl import hints
 from elystl.tl.custom.message import Message
 from elystl.tl.functions.account import UpdateNotifySettingsRequest
-from elystl.tl.functions.channels import CreateChannelRequest, EditPhotoRequest
+from elystl.tl.functions.channels import (
+    CreateChannelRequest,
+    EditPhotoRequest,
+    ToggleForumRequest,
+)
 from elystl.tl.functions.messages import (
     CreateForumTopicRequest,
     EditForumTopicRequest,
@@ -283,6 +287,25 @@ async def asset_channel(
     async for d in client.iter_dialogs():
         if d.title == title:
             client._channels_cache[title] = {"peer": d.entity, "exp": int(time.time())}
+            if forum and not getattr(d.entity, "forum", False):
+                try:
+                    await fw_protect()
+                    await client(ToggleForumRequest(channel=d.entity, enabled=True))
+                    d.entity.forum = True
+                except Exception as e:  # noqa: BLE001
+                    logger.warning(
+                        f"Could not enable forum mode for existing channel '{title}': {e}"
+                    )
+
+            if hide_general and getattr(d.entity, "forum", False):
+                try:
+                    await fw_protect()
+                    await client(
+                        EditForumTopicRequest(peer=d.entity, topic_id=1, hidden=True)
+                    )
+                except Exception:  # noqa: BLE001
+                    pass
+
             if invite_bot and all(
                 participant.id != client.loader.inline.bot_id
                 for participant in await client.get_participants(
@@ -381,6 +404,26 @@ async def asset_forum_topic(
             f"Expected entity to be 'Channel', but got '{type(entity).__name__}'"
         )
 
+    if not getattr(entity, "forum", False):
+        try:
+            await fw_protect()
+            await client(ToggleForumRequest(channel=entity, enabled=True))
+            entity.forum = True
+            logger.info(
+                f"Enabled forum mode for {getattr(entity, 'title', entity.id)}"
+            )
+            try:
+                await fw_protect()
+                await client(
+                    EditForumTopicRequest(peer=entity, topic_id=1, hidden=True)
+                )
+            except Exception:  # noqa: BLE001
+                pass
+        except Exception as e:  # noqa: BLE001
+            logger.warning(
+                f"Could not enable forum mode for {getattr(entity, 'title', entity.id)}: {e}"
+            )
+
     async def create_topic() -> ForumTopic:
         result = await client(
             CreateForumTopicRequest(
@@ -392,23 +435,66 @@ async def asset_forum_topic(
 
         await fw_protect()
 
-        await client.send_message(
-            entity=entity,
-            message=(
-                description
-                if description
-                else f"<tg-emoji emoji-id=\"5258503720928288433\">ℹ️</tg-emoji> <b>Content related to <i>'{title}'</i> will be here</b>"
-            ),
-            reply_to=result.updates[0].id,
-        )
+        topic_id = None
+        for update in getattr(result, "updates", []):
+            if hasattr(update, "message") and hasattr(update.message, "id"):
+                topic_id = update.message.id
+                break
+            if hasattr(update, "id") and not hasattr(update, "message"):
+                topic_id = update.id
+                break
+        if not topic_id and getattr(result, "updates", None):
+            topic_id = getattr(result.updates[0], "id", None) or getattr(
+                getattr(result.updates[0], "message", None), "id", None
+            )
+
+        if not topic_id:
+            raise RuntimeError(
+                f"Failed to create forum topic '{title}': no topic ID returned"
+            )
+
+        try:
+            await client.send_message(
+                entity=entity,
+                message=(
+                    description
+                    if description
+                    else f"<tg-emoji emoji-id=\"5258503720928288433\">ℹ️</tg-emoji> <b>Content related to <i>'{title}'</i> will be here</b>"
+                ),
+                reply_to=topic_id,
+            )
+        except Exception as e:  # noqa: BLE001
+            logger.debug(f"Failed to send intro message to topic '{title}': {e}")
 
         await fw_protect()
 
-        result = await client(
-            GetForumTopicsByIDRequest(peer=entity, topics=[result.updates[0].id])
-        )
+        try:
+            result_topics = await client(
+                GetForumTopicsByIDRequest(peer=entity, topics=[topic_id])
+            )
+            if result_topics.topics:
+                return result_topics.topics[0]
+        except Exception as e:  # noqa: BLE001
+            logger.debug(f"Failed to fetch created topic by ID {topic_id}: {e}")
 
-        return result.topics[0]
+        return ForumTopic(
+            id=topic_id,
+            date=int(time.time()),
+            title=title,
+            icon_color=0,
+            top_message=topic_id,
+            read_inbox_max_id=0,
+            read_outbox_max_id=0,
+            unread_count=0,
+            unread_mentions_count=0,
+            unread_reactions_count=0,
+            from_id=PeerUser(client.tg_id),
+            my=True,
+            closed=False,
+            pinned=False,
+            short=False,
+            hidden=False,
+        )
 
     def _save_cache(topic_title: str, topic_id: int):
         cached = db.pointer("elys.forums", "forums_cache", {})
@@ -418,20 +504,23 @@ async def asset_forum_topic(
         db.save()
 
     async def _search_topic(topic_title: str) -> int | None:
-        result = await client(
-            GetForumTopicsRequest(
-                peer=entity,
-                offset_date=None,
-                offset_id=0,
-                offset_topic=0,
-                limit=100,
+        try:
+            result = await client(
+                GetForumTopicsRequest(
+                    peer=entity,
+                    offset_date=None,
+                    offset_id=0,
+                    offset_topic=0,
+                    limit=100,
+                )
             )
-        )
-        await fw_protect()
-        for found_topic in result.topics:
-            if found_topic.title == topic_title:
-                _save_cache(topic_title, found_topic.id)
-                return found_topic.id
+            await fw_protect()
+            for found_topic in result.topics:
+                if getattr(found_topic, "title", None) == topic_title:
+                    _save_cache(topic_title, found_topic.id)
+                    return found_topic.id
+        except Exception as e:  # noqa: BLE001
+            logger.debug(f"Failed searching topic '{topic_title}': {e}")
         return None
 
     channel_title = getattr(entity, "title", "elys-userbot")
@@ -442,24 +531,27 @@ async def asset_forum_topic(
         cached.get("elys-userbot", {}).get(title) if isinstance(cached, dict) else None
     )
 
+    new_topic = None
     if topic_id or (topic_id := await _search_topic(title)):
         await fw_protect()
-        new_topic = await client(
-            GetForumTopicsByIDRequest(peer=entity, topics=[topic_id])
-        )
-        new_topic = new_topic.topics[0]
-
-        if isinstance(new_topic, ForumTopicDeleted):
-            logger.warning(
-                f"Topic: '{title}' was found in the database but does not exist in the channel and will be recreated"
+        try:
+            res = await client(
+                GetForumTopicsByIDRequest(peer=entity, topics=[topic_id])
             )
-            await fw_protect()
-            new_topic = await create_topic()
-            _save_cache(title, new_topic.id)
+            if res.topics:
+                new_topic = res.topics[0]
+        except Exception:  # noqa: BLE001
+            new_topic = None
 
-    else:
+    if not new_topic or isinstance(new_topic, ForumTopicDeleted):
+        if topic_id:
+            logger.warning(
+                f"Topic: '{title}' was found in cache/Telegram but is missing or deleted and will be recreated"
+            )
         await fw_protect()
         new_topic = await create_topic()
+        _save_cache(title, new_topic.id)
+    else:
         _save_cache(title, new_topic.id)
 
     if invite_bot:
