@@ -20,6 +20,7 @@ import asyncio
 import contextlib
 import datetime
 import io
+import json
 import logging
 import os
 import re
@@ -27,13 +28,17 @@ import time
 import zipfile
 from pathlib import Path
 
-import orjson
 from elystl.tl.types import Message
 
 from .. import loader, utils
 from ..inline.types import BotInlineCall
 
 logger = logging.getLogger(__name__)
+
+
+def _dump_json(obj: object) -> bytes:
+    """Serializes object to formatted UTF-8 JSON bytes."""
+    return json.dumps(obj, indent=2, ensure_ascii=False, default=str).encode("utf-8")
 
 
 @loader.tds
@@ -170,7 +175,7 @@ class ElysBackupMod(loader.Module):
                 r'"(?:heroku|hikka|legacy|ftg)\.(\S+":)', r'"elys.\1', raw_db_str
             )
 
-        db_data = self._db.migrate_data(orjson.loads(raw_db_str))
+        db_data = self._db.migrate_data(json.loads(raw_db_str))
 
         if not self._db.process_db_autofix(db_data):
             raise RuntimeError("Attempted to restore broken database")
@@ -231,11 +236,7 @@ class ElysBackupMod(loader.Module):
                 self.get("last_backup") + self.get("period") - time.time()
             )
 
-            db = io.BytesIO(
-                orjson.dumps(
-                    self._db, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS
-                )
-            )
+            db = io.BytesIO(_dump_json(self._db))
             db.name = "db.json"
 
             mods = io.BytesIO()
@@ -247,10 +248,7 @@ class ElysBackupMod(loader.Module):
                                 zipf.writestr(file, f.read())
                 zipf.writestr(
                     "db_mods.json",
-                    orjson.dumps(
-                        self.lookup("LoaderMod").get("loaded_modules", {}),
-                        option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS,
-                    ),
+                    _dump_json(self.lookup("LoaderMod").get("loaded_modules", {})),
                 )
 
             mods.seek(0)
@@ -351,7 +349,7 @@ class ElysBackupMod(loader.Module):
                 ):
                     if "db_mods.json" in modzip.namelist():
                         with modzip.open("db_mods.json", "r") as modules:
-                            db_mods = orjson.loads(modules.read().decode())
+                            db_mods = json.loads(modules.read().decode())
                             if isinstance(db_mods, dict):
                                 self.lookup("LoaderMod").set(
                                     "loaded_modules", db_mods
@@ -425,9 +423,7 @@ class ElysBackupMod(loader.Module):
 
     @loader.command()
     async def backupdb(self, message: Message):
-        txt = io.BytesIO(
-            orjson.dumps(self._db, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS)
-        )
+        txt = io.BytesIO(_dump_json(self._db))
         txt.name = f"db-backup-{datetime.datetime.now(tz=datetime.timezone.utc):%d-%m-%Y-%H-%M}.json"
 
         if not getattr(self, "_content_channel_id", None):
@@ -490,9 +486,8 @@ class ElysBackupMod(loader.Module):
         result = io.BytesIO()
         result.name = "mods.zip"
 
-        db_mods = orjson.dumps(
-            self.lookup("LoaderMod").get("loaded_modules", {}),
-            option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS,
+        db_mods = _dump_json(
+            self.lookup("LoaderMod").get("loaded_modules", {})
         )
 
         with zipfile.ZipFile(result, "w", zipfile.ZIP_DEFLATED) as zipf:
@@ -549,7 +544,7 @@ class ElysBackupMod(loader.Module):
 
         file = await reply.download_media(bytes)
         try:
-            decoded_text = orjson.loads(file.decode())
+            decoded_text = json.loads(file.decode())
         except Exception:  # noqa: BLE001
             try:
                 file = io.BytesIO(file)
@@ -558,7 +553,7 @@ class ElysBackupMod(loader.Module):
                 with zipfile.ZipFile(file) as zf:
                     if "db_mods.json" in zf.namelist():
                         with zf.open("db_mods.json", "r") as modules:
-                            db_mods = orjson.loads(modules.read().decode())
+                            db_mods = json.loads(modules.read().decode())
                             if isinstance(db_mods, dict) and all(
                                 (
                                     isinstance(key, str)
@@ -596,9 +591,7 @@ class ElysBackupMod(loader.Module):
 
     @loader.command()
     async def backupall(self, message: Message):
-        db = io.BytesIO(
-            orjson.dumps(self._db, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS)
-        )
+        db = io.BytesIO(_dump_json(self._db))
         db.name = "db.json"
 
         mods = io.BytesIO()
@@ -610,10 +603,7 @@ class ElysBackupMod(loader.Module):
                             zipf.writestr(file, f.read())
             zipf.writestr(
                 "db_mods.json",
-                orjson.dumps(
-                    self.lookup("LoaderMod").get("loaded_modules", {}),
-                    option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS,
-                ),
+                _dump_json(self.lookup("LoaderMod").get("loaded_modules", {})),
             )
 
         mods.seek(0)
@@ -684,7 +674,7 @@ class ElysBackupMod(loader.Module):
                 ):
                     if "db_mods.json" in modzip.namelist():
                         with modzip.open("db_mods.json", "r") as modules:
-                            db_mods = orjson.loads(modules.read().decode())
+                            db_mods = json.loads(modules.read().decode())
                             if isinstance(db_mods, dict):
                                 self.lookup("LoaderMod").set(
                                     "loaded_modules", db_mods

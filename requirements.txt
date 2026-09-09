@@ -1,7 +1,5 @@
 elystl==1.0.0
 pyaes
-aiofile==3.8.1
-aiofiles==24.1.0
 gitpython==3.1.51
 deep-translator
 meval==2.5
@@ -14,7 +12,6 @@ TgCrypto-pyrofork
 rsa==4.9
 ruamel.yaml==0.17.21
 bs4==0.0.2
-orjson
 Pillow
 
 # Python 3.10+

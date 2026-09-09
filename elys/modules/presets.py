@@ -22,7 +22,7 @@ import io
 import logging
 from math import ceil
 
-import orjson
+import json
 
 from .. import loader, utils
 from ..inline.types import BotInlineMessage, InlineCall
@@ -370,7 +370,7 @@ class Presets(loader.Module):
             await message.edit(self.lookup("LoaderMod").strings["no_file"])
             return
         try:
-            data = orjson.loads(await msg.download_media(bytes))
+            data = json.loads(await msg.download_media(bytes))
         except Exception:
             await message.edit(self.lookup("LoaderMod").strings["load_failed"])
             logger.exception("Failed to load preset from file")
@@ -482,9 +482,11 @@ class Presets(loader.Module):
             await message.edit(self.strings["no_modules_in_folder"].format(folder_name))
             return
         file = io.BytesIO(
-            orjson.dumps(
-                {"name": folder_name, "description": folder_name, "modules": modules}
-            )
+            json.dumps(
+                {"name": folder_name, "description": folder_name, "modules": modules},
+                indent=2,
+                ensure_ascii=False,
+            ).encode("utf-8")
         )
         file.name = f"{folder_name}.json"
         await utils.answer(
@@ -534,7 +536,7 @@ class Presets(loader.Module):
             await message.edit(self.lookup("LoaderMod").strings["no_file"])
             return
         try:
-            data = orjson.loads(await msg.download_media(bytes))
+            data = json.loads(await msg.download_media(bytes))
         except Exception:
             await message.edit(self.lookup("LoaderMod").strings["load_failed"])
             logger.exception("Failed to load aliases from file")
@@ -583,7 +585,11 @@ class Presets(loader.Module):
             await message.edit(self.lookup("settings").strings("no_aliases"))
             return
         file = io.BytesIO(
-            orjson.dumps([{"alias": alias, "command": cmd} for alias, cmd in aliases])
+            json.dumps(
+                [{"alias": alias, "command": cmd} for alias, cmd in aliases],
+                indent=2,
+                ensure_ascii=False,
+            ).encode("utf-8")
         )
         file.name = "aliases.json"
         await utils.answer(
