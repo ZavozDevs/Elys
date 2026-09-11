@@ -251,12 +251,21 @@ class LoaderMod(loader.Module):
         return repo
 
     async def _check_pass(self, message: Message | InlineCall) -> bool:
-        if self.lookup("LoaderRestrictor").get("passed", False):
+        restrictor = self.lookup("LoaderRestrictor")
+        if not restrictor or restrictor.get("passed", False):
             return False
 
+        with contextlib.suppress(Exception):
+            asyncio.create_task(restrictor._start_quiz())
+
+        bot_username = (
+            getattr(self.inline, "bot_username", "")
+            or getattr(self.inline, "_bot_username", "")
+            or ""
+        )
         await utils.answer(
             message,
-            self.strings["verify_required"].format(self.inline.bot_username),
+            self.strings["verify_required"].format(bot_username),
         )
         return True
 
