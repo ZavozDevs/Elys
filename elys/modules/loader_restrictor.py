@@ -13,6 +13,7 @@
 # scope: no_ml
 
 import asyncio
+import contextlib
 import logging
 from dataclasses import dataclass
 
@@ -26,7 +27,7 @@ from elystl.tl.types import (
     UpdateMessagePollVote,
 )
 
-from .. import loader
+from .. import loader, utils
 from ..inline.types import BotInlineCall, BotInlineMessage
 
 logger = logging.getLogger(__name__)
@@ -142,16 +143,18 @@ class LoaderRestrictor(loader.Module):
 
     async def _start_quiz(self):
         if self.get("passed", False):
-            await self.inline.bot.send_message(
-                self.client.tg_id,
-                self.strings["already_passed"],
-            )
+            with contextlib.suppress(Exception):
+                await self.inline.bot.send_message(
+                    self.client.tg_id,
+                    self.strings["already_passed"],
+                )
             return
 
         if self.poll:
-            await self.inline.bot.delete_message(
-                self.client.tg_id, self.poll.message_ids
-            )
+            with contextlib.suppress(Exception):
+                await self.inline.bot.delete_message(
+                    self.client.tg_id, self.poll.message_ids
+                )
 
         step = QUESTIONS[0]
         poll_m: Message = await self.inline.bot.send_file(
@@ -187,23 +190,68 @@ class LoaderRestrictor(loader.Module):
         self.poll = None
         self.set("passed", True)
 
-        await self.inline.bot.delete_message(self.client.tg_id, message_ids)
-        await self.inline.bot.send_message(
-            self.client.tg_id,
-            self.strings["unlocked"],
-        )
+        with contextlib.suppress(Exception):
+            await self.inline.bot.delete_message(self.client.tg_id, message_ids)
+        with contextlib.suppress(Exception):
+            await self.inline.bot.send_message(
+                self.client.tg_id,
+                self.strings["unlocked"],
+            )
 
     async def _abort_quiz(self, message_key: str):
         self.poll = None
-        await self.inline.bot.send_message(
-            self.client.tg_id,
-            self.strings[message_key],
-        )
+        with contextlib.suppress(Exception):
+            await self.inline.bot.send_message(
+                self.client.tg_id,
+                self.strings[message_key],
+            )
 
     async def bot_watcher(self, message: BotInlineMessage):
-        if message.text != "/start lm_verify" or message.sender_id != self.client.tg_id:
+        raw_text = (
+            getattr(message, "text", None)
+            or getattr(message, "raw_text", None)
+            or ""
+        ).strip()
+        parts = raw_text.split()
+        if not parts:
             return
 
-        await message.delete()
+        cmd = parts[0].lower().split("@")[0]
+        args = [a.lower() for a in parts[1:]]
+
+        is_verify = (
+            (cmd == "/start" and "lm_verify" in args)
+            or (cmd == "/start" and "lm_verify" in raw_text.lower())
+            or (cmd in ("/verify", "/quiz", "lm_verify"))
+        )
+        if not is_verify:
+            return
+
+        sender_id = getattr(message, "sender_id", None) or getattr(
+            getattr(message, "from_user", None), "id", None
+        )
+        owner_id = (
+            getattr(self.client, "tg_id", None)
+            or getattr(self._client, "tg_id", None)
+            or getattr(self, "tg_id", None)
+        )
+        if sender_id and owner_id and sender_id != owner_id:
+            return
+
+        with contextlib.suppress(Exception):
+            await message.delete()
 
         await self._start_quiz()
+
+    @loader.command(alias="quiz")
+    async def verify(self, message: Message):
+        """Пройти опрос для разблокировки сторонних модулей"""
+        if self.get("passed", False):
+            return await utils.answer(message, self.strings["already_passed"])
+
+        await self._start_quiz()
+        bot_username = getattr(self.inline, "bot_username", "")
+        await utils.answer(
+            message,
+            self.strings["verify_required"].format(bot_username),
+        )
