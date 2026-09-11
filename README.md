@@ -1,30 +1,26 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/logo.png" height="90" alt="Elys Logo">
   <h1>Elys Userbot</h1>
-  <p>Advanced Telegram userbot with enhanced security and modern features</p>
+  <p><b>Next-generation modular Telegram userbot with enhanced security, rich inline UI, and modern features.</b></p>
   
   <p>
-    <a href="https://www.codacy.com/gh/ZavozDevs/Elys/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ZavozDevs/Elys&amp;utm_campaign=Badge_Grade">
-      <img src="https://app.codacy.com/project/badge/Grade/97e3ea868f9344a5aa6e4d874f83db14" alt="Codacy Grade">
+    <a href="https://github.com/ZavozDevs/Elys/stargazers">
+      <img src="https://img.shields.io/github/stars/ZavozDevs/Elys?style=flat" alt="Stars">
     </a>
-    <a href="#">
-      <img src="https://img.shields.io/github/languages/code-size/ZavozDevs/Elys" alt="Code Size">
-    </a>
-    <a href="#">
-      <img src="https://img.shields.io/github/issues-raw/ZavozDevs/Elys" alt="Open Issues">
-    </a>
-    <a href="#">
-      <img src="https://img.shields.io/github/license/ZavozDevs/Elys" alt="License">
-    </a>
-    <a href="#">
-      <img src="https://img.shields.io/github/commit-activity/m/ZavozDevs/Elys" alt="Commit Activity">
-    </a>
-    <br>
-    <a href="#">
+    <a href="https://github.com/ZavozDevs/Elys/network/members">
       <img src="https://img.shields.io/github/forks/ZavozDevs/Elys?style=flat" alt="Forks">
     </a>
-    <a href="#">
-      <img src="https://img.shields.io/github/stars/ZavozDevs/Elys" alt="Stars">
+    <a href="https://github.com/ZavozDevs/Elys/issues">
+      <img src="https://img.shields.io/github/issues-raw/ZavozDevs/Elys" alt="Open Issues">
+    </a>
+    <a href="https://github.com/ZavozDevs/Elys/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/ZavozDevs/Elys" alt="License">
+    </a>
+    <a href="https://www.python.org/">
+      <img src="https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python" alt="Python 3.10+">
+    </a>
+    <a href="https://t.me/ElysTalk">
+      <img src="https://img.shields.io/badge/Telegram-Chat-2ca5e0.svg?logo=telegram" alt="Telegram Chat">
     </a>
     <a href="https://github.com/psf/black">
       <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style: Black">
@@ -37,10 +33,23 @@
       <img src="https://img.shields.io/badge/lang-ru-green.svg" alt="Ru">
     </a>
   </p>
-  
 </div>
 
-### Manual Installation (VPS/VDS Server)
+---
+
+## 🌟 About Elys Userbot
+
+**Elys** is an advanced, high-performance, and modular **Telegram userbot** developed by **ZavozDevs**, powered by Python 3 and asynchronous [Telethon](https://github.com/LonamiWebs/Telethon).
+
+Whether you want to automate routine messaging, manage groups and channels, add interactive inline widgets, or run custom plugins, **Elys Userbot** delivers unmatched flexibility and speed. It comes with out-of-the-box compatibility for **Hikka**, **Friendly-Telegram (FTG)**, and **GeekTG** modules.
+
+### ✨ Why Elys?
+- ⚡ **Blazing Fast & Lightweight:** Asynchronous architecture built for low resource consumption on VPS, servers, or local devices.
+- 🧩 **Modular Ecosystem:** Easily install, update, and manage community modules using simple commands (`.dlmod`, `.help`).
+- 🎨 **Modern Interactive UI:** Rich inline keyboards, menus, dynamic galleries, and full support for the latest Telegram features (forums, topics, reactions).
+- 🛡️ **Enhanced Security:** Native API firewall, entity caching, permission safeguards, and malicious module detection.
+- 🔄 **Full Compatibility:** Run your favorite modules from Hikka, FTG, and GeekTG without modifications.
+- ☁️ **Cloud Ready:** Deploy anywhere in minutes — VPS, Docker, WSL, Android (UserLAnd / Termux), or 1-click cloud hosting via **RnHost**.
 
 ---
 
@@ -102,56 +111,54 @@ python3 -m elys
 ```
 </details>
 
-
-
 ### Other
 <details>
-  <summary><b>WSL(Windows)</b></summary>
+  <summary><b>WSL (Windows)</b></summary>
 
   > **⚠️ WARNING: Can be unstable!**
 
-  1. **Download WSL.** For this open window PowerShell with admin rights and write in console 
+  1. **Download WSL.** For this open PowerShell with admin rights and write in console:
   ```powershell
   wsl --install -d Ubuntu-22.04
   ```
   
-  > *⚠️For install beed Windows 10 build 2004 or Windows 11 of any version and PC with virtualization support.*
-  > *For installation on earlier OS, please refer to this [page](https://learn.microsoft.com/ru-ru/windows/wsl/install-manual).*
+  > *⚠️ Requires Windows 10 build 2004 or Windows 11 and a PC with virtualization support.*
+  > *For installation on earlier OS versions, please refer to the [official manual](https://learn.microsoft.com/en-us/windows/wsl/install-manual).*
   
-  2. **Restart PC and start programm Ubuntu 22.04.x**
-  3. **Enter this command(RMB):** 
+  2. **Restart PC and launch Ubuntu 22.04.x**
+  3. **Install pip:** 
   ```bash
   curl -Ss https://bootstrap.pypa.io/get-pip.py | python3
   ```
-  > *⚠️ If yellow warnings appear, enter export PATH="/home/username/.local/bin:$PATH" replacing /home/username/.local/bin with the path mentioned in the message*
+  > *⚠️ If warnings appear, enter `export PATH="/home/username/.local/bin:$PATH"` replacing with your actual path.*
   
-  4. **Enter this command(RMB):**
+  4. **Run Elys:**
   ```bash
   clear && git clone https://github.com/ZavozDevs/Elys && cd Elys && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 -m elys
   ```
-  > **🔗How to get API_ID and API_HASH?:** [Video](https://youtu.be/DcqDA249Lhg?t=24)
+  > **🔗 How to get API_ID and API_HASH?:** [Video Guide](https://youtu.be/DcqDA249Lhg?t=24)
   
 </details>
 
 <details>
-  <summary><b>Phone(Userland)</b></summary>
+  <summary><b>Phone (UserLAnd / Android)</b></summary>
   
-  1. <b>Install UserLAnd from</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">the link</a>
+  1. <b>Install UserLAnd from</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">Google Play</a>
   2. <b>Open it, choose Ubuntu —&gt; Minimal —&gt; Terminal</b>
-  3. <b>Wait for the distribution to install, you can pour some tea</b> 
-  4. <b>After successful installation, a terminal will open in front of you, write there:</b>
+  3. <b>Wait for the distribution to install</b> 
+  4. <b>In the terminal, run:</b>
     
   ```bash
   sudo apt update && sudo apt upgrade -y && sudo apt install python3 git python3-pip -y && git clone https://github.com/ZavozDevs/Elys && cd Elys && python3 -m venv .venv && source .venv/bin/activate && sudo pip install -r requirements.txt && python3 -m elys
   ```
 
-5. <b>At the end of the installation, a link will appear, follow it and enter your account details to log in.</b>
-> **Voila! You have installed Elys on UserLAnd.**
+  5. <b>Follow the on-screen instructions to authorize your Telegram account.</b>
+  > **Done! Elys is running on your Android device.**
 </details>
 
-### Official hostings
+### Official Cloud Hosting
 <details>
-<summary><b>❤️‍🔥 RnHost</b></summary>
+<summary><b>❤️🔥 RnHost (1-Click Deployment)</b></summary>
   
   1. Open [host.rooni.dev](https://host.rooni.dev)
   2. Deploy **🌟 Elys Userbot**
@@ -160,17 +167,19 @@ python3 -m elys
 
 </details>
 
+---
 
-
-## Additional Features
+## 🎨 Additional Features
 
 <details>
   <summary><b>🔒 Automatic Database Backuper</b></summary>
+  <br>
   <img src="https://user-images.githubusercontent.com/36935426/202905566-964d2904-f3ce-4a14-8f05-0e7840e1b306.png" width="400">
 </details>
 
 <details>
   <summary><b>👋 Welcome Installation Screens</b></summary>
+  <br>
   <img src="https://user-images.githubusercontent.com/36935426/202905720-6319993b-697c-4b09-a194-209c110c79fd.png" width="300">
   <img src="https://user-images.githubusercontent.com/36935426/202905746-2a511129-0208-4581-bb27-7539bd7b53c9.png" width="300">
 </details>
@@ -181,35 +190,30 @@ python3 -m elys
 
 | Feature | Description |
 |---------|-------------|
-| 🆕 **Latest Telegram Layer** | Support for forums and newest Telegram features |
-| 🔒 **Enhanced Security** | Native entity caching and targeted security rules |
-| 🎨 **UI/UX Improvements** | Modern interface and user experience |
-| 📦 **Core Modules** | Improved and new core functionality |
-| ⏱ **Rapid Bug Fixes** | Faster resolution than FTG/GeekTG |
-| 🔄 **Backward Compatibility** | Works with FTG, GeekTG and Hikka modules |
-| ▶️ **Inline Elements** | Forms, galleries and lists support |
+| 🆕 **Latest Telegram Layer** | Support for forums, topics, reactions and newest Telegram features |
+| 🔒 **Enhanced Security** | Native entity caching, permission checks and targeted security rules |
+| 🎨 **UI/UX Improvements** | Modern responsive interface and smooth user experience |
+| 📦 **Core Modules** | Improved built-in modules and extended utility commands |
+| ⏱ **Rapid Bug Fixes** | Active maintenance and faster issue resolution |
+| 🔄 **Backward Compatibility** | Seamless support for FTG, GeekTG and Hikka modules |
+| ▶️ **Inline Elements** | Dynamic forms, interactive galleries, and interactive lists |
 
 ---
 
 ## 📋 Requirements
 
 - **Python 3.10+**
-- **API Credentials** from [Telegram Apps](https://my.telegram.org/apps)
+- **API Credentials** (API ID and API HASH from [my.telegram.org/apps](https://my.telegram.org/apps))
 
 ---
 
-## 📚 Documentation
+## 💬 Community & Support
 
-| Type | Link |
-|------|------|
-| **User Documentation** | [heroku-ub.xyz](https://heroku-ub.xyz/) |
-| **Developer Docs** | [dev.heroku-ub.xyz](https://dev.heroku-ub.xyz/) |
-
----
-
-## 💬 Support
-
-[![Telegram Support](https://img.shields.io/badge/Telegram-Support_Group-2594cb?logo=telegram)](https://t.me/ElysTalk)
+| Platform | Link |
+|----------|------|
+| **Telegram Support & Chat** | [@ElysTalk](https://t.me/ElysTalk) |
+| **Cloud Hosting** | [host.rooni.dev](https://host.rooni.dev) |
+| **Bug Reports & Issues** | [GitHub Issues](https://github.com/ZavozDevs/Elys/issues) |
 
 ---
 
@@ -218,13 +222,13 @@ python3 -m elys
 > This project is provided as-is. The developer takes **NO responsibility** for:
 > - Account bans or restrictions
 > - Message deletions by Telegram
-> - Security issues from scam modules
-> - Session leaks from malicious modules
+> - Security issues from untrusted third-party modules
+> - Session leaks from malicious scripts
 >
 > **Security Recommendations:**
 > - Enable `.api_fw_protection`
-> - Avoid installing many modules at once
-> - Review [Telegram's Terms](https://core.telegram.org/api/terms)
+> - Avoid installing untrusted modules
+> - Review [Telegram Terms of Service](https://core.telegram.org/api/terms)
 
 ---
 
@@ -233,7 +237,3 @@ python3 -m elys
 - [**Codrago**](https://github.com/coddrago) for [Heroku Userbot](https://github.com/coddrago/Heroku)
 - [**Hikari**](https://gitlab.com/hikariatama) for [Hikka Userbot](https://github.com/hikariatama/hikka) (project foundation)
 - [**Lonami**](https://t.me/lonami) for [Telethon](https://codeberg.org/Lonami/Telethon)
-
-
-
-<!-- updated -->
