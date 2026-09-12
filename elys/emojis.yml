@@ -8,7 +8,7 @@
 system:
   stop:
     id: "5210952531676504517"
-    fallback: "🚫"
+    fallback: "\U0001F6AB"
     aliases: ["ban", "error", "no"]
   cross:
     id: "5287372146039861774"
@@ -46,9 +46,12 @@ system:
   info:
     id: "5879813604068298387"
     fallback: "ℹ️"
+  info_topic:
+    id: "5258503720928288433"
+    fallback: "ℹ️"
   tip:
     id: "5472146462362048818"
-    fallback: "💡"
+    fallback: "\U0001F4A1"
     aliases: ["bulb", "idea"]
   bullet:
     id: "5253713110111365241"
@@ -59,39 +62,39 @@ system:
     fallback: "⚪"
   green_circle:
     id: "5427009714745541184"
-    fallback: "🟢"
+    fallback: "\U0001F7E2"
   blue_circle:
     id: "5784891605601225888"
-    fallback: "🔵"
+    fallback: "\U0001F535"
   gear:
     id: "5341715473882955310"
     fallback: "⚙️"
     aliases: ["settings"]
   sync:
     id: "5774134533590880843"
-    fallback: "🔄"
+    fallback: "\U0001F504"
     aliases: ["reload", "refresh"]
   repeat:
     id: "5253464392850221514"
-    fallback: "🔁"
+    fallback: "\U0001F501"
   wait:
     id: "5451732530048802485"
     fallback: "⏳"
     aliases: ["hourglass"]
   clock:
     id: "5345778951031658558"
-    fallback: "🕖"
+    fallback: "\U0001F556"
     aliases: ["time"]
   search:
     id: "5873225338984599714"
-    fallback: "🔍"
+    fallback: "\U0001F50D"
   inspect:
     id: "5337183664630709422"
-    fallback: "🔎"
+    fallback: "\U0001F50E"
     aliases: ["zoom_in"]
   trash:
     id: "5465665476971471368"
-    fallback: "🗑️"
+    fallback: "\U0001F5D1️"
     aliases: ["delete"]
   flash:
     id: "5256099067523510898"
@@ -99,48 +102,238 @@ system:
     aliases: ["bolt", "lightning"]
   fire:
     id: "5253877736207821121"
-    fallback: "🔥"
+    fallback: "\U0001F525"
   recycle:
     id: "5318933532825888187"
     fallback: "♻️"
 
+  warn_security:
+    id: '5447644880824181073'
+    fallback: ⚠️
+    aliases:
+    - warning_security
+    - warn_sec
+  warn_verify:
+    id: '5188463524568926712'
+    fallback: ⚠️
+    aliases:
+    - warning_verify
+  exclamation_branch:
+    id: '5253864872780769235'
+    fallback: ❗️
+    aliases:
+    - important_branch
+  check_repo:
+    id: '5784993237412351403'
+    fallback: ✅
+    aliases:
+    - check_modules
+    - check_alt
+  check_test:
+    id: '5332533929020761310'
+    fallback: ✅
+    aliases:
+    - check_debug
+  check_eval:
+    id: '5197688912457245639'
+    fallback: ✅
+    aliases:
+    - eval_success
+  check_branch:
+    id: '5255813619702049821'
+    fallback: ✅
+    aliases:
+    - done_branch
+  check_terminal:
+    id: '5314250708508220914'
+    fallback: ✅
+    aliases:
+    - done_terminal
+  stop_rpc:
+    id: '5877477244938489129'
+    fallback: 🚫
+    aliases:
+    - rpc_fail
+  stop_info:
+    id: '5472267631979405211'
+    fallback: 🚫
+    aliases:
+    - ban_info
+  cross_info:
+    id: '5465665476971471368'
+    fallback: ❌
+    aliases:
+    - fail_info
+  cross_lib:
+    id: '5404553572727660202'
+    fallback: ❌
+    aliases:
+    - fail_lib
+  question_approve:
+    id: '5467666648263564704'
+    fallback: ❓
+    aliases:
+    - help_approve
+  wait_terminal:
+    id: '5213452215527677338'
+    fallback: ⏳
+    aliases:
+    - wait_alt
+  clock_fw:
+    id: '5877458226823302157'
+    fallback: 🕒
+    aliases:
+    - clock_three
+  loading_clock:
+    id: '5325792861885570739'
+    fallback: 🕔
+    aliases:
+    - installing_clock
+  gear_branch:
+    id: '5253952855185829086'
+    fallback: ⚙️
+    aliases:
+    - settings_branch
+  gear_main:
+    id: '5231065262228250587'
+    fallback: ⚙
+    aliases:
+    - settings_main
+  bullet_security:
+    id: '4974264756668990388'
+    fallback: ▫️
+    aliases:
+    - bullet_sgroup
+  bullet_dot:
+    id: '4974307891025543730'
+    fallback: ▫️
+    aliases:
+    - bullet_user
+  bullet_settings:
+    id: '4974259868996207180'
+    fallback: ▪️
+    aliases:
+    - small_black_square
+  bullet_square:
+    id: '5238035813761069618'
+    fallback: ◼️
+    aliases:
+    - black_medium_square
+  bullet_circle:
+    id: '5238160913273502720'
+    fallback: ⚫
+    aliases:
+    - black_circle
+  bullet_small:
+    id: '5238094680582823847'
+    fallback: ▪️
+    aliases:
+    - black_small_square
+  bullet_white:
+    id: '5197195523794157505'
+    fallback: ▫️
+    aliases:
+    - white_small_square
+  flash_ping:
+    id: '5920515922505765329'
+    fallback: ⚡️
+    aliases:
+    - lightning_ping
+  clock_uptime:
+    id: '5900104897885376843'
+    fallback: 🕓
+    aliases:
+    - clock_four
 security:
   lock:
     id: "5870704313440932932"
-    fallback: "🔒"
+    fallback: "\U0001F512"
     aliases: ["locked"]
   unlock:
     id: "5472308992514464048"
-    fallback: "🔓"
+    fallback: "\U0001F513"
   keylock:
     id: "5472308992514464048"
-    fallback: "🔐"
+    fallback: "\U0001F510"
     aliases: ["sec_rules", "key"]
   shield:
     id: "5253780051471642059"
-    fallback: "🛡️"
+    fallback: "\U0001F6E1️"
     aliases: ["protect"]
   perms:
     id: "5870450390679425417"
-    fallback: "🗒️"
+    fallback: "\U0001F5D2️"
     aliases: ["note", "notepad"]
+  lock_protect:
+    id: '6003424016977628379'
+    fallback: 🔒
+    aliases:
+    - lock_core
+    - lock_alt
+  lock_terminal:
+    id: '5472308992514464048'
+    fallback: 🔐
+    aliases:
+    - keylock_terminal
+    - auth_lock
+  users_security:
+    id: '6037355667365300960'
+    fallback: 👥
+    aliases:
+    - group_security
+  user_security:
+    id: '6037122016849432064'
+    fallback: 👤
+    aliases:
+    - member_security
+  shield_branch:
+    id: '5253780051471642059'
+    fallback: 🛡️
+    aliases:
+    - shield_alt
 
 users:
   owner:
     id: "5386399931378440814"
-    fallback: "😎"
+    fallback: "\U0001F60E"
     aliases: ["cool"]
   user:
     id: "5883964170268840032"
-    fallback: "👤"
+    fallback: "\U0001F464"
   users:
     id: "5870772616305839506"
-    fallback: "👥"
+    fallback: "\U0001F465"
     aliases: ["group"]
   bot:
     id: "5372981976804366741"
-    fallback: "🤖"
+    fallback: "\U0001F916"
     aliases: ["robot"]
+  bot_info:
+    id: '5931415565955503486'
+    fallback: 🤖
+    aliases:
+    - bot_stat
+    - bot_blue
+  bot_info_alt:
+    id: '5819078828017849357'
+    fallback: 🤖
+    aliases:
+    - bot_stat_alt
+  user_info:
+    id: '5879770735999717115'
+    fallback: 👤
+    aliases:
+    - user_stat
+  owner_dev:
+    id: '5474667187258006816'
+    fallback: 😎
+    aliases:
+    - sunglasses_dev
+  owner_designer:
+    id: '5472238129849048175'
+    fallback: 😎
+    aliases:
+    - sunglasses_designer
 
 branding:
   star:
@@ -148,152 +341,359 @@ branding:
     fallback: "⭐"
   glowing_star:
     id: "5237990626410142523"
-    fallback: "🌟"
+    fallback: "\U0001F31F"
     aliases: ["star_glow"]
   sparkles:
     id: "5249255582598210678"
     fallback: "✨"
   magic:
     id: "5469791106591890404"
-    fallback: "🪄"
+    fallback: "\U0001FA84"
     aliases: ["wand"]
   stealth:
     id: "5870903672937911120"
-    fallback: "🕶️"
+    fallback: "\U0001F576️"
     aliases: ["glasses"]
   rocket:
     id: "5431736674147114227"
-    fallback: "🚀"
+    fallback: "\U0001F680"
   party:
     id: "5436040291507247633"
-    fallback: "🎉"
+    fallback: "\U0001F389"
     aliases: ["tada"]
   diamond:
     id: "5471952986970267163"
-    fallback: "💎"
+    fallback: "\U0001F48E"
     aliases: ["gem"]
   money:
     id: "5404553572727660202"
-    fallback: "💰"
+    fallback: "\U0001F4B0"
   heart:
     id: "5238125033116705019"
     fallback: "❤️"
   heart_hands:
     id: "5287454910059654880"
-    fallback: "🫶"
+    fallback: "\U0001FAF6"
 
+  star_loader:
+    id: '5134452506935427991'
+    fallback: 🌟
+    aliases:
+    - glowing_star_loader
+    - star_aliases
+  star_repo:
+    id: '5429092129638980960'
+    fallback: 🌟
+    aliases:
+    - glowing_star_repo
+  star_beta:
+    id: '5465188915990255885'
+    fallback: 🌟
+    aliases:
+    - glowing_star_beta
+  star_choose:
+    id: '5363805650327450240'
+    fallback: 🌟
+    aliases:
+    - glowing_star_choose
+  star_test:
+    id: '5350594756126721186'
+    fallback: 🌟
+    aliases:
+    - glowing_star_test
+  star_quickstart:
+    id: '5463379725441341739'
+    fallback: 🌟
+    aliases:
+    - glowing_star_qs
+  star_update:
+    id: '5465496001856950230'
+    fallback: 🌟
+    aliases:
+    - glowing_star_no_update
+  star_subscribe:
+    id: '5435957248314579621'
+    fallback: ⭐️
+    aliases:
+    - star_channel
+  dizzy_sparkle:
+    id: '5469741319330996757'
+    fallback: 💫
+    aliases:
+    - sparkle_dizzy
+    - dizzy_alt
+  party_inline:
+    id: '6318792204118656433'
+    fallback: 🎉
+    aliases:
+    - party_bot
+  rocket_restart:
+    id: '5875145601682771643'
+    fallback: 🚀
+    aliases:
+    - launch_restart
+  logo_star_1:
+    id: '5247212990641514265'
+    fallback: ⭐️
+    aliases:
+    - elys_logo_star_1
+  logo_star_2:
+    id: '5249364352644981683'
+    fallback: ⭐️
+    aliases:
+    - elys_logo_star_2
+  logo_star_3:
+    id: '5249140597733761149'
+    fallback: ⭐️
+    aliases:
+    - elys_logo_star_3
+  logo_star_4:
+    id: '5246996296656531063'
+    fallback: ⭐️
+    aliases:
+    - elys_logo_star_4
+  heart_info:
+    id: '5224219153077914783'
+    fallback: ❤️
+    aliases: []
+  purple_heart_info:
+    id: '5449468596952507859'
+    fallback: 💜
+    aliases: []
+  orange_heart_info:
+    id: '5449599833973203438'
+    fallback: 🧡
+    aliases: []
 ui:
   folder:
     id: "5256113064821926998"
-    fallback: "📁"
+    fallback: "\U0001F4C1"
   folders:
     id: "5431736674147114227"
-    fallback: "🗂️"
+    fallback: "\U0001F5C2️"
     aliases: ["card_index"]
   package:
     id: "5431736674147114227"
-    fallback: "📦"
+    fallback: "\U0001F4E6"
     aliases: ["module", "box"]
   theme:
     id: "5249090625789271993"
-    fallback: "🖌️"
+    fallback: "\U0001F58C️"
     aliases: ["brush"]
   palette:
     id: "5249090625789271993"
-    fallback: "🎨"
+    fallback: "\U0001F3A8"
   wrench:
     id: "5249457712349097667"
-    fallback: "🔧"
+    fallback: "\U0001F527"
   globe:
     id: "6037284117505116849"
-    fallback: "🌐"
+    fallback: "\U0001F310"
     aliases: ["lang", "web"]
   chat:
     id: "6037254263187443802"
-    fallback: "💬"
+    fallback: "\U0001F4AC"
     aliases: ["speech"]
   book:
     id: "5208634061085492935"
-    fallback: "📖"
+    fallback: "\U0001F4D6"
   memo:
     id: "5424772191403143504"
-    fallback: "📝"
+    fallback: "\U0001F4DD"
     aliases: ["pencil"]
   newspaper:
     id: "5434144690511290129"
-    fallback: "📰"
+    fallback: "\U0001F4F0"
   keyboard:
     id: "5472111548572900003"
     fallback: "⌨️"
   laptop:
     id: "5472146462362048818"
-    fallback: "💻"
+    fallback: "\U0001F4BB"
     aliases: ["computer", "platform"]
   device:
     id: "5431736674147114227"
-    fallback: "📱"
+    fallback: "\U0001F4F1"
     aliases: ["phone"]
   new:
     id: "5361979468887893611"
-    fallback: "🆕"
+    fallback: "\U0001F195"
     aliases: ["new_badge"]
   watch:
     id: "5424885441100782420"
-    fallback: "👀"
+    fallback: "\U0001F440"
     aliases: ["eyes"]
   loading:
     id: "5346022209389372742"
-    fallback: "🤔"
+    fallback: "\U0001F914"
     aliases: ["expressive_loading", "md3_loading", "load", "loader_loading"]
   wave_loading:
     id: "5345988476716226868"
-    fallback: "🤔"
+    fallback: "\U0001F914"
     aliases: ["wavy_loading", "wave_load", "requirements_loading"]
   dizzy:
     id: "5134202243486057363"
-    fallback: "💫"
+    fallback: "\U0001F4AB"
     aliases: ["spark"]
   cold_face:
     id: "5452023368054216810"
-    fallback: "🥶"
+    fallback: "\U0001F976"
   wave:
     id: "5424885441100782420"
-    fallback: "👋"
+    fallback: "\U0001F44B"
     aliases: ["hello"]
   loudspeaker:
     id: "6019094432790354513"
-    fallback: "📢"
+    fallback: "\U0001F4E2"
   silent:
     id: "6010394680179562842"
-    fallback: "😶"
+    fallback: "\U0001F636"
   camera:
     id: "5778335621491723621"
-    fallback: "📷"
+    fallback: "\U0001F4F7"
   chart:
     id: "5931472654660800739"
-    fallback: "📊"
+    fallback: "\U0001F4CA"
   link:
     id: "4916086774649848789"
-    fallback: "🔗"
+    fallback: "\U0001F517"
   roller_coaster:
     id: "5440551785284510215"
-    fallback: "🎢"
+    fallback: "\U0001F3A2"
   statue:
     id: "5454219968948229067"
-    fallback: "🗽"
+    fallback: "\U0001F5FD"
   melting_face:
     id: "5325787248363314644"
-    fallback: "🫠"
+    fallback: "\U0001FAE0"
   tipping_hand:
     id: "4940480187436369099"
-    fallback: "💁‍♀️"
+    fallback: "\U0001F481‍♀️"
   dumpling:
     id: "5382337996123020810"
-    fallback: "🥟"
+    fallback: "\U0001F95F"
   pirate_flag:
     id: "5386372293263892965"
-    fallback: "🏴‍☠️"
+    fallback: "\U0001F3F4‍☠️"
 
+  folder_elys:
+    id: '5289608677244811430'
+    fallback: 📁
+    aliases:
+    - folder_settings
+  folder_config:
+    id: '5433653135799228968'
+    fallback: 📁
+    aliases:
+    - folder_cfg
+  folders_repo:
+    id: '5873153278023307367'
+    fallback: 🗂️
+    aliases:
+    - cards_repo
+  package_loader:
+    id: '5341492148468465410'
+    fallback: 📦
+    aliases:
+    - depends_package
+    - folder_package
+  package_result:
+    id: '5258270535710317499'
+    fallback: 📦
+    aliases:
+    - box_result
+  chat_help:
+    id: '6019151079114021083'
+    fallback: 💬
+    aliases:
+    - offchats_bubble
+  book_inline:
+    id: '5226512880362332956'
+    fallback: 📖
+    aliases:
+    - book_failed
+  tip_quickstart:
+    id: '5456178297941561360'
+    fallback: 💡
+    aliases:
+    - bulb_quickstart
+  sync_info:
+    id: '5843799474362652262'
+    fallback: 🔄
+    aliases:
+    - refresh_info
+    - sync_stat
+  shield_info:
+    id: '5931409969613116639'
+    fallback: 🛡
+    aliases:
+    - shield_stat
+  shield_info_alt:
+    id: '5926783847453692661'
+    fallback: 🛡
+    aliases:
+    - shield_stat_alt
+  thumbup_invoke:
+    id: '5215519585150706301'
+    fallback: 👍
+    aliases:
+    - invoke_ok
+  phone_info:
+    id: '5407025283456835913'
+    fallback: 📱
+    aliases: []
+  cat_info:
+    id: '6334750507294262724'
+    fallback: 🐈⬛
+    aliases: []
+  eagle_info:
+    id: '5427286516797831670'
+    fallback: 🦅
+    aliases: []
+  whale_info:
+    id: '5431815452437257407'
+    fallback: 🐳
+    aliases: []
+  arm_info:
+    id: '5386766919154016047'
+    fallback: 🦾
+    aliases: []
+  ferris_info:
+    id: '5226711870492126219'
+    fallback: 🎡
+    aliases: []
+  laptop_info:
+    id: '5469825590884310445'
+    fallback: 💻
+    aliases: []
+  apple_info:
+    id: '5372908412604525258'
+    fallback: 🍏
+    aliases: []
+  juice_info:
+    id: '5422884965593397853'
+    fallback: 🧃
+    aliases: []
+  cloud_face_info:
+    id: '5370547013815376328'
+    fallback: 😶🌫️
+    aliases: []
+  penguin_info:
+    id: '5361541227604878624'
+    fallback: 🐧
+    aliases: []
+  train_info:
+    id: '5359595190807962128'
+    fallback: 🚂
+    aliases: []
+  storm_info:
+    id: '5282731554135615450'
+    fallback: 🌩
+    aliases: []
+  clover_info:
+    id: '5395325195542078574'
+    fallback: 🍀
+    aliases: []
 numbers:
   num_1:
     id: "5456197350416486261"
@@ -314,58 +714,90 @@ numbers:
 gestures:
   thumbup:
     id: "5197474765387864959"
-    fallback: "👍"
+    fallback: "\U0001F44D"
     aliases: ["like"]
   ok_hand:
     id: "5458450833857322148"
-    fallback: "👌"
+    fallback: "\U0001F44C"
   point_up:
     id: "5355133243773435190"
     fallback: "☝️"
   hand_up:
     id: "5469718869536940860"
-    fallback: "👆"
+    fallback: "\U0001F446"
   shrug:
     id: "5427052514094619126"
-    fallback: "🤷‍♀️"
+    fallback: "\U0001F937‍♀️"
 
+  peace_info:
+    id: '5469986291380657759'
+    fallback: ✌️
+    aliases: []
 flags:
   flag_gb:
     id: "6323589145717376403"
-    fallback: "🇬🇧"
+    fallback: "\U0001F1EC\U0001F1E7"
   flag_uz:
     id: "6323430017179059570"
-    fallback: "🇺🇿"
+    fallback: "\U0001F1FA\U0001F1FF"
   flag_ru:
     id: "6323139226418284334"
-    fallback: "🇷🇺"
+    fallback: "\U0001F1F7\U0001F1FA"
   flag_ua:
     id: "5276140694891666474"
-    fallback: "🇺🇦"
+    fallback: "\U0001F1FA\U0001F1E6"
   flag_it:
     id: "6323471399188957082"
-    fallback: "🇮🇹"
+    fallback: "\U0001F1EE\U0001F1F9"
   flag_es:
     id: "6323447995878606497"
-    fallback: "🇪🇸"
+    fallback: "\U0001F1EA\U0001F1F8"
   flag_fr:
     id: "6323381024470337090"
-    fallback: "🇫🇷"
+    fallback: "\U0001F1EB\U0001F1F7"
   flag_de:
     id: "6323412351710134444"
-    fallback: "🇩🇪"
+    fallback: "\U0001F1E9\U0001F1EA"
   flag_tr:
     id: "6323362143785718617"
-    fallback: "🇹🇷"
+    fallback: "\U0001F1F9\U0001F1F7"
   flag_jp:
     id: "6323362143785718617"
-    fallback: "🇯🇵"
+    fallback: "\U0001F1EF\U0001F1F5"
   flag_kz:
-    id: "6323267978775234907"
-    fallback: "🇰🇿"
+    id: '5228718354658769982'
+    fallback: 🇰🇿
+    aliases:
+    - kz
   flag_by:
     id: "6323267978775234907"
-    fallback: "🇧🇾"
+    fallback: "\U0001F1E7\U0001F1FE"
   flag_pl:
     id: "6323267978775234907"
-    fallback: "🇵🇱"
+    fallback: "\U0001F1F5\U0001F1F1"
+platforms:
+  platform_termux:
+    id: '5395745114494624362'
+    fallback: 🌼
+    aliases:
+    - termux
+  platform_linux:
+    id: '5458877818031077824'
+    fallback: 🐧
+    aliases:
+    - linux
+  platform_wsl:
+    id: '5350588498359377932'
+    fallback: 🪐
+    aliases:
+    - wsl
+  platform_android:
+    id: '5276415504079164229'
+    fallback: ❤️🔥
+    aliases:
+    - android
+  platform_docker:
+    id: '5352678227582152630'
+    fallback: 🐳
+    aliases:
+    - docker

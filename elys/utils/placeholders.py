@@ -28,9 +28,7 @@ LOADING_EMOJI_PLAIN = ">_<"
 def _get_premium_loading_emoji() -> str:
     from .. import emojis
 
-    if emojis.is_alt_emoji_format():
-        return emojis.convert_to_alt_emoji(LOADING_EMOJI_PREMIUM)
-    return LOADING_EMOJI_PREMIUM
+    return emojis.render_emojis("{e:clock}")
 
 
 def get_loading_placeholder(client=None) -> str:

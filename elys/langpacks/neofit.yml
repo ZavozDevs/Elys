@@ -25,36 +25,38 @@ elys_security:
   owner_added: '{e:owner} <b>usermod -aG sudo <a href="tg://user?id={}">{}</a></b>'
   owner_removed: '{e:owner} <b>deluser <a href="tg://user?id={}">{}</a> sudo</b>'
   no_user: '{e:stop} <b>NullPointer: Target is None</b>'
-  not_a_user: '{e:warn} <b>TypeError: Expected User instance</b>'
-  li: '{e:bullet} <b><a href="tg://user?id={}">{}</a></b>'
+  not_a_user: '{e:warn_security} <b>TypeError: Expected User instance</b>'
+  li: '{e:bullet_dot} <b><a href="tg://user?id={}">{}</a></b>'
   warning: '⚠️ <b>Warning: echo "<a href="tg://user?id={}">{}</a>" >> /etc/group (</b><code>{}</code><b>)!
 
     Granting rwx permissions.</b>'
   cancel: 🚫 SIGINT (^C)
   confirm: 👑 sudo !!
   enable_nonick_btn: 🔰 systemctl enable
-  self: '{e:warn} <b>PermissionError: chmod on self denied!</b>'
+  self: '{e:warn_security} <b>PermissionError: chmod on self denied!</b>'
   suggest_nonick: 🔰 <i>./init_nonick.sh --user?</i>
   user_nn: 🔰 <b>export NONICK_<a href="tg://user?id={}">{}</a>=True</b>
   what: '{e:stop} <b>TypeError: arg[0] must be (</b><code>user</code> <b>|</b> <code>chat</code><b>)</b>'
   no_target: '{e:stop} <b>Target is NULL</b>'
   no_rule: '{e:stop} <b>RuleDefinitionError</b>'
-  confirm_rule: '🔐 <b>Confirm: chmod +x {} <a href=''{}''>{}</a> for</b> <code>{}</code> <b>{}?</b>'
-  rule_added: '🔐 <b>Updated {} <a href=''{}''>{}</a>: access granted to {}</b> <code>{}</code> <b>{}</b>'
+  confirm_rule: '🔐 <b>Confirm: chmod +x {} <a href=''{}''>{}</a> for</b> <code>{}</code>
+    <b>{}?</b>'
+  rule_added: '🔐 <b>Updated {} <a href=''{}''>{}</a>: access granted to {}</b> <code>{}</code>
+    <b>{}</b>'
   confirm_btn: 👑 Enter
   cancel_btn: 🚫 ^C
   multiple_rules: '🔐 <b>Ambiguous redirect. Resolve conflict:</b>
 
 
     {}'
-  rules: '{e:keylock} <b>iptables -L -v -n:</b>
+  rules: '{e:lock_terminal} <b>iptables -L -v -n:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>iptables: No rules defined</b>'
-  owner_target: '{e:warn} <b>User is UID 0. Firewall bypassed.</b>'
-  rules_removed: '{e:keylock} <b>iptables -F <a href="{}">{}</a></b>'
-  rule_removed: '{e:keylock} <b>iptables -D <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
+  owner_target: '{e:warn_security} <b>User is UID 0. Firewall bypassed.</b>'
+  rules_removed: '{e:lock_terminal} <b>iptables -F <a href="{}">{}</a></b>'
+  rule_removed: '{e:lock_terminal} <b>iptables -D <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
   chat_inline: '⚠️ <b>NotImplementedError: Inline chats not supported yet!</b>'
   for: while
   forever: while(true)
@@ -106,13 +108,14 @@ elys_security:
     {}
 
     '
-  sgroup_li: '{e:bullet} <code>{}</code> · <b>{} uids</b> · <b>{} rules</b>'
+  sgroup_li: '{e:bullet_security} <code>{}</code> · <b>{} uids</b> · <b>{} rules</b>'
   sgroups_list: '{e:lock} <b>cat /etc/group:</b>
 
 
     {}'
   deleted_sgroup: '{e:lock} <b>groupdel</b> <code>{}</code> <b>executed</b>'
-  user_already_in_sgroup: '{e:stop} <b>UID</b> <code>{}</code> <b>already member of</b> <code>{}</code>'
+  user_already_in_sgroup: '{e:stop} <b>UID</b> <code>{}</code> <b>already member of</b>
+    <code>{}</code>'
   user_added_to_sgroup: '{e:lock} <b>usermod -aG</b> <code>{}</code> <code>{}</code>'
   user_not_in_sgroup: '{e:stop} <b>UID</b> <code>{}</code> <b>grep failed in</b> <code>{}</code>'
   user_removed_from_sgroup: '{e:lock} <b>gpasswd -d</b> <code>{}</code> <code>{}</code>'
@@ -124,23 +127,23 @@ elys_security:
   _cmd_doc_sgroupdel: <name> [uid] - gpasswd -d
 elys_settings:
   name: ElysSettings
-  watchers: '{e:watch} <b>systemctl list-units --type=service:</b>
+  watchers: '{e:wave} <b>systemctl list-units --type=service:</b>
 
 
     <blockquote expandable><b>{}</b></blockquote>'
   no_args: '{e:stop} <b>argc < 2</b>'
   invoke404: '{e:stop} <b>Method</b> <code>{}</code> <b>MissingSymbol</b>'
   module404: '{e:stop} <b>Module</b> <code>{}</code> <b>ImportError</b>'
-  invoke: '{e:thumbup} <b>Exec debug method</b> <code>{}</code>
+  invoke: '{e:thumbup_invoke} <b>Exec debug method</b> <code>{}</code>
 
 
     {e:blue_circle} <b>Stdout:
 
     {}</b>'
-  invoking: '{e:wait} <b>./{} --method</b> <code>{}</code><b>...</b>'
+  invoking: '{e:wait_terminal} <b>./{} --method</b> <code>{}</code><b>...</b>'
   mod404: '{e:stop} <b>Daemon {} 404 Not Found</b>'
-  disabled: '{e:watch} <b>kill -SIGSTOP {}</b>'
-  enabled: '{e:watch} <b>systemctl start {}</b>'
+  disabled: '{e:wave} <b>kill -SIGSTOP {}</b>'
+  enabled: '{e:wave} <b>systemctl start {}</b>'
   args: "{e:stop} <b>Arg 'watcher_name' required</b>"
   user_nn: '{e:magic} <b>export NONICK_USER={}</b>'
   no_cmd: '{e:magic} <b>Arg: Command required</b>'
@@ -148,7 +151,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Command not found in PATH</b>'
   inline_settings: ⚙️ <b>/etc/environment config</b>
   confirm_update: 🧭 <b>git pull &amp;&amp; systemctl restart?</b>
-  confirm_restart: '{e:warn} <b>sudo reboot now?</b>'
+  confirm_restart: '{e:loading} <b>sudo reboot now?</b>'
   btn_restart: 🔄 sudo reboot
   btn_update: 🧭 git pull
   close_menu: 😌 exit
@@ -212,8 +215,8 @@ elys_settings:
     [-i in]'
   _cmd_doc_watchers: ps aux | grep watchers
   _cls_doc: Advanced Config
-  core_protection_already_removed: '{e:lock} <b>chattr -i core (Already Unlocked)</b>'
-  core_protection_already_enabled: '{e:lock} <b>chattr +i core (Already Locked)</b>'
+  core_protection_already_removed: '{e:lock_protect} <b>chattr -i core (Already Unlocked)</b>'
+  core_protection_already_enabled: '{e:lock_protect} <b>chattr +i core (Already Locked)</b>'
   core_protection_confirm: '⚠️ <b>SUDOERS WARNING!</b>
 
 
@@ -260,15 +263,17 @@ terminal:
 
     {e:dizzy} <b>real {}s</b>'
   auth_fail: '{e:stop} <b>403 Forbidden</b>'
-  auth_needed: '{e:lock}<a href="tg://user?id={}"> sudo password required</a>'
-  auth_msg: '{e:lock} <b>Input password for</b> <code>{}</code> <b>exec</b> <code>{}</code>'
-  dangerous_command: '{e:cross} <b>SystemHalt: (<code>{}</code>) blocked by safety protocol.</b>
+  auth_needed: '{e:lock_terminal}<a href="tg://user?id={}"> sudo password required</a>'
+  auth_msg: '{e:lock_terminal} <b>Input password for</b> <code>{}</code> <b>exec</b>
+    <code>{}</code>'
+  dangerous_command: '{e:cross} <b>SystemHalt: (<code>{}</code>) blocked by safety
+    protocol.</b>
 
 
-    {e:tip}<i>Exception handled.</i>'
+    {e:laptop}<i>Exception handled.</i>'
   auth_locked: '{e:stop} <b>Auth timeout</b>'
-  auth_ongoing: '{e:wait} <b>Verifying hash...</b>'
-  done: '{e:check} <b>Exit 0</b>'
+  auth_ongoing: '{e:wait_terminal} <b>Verifying hash...</b>'
+  done: '{e:check_terminal} <b>Exit 0</b>'
   _cmd_doc_apt: Alias for '.terminal apt'
   _cmd_doc_terminal: <command> - Exec bash
   _cmd_doc_terminate: '[-f force] - kill -9'
@@ -289,7 +294,8 @@ elys_web:
   invalid_target: 'TargetError: Expected @username/id.'
   cant_add_self: 'RecursionError: Cannot target self.'
   add_user_confirm: Confirm add user {} ({})?
-  add_user_insecure: Confirm add user {} ({})? Use <code>{}addacc {} force_insecure</code> to override.
+  add_user_insecure: Confirm add user {} ({})? Use <code>{}addacc {} force_insecure</code>
+    to override.
   enter_number: cin >> phone_number
   your_phone_number: Phone number
   enter_code: cin >> auth_code
@@ -312,7 +318,8 @@ elys_web:
   invalid_code_digits: Code must be numeric. Retry.
   switch_confirm: '⚠️ <b>Переносим юзербота на другой аккаунт?</b>
 
-    Старая сессия уйдёт в архив, конфиг переедет, inline-бот пересоберётся на новом аккаунте.'
+    Старая сессия уйдёт в архив, конфиг переедет, inline-бот пересоберётся на новом
+    аккаунте.'
   switch_insecure: 🚫 <b>Нет инлайна:</b> юзай <code>{}switchacc force_insecure</code>.
   switch_failed: 🚫 <b>Switch failed:</b> <code>{}</code>
   _cmd_doc_switchacc: Перенести юзербота на другой аккаунт
@@ -332,28 +339,30 @@ elys_backup:
   never: ✅ Cron job disabled. Enable with <code>{prefix}set_backup_period</code>
   never_bot: ✅ Cron job disabled. Enable with {prefix}set_backup_period
   invalid_args: '🚫 <b>ValueError: int expected</b>'
-  backup_caption: '{e:hand_up} <b>SQL Dump. Contains PII. Restore:</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>(stdin).</b>'
-  backupall_info: 👆 <b>Full System Snapshot (DB + Mods). Contains PII. Restore:</b> <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>(stdin).</b>
+  backup_caption: '{e:hand_up} <b>SQL Dump. Contains PII. Restore:</b> <pre><code
+    class="language-elys">{prefix}restoredb</code></pre> <b>(stdin).</b>'
+  backupall_info: 👆 <b>Full System Snapshot (DB + Mods). Contains PII. Restore:</b>
+    <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>(stdin).</b>
   restoring_backup: '{e:sync} <b>Restoring snapshot. Installing deps and modules...</b>'
   all_restored: '{e:sync} <b>Snapshot restored. Rebooting...</b>'
   all_restored_bot: 🔄 Snapshot restored. Rebooting...
   reply_to_file: '{e:stop} <b>IOError: Reply with .json/.zip required</b>'
   db_restored: '{e:sync} <b>DB imported. Rebooting...</b>'
-  modules_backup: '{e:package} <b>Modules Dump ({})</b>
+  modules_backup: '{e:device} <b>Modules Dump ({})</b>
 
 
     <b>Restore cmd:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Modules restored. Rebooting...</b>'
-  backup_sent: '{e:package} <b>Dump > <a href={}>log channel</a></b>'
-  backupall_sent: '{e:package} <b>Dump > <a href={}>log channel</a></b>'
+  backup_sent: '{e:device} <b>Dump > <a href={}>log channel</a></b>'
+  backupall_sent: '{e:device} <b>Dump > <a href={}>log channel</a></b>'
   db_warning: '❗️ Migration detected (Hikka -> Elys). Starting conversion.
 
     Possible data corruption. Proceed?'
   advice_converting: 'Tip: sed ''s/hikka./elys./g'' dump.json manually.'
   converting_db: 🔄 Migrating schema...
-  probably_zip: '{e:warn} <b>Restore failed. File might be zip. Use</b> <code>{}restoreall</code><b>.</b>'
+  probably_zip: '{e:stop} <b>Restore failed. File might be zip. Use</b> <code>{}restoreall</code><b>.</b>'
   _cls_doc: Backup & Restore Manager
   _cmd_doc_backupdb: mysqldump (DB)
   _cmd_doc_backupmods: tar -czf modules
@@ -369,14 +378,25 @@ settings:
   wsl: 💻 WSL
   userland: 🐧 UserLand
   jamhost: 🧃 JamHost
-  choose_installation: '{e:glowing_star} <b>Select Host:</b>'
+  choose_installation: '{e:star_choose} <b>Select Host:</b>'
   vds_install: '{e:diamond} VDS Script:
 
-    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade
+    -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3
+    -m elys</code></pre>
 
     <i>Note: Drop ''sudo'' if root.</i>'
-  wsl_install: "<b>WSL Setup.</b> PowerShell (Admin): <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>Req: Win 10 2004+ / Win 11 + Virt.</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">Docs</a>\n\n⬜️ <b>Boot Ubuntu 22.04.x</b> \n\n⬜️ <b>Install Python:</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>Check PATH.</i>\n\n⬜️ <b>Deploy:</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>API Keys:</b> <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Tutorial</a>"
-  userland_install: '<b>Get UserLAnd:</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">Google Play</a>
+  wsl_install: "<b>WSL Setup.</b> PowerShell (Admin): <code>wsl --install -d Ubuntu-22.04</code>\
+    \ \n⚠️ <i>Req: Win 10 2004+ / Win 11 + Virt.</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\"\
+    >Docs</a>\n\n⬜️ <b>Boot Ubuntu 22.04.x</b> \n\n⬜️ <b>Install Python:</b> <code>curl\
+    \ -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>Check PATH.</i>\n\
+    \n⬜️ <b>Deploy:</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git\
+    \ clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install\
+    \ -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>API\
+    \ Keys:</b> <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Tutorial</a>"
+  userland_install: '<b>Get UserLAnd:</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">Google
+    Play</a>
 
 
     <b>Env: Ubuntu -> Minimal -> Terminal</b>
@@ -387,12 +407,22 @@ settings:
 
     <b>Run:</b>
 
-    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
+    &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp;
+    python3 -m elys</code></pre>
 
 
     <b>Login via link.</b>'
   termux: 🪐 Termux
-  termux_install: "<b>🪐 Termux Deploy (Android):</b>\n\n1. <b>Termux:</b> Get via <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> or <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (no Play Store).\n\n2. <b>Run:</b>\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. Auth via generated link or terminal.\n\n🪐 <b>Termux ready.</b>"
+  termux_install: "<b>\U0001FA90 Termux Deploy (Android):</b>\n\n1. <b>Termux:</b>\
+    \ Get via <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a>\
+    \ or <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (no Play\
+    \ Store).\n\n2. <b>Run:</b>\n<pre><code class=\"language-bash\">pkg update -y\
+    \ &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys\
+    \ &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3\
+    \ -m elys</code></pre>\n\n3. Auth via generated link or terminal.\n\n\U0001FA90\
+    \ <b>Termux ready.</b>"
   too_many_args: '{e:stop} <b>Too many arguments</b>'
   blacklisted: '{e:thumbup} <b>Chat {} added to blacklist</b>'
   unblacklisted: '{e:thumbup} <b>Chat {} removed from blacklist</b>'
@@ -420,14 +450,14 @@ settings:
   aliases_file: '{e:folder} <b>Your aliases</b>
 
 
-    {e:glowing_star} <b>{prefix}la in reply to this message to import aliases</b>'
+    {e:star_loader} <b>{prefix}la in reply to this message to import aliases</b>'
   aliases: '<b>🔗 Active Aliases:</b>
 
     '
   happy_beta: '
 
 
-    {e:glowing_star} <b>You successfully gained root access to the <code>{}</code> release.</b>'
+    {e:star_beta} <b>You successfully gained root access to the <code>{}</code> release.</b>'
   stable_branch: '
 
 
@@ -437,12 +467,13 @@ settings:
 
 
     <b>Loaded aliases:</b> <blockquote expandable>{}</blockquote>'
-  alias_exists: '{e:stop} <b>Alias</b> <code>{alias}</code> <b>already defined for command</b> <code>{command}</code>'
+  alias_exists: '{e:stop} <b>Alias</b> <code>{alias}</code> <b>already defined for
+    command</b> <code>{command}</code>'
   alias_args: '{e:stop} <b>Usage: cmd alias_name</b>'
   unstable: '
 
 
-    {e:grey_exclamation} <b>Warning: Unstable branch</b> <code>{}</code><b>!</b>'
+    {e:point_up} <b>Warning: Unstable branch</b> <code>{}</code><b>!</b>'
   delalias_args: '{e:stop} <b>Usage: delalias alias_name</b>'
   alias_removed: '{e:thumbup} <b>Alias</b> <code>{}</code> <b>removed</b>.'
   aliases_removed: '{e:thumbup} <b>{count} aliases unbound:</b>
@@ -454,12 +485,12 @@ settings:
   elys: '{} <b>v{}.{}.{}</b> <i>{}</i>
 
 
-    <b>{e:folder} <b>elys-tl:</b> <i>{}</i>
+    <b>{e:folder_elys} <b>elys-tl:</b> <i>{}</i>
 
 
     {e:wrench} <b>Devs: {}</b>
 
-    {e:theme} <b>Designers: {}</b>'
+    {e:palette} <b>Designers: {}</b>'
   confirm_cleardb: '⚠️ <b>Warning: Drop Database? Data loss imminent.</b>'
   cleardb_confirm: 🗑 DROP DATABASE
   cancel: 🚫 ^C
@@ -471,7 +502,7 @@ settings:
   mod_disabled: Module {} disabled
   cmd_enabled: Command {} enabled in module {}
   cmd_disabled: Command {} disabled in module {}
-  not_a_user: '{e:warn} <b>TypeError: {} is not User</b>'
+  not_a_user: '{e:warn_security} <b>TypeError: {} is not User</b>'
   who_to_blacklist: '{e:question} <b>Target for blacklist?</b>'
   who_to_unblacklist: '{e:question} <b>Target for unblacklist?</b>'
   _cmd_doc_addalias: Bind alias
@@ -501,8 +532,16 @@ settings:
 
     3. Log in.'
   _cfg_rich_mode: Render Elys info as a Rich message.
-  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Component</th><th>Current release</th></tr><tr><td><b>Version</b></td><td><code>{version}</code></td></tr><tr><td><b>Build</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API layer</b></td><td><code>{layer}</code></td></tr><tr><td><b>Current user</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Developers</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
-  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Component</th><th>Current release</th></tr><tr><td><b>Version</b></td><td><code>{version}</code></td></tr><tr><td><b>Build</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API layer</b></td><td><code>{layer}</code></td></tr><tr><td><b>Current user</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Developers</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Component</th><th>Current release</th></tr><tr><td><b>Version</b></td><td><code>{version}</code></td></tr><tr><td><b>Build</b></td><td>{build}</td></tr><tr><td><b>Elys
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API layer</b></td><td><code>{layer}</code></td></tr><tr><td><b>Current
+    user</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Developers</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Component</th><th>Current release</th></tr><tr><td><b>Version</b></td><td><code>{version}</code></td></tr><tr><td><b>Build</b></td><td>{build}</td></tr><tr><td><b>Elys
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API layer</b></td><td><code>{layer}</code></td></tr><tr><td><b>Current
+    user</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Developers</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   no_aliases: '{e:stop} <b>No custom aliases configured</b>'
 elys_config:
   name: ElysConfig
@@ -523,14 +562,15 @@ elys_config:
 
 
     {}'
-  configuring_folder: '{e:folder} <b>Config dir</b> <code>{}</code>
+  configuring_folder: '{e:folder_config} <b>Config dir</b> <code>{}</code>
 
 
     <b>Params:</b>
 
 
     {}'
-  configuring_category: '{e:gear} <b>Config mod</b> <code>{}</code> <b>in cat</b> <code>{}</code>
+  configuring_category: '{e:gear} <b>Config mod</b> <code>{}</code> <b>in cat</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -538,7 +578,8 @@ elys_config:
     <b>Params:</b>
 
     {}'
-  configuring_category_lib: '{e:gear} <b>Config lib</b> <code>{}</code> <b>in cat</b> <code>{}</code>
+  configuring_category_lib: '{e:gear} <b>Config lib</b> <code>{}</code> <b>in cat</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -569,7 +610,8 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:package} <b>Edit param</b> <code>{}</code> <b>in</b> <code>{}</code>
+  configuring_option_lib: '{e:device} <b>Edit param</b> <code>{}</code> <b>in</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -581,16 +623,17 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:gear} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
+  option_saved: '{e:recycle} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
 
     <b>Value: {}</b>'
-  option_saved_lib: '{e:package} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
+  option_saved_lib: '{e:device} <b>Written</b> <code>{}</code> <b>in</b> <code>{}</code><b>!</b>
 
     <b>Value: {}</b>'
   option_reset: '♻️ <b>Reset</b> <code>{}</code> <b>in</b> <code>{}</code> <b>to default</b>
 
     <b>Value: {}</b>'
-  option_reset_lib: '♻️ <b>Reset</b> <code>{}</code> <b>in</b> <code>{}</code> <b>to default</b>
+  option_reset_lib: '♻️ <b>Reset</b> <code>{}</code> <b>in</b> <code>{}</code> <b>to
+    default</b>
 
     <b>Value: {}</b>'
   args: 🚫 <b>Invalid arguments</b>
@@ -618,13 +661,20 @@ elys_config:
   libraries: 📦 Libs
   _cfg_chat_input: Input config values via message (experimental)
   _cfg_switch_layout: Invert layout for commands (e.g. .рудз -> .help)
-  chat_input_prompt_set: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
-  chat_input_prompt_set_lib: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
-  chat_input_prompt_add: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
-  chat_input_prompt_add_lib: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
-  chat_input_prompt_remove: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
-  chat_input_prompt_remove_lib: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
-  series_min_len_error: "⚠️ <b>len(<code>{}</code>) &lt;= {}: min_len constraint violation.</b>\n\nset() new value or reset_default()."
+  chat_input_prompt_set: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\
+    \n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Send new value for <code>{}</code> (<code>{}</code>).</b>\n\
+    \n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_add: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\
+    \n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Send item to append to <code>{}</code> (<code>{}</code>).</b>\n\
+    \n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_remove: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\
+    \n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Send item to drop from <code>{}</code> (<code>{}</code>).</b>\n\
+    \n<b>Current: {}</b>\n\n<i>⏳ recv() in progress... (unlink on arrival)</i>"
+  series_min_len_error: "⚠️ <b>len(<code>{}</code>) &lt;= {}: min_len constraint violation.</b>\n\
+    \nset() new value or reset_default()."
   series_empty_error: "⚠️ <b><code>{}</code> is empty.</b>"
   series_not_found_error: "\U0001F6AB <b>'{}' not found in <code>{}</code>.</b>"
   cancel_btn: 🚫 Cancel
@@ -633,10 +683,11 @@ elys_config:
   _cls_doc: Interactive Configurator
 inline_stuff:
   name: InlineStuff
-  bot_username_invalid: '{e:stop} <b>RegexError: Username must match `.*bot` and len >= 4</b>'
+  bot_username_invalid: '{e:stop} <b>RegexError: Username must match `.*bot` and len
+    >= 4</b>'
   token_invalid: '{e:stop} <b>ValueError: Invalid Token format</b>'
   bot_username_occupied: '{e:stop} <b>Username occupied</b>'
-  bot_updated: '{e:party} <b>Config saved. Reboot required.</b>'
+  bot_updated: '{e:party_inline} <b>Config saved. Reboot required.</b>'
   this_is_elys: '{} <b>{} Userbot. Modular Telegram automation.</b>'
   support_chat_caption: Support
   profile_cmd: 'ℹ️ System Status
@@ -656,15 +707,15 @@ inline_stuff:
   _cmd_doc_ch_bot_token: <token> - Replace inline bot token
 test:
   name: Tester
-  set_loglevel: '{e:stop} <b>TypeError: Verbosity must be int or string</b>'
-  no_logs: '{e:shrug} <b>/var/log/elys empty for level</b> <code>{}</code><b>.</b>'
+  set_loglevel: '{e:point_up} <b>TypeError: Verbosity must be int or string</b>'
+  no_logs: '{e:point_up} <b>/var/log/elys empty for level</b> <code>{}</code><b>.</b>'
   configping: 'Custom text. Vars: {ping}, {uptime}, {ping_hint}, {hostname}'
   configpingph: '🤖 Vars: {}'
   hint: Set hint
   ping_emoji: Low-latency Emoji
   back: ↩️ cd ..
   banner_url: Ping banner URL
-  logs_caption: '{e:glowing_star} <b>Logs (Verbosity:</b> <code>{}</code><b>)</b>
+  logs_caption: '{e:star_test} <b>Logs (Verbosity:</b> <code>{}</code><b>)</b>
 
 
     {e:white_circle} <b>v{}.{}.{}</b>{}'
@@ -675,17 +726,22 @@ test:
 
     <b>Use</b> <code>.logs {0} -f</code> <b>to bypass</b>'
   choose_loglevel: 💁‍♂️ <b>Select log level</b>
-  bad_module: '{e:stop} <b>Module not found</b>'
-  debugging_enabled: '{e:check} <b>Debug mode:</b> <code>{0}</code>
+  bad_module: '{e:point_up} <b>Module not found</b>'
+  debugging_enabled: '{e:check_test} <b>Debug mode:</b> <code>{0}</code>
 
     <i>Watching `debug_modules/{0}.py` for changes...</i>'
-  debugging_disabled: '{e:check} <b>Debug mode disabled</b>'
+  debugging_disabled: '{e:check_test} <b>Debug mode disabled</b>'
   send_anyway: 📤 sudo force send
   cancel: 🚫 ^C
-  branch_menu: "<blockquote>{e:gear} <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield} <b>master</b> - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_menu: "<blockquote>{e:gear_branch} <b>Выбор ветки обновления Elys</b>\nТекущая\
+    \ ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield_branch} <b>master</b>\
+    \ - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка\
+    \ (нестабильная)</blockquote>"
   branch_switching: "<blockquote>{e:repeat} <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
-  branch_switched: "<blockquote>{e:check} <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
-  branch_switch_fail: "<blockquote>{e:exclamation} <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
+  branch_switched: "<blockquote>{e:check_branch} <b>Ветка переключена на <code>{branch}</code>!</b>\n\
+    <i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote>{e:exclamation_branch} <b>Не удалось переключить\
+    \ ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
@@ -707,7 +763,7 @@ updater:
   restarting_caption: '{e:loading} <b>Rebooting {}...</b>'
   downloading: '{e:loading} <b>git fetch...</b>'
   installing: '{e:loading} <b>pip install...</b>'
-  success: '{e:done} <b>Boot success! {}</b>
+  success: '{e:wave_loading} <b>Boot success! {}</b>
 
     <i>Async loading modules...</i>
 
@@ -721,9 +777,9 @@ updater:
 
 
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
-  no_update: '{e:glowing_star} <b>Up to date. git pull --force?</b>'
+  no_update: '{e:star_update} <b>Up to date. git pull --force?</b>'
   cancel: 🚫 ^C
-  full_success: '{e:check} <b>Boot complete! {}</b>
+  full_success: '{e:done} <b>Boot complete! {}</b>
 
     <i>Total Runtime: {}s</i>'
   ub_stop: '{emoji} Process SIGSTOP'
@@ -732,10 +788,10 @@ updater:
     <i>Runtime: {}s
 
     Failed imports: {}</i>'
-  secure_boot_complete: '{e:lock} <b>Safe Mode Active! {}</b>
+  secure_boot_complete: '{e:lock_terminal} <b>Safe Mode Active! {}</b>
 
     <i>Runtime: {}s</i>'
-  secure_boot_fail: '{e:lock} <b>Safe Mode Error! {}</b>
+  secure_boot_fail: '{e:lock_terminal} <b>Safe Mode Error! {}</b>
 
     <i>Runtime: {}s
 
@@ -795,10 +851,15 @@ updater:
   _cmd_doc_autoupdate: Toggle automatic update daemon
   _cmd_doc_changelog: Print last major update changelog
   _cmd_doc_ubstop: Stop userbot process
-  branch_menu: "<blockquote>{e:gear} <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield} <b>master</b> - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_menu: "<blockquote>{e:gear_branch} <b>Выбор ветки обновления Elys</b>\nТекущая\
+    \ ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield_branch} <b>master</b>\
+    \ - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка\
+    \ (нестабильная)</blockquote>"
   branch_switching: "<blockquote>{e:repeat} <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
-  branch_switched: "<blockquote>{e:check} <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
-  branch_switch_fail: "<blockquote>{e:exclamation} <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
+  branch_switched: "<blockquote>{e:check_branch} <b>Ветка переключена на <code>{branch}</code>!</b>\n\
+    <i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote>{e:exclamation_branch} <b>Не удалось переключить\
+    \ ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
@@ -807,7 +868,9 @@ updater:
   stop_ub_confirm: '{} <b>process will be stopped. Confirm?</b>'
 api_protection:
   name: APILimiter
-  warning: "⚠️ <b>WARNING!</b>\n\nRate Limit Exceeded. Process suspended for {}s to prevent API ban. See logs. \n\nUse <code>{prefix}suspend_api_protect</code> &lt;sec&gt; to override."
+  warning: "⚠️ <b>WARNING!</b>\n\nRate Limit Exceeded. Process suspended for {}s to\
+    \ prevent API ban. See logs. \n\nUse <code>{prefix}suspend_api_protect</code>\
+    \ &lt;sec&gt; to override."
   args_invalid: '{e:stop} <b>Invalid Args</b>'
   suspended_for: '{e:ok_hand} <b>Limiter disabled for {}s</b>'
   'true': '{e:ok_hand} <b>Limiter ENABLED</b>'
@@ -829,9 +892,9 @@ help:
   undoc: 🦥 No Man Page
   all_header: <b>{} mods installed, {} hidden:</b>
   no_mod: 🚫 <b>Specify module</b>
-  help_lib: '{e:cross} <b>{} is a Library.</b>
+  help_lib: '{e:money} <b>{} is a Library.</b>
 
-    {e:cross} <b>Libraries have no docs.</b>'
+    {e:money} <b>Libraries have no docs.</b>'
   developer: '{e:heart_hands} Dev: {}'
   hidden_shown: '<b>{} hidden, {} shown:</b>
 
@@ -841,7 +904,7 @@ help:
   offchats: '{e:grey_question} <a href="https://t.me/ElysTalk"><b>Support</b></a>
 
 
-    {e:chat} <a href="https://t.me/heroku_offtop"><b>Offtop</b></a>
+    {e:chat_help} <a href="https://t.me/heroku_offtop"><b>Offtop</b></a>
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Channel</b></a>'
@@ -860,7 +923,20 @@ help:
   rich_placeholders: Placeholders
   rich_commands: Commands
 elys_info:
-  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D681\U0001D698\U0001D698\U0001D69D</b>: {me}\n├  【{e:bot}】 <b>\U0001D685\U0001D68E\U0001D69B</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>\U0001D67F\U0001D69B\U0001D68E\U0001D68F\U0001D692\U0001D6A1</b>: {prefix}⠀ ⠀ \n├  【{e:sync}】 <b>\U0001D684\U0001D699\U0001D69D\U0001D692\U0001D696\U0001D68E</b>: {uptime}\n├  【{e:user}】 <b>\U0001D671\U0001D69B\U0001D68A\U0001D697\U0001D68C\U0001D691</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>\U0001D672\U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield}】 <b>\U0001D681\U0001D670\U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\U0001D692\U0001D697\U0001D690</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield}】 <b>\U0001D684\U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E</b>: {upd}\n├  【{e:bot}】 <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>: {platform}\n├  【{e:bot}】 <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot}】 <b>\U0001D67F\U0001D6A2\U0001D69D\U0001D691\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
+  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D681\U0001D698\U0001D698\
+    \U0001D69D</b>: {me}\n├  【{e:bot_info}】 <b>\U0001D685\U0001D68E\U0001D69B</b>:\
+    \ {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>\U0001D67F\U0001D69B\
+    \U0001D68E\U0001D68F\U0001D692\U0001D6A1</b>: {prefix}⠀ ⠀ \n├  【{e:sync_info}】\
+    \ <b>\U0001D684\U0001D699\U0001D69D\U0001D692\U0001D696\U0001D68E</b>: {uptime}\n\
+    ├  【{e:user_info}】 <b>\U0001D671\U0001D69B\U0001D68A\U0001D697\U0001D68C\U0001D691\
+    </b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>\U0001D672\
+    \U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield_info}】 <b>\U0001D681\U0001D670\
+    \U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\U0001D692\U0001D697\U0001D690\
+    </b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield_info_alt}】 <b>\U0001D684\
+    \U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E</b>: {upd}\n├  【{e:bot_info}】\
+    \ <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>: {platform}\n├  【{e:bot_info_alt}】\
+    \ <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot_info_alt}】 <b>\U0001D67F\U0001D6A2\
+    \U0001D69D\U0001D691\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
   non_detectable: '{e:stop} <b>Hardware detection failed!</b>'
   ping_emoji: Ping emoji
   send_info: Cat info
@@ -878,21 +954,22 @@ elys_info:
   desc: '{e:star} <b>What is Userbot?</b>
 
 
-    {e:owner} A userbot is an automation script running on a user account (Client API).
+    {e:owner_designer} A userbot is an automation script running on a user account
+    (Client API).
 
 
-    {e:owner} Unlike Bots (Bot API), userbots have full access to User methods.
+    {e:owner_dev} Unlike Bots (Bot API), userbots have full access to User methods.
 
 
-    {e:stop} <b>Warning: Violates ToS? Use at own risk.</b>
+    {e:stop_info} <b>Warning: Violates ToS? Use at own risk.</b>
 
 
     '
-  no_font: '{e:cross} Font not found in reply/link.'
+  no_font: '{e:cross_info} Font not found in reply/link.'
   no_banner: '{e:silent} <b>404: Link </b><code>{link></code> <b>unreachable.</b>'
   font_installed: '{e:party} <b>Font installed.</b>'
-  incorrect_format_font: '{e:cross} <b>FormatError (support: otf, ttf)</b>'
-  incorrect_img_format: '{e:cross} <b>FormatError (support: jpg, png, bmp, webp)</b>'
+  incorrect_format_font: '{e:cross_info} <b>FormatError (support: otf, ttf)</b>'
+  incorrect_img_format: '{e:cross_info} <b>FormatError (support: jpg, png, bmp, webp)</b>'
   _cmd_doc_ubinfo: About
   _cmd_doc_info: SystemInfo
   _cmd_doc_setinfo: <text> - Edit Info Template
@@ -901,13 +978,20 @@ elys_info:
   show_preview_in_help: Display banner preview in help [module]
   name: ElysInfo
   _cfg_rich_mode: Render info as a Rich message.
-  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Overview</summary><table><tr><th>Overview</th><th>Owner</th></tr><tr><td>【{e:user}】 <b>Owner</b></td><td>{me}</td></tr><tr><td>【{e:bot}】 <b>Version</b></td><td>{version}</td></tr><tr><td>【{e:camera}】 <b>Prefix</b></td><td>{prefix}</td></tr><tr><td>【{e:sync}】 <b>Uptime</b></td><td>{uptime}</td></tr><tr><td>【{e:user}】 <b>Branch</b></td><td>{branch}</td></tr></table></details><details><summary>Status</summary><table><tr><th>Status</th><th>Updates</th></tr><tr><td>【{e:shield}】 <b>Updates</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield}】 <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Ping</b></td><td>{ping}</td></tr></table></details><details><summary>Environment</summary><table><tr><th>Environment</th><th>OS</th></tr><tr><td>【{e:bot}】 <b>Host</b></td><td>{platform}</td></tr><tr><td>【{e:bot}】 <b>OS</b></td><td>{os}</td></tr><tr><td>【{e:bot}】 <b>Python</b></td><td>{python_ver}</td></tr></table></details>
+  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Overview</summary><table><tr><th>Overview</th><th>Owner</th></tr><tr><td>【{e:user}】
+    <b>Owner</b></td><td>{me}</td></tr><tr><td>【{e:bot_info}】 <b>Version</b></td><td>{version}</td></tr><tr><td>【{e:camera}】
+    <b>Prefix</b></td><td>{prefix}</td></tr><tr><td>【{e:sync_info}】 <b>Uptime</b></td><td>{uptime}</td></tr><tr><td>【{e:user_info}】
+    <b>Branch</b></td><td>{branch}</td></tr></table></details><details><summary>Status</summary><table><tr><th>Status</th><th>Updates</th></tr><tr><td>【{e:shield_info_alt}】
+    <b>Updates</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield_info}】
+    <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Ping</b></td><td>{ping}</td></tr></table></details><details><summary>Environment</summary><table><tr><th>Environment</th><th>OS</th></tr><tr><td>【{e:bot_info}】
+    <b>Host</b></td><td>{platform}</td></tr><tr><td>【{e:bot_info_alt}】 <b>OS</b></td><td>{os}</td></tr><tr><td>【{e:bot_info_alt}】
+    <b>Python</b></td><td>{python_ver}</td></tr></table></details>
 loader:
   name: Loader
   link: '{e:folder} <b>Src:</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm to install</b>
+    {e:star_loader} <b>{prefix}lm to install</b>
 
 
     {e:link} <code>{prefix}dlm {url}</code>
@@ -917,15 +1001,15 @@ loader:
   file: '{e:folder} <b>Src:</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm to install</b>
+    {e:star_loader} <b>{prefix}lm to install</b>
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:loading} Grepping Repos...'
-  loading_module_via_file: '{e:loading} Import...'
-  ml_load_module: '{e:sync} wget...'
+  finding_module_in_repos: '{e:clock} Grepping Repos...'
+  loading_module_via_file: '{e:clock} Import...'
+  ml_load_module: '{e:clock} wget...'
   no_ml: '{e:cross} <b>Module</b> <code>{}</code> <b>cannot be exported as file</b>'
-  not_exact: '{e:warn} <i>Fuzzy match.</i>'
+  not_exact: '{e:point_up} <i>Fuzzy match.</i>'
   args: '{e:stop} <b>Missing Args</b>'
   repo_config_doc: Repo URL
   avail_header: '{e:roller_coaster} <b>Mods in Repo</b>'
@@ -934,18 +1018,18 @@ loader:
   provide_module: "{e:warn} <b>Argument 'module' required</b>"
   bad_unicode: '{e:stop} <b>UnicodeDecodeError</b>'
   load_failed: '{e:stop} <b>ImportError. Check logs</b>'
-  loaded: '{e:glowing_star} <b>Module</b> <code>{}</code>{} <b>imported {}</b>{}{}{}{}{}{}{}{}'
+  loaded: '{e:star_loader} <b>Module</b> <code>{}</code>{} <b>imported {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Class name required for unload</b>
   unloaded: '{} <b>Module {} removed.</b>'
-  unload_suggestions: '{e:cross} <b>Module</b> <code>{}</code> <b>not found.</b>
+  unload_suggestions: '{e:shield_branch} <b>Module</b> <code>{}</code> <b>not found.</b>
 
 
     <b>Closest matches:</b>'
-  modules_unloaded: '{e:check} <b>Unloaded {unloaded_num} mods:</b>
+  modules_unloaded: '{e:check_repo} <b>Unloaded {unloaded_num} mods:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:cross} <b>Unload failed.</b>'
-  modules_not_unloaded: '{e:cross} <b>Failed to unload {not_unloaded} mods.</b>
+  not_unloaded: '{e:shield_branch} <b>Unload failed.</b>'
+  modules_not_unloaded: '{e:shield_branch} <b>Failed to unload {not_unloaded} mods.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Pip install failed</b>'
@@ -954,8 +1038,9 @@ loader:
 
 
     {}</b>'
-  requirements_restart: '{e:rocket} <b>Deps installed. Restart required for</b> <code>{}</code>'
-  all_modules_deleted: '{e:check} <b>rm -rf all modules</b>'
+  requirements_restart: '{e:rocket_restart} <b>Deps installed. Restart required for</b>
+    <code>{}</code>'
+  all_modules_deleted: '{e:check_repo} <b>rm -rf all modules</b>'
   undoc: '{e:shrug} No Man Page'
   ihandler: '
 
@@ -971,7 +1056,7 @@ loader:
 
 
     {e:heart_hands} <b>Dev:</b> {}'
-  depends_from: "\n\n{e:package} <b>Dependencies:</b> \n{}"
+  depends_from: "\n\n{e:package_loader} <b>Dependencies:</b> \n{}"
   by: by
   module_fs: 💿 <b>Write to FS? (Persist after restart)</b>
   save: 💿 Write
@@ -992,7 +1077,7 @@ loader:
   suggest_subscribe: '
 
 
-    {e:star} <b>Dev {} requests follow.</b>'
+    {e:star_subscribe} <b>Dev {} requests follow.</b>'
   subscribe: 💬 Follow
   no_subscribe: 🚫 Ignore
   subscribed: 💬 Following
@@ -1000,24 +1085,28 @@ loader:
   confirm_clearmodules: ⚠️ <b>Confirm removal of ALL modules?</b>
   clearmodules: 🗑 rm -rf
   cancel: 🚫 ^C
-  overwrite_module: '{e:cross} <b>Security Alert: Attempt to override core mod (</b><code>{}</code><b>) blocked.</b>'
-  scam_module: '{e:cross} <b>Security Alert: Malicious module</b> <code>{name}</code> <b>blocked. Report to (</b><code>{prefix}support</code><b>)</b>'
-  overwrite_command: '{e:cross} <b>Security Alert: Attempt to override core command (</b><code>{}{}</code><b>) blocked.</b>'
+  overwrite_module: '{e:cross} <b>Security Alert: Attempt to override core mod (</b><code>{}</code><b>)
+    blocked.</b>'
+  scam_module: '{e:cross} <b>Security Alert: Malicious module</b> <code>{name}</code>
+    <b>blocked. Report to (</b><code>{prefix}support</code><b>)</b>'
+  overwrite_command: '{e:cross} <b>Security Alert: Attempt to override core command
+    (</b><code>{}{}</code><b>) blocked.</b>'
   unload_core: '{e:cross} <b>Permission Denied: Cannot unload core mod</b> <code>{}</code><b></b>'
   cannot_unload_lib: '{e:cross} <b>Permission Denied: Cannot unload library</b>'
-  wait_channel_approve: '{e:dizzy} <b>Module</b> <code>{}</code> <b>requests join <a href="https://t.me/{}">{}</a>.
+  wait_channel_approve: '{e:dizzy_sparkle} <b>Module</b> <code>{}</code> <b>requests
+    join <a href="https://t.me/{}">{}</a>.
 
 
-    <b>{e:question} Reason: {}</b>
+    <b>{e:question_approve} Reason: {}</b>
 
 
     <i>Awaiting auth...</i>'
-  installing: '{e:loading} <b>Installing</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading_clock} <b>Installing</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Repo</b> <code>{}</code> <b>exists</b>'
-  repo_added: '{e:check} <b>Repo</b> <code>{}</code> <b>added</b>'
+  repo_added: '{e:check_repo} <b>Repo</b> <code>{}</code> <b>added</b>'
   no_repo: '{e:stop} <b>Repo URL required</b>'
   repo_not_exists: '{e:stop} <b>Repo</b> <code>{}</code> <b>not found</b>'
-  repo_deleted: '{e:check} <b>Repo</b> <code>{}</code> <b>removed</b>'
+  repo_deleted: '{e:check_repo} <b>Repo</b> <code>{}</code> <b>removed</b>'
   _cmd_doc_addrepo: Add Repo
   _cmd_doc_clearmodules: Purge Mods
   _cmd_doc_delrepo: Remove Repo
@@ -1026,10 +1115,14 @@ loader:
   _cmd_doc_unloadmod: Unload class
   _cls_doc: Module Loader
   basic_auth_doc: Basic Auth credentials
-  choose_repo: '{e:folders} <b>Choose a repository to install all modules from I use Arch btw:</b>'
-  installing_all_from_repo: '{e:loading} <b>Cloning repo and installing all modules via git pull && makepkg -si...</b>'
-  installed_all_from_repo: '{e:glowing_star} <b>All modules from repository installed successfully! (no errors, chad moment)</b>'
-  dlm_all_from_repo_error_nomods: '{e:warn} <b>No modules found in this repository! RTFM or gtfo, normie.</b>'
+  choose_repo: '{e:folders_repo} <b>Choose a repository to install all modules from
+    I use Arch btw:</b>'
+  installing_all_from_repo: '{e:clock} <b>Cloning repo and installing all modules
+    via git pull && makepkg -si...</b>'
+  installed_all_from_repo: '{e:star_repo} <b>All modules from repository installed
+    successfully! (no errors, chad moment)</b>'
+  dlm_all_from_repo_error_nomods: '{e:warn} <b>No modules found in this repository!
+    RTFM or gtfo, normie.</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Some modules failed to install:</b>
 
     '
@@ -1040,7 +1133,7 @@ loader:
   result: '{e:inspect} <b>Lookup result:</b> <code>{query}</code>
 
 
-    {e:package} <b>{name}</b> by <b>{dev}</b>
+    {e:package_result} <b>{name}</b> by <b>{dev}</b>
 
     {e:info} <i>{cls_doc}</i>
 
@@ -1050,7 +1143,8 @@ loader:
 
 
     {e:star} <code>{prefix}dlmod {mhash}</code>'
-  verify_required: '{e:warn} <b>PermissionError: third-party module installs locked. Resolve via <a href="https://t.me/{}?start=lm_verify">your bot</a></b>'
+  verify_required: '{e:warn_verify} <b>PermissionError: third-party module installs
+    locked. Resolve via <a href="https://t.me/{}?start=lm_verify">your bot</a></b>'
 translations:
   name: Translations
   lang_saved: '{} <b>Locale saved!</b>'
@@ -1059,7 +1153,7 @@ translations:
   lang_removed: '{e:thumbup} <b>Reset to default locale</b>'
   check_pack: '{e:stop} <b>Invalid JSON/YAML</b>'
   check_url: '{e:stop} <b>Invalid URL</b>'
-  too_long: '{e:package} <b>Buffer Overflow. Sending file.</b>'
+  too_long: '{e:package_loader} <b>Buffer Overflow. Sending file.</b>'
   choose_language: '{e:statue} <b>Select Locale</b>'
   off_langs: 🏴‍☠️ Stable Locales
   meme_langs: 🏴‍☠️ Community Locales
@@ -1068,9 +1162,10 @@ translations:
 
 
     <b>❓ Reason:</b> <i>{}</i>'
-  fw_error: '{e:clock} <b>FloodWait: {}s on</b> <code>{}</code>'
-  rpc_error: '{e:stop} <b>RPCError:</b> <code>{}</code> <b>in</b> <code>{}</code>'
-  _cmd_doc_dllangpack: '[link to pack] - add external translation pack (btw I use Arch)'
+  fw_error: '{e:clock_fw} <b>FloodWait: {}s on</b> <code>{}</code>'
+  rpc_error: '{e:stop_rpc} <b>RPCError:</b> <code>{}</code> <b>in</b> <code>{}</code>'
+  _cmd_doc_dllangpack: '[link to pack] - add external translation pack (btw I use
+    Arch)'
   _cmd_doc_setlang: '[language] - change default language'
   downloaded_langs: Downloaded
   btn_yes: Confirm
@@ -1116,7 +1211,7 @@ eval:
   eval_result: '
 
 
-    {e:check}<b> Return:</b>
+    {e:check_eval}<b> Return:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
   print_outp: '
@@ -1148,33 +1243,42 @@ translate:
   _cls_doc: Translation Utils
 quickstart:
   name: Quickstart
-  base: '{e:glowing_star} <b>Greetings, user.</b> Your <b>{}</b> userbot daemon is now successfully compiled and running.
+  base: '{e:star_quickstart} <b>Greetings, user.</b> Your <b>{}</b> userbot daemon
+    is now successfully compiled and running.
 
 
-    {e:dizzy} <b>RTFM didn''t help?</b> SSH into <a href="https://t.me/ElysTalk">our support chat</a>. We provide open-source support for <b>all users</b>.
+    {e:dizzy} <b>RTFM didn''t help?</b> SSH into <a href="https://t.me/ElysTalk">our
+    support chat</a>. We provide open-source support for <b>all users</b>.
 
 
     {e:tipping_hand} <b>Quick Manpage (TL;DR):</b>
 
 
-    {e:num_1} <b>Execute</b> <code>.help</code> <b>to output the directory of installed modules</b>
+    {e:num_1} <b>Execute</b> <code>.help</code> <b>to output the directory of installed
+    modules</b>
 
-    {e:num_2} <b>Execute</b> <code>.help &lt;Module name/command&gt;</code> <b>to print the manpage of a specific module</b>
+    {e:num_2} <b>Execute</b> <code>.help &lt;Module name/command&gt;</code> <b>to
+    print the manpage of a specific module</b>
 
-    {e:num_3} <b>Execute</b> <code>.dlmod &lt;link&gt;</code> <b>to wget and compile a module from a URI</b>
+    {e:num_3} <b>Execute</b> <code>.dlmod &lt;link&gt;</code> <b>to wget and compile
+    a module from a URI</b>
 
-    {e:num_4} <b>Execute</b> <code>.loadmod</code> <b>piped from a file to source a module directly</b>
+    {e:num_4} <b>Execute</b> <code>.loadmod</code> <b>piped from a file to source
+    a module directly</b>
 
-    {e:num_5} <b>Execute</b> <code>.unloadmod &lt;Module name&gt;</code> <b>to sigkill and remove a module from memory</b>
+    {e:num_5} <b>Execute</b> <code>.unloadmod &lt;Module name&gt;</code> <b>to sigkill
+    and remove a module from memory</b>
 
 
-    {e:tip} <b>Elys is fully POSIX-compliant with modules from Hikka, Friendly-Telegram, and GeekTG, alongside its native repository.</b>
+    {e:tip_quickstart} <b>Elys is fully POSIX-compliant with modules from Hikka, Friendly-Telegram,
+    and GeekTG, alongside its native repository.</b>
 
     '
   language_saved: 🇬🇧 Locale saved!
   language: 🇬🇧 English
   btn_support: 🥷 Support
-  support_chat_reason: Help is only available here. Joining = agreeing to federation rules. Violations lead to permanent ban.
+  support_chat_reason: Help is only available here. Joining = agreeing to federation
+    rules. Violations lead to permanent ban.
   _cls_doc: Installation Notification
 $validators:
   boolean: bool
@@ -1222,7 +1326,7 @@ $inline:
   invoke_failed_logs: '{e:stop} <b>RuntimeError!</b>
 
 
-    {e:book} <b>Stacktrace:</b>
+    {e:book_inline} <b>Stacktrace:</b>
 
 
     <pre><code class="language-logs">{}</code></pre>'
@@ -1251,7 +1355,8 @@ $inline:
     1. Restart Elys: <code>{prefix}restart</code>
 
 
-    2. Enable inline mode for the bot: go to @BotFather, send /mybots, click Bot Settings -> Inline Mode -> On
+    2. Enable inline mode for the bot: go to @BotFather, send /mybots, click Bot Settings
+    -> Inline Mode -> On
 
 
     3. Create a new bot: send the command <code>{prefix}ch_elys_bot</code> <@botname>'
@@ -1269,29 +1374,42 @@ loader_restrictor:
   q1_ans1: Exactly what's declared in its docstring, nothing more
   q1_ans2: Read-only, scoped to the chat it was invoked in
   q1_ans3: Executes only on explicit function call
-  q1_ans4: 'Same as root: full read/write on your Telegram account, including account deletion'
-  q1_hint: Base image has some guardrails, but a module can still escalate to full account access
+  q1_ans4: 'Same as root: full read/write on your Telegram account, including account
+    deletion'
+  q1_hint: Base image has some guardrails, but a module can still escalate to full
+    account access
   q2: Unknown user DMs you, asks you to test-run their module. git pull and execute?
   q2_ans1: Sure, why not
-  q2_ans2: 'Code review first (manual/LLM). If unclear: report to support with #check_scam, tag the source'
+  q2_ans2: 'Code review first (manual/LLM). If unclear: report to support with #check_scam,
+    tag the source'
   q2_ans3: Ask the author for a signed guarantee, trust it
   q2_ans4: Deploy to a throwaway account first - sandboxed, safer
-  q2_hint: Anything outside the official registry needs a code review before merge. No exceptions
-  q3: Does a module get filesystem/OS access on the host, or is it sandboxed to the Telegram API?
+  q2_hint: Anything outside the official registry needs a code review before merge.
+    No exceptions
+  q3: Does a module get filesystem/OS access on the host, or is it sandboxed to the
+    Telegram API?
   q3_ans1: Sandboxed - no filesystem access outside the Telegram API
   q3_ans2: Only with an explicit Telegram grant
-  q3_ans3: 'No sandbox - it''s an in-process import: full read/write/delete on the filesystem'
+  q3_ans3: 'No sandbox - it''s an in-process import: full read/write/delete on the
+    filesystem'
   q3_ans4: Media files only
-  q3_hint: The userbot is just a Python process on your host. A module runs in that same process, same permissions
-  q4: Would stdout/logs show it if a module started acting without authorization (exfil, etc.)?
+  q3_hint: The userbot is just a Python process on your host. A module runs in that
+    same process, same permissions
+  q4: Would stdout/logs show it if a module started acting without authorization (exfil,
+    etc.)?
   q4_ans1: Yes, Telegram would push a security alert
   q4_ans2: Yes, I'd catch it in the logs
   q4_ans3: No, but the base sandboxing should catch it
   q4_ans4: Not guaranteed - it can run silently, no log output, until it's too late
-  q4_hint: 'Silent failure is the real threat model here: no code review means no early warning, only post-mortem'
-  timeout: '{e:warn} <b>TimeoutError: quiz not completed in time. Retry:</b> <code>/start lm_verify</code>'
-  failed: '{e:stop} <b>AssertionError: wrong answer. To unlock third-party installs, retry:</b> <code>/start lm_verify</code>'
-  already_passed: '{e:check} <b>Check already passed - third-party install permission granted</b>'
+  q4_hint: 'Silent failure is the real threat model here: no code review means no
+    early warning, only post-mortem'
+  timeout: '{e:warn_security} <b>TimeoutError: quiz not completed in time. Retry:</b>
+    <code>/start lm_verify</code>'
+  failed: '{e:stop} <b>AssertionError: wrong answer. To unlock third-party installs,
+    retry:</b> <code>/start lm_verify</code>'
+  already_passed: '{e:check} <b>Check already passed - third-party install permission
+    granted</b>'
   unlocked: '{e:check} <b>Check passed, third-party install permission granted</b>'
-  unlock_prompt: '{e:warn} <b>PermissionError: third-party module installs locked. Run the check to resolve</b>'
+  unlock_prompt: '{e:warn_security} <b>PermissionError: third-party module installs
+    locked. Run the check to resolve</b>'
   unlock_prompt_btn: Run check()

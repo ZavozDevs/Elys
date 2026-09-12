@@ -454,13 +454,18 @@ async def asset_forum_topic(
             )
 
         try:
+            from .. import emojis
+
+            intro_msg = (
+                description
+                if description
+                else emojis.render_emojis(
+                    f"{{e:info_topic}} <b>Content related to <i>'{title}'</i> will be here</b>"
+                )
+            )
             await client.send_message(
                 entity=entity,
-                message=(
-                    description
-                    if description
-                    else f"<tg-emoji emoji-id=\"5258503720928288433\">ℹ️</tg-emoji> <b>Content related to <i>'{title}'</i> will be here</b>"
-                ),
+                message=intro_msg,
                 reply_to=topic_id,
             )
         except Exception as e:  # noqa: BLE001

@@ -50,7 +50,7 @@ class TestMod(loader.Module):
 
     strings = {  # noqa: RUF012
         "name": "Tester",
-        "placeholder_error": "<tg-emoji emoji-id=5210952531676504517>🚫</tg-emoji>",
+        "placeholder_error": "{e:stop}",
     }
 
     def __init__(self):
@@ -98,7 +98,7 @@ class TestMod(loader.Module):
             ),
             loader.ConfigValue(
                 "custom_message",
-                "<tg-emoji emoji-id=5920515922505765329>⚡️</tg-emoji> <b>𝙿𝚒𝚗𝚐: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n<tg-emoji emoji-id=5900104897885376843>🕓</tg-emoji><b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{uptime}</code>",
+                "{e:flash_ping} <b>𝙿𝚒𝚗𝚐: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n{e:clock_uptime}<b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{uptime}</code>",
                 lambda: (
                     self.strings["configping"]
                     + (

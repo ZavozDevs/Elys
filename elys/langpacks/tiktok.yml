@@ -21,36 +21,41 @@ elys_security:
     <blockquote expandable>{}</blockquote>'
   no_owner: '{e:owner} <b>В овнерах пусто, лол</b> <code>owner</code>'
   no_user: '{e:stop} <b>Кому права давать, стене?</b>'
-  not_a_user: '{e:warn} <b>Это не юзер, это бот или чат, чел</b>'
+  not_a_user: '{e:warn_security} <b>Это не юзер, это бот или чат, чел</b>'
   cancel: 🚫 Отмена (слив)
   confirm: 👑 Газуем
-  self: '{e:warn} <b>Себе права не меняют, гений</b>'
-  warning: '⚠️ <b>Эй, ты рил хочешь добавить <a href="tg://user?id={}">{}</a> в группу</b> <code>{}</code><b>?
+  self: '{e:warn_security} <b>Себе права не меняют, гений</b>'
+  warning: '⚠️ <b>Эй, ты рил хочешь добавить <a href="tg://user?id={}">{}</a> в группу</b>
+    <code>{}</code><b>?
 
     Он же может твой акк угнать или снести все к чертям!</b>'
   suggest_nonick: 🔰 <i>Врубить ему NoNick, чтоб как анонимус был?</i>
   user_nn: 🔰 <b>NoNick для <a href="tg://user?id={}">{}</a> врубил, чисто стелс</b>
   enable_nonick_btn: 🔰 Го
-  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> теперь в скваде</b> <code>owner</code>'
-  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> кикнут из</b> <code>owner</code> <b>(лох)</b>'
+  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> теперь в скваде</b>
+    <code>owner</code>'
+  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> кикнут из</b> <code>owner</code>
+    <b>(лох)</b>'
   _cls_doc: Крутилки безопасности
   what: '{e:stop} <b>Чел, напиши сначала цель: (</b><code>user</code> <b>или</b> <code>chat</code><b>)</b>'
   no_target: '{e:stop} <b>Кому правила писать, Пушкину?</b>'
   no_rule: '{e:stop} <b>Правило забыл (модуль или команду)</b>'
-  confirm_rule: 🔐 <b>Зуб даешь, что хочешь разрешить {} <a href='{}'>{}</a> юзать {}</b> <code>{}</code> <b>{}?</b>
+  confirm_rule: 🔐 <b>Зуб даешь, что хочешь разрешить {} <a href='{}'>{}</a> юзать
+    {}</b> <code>{}</code> <b>{}?</b>
   multiple_rules: '🔐 <b>Тут непонятка, выбери че ты хотел:</b>
 
 
     {}'
-  rule_added: 🔐 <b>Все, дал {} <a href='{}'>{}</a> право юзать {}</b> <code>{}</code> <b>{}</b>
-  rules: '{e:keylock} <b>Таргет правила (для избранных):</b>
+  rule_added: 🔐 <b>Все, дал {} <a href='{}'>{}</a> право юзать {}</b> <code>{}</code>
+    <b>{}</b>
+  rules: '{e:lock_terminal} <b>Таргет правила (для избранных):</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Пусто тут, как в голове у тиктокера</b>'
-  owner_target: '{e:warn} <b>Э, это овнер, он и так босс, не трогай его права</b>'
-  rules_removed: '{e:keylock} <b>Снес правила для <a href="{}">{}</a></b>'
-  rule_removed: '{e:keylock} <b>Минус правило для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
+  owner_target: '{e:warn_security} <b>Э, это овнер, он и так босс, не трогай его права</b>'
+  rules_removed: '{e:lock_terminal} <b>Снес правила для <a href="{}">{}</a></b>'
+  rule_removed: '{e:lock_terminal} <b>Минус правило для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
   chat_inline: ⚠️ <b>Инлайн в чате не настроишь, ты че!</b>
   for: на
   forever: навсегда (пожизненно)
@@ -68,12 +73,15 @@ elys_security:
   second: сек
   seconds: сек
   _cmd_doc_inlinesec: '[команда] - Настроить права для инлайна'
-  _cmd_doc_querysec: Врубить/вырубить разрешение на выполнение инлайн запросов для ноунеймов
-  _cmd_doc_owneradd: '[-f|--force] [-n|--nonick] <юзер> - Закинуть в `owner` (дать админку)'
+  _cmd_doc_querysec: Врубить/вырубить разрешение на выполнение инлайн запросов для
+    ноунеймов
+  _cmd_doc_owneradd: '[-f|--force] [-n|--nonick] <юзер> - Закинуть в `owner` (дать
+    админку)'
   _cmd_doc_ownerlist: Чекнуть кто в `owner`
   _cmd_doc_ownerrm: <юзер> - Кикнуть из `owner`
   _cmd_doc_security: '[команда] - Настроить права, кто может юзать'
-  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [цель] [правило] [время] - Добавить правило, чтоб не абузили
+  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [цель] [правило] [время] - Добавить правило,
+    чтоб не абузили
 
     Типа: .tsec user ban 1d'
   _cmd_doc_tsecclr: <"user"/"chat"/"sgroup"> - Вайпнуть все правила
@@ -103,16 +111,20 @@ elys_security:
     {}
 
     '
-  sgroup_li: '{e:bullet} <code>{}</code> · <b>{} челов</b> · <b>{} правил</b>'
+  sgroup_li: '{e:bullet_security} <code>{}</code> · <b>{} челов</b> · <b>{} правил</b>'
   sgroups_list: '{e:lock} <b>Сквады безопасности:</b>
 
 
     {}'
   deleted_sgroup: '{e:lock} <b>Сквад</b> <code>{}</code> <b>рипнулся (удален)</b>'
-  user_already_in_sgroup: '{e:stop} <b>Чел</b> <code>{}</code> <b>уже в скваде</b> <code>{}</code>'
-  user_added_to_sgroup: '{e:lock} <b>Закинул чела</b> <code>{}</code> <b>в сквад</b> <code>{}</code>'
-  user_not_in_sgroup: '{e:stop} <b>Чел</b> <code>{}</code> <b>не в этом скваде</b> <code>{}</code>'
-  user_removed_from_sgroup: '{e:lock} <b>Кикнул чела</b> <code>{}</code> <b>из сквада</b> <code>{}</code>'
+  user_already_in_sgroup: '{e:stop} <b>Чел</b> <code>{}</code> <b>уже в скваде</b>
+    <code>{}</code>'
+  user_added_to_sgroup: '{e:lock} <b>Закинул чела</b> <code>{}</code> <b>в сквад</b>
+    <code>{}</code>'
+  user_not_in_sgroup: '{e:stop} <b>Чел</b> <code>{}</code> <b>не в этом скваде</b>
+    <code>{}</code>'
+  user_removed_from_sgroup: '{e:lock} <b>Кикнул чела</b> <code>{}</code> <b>из сквада</b>
+    <code>{}</code>'
   _cmd_doc_delsgroup: <имя> - Делитнуть сквад
   _cmd_doc_sgroup: <имя> - Чекнуть инфу сквада
   _cmd_doc_sgroups: Список сквадов
@@ -122,15 +134,15 @@ elys_security:
   name: ElysSecurity
   cancel_btn: 🚫 Отмена
   confirm_btn: 👑 Подтвердить
-  li: '{e:bullet} <b><a href="tg://user?id={}">{}</a></b>'
+  li: '{e:bullet_dot} <b><a href="tg://user?id={}">{}</a></b>'
 elys_settings:
-  watchers: '{e:watch} <b>Сталкеры (watchers):</b>
+  watchers: '{e:wave} <b>Сталкеры (watchers):</b>
 
 
     <blockquote expandable><b>{}</b></blockquote>'
   mod404: '{e:stop} <b>Сталкер {} потерялся</b>'
-  disabled: '{e:watch} <b>Сталкер {} пошел спать (OFF)</b>'
-  enabled: '{e:watch} <b>Сталкер {} бдит (ON)</b>'
+  disabled: '{e:wave} <b>Сталкер {} пошел спать (OFF)</b>'
+  enabled: '{e:wave} <b>Сталкер {} бдит (ON)</b>'
   args: '{e:stop} <b>Имя сталкера введи</b>'
   user_nn: '{e:magic} <b>Статус NoNick у этого бро: {}</b>'
   no_cmd: '{e:magic} <b>Команду напиши, где ник прятать</b>'
@@ -138,7 +150,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Нет такой команды, лол</b>'
   inline_settings: ⚙️ <b>Тут настройки Elys, не сломай</b>
   confirm_update: 🧭 <b>Обновляемся? Юб ребутнется</b>
-  confirm_restart: '{e:warn} <b>Ребутаем шарманку?</b>'
+  confirm_restart: '{e:loading} <b>Ребутаем шарманку?</b>'
   btn_restart: 🔄 Ребут
   btn_update: 🧭 Обнова
   close_menu: 😌 Закрыть (ну нафиг)
@@ -146,7 +158,8 @@ elys_settings:
   do_not_suggest_subscribe: 🚫 Не пиарить каналы
   private_not_allowed: '{e:stop} <b>В чате пиши, а не тут</b>'
   _cls_doc: Всякие настройки для гиков
-  nonick_warning: Алярм! Ты врубил NoNick со стандартным префиксом! Тебя могут замутить в чатах Elys. Меняй префикс или оффай это!
+  nonick_warning: Алярм! Ты врубил NoNick со стандартным префиксом! Тебя могут замутить
+    в чатах Elys. Меняй префикс или оффай это!
   reply_required: '{e:stop} <b>Реплайни на чела, кому NoNick делаем</b>'
   deauth_confirm: '⚠️ <b>ТЫ РИЛ ХОЧЕШЬ СНЕСТИ ELYS? ЭТО НЕ РОФЛ, ВСЕ УДАЛИТСЯ!</b>
 
@@ -201,19 +214,22 @@ elys_settings:
 
     [-i - входящие]'
   _cmd_doc_watchers: Че там по сталкерам
-  core_protection_already_removed: '{e:lock} <b>Защита ядра уже снята (ты опасный)</b>'
-  core_protection_already_enabled: '{e:lock} <b>Защита ядра стоит</b>'
+  core_protection_already_removed: '{e:lock_protect} <b>Защита ядра уже снята (ты
+    опасный)</b>'
+  core_protection_already_enabled: '{e:lock_protect} <b>Защита ядра стоит</b>'
   core_protection_confirm: '⚠️ <b>ЧИТАЙ, БЛИН!</b>
 
 
-    Снимаешь защиту - сам виноват, если все сломаешь. Обычным людям это <b>не надо</b>. Если ты не кодер - <b>не лезь</b>. Сомневаешься - <b>не лезь</b>.
+    Снимаешь защиту - сам виноват, если все сломаешь. Обычным людям это <b>не надо</b>.
+    Если ты не кодер - <b>не лезь</b>. Сомневаешься - <b>не лезь</b>.
 
 
     <b>Точно снимаем защиту?</b>'
   core_protection_confirm_e: '⚠️ <b>ЧИТАЙ!</b>
 
 
-    Возвращаем защиту. Если ты обычный чел, тебе вообще не надо было ее снимать. Если не кодер - <b>зачем трогал?</b>.
+    Возвращаем защиту. Если ты обычный чел, тебе вообще не надо было ее снимать. Если
+    не кодер - <b>зачем трогал?</b>.
 
 
     <b>Возвращаем как было?</b>'
@@ -249,15 +265,17 @@ terminal:
 
     {e:dizzy} <b>Ждал: {}с</b>'
   auth_fail: '{e:stop} <b>Пароль не тот, пробуй еще</b>'
-  auth_needed: '{e:lock}<a href="tg://user?id={}"> Введи пароль, хакер</a>'
-  auth_msg: '{e:lock} <b>Редачь это сообщение и пиши пароль от рута для</b> <code>{}</code> <b>, чтоб запустить</b> <code>{}</code>'
+  auth_needed: '{e:lock_terminal}<a href="tg://user?id={}"> Введи пароль, хакер</a>'
+  auth_msg: '{e:lock_terminal} <b>Редачь это сообщение и пиши пароль от рута для</b>
+    <code>{}</code> <b>, чтоб запустить</b> <code>{}</code>'
   auth_locked: '{e:stop} <b>Не фортануло с паролем. Попозже приходи</b>'
-  auth_ongoing: '{e:wait} <b>Проверяю пароль...</b>'
-  done: '{e:check} <b>Готово</b>'
-  dangerous_command: '{e:cross} <b>Тормози! Эту команду (<code>{}</code>) я отменил, а то убьешь все.</b>
+  auth_ongoing: '{e:wait_terminal} <b>Проверяю пароль...</b>'
+  done: '{e:check_terminal} <b>Готово</b>'
+  dangerous_command: '{e:cross} <b>Тормози! Эту команду (<code>{}</code>) я отменил,
+    а то убьешь все.</b>
 
 
-    {e:tip}<i> Это защита от дурака, не пиши в поддержку</i>'
+    {e:laptop}<i> Это защита от дурака, не пиши в поддержку</i>'
   _cmd_doc_apt: Типа '.terminal apt' но короче
   _cmd_doc_terminal: <команда> - Бахнуть баш команду
   _cmd_doc_terminate: '[-f для форса] - Реплайни, чтоб убить процесс'
@@ -279,7 +297,8 @@ elys_web:
   invalid_target: Реплайни на чела или тегни его нормально.
   cant_add_self: Себя добавить нельзя, шиз.
   add_user_confirm: Добавляем аккаунт {} ({})?
-  add_user_insecure: Добавляем аккаунт {} ({})? Юзай <code>{}addacc {} force_insecure</code> чтоб подтвердить.
+  add_user_insecure: Добавляем аккаунт {} ({})? Юзай <code>{}addacc {} force_insecure</code>
+    чтоб подтвердить.
   enter_number: Вводи номер
   your_phone_number: Твой мобильник
   enter_code: Код давай
@@ -303,7 +322,8 @@ elys_web:
   switch_confirm: '⚠️ <b>Точно переносим бота на другой акк?</b>
 
     Старая сессия в архив, конфиг переедет, inline-бот пересоздам на новом акке.'
-  switch_insecure: 🚫 <b>Перенос не стартанул:</b> нет инлайна. Пиши <code>{}switchacc force_insecure</code> если уверен.
+  switch_insecure: 🚫 <b>Перенос не стартанул:</b> нет инлайна. Пиши <code>{}switchacc
+    force_insecure</code> если уверен.
   switch_failed: 🚫 <b>Перенос упал:</b> <code>{}</code>
   _cmd_doc_switchacc: Перенести юзербота на другой Telegram-аккаунт
   name: ElysAccounts
@@ -322,28 +342,34 @@ elys_backup:
   never: '✅ Ок, не буду сейвить автоматом. Вернуть: <code>{prefix}set_backup_period</code>'
   never_bot: '✅ Ок, не буду сейвить автоматом. Вернуть: {prefix}set_backup_period'
   invalid_args: 🚫 <b>Пиши часы цифрами, или `0` чтоб оффнуть</b>
-  backup_caption: '{e:hand_up} <b>Это бэкап базы. Не кидай никому, уведут акк. Восстановить:</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>реплаем на файл.</b>'
-  backupall_info: 👆 <b>Это фулл бэкап (база + моды). Не сливай никому! Восстановить:</b> <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>реплаем на файл.</b>
+  backup_caption: '{e:hand_up} <b>Это бэкап базы. Не кидай никому, уведут акк. Восстановить:</b>
+    <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>реплаем на
+    файл.</b>'
+  backupall_info: 👆 <b>Это фулл бэкап (база + моды). Не сливай никому! Восстановить:</b>
+    <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>реплаем на
+    файл.</b>
   restoring_backup: '{e:sync} <b>Накатываю бэкап, ставлю зависимости и моды...</b>'
   all_restored: '{e:sync} <b>Фулл бэкап накатил, ребутаюсь....</b>'
   all_restored_bot: 🔄 Фулл бэкап накатил, ребутаюсь...
   reply_to_file: '{e:stop} <b>Реплайни на .json или .zip, ну</b>'
   db_restored: '{e:sync} <b>Базу накатил, ребут...</b>'
-  modules_backup: '{e:package} <b>Бэкап модов ({})</b>
+  modules_backup: '{e:device} <b>Бэкап модов ({})</b>
 
 
     <b>Восстановить:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Моды вернул, ребут</b>'
-  backup_sent: '{e:package} <b>Скинул бэкап в <a href={}>чат базы</a></b>'
-  backupall_sent: '{e:package} <b>Дропнул бэкап базы и модулей в <a href={}>чат базы</a></b>'
+  backup_sent: '{e:device} <b>Скинул бэкап в <a href={}>чат базы</a></b>'
+  backupall_sent: '{e:device} <b>Дропнул бэкап базы и модулей в <a href={}>чат базы</a></b>'
   db_warning: '❗️ О, бэкап от Hikka. <b>Попробую</b> переделать под Elys.
 
     Может кринжануть. Пробуем?'
-  advice_converting: Можешь сам поменять <a>'hikka.'</a> на <a>'elys.'</a> в файле. Так надо.
+  advice_converting: Можешь сам поменять <a>'hikka.'</a> на <a>'elys.'</a> в файле.
+    Так надо.
   converting_db: 🔄 Шаманю над базой...
-  probably_zip: '{e:warn} <b>Не вышло. Если это фулл бэкап (.zip/.backup), юзай</b> <code>{}restoreall</code> <b>реплаем.</b>'
+  probably_zip: '{e:stop} <b>Не вышло. Если это фулл бэкап (.zip/.backup), юзай</b>
+    <code>{}restoreall</code> <b>реплаем.</b>'
   _cls_doc: Работает с бэкапами (сейвами)
   _cmd_doc_backupdb: Сделать бэкап базы [придет в лс]
   _cmd_doc_backupmods: Сделать бэкап модов [придет в лс]
@@ -354,13 +380,25 @@ elys_backup:
   _cmd_doc_restoreall: Накатить общий бэкап
   name: ElysBackup
 settings:
-  choose_installation: '{e:glowing_star} <b>Где ставить будем?</b>'
+  choose_installation: '{e:star_choose} <b>Где ставить будем?</b>'
   vds_install: '{e:diamond} На VDS одной командой:
 
-    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade
+    -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3
+    -m elys</code></pre>
 
     <i>Если нет sudo, убери его из команды.</i>'
-  wsl_install: "<b>WSL тема.</b> Открой PowerShell (админ) и пиши <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>Надо Windows 10 (2004+) или 11 и виртуализацию.</i>\n\n⬜️ <b>Ребутни комп и открой Ubuntu 22.04.x</b> \n\n⬜️ <b>Вставь это (ПКМ):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>Если желтым ругается, пиши</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code>\n\n⬜️ <b>Вставь это (ПКМ):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>API_ID и API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Видос тут</a>"
+  wsl_install: "<b>WSL тема.</b> Открой PowerShell (админ) и пиши <code>wsl --install\
+    \ -d Ubuntu-22.04</code> \n⚠️ <i>Надо Windows 10 (2004+) или 11 и виртуализацию.</i>\n\
+    \n⬜️ <b>Ребутни комп и открой Ubuntu 22.04.x</b> \n\n⬜️ <b>Вставь это (ПКМ):</b>\
+    \ <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>Если\
+    \ желтым ругается, пиши</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"\
+    </code>\n\n⬜️ <b>Вставь это (ПКМ):</b> \n<pre><code class=\"language-bash\">clear\
+    \ &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp;\
+    \ pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517\
+    \ <b>API_ID и API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Видос\
+    \ тут</a>"
   userland_install: '<b>Качай UserLAnd тут:</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">ссылка</a>
 
 
@@ -372,7 +410,10 @@ settings:
 
     <b>Как откроется консоль, пиши:</b>
 
-    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
+    &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp;
+    python3 -m elys</code></pre>
 
 
     <b>В конце будет ссылка, переходи и логинься.
@@ -380,7 +421,15 @@ settings:
 
     Вуаля! Ты хакер на телефоне.</b>'
   termux: 🪐 Termux
-  termux_install: "<b>🪐 Ставим Elys в Termux на мобилу:</b>\n\n1. Качай нормальный <b>Termux</b> с <a href=\"https://github.com/termux/termux-app/releases\">GitHub</a> или <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (с Google Play не качай, там тухляк).\n\n2. Открывай Termux и вставляй одну строчку:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. Вылезет ссылка — тыкай и входи в акк, либо пиши прямо в консоли.\n\n🪐 <b>Вуаля! Бот на телефоне в кармане.</b>"
+  termux_install: "<b>\U0001FA90 Ставим Elys в Termux на мобилу:</b>\n\n1. Качай нормальный\
+    \ <b>Termux</b> с <a href=\"https://github.com/termux/termux-app/releases\">GitHub</a>\
+    \ или <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (с Google\
+    \ Play не качай, там тухляк).\n\n2. Открывай Termux и вставляй одну строчку:\n\
+    <pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python\
+    \ -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys\
+    \ &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\
+    \n3. Вылезет ссылка — тыкай и входи в акк, либо пиши прямо в консоли.\n\n\U0001FA90\
+    \ <b>Вуаля! Бот на телефоне в кармане.</b>"
   too_many_args: '{e:stop} <b>Много букв, короче пиши</b>'
   blacklisted: '{e:thumbup} <b>Чат {} в мусорке (ЧС)</b>'
   unblacklisted: '{e:thumbup} <b>Чат {} вернул из мусорки</b>'
@@ -394,7 +443,8 @@ settings:
   entity_prefix_set: '{} <b>Префикс для {entity_name} сменил. Вернуть:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix} {entity_id}</code></pre>'
-  id_not_found_scgroup: '{e:stop} Этого нет в сквадах безопасности. Смысла нет префикс менять'
+  id_not_found_scgroup: '{e:stop} Этого нет в сквадах безопасности. Смысла нет префикс
+    менять'
   invalid_id_or_username: '{e:stop} Кривой id или юзернейм'
   alias_created: '{e:thumbup} <b>Алиас готов. Юзай через</b> <code>{}</code>'
   aliases_created: '{e:thumbup} <b>Добавил {count} алиаса:</b>
@@ -408,14 +458,15 @@ settings:
   aliases_file: '{e:folder} <b>Твои алиасы</b>
 
 
-    {e:glowing_star} <b>{prefix}la в ответ на это сообщение для импорта</b>'
+    {e:star_loader} <b>{prefix}la в ответ на это сообщение для импорта</b>'
   aliases: '<b>🔗 Твои алиасы:</b>
 
     '
   happy_beta: '
 
 
-    {e:glowing_star} <b>Ты теперь счастливый юзер <code>{}</code> версии, это имба</b> ✨'
+    {e:star_beta} <b>Ты теперь счастливый юзер <code>{}</code> версии, это имба</b>
+    ✨'
   stable_branch: '
 
 
@@ -425,11 +476,12 @@ settings:
 
 
     <b>Загруженные алиасы:</b> <blockquote expandable>{}</blockquote>'
-  alias_exists: '{e:stop} <b>Алиас</b> <code>{alias}</code> <b>уже занят командой</b> <code>{command}</code>'
+  alias_exists: '{e:stop} <b>Алиас</b> <code>{alias}</code> <b>уже занят командой</b>
+    <code>{command}</code>'
   unstable: '
 
 
-    {e:grey_exclamation} <b>Ты на ветке</b> <code>{}</code> <b>сидишь, бро</b>'
+    {e:point_up} <b>Ты на ветке</b> <code>{}</code> <b>сидишь, бро</b>'
   alias_args: '{e:stop} <b>Пиши команду и алиас к ней</b>'
   delalias_args: '{e:stop} <b>Имя алиаса давай</b>'
   alias_removed: '{e:thumbup} <b>Алиас</b> <code>{}</code> <b>минус</b>.'
@@ -442,12 +494,12 @@ settings:
   elys: '{} <b>{}.{}.{}</b> <i>{}</i>
 
 
-    <b>{e:folder} <b>elys-tl:</b> <i>{}</i>
+    <b>{e:folder_elys} <b>elys-tl:</b> <i>{}</i>
 
 
     {e:wrench} <b>Кодеры: {}</b>
 
-    {e:theme} <b>Дизайнеры: {}</b>'
+    {e:palette} <b>Дизайнеры: {}</b>'
   _cls_doc: Базовые настройки
   confirm_cleardb: ⚠️ <b>Ты реально хочешь вайпнуть базу данных? Все слетит!</b>
   cleardb_confirm: 🗑 Вайпнуть базу
@@ -460,7 +512,7 @@ settings:
   mod_disabled: Модуль {} вырублен
   cmd_enabled: Команда {} врублена в модуле {}
   cmd_disabled: Команда {} вырублена в модуле {}
-  not_a_user: '{e:warn} <b>{} не юзер, это бот или чат, чел</b>'
+  not_a_user: '{e:warn_security} <b>{} не юзер, это бот или чат, чел</b>'
   who_to_blacklist: '{e:question} <b>Кого банить?</b>'
   who_to_unblacklist: '{e:question} <b>Кого разбанить?</b>'
   _cmd_doc_addalias: Сделать алиас (сокращение)
@@ -489,8 +541,16 @@ settings:
 
     3. Логинься по ссылке и кайфуй.'
   _cfg_rich_mode: Показывать elys как Rich-сообщение.
-  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Текущий релиз</th></tr><tr><td><b>Версия</b></td><td><code>{version}</code></td></tr><tr><td><b>Сборка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Слой API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Текущий юзер</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Разработчики</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
-  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Текущий релиз</th></tr><tr><td><b>Версия</b></td><td><code>{version}</code></td></tr><tr><td><b>Сборка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Слой API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Текущий юзер</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Разработчики</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Компонент</th><th>Текущий релиз</th></tr><tr><td><b>Версия</b></td><td><code>{version}</code></td></tr><tr><td><b>Сборка</b></td><td>{build}</td></tr><tr><td><b>Elys
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Слой API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Текущий
+    юзер</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Разработчики</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Компонент</th><th>Текущий релиз</th></tr><tr><td><b>Версия</b></td><td><code>{version}</code></td></tr><tr><td><b>Сборка</b></td><td>{build}</td></tr><tr><td><b>Elys
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Слой API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Текущий
+    юзер</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Разработчики</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   no_aliases: '{e:stop} <b>Алиасов еще нет</b>'
 elys_config:
   choose_core: '{e:gear} <b>Тыкай категорию</b>'
@@ -503,7 +563,7 @@ elys_config:
 
 
     {}'
-  configuring_folder: '{e:folder} <b>Настройка папки</b> <code>{}</code>
+  configuring_folder: '{e:folder_config} <b>Настройка папки</b> <code>{}</code>
 
 
     <b>Че щас стоит:</b>
@@ -517,7 +577,8 @@ elys_config:
 
 
     {}'
-  configuring_category: '{e:gear} <b>Настройка модуля</b> <code>{}</code> <b>в категории</b> <code>{}</code>
+  configuring_category: '{e:gear} <b>Настройка модуля</b> <code>{}</code> <b>в категории</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -525,7 +586,8 @@ elys_config:
     <b>Че щас стоит:</b>
 
     {}'
-  configuring_category_lib: '{e:gear} <b>Настройка либы</b> <code>{}</code> <b>в категории</b> <code>{}</code>
+  configuring_category_lib: '{e:gear} <b>Настройка либы</b> <code>{}</code> <b>в категории</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -544,7 +606,8 @@ elys_config:
   category_uncategorized: '
 
     <b>{e:bullet} Остальное</b>'
-  configuring_option: '{e:gear} <b>Крутим настройку</b> <code>{}</code> <b>модуля</b> <code>{}</code>
+  configuring_option: '{e:gear} <b>Крутим настройку</b> <code>{}</code> <b>модуля</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -556,7 +619,8 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:package} <b>Крутим настройку</b> <code>{}</code> <b>либы</b> <code>{}</code>
+  configuring_option_lib: '{e:device} <b>Крутим настройку</b> <code>{}</code> <b>либы</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -568,16 +632,20 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:gear} <b>Настройку</b> <code>{}</code> <b>для</b> <code>{}</code><b> сохранил!</b>
+  option_saved: '{e:recycle} <b>Настройку</b> <code>{}</code> <b>для</b> <code>{}</code><b>
+    сохранил!</b>
 
     <b>Щас: {}</b>'
-  option_saved_lib: '{e:package} <b>Настройку</b> <code>{}</code> <b>для либы</b> <code>{}</code><b> сохранил!</b>
+  option_saved_lib: '{e:device} <b>Настройку</b> <code>{}</code> <b>для либы</b> <code>{}</code><b>
+    сохранил!</b>
 
     <b>Щас: {}</b>'
-  option_reset: '♻️ <b>Сбросил</b> <code>{}</code> <b>для</b> <code>{}</code><b> в дефолт</b>
+  option_reset: '♻️ <b>Сбросил</b> <code>{}</code> <b>для</b> <code>{}</code><b> в
+    дефолт</b>
 
     <b>Щас: {}</b>'
-  option_reset_lib: '♻️ <b>Сбросил</b> <code>{}</code> <b>для либы</b> <code>{}</code><b> в дефолт</b>
+  option_reset_lib: '♻️ <b>Сбросил</b> <code>{}</code> <b>для либы</b> <code>{}</code><b>
+    в дефолт</b>
 
     <b>Щас: {}</b>'
   _cls_doc: Конфигуратор (настройки)
@@ -606,13 +674,22 @@ elys_config:
   libraries: 📦 Либы
   _cfg_chat_input: Писать значения конфига в чат вместо инлайна (хайп/эксперимент)
   _cfg_switch_layout: Авто-фикс раскладки для команд (типо .рудз -> .help)
-  chat_input_prompt_set: "✍️ <b>Кидай новое значение для <code>{}</code> модуля <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
-  chat_input_prompt_set_lib: "✍️ <b>Кидай новое значение для <code>{}</code> либки <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
-  chat_input_prompt_add: "➕ <b>Кидай новый пункт для <code>{}</code> модуля <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
-  chat_input_prompt_add_lib: "➕ <b>Кидай новый пункт для <code>{}</code> либки <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
-  chat_input_prompt_remove: "➖ <b>Кидай пункт на вылет из <code>{}</code> модуля <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
-  chat_input_prompt_remove_lib: "➖ <b>Кидай пункт на вылет из <code>{}</code> либки <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
-  series_min_len_error: "⚠️ <b>Нельзя удалить из <code>{}</code>: тут должно быть хотя бы {} шт.</b>\n\nЗадай новое значение или сбрось по дефолту."
+  chat_input_prompt_set: "✍️ <b>Кидай новое значение для <code>{}</code> модуля <code>{}</code>\
+    \ в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Кидай новое значение для <code>{}</code> либки\
+    \ <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку...\
+    \ (юб сразу удалит)</i>"
+  chat_input_prompt_add: "➕ <b>Кидай новый пункт для <code>{}</code> модуля <code>{}</code>\
+    \ в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Кидай новый пункт для <code>{}</code> либки <code>{}</code>\
+    \ в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_remove: "➖ <b>Кидай пункт на вылет из <code>{}</code> модуля <code>{}</code>\
+    \ в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку... (юб сразу удалит)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Кидай пункт на вылет из <code>{}</code> либки\
+    \ <code>{}</code> в чатик.</b>\n\n<b>Щас стоит: {}</b>\n\n<i>⏳ Ждём сообщеньку...\
+    \ (юб сразу удалит)</i>"
+  series_min_len_error: "⚠️ <b>Нельзя удалить из <code>{}</code>: тут должно быть\
+    \ хотя бы {} шт.</b>\n\nЗадай новое значение или сбрось по дефолту."
   series_empty_error: "⚠️ <b>Список <code>{}</code> уже пустой.</b>"
   series_not_found_error: "\U0001F6AB <b>Пункт <code>{}</code> не найден в <code>{}</code>.</b>"
   cancel_btn: 🚫 Отмена
@@ -620,10 +697,11 @@ elys_config:
   _cmd_doc_fconfig: <модуль> <опция> <значение> - быстро поменять конфиг
   name: ElysConfig
 inline_stuff:
-  bot_username_invalid: '{e:stop} <b>Ник кривой. Должен быть с</b> <code>bot</code> <b>на конце и от 5 символов</b>'
+  bot_username_invalid: '{e:stop} <b>Ник кривой. Должен быть с</b> <code>bot</code>
+    <b>на конце и от 5 символов</b>'
   token_invalid: '{e:stop} <b>Токен паленый какой-то. Проверь цифры и буквы</b>'
   bot_username_occupied: '{e:stop} <b>Ник занят уже кем-то</b>'
-  bot_updated: '{e:party} <b>Сохранил. Ребутни юб чтоб заработало</b>'
+  bot_updated: '{e:party_inline} <b>Сохранил. Ребутни юб чтоб заработало</b>'
   this_is_elys: '{} <b>Ку! Это {} — лютый юзербот. Ставь себе и кайфуй!</b>'
   support_chat_caption: Саппорт
   profile_cmd: 'ℹ️ Стата юзербота
@@ -643,26 +721,29 @@ inline_stuff:
   _cls_doc: Настройка inline-бота
   _cmd_doc_ch_bot_token: <token> - Сменить токен inline-бота
 test:
-  set_loglevel: '{e:stop} <b>Уровень логов дай (числом или словом)</b>'
-  no_logs: '{e:shrug} <b>Нет логов уровня</b> <code>{}</code><b>.</b>'
-  configping: 'Твой текст пинга. Юзай: {ping}, {uptime}, {ping_hint} (рофл фраза). Можно {hostname} сервера.'
+  set_loglevel: '{e:point_up} <b>Уровень логов дай (числом или словом)</b>'
+  no_logs: '{e:point_up} <b>Нет логов уровня</b> <code>{}</code><b>.</b>'
+  configping: 'Твой текст пинга. Юзай: {ping}, {uptime}, {ping_hint} (рофл фраза).
+    Можно {hostname} сервера.'
   configpingph: '🤖Кастомные плейсхолдеры: {}'
   hint: Подсказка
   ping_emoji: Эмодзи когда пинг норм.
   back: ↩️ Назад
   banner_url: 'Картинка для пинга, типа: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
-  logs_caption: '{e:glowing_star} <b>Логи Elys (lvl</b> <code>{}</code><b>)</b>
+  logs_caption: '{e:star_test} <b>Логи Elys (lvl</b> <code>{}</code><b>)</b>
 
 
     {e:white_circle} <b>Версия: {}.{}.{}</b>{}'
-  debugging_enabled: '{e:check} <b>Режим дебага ON для</b> <code>{0}</code>
+  debugging_enabled: '{e:check_test} <b>Режим дебага ON для</b> <code>{0}</code>
 
     <i>Иди в `debug_modules`, правь `{0}.py`, и смотри че будет</i>'
-  debugging_disabled: '{e:check} <b>Режим дебага OFF</b>'
+  debugging_disabled: '{e:check_test} <b>Режим дебага OFF</b>'
   suspend_invalid_time: '{e:stop} <b>Время кривое</b>'
   suspended: '{e:cold_face} <b>Фризнул бота на</b> <code>{}</code> <b>сек</b>'
-  confidential: ⚠️ <b>Логи уровня</b> <code>{}</code> <b>могут спалить твои данные, аккуратнее</b>
-  confidential_text: '⚠️ <b>Логи уровня</b> <code>{0}</code> <b>могут спалить твои данные!</b>
+  confidential: ⚠️ <b>Логи уровня</b> <code>{}</code> <b>могут спалить твои данные,
+    аккуратнее</b>
+  confidential_text: '⚠️ <b>Логи уровня</b> <code>{0}</code> <b>могут спалить твои
+    данные!</b>
 
     <b>Пиши</b> <code>.logs {0} -f</code><b>, если пофиг</b>'
   choose_loglevel: 💁‍♂️ <b>Выбери уровень</b>
@@ -682,12 +763,12 @@ updater:
   restarting_caption: '{e:loading} <b>Твой {} ребутается...</b>'
   downloading: '{e:loading} <b>Качаю обнову...</b>'
   installing: '{e:loading} <b>Ставлю обнову...</b>'
-  success: '{e:done} <b>Ребут успешный! {}</b>
+  success: '{e:wave_loading} <b>Ребут успешный! {}</b>
 
     <i>Модули еще грузятся...</i>
 
     <i>Заняло {} сек</i>'
-  full_success: '{e:check} <b>Фулл загрузка! {}</b>
+  full_success: '{e:done} <b>Фулл загрузка! {}</b>
 
     <i>Всего заняло {} сек.</i>'
   ub_stop: Твой {emoji} стопнулся!
@@ -696,10 +777,10 @@ updater:
     <i>Ребут занял {} сек
 
     {} модулей не загрузилось</i>'
-  secure_boot_complete: '{e:lock} <b>Сейф бут все! {}</b>
+  secure_boot_complete: '{e:lock_terminal} <b>Сейф бут все! {}</b>
 
     <i>Заняло {} сек</i>'
-  secure_boot_fail: '{e:lock} <b>Сейф бут все, но что-то пошло не так! {}</b>
+  secure_boot_fail: '{e:lock_terminal} <b>Сейф бут все, но что-то пошло не так! {}</b>
 
     <i>Заняло {} сек
 
@@ -713,12 +794,17 @@ updater:
 
 
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
-  no_update: '{e:glowing_star} <b>У тебя ласт версия. Все равно обновить?</b>'
+  no_update: '{e:star_update} <b>У тебя ласт версия. Все равно обновить?</b>'
   cancel: 🚫 Не надо
-  branch_menu: "<blockquote>{e:gear} <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield} <b>master</b> - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_menu: "<blockquote>{e:gear_branch} <b>Выбор ветки обновления Elys</b>\nТекущая\
+    \ ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield_branch} <b>master</b>\
+    \ - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка\
+    \ (нестабильная)</blockquote>"
   branch_switching: "<blockquote>{e:repeat} <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
-  branch_switched: "<blockquote>{e:check} <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
-  branch_switch_fail: "<blockquote>{e:exclamation} <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
+  branch_switched: "<blockquote>{e:check_branch} <b>Ветка переключена на <code>{branch}</code>!</b>\n\
+    <i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote>{e:exclamation_branch} <b>Не удалось переключить\
+    \ ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
@@ -786,7 +872,10 @@ updater:
   _cmd_doc_changelog: Показать changelog последнего большого апдейта
   _cmd_doc_ubstop: Остановить юзербота
 api_protection:
-  warning: "⚠️ <b>ЭЭЭ СТОПЭ!</b>\n\nТы превысил лимиты запросов. Чтоб телега не дала спамбан, юзербот <b>ушел в фриз</b> на {} секунд. Инфа в файле. \n\nИди в <code>{prefix}support</code> поплачь!\n\nЕсли так и надо, жди таймер, а потом юзай <code>{prefix}suspend_api_protect</code> &lt;секунды&gt;"
+  warning: "⚠️ <b>ЭЭЭ СТОПЭ!</b>\n\nТы превысил лимиты запросов. Чтоб телега не дала\
+    \ спамбан, юзербот <b>ушел в фриз</b> на {} секунд. Инфа в файле. \n\nИди в <code>{prefix}support</code>\
+    \ поплачь!\n\nЕсли так и надо, жди таймер, а потом юзай <code>{prefix}suspend_api_protect</code>\
+    \ &lt;секунды&gt;"
   args_invalid: '{e:stop} <b>Аргументы кривые</b>'
   suspended_for: '{e:ok_hand} <b>Защита API оффнута на {} сек</b>'
   'true': '{e:ok_hand} <b>Защита ON</b>'
@@ -808,9 +897,9 @@ help:
   undoc: 🦥 Хз че это
   all_header: <b>{} модов тут, {} в стелсе:</b>
   no_mod: 🚫 <b>Какой модуль прячем?</b>
-  help_lib: '{e:cross} <b>Пакет</b> <code>{}</code> <b>это либа.</b>
+  help_lib: '{e:money} <b>Пакет</b> <code>{}</code> <b>это либа.</b>
 
-    {e:cross} <b>У либ нет описания, лол...</b>'
+    {e:money} <b>У либ нет описания, лол...</b>'
   developer: '{e:heart_hands} Разработчик: {}'
   hidden_shown: '<b>{} модов скрыто, {} показано:</b>
 
@@ -820,7 +909,7 @@ help:
   offchats: '{e:grey_question} <a href="https://t.me/ElysTalk"><b>Саппорт (помощь)</b></a>
 
 
-    {e:chat} <a href="https://t.me/heroku_offtop"><b>Оффтоп (флуд)</b></a>
+    {e:chat_help} <a href="https://t.me/heroku_offtop"><b>Оффтоп (флуд)</b></a>
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Канал</b></a>'
@@ -832,7 +921,8 @@ help:
   _cmd_doc_help: '[модуль] [-f] - Показать хелп'
   _cmd_doc_helphide: <модули> - Спрятать модули из хелпа (через пробел)
   _cmd_doc_support: Дать ссылку на чат
-  show_preview_in_help: 'Показать # meta banner в превью команды help [module], еще посидим'
+  show_preview_in_help: 'Показать # meta banner в превью команды help [module], еще
+    посидим'
   name: Help
   _cfg_rich_mode: Показывать help как Rich-сообщение.
   rich_core: Встроенные модули
@@ -840,7 +930,21 @@ help:
   rich_placeholders: Плейсхолдеры
   rich_commands: Команды
 elys_info:
-  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D67E\U0001D6A0\U0001D697\U0001D68E\U0001D69B</b>: {me}\n├  【{e:bot}】 <b>\U0001D685\U0001D68E\U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>\U0001D67F\U0001D69B\U0001D68E\U0001D68F\U0001D692\U0001D6A1</b>: {prefix}⠀ ⠀ \n├  【{e:sync}】 <b>\U0001D684\U0001D699\U0001D69D\U0001D692\U0001D696\U0001D68E</b>: {uptime}\n├  【{e:user}】 <b>\U0001D671\U0001D69B\U0001D68A\U0001D697\U0001D68C\U0001D691</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>\U0001D672\U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield}】 <b>\U0001D681\U0001D670\U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\U0001D692\U0001D697\U0001D690</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield}】 <b>\U0001D684\U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E</b>: {upd}\n├  【{e:bot}】 <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>: {platform}\n├  【{e:bot}】 <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot}】 <b>\U0001D67F\U0001D6A2\U0001D69D\U0001D691\U0001D698\U0001D697 \U0001D685\U0001D68E\U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
+  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D67E\U0001D6A0\U0001D697\
+    \U0001D68E\U0001D69B</b>: {me}\n├  【{e:bot_info}】 <b>\U0001D685\U0001D68E\U0001D69B\
+    \U0001D69C\U0001D692\U0001D698\U0001D697</b>: {version}\n└</blockquote>\n<blockquote>┌\n\
+    ├  【{e:camera}】 <b>\U0001D67F\U0001D69B\U0001D68E\U0001D68F\U0001D692\U0001D6A1\
+    </b>: {prefix}⠀ ⠀ \n├  【{e:sync_info}】 <b>\U0001D684\U0001D699\U0001D69D\U0001D692\
+    \U0001D696\U0001D68E</b>: {uptime}\n├  【{e:user_info}】 <b>\U0001D671\U0001D69B\
+    \U0001D68A\U0001D697\U0001D68C\U0001D691</b>: {branch}\n└</blockquote>\n<blockquote>┌\n\
+    ├  【{e:exclamation}】 <b>\U0001D672\U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield_info}】\
+    \ <b>\U0001D681\U0001D670\U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\
+    \U0001D692\U0001D697\U0001D690</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├ \
+    \ 【{e:shield_info_alt}】 <b>\U0001D684\U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E\
+    </b>: {upd}\n├  【{e:bot_info}】 <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>:\
+    \ {platform}\n├  【{e:bot_info_alt}】 <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot_info_alt}】\
+    \ <b>\U0001D67F\U0001D6A2\U0001D69D\U0001D691\U0001D698\U0001D697 \U0001D685\U0001D68E\
+    \U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
   non_detectable: '{e:stop} <b>Сервак скрытный, не вижу!</b>'
   ping_emoji: Эмодзи пинга
   send_info: Кинуть инфу о юзерботе
@@ -859,17 +963,20 @@ elys_info:
   desc: '{e:star} <b>Че такое Userbot?</b>
 
 
-    {e:owner} Userbot - это <b>софт</b>, который через Telegram API делает <b>грязную работу за тебя</b>. Типа <b>спам, инвайт, качалка медиа и прочий движ</b>.
+    {e:owner_designer} Userbot - это <b>софт</b>, который через Telegram API делает
+    <b>грязную работу за тебя</b>. Типа <b>спам, инвайт, качалка медиа и прочий движ</b>.
 
 
-    {e:owner} Юзерботы работают <b>прямо на твоем акке</b>, а не как обычные боты. Короче ты становишься киборгом.
+    {e:owner_dev} Юзерботы работают <b>прямо на твоем акке</b>, а не как обычные боты.
+    Короче ты становишься киборгом.
 
 
-    {e:stop} Но! <b>Telegram это официально не одобряет</b>, так что если будешь творить дичь — словишь бан. <b>Будь аккуратнее</b> и не ставь скам-модули.
+    {e:stop_info} Но! <b>Telegram это официально не одобряет</b>, так что если будешь
+    творить дичь — словишь бан. <b>Будь аккуратнее</b> и не ставь скам-модули.
 
 
     '
-  no_font: '{e:cross} Где ссылка или реплай на шрифт, алло?'
+  no_font: '{e:cross_info} Где ссылка или реплай на шрифт, алло?'
   no_banner: '{e:silent} <b>По ссылке </b><code>{link}</code><b> пусто.
 
 
@@ -877,10 +984,10 @@ elys_info:
   font_installed: '{e:party} <b>Шрифт поставил!</b>
 
     {e:party} <i>Кайфуй.</i>'
-  incorrect_format_font: '{e:cross} <b>Формат кринж!</b>
+  incorrect_format_font: '{e:cross_info} <b>Формат кринж!</b>
 
     <blockquote>Надо -> otf, ttf</blockquote>'
-  incorrect_img_format: '{e:cross} <b>Формат картинки не тот</b>
+  incorrect_img_format: '{e:cross_info} <b>Формат картинки не тот</b>
 
     <blockquote>Надо -> jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Скинуть 'Что такое Elys?'
@@ -889,13 +996,20 @@ elys_info:
   name: ElysInfo
   _cls_doc: Показать инфу о юзерботе
   _cfg_rich_mode: Показывать info как Rich-сообщение.
-  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Основное</summary><table><tr><th>Основное</th><th>Владелец</th></tr><tr><td>【{e:user}】 <b>Владелец</b></td><td>{me}</td></tr><tr><td>【{e:bot}】 <b>Версия</b></td><td>{version}</td></tr><tr><td>【{e:camera}】 <b>Префикс</b></td><td>{prefix}</td></tr><tr><td>【{e:sync}】 <b>Время работы</b></td><td>{uptime}</td></tr><tr><td>【{e:user}】 <b>Ветка</b></td><td>{branch}</td></tr></table></details><details><summary>Статус</summary><table><tr><th>Статус</th><th>Обновление</th></tr><tr><td>【{e:shield}】 <b>Обновление</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield}】 <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Пинг</b></td><td>{ping}</td></tr></table></details><details><summary>Окружение</summary><table><tr><th>Окружение</th><th>ОС</th></tr><tr><td>【{e:bot}】 <b>Хост</b></td><td>{platform}</td></tr><tr><td>【{e:bot}】 <b>ОС</b></td><td>{os}</td></tr><tr><td>【{e:bot}】 <b>Python</b></td><td>{python_ver}</td></tr></table></details>
+  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Основное</summary><table><tr><th>Основное</th><th>Владелец</th></tr><tr><td>【{e:user}】
+    <b>Владелец</b></td><td>{me}</td></tr><tr><td>【{e:bot_info}】 <b>Версия</b></td><td>{version}</td></tr><tr><td>【{e:camera}】
+    <b>Префикс</b></td><td>{prefix}</td></tr><tr><td>【{e:sync_info}】 <b>Время работы</b></td><td>{uptime}</td></tr><tr><td>【{e:user_info}】
+    <b>Ветка</b></td><td>{branch}</td></tr></table></details><details><summary>Статус</summary><table><tr><th>Статус</th><th>Обновление</th></tr><tr><td>【{e:shield_info_alt}】
+    <b>Обновление</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield_info}】
+    <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Пинг</b></td><td>{ping}</td></tr></table></details><details><summary>Окружение</summary><table><tr><th>Окружение</th><th>ОС</th></tr><tr><td>【{e:bot_info}】
+    <b>Хост</b></td><td>{platform}</td></tr><tr><td>【{e:bot_info_alt}】 <b>ОС</b></td><td>{os}</td></tr><tr><td>【{e:bot_info_alt}】
+    <b>Python</b></td><td>{python_ver}</td></tr></table></details>
   show_preview_in_help: Показывать баннер мода в .help <мод>?
 loader:
   link: '{e:folder} <b>Файл</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm реплаем сюда, чтоб поставить</b>
+    {e:star_loader} <b>{prefix}lm реплаем сюда, чтоб поставить</b>
 
 
     {e:link} <code>{prefix}dlm {url}</code>
@@ -905,15 +1019,15 @@ loader:
   file: '{e:folder} <b>Файл</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm реплаем сюда, чтоб поставить</b>
+    {e:star_loader} <b>{prefix}lm реплаем сюда, чтоб поставить</b>
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:loading} Ищу в репо...'
-  loading_module_via_file: '{e:loading} Гружу...'
-  ml_load_module: '{e:sync} Качаю как файл...'
+  finding_module_in_repos: '{e:clock} Ищу в репо...'
+  loading_module_via_file: '{e:clock} Гружу...'
+  ml_load_module: '{e:clock} Качаю как файл...'
   no_ml: '{e:cross} <b>Модуль</b> <code>{}</code> <b>нельзя выгрузить файлом</b>'
-  not_exact: '{e:warn} <i>Точно такого нет, вот похожее</i>'
+  not_exact: '{e:point_up} <i>Точно такого нет, вот похожее</i>'
   args: '{e:stop} <b>Аргументы где?</b>'
   repo_config_doc: Ссылка на репо
   add_repo_config_doc: Доп. репозитории
@@ -923,18 +1037,18 @@ loader:
   provide_module: '{e:warn} <b>Че качать то?</b>'
   bad_unicode: '{e:stop} <b>Кодировка кривая</b>'
   load_failed: '{e:stop} <b>Не загрузилось (F). Чекни логи.</b>'
-  loaded: '{e:glowing_star} <b>Модуль</b> <code>{}</code>{} <b>залетел {}</b>{}{}{}{}{}{}{}{}'
+  loaded: '{e:star_loader} <b>Модуль</b> <code>{}</code>{} <b>залетел {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Че выгружать?</b>
   unloaded: '{} <b>Модуль {} выкинул.</b>'
-  unload_suggestions: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не нашел.</b>
+  unload_suggestions: '{e:shield_branch} <b>Модуль</b> <code>{}</code> <b>не нашел.</b>
 
 
     <b>Может, ты про:</b>'
-  modules_unloaded: '{e:check} <b>Выкинул {unloaded_num} модов:</b>
+  modules_unloaded: '{e:check_repo} <b>Выкинул {unloaded_num} модов:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:cross} <b>Не выкинул.</b>'
-  modules_not_unloaded: '{e:cross} <b>Не смог выкинуть {not_unloaded} модов.</b>
+  not_unloaded: '{e:shield_branch} <b>Не выкинул.</b>'
+  modules_not_unloaded: '{e:shield_branch} <b>Не смог выкинуть {not_unloaded} модов.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Зависимости не встали</b>'
@@ -943,8 +1057,8 @@ loader:
 
 
     {}</b>'
-  requirements_restart: '{e:rocket} <b>Либы встали, ребутнись для</b> <code>{}</code>'
-  all_modules_deleted: '{e:check} <b>Модули снесены</b>'
+  requirements_restart: '{e:rocket_restart} <b>Либы встали, ребутнись для</b> <code>{}</code>'
+  all_modules_deleted: '{e:check_repo} <b>Модули снесены</b>'
   undoc: '{e:shrug} Хз че это'
   ihandler: '
 
@@ -957,7 +1071,7 @@ loader:
 
 
     {e:heart_hands} <b>Кодер:</b> {}'
-  depends_from: "\n\n{e:package} <b>Надо еще:</b> \n{}"
+  depends_from: "\n\n{e:package_loader} <b>Надо еще:</b> \n{}"
   by: от
   module_fs: 💿 <b>Сейвим модуль на диск, чтоб не слетал?</b>
   save: 💿 Сейви
@@ -988,7 +1102,7 @@ loader:
   suggest_subscribe: '
 
 
-    {e:star} <b>Модуль от {}. Подпишись на него, не будь крысой?</b>'
+    {e:star_subscribe} <b>Модуль от {}. Подпишись на него, не будь крысой?</b>'
   subscribe: 💬 Подписка
   no_subscribe: 🚫 Не хочу
   subscribed: 💬 Красава!
@@ -999,41 +1113,49 @@ loader:
   overwrite_module: '{e:cross} <b>Этот модуль хотел перезаписать встроенный (</b><code>{}</code><b>)</b>
 
 
-    {e:tip}<i> Это защита, чтоб всякий шлак не ломал бота. Не пиши в саппорт.</i>'
-  scam_module: '{e:cross} <b>Модуль</b> <code>{name}</code> <b>это СКАМ, кидай репорт в (</b><code>{prefix}support</code><b>)</b>
+    {e:laptop}<i> Это защита, чтоб всякий шлак не ломал бота. Не пиши в саппорт.</i>'
+  scam_module: '{e:cross} <b>Модуль</b> <code>{name}</code> <b>это СКАМ, кидай репорт
+    в (</b><code>{prefix}support</code><b>)</b>
 
 
     <tg-spoiler><i>Я его стопнул.</i></tg-spoiler>'
-  overwrite_command: '{e:cross} <b>Этот модуль хотел перезаписать встроенную команду (</b><code>{}</code><b>)</b>
+  overwrite_command: '{e:cross} <b>Этот модуль хотел перезаписать встроенную команду
+    (</b><code>{}</code><b>)</b>
 
 
-    {e:tip}<i> Это защита, чтоб всякий шлак не ломал бота.</i>'
-  unload_core: '{e:cross} <b>Нельзя сносить встроенный модуль</b> <code>{}</code><b>, сломаешь всё</b>
+    {e:laptop}<i> Это защита, чтоб всякий шлак не ломал бота.</i>'
+  unload_core: '{e:cross} <b>Нельзя сносить встроенный модуль</b> <code>{}</code><b>,
+    сломаешь всё</b>
 
 
-    {e:tip}<i> Защита от дурака.</i>'
+    {e:laptop}<i> Защита от дурака.</i>'
   cannot_unload_lib: '{e:cross} <b>Либу не снесешь</b>'
-  wait_channel_approve: '{e:dizzy} <b>Модуль</b> <code>{}</code> <b>хочет в канал <a href="https://t.me/{}">{}</a>.
+  wait_channel_approve: '{e:dizzy_sparkle} <b>Модуль</b> <code>{}</code> <b>хочет
+    в канал <a href="https://t.me/{}">{}</a>.
 
 
-    <b>{e:question} Зачем: {}</b>
+    <b>{e:question_approve} Зачем: {}</b>
 
 
     <i>Ждем <a href="https://t.me/{}">добро</a>...</i>'
-  installing: '{e:loading} <b>Ставлю модуль</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading_clock} <b>Ставлю модуль</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Репо</b> <code>{}</code> <b>уже есть</b>'
-  repo_added: '{e:check} <b>Репо</b> <code>{}</code> <b>добавил</b>'
+  repo_added: '{e:check_repo} <b>Репо</b> <code>{}</code> <b>добавил</b>'
   no_repo: '{e:stop} <b>Какое репо добавить?</b>'
   repo_not_exists: '{e:stop} <b>Репо</b> <code>{}</code> <b>нет такого</b>'
-  repo_deleted: '{e:check} <b>Репо</b> <code>{}</code> <b>удалил</b>'
+  repo_deleted: '{e:check_repo} <b>Репо</b> <code>{}</code> <b>удалил</b>'
   _cmd_doc_addrepo: Добавить репо
   _cmd_doc_delrepo: Удалить репо
   basic_auth_doc: Вход в репо
-  choose_repo: '{e:folders} <b>Сигма, выбери репозиторий, из которого будем качать все модули, ризз или ливни:</b>'
-  installing_all_from_repo: '{e:loading} <b>Качаем все модули из репы... подожди секунду, не отписывайся, щавель уже в деле</b>'
-  installed_all_from_repo: '{e:glowing_star} <b>Все модули из репозитория успешно установлены! Сигма момент</b>'
+  choose_repo: '{e:folders_repo} <b>Сигма, выбери репозиторий, из которого будем качать
+    все модули, ризз или ливни:</b>'
+  installing_all_from_repo: '{e:clock} <b>Качаем все модули из репы... подожди секунду,
+    не отписывайся, щавель уже в деле</b>'
+  installed_all_from_repo: '{e:star_repo} <b>Все модули из репозитория успешно установлены!
+    Сигма момент</b>'
   dlm_all_from_repo_error_nomods: '{e:warn} <b>В этой репе нет ни одного модуля. Кринж</b>'
-  dlm_all_from_repo_error_somemods: '{e:warn} <b>Плаки, плаки. Некоторые модули не установились, кароче фейл, щавель не зашёл:</b>
+  dlm_all_from_repo_error_somemods: '{e:warn} <b>Плаки, плаки. Некоторые модули не
+    установились, кароче фейл, щавель не зашёл:</b>
 
     '
   show_banner_doc: Сигма или нормис?)
@@ -1044,7 +1166,7 @@ loader:
   result: '{e:inspect} <b>Нашёл по</b> <code>{query}</code>
 
 
-    {e:package} <b>{name}</b> от <b>{dev}</b>
+    {e:package_result} <b>{name}</b> от <b>{dev}</b>
 
     {e:info} <i>{cls_doc}</i>
 
@@ -1055,7 +1177,8 @@ loader:
 
     {e:star} <code>{prefix}dlmod {mhash}</code>'
   not_subscribed: '{e:stop} <b>Сначала подпишись на канал модуля</b>'
-  verify_required: '{e:warn} <b>Чтобы разлочить установку сторонних модулей, пройди тест в <a href="https://t.me/{}?start=lm_verify">своём боте</a>, го</b>'
+  verify_required: '{e:warn_verify} <b>Чтобы разлочить установку сторонних модулей,
+    пройди тест в <a href="https://t.me/{}?start=lm_verify">своём боте</a>, го</b>'
 translations:
   lang_saved: '{} <b>Язык сменил, красава!</b>'
   pack_saved: '{e:thumbup} <b>Пак переводов сохранил!</b>'
@@ -1063,7 +1186,7 @@ translations:
   lang_removed: '{e:thumbup} <b>Сбросил на дефолт</b>'
   check_pack: '{e:stop} <b>Пак кривой в ссылке</b>'
   check_url: '{e:stop} <b>Ссылку дай норм с паком</b>'
-  too_long: '{e:package} <b>Текста дофига, кидаю файлом.</b>'
+  too_long: '{e:package_loader} <b>Текста дофига, кидаю файлом.</b>'
   choose_language: '{e:statue} <b>Выбирай язык</b>'
   off_langs: 🏴‍☠️ Офф. переводы
   meme_langs: 🏴‍☠️ Рофло-переводы
@@ -1072,8 +1195,10 @@ translations:
 
 
     <b>❓ Зачем:</b> <i>{}</i>'
-  fw_error: '{e:clock} <b>Команда</b> <code>{}</code> <b>слолвила ФлудВейт {} в</b> <code> {}</code>'
-  rpc_error: '{e:stop} <b>Команда</b> <code>{}</code> <b>рипнулась (RPC Error):</b> <code>{}</code>'
+  fw_error: '{e:clock_fw} <b>Команда</b> <code>{}</code> <b>слолвила ФлудВейт {} в</b>
+    <code> {}</code>'
+  rpc_error: '{e:stop_rpc} <b>Команда</b> <code>{}</code> <b>рипнулась (RPC Error):</b>
+    <code>{}</code>'
   _cmd_doc_dllangpack: '[ссылка на пак] - добавить внешний пак перевода (не для нормисов)'
   _cmd_doc_setlang: '[язык] - сменить стандартный язык'
   downloaded_langs: Скачанные
@@ -1121,7 +1246,7 @@ eval:
   eval_result: '
 
 
-    {e:check}<b> Выхлоп:</b>
+    {e:check_eval}<b> Выхлоп:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
   print_outp: '
@@ -1152,10 +1277,12 @@ translate:
   _cmd_doc_tr: '[язык] [текст] - Перевести'
   name: Translator
 quickstart:
-  base: '{e:glowing_star} <b>Йоу, чат.</b> Твой юзербот <b>{}</b> теперь имба и готов раздавать стиль.
+  base: '{e:star_quickstart} <b>Йоу, чат.</b> Твой юзербот <b>{}</b> теперь имба и
+    готов раздавать стиль.
 
 
-    {e:dizzy} <b>Нужен хелп, бро?</b> Залетай в <a href="https://t.me/ElysTalk">наш саппорт чат</a>. Мы хелпаем <b>вообще всем</b>, ноу кэп.
+    {e:dizzy} <b>Нужен хелп, бро?</b> Залетай в <a href="https://t.me/ElysTalk">наш
+    саппорт чат</a>. Мы хелпаем <b>вообще всем</b>, ноу кэп.
 
 
     {e:tipping_hand} <b>Быстрый гайд, бести:</b>
@@ -1163,22 +1290,28 @@ quickstart:
 
     {e:num_1} <b>Дропай</b> <code>.help</code><b>, чтобы чекнуть список модулей</b>
 
-    {e:num_2} <b>Дропай</b> <code>.help &lt;Имя модуля/команда&gt;</code><b>, чтобы выкупить лор модуля</b>
+    {e:num_2} <b>Дропай</b> <code>.help &lt;Имя модуля/команда&gt;</code><b>, чтобы
+    выкупить лор модуля</b>
 
-    {e:num_3} <b>Дропай</b> <code>.dlmod &lt;ссылка&gt;</code><b>, чтобы залутать модуль по ссылке</b>
+    {e:num_3} <b>Дропай</b> <code>.dlmod &lt;ссылка&gt;</code><b>, чтобы залутать
+    модуль по ссылке</b>
 
-    {e:num_4} <b>Дропай</b> <code>.loadmod</code> <b>реплаем на файл, чтобы вытянуть из него модуль</b>
+    {e:num_4} <b>Дропай</b> <code>.loadmod</code> <b>реплаем на файл, чтобы вытянуть
+    из него модуль</b>
 
-    {e:num_5} <b>Дропай</b> <code>.unloadmod &lt;Имя модуля&gt;</code><b>, чтобы снести модуль</b>
+    {e:num_5} <b>Дропай</b> <code>.unloadmod &lt;Имя модуля&gt;</code><b>, чтобы снести
+    модуль</b>
 
 
-    {e:tip} <b>Elys проходит вайб-чек и поддерживает модули от Hikka, Friendly-Telegram и GeekTG, ну и свои собственные, рил.</b>
+    {e:tip_quickstart} <b>Elys проходит вайб-чек и поддерживает модули от Hikka, Friendly-Telegram
+    и GeekTG, ну и свои собственные, рил.</b>
 
     '
   language_saved: 🇷🇺 Язык сохранил!
   language: 🇷🇺 Русский (Рофл)
   btn_support: 🥷 Саппорт
-  support_chat_reason: Помощь по Elys только тут. Заходишь — соглашаешься с правилами федерации Elys, нарушишь — пермач.
+  support_chat_reason: Помощь по Elys только тут. Заходишь — соглашаешься с правилами
+    федерации Elys, нарушишь — пермач.
   name: Quickstart
   _cls_doc: Сообщает, что юзербот установлен
 $validators:
@@ -1227,7 +1360,7 @@ $inline:
   invoke_failed_logs: '{e:stop} <b>Сломалось!</b>
 
 
-    {e:book} <b>Логи:</b>
+    {e:book_inline} <b>Логи:</b>
 
 
     <pre><code class="language-logs">{}</code></pre>'
@@ -1256,7 +1389,8 @@ $inline:
     1. Перезагрузите Elys: <code>{prefix}restart</code>
 
 
-    2. Включите inline-режим для бота: перейдите в @BotFather, отправьте /mybots, нажмите Bot Settings -> Inline Mode -> On
+    2. Включите inline-режим для бота: перейдите в @BotFather, отправьте /mybots,
+    нажмите Bot Settings -> Inline Mode -> On
 
 
     3. Создайте нового бота: отправьте команду <code>{prefix}ch_elys_bot</code> <@имя_бота>'
@@ -1273,29 +1407,39 @@ loader_restrictor:
   q1_ans1: Только то, что в описании написано, не больше
   q1_ans2: Читать переписку только в том чате, где его вызвали
   q1_ans3: Действовать только когда сам вызвал команду
-  q1_ans4: 'То же самое, что и ты сам в Телеге, и даже больше: подарки слить, акк удалить'
-  q1_hint: В юзерботе есть базовая защита, но модуль всё равно может получить полный контроль над акком
+  q1_ans4: 'То же самое, что и ты сам в Телеге, и даже больше: подарки слить, акк
+    удалить'
+  q1_hint: В юзерботе есть базовая защита, но модуль всё равно может получить полный
+    контроль над акком
   q2: Тебе в лс пишет рандом и просит потестить его модуль. Твои действия?
   q2_ans1: Конечно помогу, как не помочь
-  q2_ans2: 'Гляну код сам/нейронкой. Если сомнения - в саппорт с #check_scam, скажу кто скинул'
+  q2_ans2: 'Гляну код сам/нейронкой. Если сомнения - в саппорт с #check_scam, скажу
+    кто скинул'
   q2_ans3: Спрошу у автора безопасен ли он, поверю на слово
   q2_ans4: Поставлю на запасной акк потестить, так безопаснее
   q2_hint: Модули не из официальных каналов - жди подвоха, всегда проверяй код
   q3: Может ли модуль лазить по файлам и системе сервера, а не только в Телеге сидеть?
   q3_ans1: Не, модуль живёт только в Телеге, файлы не видит
   q3_ans2: Может, но ток с файлами, которые он сам создал или скачал
-  q3_ans3: Может - модуль это часть самого юзербота, может читать/менять/удалять файлы как обычная программа
+  q3_ans3: Может - модуль это часть самого юзербота, может читать/менять/удалять файлы
+    как обычная программа
   q3_ans4: Только фотки и видосы из Телеги
-  q3_hint: Юзербот - обычный питон-скрипт на твоём сервере. Модуль - часть этого скрипта с теми же правами
+  q3_hint: Юзербот - обычный питон-скрипт на твоём сервере. Модуль - часть этого скрипта
+    с теми же правами
   q4: Заметишь если модуль начнёт суету без спроса (слив данных и т.д.)?
   q4_ans1: Ага, Телега сразу пришлёт пуш о подозрительной активности
   q4_ans2: Ага, увижу подозрительные логи от модуля
   q4_ans3: Не, но базовая защита юзербота должна словить это
-  q4_ans4: Не факт - модуль может суетить втихую, без единого шороха, пока не будет поздно
-  q4_hint: 'Скрытность - вот что реально страшно в опасных модулях: без проверки кода заранее не заметишь беду, пока гром не грянет'
-  timeout: '{e:warn} <b>Не успел ответить вовремя, лол. Го заново -</b> <code>/start lm_verify</code>'
-  failed: '{e:stop} <b>Мимо. Чтобы разлочить установку модулей - заново,</b> <code>/start lm_verify</code>'
+  q4_ans4: Не факт - модуль может суетить втихую, без единого шороха, пока не будет
+    поздно
+  q4_hint: 'Скрытность - вот что реально страшно в опасных модулях: без проверки кода
+    заранее не заметишь беду, пока гром не грянет'
+  timeout: '{e:warn_security} <b>Не успел ответить вовремя, лол. Го заново -</b> <code>/start
+    lm_verify</code>'
+  failed: '{e:stop} <b>Мимо. Чтобы разлочить установку модулей - заново,</b> <code>/start
+    lm_verify</code>'
   already_passed: '{e:check} <b>Тест уже сдан, установка модулей разлочена</b>'
   unlocked: '{e:check} <b>Тест сдан, установка модулей разлочена</b>'
-  unlock_prompt: '{e:warn} <b>Чтобы разлочить установку сторонних модулей, пройди короткий тест</b>'
+  unlock_prompt: '{e:warn_security} <b>Чтобы разлочить установку сторонних модулей,
+    пройди короткий тест</b>'
   unlock_prompt_btn: Давай

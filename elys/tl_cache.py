@@ -1009,21 +1009,23 @@ class CustomTelegramClient(TelegramClient):
     def _convert_entities_if_alt(self, kwargs: dict):
         from . import emojis
 
-        if emojis.is_alt_emoji_format() and kwargs.get("formatting_entities"):
+        if emojis.is_alt_emoji_format():
             from elystl.tl.types import MessageEntityCustomEmoji, MessageEntityTextUrl
 
-            kwargs["formatting_entities"] = [
-                (
-                    MessageEntityTextUrl(
-                        offset=e.offset,
-                        length=e.length,
-                        url=f"tg://emoji?id={e.document_id}",
-                    )
-                    if isinstance(e, MessageEntityCustomEmoji)
-                    else e
-                )
-                for e in kwargs["formatting_entities"]
-            ]
+            for k in ("formatting_entities", "entities"):
+                if kwargs.get(k):
+                    kwargs[k] = [
+                        (
+                            MessageEntityTextUrl(
+                                offset=e.offset,
+                                length=e.length,
+                                url=f"tg://emoji?id={e.document_id}",
+                            )
+                            if isinstance(e, MessageEntityCustomEmoji)
+                            else e
+                        )
+                        for e in kwargs[k]
+                    ]
 
     async def send_file(self, *args, **kwargs) -> Message:
         self._convert_entities_if_alt(kwargs)
@@ -1042,6 +1044,10 @@ class CustomTelegramClient(TelegramClient):
             *args,
             **kwargs,
         )
+
+    async def edit_message(self, *args, **kwargs) -> Message:
+        self._convert_entities_if_alt(kwargs)
+        return await super().edit_message(*args, **kwargs)
 
     async def _parse_message_text(self, message, parse_mode):
         from . import emojis

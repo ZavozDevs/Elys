@@ -508,6 +508,7 @@ async def answer(
     if isinstance(response, str) and not kwargs.pop("asfile", False):
         from .. import emojis
 
+        response = emojis.render_emojis(response)
         if emojis.is_alt_emoji_format():
             response = emojis.convert_to_alt_emoji(response)
         text, entities = parse_mode.parse(response)

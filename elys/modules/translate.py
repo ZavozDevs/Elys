@@ -45,17 +45,14 @@ class Translator(loader.Module):
     strings = {  # noqa: RUF012
         "name": "Translator",
         "no_args": (
-            "<tg-emoji emoji-id=5210952531676504517>❌</tg-emoji> <b>No"
-            " arguments provided</b>"
+            "{e:stop} <b>No arguments provided</b>"
         ),
         "error": (
-            '<tg-emoji emoji-id="5210952531676504517">❌</tg-emoji> <b>Unable to'
-            " translate text</b>"
+            "{e:stop} <b>Unable to translate text</b>"
         ),
         "language": "en",
         "translated_text": (
-            '<blockquote><tg-emoji emoji-id="5424772191403143504">📝</tg-emoji>'
-            " Translated text:</blockquote>\n\n{tr_text}"
+            "<blockquote>{e:memo} Translated text:</blockquote>\n\n{tr_text}"
         ),
     }
 

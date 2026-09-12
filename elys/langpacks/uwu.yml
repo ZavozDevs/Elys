@@ -4,7 +4,8 @@ elys_security:
   no_command: 🚫 <b>Command</b> <code>{}</code> <b>nyot found! UwU</b>
   permissions: 🔐 <b>Hewe you can configuwe pewmissions fow</b> <code>{}{}</code> :3
   close_menu: 🙈 Cwose dis menyu
-  global: 🔐 <b>Hewe you can configuwe gwobaw bounding mask. If da pewmission is excwuded hewe, it is excwuded evewywhewe! OwO</b>
+  global: 🔐 <b>Hewe you can configuwe gwobaw bounding mask. If da pewmission is excwuded
+    hewe, it is excwuded evewywhewe! OwO</b>
   owner: 😎 Ownew
   group_owner: 🧛‍♂️ Gwoup ownew
   group_admin_add_admins: 🧑‍⚖️ Admin (add membews)
@@ -22,39 +23,50 @@ elys_security:
 
     <blockquote expandable>{}</blockquote>'
   no_owner: '{e:owner} <b>Thewe is nyo usews in gwoup</b> <code>owner</code> ;w;'
-  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> added to gwoup</b> <code>owner</code> ^_^'
-  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> wemoved fwom gwoup</b> <code>owner</code> T_T'
+  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> added to gwoup</b> <code>owner</code>
+    ^_^'
+  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> wemoved fwom gwoup</b>
+    <code>owner</code> T_T'
   no_user: '{e:stop} <b>Spwecify usew to pewmit pwz</b>'
-  not_a_user: '{e:warn} <b>Specified entity is nyot a usew o_O</b>'
-  li: '{e:bullet} <b><a href="tg://user?id={}">{}</a></b>'
-  warning: '⚠️ <b>P-Pwease, confiwm, dat you want to add <a href="tg://user?id={}">{}</a> to gwoup</b> <code>{}</code><b>!
+  not_a_user: '{e:warn_security} <b>Specified entity is nyot a usew o_O</b>'
+  li: '{e:bullet_dot} <b><a href="tg://user?id={}">{}</a></b>'
+  warning: '⚠️ <b>P-Pwease, confiwm, dat you want to add <a href="tg://user?id={}">{}</a>
+    to gwoup</b> <code>{}</code><b>!
 
-    Dis action may weveaw pewsonaw info and gwant fuww ow pawtiaw access to usewbot to dis usew &gt;///&lt;</b>'
+    Dis action may weveaw pewsonaw info and gwant fuww ow pawtiaw access to usewbot
+    to dis usew &gt;///&lt;</b>'
   cancel: 🚫 Cancew
   confirm: 👑 Confiwm
   enable_nonick_btn: 🔰 Enyabwe
-  self: "{e:warn} <b>You can't pwomote/demote youwsewf! Baka!</b>"
+  self: "{e:warn_security} <b>You can't pwomote/demote youwsewf! Baka!</b>"
   suggest_nonick: 🔰 <i>Do you want to enyabwe NyoNick fow dis usew?</i>
   user_nn: 🔰 <b>NyoNick fow <a href="tg://user?id={}">{}</a> enyabwed ~</b>
-  what: '{e:stop} <b>You nyeed to specify da type of tawget as fiwst awgument (</b><code>user</code> <b>ow</b> <code>chat</code><b>)</b>'
+  what: '{e:stop} <b>You nyeed to specify da type of tawget as fiwst awgument (</b><code>user</code>
+    <b>ow</b> <code>chat</code><b>)</b>'
   no_target: "{e:stop} <b>You didn't specify da tawget of secuwity wuwe >~<</b>"
   no_rule: "{e:stop} <b>You didn't specify da wuwe (moduwe ow command)</b>"
-  confirm_rule: 🔐 <b>Pwease, confiwm dat you want to give {} <a href='{}'>{}</a> a pewmission to use {}</b> <code>{}</code> <b>{}? :3</b>
-  rule_added: 🔐 <b>You gave {} <a href='{}'>{}</a> a pewmission to use {}</b> <code>{}</code> <b>{} ^w^</b>
+  confirm_rule: 🔐 <b>Pwease, confiwm dat you want to give {} <a href='{}'>{}</a> a
+    pewmission to use {}</b> <code>{}</code> <b>{}? :3</b>
+  rule_added: 🔐 <b>You gave {} <a href='{}'>{}</a> a pewmission to use {}</b> <code>{}</code>
+    <b>{} ^w^</b>
   confirm_btn: 👑 Confiwm
   cancel_btn: 🚫 Cancew
-  multiple_rules: '🔐 <b>Unyabwe to unambiguwouswy detewmine da secuwity wuwe. Pwease, choose da onye you meant:</b>
+  multiple_rules: '🔐 <b>Unyabwe to unambiguwouswy detewmine da secuwity wuwe. Pwease,
+    choose da onye you meant:</b>
 
 
     {}'
-  rules: '{e:keylock} <b>Tawgeted secuwity wuwes:</b>
+  rules: '{e:lock_terminal} <b>Tawgeted secuwity wuwes:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Nyo tawgeted secuwity wuwes UwU</b>'
-  owner_target: "{e:warn} <b>Dis usew is ownew and can't be pwomoted by tawgeted secuwity</b>"
-  rules_removed: '{e:keylock} <b>Tawgeted secuwity wuwes fow <a href="{}">{}</a> wemoved</b>'
-  rule_removed: '{e:keylock} <b>Tawgeted secuwity wuwe fow <a href="{}">{}</a> (</b><code>{}</code><b>) wemoved</b>'
+  owner_target: "{e:warn_security} <b>Dis usew is ownew and can't be pwomoted by tawgeted\
+    \ secuwity</b>"
+  rules_removed: '{e:lock_terminal} <b>Tawgeted secuwity wuwes fow <a href="{}">{}</a>
+    wemoved</b>'
+  rule_removed: '{e:lock_terminal} <b>Tawgeted secuwity wuwe fow <a href="{}">{}</a>
+    (</b><code>{}</code><b>) wemoved</b>'
   chat_inline: ⚠️ <b>You can't cweate an inwine command wuwe fow chats! >.<</b>
   for: fow
   forever: fowevew
@@ -77,13 +89,15 @@ elys_security:
   _cmd_doc_ownerlist: Wist usews in `owner`
   _cmd_doc_ownerrm: <user> - Wemove usew fwom `owner`
   _cmd_doc_security: '[command] - Configuwe command''s secuwity settings'
-  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [tawget] [wuwe] [time] - Add nyew tawgeted secuwity wuwe
+  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [tawget] [wuwe] [time] - Add nyew tawgeted
+    secuwity wuwe
 
     Fow exampwe: .tsec user ban 1d, .tsec chat weadew 1h UwU'
   _cmd_doc_tsecclr: <"user"/"chat"/"sgroup"> - Cweaw tawgeted secuwity wuwes
   _cmd_doc_tsecrm: <"user"/"chat"/"sgroup"> <wuwe> - Wemove tawgeted secuwity wuwe
   _cls_doc: Contwow secuwity settings
-  querysec_info: '{e:lock} Hewe you can toggwe da abiwity to use inwine quewies fow aww extewnal usews'
+  querysec_info: '{e:lock} Hewe you can toggwe da abiwity to use inwine quewies fow
+    aww extewnal usews'
   until: untiw
   sgroup: secuwity gwoup
   sgroup_info: '{e:lock} <b>Secuwity gwoup</b> <code>{}</code> <b>info:</b>
@@ -93,7 +107,8 @@ elys_security:
 
     {}'
   created_sgroup: '{e:lock} <b>Secuwity gwoup</b> <code>{}</code> <b>cweated! Yay!</b>'
-  sgroup_already_exists: '{e:stop} <b>Secuwity gwoup</b> <code>{}</code> <b>awweady exists >_<</b>'
+  sgroup_already_exists: '{e:stop} <b>Secuwity gwoup</b> <code>{}</code> <b>awweady
+    exists >_<</b>'
   no_args: '{e:stop} <b>Nyo awguments specified</b>'
   sgroup_not_found: '{e:stop} <b>Secuwity gwoup</b> <code>{}</code> <b>nyot found</b>'
   no_users: '{e:users} <b>Nyo usews ;w;</b>'
@@ -108,16 +123,20 @@ elys_security:
     {}
 
     '
-  sgroup_li: '{e:bullet} <code>{}</code> · <b>{} usew(-s)</b> · <b>{} wuwe(-s)</b>'
+  sgroup_li: '{e:bullet_security} <code>{}</code> · <b>{} usew(-s)</b> · <b>{} wuwe(-s)</b>'
   sgroups_list: '{e:lock} <b>Secuwity gwoups:</b>
 
 
     {}'
   deleted_sgroup: '{e:lock} <b>Secuwity gwoup</b> <code>{}</code> <b>deweted</b>'
-  user_already_in_sgroup: '{e:stop} <b>Usew</b> <code>{}</code> <b>is awweady in secuwity gwoup</b> <code>{}</code>'
-  user_added_to_sgroup: '{e:lock} <b>Usew</b> <code>{}</code> <b>added to secuwity gwoup</b> <code>{}</code>'
-  user_not_in_sgroup: '{e:stop} <b>Usew</b> <code>{}</code> <b>is nyot in secuwity gwoup</b> <code>{}</code>'
-  user_removed_from_sgroup: '{e:lock} <b>Usew</b> <code>{}</code> <b>wemoved fwom secuwity gwoup</b> <code>{}</code>'
+  user_already_in_sgroup: '{e:stop} <b>Usew</b> <code>{}</code> <b>is awweady in secuwity
+    gwoup</b> <code>{}</code>'
+  user_added_to_sgroup: '{e:lock} <b>Usew</b> <code>{}</code> <b>added to secuwity
+    gwoup</b> <code>{}</code>'
+  user_not_in_sgroup: '{e:stop} <b>Usew</b> <code>{}</code> <b>is nyot in secuwity
+    gwoup</b> <code>{}</code>'
+  user_removed_from_sgroup: '{e:lock} <b>Usew</b> <code>{}</code> <b>wemoved fwom
+    secuwity gwoup</b> <code>{}</code>'
   _cmd_doc_delsgroup: <name> - Dewete secuwity gwoup
   _cmd_doc_sgroup: <name> - Show secuwity gwoup info
   _cmd_doc_sgroups: Wist secuwity gwoups
@@ -126,40 +145,46 @@ elys_security:
   _cmd_doc_sgroupdel: <name> [user ow wepwy] - Wemove usew fwom secuwity gwoup
 elys_settings:
   name: ElysSettings
-  watchers: '{e:watch} <b>Watchews:</b>
+  watchers: '{e:wave} <b>Watchews:</b>
 
 
     <blockquote expandable><b>{}</b></blockquote>'
   no_args: '{e:stop} <b>Nyo awguments specified</b>'
-  invoke404: "{e:stop} <b>Intewnaw debug medod</b> <code>{}</code> <b>nyot found, ewgo can't be invoked</b>"
+  invoke404: "{e:stop} <b>Intewnaw debug medod</b> <code>{}</code> <b>nyot found,\
+    \ ewgo can't be invoked</b>"
   module404: '{e:stop} <b>Moduwe</b> <code>{}</code> <b>nyot found >w<</b>'
-  invoke: '{e:thumbup} <b>Invoked intewnaw debug medod</b> <code>{}</code>
+  invoke: '{e:thumbup_invoke} <b>Invoked intewnaw debug medod</b> <code>{}</code>
 
 
     {e:blue_circle} <b>Wesuwt:
 
     {}</b>'
-  invoking: '{e:wait} <b>Invoking intewnaw debug medod</b> <code>{}</code> <b>of</b> <code>{}</code><b>...</b>'
+  invoking: '{e:wait_terminal} <b>Invoking intewnaw debug medod</b> <code>{}</code>
+    <b>of</b> <code>{}</code><b>...</b>'
   mod404: '{e:stop} <b>Watchew {} nyot found</b>'
-  disabled: '{e:watch} <b>Watchew {} is nyow <u>disabwed</u></b>'
-  enabled: '{e:watch} <b>Watchew {} is nyow <u>enyabwed</u></b>'
+  disabled: '{e:wave} <b>Watchew {} is nyow <u>disabwed</u></b>'
+  enabled: '{e:wave} <b>Watchew {} is nyow <u>enyabwed</u></b>'
   args: '{e:stop} <b>You nyeed to specify watchew nyame</b>'
   user_nn: '{e:magic} <b>NyoNick fow dis usew is nyow {} ~</b>'
   no_cmd: '{e:magic} <b>Pwease, specify command to toggwe NyoNick fow</b>'
   cmd_nn: '{e:magic} <b>NyoNick fow</b> <code>{}</code> <b>is nyow {}</b>'
   cmd404: '{e:magic} <b>Command nyot found</b>'
   inline_settings: ⚙️ <b>Hewe you can configuwe youw Elys settings UwU</b>
-  confirm_update: 🧭 <b>P-Pwease, confiwm dat you want to update. Youw usewbot wiww be westawted ~</b>
-  confirm_restart: '{e:warn} <b>Pwease, confiwm dat you want to westawt</b>'
+  confirm_update: 🧭 <b>P-Pwease, confiwm dat you want to update. Youw usewbot wiww
+    be westawted ~</b>
+  confirm_restart: '{e:loading} <b>Pwease, confiwm dat you want to westawt</b>'
   btn_restart: 🔄 Westawt
   btn_update: 🧭 Update
   close_menu: 😌 Cwose menyu
   suggest_subscribe: ✅ Suggest subscwibe to channyew
   do_not_suggest_subscribe: 🚫 Suggest subscwibe to channyew
   private_not_allowed: '{e:stop} <b>Dis command must be executed in chat</b>'
-  nonick_warning: Wawning! You enyabwed NyoNick with defauwt pwefix! You may get muted in Elys chats. Change pwefix ow disabwe NyoNick! >~<
-  reply_required: '{e:stop} <b>Wepwy to a message of usew, which nyeeds to be added to NyoNick</b>'
-  deauth_confirm: '⚠️ <b>Dis action wiww fuwwy wemove Elys fwom dis account and can''t be wevewted!
+  nonick_warning: Wawning! You enyabwed NyoNick with defauwt pwefix! You may get muted
+    in Elys chats. Change pwefix ow disabwe NyoNick! >~<
+  reply_required: '{e:stop} <b>Wepwy to a message of usew, which nyeeds to be added
+    to NyoNick</b>'
+  deauth_confirm: '⚠️ <b>Dis action wiww fuwwy wemove Elys fwom dis account and can''t
+    be wevewted!
 
 
     <i>- Elys chats wiww be wemoved
@@ -191,7 +216,8 @@ elys_settings:
   nothing: '{e:shrug} <b>Nyothing to show...</b>'
   btn_yes: 🚸 Open anyway
   btn_no: 🔻 Cancew
-  _cmd_doc_invoke: <module ow `core`> <medod> - Onwy fow debugging puwposes. DO NYOT USE IF YOU'WE NYOT A DEVEWOPEW
+  _cmd_doc_invoke: <module ow `core`> <medod> - Onwy fow debugging puwposes. DO NYOT
+    USE IF YOU'WE NYOT A DEVEWOPEW
   _cmd_doc_nonickchat: Awwow nyo nyicknyame in cewtain chat
   _cmd_doc_nonickchats: Wetuwns da wist of NyoNick chats
   _cmd_doc_nonickcmd: <command> - Awwow cewtain command to be executed wifout nyicknyame
@@ -214,19 +240,27 @@ elys_settings:
     [-i - onwy incoming]'
   _cmd_doc_watchers: Wist cuwwent watchews
   _cls_doc: Advanced settings fow Elys Usewbot
-  core_protection_already_removed: '{e:lock} <b>Cowe pwotection is awweady wemoved</b>'
-  core_protection_already_enabled: '{e:lock} <b>Cowe pwotection is awweady set up</b>'
+  core_protection_already_removed: '{e:lock_protect} <b>Cowe pwotection is awweady
+    wemoved</b>'
+  core_protection_already_enabled: '{e:lock_protect} <b>Cowe pwotection is awweady
+    set up</b>'
   core_protection_confirm: '⚠️ <b>WEAD CAWEFUWWY!</b>
 
 
-    By wemoving cowe pwotection you confiwm, dat you knyow what is it and what is it fow. In common wife scenyawio you <b>don''t nyeed it</b>. If you''we nyot a devewopew, you <b>don''t nyeed it</b>. If you''we nyot suwe, you <b>don''t nyeed it</b>.
+    By wemoving cowe pwotection you confiwm, dat you knyow what is it and what is
+    it fow. In common wife scenyawio you <b>don''t nyeed it</b>. If you''we nyot a
+    devewopew, you <b>don''t nyeed it</b>. If you''we nyot suwe, you <b>don''t nyeed
+    it</b>.
 
 
     <b>Awe you suwe you want to wemove cowe pwotection?</b>'
   core_protection_confirm_e: '⚠️ <b>WEAD CAWEFUWWY!</b>
 
 
-    By westowing cowe pwotection you confiwm, dat you knyow what is it and what is it fow. In common wife scenyawio you <b>didn''t nyeed to wemove it</b>. If you''we nyot a devewopew, you <b>didn''t nyeed it</b>. If you''we nyot suwe, you <b>don''t nyeed it</b>.
+    By westowing cowe pwotection you confiwm, dat you knyow what is it and what is
+    it fow. In common wife scenyawio you <b>didn''t nyeed to wemove it</b>. If you''we
+    nyot a devewopew, you <b>didn''t nyeed it</b>. If you''we nyot suwe, you <b>don''t
+    nyeed it</b>.
 
 
     <b>Awe you suwe you want to westowe cowe pwotection?</b>'
@@ -262,15 +296,19 @@ terminal:
 
     {e:dizzy} <b>Execution time: {}s</b>'
   auth_fail: '{e:stop} <b>Audentication faiwed, pwease twy again ;w;</b>'
-  auth_needed: '{e:lock}<a href="tg://user?id={}"> Intewactive audentication wequiwed</a>'
-  auth_msg: '{e:lock} <b>Pwease edit dis message to da passwowd fow</b> <code>{}</code> <b>to wun</b> <code>{}</code>'
-  dangerous_command: '{e:cross} <b>Da execution of dis command (<code>{}</code>) was cancewwed fow youw safety. OwO</b>
+  auth_needed: '{e:lock_terminal}<a href="tg://user?id={}"> Intewactive audentication
+    wequiwed</a>'
+  auth_msg: '{e:lock_terminal} <b>Pwease edit dis message to da passwowd fow</b> <code>{}</code>
+    <b>to wun</b> <code>{}</code>'
+  dangerous_command: '{e:cross} <b>Da execution of dis command (<code>{}</code>) was
+    cancewwed fow youw safety. OwO</b>
 
 
-    {e:tip}<i>Dis is nyot an ewwow, but a safety measuwe. Do nyot wepowt it in da suppowt chat.</i>'
+    {e:laptop}<i>Dis is nyot an ewwow, but a safety measuwe. Do nyot wepowt it in
+    da suppowt chat.</i>'
   auth_locked: '{e:stop} <b>Audentication faiwed, pwease twy again watew</b>'
-  auth_ongoing: '{e:wait} <b>Audenticating...</b>'
-  done: '{e:check} <b>Donye!</b>'
+  auth_ongoing: '{e:wait_terminal} <b>Audenticating...</b>'
+  done: '{e:check_terminal} <b>Donye!</b>'
   _cmd_doc_apt: Showthand fow '.terminal apt'
   _cmd_doc_terminal: <command> - Execute bash command
   _cmd_doc_terminate: '[-f to fowce kiww] - Use in wepwy to send SIGTEWM to a pwocess'
@@ -285,13 +323,16 @@ terminal:
 
     <code>{}</code>'
 elys_web:
-  host_denied: '{e:chat} Session addition commands awe nyot avaiwabwe on youw hosting, pwease contact youw hosting administwation.'
+  host_denied: '{e:chat} Session addition commands awe nyot avaiwabwe on youw hosting,
+    pwease contact youw hosting administwation.'
   btn_yes: 🚸 Confiwm anyway
   btn_no: 🔻 Cwose
-  invalid_target: Wepwy to da message of da pewson you want to add, ow specify deiw cowwect @username/id.
+  invalid_target: Wepwy to da message of da pewson you want to add, ow specify deiw
+    cowwect @username/id.
   cant_add_self: You can't add youwsewf. Baka.
   add_user_confirm: Do you weawwy want to add an account {} ({})?
-  add_user_insecure: Do you weawwy want to add an account {} ({})? Use da <code>{}addacc {} force_insecure</code> command to confiwm.
+  add_user_insecure: Do you weawwy want to add an account {} ({})? Use da <code>{}addacc
+    {} force_insecure</code> command to confiwm.
   enter_number: Entew da nyumbew
   your_phone_number: Youw phonye nyumbew
   enter_code: Entew da code
@@ -302,7 +343,8 @@ elys_web:
 
 
     '
-  enter_number_format: 'Entew youw phonye nyumbew in da intewnyationyaw fowmat (fow exampwe, +79212345678):'
+  enter_number_format: 'Entew youw phonye nyumbew in da intewnyationyaw fowmat (fow
+    exampwe, +79212345678):'
   login_successful: 🎉 Successfuw wogin!
   floodwait_error: Too many attempts. Twy again in {} seconds.
   code_sent: Da code has been sent. Entew it
@@ -314,48 +356,63 @@ elys_web:
   invalid_code_digits: Da code must contain digits onwy. Pwease twy again.
   switch_confirm: '⚠️ <b>Twansfew dis usewbot to anothew Tewegwam account?</b>
 
-    Da cuwwent session wiww be awchived, config moved, and inwine bot data wecweated fow da nyew account.'
-  switch_insecure: 🚫 <b>Switch account faiwed:</b> inwine menu unavaiwabwe. Type <code>{}switchacc force_insecure</code> to fowce.
+    Da cuwwent session wiww be awchived, config moved, and inwine bot data wecweated
+    fow da nyew account.'
+  switch_insecure: 🚫 <b>Switch account faiwed:</b> inwine menu unavaiwabwe. Type <code>{}switchacc
+    force_insecure</code> to fowce.
   switch_failed: 🚫 <b>Switch account faiwed:</b> <code>{}</code>
   _cmd_doc_switchacc: Twansfew usewbot to anothew Tewegwam account
   name: ElysAccounts
   _cls_doc: Inwine account management
   _cmd_doc_addacc: '[usew/id/wepwy] - Add anyothew account thwough inwine wogin'
 elys_backup:
-  period: '⌚️ <b>Da unit «AWPHA»</b> cweates weguwaw backups. Dese settings can be changed watew.
+  period: '⌚️ <b>Da unit «AWPHA»</b> cweates weguwaw backups. Dese settings can be
+    changed watew.
 
 
     Pwease sewect da backup fwequency
 
 
-    <b>🚫 It is dus impossibwe to westowe moduwes downwoaded fwom fiwes with da .lm command! Be cawefuw and do .backupmods befowe westowing.</b>'
+    <b>🚫 It is dus impossibwe to westowe moduwes downwoaded fwom fiwes with da .lm
+    command! Be cawefuw and do .backupmods befowe westowing.</b>'
   saved: ✅ Da pewiodicity is saved! It can be changed with <code>{prefix}set_backup_period</code>
   saved_bot: ✅ Da pewiodicity is saved! It can be changed with {prefix}set_backup_period
   never: ✅ I wiww nyot make automatic backups. Can be cancewwed using <code>{prefix}set_backup_period</code>
   never_bot: ✅ I wiww nyot make automatic backups. Can be cancewwed using {prefix}set_backup_period
   invalid_args: 🚫 <b>Pwease specify da cowwect fwequency in houws, ow `0` to disabwe</b>
-  backup_caption: '{e:hand_up} <b>Dis is youw database backup. Do nyot shawe it with anyonye, it contains pewsonaw info. If you nyeed to westowe it, use</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>in wesponse to dis fiwe. Shhh! It is a secwet! &gt;///&lt;</b>'
-  backupall_info: 👆 <b>Dis is youw backup of da database and moduwes. Do nyot give it to anyonye, it contains pewsonaw info. If you nyeed to westowe it, use</b> <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>in wesponse to dis fiwe.</b>
+  backup_caption: '{e:hand_up} <b>Dis is youw database backup. Do nyot shawe it with
+    anyonye, it contains pewsonaw info. If you nyeed to westowe it, use</b> <pre><code
+    class="language-elys">{prefix}restoredb</code></pre> <b>in wesponse to dis fiwe.
+    Shhh! It is a secwet! &gt;///&lt;</b>'
+  backupall_info: 👆 <b>Dis is youw backup of da database and moduwes. Do nyot give
+    it to anyonye, it contains pewsonaw info. If you nyeed to westowe it, use</b>
+    <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>in wesponse
+    to dis fiwe.</b>
   restoring_backup: '{e:sync} <b>Westowing backup, instawwing dependencies and moduwes...</b>'
   all_restored: '{e:sync} <b>Youw fuww backup has been westowed, westawting....</b>'
   all_restored_bot: 🔄 Youw fuww backup has been westowed, westawting...
   reply_to_file: '{e:stop} <b>Wepwy with .json ow .zip fiwe</b>'
   db_restored: '{e:sync} <b>Database updated, westawting...</b>'
-  modules_backup: '{e:package} <b>Moduwes backup ({})</b>
+  modules_backup: '{e:device} <b>Moduwes backup ({})</b>
 
 
     <b>You can westowe it using:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Moduwes westowed, westawting</b>'
-  backup_sent: '{e:package} <b>Backup sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
-  backupall_sent: '{e:package} <b>Backup of databwase an moduwules sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
-  db_warning: '❗️ Hikka backup detected. If you continyue, da usewbot wiww <b>twy</b> to convewt it to a fowmat suitabwe fow Elys.
+  backup_sent: '{e:device} <b>Backup sent twoo <a href={}>databwase chat</a> ( ˘ ³˘)</b>'
+  backupall_sent: '{e:device} <b>Backup of databwase an moduwules sent twoo <a href={}>databwase
+    chat</a> ( ˘ ³˘)</b>'
+  db_warning: '❗️ Hikka backup detected. If you continyue, da usewbot wiww <b>twy</b>
+    to convewt it to a fowmat suitabwe fow Elys.
 
     Thewe may be some ewwows in da convewsion. Continyue?'
-  advice_converting: You can manyuawwy wepwace <a>'hikka.'</a> with <a>'elys.'</a> in da backup content. Dis is nyecessawy fow woading it.
+  advice_converting: You can manyuawwy wepwace <a>'hikka.'</a> with <a>'elys.'</a>
+    in da backup content. Dis is nyecessawy fow woading it.
   converting_db: 🔄 Convewting...
-  probably_zip: '{e:warn} <b>Da backup fwom da fiwe couwd nyot be westowed. You awe pwobabwy twying to westowe a fuww backup (.zip ow .backup). In dat case, use</b> <code>{}restoreall</code> <b>in wepwy to da fiwe.</b>'
+  probably_zip: '{e:stop} <b>Da backup fwom da fiwe couwd nyot be westowed. You awe
+    pwobabwy twying to westowe a fuww backup (.zip ow .backup). In dat case, use</b>
+    <code>{}restoreall</code> <b>in wepwy to da fiwe.</b>'
   _cls_doc: Pwocesses database and moduwe backups
   _cmd_doc_backupdb: Cweate a database backup [wiww be sent to PM]
   _cmd_doc_backupmods: Cweate a backup of mods [wiww be sent to PM]
@@ -371,13 +428,31 @@ settings:
   wsl: 💻 WSW
   userland: 🐧 UsewWAnd
   jamhost: 🧃 JamHost
-  choose_installation: '{e:glowing_star} <b>Choose youw Elys instawwation option:</b>'
-  vds_install: '{e:diamond} Da instawwation pwocess on a VDS is donye with a singwe command:
+  choose_installation: '{e:star_choose} <b>Choose youw Elys instawwation option:</b>'
+  vds_install: '{e:diamond} Da instawwation pwocess on a VDS is donye with a singwe
+    command:
 
-    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade
+    -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3
+    -m elys</code></pre>
 
-    <i>Nyote: If you do nyot have sudo pwiviweges, omit da cowwesponding pawt of da command.</i>'
-  wsl_install: "<b>Downwoad WSW.</b> To do dis, open PowewSheww as administwatow and type <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>To instaww WSW, you nyeed Windows 10 buiwd 2004 ow Windows 11 of any vewsion and a PC with viwtuawization suppowt. Fow instawwation on eawwiew vewsions of da OS, wefew to</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">dis page</a>\n\n⬜️ <b>Westawt youw PC and waunch da Ubuntu 22.04.x appwication</b> \n\n⬜️ <b>Paste da command into it (WMB):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>If yewwow wawnings appeaw, type</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>wepwacing /home/username/.local/bin with da pad mentioned in da message</i>\n\n⬜️ <b>Paste da command (WMB):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>Whewe to get API_ID and API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Video</a>"
+    <i>Nyote: If you do nyot have sudo pwiviweges, omit da cowwesponding pawt of da
+    command.</i>'
+  wsl_install: "<b>Downwoad WSW.</b> To do dis, open PowewSheww as administwatow and\
+    \ type <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>To instaww WSW, you\
+    \ nyeed Windows 10 buiwd 2004 ow Windows 11 of any vewsion and a PC with viwtuawization\
+    \ suppowt. Fow instawwation on eawwiew vewsions of da OS, wefew to</i> <a href=\"\
+    https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">dis page</a>\n\n\
+    ⬜️ <b>Westawt youw PC and waunch da Ubuntu 22.04.x appwication</b> \n\n⬜️ <b>Paste\
+    \ da command into it (WMB):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py\
+    \ | python3</code> \n⚠️ <i>If yewwow wawnings appeaw, type</i> <code>export PATH=\"\
+    /home/username/.local/bin:$PATH\"</code> <i>wepwacing /home/username/.local/bin\
+    \ with da pad mentioned in da message</i>\n\n⬜️ <b>Paste da command (WMB):</b>\
+    \ \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys\
+    \ &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3\
+    \ -m elys</code></pre>\n\U0001F517 <b>Whewe to get API_ID and API_HASH?</b>: <a\
+    \ href=\"https://youtu.be/DcqDA249Lhg?t=24\">Video</a>"
   userland_install: '<b>Instaww UsewWAnd fwom dis</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">wink</a>
 
 
@@ -387,17 +462,30 @@ settings:
     <b>Wait fow da distwibution to instaww, you can pouw some tea 🍵</b>
 
 
-    <b>Aftew successfuw instawwation, a tewminyaw wiww open in fwont of you, type dewe:</b>
+    <b>Aftew successfuw instawwation, a tewminyaw wiww open in fwont of you, type
+    dewe:</b>
 
-    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
+    &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp;
+    python3 -m elys</code></pre>
 
 
-    <b>At da end of da instawwation, a wink wiww appeaw, fowwow it and entew youw account detaiws to wogin.
+    <b>At da end of da instawwation, a wink wiww appeaw, fowwow it and entew youw
+    account detaiws to wogin.
 
 
     Voiwà! You have instawwed Elys on UsewWAnd.</b>'
   termux: 🪐 Tewmux
-  termux_install: "<b>🪐 Instawwing Elys in Tewmux (Andwoid) nya~:</b>\n\n1. Downwoad <b>Tewmux</b> fwom <a href=\"https://github.com/termux/termux-app/releases\">GitHub Weweases</a> ow <a href=\"https://f-droid.org/packages/com.termux/\">F-Dwoid</a> (Googwe Pway vewsion is bwoken >w<).\n\n2. Open Tewmux and wun dis command:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. At da end a wink wiww appeaw — fowwow it to wogin nya!\n\n🪐 <b>Voiwà! Elys is wunning in Tewmux! ✨</b>"
+  termux_install: "<b>\U0001FA90 Instawwing Elys in Tewmux (Andwoid) nya~:</b>\n\n\
+    1. Downwoad <b>Tewmux</b> fwom <a href=\"https://github.com/termux/termux-app/releases\"\
+    >GitHub Weweases</a> ow <a href=\"https://f-droid.org/packages/com.termux/\">F-Dwoid</a>\
+    \ (Googwe Pway vewsion is bwoken >w<).\n\n2. Open Tewmux and wun dis command:\n\
+    <pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python\
+    \ -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys\
+    \ &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\
+    \n3. At da end a wink wiww appeaw — fowwow it to wogin nya!\n\n\U0001FA90 <b>Voiwà!\
+    \ Elys is wunning in Tewmux! ✨</b>"
   too_many_args: '{e:stop} <b>Too many awgs >w<</b>'
   blacklisted: '{e:thumbup} <b>Chat {} bwackwisted fwom usewbot</b>'
   unblacklisted: '{e:thumbup} <b>Chat {} unbwackwisted fwom usewbot</b>'
@@ -405,13 +493,16 @@ settings:
   user_unblacklisted: '{e:thumbup} <b>Usew {} unbwackwisted fwom usewbot</b>'
   what_prefix: '{e:question} <b>What shouwd da pwefix be set to?</b>'
   prefix_incorrect: '{e:stop} <b>Pwefix must be onye symbow in wength</b>'
-  prefix_set: '{} <b>Command pwefix updated. Use da fowwowing command to change it back:</b>
+  prefix_set: '{} <b>Command pwefix updated. Use da fowwowing command to change it
+    back:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix}</code></pre>'
-  entity_prefix_set: '{} <b>Command pwefix updated fow {entity_name}. Use da fowwowing command to change it back:</b>
+  entity_prefix_set: '{} <b>Command pwefix updated fow {entity_name}. Use da fowwowing
+    command to change it back:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix} {entity_id}</code></pre>'
-  id_not_found_scgroup: '{e:stop} Dis entity does nyot exist in any secuwity gwoup. Thewefowe, adding a pwefix fow it is pointwess'
+  id_not_found_scgroup: '{e:stop} Dis entity does nyot exist in any secuwity gwoup.
+    Thewefowe, adding a pwefix fow it is pointwess'
   invalid_id_or_username: '{e:stop} Invawid id/usewnyame was given'
   alias_created: '{e:thumbup} <b>Awias cweated. Access it with</b> <code>{}</code>'
   aliases_created: '{e:thumbup} <b>Added {count} awiases:</b>
@@ -425,14 +516,14 @@ settings:
   aliases_file: '{e:folder} <b>Yow awias</b>
 
 
-    {e:glowing_star} <b>{prefix}la in weply to this message to impowt awias</b>'
+    {e:star_loader} <b>{prefix}la in weply to this message to impowt awias</b>'
   aliases: '<b>🔗 Awiases:</b>
 
     '
   happy_beta: '
 
 
-    {e:glowing_star} <b>You are a happy owner of the <code>{}</code> version~ UwU</b>'
+    {e:star_beta} <b>You are a happy owner of the <code>{}</code> version~ UwU</b>'
   stable_branch: '
 
 
@@ -442,12 +533,13 @@ settings:
 
 
     <b>Loaded awias:</b> <blockquote expandable>{}</blockquote>'
-  alias_exists: '{e:stop} <b>Awias</b> <code>{alias}</code> <b>awweady exists fow command</b> <code>{command}</code>'
+  alias_exists: '{e:stop} <b>Awias</b> <code>{alias}</code> <b>awweady exists fow
+    command</b> <code>{command}</code>'
   alias_args: '{e:stop} <b>You must pwovide a command and da awias fow it</b>'
   unstable: '
 
 
-    {e:grey_exclamation} <b>You awe using an unstabwe bwanch</b> <code>{}</code><b>!</b>'
+    {e:point_up} <b>You awe using an unstabwe bwanch</b> <code>{}</code><b>!</b>'
   delalias_args: '{e:stop} <b>You must pwovide da awias nyame</b>'
   alias_removed: '{e:thumbup} <b>Awias</b> <code>{}</code> <b>wemoved</b>.'
   aliases_removed: '{e:thumbup} <b>Wemoved {count} awiases:</b>
@@ -459,12 +551,12 @@ settings:
   elys: '{} <b>{}.{}.{}</b> <i>{}</i>
 
 
-    <b>{e:folder} <b>elys-tl:</b> <i>{}</i>
+    <b>{e:folder_elys} <b>elys-tl:</b> <i>{}</i>
 
 
     {e:wrench} <b>Devewopews: {}</b>
 
-    {e:theme} <b>Designews: {}</b> :3'
+    {e:palette} <b>Designews: {}</b> :3'
   confirm_cleardb: ⚠️ <b>Awe you suwe, dat you want to cweaw database?</b>
   cleardb_confirm: 🗑 Cweaw database
   cancel: 🚫 Cancew
@@ -476,7 +568,7 @@ settings:
   mod_disabled: Moduwule {} disabwed
   cmd_enabled: Command {} enabwed in moduwule {}
   cmd_disabled: Command {} disabwed in moduwule {}
-  not_a_user: '{e:warn} <b>Entity {} is nyot a usew o_O</b>'
+  not_a_user: '{e:warn_security} <b>Entity {} is nyot a usew o_O</b>'
   who_to_blacklist: '{e:question} <b>Who to bwackwist?</b>'
   who_to_unblacklist: '{e:question} <b>Who to unbwackwist?</b>'
   _cmd_doc_addalias: Set an awias fow a command
@@ -492,7 +584,8 @@ settings:
   _cmd_doc_clearmodule: <moduwe> - Cweaw aww database entwies fow a moduwe
   _cmd_doc_unblacklist: <chat_id> - Unbwackwist da bot fwom opewating somewhewe
   _cmd_doc_unblacklistuser: '[user_id] - Awwow dis usew to wun pewmitted commands'
-  _cfg_nonstandart_prefixes: Awwow nyon-standawt pwefixes wike fwags ow mowe dan onye symbow
+  _cfg_nonstandart_prefixes: Awwow nyon-standawt pwefixes wike fwags ow mowe dan onye
+    symbow
   _cls_doc: Contwow cowe usewbot settings
   cmd404: '{e:magic} <b>Command nyot found</b>'
   mod404: '{e:stop} <b>Watchew {} nyot found</b>'
@@ -506,8 +599,16 @@ settings:
 
     3. Wog into youw account using da wink~ OwO'
   _cfg_rich_mode: Show Hewoku as a Wich message.
-  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Component</th><th>Cuwwent wewease</th></tr><tr><td><b>Vewsion</b></td><td><code>{version}</code></td></tr><tr><td><b>Buiwd</b></td><td>{build}</td></tr><tr><td><b>Hewoku TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API wayew</b></td><td><code>{layer}</code></td></tr><tr><td><b>Cuwwent usew</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Devewopews</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
-  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Component</th><th>Cuwwent wewease</th></tr><tr><td><b>Vewsion</b></td><td><code>{version}</code></td></tr><tr><td><b>Buiwd</b></td><td>{build}</td></tr><tr><td><b>Hewoku TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API wayew</b></td><td><code>{layer}</code></td></tr><tr><td><b>Cuwwent usew</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Devewopews</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Component</th><th>Cuwwent wewease</th></tr><tr><td><b>Vewsion</b></td><td><code>{version}</code></td></tr><tr><td><b>Buiwd</b></td><td>{build}</td></tr><tr><td><b>Hewoku
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API wayew</b></td><td><code>{layer}</code></td></tr><tr><td><b>Cuwwent
+    usew</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Devewopews</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Component</th><th>Cuwwent wewease</th></tr><tr><td><b>Vewsion</b></td><td><code>{version}</code></td></tr><tr><td><b>Buiwd</b></td><td>{build}</td></tr><tr><td><b>Hewoku
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>API wayew</b></td><td><code>{layer}</code></td></tr><tr><td><b>Cuwwent
+    usew</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Devewopews</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   no_aliases: '{e:stop} <b>You have nyo saved awiases yet 🥺</b>'
 elys_config:
   name: ElysConfig
@@ -521,7 +622,7 @@ elys_config:
 
 
     {}'
-  configuring_folder: '{e:folder} <b>Choose config option fow fowdew</b> <code>{}</code>
+  configuring_folder: '{e:folder_config} <b>Choose config option fow fowdew</b> <code>{}</code>
 
 
     <b>Cuwwent options:</b>
@@ -535,7 +636,8 @@ elys_config:
 
 
     {}'
-  configuring_category: '{e:gear} <b>Choose config option fow mod</b> <code>{}</code> <b>in categowy</b> <code>{}</code>
+  configuring_category: '{e:gear} <b>Choose config option fow mod</b> <code>{}</code>
+    <b>in categowy</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -543,7 +645,8 @@ elys_config:
     <b>Cuwwent options:</b>
 
     {}'
-  configuring_category_lib: '{e:gear} <b>Choose config option fow wibwawy</b> <code>{}</code> <b>in categowy</b> <code>{}</code>
+  configuring_category_lib: '{e:gear} <b>Choose config option fow wibwawy</b> <code>{}</code>
+    <b>in categowy</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -562,7 +665,8 @@ elys_config:
   category_uncategorized: '
 
     <b>{e:bullet} Othew</b>'
-  configuring_option: '{e:gear} <b>Configuwing option</b> <code>{}</code> <b>of mod</b> <code>{}</code>
+  configuring_option: '{e:gear} <b>Configuwing option</b> <code>{}</code> <b>of mod</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -574,7 +678,8 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:package} <b>Configuwing option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code>
+  configuring_option_lib: '{e:device} <b>Configuwing option</b> <code>{}</code> <b>of
+    wibwawy</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -586,16 +691,20 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:gear} <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code><b> saved!</b>
+  option_saved: '{e:recycle} <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code><b>
+    saved!</b>
 
     <b>Cuwwent: {}</b>'
-  option_saved_lib: '{e:package} <b>Option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code><b> saved!</b>
+  option_saved_lib: '{e:device} <b>Option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code><b>
+    saved!</b>
 
     <b>Cuwwent: {}</b>'
-  option_reset: '♻️ <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code> <b>has been weset to defauwt</b>
+  option_reset: '♻️ <b>Option</b> <code>{}</code> <b>of moduwe</b> <code>{}</code>
+    <b>has been weset to defauwt</b>
 
     <b>Cuwwent: {}</b>'
-  option_reset_lib: '♻️ <b>Option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code> <b>has been weset to defauwt</b>
+  option_reset_lib: '♻️ <b>Option</b> <code>{}</code> <b>of wibwawy</b> <code>{}</code>
+    <b>has been weset to defauwt</b>
 
     <b>Cuwwent: {}</b>'
   args: 🚫 <b>You specified incowwect awgs >w<</b>
@@ -622,27 +731,47 @@ elys_config:
   external: 🛸 Extewnaw
   libraries: 📦 Wibwawies
   _cfg_chat_input: Type config vawues in chat instead of inwine (expewimentaw)
-  _cfg_switch_layout: Automaticawwy invewt keyboawd wayout fow commands (e.g. .рудз -> .help)
-  chat_input_prompt_set: "✍️ <b>Send new vawue fow <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
-  chat_input_prompt_set_lib: "✍️ <b>Send new vawue fow <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
-  chat_input_prompt_add: "➕ <b>Send ewement to add to <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
-  chat_input_prompt_add_lib: "➕ <b>Send ewement to add to <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
-  chat_input_prompt_remove: "➖ <b>Send ewement to wemove fwom <code>{}</code> of moduwe <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
-  chat_input_prompt_remove_lib: "➖ <b>Send ewement to wemove fwom <code>{}</code> of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww be deweted)</i>"
-  series_min_len_error: "⚠️ <b>Cannot wemove item fwom <code>{}</code> uwu: wist wequiwes at weast {} item(s).</b>\n\nPwease entew new vawue ow weset to defauwt~"
+  _cfg_switch_layout: Automaticawwy invewt keyboawd wayout fow commands (e.g. .рудз
+    -> .help)
+  chat_input_prompt_set: "✍️ <b>Send new vawue fow <code>{}</code> of moduwe <code>{}</code>\
+    \ in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww\
+    \ be deweted)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Send new vawue fow <code>{}</code> of wibwawy\
+    \ <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting\
+    \ fow message... (wiww be deweted)</i>"
+  chat_input_prompt_add: "➕ <b>Send ewement to add to <code>{}</code> of moduwe <code>{}</code>\
+    \ in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting fow message... (wiww\
+    \ be deweted)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Send ewement to add to <code>{}</code> of wibwawy\
+    \ <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting\
+    \ fow message... (wiww be deweted)</i>"
+  chat_input_prompt_remove: "➖ <b>Send ewement to wemove fwom <code>{}</code> of moduwe\
+    \ <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳ Waiting\
+    \ fow message... (wiww be deweted)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Send ewement to wemove fwom <code>{}</code>\
+    \ of wibwawy <code>{}</code> in this chat uwu.</b>\n\n<b>Cuwwent: {}</b>\n\n<i>⏳\
+    \ Waiting fow message... (wiww be deweted)</i>"
+  series_min_len_error: "⚠️ <b>Cannot wemove item fwom <code>{}</code> uwu: wist wequiwes\
+    \ at weast {} item(s).</b>\n\nPwease entew new vawue ow weset to defauwt~"
   series_empty_error: "⚠️ <b>Wist <code>{}</code> is awweady empty uwu.</b>"
-  series_not_found_error: "\U0001F6AB <b>Item <code>{}</code> not found in <code>{}</code> uwu.</b>"
+  series_not_found_error: "\U0001F6AB <b>Item <code>{}</code> not found in <code>{}</code>\
+    \ uwu.</b>"
   cancel_btn: 🚫 Cancew
   _cmd_doc_config: Configuwe moduwes
-  _cmd_doc_fconfig: <module_name> <property_name> <config_value> - set da config vawue fow da moduwe
+  _cmd_doc_fconfig: <module_name> <property_name> <config_value> - set da config vawue
+    fow da moduwe
   _cls_doc: Intewactive configuwatow fow Elys Usewbot
 inline_stuff:
   name: InwineStuff
-  bot_username_invalid: '{e:stop} <b>Specified bot usewnyame is invawid. It must end with</b> <code>bot</code> <b>and contain at weast 4 symbows</b>'
-  token_invalid: '{e:stop} <b>Specified bot token is invawid. It must contain 8-10 nyumbews, </b><code>:</code> <b>and 34-36 symbows</b>'
+  bot_username_invalid: '{e:stop} <b>Specified bot usewnyame is invawid. It must end
+    with</b> <code>bot</code> <b>and contain at weast 4 symbows</b>'
+  token_invalid: '{e:stop} <b>Specified bot token is invawid. It must contain 8-10
+    nyumbews, </b><code>:</code> <b>and 34-36 symbows</b>'
   bot_username_occupied: '{e:stop} <b>Dis usewnyame is awweady occupied >_<</b>'
-  bot_updated: '{e:party} <b>Config successfuwwy saved. Westawt usewbot to appwy changes</b>'
-  this_is_elys: '{} <b>H-Hi! Dis is {} — powewfuw moduwaw Tewegwam usewbot. You can instaww it to youw account! ^w^</b>'
+  bot_updated: '{e:party_inline} <b>Config successfuwwy saved. Westawt usewbot to
+    appwy changes</b>'
+  this_is_elys: '{} <b>H-Hi! Dis is {} — powewfuw moduwaw Tewegwam usewbot. You can
+    instaww it to youw account! ^w^</b>'
   support_chat_caption: Suppowt chat
   profile_cmd: 'ℹ️ Usewbot Main Infowmation
 
@@ -661,30 +790,36 @@ inline_stuff:
   _cmd_doc_ch_bot_token: <token> - Change inwine bot token
 test:
   name: Testew
-  set_loglevel: '{e:stop} <b>Pwease specify vewbosity as an integew ow stwing</b>'
-  no_logs: "{e:shrug} <b>You don't have any wogs at vewbosity</b> <code>{}</code><b>.</b>"
-  configping: 'Youw custom text. You can use pwacehowdews: {ping} - Dat''s youw ping. {uptime} - It''s youw uptime. {ping_hint} - Dis is da same hint as in da elys moduwe, it is chosen with wandom chance, awso you can specify dis hint in da config. You can use da {hostname} pwacehowdew if you nyeed da hostnyame of youw sewvew'
+  set_loglevel: '{e:point_up} <b>Pwease specify vewbosity as an integew ow stwing</b>'
+  no_logs: "{e:point_up} <b>You don't have any wogs at vewbosity</b> <code>{}</code><b>.</b>"
+  configping: 'Youw custom text. You can use pwacehowdews: {ping} - Dat''s youw ping.
+    {uptime} - It''s youw uptime. {ping_hint} - Dis is da same hint as in da elys
+    moduwe, it is chosen with wandom chance, awso you can specify dis hint in da config.
+    You can use da {hostname} pwacehowdew if you nyeed da hostnyame of youw sewvew'
   configpingph: '🤖 Custom pwaceholders: {}'
   hint: Set a hint
   ping_emoji: Emoji dat appeaws when ping does nyot incwease signyificantwy
   back: ↩️ Back
   banner_url: 'Image fow youw ping, fow exampwe: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
-  logs_caption: '{e:glowing_star} <b>Elys wogs with vewbosity</b> <code>{}</code>
+  logs_caption: '{e:star_test} <b>Elys wogs with vewbosity</b> <code>{}</code>
 
 
     {e:white_circle} <b>Vewsion: {}.{}.{}</b>{}'
   suspend_invalid_time: '{e:stop} <b>Invawid time to suspend</b>'
   suspended: '{e:cold_face} <b>Bot suspended fow {}</b>'
-  confidential: ⚠️ <b>Wog wevew</b> <code>{}</code> <b>may weveaw youw confidentiaw info, be cawefuw</b>
-  confidential_text: '⚠️ <b>Wog wevew</b> <code>{0}</code> <b>may weveaw youw confidentiaw info, be cawefuw</b>
+  confidential: ⚠️ <b>Wog wevew</b> <code>{}</code> <b>may weveaw youw confidentiaw
+    info, be cawefuw</b>
+  confidential_text: '⚠️ <b>Wog wevew</b> <code>{0}</code> <b>may weveaw youw confidentiaw
+    info, be cawefuw</b>
 
     <b>Type</b> <code>.logs {0} -f</code> <b>to ignyowe dis wawning</b>'
   choose_loglevel: 💁‍♂️ <b>Choose wog wevew</b>
-  bad_module: '{e:stop} <b>Moduwe nyot found</b>'
-  debugging_enabled: '{e:check} <b>Debugging mode enyabwed fow moduwe</b> <code>{0}</code>
+  bad_module: '{e:point_up} <b>Moduwe nyot found</b>'
+  debugging_enabled: '{e:check_test} <b>Debugging mode enyabwed fow moduwe</b> <code>{0}</code>
 
-    <i>Go to diwectowy nyamed `debug_modules`, edit fiwe nyamed `{0}.py` and see changes in weaw time</i>'
-  debugging_disabled: '{e:check} <b>Debugging disabwed</b>'
+    <i>Go to diwectowy nyamed `debug_modules`, edit fiwe nyamed `{0}.py` and see changes
+    in weaw time</i>'
+  debugging_disabled: '{e:check_test} <b>Debugging disabwed</b>'
   send_anyway: 📤 Send anyway
   cancel: 🚫 Cancew
   logs_cleared: 🗑 <b>Wogs cweawed</b>
@@ -704,7 +839,7 @@ updater:
   restarting_caption: '{e:loading} <b>Youw {} is westawting...</b>'
   downloading: '{e:loading} <b>Downwoading updates...</b>'
   installing: '{e:loading} <b>Instawwing updates...</b>'
-  success: '{e:done} <b>Westawt successfuw! {}</b>
+  success: '{e:wave_loading} <b>Westawt successfuw! {}</b>
 
     <i>But stiww woading moduwes...</i>
 
@@ -713,24 +848,30 @@ updater:
   btn_restart: 🔄 Westawt
   btn_update: 🧭 Update
   restart_confirm: '{e:question} <b>Awe you suwe you want to westawt?</b>'
-  secure_boot_confirm: '{e:question} <b>Awe you suwe you want to westawt in secuwe boot mode?</b>'
+  secure_boot_confirm: '{e:question} <b>Awe you suwe you want to westawt in secuwe
+    boot mode?</b>'
   update_confirm: '{e:question} <b>Awe you suwe you want to update?
 
 
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
-  no_update: '{e:glowing_star} <b>You awe on da watest vewsion, puww updates anyway?</b>'
+  no_update: '{e:star_update} <b>You awe on da watest vewsion, puww updates anyway?</b>'
   cancel: 🚫 Cancew
-  branch_menu: "<blockquote>{e:gear} <b>Выбор ветки обновления Elys</b>\nТекущая ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield} <b>master</b> - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка (нестабильная)</blockquote>"
+  branch_menu: "<blockquote>{e:gear_branch} <b>Выбор ветки обновления Elys</b>\nТекущая\
+    \ ветка: <code>{current}</code></blockquote>\n<blockquote>{e:shield_branch} <b>master</b>\
+    \ - стабильная\n{e:fire} <b>beta</b> - бета-версия\n{e:flash} <b>dev</b> - разработка\
+    \ (нестабильная)</blockquote>"
   branch_switching: "<blockquote>{e:repeat} <b>Переключение на ветку <code>{branch}</code>...</b></blockquote>"
-  branch_switched: "<blockquote>{e:check} <b>Ветка переключена на <code>{branch}</code>!</b>\n<i>Для применения изменений требуется перезагрузка.</i></blockquote>"
-  branch_switch_fail: "<blockquote>{e:exclamation} <b>Не удалось переключить ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
+  branch_switched: "<blockquote>{e:check_branch} <b>Ветка переключена на <code>{branch}</code>!</b>\n\
+    <i>Для применения изменений требуется перезагрузка.</i></blockquote>"
+  branch_switch_fail: "<blockquote>{e:exclamation_branch} <b>Не удалось переключить\
+    \ ветку на <code>{branch}</code>!</b>\nОшибка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ты уже на ветке {branch}'
   branch_invalid: '❌ Неизвестная ветка <code>{target}</code>! Доступные: {available}'
   branch_btn_restart: 'Перезагрузить'
   branch_btn_later: 'Позже'
   branch_btn_close: 'Закрыть'
   stop_ub_confirm: Youw {} wiww be stopped, awe you suwe? :3
-  full_success: '{e:check} <b>Usewbot is fuwwy woaded! {}</b>
+  full_success: '{e:done} <b>Usewbot is fuwwy woaded! {}</b>
 
     <i>Fuww westawt took {}s</i>'
   ub_stop: Youw {emoji} has been stopped
@@ -739,10 +880,11 @@ updater:
     <i>Fuww westawt took {}s
 
     Faiwed to woad {} moduwes</i>'
-  secure_boot_complete: '{e:lock} <b>Secuwe boot compweted! {}</b>
+  secure_boot_complete: '{e:lock_terminal} <b>Secuwe boot compweted! {}</b>
 
     <i>Westawt took {}s</i>'
-  secure_boot_fail: '{e:lock} <b>Secuwe boot compweted, but an ewwow occuwwed! {}</b>
+  secure_boot_fail: '{e:lock_terminal} <b>Secuwe boot compweted, but an ewwow occuwwed!
+    {}</b>
 
     <i>Westawt took {}s
 
@@ -768,7 +910,8 @@ updater:
   autoupdate: '🛡 Unit Awpha awso awwows you to ignyowe updates and <b>do it automaticawwy</b>!
 
 
-    💫 Howevew, majow updates such as changing da gwobaw vewsion (1.x.x -> 2.x.x) wiww be ignyowed fow automatic updates and you wiww have to update manyuawwy'
+    💫 Howevew, majow updates such as changing da gwobaw vewsion (1.x.x -> 2.x.x) wiww
+    be ignyowed fow automatic updates and you wiww have to update manyuawwy'
   autoupdate_on: '🎆 Automatic updates <b>have been enyabwed!
 
     Enjoy using it!</b>'
@@ -784,7 +927,8 @@ updater:
   _cmd_doc_source: Winks da souwce code of dis pwoject
   _cmd_doc_update: Downwoads usewbot updates
   _cmd_doc_rollback: Wowwbacks usewbot updates
-  _cls_doc: Updates itsewf, twacks watest Elys weweases, and nyotifies you, if update is wequiwed
+  _cls_doc: Updates itsewf, twacks watest Elys weweases, and nyotifies you, if update
+    is wequiwed
   update_required: '{e:new} <b>Elys Update avaiwabwe!</b>
 
 
@@ -808,7 +952,13 @@ updater:
   _cmd_doc_ubstop: Stop youw usewbot
 api_protection:
   name: APIWimitew
-  warning: "⚠️ <b>WAWNING!</b>\n\nYouw account exceeded da wimit of wequests, specified in config. In owdew to pwevent Tewegwam API Fwood, usewbot has been <b>fuwwy fwozen</b> fow {} seconds. Fuwdew info is pwovided in attached fiwe. \n\nIt is wecommended to get hewp in <code>{prefix}support</code> gwoup!\n\nIf you dink, dat it is an intended behaviow, den wait untiw usewbot gets unwocked and nyext time, when you wiww be going to pewfowm such an opewation, use <code>{prefix}suspend_api_protect</code> &lt;time in seconds&gt;"
+  warning: "⚠️ <b>WAWNING!</b>\n\nYouw account exceeded da wimit of wequests, specified\
+    \ in config. In owdew to pwevent Tewegwam API Fwood, usewbot has been <b>fuwwy\
+    \ fwozen</b> fow {} seconds. Fuwdew info is pwovided in attached fiwe. \n\nIt\
+    \ is wecommended to get hewp in <code>{prefix}support</code> gwoup!\n\nIf you\
+    \ dink, dat it is an intended behaviow, den wait untiw usewbot gets unwocked and\
+    \ nyext time, when you wiww be going to pewfowm such an opewation, use <code>{prefix}suspend_api_protect</code>\
+    \ &lt;time in seconds&gt;"
   args_invalid: '{e:stop} <b>Invawid awguments</b>'
   suspended_for: '{e:ok_hand} <b>API Fwood Pwotection is disabwed fow {} seconds</b>'
   'true': '{e:ok_hand} <b>Pwotection enyabwed</b>'
@@ -817,22 +967,24 @@ api_protection:
   _cfg_time_sample: Time sampwe dwough which da bot wiww count wequests
   _cfg_threshold: Thweshowd of wequests to twiggew pwotection
   _cfg_local_floodwait: Fweeze usewbot fow dis amount of time, if wequest wimit exceeds
-  _cfg_forbidden_methods: Fowbid specified medods fwom being executed dwoughout extewnaw moduwes
+  _cfg_forbidden_methods: Fowbid specified medods fwom being executed dwoughout extewnaw
+    moduwes
   btn_no: 🚫 Nyo
   btn_yes: ✅ Yes
   proxied_url: 🌐 Pwoxied UWW
   local_url: 🏠 Wocaw UWW
   _cmd_doc_api_fw_protection: Toggwe API Watewimitew
-  _cmd_doc_suspend_api_protect: <time in seconds> - Suspend API Watewimitew fow n seconds
+  _cmd_doc_suspend_api_protect: <time in seconds> - Suspend API Watewimitew fow n
+    seconds
   _cls_doc: Hewps usewbot avoid spamming Tewegwam API
 help:
   name: Hewp
   undoc: 🦥 Nyo docs
   all_header: <b>{} mods avaiwabwe, {} hidden:</b>
   no_mod: 🚫 <b>Specify moduwe to hide</b>
-  help_lib: '{e:cross} <b>Package</b> <code>{}</code> <b>is a wibwawy.</b>
+  help_lib: '{e:money} <b>Package</b> <code>{}</code> <b>is a wibwawy.</b>
 
-    {e:cross} <b>Wibwawies do nyot have descwiptions...</b>'
+    {e:money} <b>Wibwawies do nyot have descwiptions...</b>'
   developer: '{e:heart_hands} Devewopew: {}'
   hidden_shown: '<b>{} moduwes hidden, {} moduwes shown:</b>
 
@@ -842,12 +994,14 @@ help:
   offchats: '{e:grey_question} <a href="https://t.me/ElysTalk"><b>Suppowt chat</b></a>
 
 
-    {e:chat} <a href="https://t.me/heroku_offtop"><b>Offtop chat</b></a>
+    {e:chat_help} <a href="https://t.me/heroku_offtop"><b>Offtop chat</b></a>
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Officiaw channyew</b></a>'
-  partial_load: '{e:point_up} <b>Usewbot is nyot fuwwy woaded, so nyot aww moduwes awe shown</b>'
-  not_exact: '{e:point_up} <b>Nyo exact match occuwed, so da cwosest wesuwt is shown instead</b>'
+  partial_load: '{e:point_up} <b>Usewbot is nyot fuwwy woaded, so nyot aww moduwes
+    awe shown</b>'
+  not_exact: '{e:point_up} <b>Nyo exact match occuwed, so da cwosest wesuwt is shown
+    instead</b>'
   request_join: You wequested wink fow Elys suppowt chat
   core_notice: "{e:point_up} <b>Dis is a cowe moduwe. You can't unwoad it nyow wepwace</b>"
   show_preview_in_help: 'Show # meta bannyew in hewp pweview [moduwe] pwease~ :3 OwO'
@@ -861,7 +1015,15 @@ help:
   rich_placeholders: Pwacehowdews
   rich_commands: Commands
 elys_info:
-  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>Ownew</b>: {me}\n├  【{e:bot}】 <b>Vewsion</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>Pwefix</b>: {prefix}⠀ ⠀ \n├  【{e:sync}】 <b>Uptime</b>: {uptime}\n├  【{e:user}】 <b>Bwanch</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>CPU</b>: {cpu_usage}\n├  【{e:shield}】 <b>WAM</b>: {ram_usage}\n├  【{e:chart}】 <b>Ping</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield}】 <b>Update</b>: {upd}\n├  【{e:bot}】 <b>Host</b>: {platform}\n├  【{e:bot}】 <b>OS</b>: {os}\n├  【{e:bot}】 <b>Pydon Vewsion</b>: {python_ver}\n└</blockquote>"
+  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>Ownew</b>: {me}\n├  【{e:bot_info}】\
+    \ <b>Vewsion</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>Pwefix</b>:\
+    \ {prefix}⠀ ⠀ \n├  【{e:sync_info}】 <b>Uptime</b>: {uptime}\n├  【{e:user_info}】\
+    \ <b>Bwanch</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】\
+    \ <b>CPU</b>: {cpu_usage}\n├  【{e:shield_info}】 <b>WAM</b>: {ram_usage}\n├  【{e:chart}】\
+    \ <b>Ping</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield_info_alt}】\
+    \ <b>Update</b>: {upd}\n├  【{e:bot_info}】 <b>Host</b>: {platform}\n├  【{e:bot_info_alt}】\
+    \ <b>OS</b>: {os}\n├  【{e:bot_info_alt}】 <b>Pydon Vewsion</b>: {python_ver}\n\
+    └</blockquote>"
   non_detectable: '{e:stop} <b>Dis component cannyot be detected on youw sewvew!</b>'
   ping_emoji: emoji fow ping in youw info
   send_info: Send usewbot info
@@ -872,35 +1034,47 @@ elys_info:
   upd_avail: <b>Update wequiwed</b> <code>{prefix}update</code>
   switchinfo_on: '{e:check} Image Info tuwned on successfuwwy'
   switchinfo_off: '{e:check} Image Info tuwned off successfuwwy'
-  _cfg_cst_msg: Custom message fow info. May contain {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} keywowds
+  _cfg_cst_msg: Custom message fow info. May contain {me}, {version}, {build}, {prefix},
+    {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user},
+    {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status} keywowds
   _cfg_cst_ph: '🤖Custom pwaceholders: {}'
   _cfg_cst_btn: Custom button fow info. Weave empty to wemove button
   _cfg_banner: UWW to image bannew
   desc: '{e:star} <b>Usewbot — what is it?</b>
 
 
-    {e:owner} A usewbot wefews to a <b>diwd-pawty pwogwam</b> dat intewacts with da Tewegwam API to pewfowm <b>automated tasks on behawf of a usew</b>. Dese usewbots can be used to automate vawious tasks such as <b>sending messages, joining channyews, downwoading media, and much mowe</b>.
+    {e:owner_designer} A usewbot wefews to a <b>diwd-pawty pwogwam</b> dat intewacts
+    with da Tewegwam API to pewfowm <b>automated tasks on behawf of a usew</b>. Dese
+    usewbots can be used to automate vawious tasks such as <b>sending messages, joining
+    channyews, downwoading media, and much mowe</b>.
 
 
-    {e:owner} Usewbots awe diffewent fwom weguwaw Tewegwam bots as <b>dey wun on da usew''s account</b> wader dan a bot account. Dis means dat usewbots can access mowe featuwes and have gweatew fwexibiwity in tewms of da actions dey can pewfowm.
+    {e:owner_dev} Usewbots awe diffewent fwom weguwaw Tewegwam bots as <b>dey wun
+    on da usew''s account</b> wader dan a bot account. Dis means dat usewbots can
+    access mowe featuwes and have gweatew fwexibiwity in tewms of da actions dey can
+    pewfowm.
 
 
-    {e:stop} Howevew, it is impowtant to nyote dat <b>usewbots awe nyot officiawwy suppowted by Tewegwam</b> and deiw use may viowate da pwatfowm''s tewms of sewvice. As such, <b>usews shouwd exewcise caution when using usewbots</b> and ensuwe dat dey awe nyot being used fow mawicious puwposes.
+    {e:stop_info} Howevew, it is impowtant to nyote dat <b>usewbots awe nyot officiawwy
+    suppowted by Tewegwam</b> and deiw use may viowate da pwatfowm''s tewms of sewvice.
+    As such, <b>usews shouwd exewcise caution when using usewbots</b> and ensuwe dat
+    dey awe nyot being used fow mawicious puwposes.
 
 
     '
-  no_font: '{e:cross} Whewe is da wink ow wepwy to da font?'
+  no_font: '{e:cross_info} Whewe is da wink ow wepwy to da font?'
   no_banner: '{e:silent} <b>Nyothing was found at da specified wink </b><code>{link></code><b>.
 
 
-    Check da integwity of youw fiwe at da wink, and awso make suwe dat da wink points diwectwy to da fiwe.</b>'
+    Check da integwity of youw fiwe at da wink, and awso make suwe dat da wink points
+    diwectwy to da fiwe.</b>'
   font_installed: '{e:party} <b>Font instawwed successfuwwy!</b>
 
     {e:party} <i>You can nyow enjoy using it.</i>'
-  incorrect_format_font: '{e:cross} <b>Invawid font fowmat!</b>
+  incorrect_format_font: '{e:cross_info} <b>Invawid font fowmat!</b>
 
     <blockquote>Suppowted fowmats -> otf, ttf</blockquote>'
-  incorrect_img_format: '{e:cross} <b>Invawid image fowmat</b>
+  incorrect_img_format: '{e:cross_info} <b>Invawid image fowmat</b>
 
     <blockquote>Suppowted fowmats -> jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Send info aka 'What is Elys?'
@@ -910,14 +1084,21 @@ elys_info:
   _cls_doc: Show usewbot info
   name: ElysInfo
   _cfg_rich_mode: Show info as a Wich message.
-  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Ovewview</summary><table><tr><th>Ovewview</th><th>Ownew</th></tr><tr><td>【{e:user}】 <b>Ownew</b></td><td>{me}</td></tr><tr><td>【{e:bot}】 <b>Vewsion</b></td><td>{version}</td></tr><tr><td>【{e:camera}】 <b>Pwefix</b></td><td>{prefix}</td></tr><tr><td>【{e:sync}】 <b>Uptime</b></td><td>{uptime}</td></tr><tr><td>【{e:user}】 <b>Bwanch</b></td><td>{branch}</td></tr></table></details><details><summary>Status</summary><table><tr><th>Status</th><th>Updates</th></tr><tr><td>【{e:shield}】 <b>Updates</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield}】 <b>WAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Ping</b></td><td>{ping}</td></tr></table></details><details><summary>Envwionment</summary><table><tr><th>Envwionment</th><th>OS</th></tr><tr><td>【{e:bot}】 <b>Host</b></td><td>{platform}</td></tr><tr><td>【{e:bot}】 <b>OS</b></td><td>{os}</td></tr><tr><td>【{e:bot}】 <b>Python</b></td><td>{python_ver}</td></tr></table></details>
+  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Ovewview</summary><table><tr><th>Ovewview</th><th>Ownew</th></tr><tr><td>【{e:user}】
+    <b>Ownew</b></td><td>{me}</td></tr><tr><td>【{e:bot_info}】 <b>Vewsion</b></td><td>{version}</td></tr><tr><td>【{e:camera}】
+    <b>Pwefix</b></td><td>{prefix}</td></tr><tr><td>【{e:sync_info}】 <b>Uptime</b></td><td>{uptime}</td></tr><tr><td>【{e:user_info}】
+    <b>Bwanch</b></td><td>{branch}</td></tr></table></details><details><summary>Status</summary><table><tr><th>Status</th><th>Updates</th></tr><tr><td>【{e:shield_info_alt}】
+    <b>Updates</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield_info}】
+    <b>WAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Ping</b></td><td>{ping}</td></tr></table></details><details><summary>Envwionment</summary><table><tr><th>Envwionment</th><th>OS</th></tr><tr><td>【{e:bot_info}】
+    <b>Host</b></td><td>{platform}</td></tr><tr><td>【{e:bot_info_alt}】 <b>OS</b></td><td>{os}</td></tr><tr><td>【{e:bot_info_alt}】
+    <b>Python</b></td><td>{python_ver}</td></tr></table></details>
   show_preview_in_help: 'Show # meta bannyew pweview in hewp [moduwe]? 🥺'
 loader:
   name: Woadew
   link: '{e:folder} <b>Fiwe of</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm in wepwy to dis message to instaww</b>
+    {e:star_loader} <b>{prefix}lm in wepwy to dis message to instaww</b>
 
 
     {e:link} <code>{prefix}dlm {url}</code>
@@ -927,15 +1108,16 @@ loader:
   file: '{e:folder} <b>Fiwe of</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm in wepwy to dis message to instaww</b>
+    {e:star_loader} <b>{prefix}lm in wepwy to dis message to instaww</b>
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:loading} Wooking fow moduwes in wepositowies.'
-  loading_module_via_file: '{e:loading} Woading da moduwe.'
-  ml_load_module: "{e:sync} I'm downwoading da moduwe as a fiwe."
+  finding_module_in_repos: '{e:clock} Wooking fow moduwes in wepositowies.'
+  loading_module_via_file: '{e:clock} Woading da moduwe.'
+  ml_load_module: "{e:clock} I'm downwoading da moduwe as a fiwe."
   no_ml: '{e:cross} <b>Moduwe</b> <code>{}</code> <b>cannyot be expowted as a fiwe</b>'
-  not_exact: '{e:warn} <i>Nyo exact match has been found, so da cwosest wesuwt is shown instead</i>'
+  not_exact: '{e:point_up} <i>Nyo exact match has been found, so da cwosest wesuwt
+    is shown instead</i>'
   args: '{e:stop} <b>You must specify awguments</b>'
   repo_config_doc: UWW to a moduwe wepo
   avail_header: '{e:roller_coaster} <b>Moduwes fwom wepo</b>'
@@ -944,35 +1126,39 @@ loader:
   provide_module: '{e:warn} <b>Pwovide a moduwe to woad</b>'
   bad_unicode: '{e:stop} <b>Invawid Unyicode fowmatting in moduwe</b>'
   load_failed: '{e:stop} <b>Woading faiwed. See wogs fow detaiws >.<</b>'
-  loaded: '{e:glowing_star} <b>Moduwe</b> <code>{}</code>{} <b>woaded {}</b>{}{}{}{}{}{}'
+  loaded: '{e:star_loader} <b>Moduwe</b> <code>{}</code>{} <b>woaded {}</b>{}{}{}{}{}{}'
   no_class: <b>What cwass nyeeds to be unwoaded?</b>
   unloaded: '{} <b>Moduwe {} unwoaded.</b>'
-  unload_suggestions: '{e:cross} <b>Moduwe</b> <code>{}</code> <b>nyot found.</b>
+  unload_suggestions: '{e:shield_branch} <b>Moduwe</b> <code>{}</code> <b>nyot found.</b>
 
 
     <b>Maybe you meant:</b>'
-  modules_unloaded: '{e:check} <b>Unwoaded {unloaded_num} moduwes:</b>
+  modules_unloaded: '{e:check_repo} <b>Unwoaded {unloaded_num} moduwes:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:cross} <b>Moduwe nyot unwoaded.</b>'
-  modules_not_unloaded: '{e:cross} <b>Faiwed to unwoad {not_unloaded} moduwes.</b>
+  not_unloaded: '{e:shield_branch} <b>Moduwe nyot unwoaded.</b>'
+  modules_not_unloaded: '{e:shield_branch} <b>Faiwed to unwoad {not_unloaded} moduwes.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Wequiwements instawwation faiwed</b>'
-  requirements_restarted: 🚀 <b>Youw usewbot is westawted, aftew westawt, instaww da moduwe again.</b>
+  requirements_restarted: 🚀 <b>Youw usewbot is westawted, aftew westawt, instaww da
+    moduwe again.</b>
   requirements_installing: '{e:wave_loading} <b>Instawwing wequiwements:
 
 
     {}</b>'
-  requirements_restart: '{e:rocket} <b>Wequiwements instawwed, but a westawt is wequiwed fow</b> <code>{}</code> <b>to appwy</b>'
-  all_modules_deleted: '{e:check} <b>Aww moduwes deweted</b>'
+  requirements_restart: '{e:rocket_restart} <b>Wequiwements instawwed, but a westawt
+    is wequiwed fow</b> <code>{}</code> <b>to appwy</b>'
+  all_modules_deleted: '{e:check_repo} <b>Aww moduwes deweted</b>'
   undoc: '{e:shrug} Nyo docs'
   ihandler: '
 
     {e:bot} <code>{}</code> {}'
-  inline_init_failed: '{e:cross} <b>Dis moduwe wequiwes Elys inwine featuwe and initiawization of InwineManyagew faiwed</b>
+  inline_init_failed: '{e:cross} <b>Dis moduwe wequiwes Elys inwine featuwe and initiawization
+    of InwineManyagew faiwed</b>
 
-    <i>Pwease, wemove onye of youw owd bots fwom @BotFather and westawt usewbot to woad dis moduwe</i>'
+    <i>Pwease, wemove onye of youw owd bots fwom @BotFather and westawt usewbot to
+    woad dis moduwe</i>'
   version_incompatible: '{e:cross} <b>Dis moduwe wequiwes Elys {}+
 
     Pwease, update with</b> <code>.update</code>'
@@ -981,9 +1167,10 @@ loader:
 
 
     {e:heart_hands} <b>Devewopew:</b> {}'
-  depends_from: "\n\n{e:package} <b>Dependencies:</b> \n{}"
+  depends_from: "\n\n{e:package_loader} <b>Dependencies:</b> \n{}"
   by: by
-  module_fs: 💿 <b>Wouwd you wike to save dis moduwe to fiwesystem, so it won't get unwoaded aftew westawt?</b>
+  module_fs: 💿 <b>Wouwd you wike to save dis moduwe to fiwesystem, so it won't get
+    unwoaded aftew westawt?</b>
   save: 💿 Save
   no_save: 🚫 Don't save
   save_for_all: 💽 Awways save to fs
@@ -998,11 +1185,13 @@ loader:
   blob_link: '
 
 
-    {e:warn} <b>Do nyot use `blob` winks to downwoad moduwes. Considew switching to `raw` instead</b>'
+    {e:warn} <b>Do nyot use `blob` winks to downwoad moduwes. Considew switching to
+    `raw` instead</b>'
   suggest_subscribe: '
 
 
-    {e:star} <b>Dis moduwe is made by {}. Do you want to join dis channyew to suppowt devewopew?</b>'
+    {e:star_subscribe} <b>Dis moduwe is made by {}. Do you want to join dis channyew
+    to suppowt devewopew?</b>'
   subscribe: 💬 Subscwibe
   no_subscribe: 🚫 Don't subscwibe
   subscribed: 💬 Subscwibed
@@ -1013,33 +1202,39 @@ loader:
   overwrite_module: '{e:cross} <b>Dis moduwe attempted to ovewwide da cowe onye (</b><code>{}</code><b>)</b>
 
 
-    {e:tip}<i> Don''t wepowt it as bug. It''s a secuwity measuwe to pwevent wepwacing cowe moduwes with some junk</i>'
-  scam_module: '{e:cross} <b>Da moduwe</b> <code>{name}</code> <b>is a scam, pwease wepowt it to da suppowt gwoup (</b><code>{prefix}support</code><b>)</b>
+    {e:laptop}<i> Don''t wepowt it as bug. It''s a secuwity measuwe to pwevent wepwacing
+    cowe moduwes with some junk</i>'
+  scam_module: '{e:cross} <b>Da moduwe</b> <code>{name}</code> <b>is a scam, pwease
+    wepowt it to da suppowt gwoup (</b><code>{prefix}support</code><b>)</b>
 
 
     <tg-spoiler><i>Pwotection has stopped its woading.</i></tg-spoiler>'
-  overwrite_command: '{e:cross} <b>Dis moduwe attempted to ovewwide da cowe command (</b><code>{}{}</code><b>)</b>
+  overwrite_command: '{e:cross} <b>Dis moduwe attempted to ovewwide da cowe command
+    (</b><code>{}{}</code><b>)</b>
 
 
-    {e:tip}<i> Don''t wepowt it as bug. It''s a secuwity measuwe to pwevent wepwacing cowe moduwes'' commands with some junk</i>'
+    {e:laptop}<i> Don''t wepowt it as bug. It''s a secuwity measuwe to pwevent wepwacing
+    cowe moduwes'' commands with some junk</i>'
   unload_core: '{e:cross} <b>You can''t unwoad cowe moduwe</b> <code>{}</code><b></b>
 
 
-    {e:tip}<i> Don''t wepowt it as bug. It''s a secuwity measuwe to pwevent wepwacing cowe moduwes with some junk</i>'
+    {e:laptop}<i> Don''t wepowt it as bug. It''s a secuwity measuwe to pwevent wepwacing
+    cowe moduwes with some junk</i>'
   cannot_unload_lib: "{e:cross} <b>You can't unwoad wibwawy</b>"
-  wait_channel_approve: '{e:dizzy} <b>Moduwe</b> <code>{}</code> <b>wequests pewmission to join channyew <a href="https://t.me/{}">{}</a>.
+  wait_channel_approve: '{e:dizzy_sparkle} <b>Moduwe</b> <code>{}</code> <b>wequests
+    pewmission to join channyew <a href="https://t.me/{}">{}</a>.
 
 
-    <b>{e:question} Weason: {}</b>
+    <b>{e:question_approve} Weason: {}</b>
 
 
     <i>Waiting fow <a href="https://t.me/{}">appwovaw</a>...</i>'
-  installing: '{e:loading} <b>Instawwing moduwe</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading_clock} <b>Instawwing moduwe</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Wepo</b> <code>{}</code> <b>is awweady added</b>'
-  repo_added: '{e:check} <b>Wepo</b> <code>{}</code> <b>added</b>'
+  repo_added: '{e:check_repo} <b>Wepo</b> <code>{}</code> <b>added</b>'
   no_repo: '{e:stop} <b>You nyeed to specify wepo to add</b>'
   repo_not_exists: '{e:stop} <b>Wepo</b> <code>{}</code> <b>is nyot added</b>'
-  repo_deleted: '{e:check} <b>Wepo</b> <code>{}</code> <b>deweted</b>'
+  repo_deleted: '{e:check_repo} <b>Wepo</b> <code>{}</code> <b>deweted</b>'
   _cmd_doc_addrepo: Add a wepositowy to da wist of wepositowies
   _cmd_doc_clearmodules: Dewete aww instawwed moduwes
   _cmd_doc_delrepo: Wemove a wepositowy fwom da wist of wepositowies
@@ -1048,11 +1243,16 @@ loader:
   _cmd_doc_unloadmod: Unwoad moduwe by cwass nyame
   _cls_doc: Woads moduwes
   basic_auth_doc: Basic aud fow moduwe wepo
-  choose_repo: '{e:folders} <b>Pwease chwoose a wepositowy to instaww aww moduwes fwom, senpai~ :3</b>'
-  installing_all_from_repo: '{e:loading} <b>Instawwing aww da moduwes fwom wepositowy... pwease wait a wittle, nyaa~ >w<</b>'
-  installed_all_from_repo: '{e:glowing_star} <b>Aww moduwes fwom wepositowy instawwed successfuwwy! OwO yippee~</b>'
-  dlm_all_from_repo_error_nomods: '{e:warn} <b>Nyooo moduwes found in dis wepositowy! >///< Awe you suwe, mastew?</b>'
-  dlm_all_from_repo_error_somemods: '{e:warn} <b>Some moduwes faiwed to instaww... sowwy senpai :c</b>
+  choose_repo: '{e:folders_repo} <b>Pwease chwoose a wepositowy to instaww aww moduwes
+    fwom, senpai~ :3</b>'
+  installing_all_from_repo: '{e:clock} <b>Instawwing aww da moduwes fwom wepositowy...
+    pwease wait a wittle, nyaa~ >w<</b>'
+  installed_all_from_repo: '{e:star_repo} <b>Aww moduwes fwom wepositowy instawwed
+    successfuwwy! OwO yippee~</b>'
+  dlm_all_from_repo_error_nomods: '{e:warn} <b>Nyooo moduwes found in dis wepositowy!
+    >///< Awe you suwe, mastew?</b>'
+  dlm_all_from_repo_error_somemods: '{e:warn} <b>Some moduwes faiwed to instaww...
+    sowwy senpai :c</b>
 
     '
   show_banner_doc: 'Show # meta bannyew wike pweview? Pwease? :3'
@@ -1062,7 +1262,7 @@ loader:
   result: '{e:inspect} <b>Seawch wesuwt fow</b> <code>{query}</code>
 
 
-    {e:package} <b>{name}</b> by <b>{dev}</b>
+    {e:package_result} <b>{name}</b> by <b>{dev}</b>
 
     {e:info} <i>{cls_doc}</i>
 
@@ -1072,7 +1272,8 @@ loader:
 
 
     {e:star} <code>{prefix}dlmod {mhash}</code>'
-  verify_required: '{e:warn} <b>To unwock de abiwity to instaww diwd-pawty moduwes, compwete de test in <a href="https://t.me/{}?start=lm_verify">youw bot</a></b>'
+  verify_required: '{e:warn_verify} <b>To unwock de abiwity to instaww diwd-pawty
+    moduwes, compwete de test in <a href="https://t.me/{}?start=lm_verify">youw bot</a></b>'
 translations:
   name: Twanswations
   lang_saved: '{} <b>Wangwuage saved!</b>'
@@ -1081,17 +1282,21 @@ translations:
   lang_removed: '{e:thumbup} <b>Twanswations weset to defauwt onyes</b>'
   check_pack: '{e:stop} <b>Invawid pack fowmat in uww</b>'
   check_url: '{e:stop} <b>You nyeed to specify vawid uww containing a wangpack</b>'
-  too_long: "{e:package} <b>Command output seems to be too wong, so it's sent in fiwe.</b>"
+  too_long: "{e:package_loader} <b>Command output seems to be too wong, so it's sent\
+    \ in fiwe.</b>"
   choose_language: '{e:statue} <b>Choose wangwuage</b>'
   off_langs: 🏴‍☠️ Officiaw WangPacks
   meme_langs: 🏴‍☠️ Meme WangPacks
   not_official: '{e:warn} <b>Dis wangwuage is nyot officiawwy suppowted</b>'
-  requested_join: '💫 <b>Moduwe</b> <code>{}</code> <b>wequested to join channyew <a href=''https://t.me/{}''>{}</a></b>
+  requested_join: '💫 <b>Moduwe</b> <code>{}</code> <b>wequested to join channyew <a
+    href=''https://t.me/{}''>{}</a></b>
 
 
     <b>❓ Weason:</b> <i>{}</i>'
-  fw_error: '{e:clock} <b>Caww</b> <code>{}</code> <b>caused FwoodWait of {} on medod</b> <code>{}</code>'
-  rpc_error: '{e:stop} <b>Caww</b> <code>{}</code> <b>faiwed due to WPC ewwow:</b> <code>{}</code>'
+  fw_error: '{e:clock_fw} <b>Caww</b> <code>{}</code> <b>caused FwoodWait of {} on
+    medod</b> <code>{}</code>'
+  rpc_error: '{e:stop_rpc} <b>Caww</b> <code>{}</code> <b>faiwed due to WPC ewwow:</b>
+    <code>{}</code>'
   _cmd_doc_dllangpack: '[wink to pack] - add extewnal twanswation pack, pwease~ :3'
   _cmd_doc_setlang: '[wanguage] - change defauwt wanguage OwO'
   downloaded_langs: Downwoaded
@@ -1138,7 +1343,7 @@ eval:
   eval_result: '
 
 
-    {e:check}<b> Wesuwt:</b>
+    {e:check_eval}<b> Wesuwt:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
   print_outp: '
@@ -1170,10 +1375,12 @@ translate:
   _cls_doc: Twanswates text (obviouswy)
 quickstart:
   name: Quickstawt
-  base: '{e:glowing_star} <b>Hewwo! (✿◠‿◠)</b> Y-your <b>{}</b> usewbot is now instawwed~ yay!
+  base: '{e:star_quickstart} <b>Hewwo! (✿◠‿◠)</b> Y-your <b>{}</b> usewbot is now
+    instawwed~ yay!
 
 
-    {e:dizzy} <b>N-need hewp?</b> Pwease join <a href="https://t.me/ElysTalk">ouw suppowt chat</a>. We hewp <b>evewyone</b> uwu.
+    {e:dizzy} <b>N-need hewp?</b> Pwease join <a href="https://t.me/ElysTalk">ouw
+    suppowt chat</a>. We hewp <b>evewyone</b> uwu.
 
 
     {e:tipping_hand} <b>Quick G-guide:</b>
@@ -1181,22 +1388,28 @@ quickstart:
 
     {e:num_1} <b>Wwite</b> <code>.help</code> <b>to see the wist of moduwes (´･ω･`)</b>
 
-    {e:num_2} <b>Wwite</b> <code>.help &lt;Moduwe name/command&gt;</code> <b>to see the descwiption of the moduwe</b>
+    {e:num_2} <b>Wwite</b> <code>.help &lt;Moduwe name/command&gt;</code> <b>to see
+    the descwiption of the moduwe</b>
 
-    {e:num_3} <b>Wwite</b> <code>.dlmod &lt;wink&gt;</code> <b>to woad a moduwe fwom a wink!</b>
+    {e:num_3} <b>Wwite</b> <code>.dlmod &lt;wink&gt;</code> <b>to woad a moduwe fwom
+    a wink!</b>
 
-    {e:num_4} <b>Wwite</b> <code>.loadmod</code> <b>in wesponse to a fiwe to woad a moduwe fwom it~</b>
+    {e:num_4} <b>Wwite</b> <code>.loadmod</code> <b>in wesponse to a fiwe to woad
+    a moduwe fwom it~</b>
 
-    {e:num_5} <b>Wwite</b> <code>.unloadmod &lt;Moduwe name&gt;</code> <b>to unwoad a moduwe (bye bye!)</b>
+    {e:num_5} <b>Wwite</b> <code>.unloadmod &lt;Moduwe name&gt;</code> <b>to unwoad
+    a moduwe (bye bye!)</b>
 
 
-    {e:tip} <b>Elys suppowts moduwes fwom Hikka, Fwiendwy-Tewegwam, and GeekTG, as weww as its own! ✨</b>
+    {e:tip_quickstart} <b>Elys suppowts moduwes fwom Hikka, Fwiendwy-Tewegwam, and
+    GeekTG, as weww as its own! ✨</b>
 
     '
   language_saved: 🇬🇧 Wangwuage saved! ~
   language: 🇬🇧 Engwish
   btn_support: 🥷 Suppowt chat
-  support_chat_reason: Elys hewp is onwy avaiwabwe in dis chat. By agweeing to join, you agwee to Elys fedewation wuwes and viowations = pewm ban >w<
+  support_chat_reason: Elys hewp is onwy avaiwabwe in dis chat. By agweeing to join,
+    you agwee to Elys fedewation wuwes and viowations = pewm ban >w<
   _cls_doc: Nyotifies usew about usewbot instawwation
 $validators:
   boolean: boowean
@@ -1244,13 +1457,14 @@ $inline:
   invoke_failed_logs: '{e:stop} <b>Unit invoke faiwed! >_<</b>
 
 
-    {e:book} <b>Wogs:</b>
+    {e:book_inline} <b>Wogs:</b>
 
 
     <pre><code class="language-logs">{}</code></pre>'
   show_inline_cmds: 📄 Show aww avaiwabwe inwine commands
   no_inline_cmds: You have nyo avaiwabwe commands
-  no_inline_cmds_msg: <b>😔 Thewe awe nyo avaiwabwe inwine commands ow you wack access to dem</b>
+  no_inline_cmds_msg: <b>😔 Thewe awe nyo avaiwabwe inwine commands ow you wack access
+    to dem</b>
   inline_cmds: ℹ️ You have {} avaiwabwe command(-s)
   inline_cmds_msg: '<b>ℹ️ Avaiwabwe inwine commands:</b>
 
@@ -1273,7 +1487,8 @@ $inline:
     1. Westawt Elys: <code>{prefix}restart</code>
 
 
-    2. Enabwe inwine mode fow the bot: go to @BotFather, send /mybots, cwick Bot Settings -> Inwine Mode -> On
+    2. Enabwe inwine mode fow the bot: go to @BotFather, send /mybots, cwick Bot Settings
+    -> Inwine Mode -> On
 
 
     3. Cweate a new bot: send the command <code>{prefix}ch_elys_bot</code> <@botname>'
@@ -1291,28 +1506,38 @@ loader_restrictor:
   q1_ans2: Wead messages onwy in de chat whewe it was cawwed
   q1_ans3: Act onwy when you expwicitwy caww its command
   q1_ans4: 'De same as you in Tewegwam, and mowe: sending gifts, deweting youw account'
-  q1_hint: Awdough de usewbot has basic pwotection against dangewous wequests, a moduwe can stiww gain fuww contwow of youw account
+  q1_hint: Awdough de usewbot has basic pwotection against dangewous wequests, a moduwe
+    can stiww gain fuww contwow of youw account
   q2: A stwangew messages you and asks you to test deiw moduwe. What do you do?
   q2_ans1: Suwe, why nyot hewp dem?
   q2_ans2: 'Check de code mysewf/wid AI. If unsuwe, wepowt wid #check_scam'
   q2_ans3: Ask de audow if it's safe and take deiw wowd fow it
   q2_ans4: Instaww it on anyodew account to test it - dat's safew
-  q2_hint: Any moduwe nyot fwom officiaw devewopew channyews shouwd be checked fow dangewous code. Don't put youwsewf at wisk!
+  q2_hint: Any moduwe nyot fwom officiaw devewopew channyews shouwd be checked fow
+    dangewous code. Don't put youwsewf at wisk!
   q3: Can a moduwe wowk wid de fiwes and system of de sewvew/hosting, nyot just Tewegwam?
   q3_ans1: NYo, a moduwe onwy wowks inside Tewegwam and can't see odew fiwes
   q3_ans2: Onwy if it has a sepawate pewmission fwom Tewegwam
   q3_ans3: 'Yes - a moduwe is pawt of de usewbot: it can wead, change, dewete fiwes'
   q3_ans4: Onwy photos and videos fwom Tewegwam
-  q3_hint: De usewbot is a Pydon pwogwam wunnying on youw sewvew. A moduwe is pawt of dat same pwogwam, wid de same wights
-  q4: Wouwd you nyotice if a moduwe stawted acting widout youw pewmission (data deft, etc.)?
+  q3_hint: De usewbot is a Pydon pwogwam wunnying on youw sewvew. A moduwe is pawt
+    of dat same pwogwam, wid de same wights
+  q4: Wouwd you nyotice if a moduwe stawted acting widout youw pewmission (data deft,
+    etc.)?
   q4_ans1: Yes, Tewegwam wouwd immediatewy nyotify me about suspicious activity
   q4_ans2: Yes, I'd nyotice suspicious wogs fwom de moduwe
   q4_ans3: NYo, but de usewbot's basic pwotection shouwd catch such activity
-  q4_ans4: NYot nyecessawiwy - a moduwe can act invisibwy, widout any nyotifications, untiw it's too wate
-  q4_hint: 'Steawd is de main dangew of mawicious moduwes: widout checking de code befowehand, you might simpwy nyot nyotice a pwobwem untiw it''s too wate'
-  timeout: "{e:warn} <b>You didn't answew aww de questions in time. You can twy again by sending</b> <code>/start lm_verify</code>"
-  failed: '{e:stop} <b>Wwong answew. To unwock diwd-pawty moduwe instawwation, twy again by sending</b> <code>/start lm_verify</code>'
-  already_passed: "{e:check} <b>You've awweady passed de check - diwd-pawty moduwe instawwation is unwocked</b>"
+  q4_ans4: NYot nyecessawiwy - a moduwe can act invisibwy, widout any nyotifications,
+    untiw it's too wate
+  q4_hint: 'Steawd is de main dangew of mawicious moduwes: widout checking de code
+    befowehand, you might simpwy nyot nyotice a pwobwem untiw it''s too wate'
+  timeout: "{e:warn_security} <b>You didn't answew aww de questions in time. You can\
+    \ twy again by sending</b> <code>/start lm_verify</code>"
+  failed: '{e:stop} <b>Wwong answew. To unwock diwd-pawty moduwe instawwation, twy
+    again by sending</b> <code>/start lm_verify</code>'
+  already_passed: "{e:check} <b>You've awweady passed de check - diwd-pawty moduwe\
+    \ instawwation is unwocked</b>"
   unlocked: '{e:check} <b>Check passed, diwd-pawty moduwe instawwation is unwocked</b>'
-  unlock_prompt: '{e:warn} <b>To unwock diwd-pawty moduwe instawwation, compwete a showt check</b>'
+  unlock_prompt: '{e:warn_security} <b>To unwock diwd-pawty moduwe instawwation, compwete
+    a showt check</b>'
   unlock_prompt_btn: Take de check

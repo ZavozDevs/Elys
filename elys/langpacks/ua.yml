@@ -3,7 +3,8 @@ elys_security:
   no_command: '{e:stop} <b>Команда</b> <code>{}</code> <b>не знайдена!</b>'
   permissions: 🔐 <b>Тут можна налаштувати дозволи для команди</b> <code>{}{}</code>
   close_menu: 🙈 Закрити це меню
-  global: 🔐 <b>Тут можна налаштувати глобальну маску виключення. Якщо тумблер вимкнений тут, він вимкнений для всіх команд</b>
+  global: 🔐 <b>Тут можна налаштувати глобальну маску виключення. Якщо тумблер вимкнений
+    тут, він вимкнений для всіх команд</b>
   owner: 😎 Власник
   group_owner: 🧛‍♂️ Власник групи
   group_admin_add_admins: 🧑‍⚖️ Адмін (додавати учасників)
@@ -21,36 +22,46 @@ elys_security:
     <blockquote expandable>{}</blockquote>'
   no_owner: '{e:owner} <b>Немає користувачів в групі</b> <code>owner</code>'
   no_user: '{e:stop} <b>Вкажи, кому видати права</b>'
-  not_a_user: '{e:warn} <b>Вказана ціль - не користувач</b>'
+  not_a_user: '{e:warn_security} <b>Вказана ціль - не користувач</b>'
   cancel: 🚫 Скасувати
   confirm: 👑 Підтвердити
-  self: '{e:warn} <b>Не можна керувати своїми правами!</b>'
-  warning: '⚠️ <b>Ти дійсно бажаєш додати <a href="tg://user?id={}">{}</a> до групи</b> <code>{}</code><b>!
+  self: '{e:warn_security} <b>Не можна керувати своїми правами!</b>'
+  warning: '⚠️ <b>Ти дійсно бажаєш додати <a href="tg://user?id={}">{}</a> до групи</b>
+    <code>{}</code><b>!
 
     Ця дія може передати частковий або повний доступ до юзерботу цьому користувачеві!</b>'
   suggest_nonick: 🔰 <i>Чи бажаєш ти увімкнути NoNick для цього користувача?</i>
   user_nn: 🔰 <b>NoNick для <a href="tg://user?id={}">{}</a> ввімкнено</b>
   enable_nonick_btn: 🔰 Ввімкнути
-  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> додано до групи</b> <code>owner</code>'
-  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> видалено з групи</b> <code>owner</code>'
+  owner_added: '{e:owner} <b><a href="tg://user?id={}">{}</a> додано до групи</b>
+    <code>owner</code>'
+  owner_removed: '{e:owner} <b><a href="tg://user?id={}">{}</a> видалено з групи</b>
+    <code>owner</code>'
   _cls_doc: Керування налаштуваннями безпеки
-  what: '{e:stop} <b>Вам потрібно вказати тип цілі першим аргументом (</b><code>user</code> <b>or</b> <code>chat</code><b>)</b>'
+  what: '{e:stop} <b>Вам потрібно вказати тип цілі першим аргументом (</b><code>user</code>
+    <b>or</b> <code>chat</code><b>)</b>'
   no_target: '{e:stop} <b>Не вказана мета правила безпеки</b>'
   no_rule: '{e:stop} <b>Не вказано правило безпеки (модуль або команда)</b>'
-  confirm_rule: 🔐 <b>Будь ласка, підтвердіть, що хочете видати {} <a href='{}'>{}</a> право використовувати {}</b> <code>{}</code> <b>{}</b>
-  multiple_rules: '🔐 <b>Не вийшло однозначно розпізнати правила безпеки. Оберіть те, яке мали на увазі:</b>
+  confirm_rule: 🔐 <b>Будь ласка, підтвердіть, що хочете видати {} <a href='{}'>{}</a>
+    право використовувати {}</b> <code>{}</code> <b>{}</b>
+  multiple_rules: '🔐 <b>Не вийшло однозначно розпізнати правила безпеки. Оберіть те,
+    яке мали на увазі:</b>
 
 
     {}'
-  rule_added: 🔐 <b>Ви надали {} <a href='{}'>{}</a> право використовувати {}</b> <code>{}</code> <b>{}</b>
-  rules: '{e:keylock} <b>Таргетовані правила безпеки:</b>
+  rule_added: 🔐 <b>Ви надали {} <a href='{}'>{}</a> право використовувати {}</b> <code>{}</code>
+    <b>{}</b>
+  rules: '{e:lock_terminal} <b>Таргетовані правила безпеки:</b>
 
 
     <blockquote expandable>{}</blockquote>'
   no_rules: '{e:stop} <b>Немає таргетованих правил безпеки</b>'
-  owner_target: '{e:warn} <b>Цей користувач - власник, його права не можуть керуватися таргетованою безпекою</b>'
-  rules_removed: '{e:keylock} <b>Правила таргетованої безпеки для <a href="{}">{}</a> видалено</b>'
-  rule_removed: '{e:keylock} <b>Видалено правило безпеки для <a href="{}">{}</a> (</b><code>{}</code><b>)</b>'
+  owner_target: '{e:warn_security} <b>Цей користувач - власник, його права не можуть
+    керуватися таргетованою безпекою</b>'
+  rules_removed: '{e:lock_terminal} <b>Правила таргетованої безпеки для <a href="{}">{}</a>
+    видалено</b>'
+  rule_removed: '{e:lock_terminal} <b>Видалено правило безпеки для <a href="{}">{}</a>
+    (</b><code>{}</code><b>)</b>'
   chat_inline: ⚠️ <b>Ви не можете створити правило inline-команди для чатів!</b>
   for: на
   forever: назавжди
@@ -69,20 +80,24 @@ elys_security:
   seconds: секунд(-и)
   _cmd_doc_inlinesec: '[команда] - Налаштувати дозволи для інлайн команди'
   _cmd_doc_querysec: Перемкнути дозвіл на виконання інлайн-запитів для сторонніх користувачів
-  _cmd_doc_owneradd: '[-f|--force] [-n|--nonick] <користувач> - Додати користувача до групи `owner`'
+  _cmd_doc_owneradd: '[-f|--force] [-n|--nonick] <користувач> - Додати користувача
+    до групи `owner`'
   _cmd_doc_ownerlist: Показати список користувачів у групі `owner`
   _cmd_doc_ownerrm: <користувач> - Видалити користувача з групи `owner`
   _cmd_doc_security: '[команда] - Налаштувати дозволи для команди'
-  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [мета користувача або чату] [правило (команда/модуль)] [час] - Додати нове правило таргетованої безпеки
+  _cmd_doc_tsec: '<"user"/"chat"/"sgroup"> [мета користувача або чату] [правило (команда/модуль)]
+    [час] - Додати нове правило таргетованої безпеки
 
     Наприклад: .tsec user ban 1d, .tsec chat weather 1h, .tsec user HikariChat'
   _cmd_doc_tsecclr: '<"user"/"chat"/"sgroup"> - Очистити правила таргетованої безпеки
 
     Наприклад: .tsecclr user, .tsecclr chat'
-  _cmd_doc_tsecrm: '<"user"/"chat"/"sgroup"> <правило - модуль або команда> - Видалити правило таргетованої безпеки
+  _cmd_doc_tsecrm: '<"user"/"chat"/"sgroup"> <правило - модуль або команда> - Видалити
+    правило таргетованої безпеки
 
     Наприклад: .tsecrm user ban, .tsecrm chat HikariChat'
-  querysec_info: '{e:lock} Тут ви можете перемкнути можливість використання інлайн-запитів для всіх сторонніх користувачів'
+  querysec_info: '{e:lock} Тут ви можете перемкнути можливість використання інлайн-запитів
+    для всіх сторонніх користувачів'
   until: до
   sgroup: група безпеки
   sgroup_info: '{e:lock} <b>Інформація про групу безпеки</b> <code>{}</code>:
@@ -107,34 +122,41 @@ elys_security:
     {}
 
     '
-  sgroup_li: '{e:bullet} <code>{}</code> · <b>{} користувач(-ів)</b> · <b>{} правил(-о)</b>'
+  sgroup_li: '{e:bullet_security} <code>{}</code> · <b>{} користувач(-ів)</b> · <b>{}
+    правил(-о)</b>'
   sgroups_list: '{e:lock} <b>Групи безпеки:</b>
 
 
     {}'
   deleted_sgroup: '{e:lock} <b>Групу безпеки</b> <code>{}</code> <b>видалено</b>'
-  user_already_in_sgroup: '{e:stop} <b>Користувач</b> <code>{}</code> <b>вже знаходиться в групі безпеки</b> <code>{}</code>'
-  user_added_to_sgroup: '{e:lock} <b>Користувача</b> <code>{}</code> <b>додано до групи безпеки</b> <code>{}</code>'
-  user_not_in_sgroup: '{e:stop} <b>Користувач</b> <code>{}</code> <b>не знаходиться в цій групі безпеки</b> <code>{}</code>'
-  user_removed_from_sgroup: '{e:lock} <b>Користувача</b> <code>{}</code> <b>видалено з групи</b> <code>{}</code>'
+  user_already_in_sgroup: '{e:stop} <b>Користувач</b> <code>{}</code> <b>вже знаходиться
+    в групі безпеки</b> <code>{}</code>'
+  user_added_to_sgroup: '{e:lock} <b>Користувача</b> <code>{}</code> <b>додано до
+    групи безпеки</b> <code>{}</code>'
+  user_not_in_sgroup: '{e:stop} <b>Користувач</b> <code>{}</code> <b>не знаходиться
+    в цій групі безпеки</b> <code>{}</code>'
+  user_removed_from_sgroup: '{e:lock} <b>Користувача</b> <code>{}</code> <b>видалено
+    з групи</b> <code>{}</code>'
   _cmd_doc_delsgroup: <ім'я> - Видалити групи безпеки
   _cmd_doc_sgroup: <ім'я> - Показати інформацію про групу безпеки
   _cmd_doc_sgroups: Список груп безпеки
   _cmd_doc_newsgroup: <ім'я> - Створити нову групу безпеки
-  _cmd_doc_sgroupadd: <ім'я> [користувач або відповідь] - Додати користувача до групи безпеки
-  _cmd_doc_sgroupdel: <ім'я> [користувач або відповідь] - Видалити користувача з групи безпеки
+  _cmd_doc_sgroupadd: <ім'я> [користувач або відповідь] - Додати користувача до групи
+    безпеки
+  _cmd_doc_sgroupdel: <ім'я> [користувач або відповідь] - Видалити користувача з групи
+    безпеки
   name: ElysSecurity
   cancel_btn: 🚫 Скасувати
   confirm_btn: 👑 Підтвердити
-  li: '{e:bullet} <b><a href="tg://user?id={}">{}</a></b>'
+  li: '{e:bullet_dot} <b><a href="tg://user?id={}">{}</a></b>'
 elys_settings:
-  watchers: '{e:watch} <b>Наглядачі:</b>
+  watchers: '{e:wave} <b>Наглядачі:</b>
 
 
     <blockquote expandable><b>{}</b></blockquote>'
   mod404: '{e:stop} <b>Наглядача {} не знайдено</b>'
-  disabled: '{e:watch} <b>Наглядача {} тепер <u>вимкнено</u></b>'
-  enabled: '{e:watch} <b>Наглядача {} тепер <u>увімкнено</u></b>'
+  disabled: '{e:wave} <b>Наглядача {} тепер <u>вимкнено</u></b>'
+  enabled: '{e:wave} <b>Наглядача {} тепер <u>увімкнено</u></b>'
   args: "{e:stop} <b>Вкажи ім'я наглядача</b>"
   user_nn: '{e:magic} <b>Стан NoNick для цього користувача: {}</b>'
   no_cmd: '{e:magic} <b>Вкажи команду, для якої треба ввімкнути\вимкнути NoNick</b>'
@@ -142,7 +164,7 @@ elys_settings:
   cmd404: '{e:magic} <b>Команду не знайдено</b>'
   inline_settings: ⚙️ <b>Тут можна керувати налаштуваннями Elys</b>
   confirm_update: 🧭 <b>Підтвердіть оновлення. Юзербота буде перезавантажено</b>
-  confirm_restart: '{e:warn} <b>Підтвердіть перезавантаження</b>'
+  confirm_restart: '{e:loading} <b>Підтвердіть перезавантаження</b>'
   btn_restart: 🔄 Перезавнтаження
   btn_update: 🧭 Оновлення
   close_menu: 😌 Закрити меню
@@ -150,9 +172,12 @@ elys_settings:
   do_not_suggest_subscribe: 🚫 Пропонувати підписку на канал
   private_not_allowed: '{e:stop} <b>Цю команду треба виконувати в чаті</b>'
   _cls_doc: Додаткові налаштування Elys
-  nonick_warning: Увага! Ти ввімкнув NoNick зі стандартним префіксом! Тебе можуть замьютити в чатах Elys. Зміни префікс або вимкни глобальний NoNick!
-  reply_required: '{e:stop} <b>Дай відповідь на повідомлення користувача, для якого треба увімкнути NoNick</b>'
-  deauth_confirm: '⚠️ <b>Ця дія повністю видалить Elys з цього акаунту! Її не можна скасувати</b>
+  nonick_warning: Увага! Ти ввімкнув NoNick зі стандартним префіксом! Тебе можуть
+    замьютити в чатах Elys. Зміни префікс або вимкни глобальний NoNick!
+  reply_required: '{e:stop} <b>Дай відповідь на повідомлення користувача, для якого
+    треба увімкнути NoNick</b>'
+  deauth_confirm: '⚠️ <b>Ця дія повністю видалить Elys з цього акаунту! Її не можна
+    скасувати</b>
 
 
     <i>- Всі чати, пов''язані з Elys будуть видалені
@@ -205,19 +230,23 @@ elys_settings:
 
     [-i - тільки вхідні]'
   _cmd_doc_watchers: Показати активних наглядачів
-  core_protection_already_removed: '{e:lock} <b>Захист ядра вже видалено</b>'
-  core_protection_already_enabled: '{e:lock} <b>Захист ядра вже встановлений</b>'
+  core_protection_already_removed: '{e:lock_protect} <b>Захист ядра вже видалено</b>'
+  core_protection_already_enabled: '{e:lock_protect} <b>Захист ядра вже встановлений</b>'
   core_protection_confirm: '⚠️ <b>УВАЖНО ПРОЧИТАТЙТЕ!</b>
 
 
-    Видаляючи захист ядра, ви підтверджуєте, що знаєте що це і для чого воно. В звичайному сценарії життя вам <b>не треба</b>. Якщо ви не розробник, вам <b>не треба</b>. Якщо ви не впевнені, вам <b>не треба</b>.
+    Видаляючи захист ядра, ви підтверджуєте, що знаєте що це і для чого воно. В звичайному
+    сценарії життя вам <b>не треба</b>. Якщо ви не розробник, вам <b>не треба</b>.
+    Якщо ви не впевнені, вам <b>не треба</b>.
 
 
     <b>Ви впевнені, що хочете видалити захист ядра?</b>'
   core_protection_confirm_e: '⚠️ <b>УВАЖНО ПРОЧИТАТЙТЕ!</b>
 
 
-    Встановлюючи захист ядра, ви підтверджуєте, що знаєте що це і для чого воно. В звичайному сценарії життя вам <b>не треба</b>. Якщо ви не розробник, вам <b>не треба</b>. Якщо ви не впевнені, вам <b>не треба</b>.
+    Встановлюючи захист ядра, ви підтверджуєте, що знаєте що це і для чого воно. В
+    звичайному сценарії життя вам <b>не треба</b>. Якщо ви не розробник, вам <b>не
+    треба</b>. Якщо ви не впевнені, вам <b>не треба</b>.
 
 
     <b>Ви впевнені, що хочете встановити захист ядра?</b>'
@@ -253,18 +282,22 @@ terminal:
 
     {e:dizzy} <b>Час виконання:  {}s</b>'
   auth_fail: '{e:stop} <b>Аутентифікація невдала, спробуй ще раз</b>'
-  auth_needed: '{e:lock}<a href="tg://user?id={}"> Необхідна аутентифікація</a>'
-  auth_msg: '{e:lock} <b>Будь-ласка, відредагуй це повідомлення з паролем від рута для</b> <code>{}</code> <b>, щоб виконати</b> <code>{}</code>'
+  auth_needed: '{e:lock_terminal}<a href="tg://user?id={}"> Необхідна аутентифікація</a>'
+  auth_msg: '{e:lock_terminal} <b>Будь-ласка, відредагуй це повідомлення з паролем
+    від рута для</b> <code>{}</code> <b>, щоб виконати</b> <code>{}</code>'
   auth_locked: '{e:stop} <b>Аутентифікація не вдалась. Спробуй пізніше</b>'
-  auth_ongoing: '{e:wait} <b>Аутентифікація...</b>'
-  done: '{e:check} <b>Ура</b>'
-  dangerous_command: '{e:cross} <b>Виконання цієї команди (<code>{}</code>) скасовано для твоєї безпеки.</b>
+  auth_ongoing: '{e:wait_terminal} <b>Аутентифікація...</b>'
+  done: '{e:check_terminal} <b>Ура</b>'
+  dangerous_command: '{e:cross} <b>Виконання цієї команди (<code>{}</code>) скасовано
+    для твоєї безпеки.</b>
 
 
-    {e:tip}<i>Це не помилка, а захисний захід. Будь ласка, не повідомляй про це в support-чаті.</i>'
+    {e:laptop}<i>Це не помилка, а захисний захід. Будь ласка, не повідомляй про це
+    в support-чаті.</i>'
   _cmd_doc_apt: Скорочення для '.terminal apt'
   _cmd_doc_terminal: <команда> - Запустити команду в системі
-  _cmd_doc_terminate: '[-f to force kill] - Дай відповідь на повідомлення, щоб вбити процес'
+  _cmd_doc_terminate: '[-f to force kill] - Дай відповідь на повідомлення, щоб вбити
+    процес'
   exec_confirm: <b>Системна команда:</b> <code>{}</code>
   exec_running: <b>Виконую...</b>
   btn_execute: Виконати
@@ -277,13 +310,16 @@ terminal:
 
     <code>{}</code>'
 elys_web:
-  host_denied: '{e:chat} Команди додавання сесій недоступні на вашому хостингу, зверніться до адміністрації вашого хостингу.'
+  host_denied: '{e:chat} Команди додавання сесій недоступні на вашому хостингу, зверніться
+    до адміністрації вашого хостингу.'
   btn_yes: 🚸 Все одно відкрити
   btn_no: 🔻 Закрити
-  invalid_target: Дайте відповідь на повідомлення людини, яку хочете додати, або вкажіть його коректний @username/id.
+  invalid_target: Дайте відповідь на повідомлення людини, яку хочете додати, або вкажіть
+    його коректний @username/id.
   cant_add_self: Ви не можете додати себе.
   add_user_confirm: Ви дійсно хочете додати обліковий запис {} ({})?
-  add_user_insecure: Ви дійсно хочете додати обліковий запис {} ({})? Використовуйте команду <code> {} addacc {} force_insecure</code > для підтвердження.
+  add_user_insecure: Ви дійсно хочете додати обліковий запис {} ({})? Використовуйте
+    команду <code> {} addacc {} force_insecure</code > для підтвердження.
   enter_number: Ввести номер
   your_phone_number: Ваш номер телефону
   enter_code: Ввести код
@@ -294,7 +330,8 @@ elys_web:
 
 
     '
-  enter_number_format: 'Введіть свій номер телефону в міжнародному форматі (наприклад, +79212345678):'
+  enter_number_format: 'Введіть свій номер телефону в міжнародному форматі (наприклад,
+    +79212345678):'
   login_successful: 🎉 Успішний вхід!
   floodwait_error: Занадто багато спроб. Спробуйте ще раз через {} секунд.
   code_sent: Код був відправлений. Введіть його
@@ -306,48 +343,67 @@ elys_web:
   invalid_code_digits: Код має складатися лише з цифр. Повторіть спробу.
   switch_confirm: '⚠️ <b>Перенести цього юзербота на інший Telegram-акаунт?</b>
 
-    Поточну сесію буде заархівовано, конфіг перенесено, а дані inline-бота буде створено заново на новому акаунті.'
-  switch_insecure: 🚫 <b>Помилка перенесення:</b> інлайн-меню недоступне. Використовуйте <code>{}switchacc force_insecure</code> для обходу.
+    Поточну сесію буде заархівовано, конфіг перенесено, а дані inline-бота буде створено
+    заново на новому акаунті.'
+  switch_insecure: 🚫 <b>Помилка перенесення:</b> інлайн-меню недоступне. Використовуйте
+    <code>{}switchacc force_insecure</code> для обходу.
   switch_failed: 🚫 <b>Помилка перенесення:</b> <code>{}</code>
   _cmd_doc_switchacc: Перенести юзербота на інший Telegram-акаунт
   name: ElysAccounts
   _cls_doc: Керування акаунтами через inline
   _cmd_doc_addacc: '[user/id/reply] - Додати інший акаунт через inline-вхід'
 elys_backup:
-  period: '⌚️ <b>Пристрій «ALPHA»</b> створює регулярні резервні копії. Ці налаштування можна змінити пізніше.
+  period: '⌚️ <b>Пристрій «ALPHA»</b> створює регулярні резервні копії. Ці налаштування
+    можна змінити пізніше.
 
 
     Будь ласка, виберіть частоту резервного копіювання
 
 
-    <b>🚫 Таким чином неможливо відновити модулі, завантажені з файлів за допомогою команди .lm! Будьте обережні та виконайте .backupmods перед відновленням.</b>'
+    <b>🚫 Таким чином неможливо відновити модулі, завантажені з файлів за допомогою
+    команди .lm! Будьте обережні та виконайте .backupmods перед відновленням.</b>'
   saved: ✅ Періодичність збережено! Її можна змінити за допомогою <code>{prefix}set_backup_period</code>
   saved_bot: ✅ Періодичність збережено! Її можна змінити за допомогою {prefix}set_backup_period
-  never: ✅ Я не робитиму автоматичне резервне копіювання. Можна скасувати за допомогою <code>{prefix}set_backup_period</code>
-  never_bot: ✅ Я не робитиму автоматичне резервне копіювання. Можна скасувати за допомогою {prefix}set_backup_period
+  never: ✅ Я не робитиму автоматичне резервне копіювання. Можна скасувати за допомогою
+    <code>{prefix}set_backup_period</code>
+  never_bot: ✅ Я не робитиму автоматичне резервне копіювання. Можна скасувати за допомогою
+    {prefix}set_backup_period
   invalid_args: 🚫 <b>Будь ласка, вкажіть правильну частоту в годинах або 0 для вимкнення</b>
-  backup_caption: '{e:hand_up} <b>Це резервна копія вашої бази даних. Не повідомляйте його нікому, він містить особисту інформацію. Якщо вам потрібно його відновити, використовуйте</b> <pre><code class="language-elys">{prefix}restoredb</code></pre> <b>у відповідь на цей файл.</b>'
-  backupall_info: 👆 <b>Це ваша резервна копія бази даних і модулів. Не давайте його нікому, він містить особисту інформацію. Якщо вам потрібно його відновити, використовуйте</b> <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>у відповідь на цей файл.</b>
-  restoring_backup: '{e:sync} <b>Відновлюю резервну копію, встановлюю залежності та модулі...</b>'
+  backup_caption: '{e:hand_up} <b>Це резервна копія вашої бази даних. Не повідомляйте
+    його нікому, він містить особисту інформацію. Якщо вам потрібно його відновити,
+    використовуйте</b> <pre><code class="language-elys">{prefix}restoredb</code></pre>
+    <b>у відповідь на цей файл.</b>'
+  backupall_info: 👆 <b>Це ваша резервна копія бази даних і модулів. Не давайте його
+    нікому, він містить особисту інформацію. Якщо вам потрібно його відновити, використовуйте</b>
+    <pre><code class="language-elys">{prefix}restoreall</code></pre> <b>у відповідь
+    на цей файл.</b>
+  restoring_backup: '{e:sync} <b>Відновлюю резервну копію, встановлюю залежності та
+    модулі...</b>'
   all_restored: '{e:sync} <b>Вашу повну резервну копію відновлено, перезапуск....</b>'
   all_restored_bot: 🔄 Вашу повну резервну копію відновлено, перезапуск...
   reply_to_file: '{e:stop} <b>Відповісти за допомогою файлу .json або .zip</b>'
   db_restored: '{e:sync} <b>База даних оновлена, перезапуск...</b>'
-  modules_backup: '{e:package} <b>Резервна копія модулів ({})</b>
+  modules_backup: '{e:device} <b>Резервна копія модулів ({})</b>
 
 
     <b>Ви можете відновити її за допомогою:</b>
 
     <pre><code class="language-elys">{}restoremods</code></pre>'
   mods_restored: '{e:sync} <b>Модулі відновлено, перезапуск</b>'
-  backup_sent: '{e:package} <b>Резервну копію надіслано до <a href={}>чату з базами даних</a></b>'
-  backupall_sent: '{e:package} <b>Резервна копія бази та модулів надіслана в <a href={}>чат з базами даних</a></b>'
-  db_warning: '❗️ Виявлено резервну копію Hikka. Якщо ви продовжите, користувач-бот <b>спробує</b> конвертувати її у формат, придатний для Elys.
+  backup_sent: '{e:device} <b>Резервну копію надіслано до <a href={}>чату з базами
+    даних</a></b>'
+  backupall_sent: '{e:device} <b>Резервна копія бази та модулів надіслана в <a href={}>чат
+    з базами даних</a></b>'
+  db_warning: '❗️ Виявлено резервну копію Hikka. Якщо ви продовжите, користувач-бот
+    <b>спробує</b> конвертувати її у формат, придатний для Elys.
 
     Під час конвертації можуть бути деякі помилки. Продовжити?'
-  advice_converting: Ви можете вручну замінити <a>'hikka.'</a> на <a>'elys.'</a> у вмісті резервної копії. Це необхідно для її завантаження.
+  advice_converting: Ви можете вручну замінити <a>'hikka.'</a> на <a>'elys.'</a> у
+    вмісті резервної копії. Це необхідно для її завантаження.
   converting_db: 🔄 Конвертування...
-  probably_zip: '{e:warn} <b>Не вдалося відновити бекап з файлу. Ймовірно, ви намагаєтеся відновити повний бекап (.zip або .backup). У цьому випадку використовуйте</b> <code>{}restoreall</code> <b>у відповідь на файл.</b>'
+  probably_zip: '{e:stop} <b>Не вдалося відновити бекап з файлу. Ймовірно, ви намагаєтеся
+    відновити повний бекап (.zip або .backup). У цьому випадку використовуйте</b>
+    <code>{}restoreall</code> <b>у відповідь на файл.</b>'
   _cls_doc: Обробляє резервні копії бази даних і модулів
   _cmd_doc_backupdb: Створити резервну копію бази даних [буде надіслано на PM]
   _cmd_doc_backupmods: Створити резервну копію модів [буде надіслано в личку]
@@ -358,13 +414,29 @@ elys_backup:
   _cmd_doc_restoreall: Відновлює загальну резервну копію (база + модулі)
   name: ElysBackup
 settings:
-  choose_installation: '{e:glowing_star} <b>Виберіть варіант установки Elys:</b>'
+  choose_installation: '{e:star_choose} <b>Виберіть варіант установки Elys:</b>'
   vds_install: '{e:diamond} Процес установки на VDS виконується однією командою:
 
-    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade
+    -y &amp;&amp; sudo apt install git python3-pip &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3
+    -m elys</code></pre>
 
     <i>Примітка: Якщо у вас відсутні права sudo, виключіть відповідну частину команди.</i>'
-  wsl_install: "<b>Завантаж WSL.</b> Для цього відкрий PowerShell з правами адміністратора і напиши <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>Для встановлення WSL потрібна Windows 10 збірки 2004 або Windows 11 будь-якої версії та ПК з підтримкою віртуалізації. Для встановлення на більш ранні версії ОС звернись до</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\">цієї сторінки</a>\n\n⬜️ <b>Перезавантаж ПК та запусти додаток Ubuntu 22.04.x</b> \n\n⬜️ <b>Встав у нього команду (ПКМ):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py | python3</code> \n⚠️ <i>При появі жовтих попереджень введи</i> <code>export PATH=\"/home/username/.local/bin:$PATH\"</code> <i>замінивши /home/username/.local/bin на той шлях, про який йдеться в повідомленні</i>\n\n⬜️ <b>Встав команду (ПКМ):</b> \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\U0001F517 <b>Де отримати API_ID та API_HASH?</b>: <a href=\"https://youtu.be/DcqDA249Lhg?t=24\">Відео</a>"
+  wsl_install: "<b>Завантаж WSL.</b> Для цього відкрий PowerShell з правами адміністратора\
+    \ і напиши <code>wsl --install -d Ubuntu-22.04</code> \n⚠️ <i>Для встановлення\
+    \ WSL потрібна Windows 10 збірки 2004 або Windows 11 будь-якої версії та ПК з\
+    \ підтримкою віртуалізації. Для встановлення на більш ранні версії ОС звернись\
+    \ до</i> <a href=\"https://learn.microsoft.com/ru-ru/windows/wsl/install-manual\"\
+    >цієї сторінки</a>\n\n⬜️ <b>Перезавантаж ПК та запусти додаток Ubuntu 22.04.x</b>\
+    \ \n\n⬜️ <b>Встав у нього команду (ПКМ):</b> <code>curl -Ss https://bootstrap.pypa.io/get-pip.py\
+    \ | python3</code> \n⚠️ <i>При появі жовтих попереджень введи</i> <code>export\
+    \ PATH=\"/home/username/.local/bin:$PATH\"</code> <i>замінивши /home/username/.local/bin\
+    \ на той шлях, про який йдеться в повідомленні</i>\n\n⬜️ <b>Встав команду (ПКМ):</b>\
+    \ \n<pre><code class=\"language-bash\">clear &amp;&amp; git clone https://github.com/ZavozDevs/Elys\
+    \ &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3\
+    \ -m elys</code></pre>\n\U0001F517 <b>Де отримати API_ID та API_HASH?</b>: <a\
+    \ href=\"https://youtu.be/DcqDA249Lhg?t=24\">Відео</a>"
   userland_install: '<b>Встанови UserLAnd за</b> <a href="https://play.google.com/store/apps/details?id=tech.ula">посиланням</a>
 
 
@@ -376,15 +448,28 @@ settings:
 
     <b>Після успішного встановлення перед тобою відкриється термінал, пиши туди:</b>
 
-    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>
+    <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y
+    &amp;&amp; sudo apt install python3 git python3-pip -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys
+    &amp;&amp; cd Elys &amp;&amp; sudo pip install -r requirements.txt &amp;&amp;
+    python3 -m elys</code></pre>
 
 
-    <b>В кінці встановлення з''явиться посилання, переходи за ним і вводи дані свого акаунта для входу.
+    <b>В кінці встановлення з''явиться посилання, переходи за ним і вводи дані свого
+    акаунта для входу.
 
 
     Вуаля! Ви встановили Elys на UserLAnd.</b>'
   termux: 🪐 Termux
-  termux_install: "<b>🪐 Встановлення Elys в Termux (Android):</b>\n\n1. Завантаж та встанови <b>Termux</b> з <a href=\"https://github.com/termux/termux-app/releases\">GitHub Releases</a> або <a href=\"https://f-droid.org/packages/com.termux/\">F-Droid</a> (версія з Google Play застаріла і не підтримується).\n\n2. Відкрий Termux та встав команду:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp; pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3 -m elys</code></pre>\n\n3. В кінці встановлення з'явиться посилання — переходь за ним для авторизації через браузер або увійди прямо в терміналі.\n\n🪐 <b>Вуаля! Ви встановили Elys в Termux.</b>"
+  termux_install: "<b>\U0001FA90 Встановлення Elys в Termux (Android):</b>\n\n1. Завантаж\
+    \ та встанови <b>Termux</b> з <a href=\"https://github.com/termux/termux-app/releases\"\
+    >GitHub Releases</a> або <a href=\"https://f-droid.org/packages/com.termux/\"\
+    >F-Droid</a> (версія з Google Play застаріла і не підтримується).\n\n2. Відкрий\
+    \ Termux та встав команду:\n<pre><code class=\"language-bash\">pkg update -y &amp;&amp;\
+    \ pkg install git python -y &amp;&amp; git clone https://github.com/ZavozDevs/Elys\
+    \ &amp;&amp; cd Elys &amp;&amp; pip install -r requirements.txt &amp;&amp; python3\
+    \ -m elys</code></pre>\n\n3. В кінці встановлення з'явиться посилання — переходь\
+    \ за ним для авторизації через браузер або увійди прямо в терміналі.\n\n\U0001FA90\
+    \ <b>Вуаля! Ви встановили Elys в Termux.</b>"
   too_many_args: '{e:stop} <bЗанадто багато аргументів</b>'
   blacklisted: '{e:thumbup} <b>Чат {} додано до чорного списку юзербота</b>'
   unblacklisted: '{e:thumbup} <b>Чат {} видалено з чорного списку юзербота</b>'
@@ -392,13 +477,16 @@ settings:
   user_unblacklisted: '{e:thumbup} <b>Користувача {} видалено з чорного списку юзербота</b>'
   what_prefix: '{e:question} <b>А який префікс встановлювати?</b>'
   prefix_incorrect: '{e:stop} <b>Префікс має бути тільки з одного символу</b>'
-  prefix_set: '{} <b>Префікс команд оновлено. Використай наступну команду, щоб змінити його назад:</b>
+  prefix_set: '{} <b>Префікс команд оновлено. Використай наступну команду, щоб змінити
+    його назад:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix}</code></pre>'
-  entity_prefix_set: '{} <b>Префікс команди оновлено для {entity_name}. Використайте наступну команду, щоб змінити його назад:</b>
+  entity_prefix_set: '{} <b>Префікс команди оновлено для {entity_name}. Використайте
+    наступну команду, щоб змінити його назад:</b>
 
     <pre><code class="language-elys">{newprefix}setprefix {oldprefix} {entity_id}</code></pre>'
-  id_not_found_scgroup: '{e:stop} Ця сутність не існує в жодній групі безпеки. Тому додавати для неї префікс безглуздо'
+  id_not_found_scgroup: '{e:stop} Ця сутність не існує в жодній групі безпеки. Тому
+    додавати для неї префікс безглуздо'
   invalid_id_or_username: "{e:stop} Вказано недійсний id/ім'я користувача"
   alias_created: '{e:thumbup} <b>Аліас створено. Використовуй його через</b> <code>{}</code>'
   aliases_created: '{e:thumbup} <b>Додано {count} аліаси:</b>
@@ -412,18 +500,18 @@ settings:
   aliases_file: '{e:folder} <b>Ваші аліаси</b>
 
 
-    {e:glowing_star} <b>{prefix}la у відповідь на це повідомлення для імпорту аліасів</b>'
+    {e:star_loader} <b>{prefix}la у відповідь на це повідомлення для імпорту аліасів</b>'
   unstable: '
 
 
-    {e:grey_exclamation} <b>Ви використовуєте нестабільну гілку</b> <code>{}</code><b>!</b>'
+    {e:point_up} <b>Ви використовуєте нестабільну гілку</b> <code>{}</code><b>!</b>'
   aliases: '<b>🔗 Аліаси:</b>
 
     '
   happy_beta: '
 
 
-    {e:glowing_star} <b>Ви щасливий володар версії <code>{}</code>!</b>'
+    {e:star_beta} <b>Ви щасливий володар версії <code>{}</code>!</b>'
   stable_branch: '
 
 
@@ -433,7 +521,8 @@ settings:
 
 
     <b>Завантажені аліаси:</b> <blockquote expandable>{}</blockquote>'
-  alias_exists: '{e:stop} <b>Аліас</b> <code>{alias}</code> <b>вже існує для команди</b> <code>{command}</code>'
+  alias_exists: '{e:stop} <b>Аліас</b> <code>{alias}</code> <b>вже існує для команди</b>
+    <code>{command}</code>'
   alias_args: '{e:stop} <b>Потрібно ввести команду та аліас для неї</b>'
   delalias_args: "{e:stop} <b>Потрібно ім'я аліасу</b>"
   alias_removed: '{e:thumbup} <b>Аліас</b> <code>{}</code> <b>видалено</b>.'
@@ -446,12 +535,12 @@ settings:
   elys: '{} <b>{}.{}.{}</b> <i>{}</i>
 
 
-    <b>{e:folder} <b>elys-tl:</b> <i>{}</i>
+    <b>{e:folder_elys} <b>elys-tl:</b> <i>{}</i>
 
 
     {e:wrench} <b>Developers: {}</b>
 
-    {e:theme} <b>Designers: {}</b>'
+    {e:palette} <b>Designers: {}</b>'
   _cls_doc: Керування базовими налаштуваннями юзербота
   confirm_cleardb: ⚠️ <b>Ви впевнені, що хочете зкинути базу даних?</b>
   cleardb_confirm: 🗑 Очистити базу
@@ -464,7 +553,7 @@ settings:
   mod_disabled: Модуль {} вимкнено
   cmd_enabled: Команду {} увімкнено в модулі {}
   cmd_disabled: Команду {} вимкнено в модулі {}
-  not_a_user: '{e:warn} <b>Сутність {} не є користувачем</b>'
+  not_a_user: '{e:warn_security} <b>Сутність {} не є користувачем</b>'
   who_to_blacklist: '{e:question} <b>Кого заблокировати?</b>'
   who_to_unblacklist: '{e:question} <b>Кого розблокувати?</b>'
   _cmd_doc_addalias: Встановити аліас для команди
@@ -493,9 +582,18 @@ settings:
 
     3. Увійдіть у свій акаунт за отриманим посиланням.'
   _cfg_rich_mode: Показувати Elys як Rich-повідомлення.
-  _cfg_alt_emoji_format: 'Використовувати формат <a href="tg://emoji?id=..."> замість <tg-emoji> для преміум-емодзі (експериментально)'
-  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Поточний реліз</th></tr><tr><td><b>Версія</b></td><td><code>{version}</code></td></tr><tr><td><b>Збірка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Шар API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Поточний користувач</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Розробники</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
-  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table bordered><tr><th>Компонент</th><th>Поточний реліз</th></tr><tr><td><b>Версія</b></td><td><code>{version}</code></td></tr><tr><td><b>Збірка</b></td><td>{build}</td></tr><tr><td><b>Elys TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Шар API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Поточний користувач</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Розробники</b></td><td><a href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  _cfg_alt_emoji_format: 'Використовувати формат <a href="tg://emoji?id=..."> замість
+    <tg-emoji> для преміум-емодзі (експериментально)'
+  rich_elys_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Компонент</th><th>Поточний реліз</th></tr><tr><td><b>Версія</b></td><td><code>{version}</code></td></tr><tr><td><b>Збірка</b></td><td>{build}</td></tr><tr><td><b>Elys
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Шар API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Поточний
+    користувач</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Розробники</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
+  rich_heroku_message: <figure><img src="{banner_url}"/></figure><h1>{platform} Userbot</h1><table
+    bordered><tr><th>Компонент</th><th>Поточний реліз</th></tr><tr><td><b>Версія</b></td><td><code>{version}</code></td></tr><tr><td><b>Збірка</b></td><td>{build}</td></tr><tr><td><b>Elys
+    TL</b></td><td><code>{htl_version}</code></td></tr><tr><td><b>Шар API</b></td><td><code>{layer}</code></td></tr><tr><td><b>Поточний
+    користувач</b></td><td><code>{current_user}</code></td></tr><tr><td><b>Розробники</b></td><td><a
+    href="https://t.me/codrago">@codrago</a>, <a href="https://t.me/gemeguardian">@gemeguardian</a></td></tr></table>
   no_aliases: '{e:stop} <b>У тебе поки немає збережених аліасів</b>'
 elys_config:
   choose_core: '{e:gear} <b>Обери категорію</b>'
@@ -508,7 +606,7 @@ elys_config:
 
 
     {}'
-  configuring_folder: '{e:folder} <b>Обери параметр для папки</b> <code>{}</code>
+  configuring_folder: '{e:folder_config} <b>Обери параметр для папки</b> <code>{}</code>
 
 
     <b>Поточні налаштування:</b>
@@ -522,7 +620,8 @@ elys_config:
 
 
     {}'
-  configuring_category: '{e:gear} <b>Обери параметр для модуля</b> <code>{}</code> <b>у категорії</b> <code>{}</code>
+  configuring_category: '{e:gear} <b>Обери параметр для модуля</b> <code>{}</code>
+    <b>у категорії</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -530,7 +629,8 @@ elys_config:
     <b>Поточні налаштування:</b>
 
     {}'
-  configuring_category_lib: '{e:gear} <b>Обери параметр для бібліотеки</b> <code>{}</code> <b>у категорії</b> <code>{}</code>
+  configuring_category_lib: '{e:gear} <b>Обери параметр для бібліотеки</b> <code>{}</code>
+    <b>у категорії</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -549,7 +649,8 @@ elys_config:
   category_uncategorized: '
 
     <b>{e:bullet} Інше</b>'
-  configuring_option: '{e:gear} <b>Керування параметром</b> <code>{}</code> <b>модуля</b> <code>{}</code>
+  configuring_option: '{e:gear} <b>Керування параметром</b> <code>{}</code> <b>модуля</b>
+    <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -561,7 +662,8 @@ elys_config:
 
 
     {}'
-  configuring_option_lib: '{e:package} <b>Керування параметром</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code>
+  configuring_option_lib: '{e:device} <b>Керування параметром</b> <code>{}</code>
+    <b>бібліотеки</b> <code>{}</code>
 
     <i>ℹ️ {}</i>
 
@@ -573,16 +675,20 @@ elys_config:
 
 
     {}'
-  option_saved: '{e:gear} <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> збережено!</b>
+  option_saved: '{e:recycle} <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b>
+    збережено!</b>
 
     <b>Поточне: {}</b>'
-  option_saved_lib: '{e:package} <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b> збережено!</b>
+  option_saved_lib: '{e:device} <b>Параметр</b> <code>{}</code> <b>бібліотеки</b>
+    <code>{}</code><b> збережено!</b>
 
     <b>Поточне: {}</b>'
-  option_reset: '♻️ <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b> зкинуто до значення за замовчуванням</b>
+  option_reset: '♻️ <b>Параметр</b> <code>{}</code> <b>модуля</b> <code>{}</code><b>
+    зкинуто до значення за замовчуванням</b>
 
     <b>Поточне: {}</b>'
-  option_reset_lib: '♻️ <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b> зкинути до значення за замовчуванням</b>
+  option_reset_lib: '♻️ <b>Параметр</b> <code>{}</code> <b>бібліотеки</b> <code>{}</code><b>
+    зкинути до значення за замовчуванням</b>
 
     <b>Поточне: {}</b>'
   _cls_doc: Інтерактивний конфігуратор Elys
@@ -609,28 +715,51 @@ elys_config:
   builtin: 🛰 Вбудовані
   external: 🛸 Зовнішні
   libraries: 📦 Бібліотеки
-  _cfg_chat_input: Вводити значення конфігу звичайним повідомленням у чат замість інлайн-запиту (експериментально)
-  _cfg_switch_layout: Автоматично інвертувати розкладку клавіатури для команд (наприклад, .рудз -> .help)
-  _cfg_alt_emoji_format: 'Використовувати формат <a href="tg://emoji?id=..."> замість <tg-emoji> для преміум-емодзі (експериментально)'
-  chat_input_prompt_set: "✍️ <b>Надішли нове значення для параметра <code>{}</code> модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
-  chat_input_prompt_set_lib: "✍️ <b>Надішли нове значення для параметра <code>{}</code> бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
-  chat_input_prompt_add: "➕ <b>Надішли елемент для додавання до <code>{}</code> модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
-  chat_input_prompt_add_lib: "➕ <b>Надішли елемент для додавання до <code>{}</code> бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
-  chat_input_prompt_remove: "➖ <b>Надішли елемент для видалення з <code>{}</code> модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
-  chat_input_prompt_remove_lib: "➖ <b>Надішли елемент для видалення з <code>{}</code> бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
-  series_min_len_error: "⚠️ <b>Не можна видалити елемент з <code>{}</code>: список має містити щонайменше {} елемент(ів).</b>\n\nВведи нове значення або скинь параметр до налаштувань за замовчуванням."
+  _cfg_chat_input: Вводити значення конфігу звичайним повідомленням у чат замість
+    інлайн-запиту (експериментально)
+  _cfg_switch_layout: Автоматично інвертувати розкладку клавіатури для команд (наприклад,
+    .рудз -> .help)
+  _cfg_alt_emoji_format: 'Використовувати формат <a href="tg://emoji?id=..."> замість
+    <tg-emoji> для преміум-емодзі (експериментально)'
+  chat_input_prompt_set: "✍️ <b>Надішли нове значення для параметра <code>{}</code>\
+    \ модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне:\
+    \ {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
+  chat_input_prompt_set_lib: "✍️ <b>Надішли нове значення для параметра <code>{}</code>\
+    \ бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне:\
+    \ {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
+  chat_input_prompt_add: "➕ <b>Надішли елемент для додавання до <code>{}</code> модуля\
+    \ <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне: {}</b>\n\
+    \n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
+  chat_input_prompt_add_lib: "➕ <b>Надішли елемент для додавання до <code>{}</code>\
+    \ бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне:\
+    \ {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
+  chat_input_prompt_remove: "➖ <b>Надішли елемент для видалення з <code>{}</code>\
+    \ модуля <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне:\
+    \ {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
+  chat_input_prompt_remove_lib: "➖ <b>Надішли елемент для видалення з <code>{}</code>\
+    \ бібліотеки <code>{}</code> звичайним повідомленням у цей чат.</b>\n\n<b>Поточне:\
+    \ {}</b>\n\n<i>⏳ Очікування повідомлення... (повідомлення буде автоматично видалено)</i>"
+  series_min_len_error: "⚠️ <b>Не можна видалити елемент з <code>{}</code>: список\
+    \ має містити щонайменше {} елемент(ів).</b>\n\nВведи нове значення або скинь\
+    \ параметр до налаштувань за замовчуванням."
   series_empty_error: "⚠️ <b>Список <code>{}</code> уже порожній.</b>"
-  series_not_found_error: "\U0001F6AB <b>Елемент <code>{}</code> не знайдено в списку <code>{}</code>.</b>"
+  series_not_found_error: "\U0001F6AB <b>Елемент <code>{}</code> не знайдено в списку\
+    \ <code>{}</code>.</b>"
   cancel_btn: 🚫 Скасувати
   _cmd_doc_config: Налаштувати модулі
-  _cmd_doc_fconfig: <модуль> <налаштування> <значення> - встановити значення конфігу для модуля
+  _cmd_doc_fconfig: <модуль> <налаштування> <значення> - встановити значення конфігу
+    для модуля
   name: ElysConfig
 inline_stuff:
-  bot_username_invalid: '{e:stop} <b>Неправильний нік бота. Він має закінчитися на</b> <code>bot</code> <b>і бути не коротше ніж 5 символів</b>'
-  token_invalid: '{e:stop} <b>Вказаний токен бота недійсний. Він повинен містити 8-10 цифр, </b><code>:</code> <b>і 34-36 символів</b>'
+  bot_username_invalid: '{e:stop} <b>Неправильний нік бота. Він має закінчитися на</b>
+    <code>bot</code> <b>і бути не коротше ніж 5 символів</b>'
+  token_invalid: '{e:stop} <b>Вказаний токен бота недійсний. Він повинен містити 8-10
+    цифр, </b><code>:</code> <b>і 34-36 символів</b>'
   bot_username_occupied: '{e:stop} <b>Такий нік бота вже зайнятий</b>'
-  bot_updated: '{e:party} <b>Налаштування збережені. Для їх застосування треба перезавантажити юзербота</b>'
-  this_is_elys: '{} <b>Привіт! Це {} — потужний модульний Telegram юзербот. Ви можете встановити його на свій акаунт!</b>'
+  bot_updated: '{e:party_inline} <b>Налаштування збережені. Для їх застосування треба
+    перезавантажити юзербота</b>'
+  this_is_elys: '{} <b>Привіт! Це {} — потужний модульний Telegram юзербот. Ви можете
+    встановити його на свій акаунт!</b>'
   support_chat_caption: Чат підтримки
   profile_cmd: 'ℹ️ Основна інформація про юзербота
 
@@ -649,31 +778,40 @@ inline_stuff:
   _cls_doc: Налаштування inline-бота
   _cmd_doc_ch_bot_token: <token> - Змінити токен inline-бота
 test:
-  set_loglevel: '{e:stop} <b>Вкажи рівень логів числом або рядком</b>'
-  no_logs: '{e:shrug} <b>У тебе немає логів рівня</b> <code>{}</code><b>.</b>'
-  configping: 'Ваш текст. Ви можете використовувати заміщення: {ping} - Це ваш пінг, {uptime} - Це ваш час роботи. {ping_hint} - Це той самий підказка, що й у модулі elys, вона вибирається випадково, також ви можете вказати цю підказку у конфігурації. Ви можте використовувати плейсхолдер {hostname} якщо вам потрібен hostname вашого сервера'
+  set_loglevel: '{e:point_up} <b>Вкажи рівень логів числом або рядком</b>'
+  no_logs: '{e:point_up} <b>У тебе немає логів рівня</b> <code>{}</code><b>.</b>'
+  configping: 'Ваш текст. Ви можете використовувати заміщення: {ping} - Це ваш пінг,
+    {uptime} - Це ваш час роботи. {ping_hint} - Це той самий підказка, що й у модулі
+    elys, вона вибирається випадково, також ви можете вказати цю підказку у конфігурації.
+    Ви можте використовувати плейсхолдер {hostname} якщо вам потрібен hostname вашого
+    сервера'
   configpingph: '🤖Кастомні плейсхолдери: {}'
   hint: Встановіть підказку
   ping_emoji: Емоджі, який з'являється, коли пінг не збільшується суттєво
   back: ↩️ Назад
   banner_url: 'Картинка для вашого пінгу, наприклад: https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/ping_cmd.png'
-  logs_caption: '{e:glowing_star} <b>Логи Elys рівня</b> <code>{}</code>
+  logs_caption: '{e:star_test} <b>Логи Elys рівня</b> <code>{}</code>
 
 
     {e:white_circle} <b>Версія: {}.{}.{}</b>{}'
-  debugging_enabled: '{e:check} <b>Режим розробника увімкнено для модуля</b> <code>{0}</code>
+  debugging_enabled: '{e:check_test} <b>Режим розробника увімкнено для модуля</b>
+    <code>{0}</code>
 
-    <i>Прямуй до директорії `debug_modules`, змінюй файл `{0}.py`, и смотри изменения в режиме реального времени</i>'
-  debugging_disabled: '{e:check} <b>Режим розробника вімкнено</b>'
+    <i>Прямуй до директорії `debug_modules`, змінюй файл `{0}.py`, и смотри изменения
+    в режиме реального времени</i>'
+  debugging_disabled: '{e:check_test} <b>Режим розробника вімкнено</b>'
   suspend_invalid_time: '{e:stop} <b>Неверное время заморозки</b>'
   suspended: '{e:cold_face} <b>Бота заморожено на</b> <code>{}</code> <b>секунд</b>'
-  confidential: ⚠️ <b>Рівень логів</b> <code>{}</code> <b>може містити особисту інформацію, будь обережний</b>
-  confidential_text: '⚠️ <b>Рівень логів</b> <code>{0}</code> <b>може містити особисту інформацію, будь обережний</b>
+  confidential: ⚠️ <b>Рівень логів</b> <code>{}</code> <b>може містити особисту інформацію,
+    будь обережний</b>
+  confidential_text: '⚠️ <b>Рівень логів</b> <code>{0}</code> <b>може містити особисту
+    інформацію, будь обережний</b>
 
     <b>Напиши</b> <code>.logs {0} -f</code><b>, щоб надіслати логи ігноруючи попередження</b>'
   choose_loglevel: 💁‍♂️ <b>Вибери рівень логів</b>
   _cmd_doc_dump: Показати інформацію про повідомлення
-  _cmd_doc_logs: <рівень> [-f] - Надсилає лог-файл. Рівні нижче WARNING можуть містити особисту інфомрацію.
+  _cmd_doc_logs: <рівень> [-f] - Надсилає лог-файл. Рівні нижче WARNING можуть містити
+    особисту інфомрацію.
   _cmd_doc_suspend: <час> - Заморозити бота на деякий час
   _cmd_doc_ping: Перевіряє швидкість відгуку юзербота
   _cls_doc: Операції, пов'язані із самотестуванням
@@ -688,12 +826,12 @@ updater:
   restarting_caption: '{e:loading} <b>Твій {} перезавантажується...</b>'
   downloading: '{e:loading} <b>Завантаження оновлень...</b>'
   installing: '{e:loading} <b>Встановлення оновлень...</b>'
-  success: '{e:done} <b>Перезавантаження успішне! {}</b>
+  success: '{e:wave_loading} <b>Перезавантаження успішне! {}</b>
 
     <i>Але модулі ще завантажуються...</i>
 
     <i>Перезавантаження зайняло {} сек</i>'
-  full_success: '{e:check} <b>Юзербот повністю завантажений! {}</b>
+  full_success: '{e:done} <b>Юзербот повністю завантажений! {}</b>
 
     <i>Повне перезавантаження зайняло {} сек</i>'
   ub_stop: Твій {emoji} зупинений!
@@ -702,10 +840,11 @@ updater:
     <i>Повне перезавантаження зайняло {} сек
 
     Не вдалося завантажити {} модулів</i>'
-  secure_boot_complete: '{e:lock} <b>Безпечне завантаження завершено! {}</b>
+  secure_boot_complete: '{e:lock_terminal} <b>Безпечне завантаження завершено! {}</b>
 
     <i>Перезавантаження зайняло {} сек</i>'
-  secure_boot_fail: '{e:lock} <b>Безпечне завантаження завершено, але сталася помилка! {}</b>
+  secure_boot_fail: '{e:lock_terminal} <b>Безпечне завантаження завершено, але сталася
+    помилка! {}</b>
 
     <i>Перезавантаження зайняло {} сек
 
@@ -714,17 +853,23 @@ updater:
   btn_restart: 🔄 Перезавнтаження
   btn_update: 🧭 Оновитися
   restart_confirm: '{e:question} <b>Ти впевнений, що хочеш перезавантажитися?</b>'
-  secure_boot_confirm: '{e:question} <b>Ти впевнений, що хочеш перезавантажитися в режимі безпечного завантаження?</b>'
+  secure_boot_confirm: '{e:question} <b>Ти впевнений, що хочеш перезавантажитися в
+    режимі безпечного завантаження?</b>'
   update_confirm: '{e:question} <b>Ти впевнений, що хочеш оновитися?
 
 
     <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a> ⤑ <a href="https://github.com/ZavozDevs/Elys/commit/{}">{}</a></b>'
-  no_update: '{e:glowing_star} <b>У тебе остання версія. Оновитися примусово?</b>'
+  no_update: '{e:star_update} <b>У тебе остання версія. Оновитися примусово?</b>'
   cancel: 🚫 Скасувати
-  branch_menu: "<blockquote>{e:gear} <b>Вибір гілки оновлення Elys</b>\nПоточна гілка: <code>{current}</code></blockquote>\n<blockquote>{e:shield} <b>master</b> - стабільна\n{e:fire} <b>beta</b> - бета-версія\n{e:flash} <b>dev</b> - розробка (нестабільна)</blockquote>"
+  branch_menu: "<blockquote>{e:gear_branch} <b>Вибір гілки оновлення Elys</b>\nПоточна\
+    \ гілка: <code>{current}</code></blockquote>\n<blockquote>{e:shield_branch} <b>master</b>\
+    \ - стабільна\n{e:fire} <b>beta</b> - бета-версія\n{e:flash} <b>dev</b> - розробка\
+    \ (нестабільна)</blockquote>"
   branch_switching: "<blockquote>{e:repeat} <b>Перемикання на гілку <code>{branch}</code>...</b></blockquote>"
-  branch_switched: "<blockquote>{e:check} <b>Гілку перемкнено на <code>{branch}</code>!</b>\n<i>Для застосування потрібне перезавантаження.</i></blockquote>"
-  branch_switch_fail: "<blockquote>{e:exclamation} <b>Не вдалося перемкнути гілку на <code>{branch}</code>!</b>\nПомилка: <code>{error}</code></blockquote>"
+  branch_switched: "<blockquote>{e:check_branch} <b>Гілку перемкнено на <code>{branch}</code>!</b>\n\
+    <i>Для застосування потрібне перезавантаження.</i></blockquote>"
+  branch_switch_fail: "<blockquote>{e:exclamation_branch} <b>Не вдалося перемкнути\
+    \ гілку на <code>{branch}</code>!</b>\nПомилка: <code>{error}</code></blockquote>"
   branch_already_on: 'Ти вже на гілці {branch}'
   branch_invalid: '❌ Невідома гілка <code>{target}</code>! Доступні: {available}'
   branch_btn_restart: 'Перезавантажити'
@@ -734,7 +879,8 @@ updater:
   _cls_doc: Оновлює юзербот
   invalid_args: '{e:stop} <b>Ви повинні вказати кількість комітів для відкату!</b>'
   rollback_too_far: '{e:stop} <b>Ви відкочуєтесь занадто далеко!</b>'
-  rollback_confirm: '{e:question} <b>Ви впевнені, що хочете відкотити {num} коміт (-а, -ів)?</b>'
+  rollback_confirm: '{e:question} <b>Ви впевнені, що хочете відкотити {num} коміт
+    (-а, -ів)?</b>'
   rollback_process: '{e:clock} <b>Відкот {num} коміт(-a,-ів)...</b>'
   autoupdate_notifier: '{e:new} Нова версія Elys!
 
@@ -753,7 +899,8 @@ updater:
   autoupdate: '🛡 Unit Alpha також дозволяє ігнорувати оновлення та <b>робити це автоматично</b>!
 
 
-    💫 Однак великі оновлення, такі як зміна глобальної версії (1.x.x -> 2.x.x), будуть ігноруватися для автоматичних оновлень, і вам доведеться оновлюватися вручну'
+    💫 Однак великі оновлення, такі як зміна глобальної версії (1.x.x -> 2.x.x), будуть
+    ігноруватися для автоматичних оновлень, і вам доведеться оновлюватися вручну'
   autoupdate_on: '🎆 Автоматичні оновлення <b>були увімкнені!
 
     Приємного користування!</b>'
@@ -786,13 +933,20 @@ updater:
   latest_disabled: Повідомлення про останнє оновлення було вимкнено
   update: 🔄 Оновити
   ignore: 🚫 Ігнорувати
-  changelog: '{e:newspaper} <b>Список змін останнього великого оновлення:</b><blockquote expandable>{}</blockquote>'
+  changelog: '{e:newspaper} <b>Список змін останнього великого оновлення:</b><blockquote
+    expandable>{}</blockquote>'
   name: Updater
   _cmd_doc_autoupdate: Перемкнути автооновлення
   _cmd_doc_changelog: Показати changelog останнього великого оновлення
   _cmd_doc_ubstop: Зупинити юзербота
 api_protection:
-  warning: "⚠️ <b>УВАГА!</b>\n\nАкаунт вийшов за ліміти запитів, зазначені в конфігурації. З метою запобігання флуду Telegram API, юзербот був <b>повністю заморожений</b> на {} секунд. Додаткова інформація прикріплена у файлі нижче. \n\nРекомендується звернутися по допомогу до <code>{prefix}support</code> групу!\n\nЯкщо ти вважаєш, що це запланована поведінка юзербота, просто почекай, доки закінчиться таймер, і наступного разу, коли заплануєш виконувати таку ресурсовитратну операцію, використовуй <code>{prefix}suspend_api_protect</code> &lt;час у секундах&gt;"
+  warning: "⚠️ <b>УВАГА!</b>\n\nАкаунт вийшов за ліміти запитів, зазначені в конфігурації.\
+    \ З метою запобігання флуду Telegram API, юзербот був <b>повністю заморожений</b>\
+    \ на {} секунд. Додаткова інформація прикріплена у файлі нижче. \n\nРекомендується\
+    \ звернутися по допомогу до <code>{prefix}support</code> групу!\n\nЯкщо ти вважаєш,\
+    \ що це запланована поведінка юзербота, просто почекай, доки закінчиться таймер,\
+    \ і наступного разу, коли заплануєш виконувати таку ресурсовитратну операцію,\
+    \ використовуй <code>{prefix}suspend_api_protect</code> &lt;час у секундах&gt;"
   args_invalid: '{e:stop} <b>Неправильні аргументи</b>'
   suspended_for: '{e:ok_hand} <b>Захист API вимкнено на {} секунд</b>'
   'true': '{e:ok_hand} <b>Захист увімкнено</b>'
@@ -800,8 +954,10 @@ api_protection:
   u_sure: '{e:warn} <b>Ти впевнений?</b>'
   _cfg_time_sample: Часовий проміжок, за яким буде рахуватися кількість запитів
   _cfg_threshold: Поріг запитів, за якого спрацьовуватиме захист
-  _cfg_local_floodwait: Заморозити юзербота на цю кількість секунд, якщо ліміт запитів перевищено
-  _cfg_forbidden_methods: Заборонити виконання зазначених методів у всіх зовнішніх модулях
+  _cfg_local_floodwait: Заморозити юзербота на цю кількість секунд, якщо ліміт запитів
+    перевищено
+  _cfg_forbidden_methods: Заборонити виконання зазначених методів у всіх зовнішніх
+    модулях
   btn_no: 🚫 Ні
   btn_yes: ✅ Так
   proxied_url: 🌐 Проксоване посилання
@@ -814,9 +970,9 @@ help:
   undoc: 🦥 Немає опису
   all_header: <b>{} модулів доступно, {} приховано:</b>
   no_mod: 🚫 <b>Вкажи модуль(-і), які потрібно приховати</b>
-  help_lib: '{e:cross} <b>Пакет</b> <code>{}</code> <b>є бібліотекою.</b>
+  help_lib: '{e:money} <b>Пакет</b> <code>{}</code> <b>є бібліотекою.</b>
 
-    {e:cross} <b>У бібліотек немає опису...</b>'
+    {e:money} <b>У бібліотек немає опису...</b>'
   developer: '{e:heart_hands} Розробник: {}'
   hidden_shown: '<b>{} модулів приховано, {} модулів показано:</b>
 
@@ -826,15 +982,18 @@ help:
   offchats: '{e:grey_question} <a href="https://t.me/ElysTalk"><b>Чат допомоги</b></a>
 
 
-    {e:chat} <a href="https://t.me/heroku_offtop"><b>Оффтоп чат</b></a>
+    {e:chat_help} <a href="https://t.me/heroku_offtop"><b>Оффтоп чат</b></a>
 
 
     {e:loudspeaker} <a href="https://t.me/heroku_ub"><b>Офiцiйний канал</b></a>'
   _cls_doc: Показує допомогу за модулями
-  partial_load: '{e:point_up} <b>Юзербот ще не завантажився повністю, тому показані не всі модулі</b>'
-  not_exact: '{e:point_up} <b>Точного збігу не знайшлося, тому було обрано найбільш підходяще</b>'
+  partial_load: '{e:point_up} <b>Юзербот ще не завантажився повністю, тому показані
+    не всі модулі</b>'
+  not_exact: '{e:point_up} <b>Точного збігу не знайшлося, тому було обрано найбільш
+    підходяще</b>'
   request_join: Ви запросили посилання на чат допомоги Elys
-  core_notice: '{e:point_up} <b>Це вбудований модуль. Ви не можете його вивантажити або замінити</b>'
+  core_notice: '{e:point_up} <b>Це вбудований модуль. Ви не можете його вивантажити
+    або замінити</b>'
   _cmd_doc_help: '[модуль] [-f] - Показати команди'
   _cmd_doc_helphide: '<модуль або модулі> - Сховати модуль(-і) з help
 
@@ -848,7 +1007,21 @@ help:
   rich_placeholders: Плейсхолдери
   rich_commands: Команди
 elys_info:
-  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D67E\U0001D6A0\U0001D697\U0001D68E\U0001D69B</b>: {me}\n├  【{e:bot}】 <b>\U0001D685\U0001D68E\U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {version}\n└</blockquote>\n<blockquote>┌\n├  【{e:camera}】 <b>\U0001D67F\U0001D69B\U0001D68E\U0001D68F\U0001D692\U0001D6A1</b>: {prefix}⠀ ⠀ \n├  【{e:sync}】 <b>\U0001D684\U0001D699\U0001D69D\U0001D692\U0001D696\U0001D68E</b>: {uptime}\n├  【{e:user}】 <b>\U0001D671\U0001D69B\U0001D68A\U0001D697\U0001D68C\U0001D691</b>: {branch}\n└</blockquote>\n<blockquote>┌\n├  【{e:exclamation}】 <b>\U0001D672\U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield}】 <b>\U0001D681\U0001D670\U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\U0001D692\U0001D697\U0001D690</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├  【{e:shield}】 <b>\U0001D684\U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E</b>: {upd}\n├  【{e:bot}】 <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>: {platform}\n├  【{e:bot}】 <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot}】 <b>\U0001D67F\U0001D6A2\U0001D69D\U0001D691\U0001D698\U0001D697 \U0001D685\U0001D68E\U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
+  info_message: "{}\n<blockquote>┌\n├  【{e:user}】 <b>\U0001D67E\U0001D6A0\U0001D697\
+    \U0001D68E\U0001D69B</b>: {me}\n├  【{e:bot_info}】 <b>\U0001D685\U0001D68E\U0001D69B\
+    \U0001D69C\U0001D692\U0001D698\U0001D697</b>: {version}\n└</blockquote>\n<blockquote>┌\n\
+    ├  【{e:camera}】 <b>\U0001D67F\U0001D69B\U0001D68E\U0001D68F\U0001D692\U0001D6A1\
+    </b>: {prefix}⠀ ⠀ \n├  【{e:sync_info}】 <b>\U0001D684\U0001D699\U0001D69D\U0001D692\
+    \U0001D696\U0001D68E</b>: {uptime}\n├  【{e:user_info}】 <b>\U0001D671\U0001D69B\
+    \U0001D68A\U0001D697\U0001D68C\U0001D691</b>: {branch}\n└</blockquote>\n<blockquote>┌\n\
+    ├  【{e:exclamation}】 <b>\U0001D672\U0001D67F\U0001D684</b>: {cpu_usage}\n├  【{e:shield_info}】\
+    \ <b>\U0001D681\U0001D670\U0001D67C</b>: {ram_usage}\n├  【{e:chart}】 <b>\U0001D67F\
+    \U0001D692\U0001D697\U0001D690</b>: {ping}\n└</blockquote>\n<blockquote>┌\n├ \
+    \ 【{e:shield_info_alt}】 <b>\U0001D684\U0001D699\U0001D68D\U0001D68A\U0001D69D\U0001D68E\
+    </b>: {upd}\n├  【{e:bot_info}】 <b>\U0001D677\U0001D698\U0001D69C\U0001D69D</b>:\
+    \ {platform}\n├  【{e:bot_info_alt}】 <b>\U0001D67E\U0001D682</b>: {os}\n├  【{e:bot_info_alt}】\
+    \ <b>\U0001D67F\U0001D6A2\U0001D69D\U0001D691\U0001D698\U0001D697 \U0001D685\U0001D68E\
+    \U0001D69B\U0001D69C\U0001D692\U0001D698\U0001D697</b>: {python_ver}\n└</blockquote>"
   non_detectable: '{e:stop} <b>Цей компонент не може бути виявлений на вашому сервері!</b>'
   ping_emoji: Пінг для вашого інфо
   send_info: Надіслати інформацію про юзербота
@@ -858,37 +1031,52 @@ elys_info:
   up_to_date: <b>Актуальна версія</b>
   update_required: <b>Потрібне оновлення</b> <code>{prefix}update</code>
   upd_avail: <b>Потрібне оновлення</b> <code>{prefix}update</code>
-  _cfg_cst_msg: Кастомний текст повідомлення в info. Може містити ключові слова {me}, {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage}, {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver}, {git_status}
+  _cfg_cst_msg: Кастомний текст повідомлення в info. Може містити ключові слова {me},
+    {version}, {build}, {prefix}, {platform}, {upd}, {uptime}, {cpu_usage}, {ram_usage},
+    {branch}, {hostname}, {user}, {os}, {kernel}, {cpu}, {ping}, {python_ver}, {htl_ver},
+    {git_status}
   _cfg_cst_ph: '🤖Кастомні плейсхолдери: {}'
-  _cfg_cst_btn: Кастомна кнопка в повідомленні в info. Залиш порожнім, щоб прибрати кнопку
+  _cfg_cst_btn: Кастомна кнопка в повідомленні в info. Залиш порожнім, щоб прибрати
+    кнопку
   _cfg_banner: Посилання на банер-картинку
   switchinfo_on: '{e:check} Інформація про зображення успішно увімкнена'
   switchinfo_off: '{e:check} Інформація про зображення успішно вимкнена'
   desc: '{e:star} <b>Що таке Userbot?</b>
 
 
-    {e:owner} Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.
+    {e:owner_designer} Userbot - це <b>стороння програма</b>, яка взаємодіє з Telegram
+    API для виконання <b>автоматизованих завдань від імені користувача</b>. Юзерботи
+    можуть використовуватися для автоматизації різних завдань, таких як <b>надсилання
+    повідомлень, приєднання до каналів, завантаження медіафайлів і багато іншого</b>.
 
 
-    {e:owner} Юзерботи відрізняються від звичайних ботів у Telegram тим, що <b>вони працюють на акаунті користувача</b>, а не на бот-акаунті. Це означає, що вони можуть мати доступ до більшої кількості функцій і мають більшу гнучкість у плані виконання дій.
+    {e:owner_dev} Юзерботи відрізняються від звичайних ботів у Telegram тим, що <b>вони
+    працюють на акаунті користувача</b>, а не на бот-акаунті. Це означає, що вони
+    можуть мати доступ до більшої кількості функцій і мають більшу гнучкість у плані
+    виконання дій.
 
 
-    {e:stop} Однак важливо зазначити, що <b>юзерботи офіційно не підтримуються Telegram</b> і їх використання може порушувати умови використання платформи. Тому <b>користувачі мають бути обережними під час їх використання</b> і переконатися, що на їхньому акаунті не виконується шкідливий код.
+    {e:stop_info} Однак важливо зазначити, що <b>юзерботи офіційно не підтримуються
+    Telegram</b> і їх використання може порушувати умови використання платформи. Тому
+    <b>користувачі мають бути обережними під час їх використання</b> і переконатися,
+    що на їхньому акаунті не виконується шкідливий код.
 
 
     '
-  no_font: '{e:cross} Де посилання чи відповідь з шрифтом?'
-  no_banner: '{e:silent} <b>За вказаним посиланням </b><code>{link}</code><b> нічого не знайдено.
+  no_font: '{e:cross_info} Де посилання чи відповідь з шрифтом?'
+  no_banner: '{e:silent} <b>За вказаним посиланням </b><code>{link}</code><b> нічого
+    не знайдено.
 
 
-    Перевірте цілісність вашого файлу за посиланням, а також переконайтеся, що посилання вказує безпосередньо на файл.</b>'
+    Перевірте цілісність вашого файлу за посиланням, а також переконайтеся, що посилання
+    вказує безпосередньо на файл.</b>'
   font_installed: '{e:party} <b>Шрифт успішно встановлено!</b>
 
     {e:party} <i>Тепер ви можете ним користуватися.</i>'
-  incorrect_format_font: '{e:cross} <b>Невірний формат шрифту!</b>
+  incorrect_format_font: '{e:cross_info} <b>Невірний формат шрифту!</b>
 
     <blockquote>Підтримувані формати → otf, ttf</blockquote>'
-  incorrect_img_format: '{e:cross} <b>Невірний формат зображення</b>
+  incorrect_img_format: '{e:cross_info} <b>Невірний формат зображення</b>
 
     <blockquote>Підтримувані формати → jpg, jpeg, png, bmp, webp</blockquote>'
   _cmd_doc_ubinfo: Надіслати інформацію на кшталт 'Що таке Elys?'
@@ -897,13 +1085,20 @@ elys_info:
   name: ElysInfo
   _cls_doc: Показати інформацію про юзербота
   _cfg_rich_mode: Показувати info як Rich-повідомлення.
-  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Основне</summary><table><tr><th>Основне</th><th>Власник</th></tr><tr><td>【{e:user}】 <b>Власник</b></td><td>{me}</td></tr><tr><td>【{e:bot}】 <b>Версія</b></td><td>{version}</td></tr><tr><td>【{e:camera}】 <b>Префікс</b></td><td>{prefix}</td></tr><tr><td>【{e:sync}】 <b>Час роботи</b></td><td>{uptime}</td></tr><tr><td>【{e:user}】 <b>Гілка</b></td><td>{branch}</td></tr></table></details><details><summary>Стан</summary><table><tr><th>Стан</th><th>Оновлення</th></tr><tr><td>【{e:shield}】 <b>Оновлення</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield}】 <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Пінг</b></td><td>{ping}</td></tr></table></details><details><summary>Оточення</summary><table><tr><th>Оточення</th><th>ОС</th></tr><tr><td>【{e:bot}】 <b>Хост</b></td><td>{platform}</td></tr><tr><td>【{e:bot}】 <b>ОС</b></td><td>{os}</td></tr><tr><td>【{e:bot}】 <b>Python</b></td><td>{python_ver}</td></tr></table></details>
+  rich_info_message: <figure><img src="{banner_url}"/></figure><details><summary>Основне</summary><table><tr><th>Основне</th><th>Власник</th></tr><tr><td>【{e:user}】
+    <b>Власник</b></td><td>{me}</td></tr><tr><td>【{e:bot_info}】 <b>Версія</b></td><td>{version}</td></tr><tr><td>【{e:camera}】
+    <b>Префікс</b></td><td>{prefix}</td></tr><tr><td>【{e:sync_info}】 <b>Час роботи</b></td><td>{uptime}</td></tr><tr><td>【{e:user_info}】
+    <b>Гілка</b></td><td>{branch}</td></tr></table></details><details><summary>Стан</summary><table><tr><th>Стан</th><th>Оновлення</th></tr><tr><td>【{e:shield_info_alt}】
+    <b>Оновлення</b></td><td>{upd}</td></tr><tr><td>【{e:exclamation}】 <b>CPU</b></td><td>{cpu_usage}</td></tr><tr><td>【{e:shield_info}】
+    <b>RAM</b></td><td>{ram_usage}</td></tr><tr><td>【{e:chart}】 <b>Пінг</b></td><td>{ping}</td></tr></table></details><details><summary>Оточення</summary><table><tr><th>Оточення</th><th>ОС</th></tr><tr><td>【{e:bot_info}】
+    <b>Хост</b></td><td>{platform}</td></tr><tr><td>【{e:bot_info_alt}】 <b>ОС</b></td><td>{os}</td></tr><tr><td>【{e:bot_info_alt}】
+    <b>Python</b></td><td>{python_ver}</td></tr></table></details>
   show_preview_in_help: Показувати банер модуля в .help <модуль>?
 loader:
   link: '{e:folder} <b>Файл</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm у відповідь на це повідомлення до установити</b>
+    {e:star_loader} <b>{prefix}lm у відповідь на це повідомлення до установити</b>
 
 
     {e:link} <code>{prefix}dlm {url}</code>
@@ -913,15 +1108,16 @@ loader:
   file: '{e:folder} <b>Файл</b> {class_name}
 
 
-    {e:glowing_star} <b>{prefix}lm у відповідь до цього повідомлення встановити</b>
+    {e:star_loader} <b>{prefix}lm у відповідь до цього повідомлення встановити</b>
 
 
     {not_exact}'
-  finding_module_in_repos: '{e:loading} Пошук модулів у сховищах.'
-  loading_module_via_file: '{e:loading} Завантаження модуля.'
-  ml_load_module: '{e:sync} Я завантажую модуль як файл.'
+  finding_module_in_repos: '{e:clock} Пошук модулів у сховищах.'
+  loading_module_via_file: '{e:clock} Завантаження модуля.'
+  ml_load_module: '{e:clock} Я завантажую модуль як файл.'
   no_ml: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не можна вивантажити файлом</b>'
-  not_exact: '{e:warn} <i>Точного збігу не знайдено, тому замість нього показано найближчий результат</i>'
+  not_exact: '{e:point_up} <i>Точного збігу не знайдено, тому замість нього показано
+    найближчий результат</i>'
   repo_config_doc: Посилання для завантаження модулів
   add_repo_config_doc: Додаткові репозиторії
   avail_header: '{e:roller_coaster} <b>Офіційні модулі з репозиторію</b>'
@@ -930,28 +1126,31 @@ loader:
   provide_module: '{e:warn} <b>Вкажи модуль для завантаження</b>'
   bad_unicode: '{e:stop} <b>Неправильне кодування модуля</b>'
   load_failed: '{e:stop} <b>Завантаження не увінчалося успіхом. Дивись логи.</b>'
-  loaded: '{e:glowing_star} <b>Модуль</b> <code>{}</code>{} <b>завантажено {}</b>{}{}{}{}{}{}{}{}'
+  loaded: '{e:star_loader} <b>Модуль</b> <code>{}</code>{} <b>завантажено {}</b>{}{}{}{}{}{}{}{}'
   no_class: <b>Мені самому придумати що вивантажити?</b>
   unloaded: '{} <b>Модуль {} вивантажено.</b>'
-  unload_suggestions: '{e:cross} <b>Модуль</b> <code>{}</code> <b>не знайдено.</b>
+  unload_suggestions: '{e:shield_branch} <b>Модуль</b> <code>{}</code> <b>не знайдено.</b>
 
 
     <b>Можливо, ти мав на увазі:</b>'
-  modules_unloaded: '{e:check} <b>Вивантажено {unloaded_num} модулів:</b>
+  modules_unloaded: '{e:check_repo} <b>Вивантажено {unloaded_num} модулів:</b>
 
     <blockquote expandable>{unloaded}</blockquote>'
-  not_unloaded: '{e:cross} <b>Модуль не вивантажено.</b>'
-  modules_not_unloaded: '{e:cross} <b>Не вдалося вивантажити {not_unloaded} модулів.</b>
+  not_unloaded: '{e:shield_branch} <b>Модуль не вивантажено.</b>'
+  modules_not_unloaded: '{e:shield_branch} <b>Не вдалося вивантажити {not_unloaded}
+    модулів.</b>
 
     <blockquote expandable>{errors}</blockquote>'
   requirements_failed: '{e:stop} <b>Помилка встановлення залежностей</b>'
-  requirements_restarted: 🚀 <b>Ваш юзербот перезапущено, після перезапуску встановіть модуль знову.</b>
+  requirements_restarted: 🚀 <b>Ваш юзербот перезапущено, після перезапуску встановіть
+    модуль знову.</b>
   requirements_installing: '{e:wave_loading} <b>Встановлюю залежності:
 
 
     {}</b>'
-  requirements_restart: '{e:rocket} <b>Залежності встановлено, але потрібне перезавантаження для застосування</b> <code>{}</code>'
-  all_modules_deleted: '{e:check} <b>Модулі видалено</b>'
+  requirements_restart: '{e:rocket_restart} <b>Залежності встановлено, але потрібне
+    перезавантаження для застосування</b> <code>{}</code>'
+  all_modules_deleted: '{e:check_repo} <b>Модулі видалено</b>'
   undoc: '{e:shrug} Немає опису'
   ihandler: '
 
@@ -964,15 +1163,18 @@ loader:
 
 
     {e:heart_hands} <b>Розробник:</b> {}'
-  depends_from: "\n\n{e:package} <b>Залежності:</b> \n{}"
+  depends_from: "\n\n{e:package_loader} <b>Залежності:</b> \n{}"
   by: від
-  module_fs: 💿 <b>Ти хочеш зберегти модуль на жорсткий диск, щоб він не вивантажувався під час перезавантаження?</b>
+  module_fs: 💿 <b>Ти хочеш зберегти модуль на жорсткий диск, щоб він не вивантажувався
+    під час перезавантаження?</b>
   save: 💿 Зберегти
   no_save: 🚫 Не зберігати
   save_for_all: 💽 Завжди зберігати
   never_save: 🚫 Ніколи не зберігати
-  will_save_fs: 💽 Тепер усі модулі, завантажені з файлу, зберігатимуться на жорсткий диск
-  inline_init_failed: '{e:cross} <b>Цьому модулю потрібен ElysInline, а ініціалізація менеджера інлайну невдала</b>
+  will_save_fs: 💽 Тепер усі модулі, завантажені з файлу, зберігатимуться на жорсткий
+    диск
+  inline_init_failed: '{e:cross} <b>Цьому модулю потрібен ElysInline, а ініціалізація
+    менеджера інлайну невдала</b>
 
     <i>Спробуй видалити одного зі старих ботів в @BotFather і перезавантажити юзербота</i>'
   _cmd_doc_dlmod: Завантажує і встановлює модуль з репозиторію
@@ -988,14 +1190,16 @@ loader:
   blob_link: '
 
 
-    {e:warn} <b>Не використовуй `blob` посилання для завантаження модулів. Краще завантажувати з `raw`</b>'
+    {e:warn} <b>Не використовуй `blob` посилання для завантаження модулів. Краще завантажувати
+    з `raw`</b>'
   raw_link: '
 
     {e:globe} <b>Посилання:</b> <code>{}</code>'
   suggest_subscribe: '
 
 
-    {e:star} <b>Цей модуль зроблений {}. Підписатися на нього, щоб підтримати розробника?</b>'
+    {e:star_subscribe} <b>Цей модуль зроблений {}. Підписатися на нього, щоб підтримати
+    розробника?</b>'
   subscribe: 💬 Підписатися
   no_subscribe: 🚫 Не підписуватись
   subscribed: 💬 Підписався!
@@ -1003,43 +1207,51 @@ loader:
   confirm_clearmodules: ⚠️ <b>Ви впевнені, що хочете вивантажити всі модулі?</b>
   clearmodules: 🗑 Вивантажити модулі
   cancel: 🚫 Скасування
-  scam_module: '{e:cross} <b>Модуль</b> <code>{name}</code> <b>є шахрайським модулем,будь ласка повідомте про нього в группу підтримки.(</b><code>{prefix}support</code><b>)</b>
+  scam_module: '{e:cross} <b>Модуль</b> <code>{name}</code> <b>є шахрайським модулем,будь
+    ласка повідомте про нього в группу підтримки.(</b><code>{prefix}support</code><b>)</b>
 
 
     <tg-spoiler><i>Захист зупинив його загрозу.</i></tg-spoiler>'
   overwrite_module: '{e:cross} <b>Цей модуль спробував перезаписати вбудований (</b><code>{}</code><b>)</b>
 
 
-    {e:tip}<i> Це не помилка, а захід безпеки, необхідний для запобігання заміни вбудованих модулів усяким мотлохом. Не повідомляйте про неї в support чаті</i>'
-  overwrite_command: '{e:cross} <b>Цей модуль спробував перезаписати вбудовану команду (</b><code>{}</code><b>)</b>
+    {e:laptop}<i> Це не помилка, а захід безпеки, необхідний для запобігання заміни
+    вбудованих модулів усяким мотлохом. Не повідомляйте про неї в support чаті</i>'
+  overwrite_command: '{e:cross} <b>Цей модуль спробував перезаписати вбудовану команду
+    (</b><code>{}</code><b>)</b>
 
 
-    {e:tip}<i> Це не помилка, а захід безпеки, необхідний для запобігання заміни команд вбудованих модулів усіляким мотлохом. Не повідомляйте про неї в support чаті</i>'
+    {e:laptop}<i> Це не помилка, а захід безпеки, необхідний для запобігання заміни
+    команд вбудованих модулів усіляким мотлохом. Не повідомляйте про неї в support
+    чаті</i>'
   unload_core: '{e:cross} <b>Ти не можеш вивантажити вбудований модуль</b> <code>{}</code><b></b>
 
 
-    {e:tip}<i> Це не помилка, а захід безпеки, необхідний для запобігання заміни вбудованих модулів усяким мотлохом. Не повідомляйте про неї в support чаті</i>'
+    {e:laptop}<i> Це не помилка, а захід безпеки, необхідний для запобігання заміни
+    вбудованих модулів усяким мотлохом. Не повідомляйте про неї в support чаті</i>'
   cannot_unload_lib: '{e:cross} <b>Ти не можеш вивантажити бібліотеку</b>'
-  wait_channel_approve: '{e:dizzy} <b>Модуль</b> <code>{}</code> <b>запитує дозвіл на вступ до каналу <a href="https://t.me/{}">{}</a>.
+  wait_channel_approve: '{e:dizzy_sparkle} <b>Модуль</b> <code>{}</code> <b>запитує
+    дозвіл на вступ до каналу <a href="https://t.me/{}">{}</a>.
 
 
-    <b>{e:question} Причина: {}</b>
+    <b>{e:question_approve} Причина: {}</b>
 
 
     <i>Очікування <a href="https://t.me/{}">підтвердження</a>...</i>'
-  installing: '{e:loading} <b>Встановлюю модуль</b> <code>{}</code><b>...</b>'
+  installing: '{e:loading_clock} <b>Встановлюю модуль</b> <code>{}</code><b>...</b>'
   repo_exists: '{e:stop} <b>Репозиторій</b> <code>{}</code> <b>вже додано</b>'
-  repo_added: '{e:check} <b>Репозиторій</b> <code>{}</code> <b>додано</b>'
+  repo_added: '{e:check_repo} <b>Репозиторій</b> <code>{}</code> <b>додано</b>'
   no_repo: '{e:stop} <b>Ви повинні вказати репозиторій для додавання</b>'
   repo_not_exists: '{e:stop} <b>Репозиторій</b> <code>{}</code> <b>не додано</b>'
-  repo_deleted: '{e:check} <b>Репозиторій</b> <code>{}</code> <b>видален</b>'
+  repo_deleted: '{e:check_repo} <b>Репозиторій</b> <code>{}</code> <b>видален</b>'
   _cmd_doc_addrepo: Додати додатковий репозиторій
   _cmd_doc_delrepo: Видалити додатковий репозиторій
   basic_auth_doc: Авторизація для доступу до репозиторію
-  choose_repo: '{e:folders} <b>Обери репозиторій, з якого встановити всі модулі:</b>'
-  installing_all_from_repo: '{e:loading} <b>Встановлюю всі модулі з репозиторію...</b>'
-  installed_all_from_repo: '{e:glowing_star} <b>Всі модулі з репозиторію успішно встановлено!</b>'
-  dlm_all_from_repo_error_nomods: '{e:warn} <b>У цьому репозиторії не знайдено жодного модуля!</b>'
+  choose_repo: '{e:folders_repo} <b>Обери репозиторій, з якого встановити всі модулі:</b>'
+  installing_all_from_repo: '{e:clock} <b>Встановлюю всі модулі з репозиторію...</b>'
+  installed_all_from_repo: '{e:star_repo} <b>Всі модулі з репозиторію успішно встановлено!</b>'
+  dlm_all_from_repo_error_nomods: '{e:warn} <b>У цьому репозиторії не знайдено жодного
+    модуля!</b>'
   dlm_all_from_repo_error_somemods: '{e:warn} <b>Деякі модулі не вдалося встановити:</b>
 
     '
@@ -1051,7 +1263,7 @@ loader:
   result: '{e:inspect} <b>Результат пошуку за</b> <code>{query}</code>
 
 
-    {e:package} <b>{name}</b> від <b>{dev}</b>
+    {e:package_result} <b>{name}</b> від <b>{dev}</b>
 
     {e:info} <i>{cls_doc}</i>
 
@@ -1063,7 +1275,8 @@ loader:
     {e:star} <code>{prefix}dlmod {mhash}</code>'
   args: '{e:stop} <b>Недостатньо аргументів</b>'
   not_subscribed: '{e:stop} <b>Спочатку потрібно підписатися на канал модуля</b>'
-  verify_required: '{e:warn} <b>Щоб розблокувати можливість встановлення сторонніх модулів, пройдіть тест у <a href="https://t.me/{}?start=lm_verify">своєму боті</a></b>'
+  verify_required: '{e:warn_verify} <b>Щоб розблокувати можливість встановлення сторонніх
+    модулів, пройдіть тест у <a href="https://t.me/{}?start=lm_verify">своєму боті</a></b>'
 translations:
   lang_saved: '{} <b>Мову збережено!</b>'
   pack_saved: '{e:thumbup} <b>Пакет перекладів збережено!</b>'
@@ -1071,17 +1284,21 @@ translations:
   lang_removed: '{e:thumbup} <b>Переклади скинуто на стандартні</b>'
   check_pack: '{e:stop} <b>Невірний формат пакета переказів у посиланні</b>'
   check_url: '{e:stop} <b>Ви маєте вказати посилання, що містить пакет переказів</b>'
-  too_long: '{e:package} <b>Висновок команди занадто довгий, тому його надіслано у файлі.</b>'
+  too_long: '{e:package_loader} <b>Висновок команди занадто довгий, тому його надіслано
+    у файлі.</b>'
   choose_language: '{e:statue} <b>Оберіть мову</b>'
   off_langs: 🏴‍☠️ Офіційні LangPacks
   meme_langs: 🏴‍☠️ Мемні LangPacks
   not_official: '{e:warn} <b>Цю мову не підтримують офіційно</b>'
-  requested_join: '💫 <b>Модуль</b> <code>{}</code> <b>запросив приєднання до каналу <a href=''https://t.me/{}''>{}</a></b>
+  requested_join: '💫 <b>Модуль</b> <code>{}</code> <b>запросив приєднання до каналу
+    <a href=''https://t.me/{}''>{}</a></b>
 
 
     <b>❓ Причина:</b> <i>{}</i>'
-  fw_error: '{e:clock} <b>Команда</b> <code>{}</code> <b>викликав FloodWait {} у методі</b> <code> {}</code>'
-  rpc_error: '{e:stop} <b>Команда</b> <code>{}</code> <b>не вдалася через помилку RPC:</b> <code>{}</code>'
+  fw_error: '{e:clock_fw} <b>Команда</b> <code>{}</code> <b>викликав FloodWait {}
+    у методі</b> <code> {}</code>'
+  rpc_error: '{e:stop_rpc} <b>Команда</b> <code>{}</code> <b>не вдалася через помилку
+    RPC:</b> <code>{}</code>'
   _cmd_doc_dllangpack: '[посилання на пак] - додати зовнішній пак перекладу'
   _cmd_doc_setlang: '[мова] - змінити мову за замовчуванням'
   downloaded_langs: Завантажені
@@ -1129,7 +1346,7 @@ eval:
   eval_result: '
 
 
-    {e:check}<b> Результат:</b>
+    {e:check_eval}<b> Результат:</b>
 
     <pre><code class="language-{}">{}</code></pre>'
   print_outp: '
@@ -1160,10 +1377,11 @@ translate:
   _cmd_doc_tr: '[мова] [текст] - Перекласти текст'
   name: Translator
 quickstart:
-  base: '{e:glowing_star} <b>Привіт.</b> Твій юзербот <b>{}</b> тепер встановлено.
+  base: '{e:star_quickstart} <b>Привіт.</b> Твій юзербот <b>{}</b> тепер встановлено.
 
 
-    {e:dizzy} <b>Потрібна допомога?</b> Заходь у <a href="https://t.me/ElysTalk">наш чат підтримки</a>. Ми допомагаємо <b>всім</b>.
+    {e:dizzy} <b>Потрібна допомога?</b> Заходь у <a href="https://t.me/ElysTalk">наш
+    чат підтримки</a>. Ми допомагаємо <b>всім</b>.
 
 
     {e:tipping_hand} <b>Короткий посібник:</b>
@@ -1171,22 +1389,29 @@ quickstart:
 
     {e:num_1} <b>Напиши</b> <code>.help</code><b>, щоб побачити список модулів</b>
 
-    {e:num_2} <b>Напиши</b> <code>.help &lt;Назва модуля/команда&gt;</code><b>, щоб побачити опис модуля</b>
+    {e:num_2} <b>Напиши</b> <code>.help &lt;Назва модуля/команда&gt;</code><b>, щоб
+    побачити опис модуля</b>
 
-    {e:num_3} <b>Напиши</b> <code>.dlmod &lt;посилання&gt;</code><b>, щоб завантажити модуль за посиланням</b>
+    {e:num_3} <b>Напиши</b> <code>.dlmod &lt;посилання&gt;</code><b>, щоб завантажити
+    модуль за посиланням</b>
 
-    {e:num_4} <b>Напиши</b> <code>.loadmod</code> <b>у відповідь на файл, щоб завантажити з нього модуль</b>
+    {e:num_4} <b>Напиши</b> <code>.loadmod</code> <b>у відповідь на файл, щоб завантажити
+    з нього модуль</b>
 
-    {e:num_5} <b>Напиши</b> <code>.unloadmod &lt;Назва модуля&gt;</code><b>, щоб вивантажити модуль</b>
+    {e:num_5} <b>Напиши</b> <code>.unloadmod &lt;Назва модуля&gt;</code><b>, щоб вивантажити
+    модуль</b>
 
 
-    {e:tip} <b>Elys підтримує модулі від Hikka, Friendly-Telegram та GeekTG, а також свої власні.</b>
+    {e:tip_quickstart} <b>Elys підтримує модулі від Hikka, Friendly-Telegram та GeekTG,
+    а також свої власні.</b>
 
     '
   language_saved: 🇺🇦 Мова збережена!
   language: 🇺🇦 Українська
   btn_support: 🥷 Чат підтримки
-  support_chat_reason: Допомога по Elys доступна тільки в цьому чаті. Погоджуючись на приєднання, ви приймаєте правила федерації Elys. У разі їх порушення вас буде заблоковано назавжди.
+  support_chat_reason: Допомога по Elys доступна тільки в цьому чаті. Погоджуючись
+    на приєднання, ви приймаєте правила федерації Elys. У разі їх порушення вас буде
+    заблоковано назавжди.
   name: Quickstart
   _cls_doc: Сповіщає користувача про встановлення юзербота
 $validators:
@@ -1235,13 +1460,14 @@ $inline:
   invoke_failed_logs: '{e:stop} <b>Трясця, виклик юніта закінчився дупою!</b>
 
 
-    {e:book} <b>Логи:</b>
+    {e:book_inline} <b>Логи:</b>
 
 
     <pre><code class="language-logs">{}</code></pre>'
   show_inline_cmds: 📄 Показати усі доступні вбудовані команди
   no_inline_cmds: У тебе немає доступних inline команд
-  no_inline_cmds_msg: <b>😔 Немає доступних inline команд або у тебе немає доступу до них</b>
+  no_inline_cmds_msg: <b>😔 Немає доступних inline команд або у тебе немає доступу
+    до них</b>
   inline_cmds: ℹ️ В тебе {} доступна(-их) команда(-и)
   inline_cmds_msg: '<b>ℹ️ Доступні inline команди:</b>
 
@@ -1264,7 +1490,8 @@ $inline:
     1. Перезавантажте Elys: <code>{prefix}restart</code>
 
 
-    2. Увімкніть inline-режим для бота: перейдіть до @BotFather, відправте /mybots, натисніть Bot Settings -> Inline Mode -> On
+    2. Увімкніть inline-режим для бота: перейдіть до @BotFather, відправте /mybots,
+    натисніть Bot Settings -> Inline Mode -> On
 
 
     3. Створіть нового бота: відправте команду <code>{prefix}ch_elys_bot</code> <@ім''я_бота>'
@@ -1281,29 +1508,44 @@ loader_restrictor:
   q1_ans1: Саме те, що сказано в його описі - нічого більше
   q1_ans2: Читати повідомлення тільки в тому чаті, куди було викликано
   q1_ans3: Дійте лише тоді, коли ви явно викликаєте його команду
-  q1_ans4: 'Те саме, що ти в Telegram, і більше: надсилання подарунків, видалення облікового запису'
-  q1_hint: Хоча userbot має базовий захист від небезпечних запитів, модуль може отримати повний контроль над вашим обліковим записом
-  q2: Вам надсилає повідомлення незнайомець і просить перевірити його модуль. чим ти займаєшся
+  q1_ans4: 'Те саме, що ти в Telegram, і більше: надсилання подарунків, видалення
+    облікового запису'
+  q1_hint: Хоча userbot має базовий захист від небезпечних запитів, модуль може отримати
+    повний контроль над вашим обліковим записом
+  q2: Вам надсилає повідомлення незнайомець і просить перевірити його модуль. чим
+    ти займаєшся
   q2_ans1: Звичайно, чому б їм не допомогти?
-  q2_ans2: 'Перевірте код самостійно/за допомогою ШІ. Якщо не впевнені, повідомте з #check_scam'
+  q2_ans2: 'Перевірте код самостійно/за допомогою ШІ. Якщо не впевнені, повідомте
+    з #check_scam'
   q2_ans3: Запитайте автора, чи це безпечно, і повірте їм на слово
   q2_ans4: Встановіть його на інший обліковий запис, щоб перевірити – так безпечніше
-  q2_hint: Будь-який модуль не з офіційних каналів розробника слід перевіряти на наявність небезпечного коду. Не піддавайте себе ризику!
-  q3: Чи може модуль працювати з файлами та системою сервера/хостингу, а не тільки з Telegram?
+  q2_hint: Будь-який модуль не з офіційних каналів розробника слід перевіряти на наявність
+    небезпечного коду. Не піддавайте себе ризику!
+  q3: Чи може модуль працювати з файлами та системою сервера/хостингу, а не тільки
+    з Telegram?
   q3_ans1: Ні, модуль працює лише всередині Telegram і не може бачити інші файли
   q3_ans2: Тільки якщо він має окремий дозвіл від Telegram
-  q3_ans3: 'Так, модуль є частиною юзербота: він може читати, змінювати, видаляти файли'
+  q3_ans3: 'Так, модуль є частиною юзербота: він може читати, змінювати, видаляти
+    файли'
   q3_ans4: Тільки фото та відео з Telegram
-  q3_hint: Userbot — це програма Python, яка працює на вашому сервері. Модуль є частиною тієї самої програми з такими ж правами
-  q4: Чи помітили б ви, якби модуль почав діяти без вашого дозволу (викрадення даних тощо)?
+  q3_hint: Userbot — це програма Python, яка працює на вашому сервері. Модуль є частиною
+    тієї самої програми з такими ж правами
+  q4: Чи помітили б ви, якби модуль почав діяти без вашого дозволу (викрадення даних
+    тощо)?
   q4_ans1: Так, Telegram негайно повідомляв мене про підозрілу активність
   q4_ans2: Так, я б помітив підозрілі журнали з модуля
   q4_ans3: Ні, але базовий захист юзербота має фіксувати таку активність
-  q4_ans4: Не обов'язково - модуль може діяти непомітно, без будь-яких сповіщень, поки не стане надто пізно
-  q4_hint: 'Прихованість — головна небезпека шкідливих модулів: без попередньої перевірки коду ви можете просто не помітити проблему, поки не стане надто пізно'
-  timeout: '{e:warn} <b>Ви не вчасно відповіли на всі питання. Ви можете спробувати ще раз, надіславши </b> <code>/start lm_verify</code>'
-  failed: '{e:stop} <b>Неправильна відповідь. Щоб розблокувати встановлення стороннього модуля, спробуйте ще раз, надіславши </b> <code>/start lm_verify</code>'
-  already_passed: '{e:check} <b>Ви вже пройшли перевірку - встановлення стороннього модуля розблоковано</b>'
+  q4_ans4: Не обов'язково - модуль може діяти непомітно, без будь-яких сповіщень,
+    поки не стане надто пізно
+  q4_hint: 'Прихованість — головна небезпека шкідливих модулів: без попередньої перевірки
+    коду ви можете просто не помітити проблему, поки не стане надто пізно'
+  timeout: '{e:warn_security} <b>Ви не вчасно відповіли на всі питання. Ви можете
+    спробувати ще раз, надіславши </b> <code>/start lm_verify</code>'
+  failed: '{e:stop} <b>Неправильна відповідь. Щоб розблокувати встановлення стороннього
+    модуля, спробуйте ще раз, надіславши </b> <code>/start lm_verify</code>'
+  already_passed: '{e:check} <b>Ви вже пройшли перевірку - встановлення стороннього
+    модуля розблоковано</b>'
   unlocked: '{e:check} <b>Перевірку пройдено, встановлення стороннього модуля розблоковано</b>'
-  unlock_prompt: '{e:warn} <b>Щоб розблокувати встановлення стороннього модуля, пройдіть коротку перевірку</b>'
+  unlock_prompt: '{e:warn_security} <b>Щоб розблокувати встановлення стороннього модуля,
+    пройдіть коротку перевірку</b>'
   unlock_prompt_btn: Пройти

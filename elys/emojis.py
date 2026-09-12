@@ -51,6 +51,9 @@ def _load_registry() -> None:
                 for a in aliases:
                     EMOJI_REGISTRY[a.lower()] = (eid, fb)
 
+                if eid and eid not in EMOJI_REGISTRY:
+                    EMOJI_REGISTRY[eid] = (eid, fb)
+
                 clean_fb = fb.replace("\ufe0f", "")
                 if clean_fb and clean_fb not in SYMBOL_TO_ALIAS:
                     SYMBOL_TO_ALIAS[clean_fb] = primary_alias
@@ -64,7 +67,7 @@ def _load_registry() -> None:
 _load_registry()
 
 # Regex to find {e:name} and {emoji:name}
-EMOJI_TOKEN_RE = re.compile(r"\{(?:e|emoji):([a-zA-Z0-9_]+)\}")
+EMOJI_TOKEN_RE = re.compile(r"\{(?:e|emoji):([a-zA-Z0-9_]+)\}", re.IGNORECASE)
 
 # Regex to find <tg-emoji> and other custom emoji tag representations
 CONVERT_TG_EMOJI_RE = re.compile(
@@ -181,8 +184,9 @@ def render_emojis(
 
     use_alt = is_alt_emoji_format() if alt_format is None else alt_format
 
-    if "{e:" not in text and "{emoji:" not in text:
-        if use_alt and ("<tg-emoji" in text.lower() or "<emoji" in text.lower()):
+    text_lower = text.lower()
+    if "{e:" not in text_lower and "{emoji:" not in text_lower:
+        if use_alt and ("<tg-emoji" in text_lower or "<emoji" in text_lower):
             return convert_to_alt_emoji(text)
         return text
 

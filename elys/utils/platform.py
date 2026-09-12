@@ -139,26 +139,24 @@ def get_platform_emoji() -> str:
     Returns custom emoji for current platform + Elys logo
     :return: Emoji entity in string
     """
+    from .. import emojis
 
-    ELYS_LOGO = (
-        "<tg-emoji emoji-id=5247212990641514265>⭐️</tg-emoji>"
-        "<tg-emoji emoji-id=5249364352644981683>⭐️</tg-emoji>"
-        "<tg-emoji emoji-id=5249140597733761149>⭐️</tg-emoji>"
-        "<tg-emoji emoji-id=5246996296656531063>⭐️</tg-emoji>"
+    ELYS_LOGO = emojis.render_emojis(
+        "{e:logo_star_1}{e:logo_star_2}{e:logo_star_3}{e:logo_star_4}"
     )
 
     platform_prefix = ""
     match True:
         case _ if IS_HIKKAHOST:
-            platform_prefix = "<tg-emoji emoji-id=5395745114494624362>🌼</tg-emoji>"
+            platform_prefix = emojis.render_emojis("{e:platform_termux}")
         case _ if IS_USERLAND:
-            platform_prefix = "<tg-emoji emoji-id=5458877818031077824>🐧</tg-emoji>"
+            platform_prefix = emojis.render_emojis("{e:platform_linux}")
         case _ if IS_TERMUX:
-            platform_prefix = "<tg-emoji emoji-id=5350588498359377932>🪐</tg-emoji>"
+            platform_prefix = emojis.render_emojis("{e:platform_wsl}")
         case _ if IS_RNHOST:
-            platform_prefix = "<tg-emoji emoji-id=5276415504079164229>❤️‍🔥</tg-emoji>"
+            platform_prefix = emojis.render_emojis("{e:platform_android}")
         case _ if IS_DOCKER:
-            platform_prefix = "<tg-emoji emoji-id=5352678227582152630>🐳</tg-emoji>"
+            platform_prefix = emojis.render_emojis("{e:platform_docker}")
 
     return f"{platform_prefix}{ELYS_LOGO}"
 

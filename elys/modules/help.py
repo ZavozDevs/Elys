@@ -41,9 +41,9 @@ class Help(loader.Module):
 
     strings = {  # noqa: RUF012
         "name": "Help",
-        "module_header": "<tg-emoji emoji-id=5134452506935427991>🌟</tg-emoji> <b>{}</b>:",
-        "mod_doc": "\n<i><tg-emoji emoji-id=5879813604068298387>ℹ️</tg-emoji> {}\n</i>",
-        "inline_cmd_li": "\n<tg-emoji emoji-id=5372981976804366741>🤖</tg-emoji> <code>{}</code> {}",
+        "module_header": "{e:star_loader} <b>{}</b>:",
+        "mod_doc": "\n<i>{e:info} {}\n</i>",
+        "inline_cmd_li": "\n{e:bot_cmd} <code>{}</code> {}",
         "preview_downloading": "<i>Загрузка предпросмотра модуля...</i>",
         "preview_fetch_err": "<b>Не удалось скачать модуль по ссылке</b>",
         "preview_parse_err": "<b>Не удалось проанализировать модуль</b>",
@@ -58,27 +58,27 @@ class Help(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "core_emoji",
-                "<tg-emoji emoji-id=5238035813761069618>◼️</tg-emoji>",
+                "{e:bullet_square}",
                 lambda: "Core module bullet",
             ),
             loader.ConfigValue(
                 "plain_emoji",
-                "<tg-emoji emoji-id=5238160913273502720>⚫</tg-emoji>",
+                "{e:bullet_circle}",
                 lambda: "Plain module bullet",
             ),
             loader.ConfigValue(
                 "empty_emoji",
-                "<tg-emoji emoji-id=5238094680582823847>▪️</tg-emoji>",
+                "{e:bullet_small}",
                 lambda: "Empty modules bullet",
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<tg-emoji emoji-id=5246701816518843050>⭐</tg-emoji>",
+                "{e:star}",
                 lambda: "Desc emoji",
             ),
             loader.ConfigValue(
                 "command_emoji",
-                "<tg-emoji emoji-id=5197195523794157505>▫️</tg-emoji>",
+                "{e:bullet_white}",
                 lambda: "Emoji for command",
             ),
             loader.ConfigValue(

@@ -41,7 +41,7 @@ class Settings(loader.Module):
             "Use experimental <a href=\"tg://emoji?id=...\"> format instead of"
             " <tg-emoji> for custom emojis"
         ),
-        "emoji_ok": "<tg-emoji emoji-id=5197474765387864959>👍</tg-emoji>",
+        "emoji_ok": "{e:thumbup}",
     }
 
     def __init__(self):
@@ -54,7 +54,7 @@ class Settings(loader.Module):
             ),
             loader.ConfigValue(
                 "alias_emoji",
-                "<tg-emoji emoji-id=4974259868996207180>▪️</tg-emoji>",
+                "{e:bullet_settings}",
                 "just emoji in .aliases",
             ),
             loader.ConfigValue(
