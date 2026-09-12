@@ -17,6 +17,7 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import asyncio
+import contextlib
 import logging
 import os
 import random
@@ -35,6 +36,16 @@ if typing.TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 BOT_BASE_PATTERN = re.compile(r"(\w*)_[0-9a-zA-Z]{6}_bot")
+
+
+def get_bot_avatar_path():
+    from .. import main
+
+    for name in ("bot_pic.png", "elys.png", "elys_banner_base.png"):
+        path = main.BASE_PATH / "assets" / name
+        if path.exists():
+            return path
+    return "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys.png"
 
 
 class TokenObtainment(InlineUnit):
@@ -143,7 +154,7 @@ class TokenObtainment(InlineUnit):
                         "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/elys.png"
                     )
                 else:
-                    m = await conv.send_file(main.BASE_PATH / "assets" / "elys.png")
+                    m = await conv.send_file(get_bot_avatar_path())
                 r = await conv.get_response()
 
                 logger.debug(">> <Photo>")
@@ -295,9 +306,8 @@ class TokenObtainment(InlineUnit):
 
                     try:
                         await fw_protect()
-                        from .. import main
 
-                        m = await conv.send_file(main.BASE_PATH / "assets" / "elys.png")
+                        m = await conv.send_file(get_bot_avatar_path())
                         r = await conv.get_response()
 
                         logger.debug(">> <Photo>")
