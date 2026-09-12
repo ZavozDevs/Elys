@@ -804,7 +804,7 @@ class KernelProxy:
 
     @property
     def error_load_modules(self) -> int:
-        return 0
+        return len(getattr(self._host.modules, "failed_modules", []))
 
     # -- database ---------------------------------------------------------
 

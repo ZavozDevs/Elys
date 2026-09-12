@@ -605,6 +605,7 @@ class Modules:
         self.callback_handlers = {}
         self.aliases = {}
         self.modules: list[Module | None] = []  # skipcq: PTC-W0052
+        self.failed_modules: list[str] = []
         self.libraries = []
         self.watchers = []
         self._log_handlers = []
@@ -772,6 +773,7 @@ class Modules:
                 logger.debug("Successfully loaded %s from filesystem", module_name)
             except Exception:
                 logger.exception("Failed to load module %s:", mod)
+                self.failed_modules.append(mod_shortname)
 
         return loaded
 

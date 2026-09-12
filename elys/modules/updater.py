@@ -602,20 +602,23 @@ class UpdaterMod(loader.Module):
     def req_common():
         # Now we have downloaded new code, install requirements
         logger.debug("Installing new requirements...")
+        cmd = [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            os.path.join(
+                os.path.dirname(utils.get_base_dir()),
+                "requirements.txt",
+            ),
+        ]
+        if sys.prefix == sys.base_prefix:
+            cmd.append("--user")
+
         try:
             subprocess.run(  # nosec B603
-                [
-                    sys.executable,
-                    "-m",
-                    "pip",
-                    "install",
-                    "-r",
-                    os.path.join(
-                        os.path.dirname(utils.get_base_dir()),
-                        "requirements.txt",
-                    ),
-                    "--user",
-                ],
+                cmd,
                 check=True,
                 timeout=600,
                 capture_output=True,
@@ -1153,18 +1156,24 @@ class UpdaterMod(loader.Module):
         self.set("restart_ts", None)
         ms = self.get("selfupdatemsg")
 
-        modules_count = self.db.get("Updater", "modules_count")
-        try:
-            modules_count = int(modules_count)
-        except Exception:  # noqa: BLE001
-            modules_count = len(self.allmodules.modules)
+        failed_modules = getattr(self.allmodules, "failed_modules", None)
+        if failed_modules is not None:
+            fails = len(failed_modules)
+        else:
+            modules_count = self.db.get("Updater", "modules_count")
+            try:
+                modules_count = int(modules_count)
+            except Exception:  # noqa: BLE001
+                modules_count = len(self.allmodules.modules)
+            fails = max(0, modules_count - len(self.allmodules.modules))
 
-        if modules_count <= len(self.allmodules.modules):
+        self.db.set("Updater", "modules_count", len(self.allmodules.modules))
+
+        if fails == 0:
             msg = self.strings[
                 "secure_boot_complete" if secure_boot else "full_success"
             ].format(utils.ascii_face(), took)
         else:
-            fails = modules_count - len(self.allmodules.modules)
             msg = self.strings[
                 "secure_boot_fail" if secure_boot else "full_fail"
             ].format(utils.ascii_face(), took, fails)
