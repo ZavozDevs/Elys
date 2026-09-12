@@ -433,23 +433,23 @@ branding:
     aliases:
     - launch_restart
   logo_star_1:
-    id: '5247212990641514265'
-    fallback: ⭐️
+    id: '5256047373297164926'
+    fallback: 🙂
     aliases:
     - elys_logo_star_1
   logo_star_2:
-    id: '5249364352644981683'
-    fallback: ⭐️
+    id: '5253522460808094600'
+    fallback: 🙂
     aliases:
     - elys_logo_star_2
   logo_star_3:
-    id: '5249140597733761149'
-    fallback: ⭐️
+    id: '5255953012865672959'
+    fallback: 🙂
     aliases:
     - elys_logo_star_3
   logo_star_4:
-    id: '5246996296656531063'
-    fallback: ⭐️
+    id: '5256173769889718692'
+    fallback: 🙂
     aliases:
     - elys_logo_star_4
   heart_info:
@@ -477,15 +477,15 @@ ui:
     fallback: "\U0001F4E6"
     aliases: ["module", "box"]
   theme:
-    id: "5249090625789271993"
+    id: "5255904299346601067"
     fallback: "\U0001F58C️"
     aliases: ["brush"]
   palette:
-    id: "5249090625789271993"
-    fallback: "\U0001F3A8"
+    id: "5255904299346601067"
+    fallback: 🙂
   wrench:
-    id: "5249457712349097667"
-    fallback: "\U0001F527"
+    id: "5258445936438322845"
+    fallback: 🙂
   globe:
     id: "6037284117505116849"
     fallback: "\U0001F310"
