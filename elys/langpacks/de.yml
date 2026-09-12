@@ -1062,8 +1062,8 @@ elys_info:
   _cfg_cst_btn: Benutzerdefinierte Schaltfläche in der Nachricht in info. Lasse es
     leer, um die Schaltfläche zu entfernen
   _cfg_banner: Link zum Banner-Bild
-  switchinfo_on: <emoji id="1">✅</emoji> Bildinfo erfolgreich aktiviert
-  switchinfo_off: <emoji id="2">✅</emoji> Bildinfo erfolgreich deaktiviert
+  switchinfo_on: '{e:check} Bildinfo erfolgreich aktiviert'
+  switchinfo_off: '{e:check} Bildinfo erfolgreich deaktiviert'
   desc: 'Userbots können verwendet werden, um verschiedene Aufgaben zu automatisieren,
     wie <b>Nachrichten senden, Kanälen beitreten, Mediendateien hochladen und vieles
     mehr</b>.

@@ -334,7 +334,9 @@ class Utils(InlineUnit):
         return reply_markup
 
     def sanitise_text(self: "InlineManager", text: str) -> str:
-        return re.sub(r"</?emoji.*?>", "", text)
+        from ..emojis import render_emojis
+
+        return render_emojis(re.sub(r"</?emoji.*?>", "", text))
 
     async def _edit_unit(
         self: "InlineManager",

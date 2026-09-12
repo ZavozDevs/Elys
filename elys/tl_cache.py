@@ -1052,8 +1052,10 @@ class CustomTelegramClient(TelegramClient):
     async def _parse_message_text(self, message, parse_mode):
         from . import emojis
 
-        if isinstance(message, str) and emojis.is_alt_emoji_format():
-            message = emojis.convert_to_alt_emoji(message)
+        if isinstance(message, str):
+            message = emojis.render_emojis(message)
+            if emojis.is_alt_emoji_format():
+                message = emojis.convert_to_alt_emoji(message)
         text, entities = await super()._parse_message_text(message, parse_mode)
         if emojis.is_alt_emoji_format() and entities:
             from elystl.tl.types import MessageEntityCustomEmoji, MessageEntityTextUrl
