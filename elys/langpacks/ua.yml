@@ -357,57 +357,6 @@ elys_backup:
   _cmd_doc_backupall: Створює загальну резервну копію (модулі + база)
   _cmd_doc_restoreall: Відновлює загальну резервну копію (база + модулі)
   name: ElysBackup
-presets:
-  _fun_title: 🪩 Розважальні модулі
-  _fun_desc: Кумедні модулі — анімації, спам, ігри, та ін.
-  _chat_title: 👥 Модулі адміністрування чату
-  _chat_desc: Колекція модулів, які допоможуть вам адмініструвати чат — фільтри, нотатки, розпізнавання мовлення, та ін.
-  _service_title: ⚙️ Корисні модулі
-  _service_desc: Дійсно корисні модулі — керування акаунтом, скорочувач посилань, пошукач, та ін.
-  _downloaders_title: 📥 Завантажувачі
-  _downloaders_desc: Колекція модулів, які допоможуть вам завантатжувати файли в/з різних(-і) джерел(-а) — YouTube, TikTok, Instagram, Spotify, VK Музика, та ін.
-  welcome: 👋 <b>Привіт! Втомився гортати безкінечну кількість модулів в каналах? Можу запропонувати тобі декілька готових наборів. Якщо тобі знадобится знову викликати це меню, надішли мені команду /presets</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>Модулі в цьому наборі:</b>
-
-
-    {}'
-  back: 🔙 Назад
-  install: 📦 Встановити
-  installing: '{e:wait} <b>Встановлення набору </b><code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>Встановлення набору</b> <code>{}</code> <b>({}/{} модулів)...</b>
-
-
-    {e:star} <i>Встановлення модуля {}...</i>'
-  installed: '{e:party} <b>Набір</b> <code>{}</code> <b>встановлено!</b>'
-  already_installed: ✅ [Встановлено]
-  add_to_folder_usage: '{e:stop} <b>Вкажи папку для додавання модуля. </b> <code>{prefix}addtofolder <папка> <модуль></code>'
-  already_in_folder: '{e:stop} <b>Модуль вже знаходиться в папці</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>Модуль {} додано до папки</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>Модуль {} не знайдено</b>'
-  folder_load_usage: '{e:stop} <b>Вкажи папку для завантаження модулів. </b> <code>{prefix}fl <папка></code>'
-  folder_not_found: '{e:stop} <b>Папка {} не знайдена</b>'
-  no_modules_in_folder: '{e:stop} <b>У папці {} немає модулів</b>'
-  folder: '{e:folder} <b>Папка</b> {}
-
-
-    {e:glowing_star} <b>Відповідь на це повідомлення {prefix}lp для встановлення</b>'
-  remove_from_folder_usage: '{e:stop} <b>Вкажи папку та модуль для видалення. </b> <code>{prefix}removefromfolder <папка> <модуль></code>'
-  removed_from_folder: '{e:party} <b>Модуль {} видалено з папки</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Модуль {} не знаходиться в папці {}</b>'
-  _cmd_doc_presets: '| Пакети модулів для завантаження'
-  _cmd_doc_loadpreset: Завантажити користувацький пресет. Надішли файл із командою або відповідай командою на файл.
-  _cmd_doc_addtofolder: <папка> <модуль> - Додати модуль до користувацької папки
-  _cmd_doc_folderload: <папка> - Надіслати користувацьку папку файлом пресета
-  _cmd_doc_removefromfolder: <папка> <модуль> - Видалити модуль із користувацької папки
-  _cmd_doc_loadaliases: Завантажити аліаси з файлу. Надішли файл із командою або відповідай командою на файл.
-  _cmd_doc_aliasload: Надіслати аліаси файлом
-  _cls_doc: Пропонує новим користувачам Elys пакети модулів для завантаження
-  name: Presets
 settings:
   choose_installation: '{e:glowing_star} <b>Виберіть варіант установки Elys:</b>'
   vds_install: '{e:diamond} Процес установки на VDS виконується однією командою:

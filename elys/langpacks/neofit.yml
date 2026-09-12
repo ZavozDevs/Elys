@@ -363,57 +363,6 @@ elys_backup:
   _cmd_doc_backupall: Make Snapshot
   _cmd_doc_restoreall: Restore Snapshot
   name: ElysBackup
-presets:
-  name: Presets
-  _fun_title: 🪩 /usr/games
-  _fun_desc: Entertainment packages.
-  _chat_title: 👥 Sysadmin Tools
-  _chat_desc: Moderation scripts, filters, logging.
-  _service_title: ⚙️ Utils
-  _service_desc: System utilities, grep, management.
-  _downloaders_title: 📥 wget/curl
-  _downloaders_desc: Loaders for external APIs.
-  welcome: 👋 <b>Select distro preset. Run /presets to open this menu again.</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>Packages:</b>
-
-
-    {}'
-  back: 🔙 cd ..
-  install: 📦 apt install
-  installing: '{e:wait} <b>Installing bundle</b> <code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>Processing</b> <code>{}</code> <b>({}/{})...</b>
-
-
-    {e:star} <i>pip install {}...</i>'
-  installed: '{e:party} <b>Bundle</b> <code>{}</code> <b>installed!</b>'
-  already_installed: ✅ [Installed]
-  add_to_folder_usage: '{e:stop} <b>Specify a folder to add a module. </b> <code>{prefix}addtofolder <folder> <module></code>'
-  already_in_folder: '{e:stop} <b>Module is already in the folder</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>Module {} added to folder</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>Module {} not found</b>'
-  folder_load_usage: '{e:stop} <b>Specify a folder to load modules. </b> <code>{prefix}fl <folder></code>'
-  folder_not_found: '{e:stop} <b>Folder {} not found</b>'
-  no_modules_in_folder: '{e:stop} <b>No modules in folder {}</b>'
-  folder: '{e:folder} <b>Folder</b> {}
-
-
-    {e:glowing_star} <b>{prefix}lp in reply to this message to install</b>'
-  remove_from_folder_usage: '{e:stop} <b>Specify folder and module to remove. </b> <code>{prefix}removefromfolder <folder> <module></code>'
-  removed_from_folder: '{e:party} <b>Module {} removed from folder</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Module {} is not in folder {}</b>'
-  _cmd_doc_presets: '| Module bundle manager'
-  _cmd_doc_loadpreset: Import preset JSON. Attach file or reply to file.
-  _cmd_doc_addtofolder: <dir> <mod> - Append mod to preset dir
-  _cmd_doc_folderload: <dir> - Export preset dir as JSON
-  _cmd_doc_removefromfolder: <dir> <mod> - Remove mod from preset dir
-  _cmd_doc_loadaliases: Import aliases JSON. Attach file or reply to file.
-  _cmd_doc_aliasload: Export aliases as JSON
-  _cls_doc: Package Manager (Presets)
 settings:
   name: Settings
   vds: 💎 VDS

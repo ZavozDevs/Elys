@@ -369,57 +369,6 @@ elys_backup:
   _cmd_doc_backupall: 一般的なバックアップコピー（モジュール + データベース）を作成します
   _cmd_doc_restoreall: 共通バックアップ（ベース + モジュール）を復元します
   name: ElysBackup
-presets:
-  name: Presets
-  _fun_title: 🪩 エンターテイメントモジュール
-  _fun_desc: 楽しいモジュール — アニメーション、スパム、エンターテイメントなど
-  _chat_title: 👥 グループ管理ヘルパー
-  _chat_desc: グループチャットのモデレーションを支援するツールのコレクション — フィルター、ノート、音声認識など
-  _service_title: ⚙️ 便利なモジュール
-  _service_desc: 本当に便利なモジュール — アカウント管理、リンク短縮、検索エンジンなど
-  _downloaders_title: 📥 ダウンローダー
-  _downloaders_desc: さまざまなソース（YouTube、TikTok、Instagram、Spotify、VK Musicなど）からファイルをダウンロード/アップロードするのに役立つツールのコレクション
-  welcome: 👋 <b>こんにちは！チャンネルで無限のモジュールをスクロールするのに疲れましたか？いくつかの既製コレクションを提案させてください。このメニューを再度呼び出す必要がある場合は、このボットに /presets を送信するだけです！</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>このコレクション内のモジュール:</b>
-
-
-    {}'
-  back: 🔙 戻る
-  install: 📦 インストール
-  installing: '{e:wait} <b>プリセット</b> <code>{}</code> <b>をインストールしています...</b>'
-  installing_module: '{e:wait} <b>プリセット</b> <code>{}</code> <b>({}/{}) をインストールしています...</b>
-
-
-    {e:star} <i>モジュール {} をインストール中...</i>'
-  installed: '{e:party} <b>プリセット</b> <code>{}</code> <b>がインストールされました！</b>'
-  already_installed: ✅ [インストール済み]
-  add_to_folder_usage: '{e:stop} <b>モジュールを追加するフォルダを指定してください。 </b> <code>{prefix}addtofolder <フォルダ> <モジュール></code>'
-  already_in_folder: '{e:stop} <b>モジュールは既にフォルダ内にあります</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>モジュール {}がフォルダに追加されました</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>モジュール {}が見つかりません</b>'
-  folder_load_usage: '{e:stop} <b>モジュールをロードするフォルダを指定してください。 </b> <code>{prefix}fl <フォルダ></code>'
-  folder_not_found: '{e:stop} <b>フォルダ {}が見つかりません</b>'
-  no_modules_in_folder: '{e:stop} <b>フォルダ {}にモジュールはありません</b>'
-  folder: '{e:folder} <b>フォルダ</b> {}
-
-
-    {e:glowing_star} <b>{prefix}lpをインストールするためにこのメッセージに返信してください</b>'
-  remove_from_folder_usage: '{e:stop} <b>削除するフォルダとモジュールを指定してください。 </b> <code>{prefix}removefromfolder <フォルダ> <モジュール></code>'
-  removed_from_folder: '{e:party} <b>フォルダからモジュール {} を削除しました</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>モジュール {} はフォルダ {}</b> にありません'
-  _cmd_doc_presets: '| 読み込むモジュールパック'
-  _cmd_doc_loadpreset: カスタムプリセットを読み込みます。コマンドと一緒にファイルを送るか、ファイルに返信してください。
-  _cmd_doc_addtofolder: <フォルダ> <モジュール> - カスタムフォルダにモジュールを追加します
-  _cmd_doc_folderload: <フォルダ> - カスタムフォルダをプリセットファイルとして送信します
-  _cmd_doc_removefromfolder: <フォルダ> <モジュール> - カスタムフォルダからモジュールを削除します
-  _cmd_doc_loadaliases: ファイルからエイリアスを読み込みます。コマンドと一緒にファイルを送るか、ファイルに返信してください。
-  _cmd_doc_aliasload: エイリアスをファイルとして送信します
-  _cls_doc: 新しい Elys ユーザーにロードするモジュールのパックを提案します
 settings:
   name: Settings
   vds: 💎 VDS

@@ -416,57 +416,6 @@ elys_backup:
   _cmd_doc_backupall: Creates a general backup copy (modules + database)
   _cmd_doc_restoreall: Restores a common backup (base + modules)
   name: ElysBackup
-presets:
-  name: Presets
-  _fun_title: 🪩 Entertainment modules
-  _fun_desc: Fun modules — animations, spam, entertainment, etc.
-  _chat_title: 👥 Group Administration Helpers
-  _chat_desc: The collection of tools which will help to moderate your group chat — filters, notes, voice recognition, etc.
-  _service_title: ⚙️ Useful modules
-  _service_desc: Really useful modules — account management, link shortener, search engine, etc.
-  _downloaders_title: 📥 Downloaders
-  _downloaders_desc: The collection of tools which will help you download/upload files from/to different sources — YouTube, TikTok, Instagram, Spotify, VK Music, etc.
-  welcome: 👋 <b>Hi there! Tired of scrolling through endless modules in channels? Let me suggest you some pre-made collections. If you need to call this menu again, simply send /presets to this bot!</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>Modules in this collection:</b>
-
-
-    {}'
-  back: 🔙 Back
-  install: 📦 Install
-  installing: '{e:wait} <b>Installing preset</b> <code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>Installing preset</b> <code>{}</code> <b>({}/{} modules)...</b>
-
-
-    {e:star} <i>Installing module {}...</i>'
-  installed: '{e:party} <b>Preset</b> <code>{}</code> <b>installed!</b>'
-  already_installed: ✅ [Installed]
-  add_to_folder_usage: '{e:stop} <b>Specify a folder to add a module. </b> <code>{prefix}addtofolder <folder> <module></code>'
-  already_in_folder: '{e:stop} <b>Module is already in the folder</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>Module {} added to folder</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>Module {} not found</b>'
-  folder_load_usage: '{e:stop} <b>Specify a folder to load modules. </b> <code>{prefix}fl <folder></code>'
-  folder_not_found: '{e:stop} <b>Folder {} not found</b>'
-  no_modules_in_folder: '{e:stop} <b>No modules in folder {}</b>'
-  folder: '{e:folder} <b>Folder</b> {}
-
-
-    {e:glowing_star} <b>{prefix}lp in reply to this message to install</b>'
-  remove_from_folder_usage: '{e:stop} <b>Specify folder and module to remove. </b> <code>{prefix}removefromfolder <folder> <module></code>'
-  removed_from_folder: '{e:party} <b>Module {} removed from folder</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Module {} is not in folder {}</b>'
-  _cmd_doc_presets: '| Packs of modules to load'
-  _cmd_doc_loadpreset: Custom preset loader. Reply to a file or send a file with the command.
-  _cmd_doc_addtofolder: <folder> <module> - Add module to a custom folder
-  _cmd_doc_folderload: <folder> - Send a custom folder as a preset file
-  _cmd_doc_removefromfolder: <folder> <module> - Remove module from a custom folder
-  _cmd_doc_loadaliases: Load aliases from file. Send a file with the command or reply to a file.
-  _cmd_doc_aliasload: Send aliases as a file
-  _cls_doc: Suggests new Elys users a packs of modules to load
 settings:
   name: Settings
   vds: 💎 VDS

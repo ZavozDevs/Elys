@@ -2285,32 +2285,6 @@ class ElysConfigMod(loader.Module):
                 if folder_name not in folders:
                     folders[folder_name] = {}
                 folders[folder_name][mod_name] = [p for p in mod.config]
-        try:
-            preset_folders = self.db.get("presets", "folders")
-        except Exception:  # noqa: BLE001
-            preset_folders = {}
-
-        if preset_folders:
-            for folder_name, mod_list in preset_folders.items():
-                if folder_name not in folders:
-                    folders[folder_name] = {}
-                for raw_mod in mod_list:
-                    for mod in self.allmodules.modules:
-                        try:
-                            if mod.__class__.__name__.lower() == raw_mod.lower():
-                                mod_name = (
-                                    mod.strings("name")
-                                    if callable(mod.strings)
-                                    else mod.__class__.__name__
-                                )
-                                if mod_name not in folders[folder_name]:
-                                    folders[folder_name][mod_name] = [
-                                        p for p in mod.config
-                                    ]
-                                break
-                        except Exception:
-                            logger.debug("Failed processing module for folder %s", folder_name, exc_info=True)
-                            continue
 
         return folders
 

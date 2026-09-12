@@ -353,57 +353,6 @@ elys_backup:
   _cmd_doc_backupall: Сделать общий бэкап (все вместе)
   _cmd_doc_restoreall: Накатить общий бэкап
   name: ElysBackup
-presets:
-  _fun_title: 🪩 Модули для рофлов
-  _fun_desc: Чисто покекать — анимации, спам, и прочий фан.
-  _chat_title: 👥 Для админов
-  _chat_desc: Тулзы чтоб держать чат в узде — фильтры, заметки, войсы и т.д.
-  _service_title: ⚙️ Полезные штуки
-  _service_desc: Реально нужные темы — аккаунт, ссылки, поиск.
-  _downloaders_title: 📥 Качалки
-  _downloaders_desc: Качать контент отовсюду — YouTube, TikTok, Spotify, VK и прочее.
-  welcome: 👋 <b>Ку! Задолбался искать модули? Вот тебе готовые паки. Если че, пиши /presets</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>Че внутри:</b>
-
-
-    {}'
-  back: 🔙 Назад
-  install: 📦 Инсталл
-  installing: '{e:wait} <b>Качаю пак </b><code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>Качаю пак</b> <code>{}</code> <b>({}/{})...</b>
-
-
-    {e:star} <i>Ставлю модуль {}...</i>'
-  installed: '{e:party} <b>Пак</b> <code>{}</code> <b>накатил!</b>'
-  already_installed: ✅ [Уже стоит]
-  add_to_folder_usage: '{e:stop} <b>Укажите папку для добави модуля 📁 </b> <code>{prefix}addtofolder <папка> <модуль></code>'
-  already_in_folder: '{e:stop} <b>Модуль уже в папке находится 📂</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>Модуль {} папке добавлен был 🎊</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>Модуля {} нету 😭</b>'
-  folder_load_usage: '{e:stop} <b>Папку укажи куда модуль кинуть 📂 </b> <code>{prefix}fl <папка></code>'
-  folder_not_found: '{e:stop} <b>Папки {} нету 😭</b>'
-  no_modules_in_folder: '{e:stop} <b>В папочке {} модулей нету 😿</b>'
-  folder: '{e:folder} <b>Папка</b> {}
-
-
-    {e:glowing_star} <b>Ответь {prefix}lp на сообщение это для установки 💫</b>'
-  remove_from_folder_usage: '{e:stop} <b>Укажи папку и модуль для удаления. </b> <code>{prefix}removefromfolder <папка> <модуль></code>'
-  removed_from_folder: '{e:party} <b>Модуль {} удален из папки</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Модуль {} не находится в папке {}</b>'
-  _cmd_doc_presets: '| Паки модулей для загрузки'
-  _cmd_doc_loadpreset: Загрузить свой пресет. Кинь файл с командой или ответь командой на файл.
-  _cmd_doc_addtofolder: <папка> <модуль> - Добавить модуль в свою папку
-  _cmd_doc_folderload: <папка> - Скинуть свою папку файлом пресета
-  _cmd_doc_removefromfolder: <папка> <модуль> - Удалить модуль из своей папки
-  _cmd_doc_loadaliases: Загрузить алиасы из файла. Кинь файл с командой или ответь командой на файл.
-  _cmd_doc_aliasload: Скинуть алиасы файлом
-  _cls_doc: Предлагает свежим адептам сборки модулей для загрузки
-  name: Presets
 settings:
   choose_installation: '{e:glowing_star} <b>Где ставить будем?</b>'
   vds_install: '{e:diamond} На VDS одной командой:

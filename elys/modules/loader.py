@@ -456,7 +456,7 @@ class LoaderMod(loader.Module):
         """
         Modules installed from a link are loaded from the filesystem after a
         restart, so their `__origin__` is a local file. Put the original link
-        back, otherwise `.ml` and presets lose track of where they came from.
+        back, otherwise `.ml` loses track of where they came from.
         """
         for module in self.allmodules.modules:
             link = todo.get(module.__class__.__name__)

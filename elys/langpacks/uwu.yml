@@ -365,57 +365,6 @@ elys_backup:
   _cmd_doc_backupall: Cweates a genyewaw backup copy (moduwes + database)
   _cmd_doc_restoreall: Westowes a common backup (base + moduwes)
   name: ElysBackup
-presets:
-  name: Pwesets
-  _fun_title: 🪩 Entewtainment moduwes
-  _fun_desc: Fun moduwes — anyimations, spam, entewtainment, etc.
-  _chat_title: 👥 Gwoup Administwation Hewpews
-  _chat_desc: Da cowwection of toows which wiww hewp to modewate youw gwoup chat — fiwtews, nyotes, voice wecognyition, etc.
-  _service_title: ⚙️ Usefuw moduwes
-  _service_desc: Weawwy usefuw moduwes — account manyagement, wink showtenyew, seawch enginye, etc.
-  _downloaders_title: 📥 Downwoadews
-  _downloaders_desc: Da cowwection of toows which wiww hewp you downwoad/upwoad fiwes fwom/to diffewent souwces — YouTube, TikTok, Instagwam, Spotify, VK Music, etc.
-  welcome: 👋 <b>H-Hi dewe! Tiwed of scwowwing dwough endwess moduwes in channyews? Wet me suggest you some pwe-made cowwections. If you nyeed to caww dis menyu again, simpwy send /presets to dis bot! :3</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>Moduwes in dis cowwection:</b>
-
-
-    {}'
-  back: 🔙 Back
-  install: 📦 Instaww
-  installing: '{e:wait} <b>Instawwing pweset</b> <code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>Instawwing pweset</b> <code>{}</code> <b>({}/{} moduwes)...</b>
-
-
-    {e:star} <i>Instawwing moduwe {}...</i>'
-  installed: '{e:party} <b>Pweset</b> <code>{}</code> <b>instawwed! Yay!</b>'
-  already_installed: ✅ [Instawwed]
-  add_to_folder_usage: '{e:stop} <b>Spwecify a fowdew to add a mowduwle 💕 </b> <code>{prefix}addtofolder <fowdew> <mowduwle></code>'
-  already_in_folder: '{e:stop} <b>Mowduwle iws awweady in the fowdew 😿</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>Mowduwle {} addwed to fowdew 💕</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>Mowduwle {} nowt fowund 😭</b>'
-  folder_load_usage: '{e:stop} <b>Spwecify a fowdew to woad mowduwles 💗 </b> <code>{prefix}fl <fowdew></code>'
-  folder_not_found: '{e:stop} <b>Fowdew {} nowt fowund 😿</b>'
-  no_modules_in_folder: '{e:stop} <b>No mowduwles in fowdew {} 💔</b>'
-  folder: '{e:folder} <b>Fowdew</b> {}
-
-
-    {e:glowing_star} <b>{prefix}lp in wepwy to thiws mewssage to inwstaww 💕</b>'
-  remove_from_folder_usage: '{e:stop} <b>UwU specify fowdew and mowduw to wemove. </b> <code>{prefix}removefromfolder <fowdew> <mowduw></code>'
-  removed_from_folder: '{e:party} <b>Mowduw {} wemoved fwom fowdew</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Mowduw {} is nyot in fowdew {}</b>'
-  _cmd_doc_presets: '| Packs of moduwes to woad'
-  _cmd_doc_loadpreset: Custom pweset woader. Wepwy to a fiwe ow send a fiwe with da command.
-  _cmd_doc_addtofolder: <fowdew> <moduwe> - Add moduwe to a custom fowdew
-  _cmd_doc_folderload: <fowdew> - Send a custom fowdew as a pweset fiwe
-  _cmd_doc_removefromfolder: <fowdew> <moduwe> - Wemove moduwe fwom a custom fowdew
-  _cmd_doc_loadaliases: Woad awiases fwom fiwe. Send a fiwe with da command ow wepwy to a fiwe.
-  _cmd_doc_aliasload: Send awiases as a fiwe
-  _cls_doc: Suggests nyew Elys usews a packs of moduwes to woad
 settings:
   name: Settings
   vds: 💎 VDS

@@ -355,57 +355,6 @@ elys_backup:
   _cmd_doc_backupall: Erstellt eine allgemeine Sicherungskopie (Module + Datenbank)
   _cmd_doc_restoreall: Stellt ein gemeinsames Backup wieder her (Basis + Module)
   name: ElysBackup
-presets:
-  _fun_title: 🪩 Unterhaltsame Module
-  _fun_desc: Lustige Module – Animationen, Spam, Spiele und mehr.
-  _chat_title: 👥 Chat-Administrationsmodule
-  _chat_desc: Sammlung von Modulen, die Ihnen bei der Chat-Administration helfen – Filter, Notizen, Spracherkennung und mehr.
-  _service_title: ⚙️ Nützliche Module
-  _service_desc: Tatsächlich nützliche Module – Kontoverwaltung, Linkverkürzer, Suchmaschine und mehr.
-  _downloaders_title: 📥 Downloader
-  _downloaders_desc: Sammlung von Modulen, die Ihnen helfen, Dateien aus verschiedenen Quellen hoch-/herunterzuladen – YouTube, TikTok, Instagram, Spotify, VK Musik und mehr.
-  welcome: 👋 <b>Hallo! Müde vom Durchblättern endloser Modullisten in Kanälen? Ich kann Ihnen einige vorgefertigte Sets anbieten. Wenn Sie dieses Menü erneut aufrufen müssen, senden Sie mir den Befehl /presets</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>Module in diesem Set:</b>
-
-
-    {}'
-  back: 🔙 Zurück
-  install: 📦 Installieren
-  installing: '{e:wait} <b>Installation des Sets </b><code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>Installation des Sets</b> <code>{}</code> <b>({}/{} Module)...</b>
-
-
-    {e:star} <i>Installation des Moduls {}...</i>'
-  installed: '{e:party} <b>Set</b> <code>{}</code> <b>wurde installiert!</b>'
-  already_installed: ✅ [Installiert]
-  add_to_folder_usage: '{e:stop} <b>Geben Sie einen Ordner an, um ein Modul hinzuzufügen. </b> <code>{prefix}addtofolder <ordner> <modul></code>'
-  already_in_folder: '{e:stop} <b>Modul befindet sich bereits im Ordner</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>Modul {} zum Ordner hinzugefügt</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>Modul {} nicht gefunden</b>'
-  folder_load_usage: '{e:stop} <b>Geben Sie einen Ordner an, um Module zu laden. </b> <code>{prefix}fl <ordner></code>'
-  folder_not_found: '{e:stop} <b>Ordner {} nicht gefunden</b>'
-  no_modules_in_folder: '{e:stop} <b>Keine Module im Ordner {}</b>'
-  folder: '{e:folder} <b>Ordner</b> {}
-
-
-    {e:glowing_star} <b>{prefix}lp zur Antwort auf diese Nachricht zum Installieren</b>'
-  remove_from_folder_usage: '{e:stop} <b>Geben Sie Ordner und Modul zum Entfernen an. </b> <code>{prefix}removefromfolder <ordner> <modul></code>'
-  removed_from_folder: '{e:party} <b>Modul {} aus Ordner entfernt</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Modul {} ist nicht im Ordner {}</b>'
-  _cmd_doc_presets: '| Modulpakete zum Laden'
-  _cmd_doc_loadpreset: Benutzerdefinierten Preset laden. Sende eine Datei mit dem Befehl oder antworte mit dem Befehl auf eine Datei.
-  _cmd_doc_addtofolder: <Ordner> <Modul> - Modul zu einem benutzerdefinierten Ordner hinzufügen
-  _cmd_doc_folderload: <Ordner> - Benutzerdefinierten Ordner als Preset-Datei senden
-  _cmd_doc_removefromfolder: <Ordner> <Modul> - Modul aus einem benutzerdefinierten Ordner entfernen
-  _cmd_doc_loadaliases: Aliase aus Datei laden. Sende eine Datei mit dem Befehl oder antworte mit dem Befehl auf eine Datei.
-  _cmd_doc_aliasload: Aliase als Datei senden
-  _cls_doc: Schlägt neuen Elys-Benutzern Modulsätze zum Laden vor
-  name: Presets
 settings:
   choose_installation: '{e:glowing_star} <b>Wählen Sie Ihre Elys-Installationsoption:</b>'
   vds_install: '{e:diamond} Der Installationsprozess auf einem VDS wird mit einem einzigen Befehl durchgeführt:

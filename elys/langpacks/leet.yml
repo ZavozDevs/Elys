@@ -365,57 +365,6 @@ elys_backup:
   _cmd_doc_backupall: Cr34735 4 g3n3r4l b4ckup c0py (m0d5 + DB)
   _cmd_doc_restoreall: R3570r35 4 c0mm0n b4ckup (b453 + m0d5)
   name: ElysBackup
-presets:
-  name: Pr35375
-  _fun_title: 🪩 3n73r741nm3n7 m0d5
-  _fun_desc: Fun m0d5 — 4n1m4710n5, sp4m, 3n73r741nm3n7, 37c.
-  _chat_title: 👥 Gr0up 4dm1n H3lp3rz
-  _chat_desc: 7h3 c0ll3c710n 0f 700l5 wh1ch w1ll h3lp 2 m0d3r473 ur gr0up ch47 — f1l73r5, n0735, v01c3 r3c0gn1710n, 37c.
-  _service_title: ⚙️ U53ful m0d5
-  _service_desc: R34lly u53ful m0d5 — 4cc m4n4g3m3n7, l1nk sh0r73n3r, s34rch 3ng1n3, 37c.
-  _downloaders_title: 📥 D0wnl04d3rz
-  _downloaders_desc: 7h3 c0ll3c710n 0f 700l5 wh1ch w1ll h3lp u d0wnl04d/upl04d f1l35 fr0m/2 d1ff3r3n7 s0urc35 — Y0u7ub3, 71k70k, 1n574gr4m, Sp071fy, VK Mu51c, 37c.
-  welcome: 👋 <b>H1 7h3r3! 71r3d 0f 5cr0ll1ng 7hr0ugh 3ndl355 m0d5 1n ch4nn3l5? L37 m3 sugg357 u 50m3 pr3-m4d3 c0ll3c710n5. 1f u n33d 2 c4ll 7h15 m3nu 4g41n, 51mply s3nd /presets 2 7h15 b07!</b>
-  preset: '<b>{}:</b>
-
-    ℹ️ <i>{}</i>
-
-
-    ⚒ <b>M0d5 1n 7h15 c0ll3c710n:</b>
-
-
-    {}'
-  back: 🔙 B4ck
-  install: 📦 1n574ll
-  installing: '{e:wait} <b>1n574ll1ng pr3537</b> <code>{}</code><b>...</b>'
-  installing_module: '{e:wait} <b>1n574ll1ng pr3537</b> <code>{}</code> <b>({}/{} m0d5)...</b>
-
-
-    {e:star} <i>1n574ll1ng m0dul3 {}...</i>'
-  installed: '{e:party} <b>Pr3537</b> <code>{}</code> <b>1n574ll3d!</b>'
-  already_installed: ✅ [1n574ll3d]
-  add_to_folder_usage: '{e:stop} <b>5p3c1fy 4 f0ld3r t0 4dd 4 m0dul3. </b> <code>{prefix}addtofolder <f0ld3r> <m0dul3></code>'
-  already_in_folder: '{e:stop} <b>M0dul3 1z 41r34dy 1n th3 f0ld3r</b> <code>{}</code>'
-  added_to_folder: '{e:party} <b>M0dul3 {} 4dd3d t0 f0ld3r</b> <code>{}</code>'
-  module_not_found: '{e:stop} <b>M0dul3 {} n0t f0und</b>'
-  folder_load_usage: '{e:stop} <b>5p3c1fy 4 f0ld3r t0 l04d m0dul3z. </b> <code>{prefix}fl <f0ld3r></code>'
-  folder_not_found: '{e:stop} <b>F0ld3r {} n0t f0und</b>'
-  no_modules_in_folder: '{e:stop} <b>N0 m0dul3z 1n f0ld3r {}</b>'
-  folder: '{e:folder} <b>F0ld3r</b> {}
-
-
-    {e:glowing_star} <b>{prefix}lp 1n r3ply t0 7h1z m3zz4g3 t0 1nzt4ll</b>'
-  remove_from_folder_usage: '{e:stop} <b>5p3c1fy f0ld3r 4nd m0dul3 t0 r3m0v3. </b> <code>{prefix}removefromfolder <f0ld3r> <m0dul3></code>'
-  removed_from_folder: '{e:party} <b>Modul3 {} r3m0v3d fr0m f0ld3r</b> <code>{}</code>'
-  module_not_in_folder: '{e:stop} <b>Modul3 {} 15 n07 1n f0ld3r {}</b>'
-  _cmd_doc_presets: '| P4ck5 0f m0d5 2 l04d'
-  _cmd_doc_loadpreset: Cu570m pr3537 l04d3r. R3ply 2 f1l3 0r 53nd f1l3 w17h cmd.
-  _cmd_doc_addtofolder: <f0ld3r> <m0dul3> - 4dd m0dul3 2 cu570m f0ld3r
-  _cmd_doc_folderload: <f0ld3r> - 53nd cu570m f0ld3r 45 pr3537 f1l3
-  _cmd_doc_removefromfolder: <f0ld3r> <m0dul3> - R3m0v3 m0dul3 fr0m cu570m f0ld3r
-  _cmd_doc_loadaliases: L04d 4l14535 fr0m f1l3. 53nd f1l3 w17h cmd 0r r3ply 2 f1l3.
-  _cmd_doc_aliasload: 53nd 4l14535 45 f1l3
-  _cls_doc: Sugg3575 n3w 3li5 u53rz 4 p4ck5 0f m0d5 2 l04d
 settings:
   name: S3771ng5
   vds: 💎 VDS
