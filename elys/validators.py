@@ -227,14 +227,9 @@ class Choice(Validator):
         self,
         possible_values: list[ConfigAllowedTypes],
         /,
-        allow_custom: bool = False,
     ):
         super().__init__(
-            functools.partial(
-                self._validate,
-                possible_values=possible_values,
-                allow_custom=allow_custom,
-            ),
+            functools.partial(self._validate, possible_values=possible_values),
             translator.getdict(
                 "validators.choice",
                 possible=" / ".join(list(map(str, possible_values))),
@@ -248,11 +243,8 @@ class Choice(Validator):
         /,
         *,
         possible_values: list[ConfigAllowedTypes],
-        allow_custom: bool = False,
     ) -> ConfigAllowedTypes:
         if value not in possible_values:
-            if allow_custom:
-                return value
             raise ValidationError(
                 f"Passed value ({value}) is not one of the following:"
                 f" {' / '.join(list(map(str, possible_values)))}"
