@@ -395,6 +395,13 @@ async def answer(
         message = message[0]
 
     if rich_message is not None:
+        if isinstance(rich_message, str):
+            from .. import emojis
+
+            rich_message = emojis.render_emojis(rich_message)
+            if emojis.is_alt_emoji_format():
+                rich_message = emojis.convert_to_alt_emoji(rich_message)
+
         if isinstance(
             message,
             (InlineMessage, InlineCall, BotInlineMessage, BotInlineCall),
