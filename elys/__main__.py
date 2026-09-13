@@ -40,11 +40,10 @@ def get_data_root():
         if arg.startswith("--data-root="):
             return Path(arg.split("=", maxsplit=1)[1]).expanduser()
 
-    return Path(
-        "/data"
-        if "DOCKER" in os.environ
-        else os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    )
+    if os.environ.get("DOCKER") == "true":
+        return Path("/data")
+
+    return Path(__file__).resolve().parent.parent
 
 
 def wipe_data():
@@ -67,7 +66,7 @@ def wipe_data():
         "*.session-journal",
         "api_token.txt",
     )
-    dirs = ("loaded_modules", "sessions")
+    dirs = ("loaded_modules", "sessions", "private")
     removed = 0
 
     for pattern in patterns:

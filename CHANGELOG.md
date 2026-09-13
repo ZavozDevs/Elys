@@ -6,6 +6,7 @@
  - Complete UI and brand modernization to Elys
  - Full backward compatibility with FTG, Hikka and Heroku modules
  - Built-in secure module loader, multi-account support and advanced inline features
+ - Fix external module and data directory paths on non-Docker installations
 
 ## 📜 Previous Base (Heroku 2.1.0)
 

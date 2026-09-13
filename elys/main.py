@@ -130,6 +130,18 @@ try:
 except Exception:
     logging.getLogger(__name__).debug("Failed to patch elystl html/md unparse", exc_info=True)
 
+DATA_DIR = (
+    "/data"
+    if os.environ.get("DOCKER") == "true"
+    else str(Path(__file__).resolve().parent.parent)
+)
+BASE_DIR = DATA_DIR
+BASE_PATH = Path(BASE_DIR)
+CONFIG_PATH = BASE_PATH / "config.json"
+SESSIONS_DIR = os.path.join(BASE_DIR, "sessions")
+LOADED_MODULES_DIR = os.path.join(BASE_DIR, "loaded_modules")
+PRIVATE_DIR = os.path.join(BASE_DIR, "private")
+
 from . import database, loader, utils, version
 from ._internal import print_banner, restart
 from .dispatcher import CommandDispatcher
@@ -141,15 +153,6 @@ from .version import __version__
 
 logger = logging.getLogger(__name__)
 
-BASE_DIR = (
-    "/data"
-    if "DOCKER" in os.environ
-    else os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-)
-
-BASE_PATH = Path(BASE_DIR)
-CONFIG_PATH = BASE_PATH / "config.json"
-SESSIONS_DIR = os.path.join(BASE_DIR, "sessions")
 _CONFIG_CACHE: dict | None = None
 _CONFIG_MTIME_NS: int | None = None
 
@@ -566,16 +569,28 @@ class Elys:
     """Main userbot instance, which can handle multiple clients"""
 
     def __init__(self):
-        global BASE_DIR, BASE_PATH, CONFIG_PATH, SESSIONS_DIR
+        global BASE_DIR, DATA_DIR, BASE_PATH, CONFIG_PATH, SESSIONS_DIR, LOADED_MODULES_DIR, PRIVATE_DIR
         self.omit_log = False
         self.arguments = parse_arguments()
         if self.arguments.no_git:
             os.environ["ELYS_NO_GIT"] = "1"
         if self.arguments.data_root:
             BASE_DIR = self.arguments.data_root
+            DATA_DIR = BASE_DIR
             BASE_PATH = Path(BASE_DIR)
             CONFIG_PATH = BASE_PATH / "config.json"
             SESSIONS_DIR = os.path.join(BASE_DIR, "sessions")
+            LOADED_MODULES_DIR = os.path.join(BASE_DIR, "loaded_modules")
+            PRIVATE_DIR = os.path.join(BASE_DIR, "private")
+            loader.BASE_DIR = BASE_DIR
+            loader.DATA_DIR = DATA_DIR
+            loader.LOADED_MODULES_DIR = LOADED_MODULES_DIR
+            loader.LOADED_MODULES_PATH = Path(LOADED_MODULES_DIR)
+            loader.PRIVATE_DIR = PRIVATE_DIR
+            loader.MODULES_LANGPACKS_DIR = os.path.join(
+                LOADED_MODULES_DIR, "langpacks"
+            )
+            loader.MODULES_LANGPACKS_PATH = Path(loader.MODULES_LANGPACKS_DIR)
         try:
             self.loop = asyncio.get_running_loop()
 

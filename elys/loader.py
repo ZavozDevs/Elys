@@ -338,13 +338,13 @@ MODULES_NAME = "modules"
 ru_keys = 'ёйцукенгшщзхъфывапролджэячсмитьбю.Ё"№;%:?ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,'
 en_keys = "`qwertyuiop[]asdfghjkl;'zxcvbnm,./~@#$%^&QWERTYUIOP{}ASDFGHJKL:\"|ZXCVBNM<>?"
 
-BASE_DIR = (
-    "/data"
-    if "DOCKER" in os.environ
-    else os.path.normpath(os.path.join(utils.get_base_dir(), ".."))
+BASE_DIR = main.BASE_DIR
+DATA_DIR = getattr(main, "DATA_DIR", BASE_DIR)
+LOADED_MODULES_DIR = getattr(
+    main, "LOADED_MODULES_DIR", os.path.join(BASE_DIR, "loaded_modules")
 )
+PRIVATE_DIR = getattr(main, "PRIVATE_DIR", os.path.join(BASE_DIR, "private"))
 
-LOADED_MODULES_DIR = os.path.join(BASE_DIR, "loaded_modules")
 MODULES_LANGPACKS_DIR = os.path.join(LOADED_MODULES_DIR, "langpacks")
 LOADED_MODULES_PATH = Path(LOADED_MODULES_DIR)
 MODULES_LANGPACKS_PATH = Path(MODULES_LANGPACKS_DIR)
@@ -902,21 +902,20 @@ class Modules:
         cls_name = ret.__class__.__name__
 
         if save_fs and (origin == "<string>" or utils.check_url(origin)):
-            path = os.path.join(
-                LOADED_MODULES_DIR,
-                f"{cls_name}_{self.client.tg_id}.py",
+            target_path = (
+                Path(LOADED_MODULES_DIR) / f"{cls_name}_{self.client.tg_id}.py"
             )
 
             if source_data is not None:
-                Path(path).parent.mkdir(parents=True, exist_ok=True)
-                Path(path).write_text(source_data, encoding="utf-8")
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                target_path.write_text(source_data, encoding="utf-8")
 
-                logger.debug("Saved class %s to path %s", cls_name, path)
+                logger.debug("Saved class %s to path %s", cls_name, target_path)
             else:
                 logger.warning(
                     "Can't save class %s to path %s: no source data",
                     cls_name,
-                    path,
+                    target_path,
                 )
 
         return ret
