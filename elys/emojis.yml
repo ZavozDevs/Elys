@@ -437,6 +437,10 @@ branding:
     fallback: 🙂
     aliases:
     - elys_logo_star_1
+  logo_star_1_alt:
+    id: '5255791178497959401'
+    fallback: 🙂
+    aliases: []
   logo_star_2:
     id: '5253522460808094600'
     fallback: 🙂
@@ -452,6 +456,10 @@ branding:
     fallback: 🙂
     aliases:
     - elys_logo_star_4
+  logo_star_4_alt:
+    id: '5255827251928278078'
+    fallback: 🙂
+    aliases: []
   heart_info:
     id: '5224219153077914783'
     fallback: ❤️
@@ -778,7 +786,7 @@ flags:
 platforms:
   platform_termux:
     id: '5395745114494624362'
-    fallback: 🌼
+    fallback: 🪐
     aliases:
     - termux
   platform_linux:
@@ -787,17 +795,68 @@ platforms:
     aliases:
     - linux
   platform_wsl:
-    id: '5350588498359377932'
-    fallback: 🪐
+    id: '5276463745151842799'
+    fallback: 💻
     aliases:
     - wsl
+    - platform_windows
+    - windows
   platform_android:
-    id: '5276415504079164229'
+    id: '5276324313333539897'
     fallback: ❤️🔥
     aliases:
     - android
-  platform_docker:
-    id: '5352678227582152630'
+    - platform_rnhost
+    - rnhost
+  platform_docker_1:
+    id: '5276455773692535302'
     fallback: 🐳
     aliases:
+    - platform_docker
     - docker
+  platform_docker_2:
+    id: '5274246476875214800'
+    fallback: 🐳
+    aliases: []
+  platform_apple_1:
+    id: '5276241841371525820'
+    fallback: 🍏
+    aliases:
+    - platform_apple
+    - platform_macos
+    - apple
+    - macos
+  platform_apple_2:
+    id: '5276282411632598712'
+    fallback: 🍏
+    aliases: []
+  platform_userland_1:
+    id: '5274095620443907979'
+    fallback: 🐧
+    aliases:
+    - platform_userland
+    - userland
+  platform_userland_2:
+    id: '5276279937731437831'
+    fallback: 🐧
+    aliases: []
+  platform_raspberry_1:
+    id: '5274144703330168003'
+    fallback: 🍇
+    aliases:
+    - platform_raspberry
+    - raspberry
+  platform_raspberry_2:
+    id: '5276322659771129956'
+    fallback: 🍇
+    aliases: []
+  platform_orange_1:
+    id: '5276273074373701647'
+    fallback: 🍊
+    aliases:
+    - platform_orange
+    - orange
+  platform_orange_2:
+    id: '5276173212089100836'
+    fallback: 🍊
+    aliases: []

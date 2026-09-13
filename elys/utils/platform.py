@@ -13,6 +13,7 @@
 import contextlib
 import logging
 import os
+import random
 import shutil
 import sys
 import time
@@ -34,6 +35,8 @@ IS_TERMUX = (
 )
 IS_WSL = False
 IS_WINDOWS = False
+IS_RASPBERRY = False
+IS_ORANGE = False
 with contextlib.suppress(Exception):
     from platform import uname
 
@@ -42,21 +45,27 @@ with contextlib.suppress(Exception):
     elif uname().system == "Windows":
         IS_WINDOWS = True
 
+with contextlib.suppress(Exception):
+    if os.path.isfile("/proc/device-tree/model"):
+        with open("/proc/device-tree/model") as f:
+            _model = f.read()
+            if "Orange" in _model:
+                IS_ORANGE = True
+            elif "Raspberry" in _model:
+                IS_RASPBERRY = True
+
 
 def get_named_platform() -> str:
     """
     Returns formatted platform name
     :return: Platform name
     """
-
-    with contextlib.suppress(Exception):
-        if os.path.isfile("/proc/device-tree/model"):
-            with open("/proc/device-tree/model") as f:
-                model = f.read().strip()
-                if any(board in model for board in ("Orange", "Raspberry")):
-                    return model
-
     match True:
+        case _ if IS_ORANGE:
+            return "Orange Pi"
+
+        case _ if IS_RASPBERRY:
+            return "Raspberry Pi"
 
         case _ if IS_WSL:
             return "WSL"
@@ -87,20 +96,12 @@ def get_named_platform_emoji() -> str:
     """
     Returns emoji for current platform
     """
-
-    with contextlib.suppress(Exception):
-        if os.path.isfile("/proc/device-tree/model"):
-            with open("/proc/device-tree/model") as f:
-                model = f.read()
-                if "Orange" in model:
-                    return "🍊 "
-
-                if "Raspberry" in model:
-                    return "🍇 "
-                else:
-                    return "?"
-
     match True:
+        case _ if IS_ORANGE:
+            return "🍊 "
+
+        case _ if IS_RASPBERRY:
+            return "🍇 "
 
         case _ if IS_WSL:
             return "🍀 "
@@ -134,21 +135,30 @@ def get_platform_emoji() -> str:
     """
     from .. import emojis
 
-    first_emoji = "{e:logo_star_1}"
+    first_options = ["{e:logo_star_1}", "{e:logo_star_1_alt}"]
     match True:
-        case _ if IS_TERMUX:
-            first_emoji = "{e:platform_termux}"
-        case _ if IS_WSL:
-            first_emoji = "{e:platform_wsl}"
-        case _ if IS_USERLAND:
-            first_emoji = "{e:platform_linux}"
-        case _ if IS_RNHOST:
-            first_emoji = "{e:platform_android}"
         case _ if IS_DOCKER:
-            first_emoji = "{e:platform_docker}"
+            first_options = ["{e:platform_docker_1}", "{e:platform_docker_2}"]
+        case _ if IS_RNHOST:
+            first_options = ["{e:platform_android}"]
+        case _ if IS_WSL or IS_WINDOWS:
+            first_options = ["{e:platform_wsl}"]
+        case _ if IS_MACOS:
+            first_options = ["{e:platform_apple_1}", "{e:platform_apple_2}"]
+        case _ if IS_USERLAND:
+            first_options = ["{e:platform_userland_1}", "{e:platform_userland_2}"]
+        case _ if IS_RASPBERRY:
+            first_options = ["{e:platform_raspberry_1}", "{e:platform_raspberry_2}"]
+        case _ if IS_ORANGE:
+            first_options = ["{e:platform_orange_1}", "{e:platform_orange_2}"]
+        case _ if IS_TERMUX:
+            first_options = ["{e:platform_termux}"]
+
+    first_emoji = random.choice(first_options)
+    last_emoji = random.choice(["{e:logo_star_4}", "{e:logo_star_4_alt}"])
 
     return emojis.render_emojis(
-        f"{first_emoji}{{e:logo_star_2}}{{e:logo_star_3}}{{e:logo_star_4}}"
+        f"{first_emoji}{{e:logo_star_2}}{{e:logo_star_3}}{last_emoji}"
     )
 
 
