@@ -971,12 +971,25 @@ class UpdaterMod(loader.Module):
 
     @loader.command()
     async def source(self, message: Message):
+        url = str(self.config.get("GIT_ORIGIN_URL", ""))
+        if not url or any(
+            old in url for old in ("coddrago/Heroku", "hikariatama/Hikka")
+        ):
+            url = "https://github.com/ZavozDevs/Elys"
+            self.config["GIT_ORIGIN_URL"] = url
+
         await utils.answer(
             message,
-            self.strings["source"].format(self.config["GIT_ORIGIN_URL"]),
+            self.strings["source"].format(url),
         )
 
     async def client_ready(self):
+        url = str(self.config.get("GIT_ORIGIN_URL", ""))
+        if not url or any(
+            old in url for old in ("coddrago/Heroku", "hikariatama/Hikka")
+        ):
+            self.config["GIT_ORIGIN_URL"] = "https://github.com/ZavozDevs/Elys"
+
         with contextlib.suppress(Exception):
             await self.update_complete()
 

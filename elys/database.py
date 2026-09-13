@@ -271,6 +271,11 @@ class Database(dict):
             else:
                 migrated[new_key] = v
 
+        if "Updater" in migrated and isinstance(migrated["Updater"], dict):
+            orig_url = str(migrated["Updater"].get("GIT_ORIGIN_URL", ""))
+            if any(old in orig_url for old in ("coddrago/Heroku", "hikariatama/Hikka")):
+                migrated["Updater"]["GIT_ORIGIN_URL"] = "https://github.com/ZavozDevs/Elys"
+
         return migrated
 
     def read(self):
