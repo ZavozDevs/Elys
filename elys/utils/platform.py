@@ -24,7 +24,6 @@ parser = elystl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 IS_DOCKER = "DOCKER" in os.environ
-IS_HIKKAHOST = "HIKKAHOST" in os.environ
 IS_RNHOST = "RNHOST" in os.environ or "RN_HOST" in os.environ
 IS_MACOS = "com.apple" in os.environ.get("PATH", "") or sys.platform == "darwin"
 IS_USERLAND = "userland" in os.environ.get("USER", "")
@@ -74,9 +73,6 @@ def get_named_platform() -> str:
         case _ if IS_TERMUX:
             return "Termux"
 
-        case _ if IS_HIKKAHOST:
-            return "HikkaHost"
-
         case _ if IS_RNHOST:
             return "RnHost"
 
@@ -121,11 +117,8 @@ def get_named_platform_emoji() -> str:
         case _ if IS_TERMUX:
             return "🪐 "
 
-        case _ if IS_HIKKAHOST:
-            return "🌼 "
-
         case _ if IS_RNHOST:
-            return "❤️‍🔥 "
+            return "❤️🔥 "
 
         case _ if IS_DOCKER:
             return "🐳 "
@@ -141,24 +134,22 @@ def get_platform_emoji() -> str:
     """
     from .. import emojis
 
-    ELYS_LOGO = emojis.render_emojis(
-        "{e:logo_star_1}{e:logo_star_2}{e:logo_star_3}{e:logo_star_4}"
-    )
-
-    platform_prefix = ""
+    first_emoji = "{e:logo_star_1}"
     match True:
-        case _ if IS_HIKKAHOST:
-            platform_prefix = emojis.render_emojis("{e:platform_termux}")
-        case _ if IS_USERLAND:
-            platform_prefix = emojis.render_emojis("{e:platform_linux}")
         case _ if IS_TERMUX:
-            platform_prefix = emojis.render_emojis("{e:platform_wsl}")
+            first_emoji = "{e:platform_termux}"
+        case _ if IS_WSL:
+            first_emoji = "{e:platform_wsl}"
+        case _ if IS_USERLAND:
+            first_emoji = "{e:platform_linux}"
         case _ if IS_RNHOST:
-            platform_prefix = emojis.render_emojis("{e:platform_android}")
+            first_emoji = "{e:platform_android}"
         case _ if IS_DOCKER:
-            platform_prefix = emojis.render_emojis("{e:platform_docker}")
+            first_emoji = "{e:platform_docker}"
 
-    return f"{platform_prefix}{ELYS_LOGO}"
+    return emojis.render_emojis(
+        f"{first_emoji}{{e:logo_star_2}}{{e:logo_star_3}}{{e:logo_star_4}}"
+    )
 
 
 def uptime() -> int:
