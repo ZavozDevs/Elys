@@ -687,10 +687,25 @@ class UpdaterMod(loader.Module):
             root_repo = os.path.dirname(utils.get_base_dir())
             with git.Repo(root_repo) as repo:
                 origin = repo.remote("origin")
+                with contextlib.suppress(Exception):
+                    repo.git.config(
+                        "remote.origin.fetch",
+                        "+refs/heads/*:refs/remotes/origin/*",
+                    )
+
                 logger.info("Fetching origin for branch %s...", target_branch)
-                origin.fetch(prune=True)
+                try:
+                    origin.fetch("+refs/heads/*:refs/remotes/origin/*", prune=True)
+                except Exception:
+                    origin.fetch(prune=True)
 
                 target_ref = f"origin/{target_branch}"
+                if target_ref not in [ref.name for ref in origin.refs]:
+                    with contextlib.suppress(Exception):
+                        origin.fetch(
+                            f"+refs/heads/{target_branch}:refs/remotes/origin/{target_branch}"
+                        )
+
                 if target_ref not in [ref.name for ref in origin.refs]:
                     raise ValueError(
                         f"Branch '{target_branch}' not found on remote origin"
