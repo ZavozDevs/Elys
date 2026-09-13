@@ -1765,11 +1765,12 @@ class LoaderMod(loader.Module):
     async def _inline__clearmodules(self, call: InlineCall):
         self.set("loaded_modules", {})
 
-        for file in os.scandir(loader.LOADED_MODULES_DIR):
-            try:
-                os.remove(file.path)
-            except Exception:
-                logger.debug("Failed to remove %s", file.path, exc_info=True)
+        if os.path.isdir(loader.LOADED_MODULES_DIR):
+            for file in os.scandir(loader.LOADED_MODULES_DIR):
+                try:
+                    os.remove(file.path)
+                except Exception:
+                    logger.debug("Failed to remove %s", file.path, exc_info=True)
 
         await utils.answer(call, self.strings["all_modules_deleted"])
         await self.lookup("Updater").restart_common(call)

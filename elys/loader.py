@@ -358,6 +358,9 @@ def _iter_module_files(
     suffix: str = ".py",
     include: typing.Callable[[str], bool] | None = None,
 ) -> list[str]:
+    if not os.path.isdir(directory):
+        return []
+
     with os.scandir(directory) as entries:
         return [
             entry.path
@@ -905,6 +908,7 @@ class Modules:
             )
 
             if source_data is not None:
+                Path(path).parent.mkdir(parents=True, exist_ok=True)
                 Path(path).write_text(source_data, encoding="utf-8")
 
                 logger.debug("Saved class %s to path %s", cls_name, path)
