@@ -256,8 +256,8 @@ class Help(loader.Module):
         lines = []
         for name, fun in commands.items():
             lines.append(
-                f'{self.config["command_emoji"]}'
-                " <code>{}{}</code>{} {}".format(
+                f'{self.config["command_emoji"]} '
+                + "<code>{}{}</code>{} {}".format(
                     utils.escape_html(self.get_prefix()),
                     name,
                     (
@@ -346,7 +346,7 @@ class Help(loader.Module):
                 if placeholders
                 else ""
             )
-            + (f"\n\n{self.strings['developer']}".format(dev_text) if dev_text else "")
+            + (f"\n\n{self.strings['developer'].format(dev_text)}" if dev_text else "")
             + (f"\n\n{self.strings['not_exact']}" if not exact else "")
             + (
                 f"\n{self.strings['core_notice']}"
