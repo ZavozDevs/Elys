@@ -23,6 +23,7 @@ import inspect
 import logging
 import os
 import platform as lib_platform
+import re
 import random
 import time
 from io import BytesIO
@@ -373,9 +374,16 @@ class TestMod(loader.Module):
                     break
                 await asyncio.sleep(0.05)
 
-            if target_message and self.config["custom_message"]:
+            custom_message = self.config["custom_message"]
+            if target_message and custom_message:
                 try:
-                    updated_text = self.config["custom_message"].format(**updated_data)
+                    updated_text = re.sub(
+                        r"{(\w+)}",
+                        lambda match: str(
+                            updated_data.get(match.group(1), match.group(0))
+                        ),
+                        custom_message,
+                    )
                     with contextlib.suppress(Exception):
                         if self.config["rich_mode"]:
                             await utils.answer(
@@ -402,8 +410,16 @@ class TestMod(loader.Module):
             lazy=utils.is_async_enabled(self._client),
         )
         try:
-            placeholders_msg = self.config["custom_message"].format(**data)
-        except KeyError:
+            custom_message = (
+                self.config["custom_message"]
+                or "{e:flash_ping} <b>𝙿𝚒𝚗𝚐: </b><code>{ping}</code><b> 𝚖𝚜 </b>\n{e:clock_uptime}<b> 𝚄𝚙𝚝𝚒𝚖𝚎: </b><code>{uptime}</code>"
+            )
+            placeholders_msg = re.sub(
+                r"{(\w+)}",
+                lambda match: str(data.get(match.group(1), match.group(0))),
+                custom_message,
+            )
+        except Exception:
             logger.exception("Missing placeholder in custom_message")
             placeholders_msg = self.strings["placeholder_error"]
 
