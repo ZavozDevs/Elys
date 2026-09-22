@@ -832,6 +832,7 @@ test:
   _cfg_rich_mode: Показывать ping как Rich-сообщение.
   placeholder_error: '{e:stop}'
 updater:
+  _cfg_rich_mode: Показывать обновления и список изменений как Rich-сообщение.
   source: "{e:book} <b>Исходный код можно прочитать</b> <a href='{}'>здесь</a>"
   restarting_caption: '{e:loading} <b>Твой {} перезагружается...</b>'
   downloading: '{e:loading} <b>Скачивание обновлений...</b>'

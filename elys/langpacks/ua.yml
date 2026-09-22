@@ -822,6 +822,7 @@ test:
   name: Test
   _cfg_rich_mode: Показувати ping як Rich-повідомлення.
 updater:
+  _cfg_rich_mode: Показувати оновлення та список змін як Rich-повідомлення.
   source: "{e:book} <b>Вихідний код можна прочитати</b> <a href='{}'>тут</a>"
   restarting_caption: '{e:loading} <b>Твій {} перезавантажується...</b>'
   downloading: '{e:loading} <b>Завантаження оновлень...</b>'

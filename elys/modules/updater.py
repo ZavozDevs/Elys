@@ -67,6 +67,7 @@ class UpdaterMod(loader.Module):
             "{e:star}"
             "{e:star}"
         ),
+        "_cfg_rich_mode": "Show update info and changelog as Rich message",
     }
     _GIT_FETCH_INTERVAL = 1800
     _EMFILE_FETCH_BACKOFF = 900
@@ -99,6 +100,15 @@ class UpdaterMod(loader.Module):
                 1800,
                 doc=lambda: self.strings["_cfg_doc_check_interval"],
                 validator=loader.validators.Integer(minimum=60),
+            ),
+            loader.ConfigValue(
+                "rich_mode",
+                False,
+                lambda: self.strings.get(
+                    "_cfg_rich_mode",
+                    "Show update info and changelog as Rich message",
+                ),
+                validator=loader.validators.Boolean(),
             ),
         )
 
@@ -164,6 +174,116 @@ class UpdaterMod(loader.Module):
 
         return res
 
+    def _format_rich_changelog(self, commits: list, limit: int = 15) -> str:
+        items = []
+        for commit in commits[:limit]:
+            msg = commit.message
+            if isinstance(msg, bytes):
+                msg = msg.decode(errors="replace")
+            title = msg.splitlines()[0] if msg.splitlines() else commit.hexsha
+            commit_url = f"https://github.com/ZavozDevs/Elys/commit/{commit.hexsha}"
+            items.append(
+                f'<li><a href="{commit_url}"><code>{commit.hexsha[:7]}</code></a>: {utils.escape_html(title)}</li>'
+            )
+        res = f"<ul>{''.join(items)}</ul>"
+        if len(commits) > limit:
+            res += f"<p><i>...и ещё {len(commits) - limit} коммит(-ов)</i></p>"
+        return res
+
+    def _build_rich_changelog(self, content: str) -> str:
+        sections = re.split(r"^##\s+", content, flags=re.MULTILINE)
+        if not sections or len(sections) < 2:
+            return f"<h1>{utils.get_platform_emoji()} Elys Changelog</h1><pre>{utils.escape_html(content[:3000])}</pre>"
+
+        def _format_section_items(lines: list[str], max_items: int = 25) -> str:
+            items = []
+            for line in lines:
+                stripped = line.strip()
+                if not stripped:
+                    continue
+                if stripped.startswith(("-", "*")):
+                    text = stripped.lstrip("-* ").strip()
+                    items.append(f"<li>{utils.escape_html(text)}</li>")
+                elif items:
+                    items[-1] = items[-1][:-5] + " " + utils.escape_html(stripped) + "</li>"
+                else:
+                    items.append(f"<li>{utils.escape_html(stripped)}</li>")
+                if len(items) >= max_items:
+                    break
+            if len(items) >= max_items:
+                items.append("<li><i>...</i></li>")
+            return f"<ul>{''.join(items)}</ul>" if items else ""
+
+        s1_lines = sections[1].strip().splitlines()
+        s1_title = s1_lines[0].strip() if s1_lines else "Latest"
+        s1_body = _format_section_items(s1_lines[1:])
+
+        result = [
+            '<figure><img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png"/></figure>',
+            f"<h1>{utils.get_platform_emoji()} Elys Changelog</h1>",
+            f"<h2>{utils.escape_html(s1_title)}</h2>",
+            s1_body,
+        ]
+
+        older_sections = []
+        for sec in sections[2:4]:
+            sec_lines = sec.strip().splitlines()
+            if not sec_lines:
+                continue
+            title = sec_lines[0].strip()
+            body = _format_section_items(sec_lines[1:], max_items=10)
+            if body:
+                older_sections.append(
+                    f"<details><summary>{utils.escape_html(title)}</summary>{body}</details>"
+                )
+
+        if older_sections:
+            result.append("<hr>")
+            result.extend(older_sections)
+
+        result.append(
+            '<p><i>Полная история: <a href="https://github.com/ZavozDevs/Elys/blob/dev/CHANGELOG.md">CHANGELOG.md</a></i></p>'
+        )
+        return "".join(result)
+
+    def _build_rich_restart_status(
+        self,
+        took: typing.Any,
+        fails: int,
+        secure_boot: bool = False,
+        title: str | None = None,
+    ) -> str:
+        icon = "🛡" if secure_boot else ("✅" if fails == 0 else "⚠️")
+        if not title:
+            title = (
+                "Безопасная загрузка завершена"
+                if secure_boot
+                else (
+                    "Юзербот успешно запущен!"
+                    if fails == 0
+                    else "Юзербот запущен с ошибками"
+                )
+            )
+        platform_emoji = utils.get_platform_emoji()
+        rows = [
+            f"<tr><td><b>Время перезагрузки</b></td><td><code>{took} сек.</code></td></tr>",
+            f"<tr><td><b>Всего модулей</b></td><td><code>{len(self.allmodules.modules)}</code></td></tr>",
+        ]
+        if fails > 0:
+            rows.append(f"<tr><td><b>Ошибок модулей</b></td><td><code>{fails}</code></td></tr>")
+        rows.append(f"<tr><td><b>Ветка</b></td><td><code>{version.branch}</code></td></tr>")
+        ghash = utils.get_git_hash()
+        if ghash:
+            rows.append(
+                f'<tr><td><b>Коммит</b></td><td><a href="https://github.com/ZavozDevs/Elys/commit/{ghash}"><code>{ghash[:7]}</code></a></td></tr>'
+            )
+
+        return (
+            f"<h1>{icon} {title}</h1>"
+            f"<p>{platform_emoji} {utils.ascii_face()}</p>"
+            f"<table>{''.join(rows)}</table>"
+        )
+
     @staticmethod
     def _get_remote_head_commit(repo_dir: str, branch: str) -> str | None:
         with contextlib.suppress(Exception):
@@ -182,7 +302,7 @@ class UpdaterMod(loader.Module):
     def _get_update_state(
         self,
         force_fetch: bool = False,
-    ) -> tuple[str, str, str | typing.Literal[False]]:
+    ) -> tuple[str, str, str | typing.Literal[False], list]:
         with git.Repo() as repo:
             target_branch = str(version.branch)
             current = repo.head.commit.hexsha
@@ -219,9 +339,10 @@ class UpdaterMod(loader.Module):
                     current,
                     latest,
                     self._format_changelog(commits) if commits else False,
+                    commits,
                 )
             except Exception:  # noqa: BLE001
-                return current, current, False
+                return current, current, False, []
 
     def get_changelog(self) -> str | typing.Literal[False]:
         if NO_GIT:
@@ -247,7 +368,7 @@ class UpdaterMod(loader.Module):
         if NO_GIT:
             return False
         try:
-            current, pending, changelog = await asyncio.to_thread(
+            current, pending, changelog, *rest = await asyncio.to_thread(
                 self._get_update_state
             )
             return bool(changelog and pending != current)
@@ -288,7 +409,7 @@ class UpdaterMod(loader.Module):
             return
 
         try:
-            current, self._pending, changelog = await asyncio.to_thread(
+            current, self._pending, changelog, commits = await asyncio.to_thread(
                 self._get_update_state
             )
         except Exception as e:  # noqa: BLE001
@@ -334,23 +455,46 @@ class UpdaterMod(loader.Module):
                     manual_update = True
 
             if manual_update:
-                m = await self.inline.bot.send_photo(
-                    self.tg_id,
-                    "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png",
-                    caption=self.strings["update_required"].format(
-                        current[:6],
-                        f'<a href="https://github.com/ZavozDevs/Elys/compare/{current[:12]}...{self._pending[:12]}">{self._pending[:6]}</a>',
-                        changelog,
-                    ),
-                    reply_markup=self._markup(),
-                )
+                m = None
+                if self.config["rich_mode"]:
+                    commits_html = (
+                        self._format_rich_changelog(commits)
+                        if commits
+                        else ""
+                    )
+                    rich_caption = (
+                        '<figure><img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png"/></figure>'
+                        f"<h1>{utils.get_platform_emoji()} Новое обновление Elys!</h1>"
+                        f"<p>Выпущена новая версия: <s><code>{current[:7]}</code></s> ⤑ "
+                        f'<a href="https://github.com/ZavozDevs/Elys/compare/{current[:12]}...{self._pending[:12]}"><code>{self._pending[:7]}</code></a></p>'
+                        + (f"<details open><summary>📜 Список коммитов</summary>{commits_html}</details>" if commits_html else (f"<p>{changelog}</p>" if changelog else ""))
+                    )
+                    with contextlib.suppress(Exception):
+                        m = await self.inline.bot.send_rich_message(
+                            self.tg_id,
+                            html=rich_caption,
+                            buttons=self._markup(),
+                        )
+
+                if m is None:
+                    m = await self.inline.bot.send_photo(
+                        self.tg_id,
+                        "https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png",
+                        caption=self.strings["update_required"].format(
+                            current[:6],
+                            f'<a href="https://github.com/ZavozDevs/Elys/compare/{current[:12]}...{self._pending[:12]}">{self._pending[:6]}</a>',
+                            changelog,
+                        ),
+                        reply_markup=self._markup(),
+                    )
 
                 self._notified = self._pending
                 self.set("ignore_permanent", False)
 
                 await self._delete_all_upd_messages()
 
-                self.set("upd_msg", m.message_id)
+                msg_id = getattr(m, "id", getattr(m, "message_id", None))
+                self.set("upd_msg", msg_id)
 
             else:
                 m = await self.inline.bot.send_photo(
@@ -401,7 +545,17 @@ class UpdaterMod(loader.Module):
     async def changelog(self, message: Message):
         """Shows the changelog of the last major update"""
         with open("CHANGELOG.md", encoding="utf-8") as f:  # noqa: ASYNC230
-            changelog = f.read().split("##")[1].strip()
+            raw_changelog = f.read()
+
+        if self.config["rich_mode"]:
+            rich_msg = self._build_rich_changelog(raw_changelog)
+            try:
+                await utils.answer(message, rich_message=rich_msg)
+                return
+            except Exception:
+                logger.debug("Failed sending rich changelog, falling back to plain", exc_info=True)
+
+        changelog = raw_changelog.split("##")[1].strip()
         if (await self._client.get_me()).premium:
             changelog = changelog.replace(
                 "🌑 Elys",
@@ -414,15 +568,34 @@ class UpdaterMod(loader.Module):
     async def restart(self, message: Message):
         args = utils.get_args_raw(message)
         secure_boot = any(trigger in args for trigger in ("--secure-boot", "-sb"))
+        plain_text = self.strings[
+            "secure_boot_confirm" if secure_boot else "restart_confirm"
+        ]
+        rich_text = None
+        if self.config["rich_mode"]:
+            title = (
+                "Безопасная перезагрузка"
+                if secure_boot
+                else "Перезагрузка Elys"
+            )
+            desc = (
+                "Перезагрузка в безопасном режиме (без сторонних модулей)?"
+                if secure_boot
+                else "Вы уверены, что хотите перезагрузить юзербота?"
+            )
+            rich_text = (
+                f"<h1>{utils.get_platform_emoji()} {title}</h1>"
+                f"<p>{desc}</p>"
+            )
+
         try:
             if (
                 "-f" in args
                 or not self.inline.init_complete
                 or not await self.inline.form(
                     message=message,
-                    text=self.strings[
-                        "secure_boot_confirm" if secure_boot else "restart_confirm"
-                    ],
+                    text=plain_text,
+                    rich_message=rich_text,
                     reply_markup=[
                         {
                             "text": self.strings["btn_restart"],
@@ -532,11 +705,18 @@ class UpdaterMod(loader.Module):
         if secure_boot:
             self._db.set(loader.__name__, "secure_boot", True)
 
+        rich_restarting = (
+            f"<h1>{utils.get_platform_emoji()} Перезагрузка Elys...</h1>"
+            f"<p>⏳ Юзербот перезагружается, пожалуйста, подождите...</p>"
+            if self.config["rich_mode"]
+            else None
+        )
         msg_obj = await utils.answer(
             msg_obj,
             self.strings["restarting_caption"].format(
                 utils.get_platform_emoji() if self._client.elys_me.premium else "Elys"
             ),
+            rich_message=rich_restarting,
         )
 
         await self.process_restart_message(msg_obj)
@@ -647,23 +827,56 @@ class UpdaterMod(loader.Module):
                         capture_output=True,
                         check=False,
                     )
-                    return next(
+                    commits = [*repo.iter_commits(f"HEAD..origin/{version.branch}")]
+                    upcoming_hash = next(
                         repo.iter_commits(f"origin/{version.branch}", max_count=1)
                     ).hexsha
+                    return upcoming_hash, commits
 
-            upcoming = await asyncio.to_thread(_fetch_upcoming)
+            upcoming, commits = await asyncio.to_thread(_fetch_upcoming)
+
+            plain_text = (
+                self.strings["update_confirm"].format(
+                    current, current[:8], upcoming, upcoming[:8]
+                )
+                if upcoming != current
+                else self.strings["no_update"]
+            )
+
+            rich_text = None
+            if self.config["rich_mode"]:
+                if upcoming != current:
+                    commits_html = (
+                        self._format_rich_changelog(commits)
+                        if commits
+                        else ""
+                    )
+                    rich_text = (
+                        '<figure><img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png"/></figure>'
+                        f"<h1>{utils.get_platform_emoji()} Доступно обновление Elys</h1>"
+                        f"<table>"
+                        f"<tr><th>Текущий коммит</th><th>Новый коммит</th><th>Ветка</th></tr>"
+                        f'<tr><td><code>{current[:7]}</code></td><td><a href="https://github.com/ZavozDevs/Elys/commit/{upcoming}"><code>{upcoming[:7]}</code></a></td><td><code>{version.branch}</code></td></tr>'
+                        f"</table>"
+                    )
+                    if commits_html:
+                        rich_text += f"<details open><summary>📜 Коммиты ({len(commits)})</summary>{commits_html}</details>"
+                else:
+                    rich_text = (
+                        '<figure><img src="https://raw.githubusercontent.com/ZavozDevs/assets/main/elys_userbot/updated.png"/></figure>'
+                        f"<h1>{utils.get_platform_emoji()} Обновление Elys</h1>"
+                        f"<p>{self.strings['no_update']}</p>"
+                        f"<table><tr><td><b>Текущий коммит</b></td><td><code>{current[:7]}</code></td></tr>"
+                        f"<tr><td><b>Ветка</b></td><td><code>{version.branch}</code></td></tr></table>"
+                    )
+
             if (
                 "-f" in args
                 or not self.inline.init_complete
                 or not await self.inline.form(
                     message=message,
-                    text=(
-                        self.strings["update_confirm"].format(
-                            current, current[:8], upcoming, upcoming[:8]
-                        )
-                        if upcoming != current
-                        else self.strings["no_update"]
-                    ),
+                    text=plain_text,
+                    rich_message=rich_text,
                     reply_markup=[
                         {
                             "text": self.strings["btn_update"],
@@ -678,7 +891,14 @@ class UpdaterMod(loader.Module):
                     ],
                 )
             ):
-                raise RuntimeError("Form display failed")
+                if "-f" in args:
+                    await self.inline_update(message)
+                else:
+                    await utils.answer(
+                        message,
+                        plain_text,
+                        rich_message=rich_text,
+                    )
         except Exception:  # noqa: BLE001
             await self.inline_update(message)
 
@@ -735,8 +955,15 @@ class UpdaterMod(loader.Module):
         await self.restart_common(call)
 
     async def _switch_branch_cb(self, call: InlineCall, target_branch: str):
+        switching_rich = (
+            f"<h1>{utils.get_platform_emoji()} Смена ветки...</h1>"
+            f"<p>Переключение на ветку <code>{target_branch}</code>...</p>"
+            if self.config["rich_mode"]
+            else None
+        )
         await call.edit(
             self.strings["branch_switching"].format(branch=target_branch),
+            rich_message=switching_rich,
             reply_markup=[],
         )
         try:
@@ -745,11 +972,19 @@ class UpdaterMod(loader.Module):
                 self.req_common()
         except Exception as e:
             logger.exception("Failed to switch branch to %s", target_branch)
+            fail_rich = (
+                f"<h1>❌ Ошибка смены ветки</h1>"
+                f"<p>Не удалось переключиться на <code>{target_branch}</code>:</p>"
+                f"<pre>{utils.escape_html(str(e))}</pre>"
+                if self.config["rich_mode"]
+                else None
+            )
             await call.edit(
                 self.strings["branch_switch_fail"].format(
                     branch=target_branch,
                     error=utils.escape_html(str(e)),
                 ),
+                rich_message=fail_rich,
                 reply_markup=[
                     [
                         {
@@ -762,8 +997,15 @@ class UpdaterMod(loader.Module):
             )
             return
 
+        switched_rich = (
+            f"<h1>{utils.get_platform_emoji()} Ветка переключена!</h1>"
+            f"<p>Успешно переключено на <code>{target_branch}</code>. Требуется перезагрузка для применения изменений.</p>"
+            if self.config["rich_mode"]
+            else None
+        )
         await call.edit(
             self.strings["branch_switched"].format(branch=target_branch),
+            rich_message=switched_rich,
             reply_markup=[
                 [
                     {
@@ -816,9 +1058,16 @@ class UpdaterMod(loader.Module):
                 )
                 return
 
+            switching_rich = (
+                f"<h1>{utils.get_platform_emoji()} Смена ветки...</h1>"
+                f"<p>Переключение на ветку <code>{target}</code>...</p>"
+                if self.config["rich_mode"]
+                else None
+            )
             msg_obj = await utils.answer(
                 message,
                 self.strings["branch_switching"].format(branch=target),
+                rich_message=switching_rich,
             )
             try:
                 req_update = await self._git_switch_branch(target)
@@ -826,19 +1075,34 @@ class UpdaterMod(loader.Module):
                     self.req_common()
             except Exception as e:
                 logger.exception("Failed to switch branch to %s", target)
+                fail_rich = (
+                    f"<h1>❌ Ошибка смены ветки</h1>"
+                    f"<p>Не удалось переключиться на <code>{target}</code>:</p>"
+                    f"<pre>{utils.escape_html(str(e))}</pre>"
+                    if self.config["rich_mode"]
+                    else None
+                )
                 await utils.answer(
                     msg_obj,
                     self.strings["branch_switch_fail"].format(
                         branch=target,
                         error=utils.escape_html(str(e)),
                     ),
+                    rich_message=fail_rich,
                 )
                 return
 
+            switched_rich = (
+                f"<h1>{utils.get_platform_emoji()} Ветка переключена!</h1>"
+                f"<p>Успешно переключено на <code>{target}</code>. Требуется перезагрузка для применения изменений.</p>"
+                if self.config["rich_mode"]
+                else None
+            )
             if self.inline.init_complete:
                 await self.inline.form(
                     message=msg_obj,
                     text=self.strings["branch_switched"].format(branch=target),
+                    rich_message=switched_rich,
                     reply_markup=[
                         [
                             {
@@ -858,6 +1122,7 @@ class UpdaterMod(loader.Module):
                 await utils.answer(
                     msg_obj,
                     self.strings["branch_switched"].format(branch=target),
+                    rich_message=switched_rich,
                 )
             return
 
@@ -895,27 +1160,61 @@ class UpdaterMod(loader.Module):
         ]
 
         text = self.strings["branch_menu"].format(current=current)
+        rich_menu = None
+        if self.config["rich_mode"]:
+            branch_descriptions = {
+                "master": "Стабильная ветка (рекомендуется)",
+                "beta": "Бета-тестирование новых функций",
+                "dev": "Ветка активной разработки (unstable)",
+            }
+            rows = []
+            for b in branches:
+                is_active = (b == current)
+                badge = "<b>(текущая)</b>" if is_active else "доступна"
+                desc = branch_descriptions.get(b, "")
+                rows.append(
+                    f"<tr><td><code>{b}</code></td><td>{badge}</td><td>{desc}</td></tr>"
+                )
+            rich_menu = (
+                f"<h1>{utils.get_platform_emoji()} Выбор ветки Elys</h1>"
+                f"<p>Текущая активная ветка: <code>{current}</code></p>"
+                f"<table><tr><th>Ветка</th><th>Статус</th><th>Описание</th></tr>{''.join(rows)}</table>"
+                f"<p><i>Нажмите кнопку ниже для переключения ветки:</i></p>"
+            )
 
         if not self.inline.init_complete or not await self.inline.form(
             message=message,
             text=text,
+            rich_message=rich_menu,
             reply_markup=markup,
         ):
             await utils.answer(
                 message,
                 text
                 + f"\n\n<i>Для смены ветки укажи её имя, например: <code>{self.get_prefix()}branch beta</code></i>",
+                rich_message=rich_menu,
             )
 
     @loader.command()
     async def autoupdate(self, message: Message):
         """| switch autoupdate state"""
         self.config["autoupdate"] = not self.config["autoupdate"]
+        rich_msg = None
+        if self.config["rich_mode"]:
+            state = "Включено ✅" if self.config["autoupdate"] else "Выключено 🚫"
+            rich_msg = (
+                f"<h1>{utils.get_platform_emoji()} Автообновление Elys</h1>"
+                f"<p>Текущий статус: <b>{state}</b></p>"
+            )
         if self.config["autoupdate"]:
-            await utils.answer(message, self.strings["autoupdate_on"])
+            await utils.answer(
+                message, self.strings["autoupdate_on"], rich_message=rich_msg
+            )
         else:
             await utils.answer(
-                message, self.strings["autoupdate_off"].format(prefix=self.get_prefix())
+                message,
+                self.strings["autoupdate_off"].format(prefix=self.get_prefix()),
+                rich_message=rich_msg,
             )
 
     async def inline_update(
@@ -947,7 +1246,16 @@ class UpdaterMod(loader.Module):
 
         try:
             with contextlib.suppress(Exception):
-                msg_obj = await utils.answer(msg_obj, self.strings["downloading"])
+                msg_obj = await utils.answer(
+                    msg_obj,
+                    self.strings["downloading"],
+                    rich_message=(
+                        f"<h1>{utils.get_platform_emoji()} Обновление Elys</h1>"
+                        f"<p>⏳ <b>Скачивание обновлений из репозитория...</b></p>"
+                        if self.config["rich_mode"]
+                        else None
+                    ),
+                )
 
             try:
                 req_update = await self.download_common()
@@ -956,7 +1264,16 @@ class UpdaterMod(loader.Module):
                 return
 
             with contextlib.suppress(Exception):
-                msg_obj = await utils.answer(msg_obj, self.strings["installing"])
+                msg_obj = await utils.answer(
+                    msg_obj,
+                    self.strings["installing"],
+                    rich_message=(
+                        f"<h1>{utils.get_platform_emoji()} Обновление Elys</h1>"
+                        f"<p>📦 <b>Установка обновлений и зависимостей...</b></p>"
+                        if self.config["rich_mode"]
+                        else None
+                    ),
+                )
 
             if req_update:
                 self.req_common()
@@ -978,9 +1295,23 @@ class UpdaterMod(loader.Module):
             url = "https://github.com/ZavozDevs/Elys"
             self.config["GIT_ORIGIN_URL"] = url
 
+        rich_msg = None
+        if self.config["rich_mode"]:
+            commit = utils.get_git_hash() or "unknown"
+            branch = str(version.branch)
+            rich_msg = (
+                f"<h1>{utils.get_platform_emoji()} Исходный код Elys</h1>"
+                f"<table>"
+                f'<tr><td><b>Репозиторий</b></td><td><a href="{url}">{url.replace("https://github.com/", "")}</a></td></tr>'
+                f"<tr><td><b>Ветка</b></td><td><code>{branch}</code></td></tr>"
+                f'<tr><td><b>Коммит</b></td><td><a href="{url}/commit/{commit}"><code>{commit[:7]}</code></a></td></tr>'
+                f"</table>"
+            )
+
         await utils.answer(
             message,
             self.strings["source"].format(url),
+            rich_message=rich_msg,
         )
 
     async def client_ready(self):
@@ -1159,15 +1490,39 @@ class UpdaterMod(loader.Module):
             took = "n/a"
 
         msg = self.strings["success"].format(utils.ascii_face(), took)
+        rich_msg = (
+            self._build_rich_restart_status(
+                took,
+                fails=0,
+                title="Обновление успешно завершено!",
+            )
+            if self.config["rich_mode"]
+            else None
+        )
 
         try:
             if legacy_message_ref := self._parse_legacy_update_message_ref(ms):
                 chat_id, message_id = legacy_message_ref
+                if rich_msg:
+                    with contextlib.suppress(Exception):
+                        await self._client.edit_rich_message(
+                            chat_id, message_id, html=rich_msg
+                        )
+                        return
                 await self._client.edit_message(chat_id, message_id, msg)
                 return
 
+            inline_id = self._deserialize_inline_message_id(str(ms))
+            if rich_msg:
+                with contextlib.suppress(Exception):
+                    await self.inline.bot.edit_rich_message(
+                        html=rich_msg,
+                        inline_message_id=inline_id,
+                    )
+                    return
+
             await self.inline.bot.edit_message_text(
-                inline_message_id=self._deserialize_inline_message_id(str(ms)),
+                inline_message_id=inline_id,
                 text=self.inline.sanitise_text(msg),
             )
         except Exception:
@@ -1211,11 +1566,29 @@ class UpdaterMod(loader.Module):
 
         self.set("selfupdatemsg", None)
 
+        rich_msg = (
+            self._build_rich_restart_status(
+                took,
+                fails=fails,
+                secure_boot=secure_boot,
+            )
+            if self.config["rich_mode"]
+            else None
+        )
+
         try:
             logger.debug("Editing restart complete message: %s", msg)
             if legacy_message_ref := self._parse_legacy_update_message_ref(ms):
                 chat_id, message_id = legacy_message_ref
-                await self._client.edit_message(chat_id, message_id, msg)
+                edited = False
+                if rich_msg:
+                    with contextlib.suppress(Exception):
+                        await self._client.edit_rich_message(
+                            chat_id, message_id, html=rich_msg
+                        )
+                        edited = True
+                if not edited:
+                    await self._client.edit_message(chat_id, message_id, msg)
 
                 async def _delete_legacy():
                     await asyncio.sleep(60)
@@ -1225,8 +1598,17 @@ class UpdaterMod(loader.Module):
                 asyncio.ensure_future(_delete_legacy())
                 return
 
+            inline_id = self._deserialize_inline_message_id(str(ms))
+            if rich_msg:
+                with contextlib.suppress(Exception):
+                    await self.inline.bot.edit_rich_message(
+                        html=rich_msg,
+                        inline_message_id=inline_id,
+                    )
+                    return
+
             await self.inline.bot.edit_message_text(
-                inline_message_id=self._deserialize_inline_message_id(str(ms)),
+                inline_message_id=inline_id,
                 text=self.inline.sanitise_text(msg),
             )
         except Exception:
@@ -1240,15 +1622,36 @@ class UpdaterMod(loader.Module):
         if int(args) > 10:
             await utils.answer(message, self.strings["rollback_too_far"])
             return
+
+        number = int(args)
+        plain_text = self.strings["rollback_confirm"].format(num=args)
+        rich_text = None
+        if self.config["rich_mode"]:
+            def _get_rollback_commits():
+                with contextlib.suppress(Exception):
+                    with git.Repo() as repo:
+                        return [*repo.iter_commits(f"HEAD~{number}..HEAD")]
+                return []
+
+            commits = await asyncio.to_thread(_get_rollback_commits)
+            commits_html = self._format_rich_changelog(commits) if commits else ""
+            rich_text = (
+                f"<h1>⚠️ Откат коммитов Elys</h1>"
+                f"<p>Вы уверены, что хотите откатить последние <b>{number}</b> коммитов?</p>"
+            )
+            if commits_html:
+                rich_text += f"<details open><summary>📜 Коммиты для отката</summary>{commits_html}</details>"
+
         await self.inline.form(
             message=message,
-            text=self.strings["rollback_confirm"].format(num=args),
+            text=plain_text,
+            rich_message=rich_text,
             reply_markup=[
                 [
                     {
                         "text": "✅",
                         "callback": self.rollback_confirm,
-                        "args": [args],
+                        "args": [number],
                         "style": "success",
                     }
                 ],
@@ -1263,7 +1666,14 @@ class UpdaterMod(loader.Module):
         )
 
     async def rollback_confirm(self, call: InlineCall, number: int):
-        await utils.answer(call, self.strings["rollback_process"].format(num=number))
+        plain_msg = self.strings["rollback_process"].format(num=number)
+        rich_msg = (
+            f"<h1>⏳ Откат коммитов...</h1>"
+            f"<p>Откатываем последние <b>{number}</b> коммитов и перезагружаем юзербота...</p>"
+            if self.config["rich_mode"]
+            else None
+        )
+        await utils.answer(call, plain_msg, rich_message=rich_msg)
         utils.ensure_child_watcher()
         await asyncio.create_subprocess_shell(
             f"git reset --hard HEAD~{number}", stdout=asyncio.subprocess.PIPE
@@ -1271,9 +1681,16 @@ class UpdaterMod(loader.Module):
         await self.restart_common(call)
 
     async def ubstop_func(self, call: Message | InlineCall):
+        rich_stopped = (
+            f"<h1>🛑 Elys остановлен</h1>"
+            f"<p>Процесс юзербота завершил работу.</p>"
+            if self.config["rich_mode"]
+            else None
+        )
         await utils.answer(
             call,
             self.strings["ub_stop"].format(emoji=utils.get_platform_emoji()),
+            rich_message=rich_stopped,
         )
 
         sys.exit()
@@ -1287,11 +1704,18 @@ class UpdaterMod(loader.Module):
             await self.ubstop_func(message)
             return
 
+        rich_stop = (
+            f"<h1>🛑 Остановка Elys</h1>"
+            f"<p>Вы действительно хотите выключить юзербота?</p>"
+            if self.config["rich_mode"]
+            else None
+        )
         await self.inline.form(
             message=message,
             text=self.strings["stop_ub_confirm"].format(
                 utils.get_platform_emoji() if self.client.elys_me.premium else "Elys"
             ),
+            rich_message=rich_stop,
             reply_markup=[
                 [
                     {

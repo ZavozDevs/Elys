@@ -899,6 +899,7 @@ test:
   placeholder_error: '{e:stop}'
 updater:
   name: Updater
+  _cfg_rich_mode: Show update info and changelog as Rich message.
   source: "{e:book} <b>Read the source code from</b> <a href='{}'>here</a>"
   restarting_caption: '{e:loading} <b>Your {} is restarting...</b>'
   downloading: '{e:loading} <b>Downloading updates...</b>'
