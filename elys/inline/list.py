@@ -29,6 +29,7 @@ from elystl.errors.rpcerrorlist import ChatSendInlineForbiddenError, FloodWaitEr
 from elystl.tl.types import Message
 
 from .. import main, utils
+from ..translations import fmt
 from ..types import ElysReplyMarkup
 from .types import InlineMessage, InlineUnit
 
@@ -231,10 +232,13 @@ class List(InlineUnit):
 
             del self._units[unit_id]
             await answer(
-                self.translator.getkey("inline.invoke_failed_logs").format(
-                    utils.escape_html(
-                        "\n".join(traceback.format_exc().splitlines()[1:])
-                    )
+                fmt(
+                    self.translator.getkey("inline.invoke_failed_logs"),
+                    {
+                        "": utils.escape_html(
+                            "\n".join(traceback.format_exc().splitlines()[1:])
+                        )
+                    },
                 )
                 if self._db.get(main.__name__, "inlinelogs", True)
                 else self.translator.getkey("inline.invoke_failed")
